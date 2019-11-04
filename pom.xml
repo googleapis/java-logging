@@ -76,7 +76,7 @@
     <animal-sniffer.version>1.18</animal-sniffer.version>
     <google.auth.version>0.18.0</google.auth.version>
     <http-client-bom.version>1.33.0</http-client-bom.version>
-    <google.cloud-core.version>1.91.2</google.cloud-core.version>
+    <google.cloud-core.version>1.91.3</google.cloud-core.version>
   </properties>
 
   <dependencyManagement>
