@@ -12,7 +12,6 @@ Java idiomatic client for [Stackdriver Logging][stackdriver-logging].
 
 Quickstart
 ----------
-[//]: # ({x-version-update-start:google-cloud-logging:released})
 If you are using Maven with Bom, Add this to your pom.xml file.
 ```xml
 <dependencyManagement>
@@ -31,8 +30,8 @@ If you are using Maven with Bom, Add this to your pom.xml file.
   <groupId>com.google.cloud</groupId>
   <artifactId>google-cloud-logging</artifactId>
 </dependency>
-
 ```
+[//]: # ({x-version-update-start:google-cloud-logging:released})
 If you are using Maven without Bom, Add this to your dependencies.
 ```xml
 <dependency>
