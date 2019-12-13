@@ -113,10 +113,10 @@ public class LoggingAppenderTest {
             .setSeverity(Severity.ERROR)
             .setLabels(
                 new ImmutableMap.Builder<String, String>()
-                    .put("levelName", "ERROR")
-                    .put("levelValue", String.valueOf(40000L))
-                    .put("loggerName", this.getClass().getName())
-                     .put("fullStacktrace", "this is a test".trim())
+                    .put("levelName","ERROR")
+                    .put("levelValue",String.valueOf(40000L))
+                    .put("loggerName",this.getClass().getName())
+                    .put("fullStacktrace","this is a test".trim())
                     .build())
             .build();
     logging.setFlushSeverity(Severity.ERROR);
