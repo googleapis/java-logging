@@ -36,13 +36,13 @@ If you are using Maven with Bom, Add this to your pom.xml file.
 [//]: # ({x-version-update-start:google-cloud-logging:released})
 If you are using Maven without Bom, Add this to your dependencies.
 ```xml
-<!-- [START logging_install_without_bom -->
+<!-- [START logging_install_without_bom] -->
 <dependency>
   <groupId>com.google.cloud</groupId>
   <artifactId>google-cloud-logging</artifactId>
   <version>1.99.0</version>
 </dependency>
-<!-- [END logging_install_without_bom -->
+<!-- [END logging_install_without_bom] -->
 ```
 If you are using Gradle, add this to your dependencies
 ```Groovy
