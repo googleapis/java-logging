@@ -187,7 +187,8 @@ public class MonitoredResourceUtil {
   private static Resource getAutoDetectedResourceType() {
     if (System.getenv("K_SERVICE") != null &&
         System.getenv("K_REVISION") != null &&
-        System.getenv("K_CONFIGURATION") != null) {
+        System.getenv("K_CONFIGURATION") != null &&
+        System.getenv("KUBERNETES_SERVICE_HOST") == null) {
       return Resource.CloudRun;
     }
     if (System.getenv("GAE_INSTANCE") != null) {
