@@ -185,10 +185,10 @@ public class MonitoredResourceUtil {
 
   /* Detect monitored Resource type using environment variables, else return global as default. */
   private static Resource getAutoDetectedResourceType() {
-    if (System.getenv("K_SERVICE") != null &&
-        System.getenv("K_REVISION") != null &&
-        System.getenv("K_CONFIGURATION") != null &&
-        System.getenv("KUBERNETES_SERVICE_HOST") == null) {
+    if (System.getenv("K_SERVICE") != null
+        && System.getenv("K_REVISION") != null
+        && System.getenv("K_CONFIGURATION") != null
+        && System.getenv("KUBERNETES_SERVICE_HOST") == null) {
       return Resource.CloudRun;
     }
     if (System.getenv("GAE_INSTANCE") != null) {
@@ -223,10 +223,8 @@ public class MonitoredResourceUtil {
     String zone = MetadataConfig.getZone();
     // for Cloud Run managed, the zone is "REGION-1"
     // So, we need to strip the "-1" to set location to just the region
-    if (zone.endsWith("-1"))
-      return zone.substring(0, zone.length() - 2);
-    else
-      return zone;
+    if (zone.endsWith("-1")) return zone.substring(0, zone.length() - 2);
+    else return zone;
   }
 
   private static List<LoggingEnhancer> createEnhancers(Resource resourceType) {
