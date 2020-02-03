@@ -1,5 +1,14 @@
 # Changelog
 
+### [1.100.1](https://www.github.com/googleapis/java-logging/compare/v1.100.0...v1.100.1) (2020-02-03)
+
+
+### Dependencies
+
+* update core dependencies ([#61](https://www.github.com/googleapis/java-logging/issues/61)) ([a73322c](https://www.github.com/googleapis/java-logging/commit/a73322cb0e8f43eb253a4004189f1e4d387dcb1c))
+* update core dependencies ([#85](https://www.github.com/googleapis/java-logging/issues/85)) ([5e61aa7](https://www.github.com/googleapis/java-logging/commit/5e61aa7180934af6b63e845f2d172c6e6d08d0ee))
+* update dependency com.google.http-client:google-http-client-bom to v1.34.1 ([#81](https://www.github.com/googleapis/java-logging/issues/81)) ([dacc7db](https://www.github.com/googleapis/java-logging/commit/dacc7db6775a5489f1d43467bbece7fd781e14ba))
+
 ## [1.100.0](https://www.github.com/googleapis/java-logging/compare/v1.99.0...v1.100.0) (2020-01-23)
 
 
