@@ -1,27 +1,34 @@
 {
-  "updateTime": "2020-02-03T23:05:03.138204Z",
+  "updateTime": "2020-02-10T22:51:49.312299Z",
   "sources": [
     {
       "generator": {
         "name": "artman",
-        "version": "0.44.4",
-        "dockerImage": "googleapis/artman@sha256:19e945954fc960a4bdfee6cb34695898ab21a8cf0bac063ee39b91f00a1faec8"
+        "version": "0.45.0",
+        "dockerImage": "googleapis/artman@sha256:6aec9c34db0e4be221cdaf6faba27bdc07cfea846808b3d3b964dfce3a9a0f9b"
+      }
+    },
+    {
+      "generator": {
+        "name": "artman",
+        "version": "0.45.0",
+        "dockerImage": "googleapis/artman@sha256:6aec9c34db0e4be221cdaf6faba27bdc07cfea846808b3d3b964dfce3a9a0f9b"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "29d40b78e3dc1579b0b209463fbcb76e5767f72a",
-        "internalRef": "292979741",
-        "log": "29d40b78e3dc1579b0b209463fbcb76e5767f72a\nExpose managedidentities/v1beta1/ API for client library usage.\n\nPiperOrigin-RevId: 292979741\n\na22129a1fb6e18056d576dfb7717aef74b63734a\nExpose managedidentities/v1/ API for client library usage.\n\nPiperOrigin-RevId: 292968186\n\n"
+        "sha": "fcc86bee0e84dc11e9abbff8d7c3529c0626f390",
+        "internalRef": "294264582",
+        "log": "fcc86bee0e84dc11e9abbff8d7c3529c0626f390\nfix: Bigtable Admin v2\n\nChange LRO metadata from PartialUpdateInstanceMetadata\nto UpdateInstanceMetadata. (Otherwise, it will not build.)\n\nPiperOrigin-RevId: 294264582\n\n6d9361eae2ebb3f42d8c7ce5baf4bab966fee7c0\nrefactor: Add annotations to Bigtable Admin v2.\n\nPiperOrigin-RevId: 294243406\n\nad7616f3fc8e123451c8b3a7987bc91cea9e6913\nFix: Resource type in CreateLogMetricRequest should use logging.googleapis.com.\nFix: ListLogEntries should have a method signature for convenience of calling it.\n\nPiperOrigin-RevId: 294222165\n\n63796fcbb08712676069e20a3e455c9f7aa21026\nFix: Remove extraneous resource definition for cloudkms.googleapis.com/CryptoKey.\n\nPiperOrigin-RevId: 294176658\n\ne7d8a694f4559201e6913f6610069cb08b39274e\nDepend on the latest gapic-generator and resource names plugin.\n\nThis fixes the very old an very annoying bug: https://github.com/googleapis/gapic-generator/pull/3087\n\nPiperOrigin-RevId: 293903652\n\n806b2854a966d55374ee26bb0cef4e30eda17b58\nfix: correct capitalization of Ruby namespaces in SecurityCenter V1p1beta1\n\nPiperOrigin-RevId: 293903613\n\n"
       }
     },
     {
       "template": {
         "name": "java_library",
         "origin": "synthtool.gcp",
-        "version": "2019.10.17"
+        "version": "2020.2.4"
       }
     }
   ],
