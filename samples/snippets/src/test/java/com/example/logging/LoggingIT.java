@@ -32,9 +32,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-/**
- * Tests for quickstart sample.
- */
+/** Tests for quickstart sample. */
 @RunWith(JUnit4.class)
 @SuppressWarnings("checkstyle:abbreviationaswordinname")
 public class LoggingIT {
@@ -76,10 +74,11 @@ public class LoggingIT {
   @Test(timeout = 60000)
   public void testWriteAndListLogs() throws Exception {
     // write a log entry
-    LogEntry entry = LogEntry.newBuilder(StringPayload.of("Hello world again"))
-        .setLogName(TEST_WRITE_LOG)
-        .setResource(MonitoredResource.newBuilder("global").build())
-        .build();
+    LogEntry entry =
+        LogEntry.newBuilder(StringPayload.of("Hello world again"))
+            .setLogName(TEST_WRITE_LOG)
+            .setResource(MonitoredResource.newBuilder("global").build())
+            .build();
     logging.write(Collections.singleton(entry));
     // flush out log immediately
     logging.flush();
