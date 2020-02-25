@@ -1,33 +1,20 @@
 {
-  "updateTime": "2020-02-20T19:17:21.600909Z",
+  "updateTime": "2020-02-24T22:58:54.590074Z",
   "sources": [
     {
       "generator": {
         "name": "artman",
-        "version": "0.45.0",
-        "dockerImage": "googleapis/artman@sha256:6aec9c34db0e4be221cdaf6faba27bdc07cfea846808b3d3b964dfce3a9a0f9b"
-      }
-    },
-    {
-      "git": {
-        "name": ".",
-        "remote": "git@github.com:googleapis/java-logging.git",
-        "sha": "86d342fa8a43d2d9f1f491d630ccffc6e280666c"
+        "version": "0.45.1",
+        "dockerImage": "googleapis/artman@sha256:36956ca6a4dc70a59de5d5d0fd35061b050bb56884516f0898f46d8220f25738"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e4117d5e9ed8bbca28da4a60a94947ca51cb2083",
-        "internalRef": "296212567"
-      }
-    },
-    {
-      "git": {
-        "name": "synthtool",
-        "remote": "git@github.com:chingor13/synthtool.git",
-        "sha": "703c4d78243009407f63a03a3f551cd5baf7e506"
+        "sha": "1e47e676cddbbd8d93f19ba0665af15b5532417e",
+        "internalRef": "296901854",
+        "log": "1e47e676cddbbd8d93f19ba0665af15b5532417e\nFix: Restore a method signature for UpdateCluster\n\nPiperOrigin-RevId: 296901854\n\n"
       }
     },
     {
