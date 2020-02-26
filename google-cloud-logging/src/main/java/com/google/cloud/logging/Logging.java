@@ -181,17 +181,17 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
       return new EntryListOption(OptionType.FILTER, filter);
     }
 
-    /** Returns an option to specify a organization to the log entries to be listed. */
+    /** Returns an option to specify an organization for the log entries to be listed. */
     public static EntryListOption organization(String organization) {
       return new EntryListOption(OptionType.ORGANIZATION, organization);
     }
 
-    /** Returns an option to specify a billingAccount to the log entries to be listed. */
+    /** Returns an option to specify a billingAccount for the log entries to be listed. */
     public static EntryListOption billingAccount(String billingAccount) {
       return new EntryListOption(OptionType.BILLINGACCOUNT, billingAccount);
     }
 
-    /** Returns an option to specify a folder to the log entries to be listed. */
+    /** Returns an option to specify a folder for the log entries to be listed. */
     public static EntryListOption folder(String folder) {
       return new EntryListOption(OptionType.FOLDER, folder);
     }
