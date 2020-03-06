@@ -36,7 +36,7 @@ public interface BigQueryOptionsOrBuilder
    * In both cases, tables are sharded based on UTC timezone.
    * </pre>
    *
-   * <code>bool use_partitioned_tables = 1;</code>
+   * <code>bool use_partitioned_tables = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
    *
    * @return The usePartitionedTables.
    */

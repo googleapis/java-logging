@@ -40,6 +40,158 @@ public final class ConfigServiceV2Grpc {
 
   // Static method descriptors that strictly reflect the proto.
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  @java.lang.Deprecated // Use {@link #getListBucketsMethod()} instead.
+  public static final io.grpc.MethodDescriptor<
+          com.google.logging.v2.ListBucketsRequest, com.google.logging.v2.ListBucketsResponse>
+      METHOD_LIST_BUCKETS = getListBucketsMethodHelper();
+
+  private static volatile io.grpc.MethodDescriptor<
+          com.google.logging.v2.ListBucketsRequest, com.google.logging.v2.ListBucketsResponse>
+      getListBucketsMethod;
+
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static io.grpc.MethodDescriptor<
+          com.google.logging.v2.ListBucketsRequest, com.google.logging.v2.ListBucketsResponse>
+      getListBucketsMethod() {
+    return getListBucketsMethodHelper();
+  }
+
+  private static io.grpc.MethodDescriptor<
+          com.google.logging.v2.ListBucketsRequest, com.google.logging.v2.ListBucketsResponse>
+      getListBucketsMethodHelper() {
+    io.grpc.MethodDescriptor<
+            com.google.logging.v2.ListBucketsRequest, com.google.logging.v2.ListBucketsResponse>
+        getListBucketsMethod;
+    if ((getListBucketsMethod = ConfigServiceV2Grpc.getListBucketsMethod) == null) {
+      synchronized (ConfigServiceV2Grpc.class) {
+        if ((getListBucketsMethod = ConfigServiceV2Grpc.getListBucketsMethod) == null) {
+          ConfigServiceV2Grpc.getListBucketsMethod =
+              getListBucketsMethod =
+                  io.grpc.MethodDescriptor
+                      .<com.google.logging.v2.ListBucketsRequest,
+                          com.google.logging.v2.ListBucketsResponse>
+                          newBuilder()
+                      .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+                      .setFullMethodName(
+                          generateFullMethodName(
+                              "google.logging.v2.ConfigServiceV2", "ListBuckets"))
+                      .setSampledToLocalTracing(true)
+                      .setRequestMarshaller(
+                          io.grpc.protobuf.ProtoUtils.marshaller(
+                              com.google.logging.v2.ListBucketsRequest.getDefaultInstance()))
+                      .setResponseMarshaller(
+                          io.grpc.protobuf.ProtoUtils.marshaller(
+                              com.google.logging.v2.ListBucketsResponse.getDefaultInstance()))
+                      .setSchemaDescriptor(
+                          new ConfigServiceV2MethodDescriptorSupplier("ListBuckets"))
+                      .build();
+        }
+      }
+    }
+    return getListBucketsMethod;
+  }
+
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  @java.lang.Deprecated // Use {@link #getGetBucketMethod()} instead.
+  public static final io.grpc.MethodDescriptor<
+          com.google.logging.v2.GetBucketRequest, com.google.logging.v2.LogBucket>
+      METHOD_GET_BUCKET = getGetBucketMethodHelper();
+
+  private static volatile io.grpc.MethodDescriptor<
+          com.google.logging.v2.GetBucketRequest, com.google.logging.v2.LogBucket>
+      getGetBucketMethod;
+
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static io.grpc.MethodDescriptor<
+          com.google.logging.v2.GetBucketRequest, com.google.logging.v2.LogBucket>
+      getGetBucketMethod() {
+    return getGetBucketMethodHelper();
+  }
+
+  private static io.grpc.MethodDescriptor<
+          com.google.logging.v2.GetBucketRequest, com.google.logging.v2.LogBucket>
+      getGetBucketMethodHelper() {
+    io.grpc.MethodDescriptor<
+            com.google.logging.v2.GetBucketRequest, com.google.logging.v2.LogBucket>
+        getGetBucketMethod;
+    if ((getGetBucketMethod = ConfigServiceV2Grpc.getGetBucketMethod) == null) {
+      synchronized (ConfigServiceV2Grpc.class) {
+        if ((getGetBucketMethod = ConfigServiceV2Grpc.getGetBucketMethod) == null) {
+          ConfigServiceV2Grpc.getGetBucketMethod =
+              getGetBucketMethod =
+                  io.grpc.MethodDescriptor
+                      .<com.google.logging.v2.GetBucketRequest, com.google.logging.v2.LogBucket>
+                          newBuilder()
+                      .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+                      .setFullMethodName(
+                          generateFullMethodName("google.logging.v2.ConfigServiceV2", "GetBucket"))
+                      .setSampledToLocalTracing(true)
+                      .setRequestMarshaller(
+                          io.grpc.protobuf.ProtoUtils.marshaller(
+                              com.google.logging.v2.GetBucketRequest.getDefaultInstance()))
+                      .setResponseMarshaller(
+                          io.grpc.protobuf.ProtoUtils.marshaller(
+                              com.google.logging.v2.LogBucket.getDefaultInstance()))
+                      .setSchemaDescriptor(new ConfigServiceV2MethodDescriptorSupplier("GetBucket"))
+                      .build();
+        }
+      }
+    }
+    return getGetBucketMethod;
+  }
+
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  @java.lang.Deprecated // Use {@link #getUpdateBucketMethod()} instead.
+  public static final io.grpc.MethodDescriptor<
+          com.google.logging.v2.UpdateBucketRequest, com.google.logging.v2.LogBucket>
+      METHOD_UPDATE_BUCKET = getUpdateBucketMethodHelper();
+
+  private static volatile io.grpc.MethodDescriptor<
+          com.google.logging.v2.UpdateBucketRequest, com.google.logging.v2.LogBucket>
+      getUpdateBucketMethod;
+
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static io.grpc.MethodDescriptor<
+          com.google.logging.v2.UpdateBucketRequest, com.google.logging.v2.LogBucket>
+      getUpdateBucketMethod() {
+    return getUpdateBucketMethodHelper();
+  }
+
+  private static io.grpc.MethodDescriptor<
+          com.google.logging.v2.UpdateBucketRequest, com.google.logging.v2.LogBucket>
+      getUpdateBucketMethodHelper() {
+    io.grpc.MethodDescriptor<
+            com.google.logging.v2.UpdateBucketRequest, com.google.logging.v2.LogBucket>
+        getUpdateBucketMethod;
+    if ((getUpdateBucketMethod = ConfigServiceV2Grpc.getUpdateBucketMethod) == null) {
+      synchronized (ConfigServiceV2Grpc.class) {
+        if ((getUpdateBucketMethod = ConfigServiceV2Grpc.getUpdateBucketMethod) == null) {
+          ConfigServiceV2Grpc.getUpdateBucketMethod =
+              getUpdateBucketMethod =
+                  io.grpc.MethodDescriptor
+                      .<com.google.logging.v2.UpdateBucketRequest, com.google.logging.v2.LogBucket>
+                          newBuilder()
+                      .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+                      .setFullMethodName(
+                          generateFullMethodName(
+                              "google.logging.v2.ConfigServiceV2", "UpdateBucket"))
+                      .setSampledToLocalTracing(true)
+                      .setRequestMarshaller(
+                          io.grpc.protobuf.ProtoUtils.marshaller(
+                              com.google.logging.v2.UpdateBucketRequest.getDefaultInstance()))
+                      .setResponseMarshaller(
+                          io.grpc.protobuf.ProtoUtils.marshaller(
+                              com.google.logging.v2.LogBucket.getDefaultInstance()))
+                      .setSchemaDescriptor(
+                          new ConfigServiceV2MethodDescriptorSupplier("UpdateBucket"))
+                      .build();
+        }
+      }
+    }
+    return getUpdateBucketMethod;
+  }
+
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   @java.lang.Deprecated // Use {@link #getListSinksMethod()} instead.
   public static final io.grpc.MethodDescriptor<
           com.google.logging.v2.ListSinksRequest, com.google.logging.v2.ListSinksResponse>
@@ -679,6 +831,52 @@ public final class ConfigServiceV2Grpc {
      *
      *
      * <pre>
+     * Lists buckets (Beta).
+     * </pre>
+     */
+    public void listBuckets(
+        com.google.logging.v2.ListBucketsRequest request,
+        io.grpc.stub.StreamObserver<com.google.logging.v2.ListBucketsResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getListBucketsMethodHelper(), responseObserver);
+    }
+
+    /**
+     *
+     *
+     * <pre>
+     * Gets a bucket (Beta).
+     * </pre>
+     */
+    public void getBucket(
+        com.google.logging.v2.GetBucketRequest request,
+        io.grpc.stub.StreamObserver<com.google.logging.v2.LogBucket> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetBucketMethodHelper(), responseObserver);
+    }
+
+    /**
+     *
+     *
+     * <pre>
+     * Updates a bucket. This method replaces the following fields in the
+     * existing bucket with values from the new bucket: `retention_period`
+     * If the retention period is decreased and the bucket is locked,
+     * FAILED_PRECONDITION will be returned.
+     * If the bucket has a LifecycleState of DELETE_REQUESTED, FAILED_PRECONDITION
+     * will be returned.
+     * A buckets region may not be modified after it is created.
+     * This method is in Beta.
+     * </pre>
+     */
+    public void updateBucket(
+        com.google.logging.v2.UpdateBucketRequest request,
+        io.grpc.stub.StreamObserver<com.google.logging.v2.LogBucket> responseObserver) {
+      asyncUnimplementedUnaryCall(getUpdateBucketMethodHelper(), responseObserver);
+    }
+
+    /**
+     *
+     *
+     * <pre>
      * Lists sinks.
      * </pre>
      */
@@ -860,6 +1058,24 @@ public final class ConfigServiceV2Grpc {
     public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
+              getListBucketsMethodHelper(),
+              asyncUnaryCall(
+                  new MethodHandlers<
+                      com.google.logging.v2.ListBucketsRequest,
+                      com.google.logging.v2.ListBucketsResponse>(this, METHODID_LIST_BUCKETS)))
+          .addMethod(
+              getGetBucketMethodHelper(),
+              asyncUnaryCall(
+                  new MethodHandlers<
+                      com.google.logging.v2.GetBucketRequest, com.google.logging.v2.LogBucket>(
+                      this, METHODID_GET_BUCKET)))
+          .addMethod(
+              getUpdateBucketMethodHelper(),
+              asyncUnaryCall(
+                  new MethodHandlers<
+                      com.google.logging.v2.UpdateBucketRequest, com.google.logging.v2.LogBucket>(
+                      this, METHODID_UPDATE_BUCKET)))
+          .addMethod(
               getListSinksMethodHelper(),
               asyncUnaryCall(
                   new MethodHandlers<
@@ -956,6 +1172,61 @@ public final class ConfigServiceV2Grpc {
     @java.lang.Override
     protected ConfigServiceV2Stub build(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new ConfigServiceV2Stub(channel, callOptions);
+    }
+
+    /**
+     *
+     *
+     * <pre>
+     * Lists buckets (Beta).
+     * </pre>
+     */
+    public void listBuckets(
+        com.google.logging.v2.ListBucketsRequest request,
+        io.grpc.stub.StreamObserver<com.google.logging.v2.ListBucketsResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getListBucketsMethodHelper(), getCallOptions()),
+          request,
+          responseObserver);
+    }
+
+    /**
+     *
+     *
+     * <pre>
+     * Gets a bucket (Beta).
+     * </pre>
+     */
+    public void getBucket(
+        com.google.logging.v2.GetBucketRequest request,
+        io.grpc.stub.StreamObserver<com.google.logging.v2.LogBucket> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getGetBucketMethodHelper(), getCallOptions()),
+          request,
+          responseObserver);
+    }
+
+    /**
+     *
+     *
+     * <pre>
+     * Updates a bucket. This method replaces the following fields in the
+     * existing bucket with values from the new bucket: `retention_period`
+     * If the retention period is decreased and the bucket is locked,
+     * FAILED_PRECONDITION will be returned.
+     * If the bucket has a LifecycleState of DELETE_REQUESTED, FAILED_PRECONDITION
+     * will be returned.
+     * A buckets region may not be modified after it is created.
+     * This method is in Beta.
+     * </pre>
+     */
+    public void updateBucket(
+        com.google.logging.v2.UpdateBucketRequest request,
+        io.grpc.stub.StreamObserver<com.google.logging.v2.LogBucket> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getUpdateBucketMethodHelper(), getCallOptions()),
+          request,
+          responseObserver);
     }
 
     /**
@@ -1203,6 +1474,51 @@ public final class ConfigServiceV2Grpc {
      *
      *
      * <pre>
+     * Lists buckets (Beta).
+     * </pre>
+     */
+    public com.google.logging.v2.ListBucketsResponse listBuckets(
+        com.google.logging.v2.ListBucketsRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getListBucketsMethodHelper(), getCallOptions(), request);
+    }
+
+    /**
+     *
+     *
+     * <pre>
+     * Gets a bucket (Beta).
+     * </pre>
+     */
+    public com.google.logging.v2.LogBucket getBucket(
+        com.google.logging.v2.GetBucketRequest request) {
+      return blockingUnaryCall(getChannel(), getGetBucketMethodHelper(), getCallOptions(), request);
+    }
+
+    /**
+     *
+     *
+     * <pre>
+     * Updates a bucket. This method replaces the following fields in the
+     * existing bucket with values from the new bucket: `retention_period`
+     * If the retention period is decreased and the bucket is locked,
+     * FAILED_PRECONDITION will be returned.
+     * If the bucket has a LifecycleState of DELETE_REQUESTED, FAILED_PRECONDITION
+     * will be returned.
+     * A buckets region may not be modified after it is created.
+     * This method is in Beta.
+     * </pre>
+     */
+    public com.google.logging.v2.LogBucket updateBucket(
+        com.google.logging.v2.UpdateBucketRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getUpdateBucketMethodHelper(), getCallOptions(), request);
+    }
+
+    /**
+     *
+     *
+     * <pre>
      * Lists sinks.
      * </pre>
      */
@@ -1403,6 +1719,53 @@ public final class ConfigServiceV2Grpc {
      *
      *
      * <pre>
+     * Lists buckets (Beta).
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<
+            com.google.logging.v2.ListBucketsResponse>
+        listBuckets(com.google.logging.v2.ListBucketsRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getListBucketsMethodHelper(), getCallOptions()), request);
+    }
+
+    /**
+     *
+     *
+     * <pre>
+     * Gets a bucket (Beta).
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.google.logging.v2.LogBucket>
+        getBucket(com.google.logging.v2.GetBucketRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getGetBucketMethodHelper(), getCallOptions()), request);
+    }
+
+    /**
+     *
+     *
+     * <pre>
+     * Updates a bucket. This method replaces the following fields in the
+     * existing bucket with values from the new bucket: `retention_period`
+     * If the retention period is decreased and the bucket is locked,
+     * FAILED_PRECONDITION will be returned.
+     * If the bucket has a LifecycleState of DELETE_REQUESTED, FAILED_PRECONDITION
+     * will be returned.
+     * A buckets region may not be modified after it is created.
+     * This method is in Beta.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.google.logging.v2.LogBucket>
+        updateBucket(com.google.logging.v2.UpdateBucketRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getUpdateBucketMethodHelper(), getCallOptions()), request);
+    }
+
+    /**
+     *
+     *
+     * <pre>
      * Lists sinks.
      * </pre>
      */
@@ -1582,18 +1945,21 @@ public final class ConfigServiceV2Grpc {
     }
   }
 
-  private static final int METHODID_LIST_SINKS = 0;
-  private static final int METHODID_GET_SINK = 1;
-  private static final int METHODID_CREATE_SINK = 2;
-  private static final int METHODID_UPDATE_SINK = 3;
-  private static final int METHODID_DELETE_SINK = 4;
-  private static final int METHODID_LIST_EXCLUSIONS = 5;
-  private static final int METHODID_GET_EXCLUSION = 6;
-  private static final int METHODID_CREATE_EXCLUSION = 7;
-  private static final int METHODID_UPDATE_EXCLUSION = 8;
-  private static final int METHODID_DELETE_EXCLUSION = 9;
-  private static final int METHODID_GET_CMEK_SETTINGS = 10;
-  private static final int METHODID_UPDATE_CMEK_SETTINGS = 11;
+  private static final int METHODID_LIST_BUCKETS = 0;
+  private static final int METHODID_GET_BUCKET = 1;
+  private static final int METHODID_UPDATE_BUCKET = 2;
+  private static final int METHODID_LIST_SINKS = 3;
+  private static final int METHODID_GET_SINK = 4;
+  private static final int METHODID_CREATE_SINK = 5;
+  private static final int METHODID_UPDATE_SINK = 6;
+  private static final int METHODID_DELETE_SINK = 7;
+  private static final int METHODID_LIST_EXCLUSIONS = 8;
+  private static final int METHODID_GET_EXCLUSION = 9;
+  private static final int METHODID_CREATE_EXCLUSION = 10;
+  private static final int METHODID_UPDATE_EXCLUSION = 11;
+  private static final int METHODID_DELETE_EXCLUSION = 12;
+  private static final int METHODID_GET_CMEK_SETTINGS = 13;
+  private static final int METHODID_UPDATE_CMEK_SETTINGS = 14;
 
   private static final class MethodHandlers<Req, Resp>
       implements io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1612,6 +1978,22 @@ public final class ConfigServiceV2Grpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_LIST_BUCKETS:
+          serviceImpl.listBuckets(
+              (com.google.logging.v2.ListBucketsRequest) request,
+              (io.grpc.stub.StreamObserver<com.google.logging.v2.ListBucketsResponse>)
+                  responseObserver);
+          break;
+        case METHODID_GET_BUCKET:
+          serviceImpl.getBucket(
+              (com.google.logging.v2.GetBucketRequest) request,
+              (io.grpc.stub.StreamObserver<com.google.logging.v2.LogBucket>) responseObserver);
+          break;
+        case METHODID_UPDATE_BUCKET:
+          serviceImpl.updateBucket(
+              (com.google.logging.v2.UpdateBucketRequest) request,
+              (io.grpc.stub.StreamObserver<com.google.logging.v2.LogBucket>) responseObserver);
+          break;
         case METHODID_LIST_SINKS:
           serviceImpl.listSinks(
               (com.google.logging.v2.ListSinksRequest) request,
@@ -1738,6 +2120,9 @@ public final class ConfigServiceV2Grpc {
               result =
                   io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
                       .setSchemaDescriptor(new ConfigServiceV2FileDescriptorSupplier())
+                      .addMethod(getListBucketsMethodHelper())
+                      .addMethod(getGetBucketMethodHelper())
+                      .addMethod(getUpdateBucketMethodHelper())
                       .addMethod(getListSinksMethodHelper())
                       .addMethod(getGetSinkMethodHelper())
                       .addMethod(getCreateSinkMethodHelper())
