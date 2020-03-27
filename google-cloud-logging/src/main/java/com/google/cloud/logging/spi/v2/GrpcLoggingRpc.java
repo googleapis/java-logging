@@ -38,12 +38,12 @@ import com.google.cloud.grpc.GrpcTransportOptions;
 import com.google.cloud.grpc.GrpcTransportOptions.ExecutorFactory;
 import com.google.cloud.logging.LoggingException;
 import com.google.cloud.logging.LoggingOptions;
-import com.google.cloud.logging.v2.ConfigClient;
-import com.google.cloud.logging.v2.ConfigSettings;
-import com.google.cloud.logging.v2.LoggingClient;
-import com.google.cloud.logging.v2.LoggingSettings;
-import com.google.cloud.logging.v2.MetricsClient;
-import com.google.cloud.logging.v2.MetricsSettings;
+import com.google.cloud.logging.v2.ConfigServiceV2Client;
+import com.google.cloud.logging.v2.ConfigServiceV2Settings;
+import com.google.cloud.logging.v2.LoggingServiceV2Client;
+import com.google.cloud.logging.v2.LoggingServiceV2Settings;
+import com.google.cloud.logging.v2.MetricsServiceV2Client;
+import com.google.cloud.logging.v2.MetricsServiceV2Settings;
 import com.google.common.util.concurrent.MoreExecutors;
 import com.google.logging.v2.CreateLogMetricRequest;
 import com.google.logging.v2.CreateSinkRequest;
@@ -78,9 +78,9 @@ import java.util.concurrent.ScheduledExecutorService;
 
 public class GrpcLoggingRpc implements LoggingRpc {
 
-  private final ConfigClient configClient;
-  private final LoggingClient loggingClient;
-  private final MetricsClient metricsClient;
+  private final ConfigServiceV2Client configClient;
+  private final LoggingServiceV2Client loggingClient;
+  private final MetricsServiceV2Client metricsClient;
   private final ScheduledExecutorService executor;
   private final ClientContext clientContext;
   private final ExecutorFactory<ScheduledExecutorService> executorFactory;
@@ -112,16 +112,16 @@ public class GrpcLoggingRpc implements LoggingRpc {
                 .build();
       } else {
         LoggingSettingsBuilder settingsBuilder =
-            new LoggingSettingsBuilder(LoggingSettings.newBuilder().build());
+            new LoggingSettingsBuilder(LoggingServiceV2Settings.newBuilder().build());
 
         settingsBuilder.setCredentialsProvider(
             GrpcTransportOptions.setUpCredentialsProvider(options));
         settingsBuilder.setTransportChannelProvider(
             GrpcTransportOptions.setUpChannelProvider(
-                LoggingSettings.defaultGrpcTransportProviderBuilder(), options));
+                LoggingServiceV2Settings.defaultGrpcTransportProviderBuilder(), options));
 
         HeaderProvider internalHeaderProvider =
-            LoggingSettings.defaultApiClientHeaderProviderBuilder()
+            LoggingServiceV2Settings.defaultApiClientHeaderProviderBuilder()
                 .setClientLibToken(
                     ServiceOptions.getGoogApiClientLibName(),
                     GaxProperties.getLibraryVersion(options.getClass()))
@@ -139,12 +139,12 @@ public class GrpcLoggingRpc implements LoggingRpc {
               return null;
             }
           };
-      ConfigSettings.Builder confBuilder =
-          ConfigSettings.newBuilder(clientContext).applyToAllUnaryMethods(retrySettingsSetter);
-      LoggingSettings.Builder logBuilder =
-          LoggingSettings.newBuilder(clientContext).applyToAllUnaryMethods(retrySettingsSetter);
-      MetricsSettings.Builder metricsBuilder =
-          MetricsSettings.newBuilder(clientContext).applyToAllUnaryMethods(retrySettingsSetter);
+      ConfigServiceV2Settings.Builder confBuilder =
+          ConfigServiceV2Settings.newBuilder(clientContext).applyToAllUnaryMethods(retrySettingsSetter);
+      LoggingServiceV2Settings.Builder logBuilder =
+          LoggingServiceV2Settings.newBuilder(clientContext).applyToAllUnaryMethods(retrySettingsSetter);
+      MetricsServiceV2Settings.Builder metricsBuilder =
+          MetricsServiceV2Settings.newBuilder(clientContext).applyToAllUnaryMethods(retrySettingsSetter);
 
       // TODO(pongad): Take advantage of https://github.com/googleapis/gax-java/pull/452 when it's
       // released.
@@ -163,9 +163,9 @@ public class GrpcLoggingRpc implements LoggingRpc {
                           .build())
                   .build());
 
-      configClient = ConfigClient.create(confBuilder.build());
-      loggingClient = LoggingClient.create(logBuilder.build());
-      metricsClient = MetricsClient.create(metricsBuilder.build());
+      configClient = ConfigServiceV2Client.create(confBuilder.build());
+      loggingClient = LoggingServiceV2Client.create(logBuilder.build());
+      metricsClient = MetricsServiceV2Client.create(metricsBuilder.build());
     } catch (Exception ex) {
       throw new IOException(ex);
     }
@@ -289,13 +289,13 @@ public class GrpcLoggingRpc implements LoggingRpc {
   }
 
   // This class is needed solely to get access to protected method setInternalHeaderProvider()
-  private static class LoggingSettingsBuilder extends LoggingSettings.Builder {
-    private LoggingSettingsBuilder(LoggingSettings settings) {
+  private static class LoggingSettingsBuilder extends LoggingServiceV2Settings.Builder {
+    private LoggingSettingsBuilder(LoggingServiceV2Settings settings) {
       super(settings);
     }
 
     @Override
-    protected LoggingSettings.Builder setInternalHeaderProvider(
+    protected LoggingServiceV2Settings.Builder setInternalHeaderProvider(
         HeaderProvider internalHeaderProvider) {
       return super.setInternalHeaderProvider(internalHeaderProvider);
     }
