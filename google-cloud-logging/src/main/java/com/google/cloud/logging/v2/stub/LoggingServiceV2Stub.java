@@ -15,9 +15,9 @@
  */
 package com.google.cloud.logging.v2.stub;
 
-import static com.google.cloud.logging.v2.LoggingClient.ListLogEntriesPagedResponse;
-import static com.google.cloud.logging.v2.LoggingClient.ListLogsPagedResponse;
-import static com.google.cloud.logging.v2.LoggingClient.ListMonitoredResourceDescriptorsPagedResponse;
+import static com.google.cloud.logging.v2.LoggingServiceV2Client.ListLogEntriesPagedResponse;
+import static com.google.cloud.logging.v2.LoggingServiceV2Client.ListLogsPagedResponse;
+import static com.google.cloud.logging.v2.LoggingServiceV2Client.ListMonitoredResourceDescriptorsPagedResponse;
 
 import com.google.api.core.BetaApi;
 import com.google.api.gax.core.BackgroundResource;
@@ -44,12 +44,12 @@ import javax.annotation.Generated;
 @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
 public abstract class LoggingServiceV2Stub implements BackgroundResource {
 
-  public UnaryCallable<DeleteLogRequest, Empty> deleteLogCallable() {
-    throw new UnsupportedOperationException("Not implemented: deleteLogCallable()");
-  }
-
   public UnaryCallable<WriteLogEntriesRequest, WriteLogEntriesResponse> writeLogEntriesCallable() {
     throw new UnsupportedOperationException("Not implemented: writeLogEntriesCallable()");
+  }
+
+  public UnaryCallable<DeleteLogRequest, Empty> deleteLogCallable() {
+    throw new UnsupportedOperationException("Not implemented: deleteLogCallable()");
   }
 
   public UnaryCallable<ListLogEntriesRequest, ListLogEntriesPagedResponse>

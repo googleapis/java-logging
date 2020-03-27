@@ -15,8 +15,9 @@
  */
 package com.google.cloud.logging.v2.stub;
 
-import static com.google.cloud.logging.v2.ConfigClient.ListExclusionsPagedResponse;
-import static com.google.cloud.logging.v2.ConfigClient.ListSinksPagedResponse;
+import static com.google.cloud.logging.v2.ConfigServiceV2Client.ListBucketsPagedResponse;
+import static com.google.cloud.logging.v2.ConfigServiceV2Client.ListExclusionsPagedResponse;
+import static com.google.cloud.logging.v2.ConfigServiceV2Client.ListSinksPagedResponse;
 
 import com.google.api.core.BetaApi;
 import com.google.api.gax.core.BackgroundResource;
@@ -32,15 +33,20 @@ import com.google.logging.v2.CreateExclusionRequest;
 import com.google.logging.v2.CreateSinkRequest;
 import com.google.logging.v2.DeleteExclusionRequest;
 import com.google.logging.v2.DeleteSinkRequest;
+import com.google.logging.v2.GetBucketRequest;
 import com.google.logging.v2.GetCmekSettingsRequest;
 import com.google.logging.v2.GetExclusionRequest;
 import com.google.logging.v2.GetSinkRequest;
+import com.google.logging.v2.ListBucketsRequest;
+import com.google.logging.v2.ListBucketsResponse;
 import com.google.logging.v2.ListExclusionsRequest;
 import com.google.logging.v2.ListExclusionsResponse;
 import com.google.logging.v2.ListSinksRequest;
 import com.google.logging.v2.ListSinksResponse;
+import com.google.logging.v2.LogBucket;
 import com.google.logging.v2.LogExclusion;
 import com.google.logging.v2.LogSink;
+import com.google.logging.v2.UpdateBucketRequest;
 import com.google.logging.v2.UpdateCmekSettingsRequest;
 import com.google.logging.v2.UpdateExclusionRequest;
 import com.google.logging.v2.UpdateSinkRequest;
@@ -62,6 +68,30 @@ import javax.annotation.Generated;
 @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
 public class GrpcConfigServiceV2Stub extends ConfigServiceV2Stub {
 
+  private static final MethodDescriptor<ListBucketsRequest, ListBucketsResponse>
+      listBucketsMethodDescriptor =
+          MethodDescriptor.<ListBucketsRequest, ListBucketsResponse>newBuilder()
+              .setType(MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName("google.logging.v2.ConfigServiceV2/ListBuckets")
+              .setRequestMarshaller(ProtoUtils.marshaller(ListBucketsRequest.getDefaultInstance()))
+              .setResponseMarshaller(
+                  ProtoUtils.marshaller(ListBucketsResponse.getDefaultInstance()))
+              .build();
+  private static final MethodDescriptor<GetBucketRequest, LogBucket> getBucketMethodDescriptor =
+      MethodDescriptor.<GetBucketRequest, LogBucket>newBuilder()
+          .setType(MethodDescriptor.MethodType.UNARY)
+          .setFullMethodName("google.logging.v2.ConfigServiceV2/GetBucket")
+          .setRequestMarshaller(ProtoUtils.marshaller(GetBucketRequest.getDefaultInstance()))
+          .setResponseMarshaller(ProtoUtils.marshaller(LogBucket.getDefaultInstance()))
+          .build();
+  private static final MethodDescriptor<UpdateBucketRequest, LogBucket>
+      updateBucketMethodDescriptor =
+          MethodDescriptor.<UpdateBucketRequest, LogBucket>newBuilder()
+              .setType(MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName("google.logging.v2.ConfigServiceV2/UpdateBucket")
+              .setRequestMarshaller(ProtoUtils.marshaller(UpdateBucketRequest.getDefaultInstance()))
+              .setResponseMarshaller(ProtoUtils.marshaller(LogBucket.getDefaultInstance()))
+              .build();
   private static final MethodDescriptor<ListSinksRequest, ListSinksResponse>
       listSinksMethodDescriptor =
           MethodDescriptor.<ListSinksRequest, ListSinksResponse>newBuilder()
@@ -164,6 +194,11 @@ public class GrpcConfigServiceV2Stub extends ConfigServiceV2Stub {
 
   private final BackgroundResource backgroundResources;
 
+  private final UnaryCallable<ListBucketsRequest, ListBucketsResponse> listBucketsCallable;
+  private final UnaryCallable<ListBucketsRequest, ListBucketsPagedResponse>
+      listBucketsPagedCallable;
+  private final UnaryCallable<GetBucketRequest, LogBucket> getBucketCallable;
+  private final UnaryCallable<UpdateBucketRequest, LogBucket> updateBucketCallable;
   private final UnaryCallable<ListSinksRequest, ListSinksResponse> listSinksCallable;
   private final UnaryCallable<ListSinksRequest, ListSinksPagedResponse> listSinksPagedCallable;
   private final UnaryCallable<GetSinkRequest, LogSink> getSinkCallable;
@@ -221,6 +256,45 @@ public class GrpcConfigServiceV2Stub extends ConfigServiceV2Stub {
       throws IOException {
     this.callableFactory = callableFactory;
 
+    GrpcCallSettings<ListBucketsRequest, ListBucketsResponse> listBucketsTransportSettings =
+        GrpcCallSettings.<ListBucketsRequest, ListBucketsResponse>newBuilder()
+            .setMethodDescriptor(listBucketsMethodDescriptor)
+            .setParamsExtractor(
+                new RequestParamsExtractor<ListBucketsRequest>() {
+                  @Override
+                  public Map<String, String> extract(ListBucketsRequest request) {
+                    ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+                    params.put("parent", String.valueOf(request.getParent()));
+                    return params.build();
+                  }
+                })
+            .build();
+    GrpcCallSettings<GetBucketRequest, LogBucket> getBucketTransportSettings =
+        GrpcCallSettings.<GetBucketRequest, LogBucket>newBuilder()
+            .setMethodDescriptor(getBucketMethodDescriptor)
+            .setParamsExtractor(
+                new RequestParamsExtractor<GetBucketRequest>() {
+                  @Override
+                  public Map<String, String> extract(GetBucketRequest request) {
+                    ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+                    params.put("name", String.valueOf(request.getName()));
+                    return params.build();
+                  }
+                })
+            .build();
+    GrpcCallSettings<UpdateBucketRequest, LogBucket> updateBucketTransportSettings =
+        GrpcCallSettings.<UpdateBucketRequest, LogBucket>newBuilder()
+            .setMethodDescriptor(updateBucketMethodDescriptor)
+            .setParamsExtractor(
+                new RequestParamsExtractor<UpdateBucketRequest>() {
+                  @Override
+                  public Map<String, String> extract(UpdateBucketRequest request) {
+                    ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+                    params.put("name", String.valueOf(request.getName()));
+                    return params.build();
+                  }
+                })
+            .build();
     GrpcCallSettings<ListSinksRequest, ListSinksResponse> listSinksTransportSettings =
         GrpcCallSettings.<ListSinksRequest, ListSinksResponse>newBuilder()
             .setMethodDescriptor(listSinksMethodDescriptor)
@@ -379,6 +453,18 @@ public class GrpcConfigServiceV2Stub extends ConfigServiceV2Stub {
                 })
             .build();
 
+    this.listBucketsCallable =
+        callableFactory.createUnaryCallable(
+            listBucketsTransportSettings, settings.listBucketsSettings(), clientContext);
+    this.listBucketsPagedCallable =
+        callableFactory.createPagedCallable(
+            listBucketsTransportSettings, settings.listBucketsSettings(), clientContext);
+    this.getBucketCallable =
+        callableFactory.createUnaryCallable(
+            getBucketTransportSettings, settings.getBucketSettings(), clientContext);
+    this.updateBucketCallable =
+        callableFactory.createUnaryCallable(
+            updateBucketTransportSettings, settings.updateBucketSettings(), clientContext);
     this.listSinksCallable =
         callableFactory.createUnaryCallable(
             listSinksTransportSettings, settings.listSinksSettings(), clientContext);
@@ -425,6 +511,22 @@ public class GrpcConfigServiceV2Stub extends ConfigServiceV2Stub {
             clientContext);
 
     backgroundResources = new BackgroundResourceAggregation(clientContext.getBackgroundResources());
+  }
+
+  public UnaryCallable<ListBucketsRequest, ListBucketsPagedResponse> listBucketsPagedCallable() {
+    return listBucketsPagedCallable;
+  }
+
+  public UnaryCallable<ListBucketsRequest, ListBucketsResponse> listBucketsCallable() {
+    return listBucketsCallable;
+  }
+
+  public UnaryCallable<GetBucketRequest, LogBucket> getBucketCallable() {
+    return getBucketCallable;
+  }
+
+  public UnaryCallable<UpdateBucketRequest, LogBucket> updateBucketCallable() {
+    return updateBucketCallable;
   }
 
   public UnaryCallable<ListSinksRequest, ListSinksPagedResponse> listSinksPagedCallable() {

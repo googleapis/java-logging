@@ -15,9 +15,9 @@
  */
 package com.google.cloud.logging.v2.stub;
 
-import static com.google.cloud.logging.v2.LoggingClient.ListLogEntriesPagedResponse;
-import static com.google.cloud.logging.v2.LoggingClient.ListLogsPagedResponse;
-import static com.google.cloud.logging.v2.LoggingClient.ListMonitoredResourceDescriptorsPagedResponse;
+import static com.google.cloud.logging.v2.LoggingServiceV2Client.ListLogEntriesPagedResponse;
+import static com.google.cloud.logging.v2.LoggingServiceV2Client.ListLogsPagedResponse;
+import static com.google.cloud.logging.v2.LoggingServiceV2Client.ListMonitoredResourceDescriptorsPagedResponse;
 
 import com.google.api.core.BetaApi;
 import com.google.api.gax.core.BackgroundResource;
@@ -55,13 +55,6 @@ import javax.annotation.Generated;
 @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
 public class GrpcLoggingServiceV2Stub extends LoggingServiceV2Stub {
 
-  private static final MethodDescriptor<DeleteLogRequest, Empty> deleteLogMethodDescriptor =
-      MethodDescriptor.<DeleteLogRequest, Empty>newBuilder()
-          .setType(MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName("google.logging.v2.LoggingServiceV2/DeleteLog")
-          .setRequestMarshaller(ProtoUtils.marshaller(DeleteLogRequest.getDefaultInstance()))
-          .setResponseMarshaller(ProtoUtils.marshaller(Empty.getDefaultInstance()))
-          .build();
   private static final MethodDescriptor<WriteLogEntriesRequest, WriteLogEntriesResponse>
       writeLogEntriesMethodDescriptor =
           MethodDescriptor.<WriteLogEntriesRequest, WriteLogEntriesResponse>newBuilder()
@@ -72,6 +65,13 @@ public class GrpcLoggingServiceV2Stub extends LoggingServiceV2Stub {
               .setResponseMarshaller(
                   ProtoUtils.marshaller(WriteLogEntriesResponse.getDefaultInstance()))
               .build();
+  private static final MethodDescriptor<DeleteLogRequest, Empty> deleteLogMethodDescriptor =
+      MethodDescriptor.<DeleteLogRequest, Empty>newBuilder()
+          .setType(MethodDescriptor.MethodType.UNARY)
+          .setFullMethodName("google.logging.v2.LoggingServiceV2/DeleteLog")
+          .setRequestMarshaller(ProtoUtils.marshaller(DeleteLogRequest.getDefaultInstance()))
+          .setResponseMarshaller(ProtoUtils.marshaller(Empty.getDefaultInstance()))
+          .build();
   private static final MethodDescriptor<ListLogEntriesRequest, ListLogEntriesResponse>
       listLogEntriesMethodDescriptor =
           MethodDescriptor.<ListLogEntriesRequest, ListLogEntriesResponse>newBuilder()
@@ -109,9 +109,9 @@ public class GrpcLoggingServiceV2Stub extends LoggingServiceV2Stub {
 
   private final BackgroundResource backgroundResources;
 
-  private final UnaryCallable<DeleteLogRequest, Empty> deleteLogCallable;
   private final UnaryCallable<WriteLogEntriesRequest, WriteLogEntriesResponse>
       writeLogEntriesCallable;
+  private final UnaryCallable<DeleteLogRequest, Empty> deleteLogCallable;
   private final UnaryCallable<ListLogEntriesRequest, ListLogEntriesResponse> listLogEntriesCallable;
   private final UnaryCallable<ListLogEntriesRequest, ListLogEntriesPagedResponse>
       listLogEntriesPagedCallable;
@@ -165,6 +165,11 @@ public class GrpcLoggingServiceV2Stub extends LoggingServiceV2Stub {
       throws IOException {
     this.callableFactory = callableFactory;
 
+    GrpcCallSettings<WriteLogEntriesRequest, WriteLogEntriesResponse>
+        writeLogEntriesTransportSettings =
+            GrpcCallSettings.<WriteLogEntriesRequest, WriteLogEntriesResponse>newBuilder()
+                .setMethodDescriptor(writeLogEntriesMethodDescriptor)
+                .build();
     GrpcCallSettings<DeleteLogRequest, Empty> deleteLogTransportSettings =
         GrpcCallSettings.<DeleteLogRequest, Empty>newBuilder()
             .setMethodDescriptor(deleteLogMethodDescriptor)
@@ -178,11 +183,6 @@ public class GrpcLoggingServiceV2Stub extends LoggingServiceV2Stub {
                   }
                 })
             .build();
-    GrpcCallSettings<WriteLogEntriesRequest, WriteLogEntriesResponse>
-        writeLogEntriesTransportSettings =
-            GrpcCallSettings.<WriteLogEntriesRequest, WriteLogEntriesResponse>newBuilder()
-                .setMethodDescriptor(writeLogEntriesMethodDescriptor)
-                .build();
     GrpcCallSettings<ListLogEntriesRequest, ListLogEntriesResponse>
         listLogEntriesTransportSettings =
             GrpcCallSettings.<ListLogEntriesRequest, ListLogEntriesResponse>newBuilder()
@@ -210,12 +210,12 @@ public class GrpcLoggingServiceV2Stub extends LoggingServiceV2Stub {
                 })
             .build();
 
-    this.deleteLogCallable =
-        callableFactory.createUnaryCallable(
-            deleteLogTransportSettings, settings.deleteLogSettings(), clientContext);
     this.writeLogEntriesCallable =
         callableFactory.createBatchingCallable(
             writeLogEntriesTransportSettings, settings.writeLogEntriesSettings(), clientContext);
+    this.deleteLogCallable =
+        callableFactory.createUnaryCallable(
+            deleteLogTransportSettings, settings.deleteLogSettings(), clientContext);
     this.listLogEntriesCallable =
         callableFactory.createUnaryCallable(
             listLogEntriesTransportSettings, settings.listLogEntriesSettings(), clientContext);
@@ -242,12 +242,12 @@ public class GrpcLoggingServiceV2Stub extends LoggingServiceV2Stub {
     backgroundResources = new BackgroundResourceAggregation(clientContext.getBackgroundResources());
   }
 
-  public UnaryCallable<DeleteLogRequest, Empty> deleteLogCallable() {
-    return deleteLogCallable;
-  }
-
   public UnaryCallable<WriteLogEntriesRequest, WriteLogEntriesResponse> writeLogEntriesCallable() {
     return writeLogEntriesCallable;
+  }
+
+  public UnaryCallable<DeleteLogRequest, Empty> deleteLogCallable() {
+    return deleteLogCallable;
   }
 
   public UnaryCallable<ListLogEntriesRequest, ListLogEntriesPagedResponse>
