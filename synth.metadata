@@ -1,12 +1,13 @@
 {
-  "updateTime": "2020-03-30T22:22:06.823662Z",
+  "updateTime": "2020-03-30T22:22:48.377604Z",
   "sources": [
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "83c6f84035ee0f80eaa44d8b688a010461cc4080",
-        "internalRef": "297918498"
+        "sha": "6de6e938b7df1cd62396563a067334abeedb9676",
+        "internalRef": "298474513",
+        "log": "6de6e938b7df1cd62396563a067334abeedb9676\nchore: use the latest gapic-generator and protoc-java-resource-name-plugin in Bazel workspace.\n\nPiperOrigin-RevId: 298474513\n\n244ab2b83a82076a1fa7be63b7e0671af73f5c02\nAdds service config definition for bigqueryreservation v1\n\nPiperOrigin-RevId: 298455048\n\n"
       }
     },
     {
