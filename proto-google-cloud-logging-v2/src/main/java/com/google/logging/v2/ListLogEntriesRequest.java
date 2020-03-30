@@ -920,7 +920,8 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * repeated string resource_names = 8 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
      * </code>
      *
-     * @param value The bytes of the resourceNames to add.
+     * @param index The index of the value to return.
+     * @return The bytes of the resourceNames at the given index.
      */
     public com.google.protobuf.ByteString getResourceNamesBytes(int index) {
       return resourceNames_.getByteString(index);

@@ -666,7 +666,8 @@ public final class ListLogsResponse extends com.google.protobuf.GeneratedMessage
      *
      * <code>repeated string log_names = 3;</code>
      *
-     * @param value The bytes of the logNames to add.
+     * @param index The index of the value to return.
+     * @return The bytes of the logNames at the given index.
      */
     public com.google.protobuf.ByteString getLogNamesBytes(int index) {
       return logNames_.getByteString(index);

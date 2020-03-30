@@ -368,7 +368,10 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
   private int optionsCase_ = 0;
   private java.lang.Object options_;
 
-  public enum OptionsCase implements com.google.protobuf.Internal.EnumLite {
+  public enum OptionsCase
+      implements
+          com.google.protobuf.Internal.EnumLite,
+          com.google.protobuf.AbstractMessage.InternalOneOfEnum {
     BIGQUERY_OPTIONS(12),
     OPTIONS_NOT_SET(0);
     private final int value;
