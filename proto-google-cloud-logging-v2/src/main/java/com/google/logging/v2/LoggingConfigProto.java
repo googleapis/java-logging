@@ -372,11 +372,18 @@ public final class LoggingConfigProto {
           + "gleapis.com/auth/cloud-platform.read-onl"
           + "y,https://www.googleapis.com/auth/loggin"
           + "g.admin,https://www.googleapis.com/auth/"
-          + "logging.readB\236\001\n\025com.google.logging.v2B\022"
+          + "logging.readB\274\003\n\025com.google.logging.v2B\022"
           + "LoggingConfigProtoP\001Z8google.golang.org/"
           + "genproto/googleapis/logging/v2;logging\370\001"
           + "\001\252\002\027Google.Cloud.Logging.V2\312\002\027Google\\Clo"
-          + "ud\\Logging\\V2b\006proto3"
+          + "ud\\Logging\\V2\352A`\n+logging.googleapis.com"
+          + "/OrganizationLocation\0221organizations/{or"
+          + "ganization}/locations/{location}\352AN\n%log"
+          + "ging.googleapis.com/FolderLocation\022%fold"
+          + "ers/{folder}/locations/{location}\352Ag\n-lo"
+          + "gging.googleapis.com/BillingAccountLocat"
+          + "ion\0226billingAccounts/{billing_account}/l"
+          + "ocations/{location}b\006proto3"
     };
     descriptor =
         com.google.protobuf.Descriptors.FileDescriptor.internalBuildGeneratedFileFrom(
@@ -593,6 +600,7 @@ public final class LoggingConfigProto {
     registry.add(com.google.api.ClientProto.methodSignature);
     registry.add(com.google.api.ClientProto.oauthScopes);
     registry.add(com.google.api.ResourceProto.resource);
+    registry.add(com.google.api.ResourceProto.resourceDefinition);
     registry.add(com.google.api.ResourceProto.resourceReference);
     com.google.protobuf.Descriptors.FileDescriptor.internalUpdateFileDescriptor(
         descriptor, registry);
