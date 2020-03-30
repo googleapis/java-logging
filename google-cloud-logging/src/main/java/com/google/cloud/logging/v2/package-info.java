@@ -44,7 +44,10 @@
  * <code>
  * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
  *   LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
- *   loggingServiceV2Client.deleteLog(logName);
+ *   MonitoredResource resource = MonitoredResource.newBuilder().build();
+ *   Map&lt;String, String&gt; labels = new HashMap&lt;&gt;();
+ *   List&lt;LogEntry&gt; entries = new ArrayList&lt;&gt;();
+ *   WriteLogEntriesResponse response = loggingServiceV2Client.writeLogEntries(logName, resource, labels, entries);
  * }
  * </code>
  * </pre>
