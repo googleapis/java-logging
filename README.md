@@ -12,24 +12,24 @@ Java idiomatic client for [Stackdriver Logging][product-docs].
 
 If you are using Maven with [BOM][libraries-bom], add this to your pom.xml file
 ```xml
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>com.google.cloud</groupId>
-        <artifactId>libraries-bom</artifactId>
-        <version>4.1.1</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
+<dependencyManagement>
   <dependencies>
     <dependency>
       <groupId>com.google.cloud</groupId>
-      <artifactId>google-cloud-logging</artifactId>
+      <artifactId>libraries-bom</artifactId>
+      <version>4.1.1</version>
+      <type>pom</type>
+      <scope>import</scope>
     </dependency>
   </dependencies>
+</dependencyManagement>
+
+<dependencies>
+  <dependency>
+    <groupId>com.google.cloud</groupId>
+    <artifactId>google-cloud-logging</artifactId>
+  </dependency>
+</dependencies>
 
 ```
 
@@ -38,11 +38,11 @@ If you are using Maven with [BOM][libraries-bom], add this to your pom.xml file
 If you are using Maven without BOM, add this to your dependencies:
 
 ```xml
-    <dependency>
-      <groupId>com.google.cloud</groupId>
-      <artifactId>google-cloud-logging</artifactId>
-      <version>1.101.0</version>
-    </dependency>
+<dependency>
+  <groupId>com.google.cloud</groupId>
+  <artifactId>google-cloud-logging</artifactId>
+  <version>1.100.0</version>
+</dependency>
 
 ```
 

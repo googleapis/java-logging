@@ -2,15 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.google.cloud</groupId>
-  <artifactId>logging-install-with-bom</artifactId>
+  <artifactId>logging-snapshot</artifactId>
   <packaging>jar</packaging>
-  <name>Google Cloud Logging Install With BOM Sample</name>
+  <name>Google Stackdriver Logging Snapshot Samples</name>
   <url>https://github.com/googleapis/java-logging</url>
 
+  <!--
+    The parent pom defines common style checks and testing strategies for our samples.
+    Removing or replacing it should not affect the execution of the samples in anyway.
+  -->
   <parent>
-    <groupId>com.google.cloud</groupId>
-    <artifactId>google-cloud-logging-samples</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <groupId>com.google.cloud.samples</groupId>
+    <artifactId>shared-configuration</artifactId>
+    <version>1.0.12</version>
   </parent>
 
   <properties>
@@ -19,26 +23,28 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-  <!-- [START logging_install_with_bom] -->
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>com.google.cloud</groupId>
-        <artifactId>libraries-bom</artifactId>
-        <version>4.1.1</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
+  <!-- {x-version-update-start::current} -->
   <dependencies>
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>google-cloud-logging</artifactId>
+      <version>1.101.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.truth</groupId>
+      <artifactId>truth</artifactId>
+      <version>1.0.1</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
-  <!-- [END logging_install_with_bom] -->
+  <!-- {x-version-update-end} -->
 
   <!-- compile and run all snippet tests -->
   <build>
@@ -46,6 +52,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.1.0</version>
         <executions>
           <execution>
             <id>add-snippets-source</id>
