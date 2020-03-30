@@ -19,47 +19,47 @@
  *
  * <p>The interfaces provided are listed below, along with usage samples.
  *
- * <p>============= LoggingClient =============
- *
- * <p>Service Description: Service for ingesting and querying logs.
- *
- * <p>Sample for LoggingClient:
- *
- * <pre>
- * <code>
- * try (LoggingClient loggingClient = LoggingClient.create()) {
- *   LogName logName = ProjectLogName.of("[PROJECT]", "[LOG]");
- *   loggingClient.deleteLog(logName);
- * }
- * </code>
- * </pre>
- *
- * ============ ConfigClient ============
+ * <p>===================== ConfigServiceV2Client =====================
  *
  * <p>Service Description: Service for configuring sinks used to route log entries.
  *
- * <p>Sample for ConfigClient:
+ * <p>Sample for ConfigServiceV2Client:
  *
  * <pre>
  * <code>
- * try (ConfigClient configClient = ConfigClient.create()) {
- *   SinkName sinkName = ProjectSinkName.of("[PROJECT]", "[SINK]");
- *   LogSink response = configClient.getSink(sinkName);
+ * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+ *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+ *   LogSink response = configServiceV2Client.getSink(sinkName);
  * }
  * </code>
  * </pre>
  *
- * ============= MetricsClient =============
+ * ====================== LoggingServiceV2Client ======================
  *
- * <p>Service Description: Service for configuring logs-based metrics.
+ * <p>Service Description: Service for ingesting and querying logs.
  *
- * <p>Sample for MetricsClient:
+ * <p>Sample for LoggingServiceV2Client:
  *
  * <pre>
  * <code>
- * try (MetricsClient metricsClient = MetricsClient.create()) {
- *   MetricName metricName = ProjectMetricName.of("[PROJECT]", "[METRIC]");
- *   LogMetric response = metricsClient.getLogMetric(metricName);
+ * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+ *   LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
+ *   loggingServiceV2Client.deleteLog(logName);
+ * }
+ * </code>
+ * </pre>
+ *
+ * ====================== MetricsServiceV2Client ======================
+ *
+ * <p>Service Description: Service for configuring logs-based metrics.
+ *
+ * <p>Sample for MetricsServiceV2Client:
+ *
+ * <pre>
+ * <code>
+ * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+ *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
+ *   LogMetric response = metricsServiceV2Client.getLogMetric(metricName);
  * }
  * </code>
  * </pre>

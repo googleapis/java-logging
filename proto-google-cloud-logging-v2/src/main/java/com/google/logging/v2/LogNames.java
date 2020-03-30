@@ -27,18 +27,6 @@ public class LogNames {
   private LogNames() {}
 
   public static LogName parse(String resourceNameString) {
-    if (ProjectLogName.isParsableFrom(resourceNameString)) {
-      return ProjectLogName.parse(resourceNameString);
-    }
-    if (OrganizationLogName.isParsableFrom(resourceNameString)) {
-      return OrganizationLogName.parse(resourceNameString);
-    }
-    if (FolderLogName.isParsableFrom(resourceNameString)) {
-      return FolderLogName.parse(resourceNameString);
-    }
-    if (BillingLogName.isParsableFrom(resourceNameString)) {
-      return BillingLogName.parse(resourceNameString);
-    }
     return UntypedLogName.parse(resourceNameString);
   }
 }

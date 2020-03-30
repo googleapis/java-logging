@@ -255,7 +255,7 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
    * more information, see `writer_identity` in [LogSink][google.logging.v2.LogSink].
    * </pre>
    *
-   * <code>bool unique_writer_identity = 3;</code>
+   * <code>bool unique_writer_identity = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
    *
    * @return The uniqueWriterIdentity.
    */
@@ -966,7 +966,7 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
      * more information, see `writer_identity` in [LogSink][google.logging.v2.LogSink].
      * </pre>
      *
-     * <code>bool unique_writer_identity = 3;</code>
+     * <code>bool unique_writer_identity = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @return The uniqueWriterIdentity.
      */
@@ -989,7 +989,7 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
      * more information, see `writer_identity` in [LogSink][google.logging.v2.LogSink].
      * </pre>
      *
-     * <code>bool unique_writer_identity = 3;</code>
+     * <code>bool unique_writer_identity = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @param value The uniqueWriterIdentity to set.
      * @return This builder for chaining.
@@ -1016,7 +1016,7 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
      * more information, see `writer_identity` in [LogSink][google.logging.v2.LogSink].
      * </pre>
      *
-     * <code>bool unique_writer_identity = 3;</code>
+     * <code>bool unique_writer_identity = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @return This builder for chaining.
      */

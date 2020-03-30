@@ -15,9 +15,9 @@
  */
 package com.google.cloud.logging.v2.stub;
 
-import static com.google.cloud.logging.v2.LoggingClient.ListLogEntriesPagedResponse;
-import static com.google.cloud.logging.v2.LoggingClient.ListLogsPagedResponse;
-import static com.google.cloud.logging.v2.LoggingClient.ListMonitoredResourceDescriptorsPagedResponse;
+import static com.google.cloud.logging.v2.LoggingServiceV2Client.ListLogEntriesPagedResponse;
+import static com.google.cloud.logging.v2.LoggingServiceV2Client.ListLogsPagedResponse;
+import static com.google.cloud.logging.v2.LoggingServiceV2Client.ListMonitoredResourceDescriptorsPagedResponse;
 
 import com.google.api.core.BetaApi;
 import com.google.api.gax.core.BackgroundResource;
@@ -214,7 +214,7 @@ public class GrpcLoggingServiceV2Stub extends LoggingServiceV2Stub {
         callableFactory.createUnaryCallable(
             deleteLogTransportSettings, settings.deleteLogSettings(), clientContext);
     this.writeLogEntriesCallable =
-        callableFactory.createBatchingCallable(
+        callableFactory.createUnaryCallable(
             writeLogEntriesTransportSettings, settings.writeLogEntriesSettings(), clientContext);
     this.listLogEntriesCallable =
         callableFactory.createUnaryCallable(
