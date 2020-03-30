@@ -1019,8 +1019,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      *
      * <code>repeated string project_ids = 1 [deprecated = true];</code>
      *
-     * @param index The index of the value to return.
-     * @return The bytes of the projectIds at the given index.
+     * @param value The bytes of the projectIds to add.
      */
     @java.lang.Deprecated
     public com.google.protobuf.ByteString getProjectIdsBytes(int index) {
@@ -1235,8 +1234,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * repeated string resource_names = 8 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
      * </code>
      *
-     * @param index The index of the value to return.
-     * @return The bytes of the resourceNames at the given index.
+     * @param value The bytes of the resourceNames to add.
      */
     public com.google.protobuf.ByteString getResourceNamesBytes(int index) {
       return resourceNames_.getByteString(index);

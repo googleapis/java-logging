@@ -1,13 +1,6 @@
 {
-  "updateTime": "2020-03-30T22:21:47.218804Z",
+  "updateTime": "2020-03-30T22:21:14.140256Z",
   "sources": [
-    {
-      "generator": {
-        "name": "artman",
-        "version": "1.1.1",
-        "dockerImage": "googleapis/artman@sha256:5ef340c8d9334719bc5c6981d95f4a5d2737b0a6a24f2b9a0d430e96fff85c5b"
-      }
-    },
     {
       "git": {
         "name": "googleapis",
@@ -31,8 +24,7 @@
         "apiName": "logging",
         "apiVersion": "v2",
         "language": "java",
-        "generator": "gapic",
-        "config": "google/logging/artman_logging.yaml"
+        "generator": "bazel"
       }
     }
   ]
