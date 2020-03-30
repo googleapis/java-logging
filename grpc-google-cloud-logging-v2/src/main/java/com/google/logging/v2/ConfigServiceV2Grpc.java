@@ -659,19 +659,43 @@ public final class ConfigServiceV2Grpc {
 
   /** Creates a new async stub that supports all call types for the service */
   public static ConfigServiceV2Stub newStub(io.grpc.Channel channel) {
-    return new ConfigServiceV2Stub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<ConfigServiceV2Stub> factory =
+        new io.grpc.stub.AbstractStub.StubFactory<ConfigServiceV2Stub>() {
+          @java.lang.Override
+          public ConfigServiceV2Stub newStub(
+              io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+            return new ConfigServiceV2Stub(channel, callOptions);
+          }
+        };
+    return ConfigServiceV2Stub.newStub(factory, channel);
   }
 
   /**
    * Creates a new blocking-style stub that supports unary and streaming output calls on the service
    */
   public static ConfigServiceV2BlockingStub newBlockingStub(io.grpc.Channel channel) {
-    return new ConfigServiceV2BlockingStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<ConfigServiceV2BlockingStub> factory =
+        new io.grpc.stub.AbstractStub.StubFactory<ConfigServiceV2BlockingStub>() {
+          @java.lang.Override
+          public ConfigServiceV2BlockingStub newStub(
+              io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+            return new ConfigServiceV2BlockingStub(channel, callOptions);
+          }
+        };
+    return ConfigServiceV2BlockingStub.newStub(factory, channel);
   }
 
   /** Creates a new ListenableFuture-style stub that supports unary calls on the service */
   public static ConfigServiceV2FutureStub newFutureStub(io.grpc.Channel channel) {
-    return new ConfigServiceV2FutureStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<ConfigServiceV2FutureStub> factory =
+        new io.grpc.stub.AbstractStub.StubFactory<ConfigServiceV2FutureStub>() {
+          @java.lang.Override
+          public ConfigServiceV2FutureStub newStub(
+              io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+            return new ConfigServiceV2FutureStub(channel, callOptions);
+          }
+        };
+    return ConfigServiceV2FutureStub.newStub(factory, channel);
   }
 
   /**
@@ -1016,11 +1040,7 @@ public final class ConfigServiceV2Grpc {
    * </pre>
    */
   public static final class ConfigServiceV2Stub
-      extends io.grpc.stub.AbstractStub<ConfigServiceV2Stub> {
-    private ConfigServiceV2Stub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
+      extends io.grpc.stub.AbstractAsyncStub<ConfigServiceV2Stub> {
     private ConfigServiceV2Stub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
@@ -1299,11 +1319,7 @@ public final class ConfigServiceV2Grpc {
    * </pre>
    */
   public static final class ConfigServiceV2BlockingStub
-      extends io.grpc.stub.AbstractStub<ConfigServiceV2BlockingStub> {
-    private ConfigServiceV2BlockingStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
+      extends io.grpc.stub.AbstractBlockingStub<ConfigServiceV2BlockingStub> {
     private ConfigServiceV2BlockingStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
@@ -1533,11 +1549,7 @@ public final class ConfigServiceV2Grpc {
    * </pre>
    */
   public static final class ConfigServiceV2FutureStub
-      extends io.grpc.stub.AbstractStub<ConfigServiceV2FutureStub> {
-    private ConfigServiceV2FutureStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
+      extends io.grpc.stub.AbstractFutureStub<ConfigServiceV2FutureStub> {
     private ConfigServiceV2FutureStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }

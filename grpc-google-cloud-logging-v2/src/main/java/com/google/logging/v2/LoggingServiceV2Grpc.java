@@ -263,19 +263,43 @@ public final class LoggingServiceV2Grpc {
 
   /** Creates a new async stub that supports all call types for the service */
   public static LoggingServiceV2Stub newStub(io.grpc.Channel channel) {
-    return new LoggingServiceV2Stub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<LoggingServiceV2Stub> factory =
+        new io.grpc.stub.AbstractStub.StubFactory<LoggingServiceV2Stub>() {
+          @java.lang.Override
+          public LoggingServiceV2Stub newStub(
+              io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+            return new LoggingServiceV2Stub(channel, callOptions);
+          }
+        };
+    return LoggingServiceV2Stub.newStub(factory, channel);
   }
 
   /**
    * Creates a new blocking-style stub that supports unary and streaming output calls on the service
    */
   public static LoggingServiceV2BlockingStub newBlockingStub(io.grpc.Channel channel) {
-    return new LoggingServiceV2BlockingStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<LoggingServiceV2BlockingStub> factory =
+        new io.grpc.stub.AbstractStub.StubFactory<LoggingServiceV2BlockingStub>() {
+          @java.lang.Override
+          public LoggingServiceV2BlockingStub newStub(
+              io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+            return new LoggingServiceV2BlockingStub(channel, callOptions);
+          }
+        };
+    return LoggingServiceV2BlockingStub.newStub(factory, channel);
   }
 
   /** Creates a new ListenableFuture-style stub that supports unary calls on the service */
   public static LoggingServiceV2FutureStub newFutureStub(io.grpc.Channel channel) {
-    return new LoggingServiceV2FutureStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<LoggingServiceV2FutureStub> factory =
+        new io.grpc.stub.AbstractStub.StubFactory<LoggingServiceV2FutureStub>() {
+          @java.lang.Override
+          public LoggingServiceV2FutureStub newStub(
+              io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+            return new LoggingServiceV2FutureStub(channel, callOptions);
+          }
+        };
+    return LoggingServiceV2FutureStub.newStub(factory, channel);
   }
 
   /**
@@ -415,11 +439,7 @@ public final class LoggingServiceV2Grpc {
    * </pre>
    */
   public static final class LoggingServiceV2Stub
-      extends io.grpc.stub.AbstractStub<LoggingServiceV2Stub> {
-    private LoggingServiceV2Stub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
+      extends io.grpc.stub.AbstractAsyncStub<LoggingServiceV2Stub> {
     private LoggingServiceV2Stub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
@@ -529,11 +549,7 @@ public final class LoggingServiceV2Grpc {
    * </pre>
    */
   public static final class LoggingServiceV2BlockingStub
-      extends io.grpc.stub.AbstractStub<LoggingServiceV2BlockingStub> {
-    private LoggingServiceV2BlockingStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
+      extends io.grpc.stub.AbstractBlockingStub<LoggingServiceV2BlockingStub> {
     private LoggingServiceV2BlockingStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
@@ -626,11 +642,7 @@ public final class LoggingServiceV2Grpc {
    * </pre>
    */
   public static final class LoggingServiceV2FutureStub
-      extends io.grpc.stub.AbstractStub<LoggingServiceV2FutureStub> {
-    private LoggingServiceV2FutureStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
+      extends io.grpc.stub.AbstractFutureStub<LoggingServiceV2FutureStub> {
     private LoggingServiceV2FutureStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
