@@ -201,8 +201,7 @@ public class LogSinkName implements ResourceName {
     throw new ValidationException("JobName.parse: formattedString not in valid format");
   }
 
-  @BetaApi("The method will be renamed to parseList after subclasses of this class are removed.")
-  public static List<LogSinkName> parse(List<String> formattedStrings) {
+  public static List<LogSinkName> parseList(List<String> formattedStrings) {
     List<LogSinkName> list = new ArrayList<>(formattedStrings.size());
     for (String formattedString : formattedStrings) {
       list.add(parse(formattedString));
@@ -210,8 +209,7 @@ public class LogSinkName implements ResourceName {
     return list;
   }
 
-  @BetaApi("The method will be renamed to toStringList after subclasses of this class are removed.")
-  public static List<String> toStrings(List<LogSinkName> values) {
+  public static List<String> toStringList(List<LogSinkName> values) {
     List<String> list = new ArrayList<>(values.size());
     for (LogSinkName value : values) {
       if (value == null) {

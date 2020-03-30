@@ -184,8 +184,7 @@ public class CmekSettingsName implements ResourceName {
     throw new ValidationException("JobName.parse: formattedString not in valid format");
   }
 
-  @BetaApi("The method will be renamed to parseList after subclasses of this class are removed.")
-  public static List<CmekSettingsName> parse(List<String> formattedStrings) {
+  public static List<CmekSettingsName> parseList(List<String> formattedStrings) {
     List<CmekSettingsName> list = new ArrayList<>(formattedStrings.size());
     for (String formattedString : formattedStrings) {
       list.add(parse(formattedString));
@@ -193,8 +192,7 @@ public class CmekSettingsName implements ResourceName {
     return list;
   }
 
-  @BetaApi("The method will be renamed to toStringList after subclasses of this class are removed.")
-  public static List<String> toStrings(List<CmekSettingsName> values) {
+  public static List<String> toStringList(List<CmekSettingsName> values) {
     List<String> list = new ArrayList<>(values.size());
     for (CmekSettingsName value : values) {
       if (value == null) {

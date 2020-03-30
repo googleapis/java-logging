@@ -211,8 +211,7 @@ public class LogExclusionName implements ResourceName {
     throw new ValidationException("JobName.parse: formattedString not in valid format");
   }
 
-  @BetaApi("The method will be renamed to parseList after subclasses of this class are removed.")
-  public static List<LogExclusionName> parse(List<String> formattedStrings) {
+  public static List<LogExclusionName> parseList(List<String> formattedStrings) {
     List<LogExclusionName> list = new ArrayList<>(formattedStrings.size());
     for (String formattedString : formattedStrings) {
       list.add(parse(formattedString));
@@ -220,8 +219,7 @@ public class LogExclusionName implements ResourceName {
     return list;
   }
 
-  @BetaApi("The method will be renamed to toStringList after subclasses of this class are removed.")
-  public static List<String> toStrings(List<LogExclusionName> values) {
+  public static List<String> toStringList(List<LogExclusionName> values) {
     List<String> list = new ArrayList<>(values.size());
     for (LogExclusionName value : values) {
       if (value == null) {
