@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- see http://www.mojohaus.org/clirr-maven-plugin/examples/ignored-differences.html -->
+<differences>
+  <!-- TODO: remove after 2.0.0 released -->
+  <difference>
+    <differenceType>8001</differenceType>
+    <className>com/google/cloud/logging/v2/MetricsClient*</className>
+  </difference>
+  <difference>
+    <differenceType>8001</differenceType>
+    <className>com/google/cloud/logging/v2/LoggingClient*</className>
+  </difference>
+  <difference>
+    <differenceType>8001</differenceType>
+    <className>com/google/cloud/logging/v2/ConfigClient*</className>
+  </difference>
+  <difference>
+    <differenceType>8001</differenceType>
+    <className>com/google/cloud/logging/v2/MetricsSettings*</className>
+  </difference>
+  <difference>
+    <differenceType>8001</differenceType>
+    <className>com/google/cloud/logging/v2/LoggingSettings*</className>
+  </difference>
+  <difference>
+    <differenceType>8001</differenceType>
+    <className>com/google/cloud/logging/v2/ConfigSettings*</className>
+  </difference>
+</differences>
