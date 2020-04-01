@@ -42,7 +42,6 @@ import com.google.cloud.logging.v2.ConfigServiceV2Client;
 import com.google.cloud.logging.v2.ConfigServiceV2Settings;
 import com.google.cloud.logging.v2.LoggingServiceV2Client;
 import com.google.cloud.logging.v2.LoggingServiceV2Settings;
-import com.google.cloud.logging.v2.LoggingServiceV2Settings;
 import com.google.cloud.logging.v2.MetricsServiceV2Client;
 import com.google.cloud.logging.v2.MetricsServiceV2Settings;
 import com.google.common.util.concurrent.MoreExecutors;
@@ -141,11 +140,14 @@ public class GrpcLoggingRpc implements LoggingRpc {
             }
           };
       ConfigServiceV2Settings.Builder confBuilder =
-          ConfigServiceV2Settings.newBuilder(clientContext).applyToAllUnaryMethods(retrySettingsSetter);
+          ConfigServiceV2Settings.newBuilder(clientContext)
+              .applyToAllUnaryMethods(retrySettingsSetter);
       LoggingServiceV2Settings.Builder logBuilder =
-          LoggingServiceV2Settings.newBuilder(clientContext).applyToAllUnaryMethods(retrySettingsSetter);
+          LoggingServiceV2Settings.newBuilder(clientContext)
+              .applyToAllUnaryMethods(retrySettingsSetter);
       MetricsServiceV2Settings.Builder metricsBuilder =
-          MetricsServiceV2Settings.newBuilder(clientContext).applyToAllUnaryMethods(retrySettingsSetter);
+          MetricsServiceV2Settings.newBuilder(clientContext)
+              .applyToAllUnaryMethods(retrySettingsSetter);
 
       // TODO(pongad): Take advantage of https://github.com/googleapis/gax-java/pull/452 when it's
       // released.

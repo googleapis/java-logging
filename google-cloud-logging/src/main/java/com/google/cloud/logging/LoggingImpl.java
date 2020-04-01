@@ -232,7 +232,9 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   public ApiFuture<Sink> updateAsync(SinkInfo sink) {
     UpdateSinkRequest request =
         UpdateSinkRequest.newBuilder()
-            .setSinkName(LogSinkName.ofProjectSinkName(getOptions().getProjectId(), sink.getName()).toString())
+            .setSinkName(
+                LogSinkName.ofProjectSinkName(getOptions().getProjectId(), sink.getName())
+                    .toString())
             .setSink(sink.toPb(getOptions().getProjectId()))
             .build();
     return transform(rpc.update(request), Sink.fromPbFunction(this));
@@ -247,7 +249,8 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   public ApiFuture<Sink> getSinkAsync(String sink) {
     GetSinkRequest request =
         GetSinkRequest.newBuilder()
-            .setSinkName(LogSinkName.ofProjectSinkName(getOptions().getProjectId(), sink).toString())
+            .setSinkName(
+                LogSinkName.ofProjectSinkName(getOptions().getProjectId(), sink).toString())
             .build();
     return transform(rpc.get(request), Sink.fromPbFunction(this));
   }
@@ -311,7 +314,8 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   public ApiFuture<Boolean> deleteSinkAsync(String sink) {
     DeleteSinkRequest request =
         DeleteSinkRequest.newBuilder()
-            .setSinkName(LogSinkName.ofProjectSinkName(getOptions().getProjectId(), sink).toString())
+            .setSinkName(
+                LogSinkName.ofProjectSinkName(getOptions().getProjectId(), sink).toString())
             .build();
     return transform(rpc.delete(request), EMPTY_TO_BOOLEAN_FUNCTION);
   }
