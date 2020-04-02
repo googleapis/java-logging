@@ -1,13 +1,12 @@
 {
-  "updateTime": "2020-04-02T18:27:17.854476Z",
+  "updateTime": "2020-04-02T18:30:26.635312Z",
   "sources": [
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
         "sha": "4a6cfccb4a32cb28db7366295d90078c6af3112f",
-        "internalRef": "304438717",
-        "log": "4a6cfccb4a32cb28db7366295d90078c6af3112f\ndocs: Fix link in monitoring summary description.\n\nPiperOrigin-RevId: 304438717\n\n"
+        "internalRef": "304438717"
       }
     },
     {
