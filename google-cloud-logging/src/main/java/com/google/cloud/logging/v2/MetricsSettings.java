@@ -15,7 +15,7 @@
  */
 package com.google.cloud.logging.v2;
 
-import static com.google.cloud.logging.v2.MetricsServiceV2Client.ListLogMetricsPagedResponse;
+import static com.google.cloud.logging.v2.MetricsClient.ListLogMetricsPagedResponse;
 
 import com.google.api.core.ApiFunction;
 import com.google.api.core.BetaApi;
@@ -43,7 +43,7 @@ import javax.annotation.Generated;
 
 // AUTO-GENERATED DOCUMENTATION AND CLASS
 /**
- * Settings class to configure an instance of {@link MetricsServiceV2Client}.
+ * Settings class to configure an instance of {@link MetricsClient}.
  *
  * <p>The default instance has everything set to sensible defaults:
  *
@@ -60,21 +60,21 @@ import javax.annotation.Generated;
  *
  * <pre>
  * <code>
- * MetricsServiceV2Settings.Builder metricsServiceV2SettingsBuilder =
- *     MetricsServiceV2Settings.newBuilder();
- * metricsServiceV2SettingsBuilder
+ * MetricsSettings.Builder metricsSettingsBuilder =
+ *     MetricsSettings.newBuilder();
+ * metricsSettingsBuilder
  *     .getLogMetricSettings()
  *     .setRetrySettings(
- *         metricsServiceV2SettingsBuilder.getLogMetricSettings().getRetrySettings().toBuilder()
+ *         metricsSettingsBuilder.getLogMetricSettings().getRetrySettings().toBuilder()
  *             .setTotalTimeout(Duration.ofSeconds(30))
  *             .build());
- * MetricsServiceV2Settings metricsServiceV2Settings = metricsServiceV2SettingsBuilder.build();
+ * MetricsSettings metricsSettings = metricsSettingsBuilder.build();
  * </code>
  * </pre>
  */
 @Generated("by gapic-generator")
 @BetaApi
-public class MetricsServiceV2Settings extends ClientSettings<MetricsServiceV2Settings> {
+public class MetricsSettings extends ClientSettings<MetricsSettings> {
   /** Returns the object with the settings used for calls to listLogMetrics. */
   public PagedCallSettings<
           ListLogMetricsRequest, ListLogMetricsResponse, ListLogMetricsPagedResponse>
@@ -102,9 +102,8 @@ public class MetricsServiceV2Settings extends ClientSettings<MetricsServiceV2Set
     return ((MetricsServiceV2StubSettings) getStubSettings()).deleteLogMetricSettings();
   }
 
-  public static final MetricsServiceV2Settings create(MetricsServiceV2StubSettings stub)
-      throws IOException {
-    return new MetricsServiceV2Settings.Builder(stub.toBuilder()).build();
+  public static final MetricsSettings create(MetricsServiceV2StubSettings stub) throws IOException {
+    return new MetricsSettings.Builder(stub.toBuilder()).build();
   }
 
   /** Returns a builder for the default ExecutorProvider for this service. */
@@ -156,12 +155,12 @@ public class MetricsServiceV2Settings extends ClientSettings<MetricsServiceV2Set
     return new Builder(this);
   }
 
-  protected MetricsServiceV2Settings(Builder settingsBuilder) throws IOException {
+  protected MetricsSettings(Builder settingsBuilder) throws IOException {
     super(settingsBuilder);
   }
 
-  /** Builder for MetricsServiceV2Settings. */
-  public static class Builder extends ClientSettings.Builder<MetricsServiceV2Settings, Builder> {
+  /** Builder for MetricsSettings. */
+  public static class Builder extends ClientSettings.Builder<MetricsSettings, Builder> {
     protected Builder() throws IOException {
       this((ClientContext) null);
     }
@@ -174,7 +173,7 @@ public class MetricsServiceV2Settings extends ClientSettings<MetricsServiceV2Set
       return new Builder(MetricsServiceV2StubSettings.newBuilder());
     }
 
-    protected Builder(MetricsServiceV2Settings settings) {
+    protected Builder(MetricsSettings settings) {
       super(settings.getStubSettings().toBuilder());
     }
 
@@ -227,8 +226,8 @@ public class MetricsServiceV2Settings extends ClientSettings<MetricsServiceV2Set
     }
 
     @Override
-    public MetricsServiceV2Settings build() throws IOException {
-      return new MetricsServiceV2Settings(this);
+    public MetricsSettings build() throws IOException {
+      return new MetricsSettings(this);
     }
   }
 }

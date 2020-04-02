@@ -15,9 +15,9 @@
  */
 package com.google.cloud.logging.v2;
 
-import static com.google.cloud.logging.v2.ConfigServiceV2Client.ListBucketsPagedResponse;
-import static com.google.cloud.logging.v2.ConfigServiceV2Client.ListExclusionsPagedResponse;
-import static com.google.cloud.logging.v2.ConfigServiceV2Client.ListSinksPagedResponse;
+import static com.google.cloud.logging.v2.ConfigClient.ListBucketsPagedResponse;
+import static com.google.cloud.logging.v2.ConfigClient.ListExclusionsPagedResponse;
+import static com.google.cloud.logging.v2.ConfigClient.ListSinksPagedResponse;
 
 import com.google.api.core.ApiFunction;
 import com.google.api.core.BetaApi;
@@ -60,7 +60,7 @@ import javax.annotation.Generated;
 
 // AUTO-GENERATED DOCUMENTATION AND CLASS
 /**
- * Settings class to configure an instance of {@link ConfigServiceV2Client}.
+ * Settings class to configure an instance of {@link ConfigClient}.
  *
  * <p>The default instance has everything set to sensible defaults:
  *
@@ -77,21 +77,21 @@ import javax.annotation.Generated;
  *
  * <pre>
  * <code>
- * ConfigServiceV2Settings.Builder configServiceV2SettingsBuilder =
- *     ConfigServiceV2Settings.newBuilder();
- * configServiceV2SettingsBuilder
+ * ConfigSettings.Builder configSettingsBuilder =
+ *     ConfigSettings.newBuilder();
+ * configSettingsBuilder
  *     .getSinkSettings()
  *     .setRetrySettings(
- *         configServiceV2SettingsBuilder.getSinkSettings().getRetrySettings().toBuilder()
+ *         configSettingsBuilder.getSinkSettings().getRetrySettings().toBuilder()
  *             .setTotalTimeout(Duration.ofSeconds(30))
  *             .build());
- * ConfigServiceV2Settings configServiceV2Settings = configServiceV2SettingsBuilder.build();
+ * ConfigSettings configSettings = configSettingsBuilder.build();
  * </code>
  * </pre>
  */
 @Generated("by gapic-generator")
 @BetaApi
-public class ConfigServiceV2Settings extends ClientSettings<ConfigServiceV2Settings> {
+public class ConfigSettings extends ClientSettings<ConfigSettings> {
   /** Returns the object with the settings used for calls to listBuckets. */
   public PagedCallSettings<ListBucketsRequest, ListBucketsResponse, ListBucketsPagedResponse>
       listBucketsSettings() {
@@ -171,9 +171,8 @@ public class ConfigServiceV2Settings extends ClientSettings<ConfigServiceV2Setti
     return ((ConfigServiceV2StubSettings) getStubSettings()).updateCmekSettingsSettings();
   }
 
-  public static final ConfigServiceV2Settings create(ConfigServiceV2StubSettings stub)
-      throws IOException {
-    return new ConfigServiceV2Settings.Builder(stub.toBuilder()).build();
+  public static final ConfigSettings create(ConfigServiceV2StubSettings stub) throws IOException {
+    return new ConfigSettings.Builder(stub.toBuilder()).build();
   }
 
   /** Returns a builder for the default ExecutorProvider for this service. */
@@ -225,12 +224,12 @@ public class ConfigServiceV2Settings extends ClientSettings<ConfigServiceV2Setti
     return new Builder(this);
   }
 
-  protected ConfigServiceV2Settings(Builder settingsBuilder) throws IOException {
+  protected ConfigSettings(Builder settingsBuilder) throws IOException {
     super(settingsBuilder);
   }
 
-  /** Builder for ConfigServiceV2Settings. */
-  public static class Builder extends ClientSettings.Builder<ConfigServiceV2Settings, Builder> {
+  /** Builder for ConfigSettings. */
+  public static class Builder extends ClientSettings.Builder<ConfigSettings, Builder> {
     protected Builder() throws IOException {
       this((ClientContext) null);
     }
@@ -243,7 +242,7 @@ public class ConfigServiceV2Settings extends ClientSettings<ConfigServiceV2Setti
       return new Builder(ConfigServiceV2StubSettings.newBuilder());
     }
 
-    protected Builder(ConfigServiceV2Settings settings) {
+    protected Builder(ConfigSettings settings) {
       super(settings.getStubSettings().toBuilder());
     }
 
@@ -353,8 +352,8 @@ public class ConfigServiceV2Settings extends ClientSettings<ConfigServiceV2Setti
     }
 
     @Override
-    public ConfigServiceV2Settings build() throws IOException {
-      return new ConfigServiceV2Settings(this);
+    public ConfigSettings build() throws IOException {
+      return new ConfigSettings(this);
     }
   }
 }

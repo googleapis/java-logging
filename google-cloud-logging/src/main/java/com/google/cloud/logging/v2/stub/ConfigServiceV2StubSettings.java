@@ -15,9 +15,9 @@
  */
 package com.google.cloud.logging.v2.stub;
 
-import static com.google.cloud.logging.v2.ConfigServiceV2Client.ListBucketsPagedResponse;
-import static com.google.cloud.logging.v2.ConfigServiceV2Client.ListExclusionsPagedResponse;
-import static com.google.cloud.logging.v2.ConfigServiceV2Client.ListSinksPagedResponse;
+import static com.google.cloud.logging.v2.ConfigClient.ListBucketsPagedResponse;
+import static com.google.cloud.logging.v2.ConfigClient.ListExclusionsPagedResponse;
+import static com.google.cloud.logging.v2.ConfigClient.ListSinksPagedResponse;
 
 import com.google.api.core.ApiFunction;
 import com.google.api.core.ApiFuture;
@@ -92,15 +92,15 @@ import org.threeten.bp.Duration;
  *
  * <pre>
  * <code>
- * ConfigServiceV2StubSettings.Builder configServiceV2SettingsBuilder =
+ * ConfigServiceV2StubSettings.Builder configSettingsBuilder =
  *     ConfigServiceV2StubSettings.newBuilder();
- * configServiceV2SettingsBuilder
+ * configSettingsBuilder
  *     .getSinkSettings()
  *     .setRetrySettings(
- *         configServiceV2SettingsBuilder.getSinkSettings().getRetrySettings().toBuilder()
+ *         configSettingsBuilder.getSinkSettings().getRetrySettings().toBuilder()
  *             .setTotalTimeout(Duration.ofSeconds(30))
  *             .build());
- * ConfigServiceV2StubSettings configServiceV2Settings = configServiceV2SettingsBuilder.build();
+ * ConfigServiceV2StubSettings configSettings = configSettingsBuilder.build();
  * </code>
  * </pre>
  */

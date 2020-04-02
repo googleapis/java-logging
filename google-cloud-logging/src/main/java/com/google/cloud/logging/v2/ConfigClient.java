@@ -76,16 +76,15 @@ import javax.annotation.Generated;
  *
  * <pre>
  * <code>
- * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+ * try (ConfigClient configClient = ConfigClient.create()) {
  *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
- *   LogSink response = configServiceV2Client.getSink(sinkName);
+ *   LogSink response = configClient.getSink(sinkName);
  * }
  * </code>
  * </pre>
  *
- * <p>Note: close() needs to be called on the configServiceV2Client object to clean up resources
- * such as threads. In the example above, try-with-resources is used, which automatically calls
- * close().
+ * <p>Note: close() needs to be called on the configClient object to clean up resources such as
+ * threads. In the example above, try-with-resources is used, which automatically calls close().
  *
  * <p>The surface of this class includes several types of Java methods for each of the API's
  * methods:
@@ -107,19 +106,19 @@ import javax.annotation.Generated;
  * these names, this class includes a format method for each type of name, and additionally a parse
  * method to extract the individual identifiers contained within names that are returned.
  *
- * <p>This class can be customized by passing in a custom instance of ConfigServiceV2Settings to
- * create(). For example:
+ * <p>This class can be customized by passing in a custom instance of ConfigSettings to create().
+ * For example:
  *
  * <p>To customize credentials:
  *
  * <pre>
  * <code>
- * ConfigServiceV2Settings configServiceV2Settings =
- *     ConfigServiceV2Settings.newBuilder()
+ * ConfigSettings configSettings =
+ *     ConfigSettings.newBuilder()
  *         .setCredentialsProvider(FixedCredentialsProvider.create(myCredentials))
  *         .build();
- * ConfigServiceV2Client configServiceV2Client =
- *     ConfigServiceV2Client.create(configServiceV2Settings);
+ * ConfigClient configClient =
+ *     ConfigClient.create(configSettings);
  * </code>
  * </pre>
  *
@@ -127,59 +126,57 @@ import javax.annotation.Generated;
  *
  * <pre>
  * <code>
- * ConfigServiceV2Settings configServiceV2Settings =
- *     ConfigServiceV2Settings.newBuilder().setEndpoint(myEndpoint).build();
- * ConfigServiceV2Client configServiceV2Client =
- *     ConfigServiceV2Client.create(configServiceV2Settings);
+ * ConfigSettings configSettings =
+ *     ConfigSettings.newBuilder().setEndpoint(myEndpoint).build();
+ * ConfigClient configClient =
+ *     ConfigClient.create(configSettings);
  * </code>
  * </pre>
  */
 @Generated("by gapic-generator")
 @BetaApi
-public class ConfigServiceV2Client implements BackgroundResource {
-  private final ConfigServiceV2Settings settings;
+public class ConfigClient implements BackgroundResource {
+  private final ConfigSettings settings;
   private final ConfigServiceV2Stub stub;
 
-  /** Constructs an instance of ConfigServiceV2Client with default settings. */
-  public static final ConfigServiceV2Client create() throws IOException {
-    return create(ConfigServiceV2Settings.newBuilder().build());
+  /** Constructs an instance of ConfigClient with default settings. */
+  public static final ConfigClient create() throws IOException {
+    return create(ConfigSettings.newBuilder().build());
   }
 
   /**
-   * Constructs an instance of ConfigServiceV2Client, using the given settings. The channels are
-   * created based on the settings passed in, or defaults for any settings that are not set.
+   * Constructs an instance of ConfigClient, using the given settings. The channels are created
+   * based on the settings passed in, or defaults for any settings that are not set.
    */
-  public static final ConfigServiceV2Client create(ConfigServiceV2Settings settings)
-      throws IOException {
-    return new ConfigServiceV2Client(settings);
+  public static final ConfigClient create(ConfigSettings settings) throws IOException {
+    return new ConfigClient(settings);
   }
 
   /**
-   * Constructs an instance of ConfigServiceV2Client, using the given stub for making calls. This is
-   * for advanced usage - prefer to use ConfigServiceV2Settings}.
+   * Constructs an instance of ConfigClient, using the given stub for making calls. This is for
+   * advanced usage - prefer to use ConfigSettings}.
    */
   @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
-  public static final ConfigServiceV2Client create(ConfigServiceV2Stub stub) {
-    return new ConfigServiceV2Client(stub);
+  public static final ConfigClient create(ConfigServiceV2Stub stub) {
+    return new ConfigClient(stub);
   }
 
   /**
-   * Constructs an instance of ConfigServiceV2Client, using the given settings. This is protected so
-   * that it is easy to make a subclass, but otherwise, the static factory methods should be
-   * preferred.
+   * Constructs an instance of ConfigClient, using the given settings. This is protected so that it
+   * is easy to make a subclass, but otherwise, the static factory methods should be preferred.
    */
-  protected ConfigServiceV2Client(ConfigServiceV2Settings settings) throws IOException {
+  protected ConfigClient(ConfigSettings settings) throws IOException {
     this.settings = settings;
     this.stub = ((ConfigServiceV2StubSettings) settings.getStubSettings()).createStub();
   }
 
   @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
-  protected ConfigServiceV2Client(ConfigServiceV2Stub stub) {
+  protected ConfigClient(ConfigServiceV2Stub stub) {
     this.settings = null;
     this.stub = stub;
   }
 
-  public final ConfigServiceV2Settings getSettings() {
+  public final ConfigSettings getSettings() {
     return settings;
   }
 
@@ -195,9 +192,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   OrganizationLocationName parent = OrganizationLocationName.of("[ORGANIZATION]", "[LOCATION]");
-   *   for (LogBucket element : configServiceV2Client.listBuckets(parent).iterateAll()) {
+   *   for (LogBucket element : configClient.listBuckets(parent).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -227,9 +224,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   FolderLocationName parent = FolderLocationName.of("[FOLDER]", "[LOCATION]");
-   *   for (LogBucket element : configServiceV2Client.listBuckets(parent).iterateAll()) {
+   *   for (LogBucket element : configClient.listBuckets(parent).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -259,9 +256,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   BillingAccountLocationName parent = BillingAccountLocationName.of("[BILLING_ACCOUNT]", "[LOCATION]");
-   *   for (LogBucket element : configServiceV2Client.listBuckets(parent).iterateAll()) {
+   *   for (LogBucket element : configClient.listBuckets(parent).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -291,9 +288,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
-   *   for (LogBucket element : configServiceV2Client.listBuckets(parent).iterateAll()) {
+   *   for (LogBucket element : configClient.listBuckets(parent).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -323,9 +320,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   OrganizationLocationName parent = OrganizationLocationName.of("[ORGANIZATION]", "[LOCATION]");
-   *   for (LogBucket element : configServiceV2Client.listBuckets(parent.toString()).iterateAll()) {
+   *   for (LogBucket element : configClient.listBuckets(parent.toString()).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -352,12 +349,12 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   OrganizationLocationName parent = OrganizationLocationName.of("[ORGANIZATION]", "[LOCATION]");
    *   ListBucketsRequest request = ListBucketsRequest.newBuilder()
    *     .setParent(parent.toString())
    *     .build();
-   *   for (LogBucket element : configServiceV2Client.listBuckets(request).iterateAll()) {
+   *   for (LogBucket element : configClient.listBuckets(request).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -377,12 +374,12 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   OrganizationLocationName parent = OrganizationLocationName.of("[ORGANIZATION]", "[LOCATION]");
    *   ListBucketsRequest request = ListBucketsRequest.newBuilder()
    *     .setParent(parent.toString())
    *     .build();
-   *   ApiFuture&lt;ListBucketsPagedResponse&gt; future = configServiceV2Client.listBucketsPagedCallable().futureCall(request);
+   *   ApiFuture&lt;ListBucketsPagedResponse&gt; future = configClient.listBucketsPagedCallable().futureCall(request);
    *   // Do something
    *   for (LogBucket element : future.get().iterateAll()) {
    *     // doThingsWith(element);
@@ -402,13 +399,13 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   OrganizationLocationName parent = OrganizationLocationName.of("[ORGANIZATION]", "[LOCATION]");
    *   ListBucketsRequest request = ListBucketsRequest.newBuilder()
    *     .setParent(parent.toString())
    *     .build();
    *   while (true) {
-   *     ListBucketsResponse response = configServiceV2Client.listBucketsCallable().call(request);
+   *     ListBucketsResponse response = configClient.listBucketsCallable().call(request);
    *     for (LogBucket element : response.getBucketsList()) {
    *       // doThingsWith(element);
    *     }
@@ -433,12 +430,12 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogBucketName name = LogBucketName.ofProjectLocationBucketName("[PROJECT]", "[LOCATION]", "[BUCKET]");
    *   GetBucketRequest request = GetBucketRequest.newBuilder()
    *     .setName(name.toString())
    *     .build();
-   *   LogBucket response = configServiceV2Client.getBucket(request);
+   *   LogBucket response = configClient.getBucket(request);
    * }
    * </code></pre>
    *
@@ -456,12 +453,12 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogBucketName name = LogBucketName.ofProjectLocationBucketName("[PROJECT]", "[LOCATION]", "[BUCKET]");
    *   GetBucketRequest request = GetBucketRequest.newBuilder()
    *     .setName(name.toString())
    *     .build();
-   *   ApiFuture&lt;LogBucket&gt; future = configServiceV2Client.getBucketCallable().futureCall(request);
+   *   ApiFuture&lt;LogBucket&gt; future = configClient.getBucketCallable().futureCall(request);
    *   // Do something
    *   LogBucket response = future.get();
    * }
@@ -487,7 +484,7 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogBucketName name = LogBucketName.ofProjectLocationBucketName("[PROJECT]", "[LOCATION]", "[BUCKET]");
    *   LogBucket bucket = LogBucket.newBuilder().build();
    *   FieldMask updateMask = FieldMask.newBuilder().build();
@@ -496,7 +493,7 @@ public class ConfigServiceV2Client implements BackgroundResource {
    *     .setBucket(bucket)
    *     .setUpdateMask(updateMask)
    *     .build();
-   *   LogBucket response = configServiceV2Client.updateBucket(request);
+   *   LogBucket response = configClient.updateBucket(request);
    * }
    * </code></pre>
    *
@@ -523,7 +520,7 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogBucketName name = LogBucketName.ofProjectLocationBucketName("[PROJECT]", "[LOCATION]", "[BUCKET]");
    *   LogBucket bucket = LogBucket.newBuilder().build();
    *   FieldMask updateMask = FieldMask.newBuilder().build();
@@ -532,7 +529,7 @@ public class ConfigServiceV2Client implements BackgroundResource {
    *     .setBucket(bucket)
    *     .setUpdateMask(updateMask)
    *     .build();
-   *   ApiFuture&lt;LogBucket&gt; future = configServiceV2Client.updateBucketCallable().futureCall(request);
+   *   ApiFuture&lt;LogBucket&gt; future = configClient.updateBucketCallable().futureCall(request);
    *   // Do something
    *   LogBucket response = future.get();
    * }
@@ -549,9 +546,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
-   *   for (LogSink element : configServiceV2Client.listSinks(parent).iterateAll()) {
+   *   for (LogSink element : configClient.listSinks(parent).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -575,9 +572,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   OrganizationName parent = OrganizationName.of("[ORGANIZATION]");
-   *   for (LogSink element : configServiceV2Client.listSinks(parent).iterateAll()) {
+   *   for (LogSink element : configClient.listSinks(parent).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -601,9 +598,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   FolderName parent = FolderName.of("[FOLDER]");
-   *   for (LogSink element : configServiceV2Client.listSinks(parent).iterateAll()) {
+   *   for (LogSink element : configClient.listSinks(parent).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -627,9 +624,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   BillingAccountName parent = BillingAccountName.of("[BILLING_ACCOUNT]");
-   *   for (LogSink element : configServiceV2Client.listSinks(parent).iterateAll()) {
+   *   for (LogSink element : configClient.listSinks(parent).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -653,9 +650,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
-   *   for (LogSink element : configServiceV2Client.listSinks(parent.toString()).iterateAll()) {
+   *   for (LogSink element : configClient.listSinks(parent.toString()).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -678,12 +675,12 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   ListSinksRequest request = ListSinksRequest.newBuilder()
    *     .setParent(parent.toString())
    *     .build();
-   *   for (LogSink element : configServiceV2Client.listSinks(request).iterateAll()) {
+   *   for (LogSink element : configClient.listSinks(request).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -703,12 +700,12 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   ListSinksRequest request = ListSinksRequest.newBuilder()
    *     .setParent(parent.toString())
    *     .build();
-   *   ApiFuture&lt;ListSinksPagedResponse&gt; future = configServiceV2Client.listSinksPagedCallable().futureCall(request);
+   *   ApiFuture&lt;ListSinksPagedResponse&gt; future = configClient.listSinksPagedCallable().futureCall(request);
    *   // Do something
    *   for (LogSink element : future.get().iterateAll()) {
    *     // doThingsWith(element);
@@ -727,13 +724,13 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   ListSinksRequest request = ListSinksRequest.newBuilder()
    *     .setParent(parent.toString())
    *     .build();
    *   while (true) {
-   *     ListSinksResponse response = configServiceV2Client.listSinksCallable().call(request);
+   *     ListSinksResponse response = configClient.listSinksCallable().call(request);
    *     for (LogSink element : response.getSinksList()) {
    *       // doThingsWith(element);
    *     }
@@ -758,9 +755,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-   *   LogSink response = configServiceV2Client.getSink(sinkName);
+   *   LogSink response = configClient.getSink(sinkName);
    * }
    * </code></pre>
    *
@@ -787,9 +784,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-   *   LogSink response = configServiceV2Client.getSink(sinkName.toString());
+   *   LogSink response = configClient.getSink(sinkName.toString());
    * }
    * </code></pre>
    *
@@ -813,12 +810,12 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
    *   GetSinkRequest request = GetSinkRequest.newBuilder()
    *     .setSinkName(sinkName.toString())
    *     .build();
-   *   LogSink response = configServiceV2Client.getSink(request);
+   *   LogSink response = configClient.getSink(request);
    * }
    * </code></pre>
    *
@@ -836,12 +833,12 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
    *   GetSinkRequest request = GetSinkRequest.newBuilder()
    *     .setSinkName(sinkName.toString())
    *     .build();
-   *   ApiFuture&lt;LogSink&gt; future = configServiceV2Client.getSinkCallable().futureCall(request);
+   *   ApiFuture&lt;LogSink&gt; future = configClient.getSinkCallable().futureCall(request);
    *   // Do something
    *   LogSink response = future.get();
    * }
@@ -861,10 +858,10 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   LogSink sink = LogSink.newBuilder().build();
-   *   LogSink response = configServiceV2Client.createSink(parent, sink);
+   *   LogSink response = configClient.createSink(parent, sink);
    * }
    * </code></pre>
    *
@@ -895,10 +892,10 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   OrganizationName parent = OrganizationName.of("[ORGANIZATION]");
    *   LogSink sink = LogSink.newBuilder().build();
-   *   LogSink response = configServiceV2Client.createSink(parent, sink);
+   *   LogSink response = configClient.createSink(parent, sink);
    * }
    * </code></pre>
    *
@@ -929,10 +926,10 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   FolderName parent = FolderName.of("[FOLDER]");
    *   LogSink sink = LogSink.newBuilder().build();
-   *   LogSink response = configServiceV2Client.createSink(parent, sink);
+   *   LogSink response = configClient.createSink(parent, sink);
    * }
    * </code></pre>
    *
@@ -963,10 +960,10 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   BillingAccountName parent = BillingAccountName.of("[BILLING_ACCOUNT]");
    *   LogSink sink = LogSink.newBuilder().build();
-   *   LogSink response = configServiceV2Client.createSink(parent, sink);
+   *   LogSink response = configClient.createSink(parent, sink);
    * }
    * </code></pre>
    *
@@ -997,10 +994,10 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   LogSink sink = LogSink.newBuilder().build();
-   *   LogSink response = configServiceV2Client.createSink(parent.toString(), sink);
+   *   LogSink response = configClient.createSink(parent.toString(), sink);
    * }
    * </code></pre>
    *
@@ -1028,14 +1025,14 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   LogSink sink = LogSink.newBuilder().build();
    *   CreateSinkRequest request = CreateSinkRequest.newBuilder()
    *     .setParent(parent.toString())
    *     .setSink(sink)
    *     .build();
-   *   LogSink response = configServiceV2Client.createSink(request);
+   *   LogSink response = configClient.createSink(request);
    * }
    * </code></pre>
    *
@@ -1056,14 +1053,14 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   LogSink sink = LogSink.newBuilder().build();
    *   CreateSinkRequest request = CreateSinkRequest.newBuilder()
    *     .setParent(parent.toString())
    *     .setSink(sink)
    *     .build();
-   *   ApiFuture&lt;LogSink&gt; future = configServiceV2Client.createSinkCallable().futureCall(request);
+   *   ApiFuture&lt;LogSink&gt; future = configClient.createSinkCallable().futureCall(request);
    *   // Do something
    *   LogSink response = future.get();
    * }
@@ -1084,11 +1081,11 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
    *   LogSink sink = LogSink.newBuilder().build();
    *   FieldMask updateMask = FieldMask.newBuilder().build();
-   *   LogSink response = configServiceV2Client.updateSink(sinkName, sink, updateMask);
+   *   LogSink response = configClient.updateSink(sinkName, sink, updateMask);
    * }
    * </code></pre>
    *
@@ -1133,11 +1130,11 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
    *   LogSink sink = LogSink.newBuilder().build();
    *   FieldMask updateMask = FieldMask.newBuilder().build();
-   *   LogSink response = configServiceV2Client.updateSink(sinkName.toString(), sink, updateMask);
+   *   LogSink response = configClient.updateSink(sinkName.toString(), sink, updateMask);
    * }
    * </code></pre>
    *
@@ -1182,10 +1179,10 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
    *   LogSink sink = LogSink.newBuilder().build();
-   *   LogSink response = configServiceV2Client.updateSink(sinkName, sink);
+   *   LogSink response = configClient.updateSink(sinkName, sink);
    * }
    * </code></pre>
    *
@@ -1220,10 +1217,10 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
    *   LogSink sink = LogSink.newBuilder().build();
-   *   LogSink response = configServiceV2Client.updateSink(sinkName.toString(), sink);
+   *   LogSink response = configClient.updateSink(sinkName.toString(), sink);
    * }
    * </code></pre>
    *
@@ -1255,14 +1252,14 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
    *   LogSink sink = LogSink.newBuilder().build();
    *   UpdateSinkRequest request = UpdateSinkRequest.newBuilder()
    *     .setSinkName(sinkName.toString())
    *     .setSink(sink)
    *     .build();
-   *   LogSink response = configServiceV2Client.updateSink(request);
+   *   LogSink response = configClient.updateSink(request);
    * }
    * </code></pre>
    *
@@ -1284,14 +1281,14 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
    *   LogSink sink = LogSink.newBuilder().build();
    *   UpdateSinkRequest request = UpdateSinkRequest.newBuilder()
    *     .setSinkName(sinkName.toString())
    *     .setSink(sink)
    *     .build();
-   *   ApiFuture&lt;LogSink&gt; future = configServiceV2Client.updateSinkCallable().futureCall(request);
+   *   ApiFuture&lt;LogSink&gt; future = configClient.updateSinkCallable().futureCall(request);
    *   // Do something
    *   LogSink response = future.get();
    * }
@@ -1309,9 +1306,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-   *   configServiceV2Client.deleteSink(sinkName);
+   *   configClient.deleteSink(sinkName);
    * }
    * </code></pre>
    *
@@ -1340,9 +1337,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-   *   configServiceV2Client.deleteSink(sinkName.toString());
+   *   configClient.deleteSink(sinkName.toString());
    * }
    * </code></pre>
    *
@@ -1368,12 +1365,12 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
    *   DeleteSinkRequest request = DeleteSinkRequest.newBuilder()
    *     .setSinkName(sinkName.toString())
    *     .build();
-   *   configServiceV2Client.deleteSink(request);
+   *   configClient.deleteSink(request);
    * }
    * </code></pre>
    *
@@ -1392,12 +1389,12 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
    *   DeleteSinkRequest request = DeleteSinkRequest.newBuilder()
    *     .setSinkName(sinkName.toString())
    *     .build();
-   *   ApiFuture&lt;Void&gt; future = configServiceV2Client.deleteSinkCallable().futureCall(request);
+   *   ApiFuture&lt;Void&gt; future = configClient.deleteSinkCallable().futureCall(request);
    *   // Do something
    *   future.get();
    * }
@@ -1414,9 +1411,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
-   *   for (LogExclusion element : configServiceV2Client.listExclusions(parent).iterateAll()) {
+   *   for (LogExclusion element : configClient.listExclusions(parent).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -1442,9 +1439,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   OrganizationName parent = OrganizationName.of("[ORGANIZATION]");
-   *   for (LogExclusion element : configServiceV2Client.listExclusions(parent).iterateAll()) {
+   *   for (LogExclusion element : configClient.listExclusions(parent).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -1470,9 +1467,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   FolderName parent = FolderName.of("[FOLDER]");
-   *   for (LogExclusion element : configServiceV2Client.listExclusions(parent).iterateAll()) {
+   *   for (LogExclusion element : configClient.listExclusions(parent).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -1498,9 +1495,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   BillingAccountName parent = BillingAccountName.of("[BILLING_ACCOUNT]");
-   *   for (LogExclusion element : configServiceV2Client.listExclusions(parent).iterateAll()) {
+   *   for (LogExclusion element : configClient.listExclusions(parent).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -1526,9 +1523,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
-   *   for (LogExclusion element : configServiceV2Client.listExclusions(parent.toString()).iterateAll()) {
+   *   for (LogExclusion element : configClient.listExclusions(parent.toString()).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -1551,12 +1548,12 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   ListExclusionsRequest request = ListExclusionsRequest.newBuilder()
    *     .setParent(parent.toString())
    *     .build();
-   *   for (LogExclusion element : configServiceV2Client.listExclusions(request).iterateAll()) {
+   *   for (LogExclusion element : configClient.listExclusions(request).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -1576,12 +1573,12 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   ListExclusionsRequest request = ListExclusionsRequest.newBuilder()
    *     .setParent(parent.toString())
    *     .build();
-   *   ApiFuture&lt;ListExclusionsPagedResponse&gt; future = configServiceV2Client.listExclusionsPagedCallable().futureCall(request);
+   *   ApiFuture&lt;ListExclusionsPagedResponse&gt; future = configClient.listExclusionsPagedCallable().futureCall(request);
    *   // Do something
    *   for (LogExclusion element : future.get().iterateAll()) {
    *     // doThingsWith(element);
@@ -1601,13 +1598,13 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   ListExclusionsRequest request = ListExclusionsRequest.newBuilder()
    *     .setParent(parent.toString())
    *     .build();
    *   while (true) {
-   *     ListExclusionsResponse response = configServiceV2Client.listExclusionsCallable().call(request);
+   *     ListExclusionsResponse response = configClient.listExclusionsCallable().call(request);
    *     for (LogExclusion element : response.getExclusionsList()) {
    *       // doThingsWith(element);
    *     }
@@ -1633,9 +1630,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
-   *   LogExclusion response = configServiceV2Client.getExclusion(name);
+   *   LogExclusion response = configClient.getExclusion(name);
    * }
    * </code></pre>
    *
@@ -1660,9 +1657,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
-   *   LogExclusion response = configServiceV2Client.getExclusion(name.toString());
+   *   LogExclusion response = configClient.getExclusion(name.toString());
    * }
    * </code></pre>
    *
@@ -1686,12 +1683,12 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
    *   GetExclusionRequest request = GetExclusionRequest.newBuilder()
    *     .setName(name.toString())
    *     .build();
-   *   LogExclusion response = configServiceV2Client.getExclusion(request);
+   *   LogExclusion response = configClient.getExclusion(request);
    * }
    * </code></pre>
    *
@@ -1709,12 +1706,12 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
    *   GetExclusionRequest request = GetExclusionRequest.newBuilder()
    *     .setName(name.toString())
    *     .build();
-   *   ApiFuture&lt;LogExclusion&gt; future = configServiceV2Client.getExclusionCallable().futureCall(request);
+   *   ApiFuture&lt;LogExclusion&gt; future = configClient.getExclusionCallable().futureCall(request);
    *   // Do something
    *   LogExclusion response = future.get();
    * }
@@ -1732,10 +1729,10 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   LogExclusion exclusion = LogExclusion.newBuilder().build();
-   *   LogExclusion response = configServiceV2Client.createExclusion(parent, exclusion);
+   *   LogExclusion response = configClient.createExclusion(parent, exclusion);
    * }
    * </code></pre>
    *
@@ -1764,10 +1761,10 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   OrganizationName parent = OrganizationName.of("[ORGANIZATION]");
    *   LogExclusion exclusion = LogExclusion.newBuilder().build();
-   *   LogExclusion response = configServiceV2Client.createExclusion(parent, exclusion);
+   *   LogExclusion response = configClient.createExclusion(parent, exclusion);
    * }
    * </code></pre>
    *
@@ -1796,10 +1793,10 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   FolderName parent = FolderName.of("[FOLDER]");
    *   LogExclusion exclusion = LogExclusion.newBuilder().build();
-   *   LogExclusion response = configServiceV2Client.createExclusion(parent, exclusion);
+   *   LogExclusion response = configClient.createExclusion(parent, exclusion);
    * }
    * </code></pre>
    *
@@ -1828,10 +1825,10 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   BillingAccountName parent = BillingAccountName.of("[BILLING_ACCOUNT]");
    *   LogExclusion exclusion = LogExclusion.newBuilder().build();
-   *   LogExclusion response = configServiceV2Client.createExclusion(parent, exclusion);
+   *   LogExclusion response = configClient.createExclusion(parent, exclusion);
    * }
    * </code></pre>
    *
@@ -1860,10 +1857,10 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   LogExclusion exclusion = LogExclusion.newBuilder().build();
-   *   LogExclusion response = configServiceV2Client.createExclusion(parent.toString(), exclusion);
+   *   LogExclusion response = configClient.createExclusion(parent.toString(), exclusion);
    * }
    * </code></pre>
    *
@@ -1889,14 +1886,14 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   LogExclusion exclusion = LogExclusion.newBuilder().build();
    *   CreateExclusionRequest request = CreateExclusionRequest.newBuilder()
    *     .setParent(parent.toString())
    *     .setExclusion(exclusion)
    *     .build();
-   *   LogExclusion response = configServiceV2Client.createExclusion(request);
+   *   LogExclusion response = configClient.createExclusion(request);
    * }
    * </code></pre>
    *
@@ -1915,14 +1912,14 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   LogExclusion exclusion = LogExclusion.newBuilder().build();
    *   CreateExclusionRequest request = CreateExclusionRequest.newBuilder()
    *     .setParent(parent.toString())
    *     .setExclusion(exclusion)
    *     .build();
-   *   ApiFuture&lt;LogExclusion&gt; future = configServiceV2Client.createExclusionCallable().futureCall(request);
+   *   ApiFuture&lt;LogExclusion&gt; future = configClient.createExclusionCallable().futureCall(request);
    *   // Do something
    *   LogExclusion response = future.get();
    * }
@@ -1939,11 +1936,11 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
    *   LogExclusion exclusion = LogExclusion.newBuilder().build();
    *   FieldMask updateMask = FieldMask.newBuilder().build();
-   *   LogExclusion response = configServiceV2Client.updateExclusion(name, exclusion, updateMask);
+   *   LogExclusion response = configClient.updateExclusion(name, exclusion, updateMask);
    * }
    * </code></pre>
    *
@@ -1981,11 +1978,11 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
    *   LogExclusion exclusion = LogExclusion.newBuilder().build();
    *   FieldMask updateMask = FieldMask.newBuilder().build();
-   *   LogExclusion response = configServiceV2Client.updateExclusion(name.toString(), exclusion, updateMask);
+   *   LogExclusion response = configClient.updateExclusion(name.toString(), exclusion, updateMask);
    * }
    * </code></pre>
    *
@@ -2023,7 +2020,7 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
    *   LogExclusion exclusion = LogExclusion.newBuilder().build();
    *   FieldMask updateMask = FieldMask.newBuilder().build();
@@ -2032,7 +2029,7 @@ public class ConfigServiceV2Client implements BackgroundResource {
    *     .setExclusion(exclusion)
    *     .setUpdateMask(updateMask)
    *     .build();
-   *   LogExclusion response = configServiceV2Client.updateExclusion(request);
+   *   LogExclusion response = configClient.updateExclusion(request);
    * }
    * </code></pre>
    *
@@ -2050,7 +2047,7 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
    *   LogExclusion exclusion = LogExclusion.newBuilder().build();
    *   FieldMask updateMask = FieldMask.newBuilder().build();
@@ -2059,7 +2056,7 @@ public class ConfigServiceV2Client implements BackgroundResource {
    *     .setExclusion(exclusion)
    *     .setUpdateMask(updateMask)
    *     .build();
-   *   ApiFuture&lt;LogExclusion&gt; future = configServiceV2Client.updateExclusionCallable().futureCall(request);
+   *   ApiFuture&lt;LogExclusion&gt; future = configClient.updateExclusionCallable().futureCall(request);
    *   // Do something
    *   LogExclusion response = future.get();
    * }
@@ -2076,9 +2073,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
-   *   configServiceV2Client.deleteExclusion(name);
+   *   configClient.deleteExclusion(name);
    * }
    * </code></pre>
    *
@@ -2103,9 +2100,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
-   *   configServiceV2Client.deleteExclusion(name.toString());
+   *   configClient.deleteExclusion(name.toString());
    * }
    * </code></pre>
    *
@@ -2129,12 +2126,12 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
    *   DeleteExclusionRequest request = DeleteExclusionRequest.newBuilder()
    *     .setName(name.toString())
    *     .build();
-   *   configServiceV2Client.deleteExclusion(request);
+   *   configClient.deleteExclusion(request);
    * }
    * </code></pre>
    *
@@ -2152,12 +2149,12 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
    *   DeleteExclusionRequest request = DeleteExclusionRequest.newBuilder()
    *     .setName(name.toString())
    *     .build();
-   *   ApiFuture&lt;Void&gt; future = configServiceV2Client.deleteExclusionCallable().futureCall(request);
+   *   ApiFuture&lt;Void&gt; future = configClient.deleteExclusionCallable().futureCall(request);
    *   // Do something
    *   future.get();
    * }
@@ -2180,12 +2177,12 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   CmekSettingsName name = CmekSettingsName.ofProjectName("[PROJECT]");
    *   GetCmekSettingsRequest request = GetCmekSettingsRequest.newBuilder()
    *     .setName(name.toString())
    *     .build();
-   *   CmekSettings response = configServiceV2Client.getCmekSettings(request);
+   *   CmekSettings response = configClient.getCmekSettings(request);
    * }
    * </code></pre>
    *
@@ -2209,12 +2206,12 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   CmekSettingsName name = CmekSettingsName.ofProjectName("[PROJECT]");
    *   GetCmekSettingsRequest request = GetCmekSettingsRequest.newBuilder()
    *     .setName(name.toString())
    *     .build();
-   *   ApiFuture&lt;CmekSettings&gt; future = configServiceV2Client.getCmekSettingsCallable().futureCall(request);
+   *   ApiFuture&lt;CmekSettings&gt; future = configClient.getCmekSettingsCallable().futureCall(request);
    *   // Do something
    *   CmekSettings response = future.get();
    * }
@@ -2242,14 +2239,14 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   String name = "";
    *   CmekSettings cmekSettings = CmekSettings.newBuilder().build();
    *   UpdateCmekSettingsRequest request = UpdateCmekSettingsRequest.newBuilder()
    *     .setName(name)
    *     .setCmekSettings(cmekSettings)
    *     .build();
-   *   CmekSettings response = configServiceV2Client.updateCmekSettings(request);
+   *   CmekSettings response = configClient.updateCmekSettings(request);
    * }
    * </code></pre>
    *
@@ -2278,14 +2275,14 @@ public class ConfigServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   * try (ConfigClient configClient = ConfigClient.create()) {
    *   String name = "";
    *   CmekSettings cmekSettings = CmekSettings.newBuilder().build();
    *   UpdateCmekSettingsRequest request = UpdateCmekSettingsRequest.newBuilder()
    *     .setName(name)
    *     .setCmekSettings(cmekSettings)
    *     .build();
-   *   ApiFuture&lt;CmekSettings&gt; future = configServiceV2Client.updateCmekSettingsCallable().futureCall(request);
+   *   ApiFuture&lt;CmekSettings&gt; future = configClient.updateCmekSettingsCallable().futureCall(request);
    *   // Do something
    *   CmekSettings response = future.get();
    * }

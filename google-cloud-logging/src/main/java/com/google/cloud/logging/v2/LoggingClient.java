@@ -61,19 +61,18 @@ import javax.annotation.Generated;
  *
  * <pre>
  * <code>
- * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+ * try (LoggingClient loggingClient = LoggingClient.create()) {
  *   LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
  *   MonitoredResource resource = MonitoredResource.newBuilder().build();
  *   Map&lt;String, String&gt; labels = new HashMap&lt;&gt;();
  *   List&lt;LogEntry&gt; entries = new ArrayList&lt;&gt;();
- *   WriteLogEntriesResponse response = loggingServiceV2Client.writeLogEntries(logName, resource, labels, entries);
+ *   WriteLogEntriesResponse response = loggingClient.writeLogEntries(logName, resource, labels, entries);
  * }
  * </code>
  * </pre>
  *
- * <p>Note: close() needs to be called on the loggingServiceV2Client object to clean up resources
- * such as threads. In the example above, try-with-resources is used, which automatically calls
- * close().
+ * <p>Note: close() needs to be called on the loggingClient object to clean up resources such as
+ * threads. In the example above, try-with-resources is used, which automatically calls close().
  *
  * <p>The surface of this class includes several types of Java methods for each of the API's
  * methods:
@@ -95,19 +94,19 @@ import javax.annotation.Generated;
  * these names, this class includes a format method for each type of name, and additionally a parse
  * method to extract the individual identifiers contained within names that are returned.
  *
- * <p>This class can be customized by passing in a custom instance of LoggingServiceV2Settings to
- * create(). For example:
+ * <p>This class can be customized by passing in a custom instance of LoggingSettings to create().
+ * For example:
  *
  * <p>To customize credentials:
  *
  * <pre>
  * <code>
- * LoggingServiceV2Settings loggingServiceV2Settings =
- *     LoggingServiceV2Settings.newBuilder()
+ * LoggingSettings loggingSettings =
+ *     LoggingSettings.newBuilder()
  *         .setCredentialsProvider(FixedCredentialsProvider.create(myCredentials))
  *         .build();
- * LoggingServiceV2Client loggingServiceV2Client =
- *     LoggingServiceV2Client.create(loggingServiceV2Settings);
+ * LoggingClient loggingClient =
+ *     LoggingClient.create(loggingSettings);
  * </code>
  * </pre>
  *
@@ -115,59 +114,57 @@ import javax.annotation.Generated;
  *
  * <pre>
  * <code>
- * LoggingServiceV2Settings loggingServiceV2Settings =
- *     LoggingServiceV2Settings.newBuilder().setEndpoint(myEndpoint).build();
- * LoggingServiceV2Client loggingServiceV2Client =
- *     LoggingServiceV2Client.create(loggingServiceV2Settings);
+ * LoggingSettings loggingSettings =
+ *     LoggingSettings.newBuilder().setEndpoint(myEndpoint).build();
+ * LoggingClient loggingClient =
+ *     LoggingClient.create(loggingSettings);
  * </code>
  * </pre>
  */
 @Generated("by gapic-generator")
 @BetaApi
-public class LoggingServiceV2Client implements BackgroundResource {
-  private final LoggingServiceV2Settings settings;
+public class LoggingClient implements BackgroundResource {
+  private final LoggingSettings settings;
   private final LoggingServiceV2Stub stub;
 
-  /** Constructs an instance of LoggingServiceV2Client with default settings. */
-  public static final LoggingServiceV2Client create() throws IOException {
-    return create(LoggingServiceV2Settings.newBuilder().build());
+  /** Constructs an instance of LoggingClient with default settings. */
+  public static final LoggingClient create() throws IOException {
+    return create(LoggingSettings.newBuilder().build());
   }
 
   /**
-   * Constructs an instance of LoggingServiceV2Client, using the given settings. The channels are
-   * created based on the settings passed in, or defaults for any settings that are not set.
+   * Constructs an instance of LoggingClient, using the given settings. The channels are created
+   * based on the settings passed in, or defaults for any settings that are not set.
    */
-  public static final LoggingServiceV2Client create(LoggingServiceV2Settings settings)
-      throws IOException {
-    return new LoggingServiceV2Client(settings);
+  public static final LoggingClient create(LoggingSettings settings) throws IOException {
+    return new LoggingClient(settings);
   }
 
   /**
-   * Constructs an instance of LoggingServiceV2Client, using the given stub for making calls. This
-   * is for advanced usage - prefer to use LoggingServiceV2Settings}.
+   * Constructs an instance of LoggingClient, using the given stub for making calls. This is for
+   * advanced usage - prefer to use LoggingSettings}.
    */
   @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
-  public static final LoggingServiceV2Client create(LoggingServiceV2Stub stub) {
-    return new LoggingServiceV2Client(stub);
+  public static final LoggingClient create(LoggingServiceV2Stub stub) {
+    return new LoggingClient(stub);
   }
 
   /**
-   * Constructs an instance of LoggingServiceV2Client, using the given settings. This is protected
-   * so that it is easy to make a subclass, but otherwise, the static factory methods should be
-   * preferred.
+   * Constructs an instance of LoggingClient, using the given settings. This is protected so that it
+   * is easy to make a subclass, but otherwise, the static factory methods should be preferred.
    */
-  protected LoggingServiceV2Client(LoggingServiceV2Settings settings) throws IOException {
+  protected LoggingClient(LoggingSettings settings) throws IOException {
     this.settings = settings;
     this.stub = ((LoggingServiceV2StubSettings) settings.getStubSettings()).createStub();
   }
 
   @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
-  protected LoggingServiceV2Client(LoggingServiceV2Stub stub) {
+  protected LoggingClient(LoggingServiceV2Stub stub) {
     this.settings = null;
     this.stub = stub;
   }
 
-  public final LoggingServiceV2Settings getSettings() {
+  public final LoggingSettings getSettings() {
     return settings;
   }
 
@@ -186,12 +183,12 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
    *   MonitoredResource resource = MonitoredResource.newBuilder().build();
    *   Map&lt;String, String&gt; labels = new HashMap&lt;&gt;();
    *   List&lt;LogEntry&gt; entries = new ArrayList&lt;&gt;();
-   *   WriteLogEntriesResponse response = loggingServiceV2Client.writeLogEntries(logName, resource, labels, entries);
+   *   WriteLogEntriesResponse response = loggingClient.writeLogEntries(logName, resource, labels, entries);
    * }
    * </code></pre>
    *
@@ -258,12 +255,12 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
    *   MonitoredResource resource = MonitoredResource.newBuilder().build();
    *   Map&lt;String, String&gt; labels = new HashMap&lt;&gt;();
    *   List&lt;LogEntry&gt; entries = new ArrayList&lt;&gt;();
-   *   WriteLogEntriesResponse response = loggingServiceV2Client.writeLogEntries(logName.toString(), resource, labels, entries);
+   *   WriteLogEntriesResponse response = loggingClient.writeLogEntries(logName.toString(), resource, labels, entries);
    * }
    * </code></pre>
    *
@@ -330,12 +327,12 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   List&lt;LogEntry&gt; entries = new ArrayList&lt;&gt;();
    *   WriteLogEntriesRequest request = WriteLogEntriesRequest.newBuilder()
    *     .addAllEntries(entries)
    *     .build();
-   *   WriteLogEntriesResponse response = loggingServiceV2Client.writeLogEntries(request);
+   *   WriteLogEntriesResponse response = loggingClient.writeLogEntries(request);
    * }
    * </code></pre>
    *
@@ -356,12 +353,12 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   List&lt;LogEntry&gt; entries = new ArrayList&lt;&gt;();
    *   WriteLogEntriesRequest request = WriteLogEntriesRequest.newBuilder()
    *     .addAllEntries(entries)
    *     .build();
-   *   ApiFuture&lt;WriteLogEntriesResponse&gt; future = loggingServiceV2Client.writeLogEntriesCallable().futureCall(request);
+   *   ApiFuture&lt;WriteLogEntriesResponse&gt; future = loggingClient.writeLogEntriesCallable().futureCall(request);
    *   // Do something
    *   WriteLogEntriesResponse response = future.get();
    * }
@@ -381,9 +378,9 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
-   *   loggingServiceV2Client.deleteLog(logName);
+   *   loggingClient.deleteLog(logName);
    * }
    * </code></pre>
    *
@@ -412,9 +409,9 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
-   *   loggingServiceV2Client.deleteLog(logName.toString());
+   *   loggingClient.deleteLog(logName.toString());
    * }
    * </code></pre>
    *
@@ -440,12 +437,12 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
    *   DeleteLogRequest request = DeleteLogRequest.newBuilder()
    *     .setLogName(logName.toString())
    *     .build();
-   *   loggingServiceV2Client.deleteLog(request);
+   *   loggingClient.deleteLog(request);
    * }
    * </code></pre>
    *
@@ -465,12 +462,12 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
    *   DeleteLogRequest request = DeleteLogRequest.newBuilder()
    *     .setLogName(logName.toString())
    *     .build();
-   *   ApiFuture&lt;Void&gt; future = loggingServiceV2Client.deleteLogCallable().futureCall(request);
+   *   ApiFuture&lt;Void&gt; future = loggingClient.deleteLogCallable().futureCall(request);
    *   // Do something
    *   future.get();
    * }
@@ -489,11 +486,11 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   List&lt;String&gt; formattedResourceNames = new ArrayList&lt;&gt;();
    *   String filter = "";
    *   String orderBy = "";
-   *   for (LogEntry element : loggingServiceV2Client.listLogEntries(formattedResourceNames, filter, orderBy).iterateAll()) {
+   *   for (LogEntry element : loggingClient.listLogEntries(formattedResourceNames, filter, orderBy).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -537,12 +534,12 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   List&lt;ProjectName&gt; resourceNames = new ArrayList&lt;&gt;();
    *   ListLogEntriesRequest request = ListLogEntriesRequest.newBuilder()
    *     .addAllResourceNames(ProjectName.toStringList(resourceNames))
    *     .build();
-   *   for (LogEntry element : loggingServiceV2Client.listLogEntries(request).iterateAll()) {
+   *   for (LogEntry element : loggingClient.listLogEntries(request).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -564,12 +561,12 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   List&lt;ProjectName&gt; resourceNames = new ArrayList&lt;&gt;();
    *   ListLogEntriesRequest request = ListLogEntriesRequest.newBuilder()
    *     .addAllResourceNames(ProjectName.toStringList(resourceNames))
    *     .build();
-   *   ApiFuture&lt;ListLogEntriesPagedResponse&gt; future = loggingServiceV2Client.listLogEntriesPagedCallable().futureCall(request);
+   *   ApiFuture&lt;ListLogEntriesPagedResponse&gt; future = loggingClient.listLogEntriesPagedCallable().futureCall(request);
    *   // Do something
    *   for (LogEntry element : future.get().iterateAll()) {
    *     // doThingsWith(element);
@@ -591,13 +588,13 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   List&lt;ProjectName&gt; resourceNames = new ArrayList&lt;&gt;();
    *   ListLogEntriesRequest request = ListLogEntriesRequest.newBuilder()
    *     .addAllResourceNames(ProjectName.toStringList(resourceNames))
    *     .build();
    *   while (true) {
-   *     ListLogEntriesResponse response = loggingServiceV2Client.listLogEntriesCallable().call(request);
+   *     ListLogEntriesResponse response = loggingClient.listLogEntriesCallable().call(request);
    *     for (LogEntry element : response.getEntriesList()) {
    *       // doThingsWith(element);
    *     }
@@ -623,9 +620,9 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   ListMonitoredResourceDescriptorsRequest request = ListMonitoredResourceDescriptorsRequest.newBuilder().build();
-   *   for (MonitoredResourceDescriptor element : loggingServiceV2Client.listMonitoredResourceDescriptors(request).iterateAll()) {
+   *   for (MonitoredResourceDescriptor element : loggingClient.listMonitoredResourceDescriptors(request).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -646,9 +643,9 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   ListMonitoredResourceDescriptorsRequest request = ListMonitoredResourceDescriptorsRequest.newBuilder().build();
-   *   ApiFuture&lt;ListMonitoredResourceDescriptorsPagedResponse&gt; future = loggingServiceV2Client.listMonitoredResourceDescriptorsPagedCallable().futureCall(request);
+   *   ApiFuture&lt;ListMonitoredResourceDescriptorsPagedResponse&gt; future = loggingClient.listMonitoredResourceDescriptorsPagedCallable().futureCall(request);
    *   // Do something
    *   for (MonitoredResourceDescriptor element : future.get().iterateAll()) {
    *     // doThingsWith(element);
@@ -669,10 +666,10 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   ListMonitoredResourceDescriptorsRequest request = ListMonitoredResourceDescriptorsRequest.newBuilder().build();
    *   while (true) {
-   *     ListMonitoredResourceDescriptorsResponse response = loggingServiceV2Client.listMonitoredResourceDescriptorsCallable().call(request);
+   *     ListMonitoredResourceDescriptorsResponse response = loggingClient.listMonitoredResourceDescriptorsCallable().call(request);
    *     for (MonitoredResourceDescriptor element : response.getResourceDescriptorsList()) {
    *       // doThingsWith(element);
    *     }
@@ -700,9 +697,9 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
-   *   for (String element : loggingServiceV2Client.listLogs(parent).iterateAll()) {
+   *   for (String element : loggingClient.listLogs(parent).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -727,9 +724,9 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   OrganizationName parent = OrganizationName.of("[ORGANIZATION]");
-   *   for (String element : loggingServiceV2Client.listLogs(parent).iterateAll()) {
+   *   for (String element : loggingClient.listLogs(parent).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -754,9 +751,9 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   FolderName parent = FolderName.of("[FOLDER]");
-   *   for (String element : loggingServiceV2Client.listLogs(parent).iterateAll()) {
+   *   for (String element : loggingClient.listLogs(parent).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -781,9 +778,9 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   BillingAccountName parent = BillingAccountName.of("[BILLING_ACCOUNT]");
-   *   for (String element : loggingServiceV2Client.listLogs(parent).iterateAll()) {
+   *   for (String element : loggingClient.listLogs(parent).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -808,9 +805,9 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
-   *   for (String element : loggingServiceV2Client.listLogs(parent.toString()).iterateAll()) {
+   *   for (String element : loggingClient.listLogs(parent.toString()).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -834,12 +831,12 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   ListLogsRequest request = ListLogsRequest.newBuilder()
    *     .setParent(parent.toString())
    *     .build();
-   *   for (String element : loggingServiceV2Client.listLogs(request).iterateAll()) {
+   *   for (String element : loggingClient.listLogs(request).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -860,12 +857,12 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   ListLogsRequest request = ListLogsRequest.newBuilder()
    *     .setParent(parent.toString())
    *     .build();
-   *   ApiFuture&lt;ListLogsPagedResponse&gt; future = loggingServiceV2Client.listLogsPagedCallable().futureCall(request);
+   *   ApiFuture&lt;ListLogsPagedResponse&gt; future = loggingClient.listLogsPagedCallable().futureCall(request);
    *   // Do something
    *   for (String element : future.get().iterateAll()) {
    *     // doThingsWith(element);
@@ -885,13 +882,13 @@ public class LoggingServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   ListLogsRequest request = ListLogsRequest.newBuilder()
    *     .setParent(parent.toString())
    *     .build();
    *   while (true) {
-   *     ListLogsResponse response = loggingServiceV2Client.listLogsCallable().call(request);
+   *     ListLogsResponse response = loggingClient.listLogsCallable().call(request);
    *     for (String element : response.getLogNamesList()) {
    *       // doThingsWith(element);
    *     }

@@ -15,9 +15,9 @@
  */
 package com.google.cloud.logging.v2.stub;
 
-import static com.google.cloud.logging.v2.LoggingServiceV2Client.ListLogEntriesPagedResponse;
-import static com.google.cloud.logging.v2.LoggingServiceV2Client.ListLogsPagedResponse;
-import static com.google.cloud.logging.v2.LoggingServiceV2Client.ListMonitoredResourceDescriptorsPagedResponse;
+import static com.google.cloud.logging.v2.LoggingClient.ListLogEntriesPagedResponse;
+import static com.google.cloud.logging.v2.LoggingClient.ListLogsPagedResponse;
+import static com.google.cloud.logging.v2.LoggingClient.ListMonitoredResourceDescriptorsPagedResponse;
 
 import com.google.api.MonitoredResourceDescriptor;
 import com.google.api.core.ApiFunction;
@@ -90,15 +90,15 @@ import org.threeten.bp.Duration;
  *
  * <pre>
  * <code>
- * LoggingServiceV2StubSettings.Builder loggingServiceV2SettingsBuilder =
+ * LoggingServiceV2StubSettings.Builder loggingSettingsBuilder =
  *     LoggingServiceV2StubSettings.newBuilder();
- * loggingServiceV2SettingsBuilder
+ * loggingSettingsBuilder
  *     .writeLogEntriesSettings()
  *     .setRetrySettings(
- *         loggingServiceV2SettingsBuilder.writeLogEntriesSettings().getRetrySettings().toBuilder()
+ *         loggingSettingsBuilder.writeLogEntriesSettings().getRetrySettings().toBuilder()
  *             .setTotalTimeout(Duration.ofSeconds(30))
  *             .build());
- * LoggingServiceV2StubSettings loggingServiceV2Settings = loggingServiceV2SettingsBuilder.build();
+ * LoggingServiceV2StubSettings loggingSettings = loggingSettingsBuilder.build();
  * </code>
  * </pre>
  */

@@ -25,7 +25,7 @@ import com.google.cloud.grpc.GrpcTransportOptions;
 import com.google.cloud.logging.spi.LoggingRpcFactory;
 import com.google.cloud.logging.spi.v2.GrpcLoggingRpc;
 import com.google.cloud.logging.spi.v2.LoggingRpc;
-import com.google.cloud.logging.v2.LoggingServiceV2Settings;
+import com.google.cloud.logging.v2.LoggingSettings;
 import com.google.common.collect.ImmutableSet;
 import java.io.IOException;
 import java.util.Set;
@@ -35,7 +35,7 @@ public class LoggingOptions extends ServiceOptions<Logging, LoggingOptions> {
   private static final String API_SHORT_NAME = "Logging";
   private static final String LOGGING_SCOPE = "https://www.googleapis.com/auth/logging.admin";
   private static final Set<String> SCOPES = ImmutableSet.of(LOGGING_SCOPE);
-  private static final String DEFAULT_HOST = LoggingServiceV2Settings.getDefaultEndpoint();
+  private static final String DEFAULT_HOST = LoggingSettings.getDefaultEndpoint();
   private static final long serialVersionUID = 5753499510627426717L;
 
   public static class DefaultLoggingFactory implements LoggingFactory {

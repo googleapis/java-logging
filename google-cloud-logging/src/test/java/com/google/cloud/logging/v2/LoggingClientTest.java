@@ -15,9 +15,9 @@
  */
 package com.google.cloud.logging.v2;
 
-import static com.google.cloud.logging.v2.LoggingServiceV2Client.ListLogEntriesPagedResponse;
-import static com.google.cloud.logging.v2.LoggingServiceV2Client.ListLogsPagedResponse;
-import static com.google.cloud.logging.v2.LoggingServiceV2Client.ListMonitoredResourceDescriptorsPagedResponse;
+import static com.google.cloud.logging.v2.LoggingClient.ListLogEntriesPagedResponse;
+import static com.google.cloud.logging.v2.LoggingClient.ListLogsPagedResponse;
+import static com.google.cloud.logging.v2.LoggingClient.ListMonitoredResourceDescriptorsPagedResponse;
 
 import com.google.api.MonitoredResource;
 import com.google.api.MonitoredResourceDescriptor;
@@ -60,12 +60,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 @javax.annotation.Generated("by GAPIC")
-public class LoggingServiceV2ClientTest {
+public class LoggingClientTest {
   private static MockConfigServiceV2 mockConfigServiceV2;
   private static MockLoggingServiceV2 mockLoggingServiceV2;
   private static MockMetricsServiceV2 mockMetricsServiceV2;
   private static MockServiceHelper serviceHelper;
-  private LoggingServiceV2Client client;
+  private LoggingClient client;
   private LocalChannelProvider channelProvider;
 
   @BeforeClass
@@ -90,12 +90,12 @@ public class LoggingServiceV2ClientTest {
   public void setUp() throws IOException {
     serviceHelper.reset();
     channelProvider = serviceHelper.createChannelProvider();
-    LoggingServiceV2Settings settings =
-        LoggingServiceV2Settings.newBuilder()
+    LoggingSettings settings =
+        LoggingSettings.newBuilder()
             .setTransportChannelProvider(channelProvider)
             .setCredentialsProvider(NoCredentialsProvider.create())
             .build();
-    client = LoggingServiceV2Client.create(settings);
+    client = LoggingClient.create(settings);
   }
 
   @After

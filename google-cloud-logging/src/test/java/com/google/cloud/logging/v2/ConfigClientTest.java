@@ -15,9 +15,9 @@
  */
 package com.google.cloud.logging.v2;
 
-import static com.google.cloud.logging.v2.ConfigServiceV2Client.ListBucketsPagedResponse;
-import static com.google.cloud.logging.v2.ConfigServiceV2Client.ListExclusionsPagedResponse;
-import static com.google.cloud.logging.v2.ConfigServiceV2Client.ListSinksPagedResponse;
+import static com.google.cloud.logging.v2.ConfigClient.ListBucketsPagedResponse;
+import static com.google.cloud.logging.v2.ConfigClient.ListExclusionsPagedResponse;
+import static com.google.cloud.logging.v2.ConfigClient.ListSinksPagedResponse;
 
 import com.google.api.gax.core.NoCredentialsProvider;
 import com.google.api.gax.grpc.GaxGrpcProperties;
@@ -74,12 +74,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 @javax.annotation.Generated("by GAPIC")
-public class ConfigServiceV2ClientTest {
+public class ConfigClientTest {
   private static MockConfigServiceV2 mockConfigServiceV2;
   private static MockLoggingServiceV2 mockLoggingServiceV2;
   private static MockMetricsServiceV2 mockMetricsServiceV2;
   private static MockServiceHelper serviceHelper;
-  private ConfigServiceV2Client client;
+  private ConfigClient client;
   private LocalChannelProvider channelProvider;
 
   @BeforeClass
@@ -104,12 +104,12 @@ public class ConfigServiceV2ClientTest {
   public void setUp() throws IOException {
     serviceHelper.reset();
     channelProvider = serviceHelper.createChannelProvider();
-    ConfigServiceV2Settings settings =
-        ConfigServiceV2Settings.newBuilder()
+    ConfigSettings settings =
+        ConfigSettings.newBuilder()
             .setTransportChannelProvider(channelProvider)
             .setCredentialsProvider(NoCredentialsProvider.create())
             .build();
-    client = ConfigServiceV2Client.create(settings);
+    client = ConfigClient.create(settings);
   }
 
   @After

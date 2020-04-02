@@ -15,7 +15,7 @@
  */
 package com.google.cloud.logging.v2.stub;
 
-import static com.google.cloud.logging.v2.MetricsServiceV2Client.ListLogMetricsPagedResponse;
+import static com.google.cloud.logging.v2.MetricsClient.ListLogMetricsPagedResponse;
 
 import com.google.api.core.ApiFunction;
 import com.google.api.core.ApiFuture;
@@ -75,15 +75,15 @@ import org.threeten.bp.Duration;
  *
  * <pre>
  * <code>
- * MetricsServiceV2StubSettings.Builder metricsServiceV2SettingsBuilder =
+ * MetricsServiceV2StubSettings.Builder metricsSettingsBuilder =
  *     MetricsServiceV2StubSettings.newBuilder();
- * metricsServiceV2SettingsBuilder
+ * metricsSettingsBuilder
  *     .getLogMetricSettings()
  *     .setRetrySettings(
- *         metricsServiceV2SettingsBuilder.getLogMetricSettings().getRetrySettings().toBuilder()
+ *         metricsSettingsBuilder.getLogMetricSettings().getRetrySettings().toBuilder()
  *             .setTotalTimeout(Duration.ofSeconds(30))
  *             .build());
- * MetricsServiceV2StubSettings metricsServiceV2Settings = metricsServiceV2SettingsBuilder.build();
+ * MetricsServiceV2StubSettings metricsSettings = metricsSettingsBuilder.build();
  * </code>
  * </pre>
  */

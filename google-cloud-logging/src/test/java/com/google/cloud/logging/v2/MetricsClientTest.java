@@ -15,7 +15,7 @@
  */
 package com.google.cloud.logging.v2;
 
-import static com.google.cloud.logging.v2.MetricsServiceV2Client.ListLogMetricsPagedResponse;
+import static com.google.cloud.logging.v2.MetricsClient.ListLogMetricsPagedResponse;
 
 import com.google.api.gax.core.NoCredentialsProvider;
 import com.google.api.gax.grpc.GaxGrpcProperties;
@@ -50,12 +50,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 @javax.annotation.Generated("by GAPIC")
-public class MetricsServiceV2ClientTest {
+public class MetricsClientTest {
   private static MockConfigServiceV2 mockConfigServiceV2;
   private static MockLoggingServiceV2 mockLoggingServiceV2;
   private static MockMetricsServiceV2 mockMetricsServiceV2;
   private static MockServiceHelper serviceHelper;
-  private MetricsServiceV2Client client;
+  private MetricsClient client;
   private LocalChannelProvider channelProvider;
 
   @BeforeClass
@@ -80,12 +80,12 @@ public class MetricsServiceV2ClientTest {
   public void setUp() throws IOException {
     serviceHelper.reset();
     channelProvider = serviceHelper.createChannelProvider();
-    MetricsServiceV2Settings settings =
-        MetricsServiceV2Settings.newBuilder()
+    MetricsSettings settings =
+        MetricsSettings.newBuilder()
             .setTransportChannelProvider(channelProvider)
             .setCredentialsProvider(NoCredentialsProvider.create())
             .build();
-    client = MetricsServiceV2Client.create(settings);
+    client = MetricsClient.create(settings);
   }
 
   @After

@@ -52,16 +52,15 @@ import javax.annotation.Generated;
  *
  * <pre>
  * <code>
- * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+ * try (MetricsClient metricsClient = MetricsClient.create()) {
  *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
- *   LogMetric response = metricsServiceV2Client.getLogMetric(metricName);
+ *   LogMetric response = metricsClient.getLogMetric(metricName);
  * }
  * </code>
  * </pre>
  *
- * <p>Note: close() needs to be called on the metricsServiceV2Client object to clean up resources
- * such as threads. In the example above, try-with-resources is used, which automatically calls
- * close().
+ * <p>Note: close() needs to be called on the metricsClient object to clean up resources such as
+ * threads. In the example above, try-with-resources is used, which automatically calls close().
  *
  * <p>The surface of this class includes several types of Java methods for each of the API's
  * methods:
@@ -83,19 +82,19 @@ import javax.annotation.Generated;
  * these names, this class includes a format method for each type of name, and additionally a parse
  * method to extract the individual identifiers contained within names that are returned.
  *
- * <p>This class can be customized by passing in a custom instance of MetricsServiceV2Settings to
- * create(). For example:
+ * <p>This class can be customized by passing in a custom instance of MetricsSettings to create().
+ * For example:
  *
  * <p>To customize credentials:
  *
  * <pre>
  * <code>
- * MetricsServiceV2Settings metricsServiceV2Settings =
- *     MetricsServiceV2Settings.newBuilder()
+ * MetricsSettings metricsSettings =
+ *     MetricsSettings.newBuilder()
  *         .setCredentialsProvider(FixedCredentialsProvider.create(myCredentials))
  *         .build();
- * MetricsServiceV2Client metricsServiceV2Client =
- *     MetricsServiceV2Client.create(metricsServiceV2Settings);
+ * MetricsClient metricsClient =
+ *     MetricsClient.create(metricsSettings);
  * </code>
  * </pre>
  *
@@ -103,59 +102,57 @@ import javax.annotation.Generated;
  *
  * <pre>
  * <code>
- * MetricsServiceV2Settings metricsServiceV2Settings =
- *     MetricsServiceV2Settings.newBuilder().setEndpoint(myEndpoint).build();
- * MetricsServiceV2Client metricsServiceV2Client =
- *     MetricsServiceV2Client.create(metricsServiceV2Settings);
+ * MetricsSettings metricsSettings =
+ *     MetricsSettings.newBuilder().setEndpoint(myEndpoint).build();
+ * MetricsClient metricsClient =
+ *     MetricsClient.create(metricsSettings);
  * </code>
  * </pre>
  */
 @Generated("by gapic-generator")
 @BetaApi
-public class MetricsServiceV2Client implements BackgroundResource {
-  private final MetricsServiceV2Settings settings;
+public class MetricsClient implements BackgroundResource {
+  private final MetricsSettings settings;
   private final MetricsServiceV2Stub stub;
 
-  /** Constructs an instance of MetricsServiceV2Client with default settings. */
-  public static final MetricsServiceV2Client create() throws IOException {
-    return create(MetricsServiceV2Settings.newBuilder().build());
+  /** Constructs an instance of MetricsClient with default settings. */
+  public static final MetricsClient create() throws IOException {
+    return create(MetricsSettings.newBuilder().build());
   }
 
   /**
-   * Constructs an instance of MetricsServiceV2Client, using the given settings. The channels are
-   * created based on the settings passed in, or defaults for any settings that are not set.
+   * Constructs an instance of MetricsClient, using the given settings. The channels are created
+   * based on the settings passed in, or defaults for any settings that are not set.
    */
-  public static final MetricsServiceV2Client create(MetricsServiceV2Settings settings)
-      throws IOException {
-    return new MetricsServiceV2Client(settings);
+  public static final MetricsClient create(MetricsSettings settings) throws IOException {
+    return new MetricsClient(settings);
   }
 
   /**
-   * Constructs an instance of MetricsServiceV2Client, using the given stub for making calls. This
-   * is for advanced usage - prefer to use MetricsServiceV2Settings}.
+   * Constructs an instance of MetricsClient, using the given stub for making calls. This is for
+   * advanced usage - prefer to use MetricsSettings}.
    */
   @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
-  public static final MetricsServiceV2Client create(MetricsServiceV2Stub stub) {
-    return new MetricsServiceV2Client(stub);
+  public static final MetricsClient create(MetricsServiceV2Stub stub) {
+    return new MetricsClient(stub);
   }
 
   /**
-   * Constructs an instance of MetricsServiceV2Client, using the given settings. This is protected
-   * so that it is easy to make a subclass, but otherwise, the static factory methods should be
-   * preferred.
+   * Constructs an instance of MetricsClient, using the given settings. This is protected so that it
+   * is easy to make a subclass, but otherwise, the static factory methods should be preferred.
    */
-  protected MetricsServiceV2Client(MetricsServiceV2Settings settings) throws IOException {
+  protected MetricsClient(MetricsSettings settings) throws IOException {
     this.settings = settings;
     this.stub = ((MetricsServiceV2StubSettings) settings.getStubSettings()).createStub();
   }
 
   @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
-  protected MetricsServiceV2Client(MetricsServiceV2Stub stub) {
+  protected MetricsClient(MetricsServiceV2Stub stub) {
     this.settings = null;
     this.stub = stub;
   }
 
-  public final MetricsServiceV2Settings getSettings() {
+  public final MetricsSettings getSettings() {
     return settings;
   }
 
@@ -171,9 +168,9 @@ public class MetricsServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
-   *   for (LogMetric element : metricsServiceV2Client.listLogMetrics(parent).iterateAll()) {
+   *   for (LogMetric element : metricsClient.listLogMetrics(parent).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -198,9 +195,9 @@ public class MetricsServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
-   *   for (LogMetric element : metricsServiceV2Client.listLogMetrics(parent.toString()).iterateAll()) {
+   *   for (LogMetric element : metricsClient.listLogMetrics(parent.toString()).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -222,12 +219,12 @@ public class MetricsServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   ListLogMetricsRequest request = ListLogMetricsRequest.newBuilder()
    *     .setParent(parent.toString())
    *     .build();
-   *   for (LogMetric element : metricsServiceV2Client.listLogMetrics(request).iterateAll()) {
+   *   for (LogMetric element : metricsClient.listLogMetrics(request).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -247,12 +244,12 @@ public class MetricsServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   ListLogMetricsRequest request = ListLogMetricsRequest.newBuilder()
    *     .setParent(parent.toString())
    *     .build();
-   *   ApiFuture&lt;ListLogMetricsPagedResponse&gt; future = metricsServiceV2Client.listLogMetricsPagedCallable().futureCall(request);
+   *   ApiFuture&lt;ListLogMetricsPagedResponse&gt; future = metricsClient.listLogMetricsPagedCallable().futureCall(request);
    *   // Do something
    *   for (LogMetric element : future.get().iterateAll()) {
    *     // doThingsWith(element);
@@ -272,13 +269,13 @@ public class MetricsServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   ListLogMetricsRequest request = ListLogMetricsRequest.newBuilder()
    *     .setParent(parent.toString())
    *     .build();
    *   while (true) {
-   *     ListLogMetricsResponse response = metricsServiceV2Client.listLogMetricsCallable().call(request);
+   *     ListLogMetricsResponse response = metricsClient.listLogMetricsCallable().call(request);
    *     for (LogMetric element : response.getMetricsList()) {
    *       // doThingsWith(element);
    *     }
@@ -304,9 +301,9 @@ public class MetricsServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
    *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
-   *   LogMetric response = metricsServiceV2Client.getLogMetric(metricName);
+   *   LogMetric response = metricsClient.getLogMetric(metricName);
    * }
    * </code></pre>
    *
@@ -329,9 +326,9 @@ public class MetricsServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
    *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
-   *   LogMetric response = metricsServiceV2Client.getLogMetric(metricName.toString());
+   *   LogMetric response = metricsClient.getLogMetric(metricName.toString());
    * }
    * </code></pre>
    *
@@ -352,12 +349,12 @@ public class MetricsServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
    *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
    *   GetLogMetricRequest request = GetLogMetricRequest.newBuilder()
    *     .setMetricName(metricName.toString())
    *     .build();
-   *   LogMetric response = metricsServiceV2Client.getLogMetric(request);
+   *   LogMetric response = metricsClient.getLogMetric(request);
    * }
    * </code></pre>
    *
@@ -375,12 +372,12 @@ public class MetricsServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
    *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
    *   GetLogMetricRequest request = GetLogMetricRequest.newBuilder()
    *     .setMetricName(metricName.toString())
    *     .build();
-   *   ApiFuture&lt;LogMetric&gt; future = metricsServiceV2Client.getLogMetricCallable().futureCall(request);
+   *   ApiFuture&lt;LogMetric&gt; future = metricsClient.getLogMetricCallable().futureCall(request);
    *   // Do something
    *   LogMetric response = future.get();
    * }
@@ -397,10 +394,10 @@ public class MetricsServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   LogMetric metric = LogMetric.newBuilder().build();
-   *   LogMetric response = metricsServiceV2Client.createLogMetric(parent, metric);
+   *   LogMetric response = metricsClient.createLogMetric(parent, metric);
    * }
    * </code></pre>
    *
@@ -427,10 +424,10 @@ public class MetricsServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   LogMetric metric = LogMetric.newBuilder().build();
-   *   LogMetric response = metricsServiceV2Client.createLogMetric(parent.toString(), metric);
+   *   LogMetric response = metricsClient.createLogMetric(parent.toString(), metric);
    * }
    * </code></pre>
    *
@@ -454,14 +451,14 @@ public class MetricsServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   LogMetric metric = LogMetric.newBuilder().build();
    *   CreateLogMetricRequest request = CreateLogMetricRequest.newBuilder()
    *     .setParent(parent.toString())
    *     .setMetric(metric)
    *     .build();
-   *   LogMetric response = metricsServiceV2Client.createLogMetric(request);
+   *   LogMetric response = metricsClient.createLogMetric(request);
    * }
    * </code></pre>
    *
@@ -479,14 +476,14 @@ public class MetricsServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
    *   ProjectName parent = ProjectName.of("[PROJECT]");
    *   LogMetric metric = LogMetric.newBuilder().build();
    *   CreateLogMetricRequest request = CreateLogMetricRequest.newBuilder()
    *     .setParent(parent.toString())
    *     .setMetric(metric)
    *     .build();
-   *   ApiFuture&lt;LogMetric&gt; future = metricsServiceV2Client.createLogMetricCallable().futureCall(request);
+   *   ApiFuture&lt;LogMetric&gt; future = metricsClient.createLogMetricCallable().futureCall(request);
    *   // Do something
    *   LogMetric response = future.get();
    * }
@@ -503,10 +500,10 @@ public class MetricsServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
    *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
    *   LogMetric metric = LogMetric.newBuilder().build();
-   *   LogMetric response = metricsServiceV2Client.updateLogMetric(metricName, metric);
+   *   LogMetric response = metricsClient.updateLogMetric(metricName, metric);
    * }
    * </code></pre>
    *
@@ -534,10 +531,10 @@ public class MetricsServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
    *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
    *   LogMetric metric = LogMetric.newBuilder().build();
-   *   LogMetric response = metricsServiceV2Client.updateLogMetric(metricName.toString(), metric);
+   *   LogMetric response = metricsClient.updateLogMetric(metricName.toString(), metric);
    * }
    * </code></pre>
    *
@@ -562,14 +559,14 @@ public class MetricsServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
    *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
    *   LogMetric metric = LogMetric.newBuilder().build();
    *   UpdateLogMetricRequest request = UpdateLogMetricRequest.newBuilder()
    *     .setMetricName(metricName.toString())
    *     .setMetric(metric)
    *     .build();
-   *   LogMetric response = metricsServiceV2Client.updateLogMetric(request);
+   *   LogMetric response = metricsClient.updateLogMetric(request);
    * }
    * </code></pre>
    *
@@ -587,14 +584,14 @@ public class MetricsServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
    *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
    *   LogMetric metric = LogMetric.newBuilder().build();
    *   UpdateLogMetricRequest request = UpdateLogMetricRequest.newBuilder()
    *     .setMetricName(metricName.toString())
    *     .setMetric(metric)
    *     .build();
-   *   ApiFuture&lt;LogMetric&gt; future = metricsServiceV2Client.updateLogMetricCallable().futureCall(request);
+   *   ApiFuture&lt;LogMetric&gt; future = metricsClient.updateLogMetricCallable().futureCall(request);
    *   // Do something
    *   LogMetric response = future.get();
    * }
@@ -611,9 +608,9 @@ public class MetricsServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
    *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
-   *   metricsServiceV2Client.deleteLogMetric(metricName);
+   *   metricsClient.deleteLogMetric(metricName);
    * }
    * </code></pre>
    *
@@ -636,9 +633,9 @@ public class MetricsServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
    *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
-   *   metricsServiceV2Client.deleteLogMetric(metricName.toString());
+   *   metricsClient.deleteLogMetric(metricName.toString());
    * }
    * </code></pre>
    *
@@ -659,12 +656,12 @@ public class MetricsServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
    *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
    *   DeleteLogMetricRequest request = DeleteLogMetricRequest.newBuilder()
    *     .setMetricName(metricName.toString())
    *     .build();
-   *   metricsServiceV2Client.deleteLogMetric(request);
+   *   metricsClient.deleteLogMetric(request);
    * }
    * </code></pre>
    *
@@ -682,12 +679,12 @@ public class MetricsServiceV2Client implements BackgroundResource {
    * <p>Sample code:
    *
    * <pre><code>
-   * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
    *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
    *   DeleteLogMetricRequest request = DeleteLogMetricRequest.newBuilder()
    *     .setMetricName(metricName.toString())
    *     .build();
-   *   ApiFuture&lt;Void&gt; future = metricsServiceV2Client.deleteLogMetricCallable().futureCall(request);
+   *   ApiFuture&lt;Void&gt; future = metricsClient.deleteLogMetricCallable().futureCall(request);
    *   // Do something
    *   future.get();
    * }
