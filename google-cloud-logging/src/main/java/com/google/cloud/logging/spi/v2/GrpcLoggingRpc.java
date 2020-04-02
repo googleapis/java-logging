@@ -140,14 +140,11 @@ public class GrpcLoggingRpc implements LoggingRpc {
             }
           };
       ConfigSettings.Builder confBuilder =
-          ConfigSettings.newBuilder(clientContext)
-              .applyToAllUnaryMethods(retrySettingsSetter);
+          ConfigSettings.newBuilder(clientContext).applyToAllUnaryMethods(retrySettingsSetter);
       LoggingSettings.Builder logBuilder =
-          LoggingSettings.newBuilder(clientContext)
-              .applyToAllUnaryMethods(retrySettingsSetter);
+          LoggingSettings.newBuilder(clientContext).applyToAllUnaryMethods(retrySettingsSetter);
       MetricsSettings.Builder metricsBuilder =
-          MetricsSettings.newBuilder(clientContext)
-              .applyToAllUnaryMethods(retrySettingsSetter);
+          MetricsSettings.newBuilder(clientContext).applyToAllUnaryMethods(retrySettingsSetter);
 
       // TODO(pongad): Take advantage of https://github.com/googleapis/gax-java/pull/452 when it's
       // released.
