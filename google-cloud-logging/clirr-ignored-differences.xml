@@ -3,27 +3,21 @@
 <differences>
   <!-- TODO: remove after 2.0.0 released -->
   <difference>
-    <differenceType>8001</differenceType>
-    <className>com/google/cloud/logging/v2/MetricsClient*</className>
+    <differenceType>7005</differenceType>
+    <className>com/google/cloud/logging/v2/ConfigClient</className>
+    <method>* *(com.google.logging.v2.*Name*)</method>
+    <to>* *(com.google.logging.v2.*Name*)</to>
   </difference>
   <difference>
-    <differenceType>8001</differenceType>
-    <className>com/google/cloud/logging/v2/LoggingClient*</className>
+    <differenceType>7005</differenceType>
+    <className>com/google/cloud/logging/v2/MetricsClient</className>
+    <method>* *LogMetric*(com.google.logging.v2.*Name*)</method>
+    <to>* *LogMetric*(com.google.logging.v2.*Name*)</to>
   </difference>
   <difference>
-    <differenceType>8001</differenceType>
-    <className>com/google/cloud/logging/v2/ConfigClient*</className>
-  </difference>
-  <difference>
-    <differenceType>8001</differenceType>
-    <className>com/google/cloud/logging/v2/MetricsSettings*</className>
-  </difference>
-  <difference>
-    <differenceType>8001</differenceType>
-    <className>com/google/cloud/logging/v2/LoggingSettings*</className>
-  </difference>
-  <difference>
-    <differenceType>8001</differenceType>
-    <className>com/google/cloud/logging/v2/ConfigSettings*</className>
+    <differenceType>7005</differenceType>
+    <className>com/google/cloud/logging/v2/LoggingClient</className>
+    <method>* listLogs(com.google.logging.v2.ParentName)</method>
+    <to>* listLogs(com.google.logging.v2.ProjectName)</to>
   </difference>
 </differences>
