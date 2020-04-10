@@ -15,9 +15,9 @@
  */
 package com.google.cloud.logging.v2.stub;
 
-import static com.google.cloud.logging.v2.ConfigServiceV2Client.ListBucketsPagedResponse;
-import static com.google.cloud.logging.v2.ConfigServiceV2Client.ListExclusionsPagedResponse;
-import static com.google.cloud.logging.v2.ConfigServiceV2Client.ListSinksPagedResponse;
+import static com.google.cloud.logging.v2.ConfigClient.ListBucketsPagedResponse;
+import static com.google.cloud.logging.v2.ConfigClient.ListExclusionsPagedResponse;
+import static com.google.cloud.logging.v2.ConfigClient.ListSinksPagedResponse;
 
 import com.google.api.core.ApiFunction;
 import com.google.api.core.ApiFuture;
