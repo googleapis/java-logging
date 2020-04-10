@@ -18,8 +18,9 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "83c6f84035ee0f80eaa44d8b688a010461cc4080",
-        "internalRef": "297918498"
+        "sha": "244ab2b83a82076a1fa7be63b7e0671af73f5c02",
+        "internalRef": "298455048",
+        "log": "244ab2b83a82076a1fa7be63b7e0671af73f5c02\nAdds service config definition for bigqueryreservation v1\n\nPiperOrigin-RevId: 298455048\n\n"
       }
     },
     {
