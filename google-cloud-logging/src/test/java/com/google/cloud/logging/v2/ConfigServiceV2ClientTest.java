@@ -45,6 +45,7 @@ import com.google.logging.v2.ListExclusionsRequest;
 import com.google.logging.v2.ListExclusionsResponse;
 import com.google.logging.v2.ListSinksRequest;
 import com.google.logging.v2.ListSinksResponse;
+import com.google.logging.v2.LocationName;
 import com.google.logging.v2.LogBucket;
 import com.google.logging.v2.LogBucketName;
 import com.google.logging.v2.LogExclusion;
@@ -129,7 +130,7 @@ public class ConfigServiceV2ClientTest {
             .build();
     mockConfigServiceV2.addResponse(expectedResponse);
 
-    String parent = "parent-995424086";
+    LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
 
     ListBucketsPagedResponse pagedListResponse = client.listBuckets(parent);
 
@@ -141,7 +142,7 @@ public class ConfigServiceV2ClientTest {
     Assert.assertEquals(1, actualRequests.size());
     ListBucketsRequest actualRequest = (ListBucketsRequest) actualRequests.get(0);
 
-    Assert.assertEquals(parent, actualRequest.getParent());
+    Assert.assertEquals(parent, LocationName.parse(actualRequest.getParent()));
     Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
@@ -155,7 +156,7 @@ public class ConfigServiceV2ClientTest {
     mockConfigServiceV2.addException(exception);
 
     try {
-      String parent = "parent-995424086";
+      LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
 
       client.listBuckets(parent);
       Assert.fail("No exception raised");

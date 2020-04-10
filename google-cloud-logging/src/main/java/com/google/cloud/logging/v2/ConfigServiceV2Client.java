@@ -28,12 +28,14 @@ import com.google.api.gax.rpc.UnaryCallable;
 import com.google.cloud.logging.v2.stub.ConfigServiceV2Stub;
 import com.google.cloud.logging.v2.stub.ConfigServiceV2StubSettings;
 import com.google.common.util.concurrent.MoreExecutors;
+import com.google.logging.v2.BillingAccountLocationName;
 import com.google.logging.v2.BillingAccountName;
 import com.google.logging.v2.CmekSettings;
 import com.google.logging.v2.CreateExclusionRequest;
 import com.google.logging.v2.CreateSinkRequest;
 import com.google.logging.v2.DeleteExclusionRequest;
 import com.google.logging.v2.DeleteSinkRequest;
+import com.google.logging.v2.FolderLocationName;
 import com.google.logging.v2.FolderName;
 import com.google.logging.v2.GetBucketRequest;
 import com.google.logging.v2.GetCmekSettingsRequest;
@@ -45,11 +47,13 @@ import com.google.logging.v2.ListExclusionsRequest;
 import com.google.logging.v2.ListExclusionsResponse;
 import com.google.logging.v2.ListSinksRequest;
 import com.google.logging.v2.ListSinksResponse;
+import com.google.logging.v2.LocationName;
 import com.google.logging.v2.LogBucket;
 import com.google.logging.v2.LogExclusion;
 import com.google.logging.v2.LogExclusionName;
 import com.google.logging.v2.LogSink;
 import com.google.logging.v2.LogSinkName;
+import com.google.logging.v2.OrganizationLocationName;
 import com.google.logging.v2.OrganizationName;
 import com.google.logging.v2.ProjectName;
 import com.google.logging.v2.UpdateBucketRequest;
@@ -192,8 +196,136 @@ public class ConfigServiceV2Client implements BackgroundResource {
    *
    * <pre><code>
    * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
-   *   String parent = "";
+   *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
    *   for (LogBucket element : configServiceV2Client.listBuckets(parent).iterateAll()) {
+   *     // doThingsWith(element);
+   *   }
+   * }
+   * </code></pre>
+   *
+   * @param parent Required. The parent resource whose buckets are to be listed:
+   *     <p>"projects/[PROJECT_ID]/locations/[LOCATION_ID]"
+   *     "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]"
+   *     "folders/[FOLDER_ID]/locations/[LOCATION_ID]"
+   *     <p>Note: The locations portion of the resource must be specified, but supplying the
+   *     character `-` in place of [LOCATION_ID] will return all buckets.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final ListBucketsPagedResponse listBuckets(LocationName parent) {
+    ListBucketsRequest request =
+        ListBucketsRequest.newBuilder()
+            .setParent(parent == null ? null : parent.toString())
+            .build();
+    return listBuckets(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Lists buckets (Beta).
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   *   OrganizationLocationName parent = OrganizationLocationName.of("[ORGANIZATION]", "[LOCATION]");
+   *   for (LogBucket element : configServiceV2Client.listBuckets(parent).iterateAll()) {
+   *     // doThingsWith(element);
+   *   }
+   * }
+   * </code></pre>
+   *
+   * @param parent Required. The parent resource whose buckets are to be listed:
+   *     <p>"projects/[PROJECT_ID]/locations/[LOCATION_ID]"
+   *     "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]"
+   *     "folders/[FOLDER_ID]/locations/[LOCATION_ID]"
+   *     <p>Note: The locations portion of the resource must be specified, but supplying the
+   *     character `-` in place of [LOCATION_ID] will return all buckets.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final ListBucketsPagedResponse listBuckets(OrganizationLocationName parent) {
+    ListBucketsRequest request =
+        ListBucketsRequest.newBuilder()
+            .setParent(parent == null ? null : parent.toString())
+            .build();
+    return listBuckets(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Lists buckets (Beta).
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   *   FolderLocationName parent = FolderLocationName.of("[FOLDER]", "[LOCATION]");
+   *   for (LogBucket element : configServiceV2Client.listBuckets(parent).iterateAll()) {
+   *     // doThingsWith(element);
+   *   }
+   * }
+   * </code></pre>
+   *
+   * @param parent Required. The parent resource whose buckets are to be listed:
+   *     <p>"projects/[PROJECT_ID]/locations/[LOCATION_ID]"
+   *     "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]"
+   *     "folders/[FOLDER_ID]/locations/[LOCATION_ID]"
+   *     <p>Note: The locations portion of the resource must be specified, but supplying the
+   *     character `-` in place of [LOCATION_ID] will return all buckets.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final ListBucketsPagedResponse listBuckets(FolderLocationName parent) {
+    ListBucketsRequest request =
+        ListBucketsRequest.newBuilder()
+            .setParent(parent == null ? null : parent.toString())
+            .build();
+    return listBuckets(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Lists buckets (Beta).
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   *   BillingAccountLocationName parent = BillingAccountLocationName.of("[BILLING_ACCOUNT]", "[LOCATION]");
+   *   for (LogBucket element : configServiceV2Client.listBuckets(parent).iterateAll()) {
+   *     // doThingsWith(element);
+   *   }
+   * }
+   * </code></pre>
+   *
+   * @param parent Required. The parent resource whose buckets are to be listed:
+   *     <p>"projects/[PROJECT_ID]/locations/[LOCATION_ID]"
+   *     "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]"
+   *     "folders/[FOLDER_ID]/locations/[LOCATION_ID]"
+   *     <p>Note: The locations portion of the resource must be specified, but supplying the
+   *     character `-` in place of [LOCATION_ID] will return all buckets.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final ListBucketsPagedResponse listBuckets(BillingAccountLocationName parent) {
+    ListBucketsRequest request =
+        ListBucketsRequest.newBuilder()
+            .setParent(parent == null ? null : parent.toString())
+            .build();
+    return listBuckets(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Lists buckets (Beta).
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+   *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
+   *   for (LogBucket element : configServiceV2Client.listBuckets(parent.toString()).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -221,9 +353,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    *
    * <pre><code>
    * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
-   *   String parent = "";
+   *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
    *   ListBucketsRequest request = ListBucketsRequest.newBuilder()
-   *     .setParent(parent)
+   *     .setParent(parent.toString())
    *     .build();
    *   for (LogBucket element : configServiceV2Client.listBuckets(request).iterateAll()) {
    *     // doThingsWith(element);
@@ -246,9 +378,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    *
    * <pre><code>
    * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
-   *   String parent = "";
+   *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
    *   ListBucketsRequest request = ListBucketsRequest.newBuilder()
-   *     .setParent(parent)
+   *     .setParent(parent.toString())
    *     .build();
    *   ApiFuture&lt;ListBucketsPagedResponse&gt; future = configServiceV2Client.listBucketsPagedCallable().futureCall(request);
    *   // Do something
@@ -271,9 +403,9 @@ public class ConfigServiceV2Client implements BackgroundResource {
    *
    * <pre><code>
    * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
-   *   String parent = "";
+   *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
    *   ListBucketsRequest request = ListBucketsRequest.newBuilder()
-   *     .setParent(parent)
+   *     .setParent(parent.toString())
    *     .build();
    *   while (true) {
    *     ListBucketsResponse response = configServiceV2Client.listBucketsCallable().call(request);
