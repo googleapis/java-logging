@@ -1,17 +1,10 @@
 {
   "sources": [
     {
-      "generator": {
-        "name": "artman",
-        "version": "1.2.0",
-        "dockerImage": "googleapis/artman@sha256:ef1a5b367dbe1e37cea1c7c814c801a638473e8dd66f87f4a2b8c2a146013673"
-      }
-    },
-    {
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/java-logging.git",
-        "sha": "1c749aa6510bad24432e0fe45100d1121440af3e"
+        "sha": "c9839118ca83cb7381fea6d1066307fa0796d260"
       }
     },
     {
@@ -37,8 +30,7 @@
         "apiName": "logging",
         "apiVersion": "v2",
         "language": "java",
-        "generator": "gapic",
-        "config": "google/logging/artman_logging.yaml"
+        "generator": "bazel"
       }
     }
   ]
