@@ -18,9 +18,9 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "4a180bfff8a21645b3a935c2756e8d6ab18a74e0",
-        "internalRef": "298484782",
-        "log": "4a180bfff8a21645b3a935c2756e8d6ab18a74e0\nautoml/v1beta1 publish proto updates\n\nPiperOrigin-RevId: 298484782\n\n6de6e938b7df1cd62396563a067334abeedb9676\nchore: use the latest gapic-generator and protoc-java-resource-name-plugin in Bazel workspace.\n\nPiperOrigin-RevId: 298474513\n\n244ab2b83a82076a1fa7be63b7e0671af73f5c02\nAdds service config definition for bigqueryreservation v1\n\nPiperOrigin-RevId: 298455048\n\n"
+        "sha": "a78ed801b82a5c6d9c5368e24b1412212e541bb7",
+        "internalRef": "298607357",
+        "log": "a78ed801b82a5c6d9c5368e24b1412212e541bb7\nPublishing v3 protos and configs.\n\nPiperOrigin-RevId: 298607357\n\n4a180bfff8a21645b3a935c2756e8d6ab18a74e0\nautoml/v1beta1 publish proto updates\n\nPiperOrigin-RevId: 298484782\n\n6de6e938b7df1cd62396563a067334abeedb9676\nchore: use the latest gapic-generator and protoc-java-resource-name-plugin in Bazel workspace.\n\nPiperOrigin-RevId: 298474513\n\n244ab2b83a82076a1fa7be63b7e0671af73f5c02\nAdds service config definition for bigqueryreservation v1\n\nPiperOrigin-RevId: 298455048\n\n"
       }
     },
     {
