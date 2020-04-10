@@ -434,12 +434,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * supply their own values, the entries earlier in the list will sort before
    * the entries later in the list. See the `entries.list` method.
    * Log entries with timestamps that are more than the
-   * [logs retention period](/logging/quota-policy) in the past or more than
+   * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
    * 24 hours in the future will not be available when calling `entries.list`.
    * However, those log entries can still be
-   * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+   * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * To improve throughput and to avoid exceeding the
-   * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+   * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
    * you should try to include several log entries in this list,
    * rather than calling this method for each individual log entry.
    * </pre>
@@ -467,12 +467,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * supply their own values, the entries earlier in the list will sort before
    * the entries later in the list. See the `entries.list` method.
    * Log entries with timestamps that are more than the
-   * [logs retention period](/logging/quota-policy) in the past or more than
+   * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
    * 24 hours in the future will not be available when calling `entries.list`.
    * However, those log entries can still be
-   * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+   * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * To improve throughput and to avoid exceeding the
-   * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+   * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
    * you should try to include several log entries in this list,
    * rather than calling this method for each individual log entry.
    * </pre>
@@ -501,12 +501,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * supply their own values, the entries earlier in the list will sort before
    * the entries later in the list. See the `entries.list` method.
    * Log entries with timestamps that are more than the
-   * [logs retention period](/logging/quota-policy) in the past or more than
+   * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
    * 24 hours in the future will not be available when calling `entries.list`.
    * However, those log entries can still be
-   * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+   * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * To improve throughput and to avoid exceeding the
-   * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+   * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
    * you should try to include several log entries in this list,
    * rather than calling this method for each individual log entry.
    * </pre>
@@ -534,12 +534,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * supply their own values, the entries earlier in the list will sort before
    * the entries later in the list. See the `entries.list` method.
    * Log entries with timestamps that are more than the
-   * [logs retention period](/logging/quota-policy) in the past or more than
+   * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
    * 24 hours in the future will not be available when calling `entries.list`.
    * However, those log entries can still be
-   * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+   * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * To improve throughput and to avoid exceeding the
-   * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+   * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
    * you should try to include several log entries in this list,
    * rather than calling this method for each individual log entry.
    * </pre>
@@ -567,12 +567,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * supply their own values, the entries earlier in the list will sort before
    * the entries later in the list. See the `entries.list` method.
    * Log entries with timestamps that are more than the
-   * [logs retention period](/logging/quota-policy) in the past or more than
+   * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
    * 24 hours in the future will not be available when calling `entries.list`.
    * However, those log entries can still be
-   * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+   * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * To improve throughput and to avoid exceeding the
-   * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+   * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
    * you should try to include several log entries in this list,
    * rather than calling this method for each individual log entry.
    * </pre>
@@ -1718,12 +1718,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
@@ -1755,12 +1755,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
@@ -1792,12 +1792,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
@@ -1829,12 +1829,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
@@ -1872,12 +1872,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
@@ -1912,12 +1912,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
@@ -1955,12 +1955,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
@@ -1998,12 +1998,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
@@ -2038,12 +2038,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
@@ -2078,12 +2078,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
@@ -2119,12 +2119,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
@@ -2159,12 +2159,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
@@ -2199,12 +2199,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
@@ -2232,12 +2232,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
@@ -2269,12 +2269,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
@@ -2307,12 +2307,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
@@ -2341,12 +2341,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
@@ -2375,12 +2375,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>

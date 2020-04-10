@@ -2171,8 +2171,8 @@ public class ConfigClient implements BackgroundResource {
    * <p>Note: CMEK for the Logs Router can currently only be configured for GCP organizations. Once
    * configured, it applies to all projects and folders in the GCP organization.
    *
-   * <p>See [Enabling CMEK for Logs Router](/logging/docs/routing/managed-encryption) for more
-   * information.
+   * <p>See [Enabling CMEK for Logs
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
    *
    * <p>Sample code:
    *
@@ -2200,8 +2200,8 @@ public class ConfigClient implements BackgroundResource {
    * <p>Note: CMEK for the Logs Router can currently only be configured for GCP organizations. Once
    * configured, it applies to all projects and folders in the GCP organization.
    *
-   * <p>See [Enabling CMEK for Logs Router](/logging/docs/routing/managed-encryption) for more
-   * information.
+   * <p>See [Enabling CMEK for Logs
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
    *
    * <p>Sample code:
    *
@@ -2233,8 +2233,8 @@ public class ConfigClient implements BackgroundResource {
    * `roles/cloudkms.cryptoKeyEncrypterDecrypter` role assigned for the key, or 3) access to the key
    * is disabled.
    *
-   * <p>See [Enabling CMEK for Logs Router](/logging/docs/routing/managed-encryption) for more
-   * information.
+   * <p>See [Enabling CMEK for Logs
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
    *
    * <p>Sample code:
    *
@@ -2269,8 +2269,8 @@ public class ConfigClient implements BackgroundResource {
    * `roles/cloudkms.cryptoKeyEncrypterDecrypter` role assigned for the key, or 3) access to the key
    * is disabled.
    *
-   * <p>See [Enabling CMEK for Logs Router](/logging/docs/routing/managed-encryption) for more
-   * information.
+   * <p>See [Enabling CMEK for Logs
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
    *
    * <p>Sample code:
    *
