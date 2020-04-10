@@ -319,10 +319,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
   private int payloadCase_ = 0;
   private java.lang.Object payload_;
 
-  public enum PayloadCase
-      implements
-          com.google.protobuf.Internal.EnumLite,
-          com.google.protobuf.AbstractMessage.InternalOneOfEnum {
+  public enum PayloadCase implements com.google.protobuf.Internal.EnumLite {
     PROTO_PAYLOAD(2),
     TEXT_PAYLOAD(3),
     JSON_PAYLOAD(6),
