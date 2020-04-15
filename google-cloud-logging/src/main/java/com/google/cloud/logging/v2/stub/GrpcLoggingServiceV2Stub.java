@@ -211,7 +211,7 @@ public class GrpcLoggingServiceV2Stub extends LoggingServiceV2Stub {
             .build();
 
     this.writeLogEntriesCallable =
-        callableFactory.createUnaryCallable(
+        callableFactory.createBatchingCallable(
             writeLogEntriesTransportSettings, settings.writeLogEntriesSettings(), clientContext);
     this.deleteLogCallable =
         callableFactory.createUnaryCallable(
