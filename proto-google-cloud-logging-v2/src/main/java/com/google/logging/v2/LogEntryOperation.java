@@ -140,7 +140,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
    * identifier are assumed to be part of the same operation.
    * </pre>
    *
-   * <code>string id = 1;</code>
+   * <code>string id = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
    *
    * @return The id.
    */
@@ -163,7 +163,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
    * identifier are assumed to be part of the same operation.
    * </pre>
    *
-   * <code>string id = 1;</code>
+   * <code>string id = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
    *
    * @return The bytes for id.
    */
@@ -190,7 +190,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
    * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
    * </pre>
    *
-   * <code>string producer = 2;</code>
+   * <code>string producer = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
    *
    * @return The producer.
    */
@@ -214,7 +214,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
    * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
    * </pre>
    *
-   * <code>string producer = 2;</code>
+   * <code>string producer = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
    *
    * @return The bytes for producer.
    */
@@ -239,7 +239,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
    * Optional. Set this to True if this is the first log entry in the operation.
    * </pre>
    *
-   * <code>bool first = 3;</code>
+   * <code>bool first = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
    *
    * @return The first.
    */
@@ -256,7 +256,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
    * Optional. Set this to True if this is the last log entry in the operation.
    * </pre>
    *
-   * <code>bool last = 4;</code>
+   * <code>bool last = 4 [(.google.api.field_behavior) = OPTIONAL];</code>
    *
    * @return The last.
    */
@@ -635,7 +635,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * identifier are assumed to be part of the same operation.
      * </pre>
      *
-     * <code>string id = 1;</code>
+     * <code>string id = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @return The id.
      */
@@ -658,7 +658,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * identifier are assumed to be part of the same operation.
      * </pre>
      *
-     * <code>string id = 1;</code>
+     * <code>string id = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @return The bytes for id.
      */
@@ -681,7 +681,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * identifier are assumed to be part of the same operation.
      * </pre>
      *
-     * <code>string id = 1;</code>
+     * <code>string id = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @param value The id to set.
      * @return This builder for chaining.
@@ -703,7 +703,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * identifier are assumed to be part of the same operation.
      * </pre>
      *
-     * <code>string id = 1;</code>
+     * <code>string id = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @return This builder for chaining.
      */
@@ -721,7 +721,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * identifier are assumed to be part of the same operation.
      * </pre>
      *
-     * <code>string id = 1;</code>
+     * <code>string id = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @param value The bytes for id to set.
      * @return This builder for chaining.
@@ -747,7 +747,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
      * </pre>
      *
-     * <code>string producer = 2;</code>
+     * <code>string producer = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @return The producer.
      */
@@ -771,7 +771,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
      * </pre>
      *
-     * <code>string producer = 2;</code>
+     * <code>string producer = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @return The bytes for producer.
      */
@@ -795,7 +795,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
      * </pre>
      *
-     * <code>string producer = 2;</code>
+     * <code>string producer = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @param value The producer to set.
      * @return This builder for chaining.
@@ -818,7 +818,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
      * </pre>
      *
-     * <code>string producer = 2;</code>
+     * <code>string producer = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @return This builder for chaining.
      */
@@ -837,7 +837,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
      * </pre>
      *
-     * <code>string producer = 2;</code>
+     * <code>string producer = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @param value The bytes for producer to set.
      * @return This builder for chaining.
@@ -861,7 +861,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * Optional. Set this to True if this is the first log entry in the operation.
      * </pre>
      *
-     * <code>bool first = 3;</code>
+     * <code>bool first = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @return The first.
      */
@@ -875,7 +875,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * Optional. Set this to True if this is the first log entry in the operation.
      * </pre>
      *
-     * <code>bool first = 3;</code>
+     * <code>bool first = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @param value The first to set.
      * @return This builder for chaining.
@@ -893,7 +893,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * Optional. Set this to True if this is the first log entry in the operation.
      * </pre>
      *
-     * <code>bool first = 3;</code>
+     * <code>bool first = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @return This builder for chaining.
      */
@@ -912,7 +912,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * Optional. Set this to True if this is the last log entry in the operation.
      * </pre>
      *
-     * <code>bool last = 4;</code>
+     * <code>bool last = 4 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @return The last.
      */
@@ -926,7 +926,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * Optional. Set this to True if this is the last log entry in the operation.
      * </pre>
      *
-     * <code>bool last = 4;</code>
+     * <code>bool last = 4 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @param value The last to set.
      * @return This builder for chaining.
@@ -944,7 +944,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * Optional. Set this to True if this is the last log entry in the operation.
      * </pre>
      *
-     * <code>bool last = 4;</code>
+     * <code>bool last = 4 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @return This builder for chaining.
      */
