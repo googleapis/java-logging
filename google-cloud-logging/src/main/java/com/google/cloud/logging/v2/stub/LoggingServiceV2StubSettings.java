@@ -77,16 +77,16 @@ import org.threeten.bp.Duration;
  * <p>The builder of this class is recursive, so contained classes are themselves builders. When
  * build() is called, the tree of builders is called to create the complete settings object.
  *
- * <p>For example, to set the total timeout of deleteLog to 30 seconds:
+ * <p>For example, to set the total timeout of writeLogEntries to 30 seconds:
  *
  * <pre>
  * <code>
  * LoggingServiceV2StubSettings.Builder loggingServiceV2SettingsBuilder =
  *     LoggingServiceV2StubSettings.newBuilder();
  * loggingServiceV2SettingsBuilder
- *     .deleteLogSettings()
+ *     .writeLogEntriesSettings()
  *     .setRetrySettings(
- *         loggingServiceV2SettingsBuilder.deleteLogSettings().getRetrySettings().toBuilder()
+ *         loggingServiceV2SettingsBuilder.writeLogEntriesSettings().getRetrySettings().toBuilder()
  *             .setTotalTimeout(Duration.ofSeconds(30))
  *             .build());
  * LoggingServiceV2StubSettings loggingServiceV2Settings = loggingServiceV2SettingsBuilder.build();
@@ -106,9 +106,9 @@ public class LoggingServiceV2StubSettings extends StubSettings<LoggingServiceV2S
           .add("https://www.googleapis.com/auth/logging.write")
           .build();
 
-  private final UnaryCallSettings<DeleteLogRequest, Empty> deleteLogSettings;
-  private final UnaryCallSettings<WriteLogEntriesRequest, WriteLogEntriesResponse>
+  private final BatchingCallSettings<WriteLogEntriesRequest, WriteLogEntriesResponse>
       writeLogEntriesSettings;
+  private final UnaryCallSettings<DeleteLogRequest, Empty> deleteLogSettings;
   private final PagedCallSettings<
           ListLogEntriesRequest, ListLogEntriesResponse, ListLogEntriesPagedResponse>
       listLogEntriesSettings;
@@ -120,15 +120,15 @@ public class LoggingServiceV2StubSettings extends StubSettings<LoggingServiceV2S
   private final PagedCallSettings<ListLogsRequest, ListLogsResponse, ListLogsPagedResponse>
       listLogsSettings;
 
-  /** Returns the object with the settings used for calls to deleteLog. */
-  public UnaryCallSettings<DeleteLogRequest, Empty> deleteLogSettings() {
-    return deleteLogSettings;
-  }
-
   /** Returns the object with the settings used for calls to writeLogEntries. */
   public UnaryCallSettings<WriteLogEntriesRequest, WriteLogEntriesResponse>
       writeLogEntriesSettings() {
     return writeLogEntriesSettings;
+  }
+
+  /** Returns the object with the settings used for calls to deleteLog. */
+  public UnaryCallSettings<DeleteLogRequest, Empty> deleteLogSettings() {
+    return deleteLogSettings;
   }
 
   /** Returns the object with the settings used for calls to listLogEntries. */
@@ -222,8 +222,8 @@ public class LoggingServiceV2StubSettings extends StubSettings<LoggingServiceV2S
   protected LoggingServiceV2StubSettings(Builder settingsBuilder) throws IOException {
     super(settingsBuilder);
 
-    deleteLogSettings = settingsBuilder.deleteLogSettings().build();
     writeLogEntriesSettings = settingsBuilder.writeLogEntriesSettings().build();
+    deleteLogSettings = settingsBuilder.deleteLogSettings().build();
     listLogEntriesSettings = settingsBuilder.listLogEntriesSettings().build();
     listMonitoredResourceDescriptorsSettings =
         settingsBuilder.listMonitoredResourceDescriptorsSettings().build();
@@ -422,9 +422,9 @@ public class LoggingServiceV2StubSettings extends StubSettings<LoggingServiceV2S
   public static class Builder extends StubSettings.Builder<LoggingServiceV2StubSettings, Builder> {
     private final ImmutableList<UnaryCallSettings.Builder<?, ?>> unaryMethodSettingsBuilders;
 
-    private final UnaryCallSettings.Builder<DeleteLogRequest, Empty> deleteLogSettings;
-    private final UnaryCallSettings.Builder<WriteLogEntriesRequest, WriteLogEntriesResponse>
+    private final BatchingCallSettings.Builder<WriteLogEntriesRequest, WriteLogEntriesResponse>
         writeLogEntriesSettings;
+    private final UnaryCallSettings.Builder<DeleteLogRequest, Empty> deleteLogSettings;
     private final PagedCallSettings.Builder<
             ListLogEntriesRequest, ListLogEntriesResponse, ListLogEntriesPagedResponse>
         listLogEntriesSettings;
@@ -478,9 +478,11 @@ public class LoggingServiceV2StubSettings extends StubSettings<LoggingServiceV2S
     protected Builder(ClientContext clientContext) {
       super(clientContext);
 
-      deleteLogSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
+      writeLogEntriesSettings =
+          BatchingCallSettings.newBuilder(WRITE_LOG_ENTRIES_BATCHING_DESC)
+              .setBatchingSettings(BatchingSettings.newBuilder().build());
 
-      writeLogEntriesSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
+      deleteLogSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
 
       listLogEntriesSettings = PagedCallSettings.newBuilder(LIST_LOG_ENTRIES_PAGE_STR_FACT);
 
@@ -491,8 +493,8 @@ public class LoggingServiceV2StubSettings extends StubSettings<LoggingServiceV2S
 
       unaryMethodSettingsBuilders =
           ImmutableList.<UnaryCallSettings.Builder<?, ?>>of(
-              deleteLogSettings,
               writeLogEntriesSettings,
+              deleteLogSettings,
               listLogEntriesSettings,
               listMonitoredResourceDescriptorsSettings,
               listLogsSettings);
@@ -512,12 +514,26 @@ public class LoggingServiceV2StubSettings extends StubSettings<LoggingServiceV2S
     private static Builder initDefaults(Builder builder) {
 
       builder
-          .deleteLogSettings()
+          .writeLogEntriesSettings()
+          .setBatchingSettings(
+              BatchingSettings.newBuilder()
+                  .setElementCountThreshold(1000L)
+                  .setRequestByteThreshold(1048576L)
+                  .setDelayThreshold(Duration.ofMillis(50))
+                  .setFlowControlSettings(
+                      FlowControlSettings.newBuilder()
+                          .setMaxOutstandingElementCount(100000L)
+                          .setMaxOutstandingRequestBytes(10485760L)
+                          .setLimitExceededBehavior(LimitExceededBehavior.ThrowException)
+                          .build())
+                  .build());
+      builder
+          .writeLogEntriesSettings()
           .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("non_idempotent"))
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
 
       builder
-          .writeLogEntriesSettings()
+          .deleteLogSettings()
           .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("non_idempotent"))
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
 
@@ -542,8 +558,8 @@ public class LoggingServiceV2StubSettings extends StubSettings<LoggingServiceV2S
     protected Builder(LoggingServiceV2StubSettings settings) {
       super(settings);
 
-      deleteLogSettings = settings.deleteLogSettings.toBuilder();
       writeLogEntriesSettings = settings.writeLogEntriesSettings.toBuilder();
+      deleteLogSettings = settings.deleteLogSettings.toBuilder();
       listLogEntriesSettings = settings.listLogEntriesSettings.toBuilder();
       listMonitoredResourceDescriptorsSettings =
           settings.listMonitoredResourceDescriptorsSettings.toBuilder();
@@ -551,8 +567,8 @@ public class LoggingServiceV2StubSettings extends StubSettings<LoggingServiceV2S
 
       unaryMethodSettingsBuilders =
           ImmutableList.<UnaryCallSettings.Builder<?, ?>>of(
-              deleteLogSettings,
               writeLogEntriesSettings,
+              deleteLogSettings,
               listLogEntriesSettings,
               listMonitoredResourceDescriptorsSettings,
               listLogsSettings);
@@ -574,15 +590,15 @@ public class LoggingServiceV2StubSettings extends StubSettings<LoggingServiceV2S
       return unaryMethodSettingsBuilders;
     }
 
-    /** Returns the builder for the settings used for calls to deleteLog. */
-    public UnaryCallSettings.Builder<DeleteLogRequest, Empty> deleteLogSettings() {
-      return deleteLogSettings;
-    }
-
     /** Returns the builder for the settings used for calls to writeLogEntries. */
     public UnaryCallSettings.Builder<WriteLogEntriesRequest, WriteLogEntriesResponse>
         writeLogEntriesSettings() {
       return writeLogEntriesSettings;
+    }
+
+    /** Returns the builder for the settings used for calls to deleteLog. */
+    public UnaryCallSettings.Builder<DeleteLogRequest, Empty> deleteLogSettings() {
+      return deleteLogSettings;
     }
 
     /** Returns the builder for the settings used for calls to listLogEntries. */

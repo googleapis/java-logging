@@ -25,6 +25,7 @@ import com.google.api.gax.core.GoogleCredentialsProvider;
 import com.google.api.gax.core.InstantiatingExecutorProvider;
 import com.google.api.gax.grpc.InstantiatingGrpcChannelProvider;
 import com.google.api.gax.rpc.ApiClientHeaderProvider;
+import com.google.api.gax.rpc.BatchingCallSettings;
 import com.google.api.gax.rpc.ClientContext;
 import com.google.api.gax.rpc.ClientSettings;
 import com.google.api.gax.rpc.PagedCallSettings;
@@ -60,16 +61,16 @@ import javax.annotation.Generated;
  * <p>The builder of this class is recursive, so contained classes are themselves builders. When
  * build() is called, the tree of builders is called to create the complete settings object.
  *
- * <p>For example, to set the total timeout of deleteLog to 30 seconds:
+ * <p>For example, to set the total timeout of writeLogEntries to 30 seconds:
  *
  * <pre>
  * <code>
  * LoggingServiceV2Settings.Builder loggingServiceV2SettingsBuilder =
  *     LoggingServiceV2Settings.newBuilder();
  * loggingServiceV2SettingsBuilder
- *     .deleteLogSettings()
+ *     .writeLogEntriesSettings()
  *     .setRetrySettings(
- *         loggingServiceV2SettingsBuilder.deleteLogSettings().getRetrySettings().toBuilder()
+ *         loggingServiceV2SettingsBuilder.writeLogEntriesSettings().getRetrySettings().toBuilder()
  *             .setTotalTimeout(Duration.ofSeconds(30))
  *             .build());
  * LoggingServiceV2Settings loggingServiceV2Settings = loggingServiceV2SettingsBuilder.build();
@@ -79,15 +80,15 @@ import javax.annotation.Generated;
 @Generated("by gapic-generator")
 @BetaApi
 public class LoggingServiceV2Settings extends ClientSettings<LoggingServiceV2Settings> {
+  /** Returns the object with the settings used for calls to writeLogEntries. */
+  public BatchingCallSettings<WriteLogEntriesRequest, WriteLogEntriesResponse>
+      writeLogEntriesSettings() {
+    return ((LoggingServiceV2StubSettings) getStubSettings()).writeLogEntriesSettings();
+  }
+
   /** Returns the object with the settings used for calls to deleteLog. */
   public UnaryCallSettings<DeleteLogRequest, Empty> deleteLogSettings() {
     return ((LoggingServiceV2StubSettings) getStubSettings()).deleteLogSettings();
-  }
-
-  /** Returns the object with the settings used for calls to writeLogEntries. */
-  public UnaryCallSettings<WriteLogEntriesRequest, WriteLogEntriesResponse>
-      writeLogEntriesSettings() {
-    return ((LoggingServiceV2StubSettings) getStubSettings()).writeLogEntriesSettings();
   }
 
   /** Returns the object with the settings used for calls to listLogEntries. */
@@ -210,15 +211,15 @@ public class LoggingServiceV2Settings extends ClientSettings<LoggingServiceV2Set
       return this;
     }
 
+    /** Returns the builder for the settings used for calls to writeLogEntries. */
+    public BatchingCallSettings.Builder<WriteLogEntriesRequest, WriteLogEntriesResponse>
+        writeLogEntriesSettings() {
+      return getStubSettingsBuilder().writeLogEntriesSettings();
+    }
+
     /** Returns the builder for the settings used for calls to deleteLog. */
     public UnaryCallSettings.Builder<DeleteLogRequest, Empty> deleteLogSettings() {
       return getStubSettingsBuilder().deleteLogSettings();
-    }
-
-    /** Returns the builder for the settings used for calls to writeLogEntries. */
-    public UnaryCallSettings.Builder<WriteLogEntriesRequest, WriteLogEntriesResponse>
-        writeLogEntriesSettings() {
-      return getStubSettingsBuilder().writeLogEntriesSettings();
     }
 
     /** Returns the builder for the settings used for calls to listLogEntries. */
