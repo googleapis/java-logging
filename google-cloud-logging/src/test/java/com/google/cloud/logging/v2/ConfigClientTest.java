@@ -15,6 +15,7 @@
  */
 package com.google.cloud.logging.v2;
 
+import static com.google.cloud.logging.v2.ConfigClient.ListBucketsPagedResponse;
 import static com.google.cloud.logging.v2.ConfigClient.ListExclusionsPagedResponse;
 import static com.google.cloud.logging.v2.ConfigClient.ListSinksPagedResponse;
 
@@ -27,30 +28,32 @@ import com.google.api.gax.rpc.ApiClientHeaderProvider;
 import com.google.api.gax.rpc.InvalidArgumentException;
 import com.google.api.resourcenames.ResourceName;
 import com.google.common.collect.Lists;
-import com.google.logging.v2.BillingName;
+import com.google.logging.v2.BillingAccountName;
 import com.google.logging.v2.CmekSettings;
+import com.google.logging.v2.CmekSettingsName;
 import com.google.logging.v2.CreateExclusionRequest;
 import com.google.logging.v2.CreateSinkRequest;
 import com.google.logging.v2.DeleteExclusionRequest;
 import com.google.logging.v2.DeleteSinkRequest;
-import com.google.logging.v2.ExclusionName;
-import com.google.logging.v2.ExclusionNames;
+import com.google.logging.v2.GetBucketRequest;
 import com.google.logging.v2.GetCmekSettingsRequest;
 import com.google.logging.v2.GetExclusionRequest;
 import com.google.logging.v2.GetSinkRequest;
+import com.google.logging.v2.ListBucketsRequest;
+import com.google.logging.v2.ListBucketsResponse;
 import com.google.logging.v2.ListExclusionsRequest;
 import com.google.logging.v2.ListExclusionsResponse;
 import com.google.logging.v2.ListSinksRequest;
 import com.google.logging.v2.ListSinksResponse;
+import com.google.logging.v2.LocationName;
+import com.google.logging.v2.LogBucket;
+import com.google.logging.v2.LogBucketName;
 import com.google.logging.v2.LogExclusion;
+import com.google.logging.v2.LogExclusionName;
 import com.google.logging.v2.LogSink;
-import com.google.logging.v2.ParentName;
-import com.google.logging.v2.ParentNames;
-import com.google.logging.v2.ProjectExclusionName;
+import com.google.logging.v2.LogSinkName;
 import com.google.logging.v2.ProjectName;
-import com.google.logging.v2.ProjectSinkName;
-import com.google.logging.v2.SinkName;
-import com.google.logging.v2.SinkNames;
+import com.google.logging.v2.UpdateBucketRequest;
 import com.google.logging.v2.UpdateCmekSettingsRequest;
 import com.google.logging.v2.UpdateExclusionRequest;
 import com.google.logging.v2.UpdateSinkRequest;
@@ -116,6 +119,172 @@ public class ConfigClientTest {
 
   @Test
   @SuppressWarnings("all")
+  public void listBucketsTest() {
+    String nextPageToken = "";
+    LogBucket bucketsElement = LogBucket.newBuilder().build();
+    List<LogBucket> buckets = Arrays.asList(bucketsElement);
+    ListBucketsResponse expectedResponse =
+        ListBucketsResponse.newBuilder()
+            .setNextPageToken(nextPageToken)
+            .addAllBuckets(buckets)
+            .build();
+    mockConfigServiceV2.addResponse(expectedResponse);
+
+    LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
+
+    ListBucketsPagedResponse pagedListResponse = client.listBuckets(parent);
+
+    List<LogBucket> resources = Lists.newArrayList(pagedListResponse.iterateAll());
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getBucketsList().get(0), resources.get(0));
+
+    List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
+    Assert.assertEquals(1, actualRequests.size());
+    ListBucketsRequest actualRequest = (ListBucketsRequest) actualRequests.get(0);
+
+    Assert.assertEquals(parent, LocationName.parse(actualRequest.getParent()));
+    Assert.assertTrue(
+        channelProvider.isHeaderSent(
+            ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
+            GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
+  }
+
+  @Test
+  @SuppressWarnings("all")
+  public void listBucketsExceptionTest() throws Exception {
+    StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
+    mockConfigServiceV2.addException(exception);
+
+    try {
+      LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
+
+      client.listBuckets(parent);
+      Assert.fail("No exception raised");
+    } catch (InvalidArgumentException e) {
+      // Expected exception
+    }
+  }
+
+  @Test
+  @SuppressWarnings("all")
+  public void getBucketTest() {
+    LogBucketName name2 =
+        LogBucketName.ofProjectLocationBucketName("[PROJECT]", "[LOCATION]", "[BUCKET]");
+    String description = "description-1724546052";
+    int retentionDays = 1544391896;
+    LogBucket expectedResponse =
+        LogBucket.newBuilder()
+            .setName(name2.toString())
+            .setDescription(description)
+            .setRetentionDays(retentionDays)
+            .build();
+    mockConfigServiceV2.addResponse(expectedResponse);
+
+    LogBucketName name =
+        LogBucketName.ofProjectLocationBucketName("[PROJECT]", "[LOCATION]", "[BUCKET]");
+    GetBucketRequest request = GetBucketRequest.newBuilder().setName(name.toString()).build();
+
+    LogBucket actualResponse = client.getBucket(request);
+    Assert.assertEquals(expectedResponse, actualResponse);
+
+    List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
+    Assert.assertEquals(1, actualRequests.size());
+    GetBucketRequest actualRequest = (GetBucketRequest) actualRequests.get(0);
+
+    Assert.assertEquals(name, LogBucketName.parse(actualRequest.getName()));
+    Assert.assertTrue(
+        channelProvider.isHeaderSent(
+            ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
+            GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
+  }
+
+  @Test
+  @SuppressWarnings("all")
+  public void getBucketExceptionTest() throws Exception {
+    StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
+    mockConfigServiceV2.addException(exception);
+
+    try {
+      LogBucketName name =
+          LogBucketName.ofProjectLocationBucketName("[PROJECT]", "[LOCATION]", "[BUCKET]");
+      GetBucketRequest request = GetBucketRequest.newBuilder().setName(name.toString()).build();
+
+      client.getBucket(request);
+      Assert.fail("No exception raised");
+    } catch (InvalidArgumentException e) {
+      // Expected exception
+    }
+  }
+
+  @Test
+  @SuppressWarnings("all")
+  public void updateBucketTest() {
+    LogBucketName name2 =
+        LogBucketName.ofProjectLocationBucketName("[PROJECT]", "[LOCATION]", "[BUCKET]");
+    String description = "description-1724546052";
+    int retentionDays = 1544391896;
+    LogBucket expectedResponse =
+        LogBucket.newBuilder()
+            .setName(name2.toString())
+            .setDescription(description)
+            .setRetentionDays(retentionDays)
+            .build();
+    mockConfigServiceV2.addResponse(expectedResponse);
+
+    LogBucketName name =
+        LogBucketName.ofProjectLocationBucketName("[PROJECT]", "[LOCATION]", "[BUCKET]");
+    LogBucket bucket = LogBucket.newBuilder().build();
+    FieldMask updateMask = FieldMask.newBuilder().build();
+    UpdateBucketRequest request =
+        UpdateBucketRequest.newBuilder()
+            .setName(name.toString())
+            .setBucket(bucket)
+            .setUpdateMask(updateMask)
+            .build();
+
+    LogBucket actualResponse = client.updateBucket(request);
+    Assert.assertEquals(expectedResponse, actualResponse);
+
+    List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
+    Assert.assertEquals(1, actualRequests.size());
+    UpdateBucketRequest actualRequest = (UpdateBucketRequest) actualRequests.get(0);
+
+    Assert.assertEquals(name, LogBucketName.parse(actualRequest.getName()));
+    Assert.assertEquals(bucket, actualRequest.getBucket());
+    Assert.assertEquals(updateMask, actualRequest.getUpdateMask());
+    Assert.assertTrue(
+        channelProvider.isHeaderSent(
+            ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
+            GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
+  }
+
+  @Test
+  @SuppressWarnings("all")
+  public void updateBucketExceptionTest() throws Exception {
+    StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
+    mockConfigServiceV2.addException(exception);
+
+    try {
+      LogBucketName name =
+          LogBucketName.ofProjectLocationBucketName("[PROJECT]", "[LOCATION]", "[BUCKET]");
+      LogBucket bucket = LogBucket.newBuilder().build();
+      FieldMask updateMask = FieldMask.newBuilder().build();
+      UpdateBucketRequest request =
+          UpdateBucketRequest.newBuilder()
+              .setName(name.toString())
+              .setBucket(bucket)
+              .setUpdateMask(updateMask)
+              .build();
+
+      client.updateBucket(request);
+      Assert.fail("No exception raised");
+    } catch (InvalidArgumentException e) {
+      // Expected exception
+    }
+  }
+
+  @Test
+  @SuppressWarnings("all")
   public void listSinksTest() {
     String nextPageToken = "";
     LogSink sinksElement = LogSink.newBuilder().build();
@@ -124,7 +293,7 @@ public class ConfigClientTest {
         ListSinksResponse.newBuilder().setNextPageToken(nextPageToken).addAllSinks(sinks).build();
     mockConfigServiceV2.addResponse(expectedResponse);
 
-    ParentName parent = ProjectName.of("[PROJECT]");
+    ProjectName parent = ProjectName.of("[PROJECT]");
 
     ListSinksPagedResponse pagedListResponse = client.listSinks(parent);
 
@@ -136,7 +305,7 @@ public class ConfigClientTest {
     Assert.assertEquals(1, actualRequests.size());
     ListSinksRequest actualRequest = (ListSinksRequest) actualRequests.get(0);
 
-    Assert.assertEquals(parent, ParentNames.parse(actualRequest.getParent()));
+    Assert.assertEquals(parent, ProjectName.parse(actualRequest.getParent()));
     Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
@@ -150,7 +319,7 @@ public class ConfigClientTest {
     mockConfigServiceV2.addException(exception);
 
     try {
-      ParentName parent = ProjectName.of("[PROJECT]");
+      ProjectName parent = ProjectName.of("[PROJECT]");
 
       client.listSinks(parent);
       Assert.fail("No exception raised");
@@ -162,8 +331,8 @@ public class ConfigClientTest {
   @Test
   @SuppressWarnings("all")
   public void getSinkTest() {
-    String name = "name3373707";
-    ResourceName destination = BillingName.of("[BILLING_ACCOUNT]");
+    LogSinkName name = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+    ResourceName destination = BillingAccountName.of("[BILLING_ACCOUNT]");
     String filter = "filter-1274492040";
     String description = "description-1724546052";
     boolean disabled = true;
@@ -171,7 +340,7 @@ public class ConfigClientTest {
     boolean includeChildren = true;
     LogSink expectedResponse =
         LogSink.newBuilder()
-            .setName(name)
+            .setName(name.toString())
             .setDestination(destination.toString())
             .setFilter(filter)
             .setDescription(description)
@@ -181,7 +350,7 @@ public class ConfigClientTest {
             .build();
     mockConfigServiceV2.addResponse(expectedResponse);
 
-    SinkName sinkName = ProjectSinkName.of("[PROJECT]", "[SINK]");
+    LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
 
     LogSink actualResponse = client.getSink(sinkName);
     Assert.assertEquals(expectedResponse, actualResponse);
@@ -190,7 +359,7 @@ public class ConfigClientTest {
     Assert.assertEquals(1, actualRequests.size());
     GetSinkRequest actualRequest = (GetSinkRequest) actualRequests.get(0);
 
-    Assert.assertEquals(sinkName, SinkNames.parse(actualRequest.getSinkName()));
+    Assert.assertEquals(sinkName, LogSinkName.parse(actualRequest.getSinkName()));
     Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
@@ -204,7 +373,7 @@ public class ConfigClientTest {
     mockConfigServiceV2.addException(exception);
 
     try {
-      SinkName sinkName = ProjectSinkName.of("[PROJECT]", "[SINK]");
+      LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
 
       client.getSink(sinkName);
       Assert.fail("No exception raised");
@@ -216,8 +385,8 @@ public class ConfigClientTest {
   @Test
   @SuppressWarnings("all")
   public void createSinkTest() {
-    String name = "name3373707";
-    ResourceName destination = BillingName.of("[BILLING_ACCOUNT]");
+    LogSinkName name = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+    ResourceName destination = BillingAccountName.of("[BILLING_ACCOUNT]");
     String filter = "filter-1274492040";
     String description = "description-1724546052";
     boolean disabled = true;
@@ -225,7 +394,7 @@ public class ConfigClientTest {
     boolean includeChildren = true;
     LogSink expectedResponse =
         LogSink.newBuilder()
-            .setName(name)
+            .setName(name.toString())
             .setDestination(destination.toString())
             .setFilter(filter)
             .setDescription(description)
@@ -235,7 +404,7 @@ public class ConfigClientTest {
             .build();
     mockConfigServiceV2.addResponse(expectedResponse);
 
-    ParentName parent = ProjectName.of("[PROJECT]");
+    ProjectName parent = ProjectName.of("[PROJECT]");
     LogSink sink = LogSink.newBuilder().build();
 
     LogSink actualResponse = client.createSink(parent, sink);
@@ -245,7 +414,7 @@ public class ConfigClientTest {
     Assert.assertEquals(1, actualRequests.size());
     CreateSinkRequest actualRequest = (CreateSinkRequest) actualRequests.get(0);
 
-    Assert.assertEquals(parent, ParentNames.parse(actualRequest.getParent()));
+    Assert.assertEquals(parent, ProjectName.parse(actualRequest.getParent()));
     Assert.assertEquals(sink, actualRequest.getSink());
     Assert.assertTrue(
         channelProvider.isHeaderSent(
@@ -260,7 +429,7 @@ public class ConfigClientTest {
     mockConfigServiceV2.addException(exception);
 
     try {
-      ParentName parent = ProjectName.of("[PROJECT]");
+      ProjectName parent = ProjectName.of("[PROJECT]");
       LogSink sink = LogSink.newBuilder().build();
 
       client.createSink(parent, sink);
@@ -273,8 +442,8 @@ public class ConfigClientTest {
   @Test
   @SuppressWarnings("all")
   public void updateSinkTest() {
-    String name = "name3373707";
-    ResourceName destination = BillingName.of("[BILLING_ACCOUNT]");
+    LogSinkName name = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+    ResourceName destination = BillingAccountName.of("[BILLING_ACCOUNT]");
     String filter = "filter-1274492040";
     String description = "description-1724546052";
     boolean disabled = true;
@@ -282,7 +451,7 @@ public class ConfigClientTest {
     boolean includeChildren = true;
     LogSink expectedResponse =
         LogSink.newBuilder()
-            .setName(name)
+            .setName(name.toString())
             .setDestination(destination.toString())
             .setFilter(filter)
             .setDescription(description)
@@ -292,7 +461,7 @@ public class ConfigClientTest {
             .build();
     mockConfigServiceV2.addResponse(expectedResponse);
 
-    SinkName sinkName = ProjectSinkName.of("[PROJECT]", "[SINK]");
+    LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
     LogSink sink = LogSink.newBuilder().build();
     FieldMask updateMask = FieldMask.newBuilder().build();
 
@@ -303,7 +472,7 @@ public class ConfigClientTest {
     Assert.assertEquals(1, actualRequests.size());
     UpdateSinkRequest actualRequest = (UpdateSinkRequest) actualRequests.get(0);
 
-    Assert.assertEquals(sinkName, SinkNames.parse(actualRequest.getSinkName()));
+    Assert.assertEquals(sinkName, LogSinkName.parse(actualRequest.getSinkName()));
     Assert.assertEquals(sink, actualRequest.getSink());
     Assert.assertEquals(updateMask, actualRequest.getUpdateMask());
     Assert.assertTrue(
@@ -319,7 +488,7 @@ public class ConfigClientTest {
     mockConfigServiceV2.addException(exception);
 
     try {
-      SinkName sinkName = ProjectSinkName.of("[PROJECT]", "[SINK]");
+      LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
       LogSink sink = LogSink.newBuilder().build();
       FieldMask updateMask = FieldMask.newBuilder().build();
 
@@ -333,8 +502,8 @@ public class ConfigClientTest {
   @Test
   @SuppressWarnings("all")
   public void updateSinkTest2() {
-    String name = "name3373707";
-    ResourceName destination = BillingName.of("[BILLING_ACCOUNT]");
+    LogSinkName name = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+    ResourceName destination = BillingAccountName.of("[BILLING_ACCOUNT]");
     String filter = "filter-1274492040";
     String description = "description-1724546052";
     boolean disabled = true;
@@ -342,7 +511,7 @@ public class ConfigClientTest {
     boolean includeChildren = true;
     LogSink expectedResponse =
         LogSink.newBuilder()
-            .setName(name)
+            .setName(name.toString())
             .setDestination(destination.toString())
             .setFilter(filter)
             .setDescription(description)
@@ -352,7 +521,7 @@ public class ConfigClientTest {
             .build();
     mockConfigServiceV2.addResponse(expectedResponse);
 
-    SinkName sinkName = ProjectSinkName.of("[PROJECT]", "[SINK]");
+    LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
     LogSink sink = LogSink.newBuilder().build();
 
     LogSink actualResponse = client.updateSink(sinkName, sink);
@@ -362,7 +531,7 @@ public class ConfigClientTest {
     Assert.assertEquals(1, actualRequests.size());
     UpdateSinkRequest actualRequest = (UpdateSinkRequest) actualRequests.get(0);
 
-    Assert.assertEquals(sinkName, SinkNames.parse(actualRequest.getSinkName()));
+    Assert.assertEquals(sinkName, LogSinkName.parse(actualRequest.getSinkName()));
     Assert.assertEquals(sink, actualRequest.getSink());
     Assert.assertTrue(
         channelProvider.isHeaderSent(
@@ -377,7 +546,7 @@ public class ConfigClientTest {
     mockConfigServiceV2.addException(exception);
 
     try {
-      SinkName sinkName = ProjectSinkName.of("[PROJECT]", "[SINK]");
+      LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
       LogSink sink = LogSink.newBuilder().build();
 
       client.updateSink(sinkName, sink);
@@ -393,7 +562,7 @@ public class ConfigClientTest {
     Empty expectedResponse = Empty.newBuilder().build();
     mockConfigServiceV2.addResponse(expectedResponse);
 
-    SinkName sinkName = ProjectSinkName.of("[PROJECT]", "[SINK]");
+    LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
 
     client.deleteSink(sinkName);
 
@@ -401,7 +570,7 @@ public class ConfigClientTest {
     Assert.assertEquals(1, actualRequests.size());
     DeleteSinkRequest actualRequest = (DeleteSinkRequest) actualRequests.get(0);
 
-    Assert.assertEquals(sinkName, SinkNames.parse(actualRequest.getSinkName()));
+    Assert.assertEquals(sinkName, LogSinkName.parse(actualRequest.getSinkName()));
     Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
@@ -415,7 +584,7 @@ public class ConfigClientTest {
     mockConfigServiceV2.addException(exception);
 
     try {
-      SinkName sinkName = ProjectSinkName.of("[PROJECT]", "[SINK]");
+      LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
 
       client.deleteSink(sinkName);
       Assert.fail("No exception raised");
@@ -437,7 +606,7 @@ public class ConfigClientTest {
             .build();
     mockConfigServiceV2.addResponse(expectedResponse);
 
-    ParentName parent = ProjectName.of("[PROJECT]");
+    ProjectName parent = ProjectName.of("[PROJECT]");
 
     ListExclusionsPagedResponse pagedListResponse = client.listExclusions(parent);
 
@@ -449,7 +618,7 @@ public class ConfigClientTest {
     Assert.assertEquals(1, actualRequests.size());
     ListExclusionsRequest actualRequest = (ListExclusionsRequest) actualRequests.get(0);
 
-    Assert.assertEquals(parent, ParentNames.parse(actualRequest.getParent()));
+    Assert.assertEquals(parent, ProjectName.parse(actualRequest.getParent()));
     Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
@@ -463,7 +632,7 @@ public class ConfigClientTest {
     mockConfigServiceV2.addException(exception);
 
     try {
-      ParentName parent = ProjectName.of("[PROJECT]");
+      ProjectName parent = ProjectName.of("[PROJECT]");
 
       client.listExclusions(parent);
       Assert.fail("No exception raised");
@@ -475,20 +644,20 @@ public class ConfigClientTest {
   @Test
   @SuppressWarnings("all")
   public void getExclusionTest() {
-    String name2 = "name2-1052831874";
+    LogExclusionName name2 = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
     String description = "description-1724546052";
     String filter = "filter-1274492040";
     boolean disabled = true;
     LogExclusion expectedResponse =
         LogExclusion.newBuilder()
-            .setName(name2)
+            .setName(name2.toString())
             .setDescription(description)
             .setFilter(filter)
             .setDisabled(disabled)
             .build();
     mockConfigServiceV2.addResponse(expectedResponse);
 
-    ExclusionName name = ProjectExclusionName.of("[PROJECT]", "[EXCLUSION]");
+    LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
 
     LogExclusion actualResponse = client.getExclusion(name);
     Assert.assertEquals(expectedResponse, actualResponse);
@@ -497,7 +666,7 @@ public class ConfigClientTest {
     Assert.assertEquals(1, actualRequests.size());
     GetExclusionRequest actualRequest = (GetExclusionRequest) actualRequests.get(0);
 
-    Assert.assertEquals(name, ExclusionNames.parse(actualRequest.getName()));
+    Assert.assertEquals(name, LogExclusionName.parse(actualRequest.getName()));
     Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
@@ -511,7 +680,7 @@ public class ConfigClientTest {
     mockConfigServiceV2.addException(exception);
 
     try {
-      ExclusionName name = ProjectExclusionName.of("[PROJECT]", "[EXCLUSION]");
+      LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
 
       client.getExclusion(name);
       Assert.fail("No exception raised");
@@ -523,20 +692,20 @@ public class ConfigClientTest {
   @Test
   @SuppressWarnings("all")
   public void createExclusionTest() {
-    String name = "name3373707";
+    LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
     String description = "description-1724546052";
     String filter = "filter-1274492040";
     boolean disabled = true;
     LogExclusion expectedResponse =
         LogExclusion.newBuilder()
-            .setName(name)
+            .setName(name.toString())
             .setDescription(description)
             .setFilter(filter)
             .setDisabled(disabled)
             .build();
     mockConfigServiceV2.addResponse(expectedResponse);
 
-    ParentName parent = ProjectName.of("[PROJECT]");
+    ProjectName parent = ProjectName.of("[PROJECT]");
     LogExclusion exclusion = LogExclusion.newBuilder().build();
 
     LogExclusion actualResponse = client.createExclusion(parent, exclusion);
@@ -546,7 +715,7 @@ public class ConfigClientTest {
     Assert.assertEquals(1, actualRequests.size());
     CreateExclusionRequest actualRequest = (CreateExclusionRequest) actualRequests.get(0);
 
-    Assert.assertEquals(parent, ParentNames.parse(actualRequest.getParent()));
+    Assert.assertEquals(parent, ProjectName.parse(actualRequest.getParent()));
     Assert.assertEquals(exclusion, actualRequest.getExclusion());
     Assert.assertTrue(
         channelProvider.isHeaderSent(
@@ -561,7 +730,7 @@ public class ConfigClientTest {
     mockConfigServiceV2.addException(exception);
 
     try {
-      ParentName parent = ProjectName.of("[PROJECT]");
+      ProjectName parent = ProjectName.of("[PROJECT]");
       LogExclusion exclusion = LogExclusion.newBuilder().build();
 
       client.createExclusion(parent, exclusion);
@@ -574,20 +743,20 @@ public class ConfigClientTest {
   @Test
   @SuppressWarnings("all")
   public void updateExclusionTest() {
-    String name2 = "name2-1052831874";
+    LogExclusionName name2 = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
     String description = "description-1724546052";
     String filter = "filter-1274492040";
     boolean disabled = true;
     LogExclusion expectedResponse =
         LogExclusion.newBuilder()
-            .setName(name2)
+            .setName(name2.toString())
             .setDescription(description)
             .setFilter(filter)
             .setDisabled(disabled)
             .build();
     mockConfigServiceV2.addResponse(expectedResponse);
 
-    ExclusionName name = ProjectExclusionName.of("[PROJECT]", "[EXCLUSION]");
+    LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
     LogExclusion exclusion = LogExclusion.newBuilder().build();
     FieldMask updateMask = FieldMask.newBuilder().build();
 
@@ -598,7 +767,7 @@ public class ConfigClientTest {
     Assert.assertEquals(1, actualRequests.size());
     UpdateExclusionRequest actualRequest = (UpdateExclusionRequest) actualRequests.get(0);
 
-    Assert.assertEquals(name, ExclusionNames.parse(actualRequest.getName()));
+    Assert.assertEquals(name, LogExclusionName.parse(actualRequest.getName()));
     Assert.assertEquals(exclusion, actualRequest.getExclusion());
     Assert.assertEquals(updateMask, actualRequest.getUpdateMask());
     Assert.assertTrue(
@@ -614,7 +783,7 @@ public class ConfigClientTest {
     mockConfigServiceV2.addException(exception);
 
     try {
-      ExclusionName name = ProjectExclusionName.of("[PROJECT]", "[EXCLUSION]");
+      LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
       LogExclusion exclusion = LogExclusion.newBuilder().build();
       FieldMask updateMask = FieldMask.newBuilder().build();
 
@@ -631,7 +800,7 @@ public class ConfigClientTest {
     Empty expectedResponse = Empty.newBuilder().build();
     mockConfigServiceV2.addResponse(expectedResponse);
 
-    ExclusionName name = ProjectExclusionName.of("[PROJECT]", "[EXCLUSION]");
+    LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
 
     client.deleteExclusion(name);
 
@@ -639,7 +808,7 @@ public class ConfigClientTest {
     Assert.assertEquals(1, actualRequests.size());
     DeleteExclusionRequest actualRequest = (DeleteExclusionRequest) actualRequests.get(0);
 
-    Assert.assertEquals(name, ExclusionNames.parse(actualRequest.getName()));
+    Assert.assertEquals(name, LogExclusionName.parse(actualRequest.getName()));
     Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
@@ -653,7 +822,7 @@ public class ConfigClientTest {
     mockConfigServiceV2.addException(exception);
 
     try {
-      ExclusionName name = ProjectExclusionName.of("[PROJECT]", "[EXCLUSION]");
+      LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
 
       client.deleteExclusion(name);
       Assert.fail("No exception raised");
@@ -665,18 +834,20 @@ public class ConfigClientTest {
   @Test
   @SuppressWarnings("all")
   public void getCmekSettingsTest() {
-    String name = "name3373707";
+    CmekSettingsName name2 = CmekSettingsName.ofProjectCmekSettingsName("[PROJECT]");
     String kmsKeyName = "kmsKeyName2094986649";
     String serviceAccountId = "serviceAccountId-111486921";
     CmekSettings expectedResponse =
         CmekSettings.newBuilder()
-            .setName(name)
+            .setName(name2.toString())
             .setKmsKeyName(kmsKeyName)
             .setServiceAccountId(serviceAccountId)
             .build();
     mockConfigServiceV2.addResponse(expectedResponse);
 
-    GetCmekSettingsRequest request = GetCmekSettingsRequest.newBuilder().build();
+    CmekSettingsName name = CmekSettingsName.ofProjectCmekSettingsName("[PROJECT]");
+    GetCmekSettingsRequest request =
+        GetCmekSettingsRequest.newBuilder().setName(name.toString()).build();
 
     CmekSettings actualResponse = client.getCmekSettings(request);
     Assert.assertEquals(expectedResponse, actualResponse);
@@ -685,6 +856,7 @@ public class ConfigClientTest {
     Assert.assertEquals(1, actualRequests.size());
     GetCmekSettingsRequest actualRequest = (GetCmekSettingsRequest) actualRequests.get(0);
 
+    Assert.assertEquals(name, CmekSettingsName.parse(actualRequest.getName()));
     Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
@@ -698,7 +870,9 @@ public class ConfigClientTest {
     mockConfigServiceV2.addException(exception);
 
     try {
-      GetCmekSettingsRequest request = GetCmekSettingsRequest.newBuilder().build();
+      CmekSettingsName name = CmekSettingsName.ofProjectCmekSettingsName("[PROJECT]");
+      GetCmekSettingsRequest request =
+          GetCmekSettingsRequest.newBuilder().setName(name.toString()).build();
 
       client.getCmekSettings(request);
       Assert.fail("No exception raised");
@@ -710,18 +884,21 @@ public class ConfigClientTest {
   @Test
   @SuppressWarnings("all")
   public void updateCmekSettingsTest() {
-    String name = "name3373707";
+    CmekSettingsName name2 = CmekSettingsName.ofProjectCmekSettingsName("[PROJECT]");
     String kmsKeyName = "kmsKeyName2094986649";
     String serviceAccountId = "serviceAccountId-111486921";
     CmekSettings expectedResponse =
         CmekSettings.newBuilder()
-            .setName(name)
+            .setName(name2.toString())
             .setKmsKeyName(kmsKeyName)
             .setServiceAccountId(serviceAccountId)
             .build();
     mockConfigServiceV2.addResponse(expectedResponse);
 
-    UpdateCmekSettingsRequest request = UpdateCmekSettingsRequest.newBuilder().build();
+    String name = "name3373707";
+    CmekSettings cmekSettings = CmekSettings.newBuilder().build();
+    UpdateCmekSettingsRequest request =
+        UpdateCmekSettingsRequest.newBuilder().setName(name).setCmekSettings(cmekSettings).build();
 
     CmekSettings actualResponse = client.updateCmekSettings(request);
     Assert.assertEquals(expectedResponse, actualResponse);
@@ -730,6 +907,8 @@ public class ConfigClientTest {
     Assert.assertEquals(1, actualRequests.size());
     UpdateCmekSettingsRequest actualRequest = (UpdateCmekSettingsRequest) actualRequests.get(0);
 
+    Assert.assertEquals(name, actualRequest.getName());
+    Assert.assertEquals(cmekSettings, actualRequest.getCmekSettings());
     Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
@@ -743,7 +922,13 @@ public class ConfigClientTest {
     mockConfigServiceV2.addException(exception);
 
     try {
-      UpdateCmekSettingsRequest request = UpdateCmekSettingsRequest.newBuilder().build();
+      String name = "name3373707";
+      CmekSettings cmekSettings = CmekSettings.newBuilder().build();
+      UpdateCmekSettingsRequest request =
+          UpdateCmekSettingsRequest.newBuilder()
+              .setName(name)
+              .setCmekSettings(cmekSettings)
+              .build();
 
       client.updateCmekSettings(request);
       Assert.fail("No exception raised");

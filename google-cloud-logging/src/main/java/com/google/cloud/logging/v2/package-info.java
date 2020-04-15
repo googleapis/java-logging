@@ -27,9 +27,9 @@
  *
  * <pre>
  * <code>
- * try (ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.create()) {
+ * try (ConfigClient configClient = ConfigClient.create()) {
  *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
- *   LogSink response = configServiceV2Client.getSink(sinkName);
+ *   LogSink response = configClient.getSink(sinkName);
  * }
  * </code>
  * </pre>
@@ -42,12 +42,12 @@
  *
  * <pre>
  * <code>
- * try (LoggingServiceV2Client loggingServiceV2Client = LoggingServiceV2Client.create()) {
+ * try (LoggingClient loggingClient = LoggingClient.create()) {
  *   LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
  *   MonitoredResource resource = MonitoredResource.newBuilder().build();
  *   Map&lt;String, String&gt; labels = new HashMap&lt;&gt;();
  *   List&lt;LogEntry&gt; entries = new ArrayList&lt;&gt;();
- *   WriteLogEntriesResponse response = loggingServiceV2Client.writeLogEntries(logName, resource, labels, entries);
+ *   WriteLogEntriesResponse response = loggingClient.writeLogEntries(logName, resource, labels, entries);
  * }
  * </code>
  * </pre>
@@ -60,9 +60,9 @@
  *
  * <pre>
  * <code>
- * try (MetricsServiceV2Client metricsServiceV2Client = MetricsServiceV2Client.create()) {
+ * try (MetricsClient metricsClient = MetricsClient.create()) {
  *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
- *   LogMetric response = metricsServiceV2Client.getLogMetric(metricName);
+ *   LogMetric response = metricsClient.getLogMetric(metricName);
  * }
  * </code>
  * </pre>
