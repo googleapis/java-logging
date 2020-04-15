@@ -92,15 +92,15 @@ import org.threeten.bp.Duration;
  *
  * <pre>
  * <code>
- * ConfigServiceV2StubSettings.Builder configServiceV2SettingsBuilder =
+ * ConfigServiceV2StubSettings.Builder configSettingsBuilder =
  *     ConfigServiceV2StubSettings.newBuilder();
- * configServiceV2SettingsBuilder
+ * configSettingsBuilder
  *     .getSinkSettings()
  *     .setRetrySettings(
- *         configServiceV2SettingsBuilder.getSinkSettings().getRetrySettings().toBuilder()
+ *         configSettingsBuilder.getSinkSettings().getRetrySettings().toBuilder()
  *             .setTotalTimeout(Duration.ofSeconds(30))
  *             .build());
- * ConfigServiceV2StubSettings configServiceV2Settings = configServiceV2SettingsBuilder.build();
+ * ConfigServiceV2StubSettings configSettings = configSettingsBuilder.build();
  * </code>
  * </pre>
  */

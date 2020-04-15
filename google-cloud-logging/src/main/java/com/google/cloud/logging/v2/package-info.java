@@ -19,11 +19,11 @@
  *
  * <p>The interfaces provided are listed below, along with usage samples.
  *
- * <p>===================== ConfigServiceV2Client =====================
+ * <p>============ ConfigClient ============
  *
  * <p>Service Description: Service for configuring sinks used to route log entries.
  *
- * <p>Sample for ConfigServiceV2Client:
+ * <p>Sample for ConfigClient:
  *
  * <pre>
  * <code>
@@ -34,11 +34,11 @@
  * </code>
  * </pre>
  *
- * ====================== LoggingServiceV2Client ======================
+ * ============= LoggingClient =============
  *
  * <p>Service Description: Service for ingesting and querying logs.
  *
- * <p>Sample for LoggingServiceV2Client:
+ * <p>Sample for LoggingClient:
  *
  * <pre>
  * <code>
@@ -52,11 +52,11 @@
  * </code>
  * </pre>
  *
- * ====================== MetricsServiceV2Client ======================
+ * ============= MetricsClient =============
  *
  * <p>Service Description: Service for configuring logs-based metrics.
  *
- * <p>Sample for MetricsServiceV2Client:
+ * <p>Sample for MetricsClient:
  *
  * <pre>
  * <code>
