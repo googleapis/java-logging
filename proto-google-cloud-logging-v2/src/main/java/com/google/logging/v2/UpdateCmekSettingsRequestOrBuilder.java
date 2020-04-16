@@ -70,7 +70,7 @@ public interface UpdateCmekSettingsRequestOrBuilder
    * <pre>
    * Required. The CMEK settings to update.
    * See [Enabling CMEK for Logs
-   * Router](/logging/docs/routing/managed-encryption) for more information.
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
    * </pre>
    *
    * <code>
@@ -86,7 +86,7 @@ public interface UpdateCmekSettingsRequestOrBuilder
    * <pre>
    * Required. The CMEK settings to update.
    * See [Enabling CMEK for Logs
-   * Router](/logging/docs/routing/managed-encryption) for more information.
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
    * </pre>
    *
    * <code>
@@ -102,7 +102,7 @@ public interface UpdateCmekSettingsRequestOrBuilder
    * <pre>
    * Required. The CMEK settings to update.
    * See [Enabling CMEK for Logs
-   * Router](/logging/docs/routing/managed-encryption) for more information.
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
    * </pre>
    *
    * <code>

@@ -27,7 +27,7 @@ package com.google.logging.v2;
  * Note: CMEK for the Logs Router can currently only be configured for GCP
  * organizations. Once configured, it applies to all projects and folders in the
  * GCP organization.
- * See [Enabling CMEK for Logs Router](/logging/docs/routing/managed-encryption)
+ * See [Enabling CMEK for Logs Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
  * for more information.
  * </pre>
  *
@@ -201,7 +201,7 @@ public final class CmekSettings extends com.google.protobuf.GeneratedMessageV3
    * time of encryption unless access to that key has been revoked.
    * To disable CMEK for the Logs Router, set this field to an empty string.
    * See [Enabling CMEK for Logs
-   * Router](/logging/docs/routing/managed-encryption) for more information.
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
    * </pre>
    *
    * <code>string kms_key_name = 2;</code>
@@ -238,7 +238,7 @@ public final class CmekSettings extends com.google.protobuf.GeneratedMessageV3
    * time of encryption unless access to that key has been revoked.
    * To disable CMEK for the Logs Router, set this field to an empty string.
    * See [Enabling CMEK for Logs
-   * Router](/logging/docs/routing/managed-encryption) for more information.
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
    * </pre>
    *
    * <code>string kms_key_name = 2;</code>
@@ -271,7 +271,7 @@ public final class CmekSettings extends com.google.protobuf.GeneratedMessageV3
    * [GetCmekSettings][google.logging.v2.ConfigServiceV2.GetCmekSettings] to
    * obtain the service account ID.
    * See [Enabling CMEK for Logs
-   * Router](/logging/docs/routing/managed-encryption) for more information.
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
    * </pre>
    *
    * <code>string service_account_id = 3 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
@@ -301,7 +301,7 @@ public final class CmekSettings extends com.google.protobuf.GeneratedMessageV3
    * [GetCmekSettings][google.logging.v2.ConfigServiceV2.GetCmekSettings] to
    * obtain the service account ID.
    * See [Enabling CMEK for Logs
-   * Router](/logging/docs/routing/managed-encryption) for more information.
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
    * </pre>
    *
    * <code>string service_account_id = 3 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
@@ -504,7 +504,7 @@ public final class CmekSettings extends com.google.protobuf.GeneratedMessageV3
    * Note: CMEK for the Logs Router can currently only be configured for GCP
    * organizations. Once configured, it applies to all projects and folders in the
    * GCP organization.
-   * See [Enabling CMEK for Logs Router](/logging/docs/routing/managed-encryption)
+   * See [Enabling CMEK for Logs Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    * </pre>
    *
@@ -797,7 +797,7 @@ public final class CmekSettings extends com.google.protobuf.GeneratedMessageV3
      * time of encryption unless access to that key has been revoked.
      * To disable CMEK for the Logs Router, set this field to an empty string.
      * See [Enabling CMEK for Logs
-     * Router](/logging/docs/routing/managed-encryption) for more information.
+     * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
      * </pre>
      *
      * <code>string kms_key_name = 2;</code>
@@ -834,7 +834,7 @@ public final class CmekSettings extends com.google.protobuf.GeneratedMessageV3
      * time of encryption unless access to that key has been revoked.
      * To disable CMEK for the Logs Router, set this field to an empty string.
      * See [Enabling CMEK for Logs
-     * Router](/logging/docs/routing/managed-encryption) for more information.
+     * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
      * </pre>
      *
      * <code>string kms_key_name = 2;</code>
@@ -871,7 +871,7 @@ public final class CmekSettings extends com.google.protobuf.GeneratedMessageV3
      * time of encryption unless access to that key has been revoked.
      * To disable CMEK for the Logs Router, set this field to an empty string.
      * See [Enabling CMEK for Logs
-     * Router](/logging/docs/routing/managed-encryption) for more information.
+     * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
      * </pre>
      *
      * <code>string kms_key_name = 2;</code>
@@ -907,7 +907,7 @@ public final class CmekSettings extends com.google.protobuf.GeneratedMessageV3
      * time of encryption unless access to that key has been revoked.
      * To disable CMEK for the Logs Router, set this field to an empty string.
      * See [Enabling CMEK for Logs
-     * Router](/logging/docs/routing/managed-encryption) for more information.
+     * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
      * </pre>
      *
      * <code>string kms_key_name = 2;</code>
@@ -939,7 +939,7 @@ public final class CmekSettings extends com.google.protobuf.GeneratedMessageV3
      * time of encryption unless access to that key has been revoked.
      * To disable CMEK for the Logs Router, set this field to an empty string.
      * See [Enabling CMEK for Logs
-     * Router](/logging/docs/routing/managed-encryption) for more information.
+     * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
      * </pre>
      *
      * <code>string kms_key_name = 2;</code>
@@ -971,7 +971,7 @@ public final class CmekSettings extends com.google.protobuf.GeneratedMessageV3
      * [GetCmekSettings][google.logging.v2.ConfigServiceV2.GetCmekSettings] to
      * obtain the service account ID.
      * See [Enabling CMEK for Logs
-     * Router](/logging/docs/routing/managed-encryption) for more information.
+     * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
      * </pre>
      *
      * <code>string service_account_id = 3 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
@@ -1001,7 +1001,7 @@ public final class CmekSettings extends com.google.protobuf.GeneratedMessageV3
      * [GetCmekSettings][google.logging.v2.ConfigServiceV2.GetCmekSettings] to
      * obtain the service account ID.
      * See [Enabling CMEK for Logs
-     * Router](/logging/docs/routing/managed-encryption) for more information.
+     * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
      * </pre>
      *
      * <code>string service_account_id = 3 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
@@ -1031,7 +1031,7 @@ public final class CmekSettings extends com.google.protobuf.GeneratedMessageV3
      * [GetCmekSettings][google.logging.v2.ConfigServiceV2.GetCmekSettings] to
      * obtain the service account ID.
      * See [Enabling CMEK for Logs
-     * Router](/logging/docs/routing/managed-encryption) for more information.
+     * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
      * </pre>
      *
      * <code>string service_account_id = 3 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
@@ -1060,7 +1060,7 @@ public final class CmekSettings extends com.google.protobuf.GeneratedMessageV3
      * [GetCmekSettings][google.logging.v2.ConfigServiceV2.GetCmekSettings] to
      * obtain the service account ID.
      * See [Enabling CMEK for Logs
-     * Router](/logging/docs/routing/managed-encryption) for more information.
+     * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
      * </pre>
      *
      * <code>string service_account_id = 3 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
@@ -1085,7 +1085,7 @@ public final class CmekSettings extends com.google.protobuf.GeneratedMessageV3
      * [GetCmekSettings][google.logging.v2.ConfigServiceV2.GetCmekSettings] to
      * obtain the service account ID.
      * See [Enabling CMEK for Logs
-     * Router](/logging/docs/routing/managed-encryption) for more information.
+     * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
      * </pre>
      *
      * <code>string service_account_id = 3 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
