@@ -61,16 +61,16 @@ import javax.annotation.Generated;
  * <p>The builder of this class is recursive, so contained classes are themselves builders. When
  * build() is called, the tree of builders is called to create the complete settings object.
  *
- * <p>For example, to set the total timeout of deleteLog to 30 seconds:
+ * <p>For example, to set the total timeout of writeLogEntries to 30 seconds:
  *
  * <pre>
  * <code>
  * LoggingSettings.Builder loggingSettingsBuilder =
  *     LoggingSettings.newBuilder();
  * loggingSettingsBuilder
- *     .deleteLogSettings()
+ *     .writeLogEntriesSettings()
  *     .setRetrySettings(
- *         loggingSettingsBuilder.deleteLogSettings().getRetrySettings().toBuilder()
+ *         loggingSettingsBuilder.writeLogEntriesSettings().getRetrySettings().toBuilder()
  *             .setTotalTimeout(Duration.ofSeconds(30))
  *             .build());
  * LoggingSettings loggingSettings = loggingSettingsBuilder.build();
@@ -80,15 +80,15 @@ import javax.annotation.Generated;
 @Generated("by gapic-generator")
 @BetaApi
 public class LoggingSettings extends ClientSettings<LoggingSettings> {
-  /** Returns the object with the settings used for calls to deleteLog. */
-  public UnaryCallSettings<DeleteLogRequest, Empty> deleteLogSettings() {
-    return ((LoggingServiceV2StubSettings) getStubSettings()).deleteLogSettings();
-  }
-
   /** Returns the object with the settings used for calls to writeLogEntries. */
   public BatchingCallSettings<WriteLogEntriesRequest, WriteLogEntriesResponse>
       writeLogEntriesSettings() {
     return ((LoggingServiceV2StubSettings) getStubSettings()).writeLogEntriesSettings();
+  }
+
+  /** Returns the object with the settings used for calls to deleteLog. */
+  public UnaryCallSettings<DeleteLogRequest, Empty> deleteLogSettings() {
+    return ((LoggingServiceV2StubSettings) getStubSettings()).deleteLogSettings();
   }
 
   /** Returns the object with the settings used for calls to listLogEntries. */
@@ -210,15 +210,15 @@ public class LoggingSettings extends ClientSettings<LoggingSettings> {
       return this;
     }
 
-    /** Returns the builder for the settings used for calls to deleteLog. */
-    public UnaryCallSettings.Builder<DeleteLogRequest, Empty> deleteLogSettings() {
-      return getStubSettingsBuilder().deleteLogSettings();
-    }
-
     /** Returns the builder for the settings used for calls to writeLogEntries. */
     public BatchingCallSettings.Builder<WriteLogEntriesRequest, WriteLogEntriesResponse>
         writeLogEntriesSettings() {
       return getStubSettingsBuilder().writeLogEntriesSettings();
+    }
+
+    /** Returns the builder for the settings used for calls to deleteLog. */
+    public UnaryCallSettings.Builder<DeleteLogRequest, Empty> deleteLogSettings() {
+      return getStubSettingsBuilder().deleteLogSettings();
     }
 
     /** Returns the builder for the settings used for calls to listLogEntries. */
