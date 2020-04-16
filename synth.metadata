@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/java-logging.git",
-        "sha": "6f4fae2141662f0421364ea25f738366f3feaf41"
+        "sha": "8595f4342e9599afcdf0f5c4631d6dafdcecaa08"
       }
     },
     {
