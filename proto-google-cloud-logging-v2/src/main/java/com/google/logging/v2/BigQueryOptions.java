@@ -127,7 +127,7 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
    * In both cases, tables are sharded based on UTC timezone.
    * </pre>
    *
-   * <code>bool use_partitioned_tables = 1;</code>
+   * <code>bool use_partitioned_tables = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
    *
    * @return The usePartitionedTables.
    */
@@ -505,7 +505,7 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
      * In both cases, tables are sharded based on UTC timezone.
      * </pre>
      *
-     * <code>bool use_partitioned_tables = 1;</code>
+     * <code>bool use_partitioned_tables = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @return The usePartitionedTables.
      */
@@ -525,7 +525,7 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
      * In both cases, tables are sharded based on UTC timezone.
      * </pre>
      *
-     * <code>bool use_partitioned_tables = 1;</code>
+     * <code>bool use_partitioned_tables = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @param value The usePartitionedTables to set.
      * @return This builder for chaining.
@@ -549,7 +549,7 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
      * In both cases, tables are sharded based on UTC timezone.
      * </pre>
      *
-     * <code>bool use_partitioned_tables = 1;</code>
+     * <code>bool use_partitioned_tables = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @return This builder for chaining.
      */

@@ -15,7 +15,7 @@
  */
 package com.google.cloud.logging.v2.stub;
 
-import static com.google.cloud.logging.v2.MetricsClient.ListLogMetricsPagedResponse;
+import static com.google.cloud.logging.v2.MetricsServiceV2Client.ListLogMetricsPagedResponse;
 
 import com.google.api.core.ApiFunction;
 import com.google.api.core.ApiFuture;
@@ -75,15 +75,15 @@ import org.threeten.bp.Duration;
  *
  * <pre>
  * <code>
- * MetricsServiceV2StubSettings.Builder metricsSettingsBuilder =
+ * MetricsServiceV2StubSettings.Builder metricsServiceV2SettingsBuilder =
  *     MetricsServiceV2StubSettings.newBuilder();
- * metricsSettingsBuilder
+ * metricsServiceV2SettingsBuilder
  *     .getLogMetricSettings()
  *     .setRetrySettings(
- *         metricsSettingsBuilder.getLogMetricSettings().getRetrySettings().toBuilder()
+ *         metricsServiceV2SettingsBuilder.getLogMetricSettings().getRetrySettings().toBuilder()
  *             .setTotalTimeout(Duration.ofSeconds(30))
  *             .build());
- * MetricsServiceV2StubSettings metricsSettings = metricsSettingsBuilder.build();
+ * MetricsServiceV2StubSettings metricsServiceV2Settings = metricsServiceV2SettingsBuilder.build();
  * </code>
  * </pre>
  */
@@ -289,9 +289,7 @@ public class MetricsServiceV2StubSettings extends StubSettings<MetricsServiceV2S
           "idempotent",
           ImmutableSet.copyOf(
               Lists.<StatusCode.Code>newArrayList(
-                  StatusCode.Code.DEADLINE_EXCEEDED,
-                  StatusCode.Code.INTERNAL,
-                  StatusCode.Code.UNAVAILABLE)));
+                  StatusCode.Code.DEADLINE_EXCEEDED, StatusCode.Code.UNAVAILABLE)));
       definitions.put("non_idempotent", ImmutableSet.copyOf(Lists.<StatusCode.Code>newArrayList()));
       RETRYABLE_CODE_DEFINITIONS = definitions.build();
     }
@@ -371,12 +369,12 @@ public class MetricsServiceV2StubSettings extends StubSettings<MetricsServiceV2S
 
       builder
           .updateLogMetricSettings()
-          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent"))
+          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("non_idempotent"))
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
 
       builder
           .deleteLogMetricSettings()
-          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent"))
+          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("non_idempotent"))
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
 
       return builder;
