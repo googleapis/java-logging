@@ -20,10 +20,10 @@ import com.google.common.base.MoreObjects;
 import java.util.Objects;
 
 /**
- * CmekSettings Describes the customer-managed encryption key (CMEK) settings associated with a
- * project, folder, organization, billing account, or flexible resource.
+ * Describes the customer-managed encryption key (CMEK) settings associated with a project, folder,
+ * organization, billing account, or flexible resource.
  *
- * <p>Note: CMEK for the Logs Router can currently only be configured for GCP organizations. Once
+ * <p>Note: CMEK for the Logs Router currently can be configured only for GCP organizations. Once
  * configured, it applies to all projects and folders in the GCP organization.
  *
  * @see <a href="https://cloud.google.com/logging/docs/routing/managed-encryption">Enabling CMEK for
@@ -52,7 +52,7 @@ public class CmekSettings {
   private String serviceAccountId;
 
   /** A builder for {@code CmekSettings} objects. */
-  static class Builder {
+  public static class Builder {
     private String name;
     private String kmsKeyName;
     private String serviceAccountId;
@@ -65,23 +65,23 @@ public class CmekSettings {
       this.serviceAccountId = settings.serviceAccountId;
     }
 
-    Builder setName(String name) {
+    public Builder setName(String name) {
       this.name = name;
       return this;
     }
 
-    Builder setKmsKeyName(String kmsKeyName) {
+    public Builder setKmsKeyName(String kmsKeyName) {
       this.kmsKeyName = kmsKeyName;
       return this;
     }
 
-    Builder setServiceAccountId(String serviceAccountId) {
+    public Builder setServiceAccountId(String serviceAccountId) {
       this.serviceAccountId = serviceAccountId;
       return this;
     }
 
     /** Creates a {@code CmekSettings} object. */
-    CmekSettings build() {
+    public CmekSettings build() {
       return new CmekSettings(this);
     }
   }
