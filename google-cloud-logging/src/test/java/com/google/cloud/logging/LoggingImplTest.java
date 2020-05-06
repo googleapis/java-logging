@@ -54,6 +54,7 @@ import com.google.logging.v2.DeleteExclusionRequest;
 import com.google.logging.v2.DeleteLogMetricRequest;
 import com.google.logging.v2.DeleteLogRequest;
 import com.google.logging.v2.DeleteSinkRequest;
+import com.google.logging.v2.GetCmekSettingsRequest;
 import com.google.logging.v2.GetExclusionRequest;
 import com.google.logging.v2.GetLogMetricRequest;
 import com.google.logging.v2.GetSinkRequest;
@@ -70,6 +71,7 @@ import com.google.logging.v2.ListSinksResponse;
 import com.google.logging.v2.LogExclusion;
 import com.google.logging.v2.LogMetric;
 import com.google.logging.v2.LogSink;
+import com.google.logging.v2.UpdateCmekSettingsRequest;
 import com.google.logging.v2.UpdateExclusionRequest;
 import com.google.logging.v2.UpdateLogMetricRequest;
 import com.google.logging.v2.UpdateSinkRequest;
@@ -102,6 +104,18 @@ public class LoggingImplTest {
   private static final String DESCRIPTION = "description";
   private static final MetricInfo METRIC_INFO =
       MetricInfo.newBuilder(METRIC_NAME, FILTER).setDescription(DESCRIPTION).build();
+  private static final String ORGANIZATIONS = "organization";
+  private static final String CMEK_SETTINGS_NAME =
+      "organizations/" + ORGANIZATIONS + "/cmekSettings/test";
+  private static final String KMS_KEY_NAME =
+      "projects/" + PROJECT + "/locations/my-region/keyRings/key-ring-name/cryptoKeys/key-name";
+  private static final String SERVICE_ACCOUNT = "service-account";
+  private static final CmekSettings CMEK_SETTINGS =
+      CmekSettings.newBuilder()
+          .setName(CMEK_SETTINGS_NAME)
+          .setKmsKeyName(KMS_KEY_NAME)
+          .setServiceAccountId(SERVICE_ACCOUNT)
+          .build();
   private static final com.google.api.MonitoredResourceDescriptor DESCRIPTOR_PB =
       com.google.api.MonitoredResourceDescriptor.getDefaultInstance();
   private static final MonitoredResourceDescriptor DESCRIPTOR =
@@ -1330,6 +1344,90 @@ public class LoggingImplTest {
     assertEquals(CURSOR, page.getNextPageToken());
     assertArrayEquals(
         exclusionList.toArray(), Iterables.toArray(page.getValues(), Exclusion.class));
+  }
+
+  @Test
+  public void testGetCmekSettings() {
+    GetCmekSettingsRequest request =
+        GetCmekSettingsRequest.newBuilder().setName(CMEK_SETTINGS_NAME).build();
+    EasyMock.expect(loggingRpcMock.getCmekSettings(request))
+        .andReturn(ApiFutures.immediateFuture(CMEK_SETTINGS.toPb()));
+    EasyMock.replay(rpcFactoryMock, loggingRpcMock);
+    logging = options.getService();
+    CmekSettings cmekSettings = logging.getCmekSettings(CMEK_SETTINGS_NAME);
+    assertEquals(CMEK_SETTINGS_NAME, cmekSettings.getName());
+    assertEquals(KMS_KEY_NAME, cmekSettings.getKmsKeyName());
+    assertEquals(SERVICE_ACCOUNT, cmekSettings.getServiceAccountId());
+  }
+
+  @Test
+  public void testGetCmekSettings_Null() {
+    GetCmekSettingsRequest request =
+        GetCmekSettingsRequest.newBuilder().setName(CMEK_SETTINGS_NAME).build();
+    ApiFuture<com.google.logging.v2.CmekSettings> response = ApiFutures.immediateFuture(null);
+    EasyMock.expect(loggingRpcMock.getCmekSettings(request)).andReturn(response);
+    EasyMock.replay(rpcFactoryMock, loggingRpcMock);
+    logging = options.getService();
+    assertNull(logging.getCmekSettings(CMEK_SETTINGS_NAME));
+  }
+
+  @Test
+  public void testGetCmekSettingsAsync() throws ExecutionException, InterruptedException {
+    GetCmekSettingsRequest request =
+        GetCmekSettingsRequest.newBuilder().setName(CMEK_SETTINGS_NAME).build();
+    EasyMock.expect(loggingRpcMock.getCmekSettings(request))
+        .andReturn(ApiFutures.immediateFuture(CMEK_SETTINGS.toPb()));
+    EasyMock.replay(rpcFactoryMock, loggingRpcMock);
+    logging = options.getService();
+    CmekSettings cmekSettings = logging.getCmekSettingsAsync(CMEK_SETTINGS_NAME).get();
+    assertEquals(CMEK_SETTINGS_NAME, cmekSettings.getName());
+    assertEquals(KMS_KEY_NAME, cmekSettings.getKmsKeyName());
+    assertEquals(SERVICE_ACCOUNT, cmekSettings.getServiceAccountId());
+  }
+
+  @Test
+  public void testGetCmekSettingsAsync_Null() throws ExecutionException, InterruptedException {
+    GetCmekSettingsRequest request =
+        GetCmekSettingsRequest.newBuilder().setName(CMEK_SETTINGS_NAME).build();
+    ApiFuture<com.google.logging.v2.CmekSettings> response = ApiFutures.immediateFuture(null);
+    EasyMock.expect(loggingRpcMock.getCmekSettings(request)).andReturn(response);
+    EasyMock.replay(rpcFactoryMock, loggingRpcMock);
+    logging = options.getService();
+    assertNull(logging.getCmekSettingsAsync(CMEK_SETTINGS_NAME).get());
+  }
+
+  @Test
+  public void testUpdateCmekSettings() {
+    UpdateCmekSettingsRequest request =
+        UpdateCmekSettingsRequest.newBuilder()
+            .setName(CMEK_SETTINGS_NAME)
+            .setCmekSettings(CMEK_SETTINGS.toPb())
+            .build();
+    EasyMock.expect(loggingRpcMock.updateCmekSettings(request))
+        .andReturn(ApiFutures.immediateFuture(CMEK_SETTINGS.toPb()));
+    EasyMock.replay(rpcFactoryMock, loggingRpcMock);
+    logging = options.getService();
+    CmekSettings cmekSettings = logging.updateCmekSettings(CMEK_SETTINGS);
+    assertEquals(CMEK_SETTINGS_NAME, cmekSettings.getName());
+    assertEquals(KMS_KEY_NAME, cmekSettings.getKmsKeyName());
+    assertEquals(SERVICE_ACCOUNT, cmekSettings.getServiceAccountId());
+  }
+
+  @Test
+  public void testUpdateCmekSettingsAsync() throws ExecutionException, InterruptedException {
+    UpdateCmekSettingsRequest request =
+        UpdateCmekSettingsRequest.newBuilder()
+            .setName(CMEK_SETTINGS_NAME)
+            .setCmekSettings(CMEK_SETTINGS.toPb())
+            .build();
+    EasyMock.expect(loggingRpcMock.updateCmekSettings(request))
+        .andReturn(ApiFutures.immediateFuture(CMEK_SETTINGS.toPb()));
+    EasyMock.replay(rpcFactoryMock, loggingRpcMock);
+    logging = options.getService();
+    CmekSettings cmekSettings = logging.updateCmekSettingsAsync(CMEK_SETTINGS).get();
+    assertEquals(CMEK_SETTINGS_NAME, cmekSettings.getName());
+    assertEquals(KMS_KEY_NAME, cmekSettings.getKmsKeyName());
+    assertEquals(SERVICE_ACCOUNT, cmekSettings.getServiceAccountId());
   }
 
   @Test

@@ -687,8 +687,8 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
   ApiFuture<Boolean> deleteMetricAsync(String metric);
 
   /**
-   * Creates a new exclusion in a specified parent resource. Only log entries belonging to that
-   * resource can be excluded. You can have up to 10 exclusions in a resource.
+   * <<<<<<< HEAD Creates a new exclusion in a specified parent resource. Only log entries belonging
+   * to that resource can be excluded. You can have up to 10 exclusions in a resource.
    *
    * <p>Example of creating the exclusion:
    *
@@ -876,6 +876,89 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
    * }</pre>
    */
   ApiFuture<AsyncPage<Exclusion>> listExclusionsAsync(ListOption... options);
+
+  /**
+   * Returns the requested CMEK settings or {@code null} if not found.
+   *
+   * <p>Example of getting a CMEK settings.
+   *
+   * <pre>{@code
+   * String cmekSettingsName = "my_cmek_settings_name";
+   * CmekSettings settings = logging.getCmekSettings(cmekSettingsName);
+   * if (settings == null) {
+   *   // CMEK settings was not found
+   * }
+   * }</pre>
+   *
+   * @throws LoggingException upon failure
+   */
+  CmekSettings getCmekSettings(String cmekSettings);
+
+  /**
+   * Sends a request for getting a CMEK settings. This method returns a {@code ApiFuture} object to
+   * consume the result. {@link ApiFuture#get()} returns the requested CMEK settings or {@code null}
+   * if not found.
+   *
+   * <p>Example of asynchronously getting a CMEK settings.
+   *
+   * <pre>{@code
+   * String cmekSettingsName = "my_cmek_settings_name";
+   * ApiFuture<CmekSettings> future = logging.getCmekSettingsAsync(cmekSettingsName);
+   * // ...
+   * CmekSettings settings = future.get();
+   * if (settings == null) {
+   *   // CMEK settings was not found
+   * }
+   * }</pre>
+   *
+   * @throws LoggingException upon failure
+   */
+  ApiFuture<CmekSettings> getCmekSettingsAsync(String cmekSettings);
+
+  /**
+   * Updates a CMEK settings or creates one if it does not exist.
+   *
+   * <p>Example of updating a CMEK settings.
+   *
+   * <pre>{@code
+   * String cmekSettingsName = "my_cmek_settings_name";
+   * String kmsKeyName = "my_kms_key";
+   * String serviceAccount = "my_service_account";
+   * CmekSettings settings = CmekSettings.newBuilder()
+   *     .setName(cmekSettingsName)
+   *     .setKmsKeyName(kmsKeyName)
+   *     .setServiceAccountId(serviceAccount)
+   *     .build();
+   * CmekSettings cmkSettings = logging.updateCmekSettings(settings);
+   * }</pre>
+   *
+   * @return the updated CMEK settings
+   * @throws LoggingException upon failure
+   */
+  CmekSettings updateCmekSettings(CmekSettings cmekSettings);
+
+  /**
+   * Sends a request for updating a CMEK settings (or creating it, if it does not exist). This
+   * method returns a {@code ApiFuture} object to consume the result. {@link ApiFuture#get()}
+   * returns the updated/created CMEK settings or {@code null} if not found.
+   *
+   * <p>Example of asynchronously updating a CMEK settings.
+   *
+   * <pre>{@code
+   * String cmekSettingsName = "my_cmek_settings_name";
+   * String kmsKeyName = "my_kms_key";
+   * String serviceAccount = "my_service_account";
+   * CmekSettings settings = CmekSettings.newBuilder()
+   *     .setName(cmekSettingsName)
+   *     .setKmsKeyName(kmsKeyName)
+   *     .setServiceAccountId(serviceAccount)
+   *     .build();
+   * ApiFuture<CmekSettings> future = logging.updateCmekSettingsAsync(settings);
+   * // ...
+   * CmekSettings cmkSettings = future.get();
+   * }</pre>
+   */
+  ApiFuture<CmekSettings> updateCmekSettingsAsync(CmekSettings cmekSettings);
 
   /**
    * Flushes any pending asynchronous logging writes. Logs are automatically flushed based on time
