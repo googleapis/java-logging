@@ -21,7 +21,7 @@ import java.util.Objects;
 
 /**
  * Describes the customer-managed encryption key (CMEK) settings associated with a project, folder,
- * organization, billing account, or flexible resource.
+ * organization, billing account or flexible resource.
  *
  * <p>Note: CMEK for the Logs Router currently can be configured only for GCP organizations. Once
  * configured, it applies to all projects and folders in the GCP organization.
@@ -57,9 +57,9 @@ public class CmekSettings {
     private String kmsKeyName;
     private String serviceAccountId;
 
-    Builder() {}
+    private Builder() {}
 
-    Builder(CmekSettings settings) {
+    private Builder(CmekSettings settings) {
       this.name = settings.name;
       this.kmsKeyName = settings.kmsKeyName;
       this.serviceAccountId = settings.serviceAccountId;
