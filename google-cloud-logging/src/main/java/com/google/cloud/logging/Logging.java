@@ -686,7 +686,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
   Exclusion create(Exclusion exclusion);
 
   /**
-   * Sends a request for to create the exclusion. This method returns a {@code ApiFuture} object to
+   * Sends a request to create the exclusion. This method returns an {@code ApiFuture} object to
    * consume the result. {@link ApiFuture#get()} returns the created exclusion.
    *
    * <p>Example of asynchronously creating the exclusion.
@@ -719,7 +719,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
   Exclusion getExclusion(String exclusion);
 
   /**
-   * Sends a request for to get the description of an exclusion . This method returns a {@code
+   * Sends a request to get the description of an exclusion . This method returns an {@code
    * ApiFuture} object to consume the result. {@link ApiFuture#get()} returns the requested
    * exclusion or {@code null} if not found.
    *
@@ -760,7 +760,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
 
   /**
    * Sends a request to change one or more properties of an existing exclusion. This method returns
-   * a {@code ApiFuture} object to consume the result. {@link ApiFuture#get()} returns the updated
+   * an {@code ApiFuture} object to consume the result. {@link ApiFuture#get()} returns the updated
    * exclusion or {@code null} if not found.
    *
    * <p>Example of asynchronously updating the exclusion.
@@ -798,7 +798,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
   boolean deleteExclusion(String exclusion);
 
   /**
-   * Sends a request to delete an exclusion. This method returns a {@code ApiFuture} object to
+   * Sends a request to delete an exclusion. This method returns an {@code ApiFuture} object to
    * consume the result. {@link ApiFuture#get()} returns {@code true} if the exclusion was deleted,
    * {@code false} if it was not found.
    *
@@ -839,7 +839,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
   Page<Exclusion> listExclusions(ListOption... options);
 
   /**
-   * Sends a request for listing exclusions. This method returns a {@code ApiFuture} object to
+   * Sends a request for listing exclusions. This method returns an {@code ApiFuture} object to
    * consume the result. {@link ApiFuture#get()} returns an {@link AsyncPage} object that can be
    * used to asynchronously handle paginated results. Use {@link ListOption} to specify the page
    * size or the page token from which to start listing exclusions.

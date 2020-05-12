@@ -175,8 +175,8 @@ public interface LoggingRpc extends AutoCloseable, ServiceRpc {
   ApiFuture<Empty> delete(DeleteLogMetricRequest request);
 
   /**
-   * Sends a request to create a new exclusion in a specified parent resource. This method returns a
-   * {@code ApiFuture} object to consume the result. {@link ApiFuture#get()} returns the created
+   * Sends a request to create a new exclusion in a specified parent resource. This method returns
+   * an {@code ApiFuture} object to consume the result. {@link ApiFuture#get()} returns the created
    * exclusion.
    *
    * @param request the request object containing all of the parameters for the API call
@@ -184,9 +184,9 @@ public interface LoggingRpc extends AutoCloseable, ServiceRpc {
   ApiFuture<LogExclusion> create(CreateExclusionRequest request);
 
   /**
-   * Sends a request to get the description of an exclusion. This method returns a {@code ApiFuture}
-   * object to consume the result. {@link ApiFuture#get()} returns the requested exclusion or {@code
-   * null} if not found.
+   * Sends a request to get the description of an exclusion. This method returns an {@code
+   * ApiFuture} object to consume the result. {@link ApiFuture#get()} returns the requested
+   * exclusion or {@code null} if not found.
    *
    * @param request the request object containing all of the parameters for the API call
    */
@@ -194,7 +194,7 @@ public interface LoggingRpc extends AutoCloseable, ServiceRpc {
 
   /**
    * Sends a request to change one or more properties of an existing exclusion. This method returns
-   * a {@code ApiFuture} object to consume the result. {@link ApiFuture#get()} returns the updated
+   * an {@code ApiFuture} object to consume the result. {@link ApiFuture#get()} returns the updated
    * exclusion.
    *
    * @param request the request object containing all of the parameters for the API call
@@ -203,7 +203,7 @@ public interface LoggingRpc extends AutoCloseable, ServiceRpc {
 
   /**
    * Sends a request to list all the exclusions in parent resource. Use this method to retrieve
-   * exclusions from Cloud Logging. This method returns a {@code ApiFuture} object to consume the
+   * exclusions from Cloud Logging. This method returns an {@code ApiFuture} object to consume the
    * result. {@link ApiFuture#get()} returns a response object containing the listing result.
    *
    * @param request the request object containing all of the parameters for the API call
@@ -211,7 +211,7 @@ public interface LoggingRpc extends AutoCloseable, ServiceRpc {
   ApiFuture<ListExclusionsResponse> list(ListExclusionsRequest request);
 
   /**
-   * Sends a request to delete an exclusion. This method returns a {@code ApiFuture} object to
+   * Sends a request to delete an exclusion. This method returns an {@code ApiFuture} object to
    * consume the result. {@link ApiFuture#get()} returns {@link Empty#getDefaultInstance()} or
    * {@code null} if the log exclusion was not found.
    *
