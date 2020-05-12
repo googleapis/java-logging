@@ -798,7 +798,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
   boolean deleteExclusion(String exclusion);
 
   /**
-   * Sends a request for to delete an exclusion. This method returns a {@code ApiFuture} object to
+   * Sends a request to delete an exclusion. This method returns a {@code ApiFuture} object to
    * consume the result. {@link ApiFuture#get()} returns {@code true} if the exclusion was deleted,
    * {@code false} if it was not found.
    *

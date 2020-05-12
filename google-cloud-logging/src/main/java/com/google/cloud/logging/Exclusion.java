@@ -185,8 +185,8 @@ public class Exclusion {
   }
 
   /**
-   * Returns an advanced logs filter.
-   * Example: {@code resource.type=gcs_bucket severity<ERROR sample(insertId, 0.99).
+   * Returns an advanced logs filter. Example: {@code resource.type=gcs_bucket severity<ERROR
+   * sample(insertId, 0.99)}.
    *
    * @see <a href="https://cloud.google.com/logging/docs/view/advanced-queries">Advanced Log
    *     Filters</a>
