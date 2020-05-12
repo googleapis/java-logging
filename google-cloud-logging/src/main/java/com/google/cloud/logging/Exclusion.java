@@ -32,19 +32,19 @@ import java.util.Objects;
  */
 public class Exclusion {
 
-  static final Function<LogExclusion, Exclusion> FROM_PB_FUNCTION =
+  static final Function<LogExclusion, Exclusion> FROM_PROTOBUF_FUNCTION =
       new Function<LogExclusion, Exclusion>() {
         @Override
         public Exclusion apply(LogExclusion exclusionPb) {
-          return exclusionPb != null ? Exclusion.fromPb(exclusionPb) : null;
+          return exclusionPb != null ? Exclusion.fromProtobuf(exclusionPb) : null;
         }
       };
 
-  static final Function<Exclusion, LogExclusion> TO_PB_FUNCTION =
+  static final Function<Exclusion, LogExclusion> TO_PROTOBUF_FUNCTION =
       new Function<Exclusion, LogExclusion>() {
         @Override
         public LogExclusion apply(Exclusion exclusion) {
-          return exclusion != null ? exclusion.toPb() : null;
+          return exclusion != null ? exclusion.toProtobuf() : null;
         }
       };
 
@@ -227,7 +227,7 @@ public class Exclusion {
     return new Builder(name, filter).build();
   }
 
-  LogExclusion toPb() {
+  LogExclusion toProtobuf() {
     LogExclusion.Builder builder =
         LogExclusion.newBuilder().setName(name).setFilter(filter).setDisabled(disabled);
     if (description != null) {
@@ -242,7 +242,7 @@ public class Exclusion {
     return builder.build();
   }
 
-  static Exclusion fromPb(LogExclusion exclusionPb) {
+  static Exclusion fromProtobuf(LogExclusion exclusionPb) {
     Exclusion.Builder builder = newBuilder(exclusionPb.getName(), exclusionPb.getFilter());
     builder.setDisabled(exclusionPb.getDisabled());
     if (!exclusionPb.getDescription().equals("")) {

@@ -672,7 +672,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
    * Creates a new exclusion in a specified parent resource. Only log entries belonging to that
    * resource can be excluded. You can have up to 10 exclusions in a resource.
    *
-   * <p>Example of creating the exclusion.
+   * <p>Example of creating the exclusion:
    *
    * <pre>{@code
    * String exclusionName = "my_exclusion_name";
@@ -689,7 +689,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
    * Sends a request to create the exclusion. This method returns an {@code ApiFuture} object to
    * consume the result. {@link ApiFuture#get()} returns the created exclusion.
    *
-   * <p>Example of asynchronously creating the exclusion.
+   * <p>Example of asynchronously creating the exclusion:
    *
    * <pre>{@code
    * String exclusionName = "my_exclusion_name";
@@ -704,7 +704,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
   /**
    * Gets the description of an exclusion or {@code null} if not found.
    *
-   * <p>Example of getting the description of an exclusion.
+   * <p>Example of getting the description of an exclusion:
    *
    * <pre>{@code
    * String exclusionName = "my_exclusion_name";
@@ -723,7 +723,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
    * ApiFuture} object to consume the result. {@link ApiFuture#get()} returns the requested
    * exclusion or {@code null} if not found.
    *
-   * <p>Example of asynchronously getting the exclusion.
+   * <p>Example of asynchronously getting the exclusion:
    *
    * <pre>{@code
    * String exclusionName = "my_exclusion_name";
@@ -742,7 +742,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
   /**
    * Updates one or more properties of an existing exclusion.
    *
-   * <p>Example of updating the exclusion.
+   * <p>Example of updating the exclusion:
    *
    * <pre>{@code
    * String exclusionName = "my_exclusion_name";
@@ -763,7 +763,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
    * an {@code ApiFuture} object to consume the result. {@link ApiFuture#get()} returns the updated
    * exclusion or {@code null} if not found.
    *
-   * <p>Example of asynchronously updating the exclusion.
+   * <p>Example of asynchronous exclusion update:
    *
    * <pre>{@code
    * String exclusionName = "my_exclusion_name";
@@ -781,7 +781,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
   /**
    * Deletes the requested exclusion.
    *
-   * <p>Example of deleting the exclusion.
+   * <p>Example of deleting the exclusion:
    *
    * <pre>{@code
    * String exclusionName = "my_exclusion_name";
@@ -802,7 +802,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
    * consume the result. {@link ApiFuture#get()} returns {@code true} if the exclusion was deleted,
    * {@code false} if it was not found.
    *
-   * <p>Example of asynchronously deleting the exclusion.
+   * <p>Example of asynchronously deleting the exclusion:
    *
    * <pre>{@code
    * String exclusionName = "my_exclusion_name";
@@ -823,7 +823,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
    * paginated results. Use {@link ListOption} to specify the page size or the page token from which
    * to start listing exclusion.
    *
-   * <p>Example of listing exclusions, specifying the page size.
+   * <p>Example of listing exclusions, specifying the page size:
    *
    * <pre>{@code
    * Page<Exclusion> exclusions = logging.listMetrics(ListOption.pageSize(100));
@@ -844,7 +844,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
    * used to asynchronously handle paginated results. Use {@link ListOption} to specify the page
    * size or the page token from which to start listing exclusions.
    *
-   * <p>Example of asynchronously listing exclusions, specifying the page size.
+   * <p>Example of asynchronously listing exclusions, specifying the page size:
    *
    * <pre>{@code
    * ApiFuture<AsyncPage<Exclusion>> future = logging.listExclusionsAsync(ListOption.pageSize(100));

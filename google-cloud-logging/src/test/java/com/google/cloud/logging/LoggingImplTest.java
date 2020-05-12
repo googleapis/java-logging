@@ -922,7 +922,7 @@ public class LoggingImplTest {
 
   @Test
   public void testCreateExclusion() {
-    LogExclusion exclusionPb = EXCLUSION.toPb();
+    LogExclusion exclusionPb = EXCLUSION.toProtobuf();
     ApiFuture<LogExclusion> response = ApiFutures.immediateFuture(exclusionPb);
     CreateExclusionRequest request =
         CreateExclusionRequest.newBuilder().setParent(PROJECT_PB).setExclusion(exclusionPb).build();
@@ -939,7 +939,7 @@ public class LoggingImplTest {
 
   @Test
   public void testCreateExclusionAsync() throws ExecutionException, InterruptedException {
-    LogExclusion exclusionPb = EXCLUSION.toPb();
+    LogExclusion exclusionPb = EXCLUSION.toProtobuf();
     ApiFuture<LogExclusion> response = ApiFutures.immediateFuture(exclusionPb);
     CreateExclusionRequest request =
         CreateExclusionRequest.newBuilder().setParent(PROJECT_PB).setExclusion(exclusionPb).build();
@@ -956,7 +956,7 @@ public class LoggingImplTest {
 
   @Test
   public void testGetExclusion() {
-    LogExclusion exclusionPb = EXCLUSION.toPb();
+    LogExclusion exclusionPb = EXCLUSION.toProtobuf();
     ApiFuture<LogExclusion> response = ApiFutures.immediateFuture(exclusionPb);
     GetExclusionRequest request =
         GetExclusionRequest.newBuilder().setName(EXCLUSION_NAME_PB).build();
@@ -985,7 +985,7 @@ public class LoggingImplTest {
 
   @Test
   public void testGetExclusionAsync() throws ExecutionException, InterruptedException {
-    LogExclusion exclusionPb = EXCLUSION.toPb();
+    LogExclusion exclusionPb = EXCLUSION.toProtobuf();
     ApiFuture<LogExclusion> response = ApiFutures.immediateFuture(exclusionPb);
     GetExclusionRequest request =
         GetExclusionRequest.newBuilder().setName(EXCLUSION_NAME_PB).build();
@@ -1014,7 +1014,7 @@ public class LoggingImplTest {
 
   @Test
   public void testUpdateExclusion() {
-    LogExclusion exclusionPb = EXCLUSION1.toPb();
+    LogExclusion exclusionPb = EXCLUSION1.toProtobuf();
     ApiFuture<LogExclusion> response = ApiFutures.immediateFuture(exclusionPb);
     UpdateExclusionRequest request =
         UpdateExclusionRequest.newBuilder()
@@ -1034,7 +1034,7 @@ public class LoggingImplTest {
 
   @Test
   public void testUpdateExclusionAsync() throws ExecutionException, InterruptedException {
-    LogExclusion exclusionPb = EXCLUSION1.toPb();
+    LogExclusion exclusionPb = EXCLUSION1.toProtobuf();
     ApiFuture<LogExclusion> response = ApiFutures.immediateFuture(exclusionPb);
     UpdateExclusionRequest request =
         UpdateExclusionRequest.newBuilder()
@@ -1109,7 +1109,7 @@ public class LoggingImplTest {
     ListExclusionsResponse response =
         ListExclusionsResponse.newBuilder()
             .setNextPageToken(CURSOR)
-            .addAllExclusions(Lists.transform(exclusionList, Exclusion.TO_PB_FUNCTION))
+            .addAllExclusions(Lists.transform(exclusionList, Exclusion.TO_PROTOBUF_FUNCTION))
             .build();
     ApiFuture<ListExclusionsResponse> futureResponse = ApiFutures.immediateFuture(response);
     EasyMock.expect(loggingRpcMock.list(request)).andReturn(futureResponse);
@@ -1130,7 +1130,7 @@ public class LoggingImplTest {
     ListExclusionsResponse response =
         ListExclusionsResponse.newBuilder()
             .setNextPageToken("")
-            .addAllExclusions(Lists.transform(exclusionList, Exclusion.TO_PB_FUNCTION))
+            .addAllExclusions(Lists.transform(exclusionList, Exclusion.TO_PROTOBUF_FUNCTION))
             .build();
     ApiFuture<ListExclusionsResponse> futureResponse = ApiFutures.immediateFuture(response);
     EasyMock.expect(loggingRpcMock.list(request)).andReturn(futureResponse);
@@ -1153,7 +1153,7 @@ public class LoggingImplTest {
     ListExclusionsResponse response1 =
         ListExclusionsResponse.newBuilder()
             .setNextPageToken(CURSOR)
-            .addAllExclusions(Lists.transform(exclusionList1, Exclusion.TO_PB_FUNCTION))
+            .addAllExclusions(Lists.transform(exclusionList1, Exclusion.TO_PROTOBUF_FUNCTION))
             .build();
     ListExclusionsRequest request2 =
         ListExclusionsRequest.newBuilder().setParent(PROJECT_PB).setPageToken(CURSOR).build();
@@ -1162,7 +1162,7 @@ public class LoggingImplTest {
     ListExclusionsResponse response2 =
         ListExclusionsResponse.newBuilder()
             .setNextPageToken(NEXT_CURSOR)
-            .addAllExclusions(Lists.transform(exclusionList2, Exclusion.TO_PB_FUNCTION))
+            .addAllExclusions(Lists.transform(exclusionList2, Exclusion.TO_PROTOBUF_FUNCTION))
             .build();
     ApiFuture<ListExclusionsResponse> futureResponse1 = ApiFutures.immediateFuture(response1);
     ApiFuture<ListExclusionsResponse> futureResponse2 = ApiFutures.immediateFuture(response2);
@@ -1196,7 +1196,7 @@ public class LoggingImplTest {
     ListExclusionsResponse response =
         ListExclusionsResponse.newBuilder()
             .setNextPageToken(CURSOR)
-            .addAllExclusions(Lists.transform(exclusionList, Exclusion.TO_PB_FUNCTION))
+            .addAllExclusions(Lists.transform(exclusionList, Exclusion.TO_PROTOBUF_FUNCTION))
             .build();
     ApiFuture<ListExclusionsResponse> futureResponse = ApiFutures.immediateFuture(response);
     EasyMock.expect(loggingRpcMock.list(request)).andReturn(futureResponse);
@@ -1221,7 +1221,7 @@ public class LoggingImplTest {
     ListExclusionsResponse response =
         ListExclusionsResponse.newBuilder()
             .setNextPageToken(CURSOR)
-            .addAllExclusions(Lists.transform(exclusionList, Exclusion.TO_PB_FUNCTION))
+            .addAllExclusions(Lists.transform(exclusionList, Exclusion.TO_PROTOBUF_FUNCTION))
             .build();
     ApiFuture<ListExclusionsResponse> futureResponse = ApiFutures.immediateFuture(response);
     EasyMock.expect(loggingRpcMock.list(request)).andReturn(futureResponse);
@@ -1242,7 +1242,7 @@ public class LoggingImplTest {
     ListExclusionsResponse response =
         ListExclusionsResponse.newBuilder()
             .setNextPageToken("")
-            .addAllExclusions(Lists.transform(exclusionList, Exclusion.TO_PB_FUNCTION))
+            .addAllExclusions(Lists.transform(exclusionList, Exclusion.TO_PROTOBUF_FUNCTION))
             .build();
     ApiFuture<ListExclusionsResponse> futureResponse = ApiFutures.immediateFuture(response);
     EasyMock.expect(loggingRpcMock.list(request)).andReturn(futureResponse);
@@ -1265,7 +1265,7 @@ public class LoggingImplTest {
     ListExclusionsResponse response1 =
         ListExclusionsResponse.newBuilder()
             .setNextPageToken(CURSOR)
-            .addAllExclusions(Lists.transform(exclusionList1, Exclusion.TO_PB_FUNCTION))
+            .addAllExclusions(Lists.transform(exclusionList1, Exclusion.TO_PROTOBUF_FUNCTION))
             .build();
     ListExclusionsRequest request2 =
         ListExclusionsRequest.newBuilder().setParent(PROJECT_PB).setPageToken(CURSOR).build();
@@ -1274,7 +1274,7 @@ public class LoggingImplTest {
     ListExclusionsResponse response2 =
         ListExclusionsResponse.newBuilder()
             .setNextPageToken(NEXT_CURSOR)
-            .addAllExclusions(Lists.transform(exclusionList2, Exclusion.TO_PB_FUNCTION))
+            .addAllExclusions(Lists.transform(exclusionList2, Exclusion.TO_PROTOBUF_FUNCTION))
             .build();
     ApiFuture<ListExclusionsResponse> futureResponse1 = ApiFutures.immediateFuture(response1);
     ApiFuture<ListExclusionsResponse> futureResponse2 = ApiFutures.immediateFuture(response2);
@@ -1308,7 +1308,7 @@ public class LoggingImplTest {
     ListExclusionsResponse response =
         ListExclusionsResponse.newBuilder()
             .setNextPageToken(CURSOR)
-            .addAllExclusions(Lists.transform(exclusionList, Exclusion.TO_PB_FUNCTION))
+            .addAllExclusions(Lists.transform(exclusionList, Exclusion.TO_PROTOBUF_FUNCTION))
             .build();
     ApiFuture<ListExclusionsResponse> futureResponse = ApiFutures.immediateFuture(response);
     EasyMock.expect(loggingRpcMock.list(request)).andReturn(futureResponse);

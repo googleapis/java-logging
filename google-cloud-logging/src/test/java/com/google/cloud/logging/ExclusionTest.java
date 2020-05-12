@@ -89,10 +89,10 @@ public class ExclusionTest {
   }
 
   @Test
-  public void testToAndFromPb() {
-    compareExclusion(EXCLUSION, Exclusion.fromPb(EXCLUSION.toPb()));
+  public void testToAndFromProtobuf() {
+    compareExclusion(EXCLUSION, Exclusion.fromProtobuf(EXCLUSION.toProtobuf()));
     Exclusion exclusion = Exclusion.of(EXCLUSION_NAME, EXCLUSION_FILTER);
-    compareExclusion(exclusion, Exclusion.fromPb(exclusion.toPb()));
+    compareExclusion(exclusion, Exclusion.fromProtobuf(exclusion.toProtobuf()));
   }
 
   @Test
