@@ -20,6 +20,9 @@ scriptDir=$(realpath $(dirname "${BASH_SOURCE[0]}"))
 ## cd to the parent directory, i.e. the root of the git repo
 cd ${scriptDir}/..
 
+
+ls -l ${KOKORO_KEYSTORE_DIR}/73713_google-cloud-pubsublite-java-token
+
 # Print out Java version
 java -version
 echo ${JOB_TYPE}
