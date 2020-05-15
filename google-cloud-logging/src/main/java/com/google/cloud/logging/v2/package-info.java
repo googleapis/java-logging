@@ -28,7 +28,7 @@
  * <pre>
  * <code>
  * try (ConfigClient configClient = ConfigClient.create()) {
- *   SinkName sinkName = ProjectSinkName.of("[PROJECT]", "[SINK]");
+ *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
  *   LogSink response = configClient.getSink(sinkName);
  * }
  * </code>
@@ -43,8 +43,11 @@
  * <pre>
  * <code>
  * try (LoggingClient loggingClient = LoggingClient.create()) {
- *   LogName logName = ProjectLogName.of("[PROJECT]", "[LOG]");
- *   loggingClient.deleteLog(logName);
+ *   LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
+ *   MonitoredResource resource = MonitoredResource.newBuilder().build();
+ *   Map&lt;String, String&gt; labels = new HashMap&lt;&gt;();
+ *   List&lt;LogEntry&gt; entries = new ArrayList&lt;&gt;();
+ *   WriteLogEntriesResponse response = loggingClient.writeLogEntries(logName, resource, labels, entries);
  * }
  * </code>
  * </pre>
@@ -58,7 +61,7 @@
  * <pre>
  * <code>
  * try (MetricsClient metricsClient = MetricsClient.create()) {
- *   MetricName metricName = ProjectMetricName.of("[PROJECT]", "[METRIC]");
+ *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
  *   LogMetric response = metricsClient.getLogMetric(metricName);
  * }
  * </code>

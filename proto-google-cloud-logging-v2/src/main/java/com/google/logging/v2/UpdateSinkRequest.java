@@ -151,8 +151,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
    *
    *
    * <pre>
-   * Required. The full resource name of the sink to update, including the
-   * parent resource and the sink identifier:
+   * Required. The full resource name of the sink to update, including the parent
+   * resource and the sink identifier:
    *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
    *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
    *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
@@ -181,8 +181,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
    *
    *
    * <pre>
-   * Required. The full resource name of the sink to update, including the
-   * parent resource and the sink identifier:
+   * Required. The full resource name of the sink to update, including the parent
+   * resource and the sink identifier:
    *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
    *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
    *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
@@ -214,8 +214,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
    *
    *
    * <pre>
-   * Required. The updated sink, whose name is the same identifier that appears
-   * as part of `sink_name`.
+   * Required. The updated sink, whose name is the same identifier that appears as part
+   * of `sink_name`.
    * </pre>
    *
    * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
@@ -229,8 +229,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
    *
    *
    * <pre>
-   * Required. The updated sink, whose name is the same identifier that appears
-   * as part of `sink_name`.
+   * Required. The updated sink, whose name is the same identifier that appears as part
+   * of `sink_name`.
    * </pre>
    *
    * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
@@ -244,8 +244,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
    *
    *
    * <pre>
-   * Required. The updated sink, whose name is the same identifier that appears
-   * as part of `sink_name`.
+   * Required. The updated sink, whose name is the same identifier that appears as part
+   * of `sink_name`.
    * </pre>
    *
    * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
@@ -272,7 +272,7 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
    *     set to false or defaulted to false.
    * </pre>
    *
-   * <code>bool unique_writer_identity = 3;</code>
+   * <code>bool unique_writer_identity = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
    *
    * @return The uniqueWriterIdentity.
    */
@@ -299,7 +299,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
    * Example: `updateMask=filter`.
    * </pre>
    *
-   * <code>.google.protobuf.FieldMask update_mask = 4;</code>
+   * <code>.google.protobuf.FieldMask update_mask = 4 [(.google.api.field_behavior) = OPTIONAL];
+   * </code>
    *
    * @return Whether the updateMask field is set.
    */
@@ -323,7 +324,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
    * Example: `updateMask=filter`.
    * </pre>
    *
-   * <code>.google.protobuf.FieldMask update_mask = 4;</code>
+   * <code>.google.protobuf.FieldMask update_mask = 4 [(.google.api.field_behavior) = OPTIONAL];
+   * </code>
    *
    * @return The updateMask.
    */
@@ -347,7 +349,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
    * Example: `updateMask=filter`.
    * </pre>
    *
-   * <code>.google.protobuf.FieldMask update_mask = 4;</code>
+   * <code>.google.protobuf.FieldMask update_mask = 4 [(.google.api.field_behavior) = OPTIONAL];
+   * </code>
    */
   public com.google.protobuf.FieldMaskOrBuilder getUpdateMaskOrBuilder() {
     return getUpdateMask();
@@ -744,8 +747,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      *
      *
      * <pre>
-     * Required. The full resource name of the sink to update, including the
-     * parent resource and the sink identifier:
+     * Required. The full resource name of the sink to update, including the parent
+     * resource and the sink identifier:
      *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
      *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
      *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
@@ -774,8 +777,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      *
      *
      * <pre>
-     * Required. The full resource name of the sink to update, including the
-     * parent resource and the sink identifier:
+     * Required. The full resource name of the sink to update, including the parent
+     * resource and the sink identifier:
      *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
      *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
      *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
@@ -804,8 +807,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      *
      *
      * <pre>
-     * Required. The full resource name of the sink to update, including the
-     * parent resource and the sink identifier:
+     * Required. The full resource name of the sink to update, including the parent
+     * resource and the sink identifier:
      *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
      *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
      *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
@@ -833,8 +836,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      *
      *
      * <pre>
-     * Required. The full resource name of the sink to update, including the
-     * parent resource and the sink identifier:
+     * Required. The full resource name of the sink to update, including the parent
+     * resource and the sink identifier:
      *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
      *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
      *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
@@ -858,8 +861,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      *
      *
      * <pre>
-     * Required. The full resource name of the sink to update, including the
-     * parent resource and the sink identifier:
+     * Required. The full resource name of the sink to update, including the parent
+     * resource and the sink identifier:
      *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
      *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
      *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
@@ -895,8 +898,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      *
      *
      * <pre>
-     * Required. The updated sink, whose name is the same identifier that appears
-     * as part of `sink_name`.
+     * Required. The updated sink, whose name is the same identifier that appears as part
+     * of `sink_name`.
      * </pre>
      *
      * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
@@ -910,8 +913,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      *
      *
      * <pre>
-     * Required. The updated sink, whose name is the same identifier that appears
-     * as part of `sink_name`.
+     * Required. The updated sink, whose name is the same identifier that appears as part
+     * of `sink_name`.
      * </pre>
      *
      * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
@@ -929,8 +932,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      *
      *
      * <pre>
-     * Required. The updated sink, whose name is the same identifier that appears
-     * as part of `sink_name`.
+     * Required. The updated sink, whose name is the same identifier that appears as part
+     * of `sink_name`.
      * </pre>
      *
      * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
@@ -952,8 +955,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      *
      *
      * <pre>
-     * Required. The updated sink, whose name is the same identifier that appears
-     * as part of `sink_name`.
+     * Required. The updated sink, whose name is the same identifier that appears as part
+     * of `sink_name`.
      * </pre>
      *
      * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
@@ -972,8 +975,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      *
      *
      * <pre>
-     * Required. The updated sink, whose name is the same identifier that appears
-     * as part of `sink_name`.
+     * Required. The updated sink, whose name is the same identifier that appears as part
+     * of `sink_name`.
      * </pre>
      *
      * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
@@ -996,8 +999,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      *
      *
      * <pre>
-     * Required. The updated sink, whose name is the same identifier that appears
-     * as part of `sink_name`.
+     * Required. The updated sink, whose name is the same identifier that appears as part
+     * of `sink_name`.
      * </pre>
      *
      * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
@@ -1017,8 +1020,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      *
      *
      * <pre>
-     * Required. The updated sink, whose name is the same identifier that appears
-     * as part of `sink_name`.
+     * Required. The updated sink, whose name is the same identifier that appears as part
+     * of `sink_name`.
      * </pre>
      *
      * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
@@ -1032,8 +1035,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      *
      *
      * <pre>
-     * Required. The updated sink, whose name is the same identifier that appears
-     * as part of `sink_name`.
+     * Required. The updated sink, whose name is the same identifier that appears as part
+     * of `sink_name`.
      * </pre>
      *
      * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
@@ -1049,8 +1052,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      *
      *
      * <pre>
-     * Required. The updated sink, whose name is the same identifier that appears
-     * as part of `sink_name`.
+     * Required. The updated sink, whose name is the same identifier that appears as part
+     * of `sink_name`.
      * </pre>
      *
      * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
@@ -1089,7 +1092,7 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      *     set to false or defaulted to false.
      * </pre>
      *
-     * <code>bool unique_writer_identity = 3;</code>
+     * <code>bool unique_writer_identity = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @return The uniqueWriterIdentity.
      */
@@ -1112,7 +1115,7 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      *     set to false or defaulted to false.
      * </pre>
      *
-     * <code>bool unique_writer_identity = 3;</code>
+     * <code>bool unique_writer_identity = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @param value The uniqueWriterIdentity to set.
      * @return This builder for chaining.
@@ -1139,7 +1142,7 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      *     set to false or defaulted to false.
      * </pre>
      *
-     * <code>bool unique_writer_identity = 3;</code>
+     * <code>bool unique_writer_identity = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      *
      * @return This builder for chaining.
      */
@@ -1173,7 +1176,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      * Example: `updateMask=filter`.
      * </pre>
      *
-     * <code>.google.protobuf.FieldMask update_mask = 4;</code>
+     * <code>.google.protobuf.FieldMask update_mask = 4 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      *
      * @return Whether the updateMask field is set.
      */
@@ -1197,7 +1201,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      * Example: `updateMask=filter`.
      * </pre>
      *
-     * <code>.google.protobuf.FieldMask update_mask = 4;</code>
+     * <code>.google.protobuf.FieldMask update_mask = 4 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      *
      * @return The updateMask.
      */
@@ -1227,7 +1232,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      * Example: `updateMask=filter`.
      * </pre>
      *
-     * <code>.google.protobuf.FieldMask update_mask = 4;</code>
+     * <code>.google.protobuf.FieldMask update_mask = 4 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      */
     public Builder setUpdateMask(com.google.protobuf.FieldMask value) {
       if (updateMaskBuilder_ == null) {
@@ -1259,7 +1265,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      * Example: `updateMask=filter`.
      * </pre>
      *
-     * <code>.google.protobuf.FieldMask update_mask = 4;</code>
+     * <code>.google.protobuf.FieldMask update_mask = 4 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      */
     public Builder setUpdateMask(com.google.protobuf.FieldMask.Builder builderForValue) {
       if (updateMaskBuilder_ == null) {
@@ -1288,7 +1295,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      * Example: `updateMask=filter`.
      * </pre>
      *
-     * <code>.google.protobuf.FieldMask update_mask = 4;</code>
+     * <code>.google.protobuf.FieldMask update_mask = 4 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      */
     public Builder mergeUpdateMask(com.google.protobuf.FieldMask value) {
       if (updateMaskBuilder_ == null) {
@@ -1322,7 +1330,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      * Example: `updateMask=filter`.
      * </pre>
      *
-     * <code>.google.protobuf.FieldMask update_mask = 4;</code>
+     * <code>.google.protobuf.FieldMask update_mask = 4 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      */
     public Builder clearUpdateMask() {
       if (updateMaskBuilder_ == null) {
@@ -1352,7 +1361,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      * Example: `updateMask=filter`.
      * </pre>
      *
-     * <code>.google.protobuf.FieldMask update_mask = 4;</code>
+     * <code>.google.protobuf.FieldMask update_mask = 4 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      */
     public com.google.protobuf.FieldMask.Builder getUpdateMaskBuilder() {
 
@@ -1376,7 +1386,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      * Example: `updateMask=filter`.
      * </pre>
      *
-     * <code>.google.protobuf.FieldMask update_mask = 4;</code>
+     * <code>.google.protobuf.FieldMask update_mask = 4 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      */
     public com.google.protobuf.FieldMaskOrBuilder getUpdateMaskOrBuilder() {
       if (updateMaskBuilder_ != null) {
@@ -1404,7 +1415,8 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      * Example: `updateMask=filter`.
      * </pre>
      *
-     * <code>.google.protobuf.FieldMask update_mask = 4;</code>
+     * <code>.google.protobuf.FieldMask update_mask = 4 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
             com.google.protobuf.FieldMask,

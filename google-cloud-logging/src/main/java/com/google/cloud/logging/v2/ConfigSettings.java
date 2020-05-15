@@ -15,6 +15,7 @@
  */
 package com.google.cloud.logging.v2;
 
+import static com.google.cloud.logging.v2.ConfigClient.ListBucketsPagedResponse;
 import static com.google.cloud.logging.v2.ConfigClient.ListExclusionsPagedResponse;
 import static com.google.cloud.logging.v2.ConfigClient.ListSinksPagedResponse;
 
@@ -35,15 +36,20 @@ import com.google.logging.v2.CreateExclusionRequest;
 import com.google.logging.v2.CreateSinkRequest;
 import com.google.logging.v2.DeleteExclusionRequest;
 import com.google.logging.v2.DeleteSinkRequest;
+import com.google.logging.v2.GetBucketRequest;
 import com.google.logging.v2.GetCmekSettingsRequest;
 import com.google.logging.v2.GetExclusionRequest;
 import com.google.logging.v2.GetSinkRequest;
+import com.google.logging.v2.ListBucketsRequest;
+import com.google.logging.v2.ListBucketsResponse;
 import com.google.logging.v2.ListExclusionsRequest;
 import com.google.logging.v2.ListExclusionsResponse;
 import com.google.logging.v2.ListSinksRequest;
 import com.google.logging.v2.ListSinksResponse;
+import com.google.logging.v2.LogBucket;
 import com.google.logging.v2.LogExclusion;
 import com.google.logging.v2.LogSink;
+import com.google.logging.v2.UpdateBucketRequest;
 import com.google.logging.v2.UpdateCmekSettingsRequest;
 import com.google.logging.v2.UpdateExclusionRequest;
 import com.google.logging.v2.UpdateSinkRequest;
@@ -86,6 +92,22 @@ import javax.annotation.Generated;
 @Generated("by gapic-generator")
 @BetaApi
 public class ConfigSettings extends ClientSettings<ConfigSettings> {
+  /** Returns the object with the settings used for calls to listBuckets. */
+  public PagedCallSettings<ListBucketsRequest, ListBucketsResponse, ListBucketsPagedResponse>
+      listBucketsSettings() {
+    return ((ConfigServiceV2StubSettings) getStubSettings()).listBucketsSettings();
+  }
+
+  /** Returns the object with the settings used for calls to getBucket. */
+  public UnaryCallSettings<GetBucketRequest, LogBucket> getBucketSettings() {
+    return ((ConfigServiceV2StubSettings) getStubSettings()).getBucketSettings();
+  }
+
+  /** Returns the object with the settings used for calls to updateBucket. */
+  public UnaryCallSettings<UpdateBucketRequest, LogBucket> updateBucketSettings() {
+    return ((ConfigServiceV2StubSettings) getStubSettings()).updateBucketSettings();
+  }
+
   /** Returns the object with the settings used for calls to listSinks. */
   public PagedCallSettings<ListSinksRequest, ListSinksResponse, ListSinksPagedResponse>
       listSinksSettings() {
@@ -243,6 +265,23 @@ public class ConfigSettings extends ClientSettings<ConfigSettings> {
       super.applyToAllUnaryMethods(
           getStubSettingsBuilder().unaryMethodSettingsBuilders(), settingsUpdater);
       return this;
+    }
+
+    /** Returns the builder for the settings used for calls to listBuckets. */
+    public PagedCallSettings.Builder<
+            ListBucketsRequest, ListBucketsResponse, ListBucketsPagedResponse>
+        listBucketsSettings() {
+      return getStubSettingsBuilder().listBucketsSettings();
+    }
+
+    /** Returns the builder for the settings used for calls to getBucket. */
+    public UnaryCallSettings.Builder<GetBucketRequest, LogBucket> getBucketSettings() {
+      return getStubSettingsBuilder().getBucketSettings();
+    }
+
+    /** Returns the builder for the settings used for calls to updateBucket. */
+    public UnaryCallSettings.Builder<UpdateBucketRequest, LogBucket> updateBucketSettings() {
+      return getStubSettingsBuilder().updateBucketSettings();
     }
 
     /** Returns the builder for the settings used for calls to listSinks. */
