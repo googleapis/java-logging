@@ -209,6 +209,7 @@ public abstract class BaseSystemTest {
   @Test
   public void testWriteAndListLogEntries() throws InterruptedException {
     String logId = formatForTest("test-write-log-entries-log");
+    System.out.println(logId);
     LoggingOptions loggingOptions = logging().getOptions();
     LogName logName = ProjectLogName.of(loggingOptions.getProjectId(), logId);
     StringPayload firstPayload = StringPayload.of("stringPayload");
@@ -235,6 +236,7 @@ public abstract class BaseSystemTest {
     EntryListOption[] options = {EntryListOption.filter(filter), EntryListOption.pageSize(1)};
     Page<LogEntry> page = logging().listLogEntries(options);
     while (Iterators.size(page.iterateAll().iterator()) < 2) {
+      System.out.println("sleeping 1");
       Thread.sleep(500);
       page = logging().listLogEntries(options);
     }
@@ -268,6 +270,7 @@ public abstract class BaseSystemTest {
         };
     page = logging().listLogEntries(options);
     while (Iterators.size(page.iterateAll().iterator()) < 2) {
+      System.out.println("sleeping 2");
       Thread.sleep(500);
       page = logging().listLogEntries(options);
     }
@@ -280,6 +283,7 @@ public abstract class BaseSystemTest {
     int allowedDeleteAttempts = 5;
     boolean deleted = false;
     while (!deleted && deleteAttempts < allowedDeleteAttempts) {
+      System.out.println("sleeping 3");
       Thread.sleep(5000);
       deleted = logging().deleteLog(logId);
       deleteAttempts++;
