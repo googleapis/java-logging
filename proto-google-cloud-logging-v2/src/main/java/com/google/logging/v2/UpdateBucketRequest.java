@@ -164,6 +164,7 @@ public final class UpdateBucketRequest extends com.google.protobuf.GeneratedMess
    *
    * @return The name.
    */
+  @java.lang.Override
   public java.lang.String getName() {
     java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
@@ -196,6 +197,7 @@ public final class UpdateBucketRequest extends com.google.protobuf.GeneratedMess
    *
    * @return The bytes for name.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getNameBytes() {
     java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
@@ -221,6 +223,7 @@ public final class UpdateBucketRequest extends com.google.protobuf.GeneratedMess
    *
    * @return Whether the bucket field is set.
    */
+  @java.lang.Override
   public boolean hasBucket() {
     return bucket_ != null;
   }
@@ -235,6 +238,7 @@ public final class UpdateBucketRequest extends com.google.protobuf.GeneratedMess
    *
    * @return The bucket.
    */
+  @java.lang.Override
   public com.google.logging.v2.LogBucket getBucket() {
     return bucket_ == null ? com.google.logging.v2.LogBucket.getDefaultInstance() : bucket_;
   }
@@ -247,6 +251,7 @@ public final class UpdateBucketRequest extends com.google.protobuf.GeneratedMess
    *
    * <code>.google.logging.v2.LogBucket bucket = 2 [(.google.api.field_behavior) = REQUIRED];</code>
    */
+  @java.lang.Override
   public com.google.logging.v2.LogBucketOrBuilder getBucketOrBuilder() {
     return getBucket();
   }
@@ -270,6 +275,7 @@ public final class UpdateBucketRequest extends com.google.protobuf.GeneratedMess
    *
    * @return Whether the updateMask field is set.
    */
+  @java.lang.Override
   public boolean hasUpdateMask() {
     return updateMask_ != null;
   }
@@ -290,6 +296,7 @@ public final class UpdateBucketRequest extends com.google.protobuf.GeneratedMess
    *
    * @return The updateMask.
    */
+  @java.lang.Override
   public com.google.protobuf.FieldMask getUpdateMask() {
     return updateMask_ == null ? com.google.protobuf.FieldMask.getDefaultInstance() : updateMask_;
   }
@@ -308,6 +315,7 @@ public final class UpdateBucketRequest extends com.google.protobuf.GeneratedMess
    * <code>.google.protobuf.FieldMask update_mask = 4 [(.google.api.field_behavior) = REQUIRED];
    * </code>
    */
+  @java.lang.Override
   public com.google.protobuf.FieldMaskOrBuilder getUpdateMaskOrBuilder() {
     return getUpdateMask();
   }

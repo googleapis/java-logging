@@ -144,6 +144,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
    *
    * @return The id.
    */
+  @java.lang.Override
   public java.lang.String getId() {
     java.lang.Object ref = id_;
     if (ref instanceof java.lang.String) {
@@ -167,6 +168,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
    *
    * @return The bytes for id.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getIdBytes() {
     java.lang.Object ref = id_;
     if (ref instanceof java.lang.String) {
@@ -194,6 +196,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
    *
    * @return The producer.
    */
+  @java.lang.Override
   public java.lang.String getProducer() {
     java.lang.Object ref = producer_;
     if (ref instanceof java.lang.String) {
@@ -218,6 +221,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
    *
    * @return The bytes for producer.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getProducerBytes() {
     java.lang.Object ref = producer_;
     if (ref instanceof java.lang.String) {
@@ -243,6 +247,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
    *
    * @return The first.
    */
+  @java.lang.Override
   public boolean getFirst() {
     return first_;
   }
@@ -260,6 +265,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
    *
    * @return The last.
    */
+  @java.lang.Override
   public boolean getLast() {
     return last_;
   }
@@ -865,6 +871,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      *
      * @return The first.
      */
+    @java.lang.Override
     public boolean getFirst() {
       return first_;
     }
@@ -916,6 +923,7 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      *
      * @return The last.
      */
+    @java.lang.Override
     public boolean getLast() {
       return last_;
     }

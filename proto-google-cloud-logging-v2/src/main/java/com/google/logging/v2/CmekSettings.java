@@ -146,6 +146,7 @@ public final class CmekSettings extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The name.
    */
+  @java.lang.Override
   public java.lang.String getName() {
     java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
@@ -168,6 +169,7 @@ public final class CmekSettings extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The bytes for name.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getNameBytes() {
     java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
@@ -208,6 +210,7 @@ public final class CmekSettings extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The kmsKeyName.
    */
+  @java.lang.Override
   public java.lang.String getKmsKeyName() {
     java.lang.Object ref = kmsKeyName_;
     if (ref instanceof java.lang.String) {
@@ -245,6 +248,7 @@ public final class CmekSettings extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The bytes for kmsKeyName.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getKmsKeyNameBytes() {
     java.lang.Object ref = kmsKeyName_;
     if (ref instanceof java.lang.String) {
@@ -278,6 +282,7 @@ public final class CmekSettings extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The serviceAccountId.
    */
+  @java.lang.Override
   public java.lang.String getServiceAccountId() {
     java.lang.Object ref = serviceAccountId_;
     if (ref instanceof java.lang.String) {
@@ -308,6 +313,7 @@ public final class CmekSettings extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The bytes for serviceAccountId.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getServiceAccountIdBytes() {
     java.lang.Object ref = serviceAccountId_;
     if (ref instanceof java.lang.String) {

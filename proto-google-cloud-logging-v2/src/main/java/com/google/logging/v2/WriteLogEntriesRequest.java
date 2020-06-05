@@ -202,6 +202,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    *
    * @return The logName.
    */
+  @java.lang.Override
   public java.lang.String getLogName() {
     java.lang.Object ref = logName_;
     if (ref instanceof java.lang.String) {
@@ -238,6 +239,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    *
    * @return The bytes for logName.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getLogNameBytes() {
     java.lang.Object ref = logName_;
     if (ref instanceof java.lang.String) {
@@ -269,6 +271,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    *
    * @return Whether the resource field is set.
    */
+  @java.lang.Override
   public boolean hasResource() {
     return resource_ != null;
   }
@@ -289,6 +292,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    *
    * @return The resource.
    */
+  @java.lang.Override
   public com.google.api.MonitoredResource getResource() {
     return resource_ == null ? com.google.api.MonitoredResource.getDefaultInstance() : resource_;
   }
@@ -307,6 +311,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * <code>.google.api.MonitoredResource resource = 2 [(.google.api.field_behavior) = OPTIONAL];
    * </code>
    */
+  @java.lang.Override
   public com.google.api.MonitoredResourceOrBuilder getResourceOrBuilder() {
     return getResource();
   }
@@ -348,6 +353,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    *
    * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
    */
+  @java.lang.Override
   public boolean containsLabels(java.lang.String key) {
     if (key == null) {
       throw new java.lang.NullPointerException();
@@ -355,6 +361,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
     return internalGetLabels().getMap().containsKey(key);
   }
   /** Use {@link #getLabelsMap()} instead. */
+  @java.lang.Override
   @java.lang.Deprecated
   public java.util.Map<java.lang.String, java.lang.String> getLabels() {
     return getLabelsMap();
@@ -371,6 +378,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    *
    * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
    */
+  @java.lang.Override
   public java.util.Map<java.lang.String, java.lang.String> getLabelsMap() {
     return internalGetLabels().getMap();
   }
@@ -386,6 +394,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    *
    * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
    */
+  @java.lang.Override
   public java.lang.String getLabelsOrDefault(java.lang.String key, java.lang.String defaultValue) {
     if (key == null) {
       throw new java.lang.NullPointerException();
@@ -405,6 +414,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    *
    * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
    */
+  @java.lang.Override
   public java.lang.String getLabelsOrThrow(java.lang.String key) {
     if (key == null) {
       throw new java.lang.NullPointerException();
@@ -448,6 +458,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
    * </code>
    */
+  @java.lang.Override
   public java.util.List<com.google.logging.v2.LogEntry> getEntriesList() {
     return entries_;
   }
@@ -481,6 +492,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
    * </code>
    */
+  @java.lang.Override
   public java.util.List<? extends com.google.logging.v2.LogEntryOrBuilder>
       getEntriesOrBuilderList() {
     return entries_;
@@ -515,6 +527,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
    * </code>
    */
+  @java.lang.Override
   public int getEntriesCount() {
     return entries_.size();
   }
@@ -548,6 +561,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
    * </code>
    */
+  @java.lang.Override
   public com.google.logging.v2.LogEntry getEntries(int index) {
     return entries_.get(index);
   }
@@ -581,6 +595,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
    * </code>
    */
+  @java.lang.Override
   public com.google.logging.v2.LogEntryOrBuilder getEntriesOrBuilder(int index) {
     return entries_.get(index);
   }
@@ -602,6 +617,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    *
    * @return The partialSuccess.
    */
+  @java.lang.Override
   public boolean getPartialSuccess() {
     return partialSuccess_;
   }
@@ -621,6 +637,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    *
    * @return The dryRun.
    */
+  @java.lang.Override
   public boolean getDryRun() {
     return dryRun_;
   }
@@ -1550,6 +1567,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      *
      * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      */
+    @java.lang.Override
     public boolean containsLabels(java.lang.String key) {
       if (key == null) {
         throw new java.lang.NullPointerException();
@@ -1557,6 +1575,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
       return internalGetLabels().getMap().containsKey(key);
     }
     /** Use {@link #getLabelsMap()} instead. */
+    @java.lang.Override
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.String> getLabels() {
       return getLabelsMap();
@@ -1573,6 +1592,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      *
      * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      */
+    @java.lang.Override
     public java.util.Map<java.lang.String, java.lang.String> getLabelsMap() {
       return internalGetLabels().getMap();
     }
@@ -1588,6 +1608,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      *
      * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      */
+    @java.lang.Override
     public java.lang.String getLabelsOrDefault(
         java.lang.String key, java.lang.String defaultValue) {
       if (key == null) {
@@ -1608,6 +1629,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      *
      * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      */
+    @java.lang.Override
     public java.lang.String getLabelsOrThrow(java.lang.String key) {
       if (key == null) {
         throw new java.lang.NullPointerException();
@@ -2426,6 +2448,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      *
      * @return The partialSuccess.
      */
+    @java.lang.Override
     public boolean getPartialSuccess() {
       return partialSuccess_;
     }
@@ -2487,6 +2510,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      *
      * @return The dryRun.
      */
+    @java.lang.Override
     public boolean getDryRun() {
       return dryRun_;
     }

@@ -131,6 +131,7 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
    *
    * @return The usePartitionedTables.
    */
+  @java.lang.Override
   public boolean getUsePartitionedTables() {
     return usePartitionedTables_;
   }
@@ -154,6 +155,7 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
    *
    * @return The usesTimestampColumnPartitioning.
    */
+  @java.lang.Override
   public boolean getUsesTimestampColumnPartitioning() {
     return usesTimestampColumnPartitioning_;
   }
@@ -509,6 +511,7 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
      *
      * @return The usePartitionedTables.
      */
+    @java.lang.Override
     public boolean getUsePartitionedTables() {
       return usePartitionedTables_;
     }
@@ -579,6 +582,7 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
      *
      * @return The usesTimestampColumnPartitioning.
      */
+    @java.lang.Override
     public boolean getUsesTimestampColumnPartitioning() {
       return usesTimestampColumnPartitioning_;
     }

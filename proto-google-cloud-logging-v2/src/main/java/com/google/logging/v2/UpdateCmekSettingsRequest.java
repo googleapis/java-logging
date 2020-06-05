@@ -165,6 +165,7 @@ public final class UpdateCmekSettingsRequest extends com.google.protobuf.Generat
    *
    * @return The name.
    */
+  @java.lang.Override
   public java.lang.String getName() {
     java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
@@ -195,6 +196,7 @@ public final class UpdateCmekSettingsRequest extends com.google.protobuf.Generat
    *
    * @return The bytes for name.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getNameBytes() {
     java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
@@ -224,6 +226,7 @@ public final class UpdateCmekSettingsRequest extends com.google.protobuf.Generat
    *
    * @return Whether the cmekSettings field is set.
    */
+  @java.lang.Override
   public boolean hasCmekSettings() {
     return cmekSettings_ != null;
   }
@@ -242,6 +245,7 @@ public final class UpdateCmekSettingsRequest extends com.google.protobuf.Generat
    *
    * @return The cmekSettings.
    */
+  @java.lang.Override
   public com.google.logging.v2.CmekSettings getCmekSettings() {
     return cmekSettings_ == null
         ? com.google.logging.v2.CmekSettings.getDefaultInstance()
@@ -260,6 +264,7 @@ public final class UpdateCmekSettingsRequest extends com.google.protobuf.Generat
    * .google.logging.v2.CmekSettings cmek_settings = 2 [(.google.api.field_behavior) = REQUIRED];
    * </code>
    */
+  @java.lang.Override
   public com.google.logging.v2.CmekSettingsOrBuilder getCmekSettingsOrBuilder() {
     return getCmekSettings();
   }
@@ -282,6 +287,7 @@ public final class UpdateCmekSettingsRequest extends com.google.protobuf.Generat
    *
    * @return Whether the updateMask field is set.
    */
+  @java.lang.Override
   public boolean hasUpdateMask() {
     return updateMask_ != null;
   }
@@ -301,6 +307,7 @@ public final class UpdateCmekSettingsRequest extends com.google.protobuf.Generat
    *
    * @return The updateMask.
    */
+  @java.lang.Override
   public com.google.protobuf.FieldMask getUpdateMask() {
     return updateMask_ == null ? com.google.protobuf.FieldMask.getDefaultInstance() : updateMask_;
   }
@@ -318,6 +325,7 @@ public final class UpdateCmekSettingsRequest extends com.google.protobuf.Generat
    * <code>.google.protobuf.FieldMask update_mask = 3 [(.google.api.field_behavior) = OPTIONAL];
    * </code>
    */
+  @java.lang.Override
   public com.google.protobuf.FieldMaskOrBuilder getUpdateMaskOrBuilder() {
     return getUpdateMask();
   }

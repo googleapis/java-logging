@@ -132,6 +132,7 @@ public final class DeleteSinkRequest extends com.google.protobuf.GeneratedMessag
    *
    * @return The sinkName.
    */
+  @java.lang.Override
   public java.lang.String getSinkName() {
     java.lang.Object ref = sinkName_;
     if (ref instanceof java.lang.String) {
@@ -162,6 +163,7 @@ public final class DeleteSinkRequest extends com.google.protobuf.GeneratedMessag
    *
    * @return The bytes for sinkName.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getSinkNameBytes() {
     java.lang.Object ref = sinkName_;
     if (ref instanceof java.lang.String) {
