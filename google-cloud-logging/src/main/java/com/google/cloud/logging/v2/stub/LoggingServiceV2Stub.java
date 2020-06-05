@@ -44,10 +44,6 @@ import javax.annotation.Generated;
 @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
 public abstract class LoggingServiceV2Stub implements BackgroundResource {
 
-  public UnaryCallable<WriteLogEntriesRequest, WriteLogEntriesResponse> writeLogEntriesCallable() {
-    throw new UnsupportedOperationException("Not implemented: writeLogEntriesCallable()");
-  }
-
   public UnaryCallable<DeleteLogRequest, Empty> deleteLogCallable() {
     throw new UnsupportedOperationException("Not implemented: deleteLogCallable()");
   }
@@ -59,6 +55,10 @@ public abstract class LoggingServiceV2Stub implements BackgroundResource {
 
   public UnaryCallable<ListLogEntriesRequest, ListLogEntriesResponse> listLogEntriesCallable() {
     throw new UnsupportedOperationException("Not implemented: listLogEntriesCallable()");
+  }
+
+  public UnaryCallable<WriteLogEntriesRequest, WriteLogEntriesResponse> writeLogEntriesCallable() {
+    throw new UnsupportedOperationException("Not implemented: writeLogEntriesCallable()");
   }
 
   public UnaryCallable<

@@ -119,6 +119,197 @@ public class ConfigClientTest {
 
   @Test
   @SuppressWarnings("all")
+  public void deleteSinkTest() {
+    Empty expectedResponse = Empty.newBuilder().build();
+    mockConfigServiceV2.addResponse(expectedResponse);
+
+    LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+
+    client.deleteSink(sinkName);
+
+    List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
+    Assert.assertEquals(1, actualRequests.size());
+    DeleteSinkRequest actualRequest = (DeleteSinkRequest) actualRequests.get(0);
+
+    Assert.assertEquals(sinkName, LogSinkName.parse(actualRequest.getSinkName()));
+    Assert.assertTrue(
+        channelProvider.isHeaderSent(
+            ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
+            GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
+  }
+
+  @Test
+  @SuppressWarnings("all")
+  public void deleteSinkExceptionTest() throws Exception {
+    StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
+    mockConfigServiceV2.addException(exception);
+
+    try {
+      LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+
+      client.deleteSink(sinkName);
+      Assert.fail("No exception raised");
+    } catch (InvalidArgumentException e) {
+      // Expected exception
+    }
+  }
+
+  @Test
+  @SuppressWarnings("all")
+  public void updateSinkTest() {
+    LogSinkName name = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+    ResourceName destination = BillingAccountName.of("[BILLING_ACCOUNT]");
+    String filter = "filter-1274492040";
+    String description = "description-1724546052";
+    boolean disabled = true;
+    String writerIdentity = "writerIdentity775638794";
+    boolean includeChildren = true;
+    LogSink expectedResponse =
+        LogSink.newBuilder()
+            .setName(name.toString())
+            .setDestination(destination.toString())
+            .setFilter(filter)
+            .setDescription(description)
+            .setDisabled(disabled)
+            .setWriterIdentity(writerIdentity)
+            .setIncludeChildren(includeChildren)
+            .build();
+    mockConfigServiceV2.addResponse(expectedResponse);
+
+    LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+    LogSink sink = LogSink.newBuilder().build();
+    FieldMask updateMask = FieldMask.newBuilder().build();
+
+    LogSink actualResponse = client.updateSink(sinkName, sink, updateMask);
+    Assert.assertEquals(expectedResponse, actualResponse);
+
+    List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
+    Assert.assertEquals(1, actualRequests.size());
+    UpdateSinkRequest actualRequest = (UpdateSinkRequest) actualRequests.get(0);
+
+    Assert.assertEquals(sinkName, LogSinkName.parse(actualRequest.getSinkName()));
+    Assert.assertEquals(sink, actualRequest.getSink());
+    Assert.assertEquals(updateMask, actualRequest.getUpdateMask());
+    Assert.assertTrue(
+        channelProvider.isHeaderSent(
+            ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
+            GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
+  }
+
+  @Test
+  @SuppressWarnings("all")
+  public void updateSinkExceptionTest() throws Exception {
+    StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
+    mockConfigServiceV2.addException(exception);
+
+    try {
+      LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+      LogSink sink = LogSink.newBuilder().build();
+      FieldMask updateMask = FieldMask.newBuilder().build();
+
+      client.updateSink(sinkName, sink, updateMask);
+      Assert.fail("No exception raised");
+    } catch (InvalidArgumentException e) {
+      // Expected exception
+    }
+  }
+
+  @Test
+  @SuppressWarnings("all")
+  public void updateSinkTest2() {
+    LogSinkName name = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+    ResourceName destination = BillingAccountName.of("[BILLING_ACCOUNT]");
+    String filter = "filter-1274492040";
+    String description = "description-1724546052";
+    boolean disabled = true;
+    String writerIdentity = "writerIdentity775638794";
+    boolean includeChildren = true;
+    LogSink expectedResponse =
+        LogSink.newBuilder()
+            .setName(name.toString())
+            .setDestination(destination.toString())
+            .setFilter(filter)
+            .setDescription(description)
+            .setDisabled(disabled)
+            .setWriterIdentity(writerIdentity)
+            .setIncludeChildren(includeChildren)
+            .build();
+    mockConfigServiceV2.addResponse(expectedResponse);
+
+    LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+    LogSink sink = LogSink.newBuilder().build();
+
+    LogSink actualResponse = client.updateSink(sinkName, sink);
+    Assert.assertEquals(expectedResponse, actualResponse);
+
+    List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
+    Assert.assertEquals(1, actualRequests.size());
+    UpdateSinkRequest actualRequest = (UpdateSinkRequest) actualRequests.get(0);
+
+    Assert.assertEquals(sinkName, LogSinkName.parse(actualRequest.getSinkName()));
+    Assert.assertEquals(sink, actualRequest.getSink());
+    Assert.assertTrue(
+        channelProvider.isHeaderSent(
+            ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
+            GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
+  }
+
+  @Test
+  @SuppressWarnings("all")
+  public void updateSinkExceptionTest2() throws Exception {
+    StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
+    mockConfigServiceV2.addException(exception);
+
+    try {
+      LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+      LogSink sink = LogSink.newBuilder().build();
+
+      client.updateSink(sinkName, sink);
+      Assert.fail("No exception raised");
+    } catch (InvalidArgumentException e) {
+      // Expected exception
+    }
+  }
+
+  @Test
+  @SuppressWarnings("all")
+  public void deleteExclusionTest() {
+    Empty expectedResponse = Empty.newBuilder().build();
+    mockConfigServiceV2.addResponse(expectedResponse);
+
+    LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
+
+    client.deleteExclusion(name);
+
+    List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
+    Assert.assertEquals(1, actualRequests.size());
+    DeleteExclusionRequest actualRequest = (DeleteExclusionRequest) actualRequests.get(0);
+
+    Assert.assertEquals(name, LogExclusionName.parse(actualRequest.getName()));
+    Assert.assertTrue(
+        channelProvider.isHeaderSent(
+            ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
+            GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
+  }
+
+  @Test
+  @SuppressWarnings("all")
+  public void deleteExclusionExceptionTest() throws Exception {
+    StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
+    mockConfigServiceV2.addException(exception);
+
+    try {
+      LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
+
+      client.deleteExclusion(name);
+      Assert.fail("No exception raised");
+    } catch (InvalidArgumentException e) {
+      // Expected exception
+    }
+  }
+
+  @Test
+  @SuppressWarnings("all")
   public void listBucketsTest() {
     String nextPageToken = "";
     LogBucket bucketsElement = LogBucket.newBuilder().build();
@@ -441,160 +632,6 @@ public class ConfigClientTest {
 
   @Test
   @SuppressWarnings("all")
-  public void updateSinkTest() {
-    LogSinkName name = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-    ResourceName destination = BillingAccountName.of("[BILLING_ACCOUNT]");
-    String filter = "filter-1274492040";
-    String description = "description-1724546052";
-    boolean disabled = true;
-    String writerIdentity = "writerIdentity775638794";
-    boolean includeChildren = true;
-    LogSink expectedResponse =
-        LogSink.newBuilder()
-            .setName(name.toString())
-            .setDestination(destination.toString())
-            .setFilter(filter)
-            .setDescription(description)
-            .setDisabled(disabled)
-            .setWriterIdentity(writerIdentity)
-            .setIncludeChildren(includeChildren)
-            .build();
-    mockConfigServiceV2.addResponse(expectedResponse);
-
-    LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-    LogSink sink = LogSink.newBuilder().build();
-    FieldMask updateMask = FieldMask.newBuilder().build();
-
-    LogSink actualResponse = client.updateSink(sinkName, sink, updateMask);
-    Assert.assertEquals(expectedResponse, actualResponse);
-
-    List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assert.assertEquals(1, actualRequests.size());
-    UpdateSinkRequest actualRequest = (UpdateSinkRequest) actualRequests.get(0);
-
-    Assert.assertEquals(sinkName, LogSinkName.parse(actualRequest.getSinkName()));
-    Assert.assertEquals(sink, actualRequest.getSink());
-    Assert.assertEquals(updateMask, actualRequest.getUpdateMask());
-    Assert.assertTrue(
-        channelProvider.isHeaderSent(
-            ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
-            GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
-  }
-
-  @Test
-  @SuppressWarnings("all")
-  public void updateSinkExceptionTest() throws Exception {
-    StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
-    mockConfigServiceV2.addException(exception);
-
-    try {
-      LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-      LogSink sink = LogSink.newBuilder().build();
-      FieldMask updateMask = FieldMask.newBuilder().build();
-
-      client.updateSink(sinkName, sink, updateMask);
-      Assert.fail("No exception raised");
-    } catch (InvalidArgumentException e) {
-      // Expected exception
-    }
-  }
-
-  @Test
-  @SuppressWarnings("all")
-  public void updateSinkTest2() {
-    LogSinkName name = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-    ResourceName destination = BillingAccountName.of("[BILLING_ACCOUNT]");
-    String filter = "filter-1274492040";
-    String description = "description-1724546052";
-    boolean disabled = true;
-    String writerIdentity = "writerIdentity775638794";
-    boolean includeChildren = true;
-    LogSink expectedResponse =
-        LogSink.newBuilder()
-            .setName(name.toString())
-            .setDestination(destination.toString())
-            .setFilter(filter)
-            .setDescription(description)
-            .setDisabled(disabled)
-            .setWriterIdentity(writerIdentity)
-            .setIncludeChildren(includeChildren)
-            .build();
-    mockConfigServiceV2.addResponse(expectedResponse);
-
-    LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-    LogSink sink = LogSink.newBuilder().build();
-
-    LogSink actualResponse = client.updateSink(sinkName, sink);
-    Assert.assertEquals(expectedResponse, actualResponse);
-
-    List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assert.assertEquals(1, actualRequests.size());
-    UpdateSinkRequest actualRequest = (UpdateSinkRequest) actualRequests.get(0);
-
-    Assert.assertEquals(sinkName, LogSinkName.parse(actualRequest.getSinkName()));
-    Assert.assertEquals(sink, actualRequest.getSink());
-    Assert.assertTrue(
-        channelProvider.isHeaderSent(
-            ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
-            GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
-  }
-
-  @Test
-  @SuppressWarnings("all")
-  public void updateSinkExceptionTest2() throws Exception {
-    StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
-    mockConfigServiceV2.addException(exception);
-
-    try {
-      LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-      LogSink sink = LogSink.newBuilder().build();
-
-      client.updateSink(sinkName, sink);
-      Assert.fail("No exception raised");
-    } catch (InvalidArgumentException e) {
-      // Expected exception
-    }
-  }
-
-  @Test
-  @SuppressWarnings("all")
-  public void deleteSinkTest() {
-    Empty expectedResponse = Empty.newBuilder().build();
-    mockConfigServiceV2.addResponse(expectedResponse);
-
-    LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-
-    client.deleteSink(sinkName);
-
-    List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assert.assertEquals(1, actualRequests.size());
-    DeleteSinkRequest actualRequest = (DeleteSinkRequest) actualRequests.get(0);
-
-    Assert.assertEquals(sinkName, LogSinkName.parse(actualRequest.getSinkName()));
-    Assert.assertTrue(
-        channelProvider.isHeaderSent(
-            ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
-            GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
-  }
-
-  @Test
-  @SuppressWarnings("all")
-  public void deleteSinkExceptionTest() throws Exception {
-    StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
-    mockConfigServiceV2.addException(exception);
-
-    try {
-      LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-
-      client.deleteSink(sinkName);
-      Assert.fail("No exception raised");
-    } catch (InvalidArgumentException e) {
-      // Expected exception
-    }
-  }
-
-  @Test
-  @SuppressWarnings("all")
   public void listExclusionsTest() {
     String nextPageToken = "";
     LogExclusion exclusionsElement = LogExclusion.newBuilder().build();
@@ -788,43 +825,6 @@ public class ConfigClientTest {
       FieldMask updateMask = FieldMask.newBuilder().build();
 
       client.updateExclusion(name, exclusion, updateMask);
-      Assert.fail("No exception raised");
-    } catch (InvalidArgumentException e) {
-      // Expected exception
-    }
-  }
-
-  @Test
-  @SuppressWarnings("all")
-  public void deleteExclusionTest() {
-    Empty expectedResponse = Empty.newBuilder().build();
-    mockConfigServiceV2.addResponse(expectedResponse);
-
-    LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
-
-    client.deleteExclusion(name);
-
-    List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assert.assertEquals(1, actualRequests.size());
-    DeleteExclusionRequest actualRequest = (DeleteExclusionRequest) actualRequests.get(0);
-
-    Assert.assertEquals(name, LogExclusionName.parse(actualRequest.getName()));
-    Assert.assertTrue(
-        channelProvider.isHeaderSent(
-            ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
-            GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
-  }
-
-  @Test
-  @SuppressWarnings("all")
-  public void deleteExclusionExceptionTest() throws Exception {
-    StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
-    mockConfigServiceV2.addException(exception);
-
-    try {
-      LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
-
-      client.deleteExclusion(name);
       Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception

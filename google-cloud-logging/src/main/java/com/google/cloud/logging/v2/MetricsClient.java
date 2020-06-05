@@ -54,7 +54,8 @@ import javax.annotation.Generated;
  * <code>
  * try (MetricsClient metricsClient = MetricsClient.create()) {
  *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
- *   LogMetric response = metricsClient.getLogMetric(metricName);
+ *   LogMetric metric = LogMetric.newBuilder().build();
+ *   LogMetric response = metricsClient.updateLogMetric(metricName, metric);
  * }
  * </code>
  * </pre>
@@ -159,6 +160,207 @@ public class MetricsClient implements BackgroundResource {
   @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
   public MetricsServiceV2Stub getStub() {
     return stub;
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Creates or updates a logs-based metric.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
+   *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
+   *   LogMetric metric = LogMetric.newBuilder().build();
+   *   LogMetric response = metricsClient.updateLogMetric(metricName, metric);
+   * }
+   * </code></pre>
+   *
+   * @param metricName Required. The resource name of the metric to update:
+   *     <p>"projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+   *     <p>The updated metric must be provided in the request and it's `name` field must be the
+   *     same as `[METRIC_ID]` If the metric does not exist in `[PROJECT_ID]`, then a new metric is
+   *     created.
+   * @param metric Required. The updated metric.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final LogMetric updateLogMetric(LogMetricName metricName, LogMetric metric) {
+    UpdateLogMetricRequest request =
+        UpdateLogMetricRequest.newBuilder()
+            .setMetricName(metricName == null ? null : metricName.toString())
+            .setMetric(metric)
+            .build();
+    return updateLogMetric(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Creates or updates a logs-based metric.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
+   *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
+   *   LogMetric metric = LogMetric.newBuilder().build();
+   *   LogMetric response = metricsClient.updateLogMetric(metricName.toString(), metric);
+   * }
+   * </code></pre>
+   *
+   * @param metricName Required. The resource name of the metric to update:
+   *     <p>"projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+   *     <p>The updated metric must be provided in the request and it's `name` field must be the
+   *     same as `[METRIC_ID]` If the metric does not exist in `[PROJECT_ID]`, then a new metric is
+   *     created.
+   * @param metric Required. The updated metric.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final LogMetric updateLogMetric(String metricName, LogMetric metric) {
+    UpdateLogMetricRequest request =
+        UpdateLogMetricRequest.newBuilder().setMetricName(metricName).setMetric(metric).build();
+    return updateLogMetric(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Creates or updates a logs-based metric.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
+   *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
+   *   LogMetric metric = LogMetric.newBuilder().build();
+   *   UpdateLogMetricRequest request = UpdateLogMetricRequest.newBuilder()
+   *     .setMetricName(metricName.toString())
+   *     .setMetric(metric)
+   *     .build();
+   *   LogMetric response = metricsClient.updateLogMetric(request);
+   * }
+   * </code></pre>
+   *
+   * @param request The request object containing all of the parameters for the API call.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final LogMetric updateLogMetric(UpdateLogMetricRequest request) {
+    return updateLogMetricCallable().call(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Creates or updates a logs-based metric.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
+   *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
+   *   LogMetric metric = LogMetric.newBuilder().build();
+   *   UpdateLogMetricRequest request = UpdateLogMetricRequest.newBuilder()
+   *     .setMetricName(metricName.toString())
+   *     .setMetric(metric)
+   *     .build();
+   *   ApiFuture&lt;LogMetric&gt; future = metricsClient.updateLogMetricCallable().futureCall(request);
+   *   // Do something
+   *   LogMetric response = future.get();
+   * }
+   * </code></pre>
+   */
+  public final UnaryCallable<UpdateLogMetricRequest, LogMetric> updateLogMetricCallable() {
+    return stub.updateLogMetricCallable();
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Deletes a logs-based metric.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
+   *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
+   *   metricsClient.deleteLogMetric(metricName);
+   * }
+   * </code></pre>
+   *
+   * @param metricName Required. The resource name of the metric to delete:
+   *     <p>"projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final void deleteLogMetric(LogMetricName metricName) {
+    DeleteLogMetricRequest request =
+        DeleteLogMetricRequest.newBuilder()
+            .setMetricName(metricName == null ? null : metricName.toString())
+            .build();
+    deleteLogMetric(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Deletes a logs-based metric.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
+   *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
+   *   metricsClient.deleteLogMetric(metricName.toString());
+   * }
+   * </code></pre>
+   *
+   * @param metricName Required. The resource name of the metric to delete:
+   *     <p>"projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final void deleteLogMetric(String metricName) {
+    DeleteLogMetricRequest request =
+        DeleteLogMetricRequest.newBuilder().setMetricName(metricName).build();
+    deleteLogMetric(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Deletes a logs-based metric.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
+   *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
+   *   DeleteLogMetricRequest request = DeleteLogMetricRequest.newBuilder()
+   *     .setMetricName(metricName.toString())
+   *     .build();
+   *   metricsClient.deleteLogMetric(request);
+   * }
+   * </code></pre>
+   *
+   * @param request The request object containing all of the parameters for the API call.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final void deleteLogMetric(DeleteLogMetricRequest request) {
+    deleteLogMetricCallable().call(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Deletes a logs-based metric.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (MetricsClient metricsClient = MetricsClient.create()) {
+   *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
+   *   DeleteLogMetricRequest request = DeleteLogMetricRequest.newBuilder()
+   *     .setMetricName(metricName.toString())
+   *     .build();
+   *   ApiFuture&lt;Void&gt; future = metricsClient.deleteLogMetricCallable().futureCall(request);
+   *   // Do something
+   *   future.get();
+   * }
+   * </code></pre>
+   */
+  public final UnaryCallable<DeleteLogMetricRequest, Empty> deleteLogMetricCallable() {
+    return stub.deleteLogMetricCallable();
   }
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
@@ -491,207 +693,6 @@ public class MetricsClient implements BackgroundResource {
    */
   public final UnaryCallable<CreateLogMetricRequest, LogMetric> createLogMetricCallable() {
     return stub.createLogMetricCallable();
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Creates or updates a logs-based metric.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (MetricsClient metricsClient = MetricsClient.create()) {
-   *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
-   *   LogMetric metric = LogMetric.newBuilder().build();
-   *   LogMetric response = metricsClient.updateLogMetric(metricName, metric);
-   * }
-   * </code></pre>
-   *
-   * @param metricName Required. The resource name of the metric to update:
-   *     <p>"projects/[PROJECT_ID]/metrics/[METRIC_ID]"
-   *     <p>The updated metric must be provided in the request and it's `name` field must be the
-   *     same as `[METRIC_ID]` If the metric does not exist in `[PROJECT_ID]`, then a new metric is
-   *     created.
-   * @param metric Required. The updated metric.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final LogMetric updateLogMetric(LogMetricName metricName, LogMetric metric) {
-    UpdateLogMetricRequest request =
-        UpdateLogMetricRequest.newBuilder()
-            .setMetricName(metricName == null ? null : metricName.toString())
-            .setMetric(metric)
-            .build();
-    return updateLogMetric(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Creates or updates a logs-based metric.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (MetricsClient metricsClient = MetricsClient.create()) {
-   *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
-   *   LogMetric metric = LogMetric.newBuilder().build();
-   *   LogMetric response = metricsClient.updateLogMetric(metricName.toString(), metric);
-   * }
-   * </code></pre>
-   *
-   * @param metricName Required. The resource name of the metric to update:
-   *     <p>"projects/[PROJECT_ID]/metrics/[METRIC_ID]"
-   *     <p>The updated metric must be provided in the request and it's `name` field must be the
-   *     same as `[METRIC_ID]` If the metric does not exist in `[PROJECT_ID]`, then a new metric is
-   *     created.
-   * @param metric Required. The updated metric.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final LogMetric updateLogMetric(String metricName, LogMetric metric) {
-    UpdateLogMetricRequest request =
-        UpdateLogMetricRequest.newBuilder().setMetricName(metricName).setMetric(metric).build();
-    return updateLogMetric(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Creates or updates a logs-based metric.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (MetricsClient metricsClient = MetricsClient.create()) {
-   *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
-   *   LogMetric metric = LogMetric.newBuilder().build();
-   *   UpdateLogMetricRequest request = UpdateLogMetricRequest.newBuilder()
-   *     .setMetricName(metricName.toString())
-   *     .setMetric(metric)
-   *     .build();
-   *   LogMetric response = metricsClient.updateLogMetric(request);
-   * }
-   * </code></pre>
-   *
-   * @param request The request object containing all of the parameters for the API call.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final LogMetric updateLogMetric(UpdateLogMetricRequest request) {
-    return updateLogMetricCallable().call(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Creates or updates a logs-based metric.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (MetricsClient metricsClient = MetricsClient.create()) {
-   *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
-   *   LogMetric metric = LogMetric.newBuilder().build();
-   *   UpdateLogMetricRequest request = UpdateLogMetricRequest.newBuilder()
-   *     .setMetricName(metricName.toString())
-   *     .setMetric(metric)
-   *     .build();
-   *   ApiFuture&lt;LogMetric&gt; future = metricsClient.updateLogMetricCallable().futureCall(request);
-   *   // Do something
-   *   LogMetric response = future.get();
-   * }
-   * </code></pre>
-   */
-  public final UnaryCallable<UpdateLogMetricRequest, LogMetric> updateLogMetricCallable() {
-    return stub.updateLogMetricCallable();
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes a logs-based metric.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (MetricsClient metricsClient = MetricsClient.create()) {
-   *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
-   *   metricsClient.deleteLogMetric(metricName);
-   * }
-   * </code></pre>
-   *
-   * @param metricName Required. The resource name of the metric to delete:
-   *     <p>"projects/[PROJECT_ID]/metrics/[METRIC_ID]"
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final void deleteLogMetric(LogMetricName metricName) {
-    DeleteLogMetricRequest request =
-        DeleteLogMetricRequest.newBuilder()
-            .setMetricName(metricName == null ? null : metricName.toString())
-            .build();
-    deleteLogMetric(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes a logs-based metric.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (MetricsClient metricsClient = MetricsClient.create()) {
-   *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
-   *   metricsClient.deleteLogMetric(metricName.toString());
-   * }
-   * </code></pre>
-   *
-   * @param metricName Required. The resource name of the metric to delete:
-   *     <p>"projects/[PROJECT_ID]/metrics/[METRIC_ID]"
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final void deleteLogMetric(String metricName) {
-    DeleteLogMetricRequest request =
-        DeleteLogMetricRequest.newBuilder().setMetricName(metricName).build();
-    deleteLogMetric(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes a logs-based metric.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (MetricsClient metricsClient = MetricsClient.create()) {
-   *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
-   *   DeleteLogMetricRequest request = DeleteLogMetricRequest.newBuilder()
-   *     .setMetricName(metricName.toString())
-   *     .build();
-   *   metricsClient.deleteLogMetric(request);
-   * }
-   * </code></pre>
-   *
-   * @param request The request object containing all of the parameters for the API call.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final void deleteLogMetric(DeleteLogMetricRequest request) {
-    deleteLogMetricCallable().call(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes a logs-based metric.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (MetricsClient metricsClient = MetricsClient.create()) {
-   *   LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
-   *   DeleteLogMetricRequest request = DeleteLogMetricRequest.newBuilder()
-   *     .setMetricName(metricName.toString())
-   *     .build();
-   *   ApiFuture&lt;Void&gt; future = metricsClient.deleteLogMetricCallable().futureCall(request);
-   *   // Do something
-   *   future.get();
-   * }
-   * </code></pre>
-   */
-  public final UnaryCallable<DeleteLogMetricRequest, Empty> deleteLogMetricCallable() {
-    return stub.deleteLogMetricCallable();
   }
 
   @Override

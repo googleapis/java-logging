@@ -73,16 +73,16 @@ import javax.annotation.Generated;
  * <p>The builder of this class is recursive, so contained classes are themselves builders. When
  * build() is called, the tree of builders is called to create the complete settings object.
  *
- * <p>For example, to set the total timeout of getSink to 30 seconds:
+ * <p>For example, to set the total timeout of deleteSink to 30 seconds:
  *
  * <pre>
  * <code>
  * ConfigSettings.Builder configSettingsBuilder =
  *     ConfigSettings.newBuilder();
  * configSettingsBuilder
- *     .getSinkSettings()
+ *     .deleteSinkSettings()
  *     .setRetrySettings(
- *         configSettingsBuilder.getSinkSettings().getRetrySettings().toBuilder()
+ *         configSettingsBuilder.deleteSinkSettings().getRetrySettings().toBuilder()
  *             .setTotalTimeout(Duration.ofSeconds(30))
  *             .build());
  * ConfigSettings configSettings = configSettingsBuilder.build();
@@ -92,6 +92,21 @@ import javax.annotation.Generated;
 @Generated("by gapic-generator")
 @BetaApi
 public class ConfigSettings extends ClientSettings<ConfigSettings> {
+  /** Returns the object with the settings used for calls to deleteSink. */
+  public UnaryCallSettings<DeleteSinkRequest, Empty> deleteSinkSettings() {
+    return ((ConfigServiceV2StubSettings) getStubSettings()).deleteSinkSettings();
+  }
+
+  /** Returns the object with the settings used for calls to updateSink. */
+  public UnaryCallSettings<UpdateSinkRequest, LogSink> updateSinkSettings() {
+    return ((ConfigServiceV2StubSettings) getStubSettings()).updateSinkSettings();
+  }
+
+  /** Returns the object with the settings used for calls to deleteExclusion. */
+  public UnaryCallSettings<DeleteExclusionRequest, Empty> deleteExclusionSettings() {
+    return ((ConfigServiceV2StubSettings) getStubSettings()).deleteExclusionSettings();
+  }
+
   /** Returns the object with the settings used for calls to listBuckets. */
   public PagedCallSettings<ListBucketsRequest, ListBucketsResponse, ListBucketsPagedResponse>
       listBucketsSettings() {
@@ -124,16 +139,6 @@ public class ConfigSettings extends ClientSettings<ConfigSettings> {
     return ((ConfigServiceV2StubSettings) getStubSettings()).createSinkSettings();
   }
 
-  /** Returns the object with the settings used for calls to updateSink. */
-  public UnaryCallSettings<UpdateSinkRequest, LogSink> updateSinkSettings() {
-    return ((ConfigServiceV2StubSettings) getStubSettings()).updateSinkSettings();
-  }
-
-  /** Returns the object with the settings used for calls to deleteSink. */
-  public UnaryCallSettings<DeleteSinkRequest, Empty> deleteSinkSettings() {
-    return ((ConfigServiceV2StubSettings) getStubSettings()).deleteSinkSettings();
-  }
-
   /** Returns the object with the settings used for calls to listExclusions. */
   public PagedCallSettings<
           ListExclusionsRequest, ListExclusionsResponse, ListExclusionsPagedResponse>
@@ -154,11 +159,6 @@ public class ConfigSettings extends ClientSettings<ConfigSettings> {
   /** Returns the object with the settings used for calls to updateExclusion. */
   public UnaryCallSettings<UpdateExclusionRequest, LogExclusion> updateExclusionSettings() {
     return ((ConfigServiceV2StubSettings) getStubSettings()).updateExclusionSettings();
-  }
-
-  /** Returns the object with the settings used for calls to deleteExclusion. */
-  public UnaryCallSettings<DeleteExclusionRequest, Empty> deleteExclusionSettings() {
-    return ((ConfigServiceV2StubSettings) getStubSettings()).deleteExclusionSettings();
   }
 
   /** Returns the object with the settings used for calls to getCmekSettings. */
@@ -267,6 +267,21 @@ public class ConfigSettings extends ClientSettings<ConfigSettings> {
       return this;
     }
 
+    /** Returns the builder for the settings used for calls to deleteSink. */
+    public UnaryCallSettings.Builder<DeleteSinkRequest, Empty> deleteSinkSettings() {
+      return getStubSettingsBuilder().deleteSinkSettings();
+    }
+
+    /** Returns the builder for the settings used for calls to updateSink. */
+    public UnaryCallSettings.Builder<UpdateSinkRequest, LogSink> updateSinkSettings() {
+      return getStubSettingsBuilder().updateSinkSettings();
+    }
+
+    /** Returns the builder for the settings used for calls to deleteExclusion. */
+    public UnaryCallSettings.Builder<DeleteExclusionRequest, Empty> deleteExclusionSettings() {
+      return getStubSettingsBuilder().deleteExclusionSettings();
+    }
+
     /** Returns the builder for the settings used for calls to listBuckets. */
     public PagedCallSettings.Builder<
             ListBucketsRequest, ListBucketsResponse, ListBucketsPagedResponse>
@@ -300,16 +315,6 @@ public class ConfigSettings extends ClientSettings<ConfigSettings> {
       return getStubSettingsBuilder().createSinkSettings();
     }
 
-    /** Returns the builder for the settings used for calls to updateSink. */
-    public UnaryCallSettings.Builder<UpdateSinkRequest, LogSink> updateSinkSettings() {
-      return getStubSettingsBuilder().updateSinkSettings();
-    }
-
-    /** Returns the builder for the settings used for calls to deleteSink. */
-    public UnaryCallSettings.Builder<DeleteSinkRequest, Empty> deleteSinkSettings() {
-      return getStubSettingsBuilder().deleteSinkSettings();
-    }
-
     /** Returns the builder for the settings used for calls to listExclusions. */
     public PagedCallSettings.Builder<
             ListExclusionsRequest, ListExclusionsResponse, ListExclusionsPagedResponse>
@@ -332,11 +337,6 @@ public class ConfigSettings extends ClientSettings<ConfigSettings> {
     public UnaryCallSettings.Builder<UpdateExclusionRequest, LogExclusion>
         updateExclusionSettings() {
       return getStubSettingsBuilder().updateExclusionSettings();
-    }
-
-    /** Returns the builder for the settings used for calls to deleteExclusion. */
-    public UnaryCallSettings.Builder<DeleteExclusionRequest, Empty> deleteExclusionSettings() {
-      return getStubSettingsBuilder().deleteExclusionSettings();
     }
 
     /** Returns the builder for the settings used for calls to getCmekSettings. */

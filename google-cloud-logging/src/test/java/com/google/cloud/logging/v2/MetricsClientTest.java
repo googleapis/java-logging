@@ -95,6 +95,94 @@ public class MetricsClientTest {
 
   @Test
   @SuppressWarnings("all")
+  public void updateLogMetricTest() {
+    LogMetricName name = LogMetricName.of("[PROJECT]", "[METRIC]");
+    String description = "description-1724546052";
+    String filter = "filter-1274492040";
+    String valueExtractor = "valueExtractor2047672534";
+    LogMetric expectedResponse =
+        LogMetric.newBuilder()
+            .setName(name.toString())
+            .setDescription(description)
+            .setFilter(filter)
+            .setValueExtractor(valueExtractor)
+            .build();
+    mockMetricsServiceV2.addResponse(expectedResponse);
+
+    LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
+    LogMetric metric = LogMetric.newBuilder().build();
+
+    LogMetric actualResponse = client.updateLogMetric(metricName, metric);
+    Assert.assertEquals(expectedResponse, actualResponse);
+
+    List<AbstractMessage> actualRequests = mockMetricsServiceV2.getRequests();
+    Assert.assertEquals(1, actualRequests.size());
+    UpdateLogMetricRequest actualRequest = (UpdateLogMetricRequest) actualRequests.get(0);
+
+    Assert.assertEquals(metricName, LogMetricName.parse(actualRequest.getMetricName()));
+    Assert.assertEquals(metric, actualRequest.getMetric());
+    Assert.assertTrue(
+        channelProvider.isHeaderSent(
+            ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
+            GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
+  }
+
+  @Test
+  @SuppressWarnings("all")
+  public void updateLogMetricExceptionTest() throws Exception {
+    StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
+    mockMetricsServiceV2.addException(exception);
+
+    try {
+      LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
+      LogMetric metric = LogMetric.newBuilder().build();
+
+      client.updateLogMetric(metricName, metric);
+      Assert.fail("No exception raised");
+    } catch (InvalidArgumentException e) {
+      // Expected exception
+    }
+  }
+
+  @Test
+  @SuppressWarnings("all")
+  public void deleteLogMetricTest() {
+    Empty expectedResponse = Empty.newBuilder().build();
+    mockMetricsServiceV2.addResponse(expectedResponse);
+
+    LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
+
+    client.deleteLogMetric(metricName);
+
+    List<AbstractMessage> actualRequests = mockMetricsServiceV2.getRequests();
+    Assert.assertEquals(1, actualRequests.size());
+    DeleteLogMetricRequest actualRequest = (DeleteLogMetricRequest) actualRequests.get(0);
+
+    Assert.assertEquals(metricName, LogMetricName.parse(actualRequest.getMetricName()));
+    Assert.assertTrue(
+        channelProvider.isHeaderSent(
+            ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
+            GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
+  }
+
+  @Test
+  @SuppressWarnings("all")
+  public void deleteLogMetricExceptionTest() throws Exception {
+    StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
+    mockMetricsServiceV2.addException(exception);
+
+    try {
+      LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
+
+      client.deleteLogMetric(metricName);
+      Assert.fail("No exception raised");
+    } catch (InvalidArgumentException e) {
+      // Expected exception
+    }
+  }
+
+  @Test
+  @SuppressWarnings("all")
   public void listLogMetricsTest() {
     String nextPageToken = "";
     LogMetric metricsElement = LogMetric.newBuilder().build();
@@ -234,94 +322,6 @@ public class MetricsClientTest {
       LogMetric metric = LogMetric.newBuilder().build();
 
       client.createLogMetric(parent, metric);
-      Assert.fail("No exception raised");
-    } catch (InvalidArgumentException e) {
-      // Expected exception
-    }
-  }
-
-  @Test
-  @SuppressWarnings("all")
-  public void updateLogMetricTest() {
-    LogMetricName name = LogMetricName.of("[PROJECT]", "[METRIC]");
-    String description = "description-1724546052";
-    String filter = "filter-1274492040";
-    String valueExtractor = "valueExtractor2047672534";
-    LogMetric expectedResponse =
-        LogMetric.newBuilder()
-            .setName(name.toString())
-            .setDescription(description)
-            .setFilter(filter)
-            .setValueExtractor(valueExtractor)
-            .build();
-    mockMetricsServiceV2.addResponse(expectedResponse);
-
-    LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
-    LogMetric metric = LogMetric.newBuilder().build();
-
-    LogMetric actualResponse = client.updateLogMetric(metricName, metric);
-    Assert.assertEquals(expectedResponse, actualResponse);
-
-    List<AbstractMessage> actualRequests = mockMetricsServiceV2.getRequests();
-    Assert.assertEquals(1, actualRequests.size());
-    UpdateLogMetricRequest actualRequest = (UpdateLogMetricRequest) actualRequests.get(0);
-
-    Assert.assertEquals(metricName, LogMetricName.parse(actualRequest.getMetricName()));
-    Assert.assertEquals(metric, actualRequest.getMetric());
-    Assert.assertTrue(
-        channelProvider.isHeaderSent(
-            ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
-            GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
-  }
-
-  @Test
-  @SuppressWarnings("all")
-  public void updateLogMetricExceptionTest() throws Exception {
-    StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
-    mockMetricsServiceV2.addException(exception);
-
-    try {
-      LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
-      LogMetric metric = LogMetric.newBuilder().build();
-
-      client.updateLogMetric(metricName, metric);
-      Assert.fail("No exception raised");
-    } catch (InvalidArgumentException e) {
-      // Expected exception
-    }
-  }
-
-  @Test
-  @SuppressWarnings("all")
-  public void deleteLogMetricTest() {
-    Empty expectedResponse = Empty.newBuilder().build();
-    mockMetricsServiceV2.addResponse(expectedResponse);
-
-    LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
-
-    client.deleteLogMetric(metricName);
-
-    List<AbstractMessage> actualRequests = mockMetricsServiceV2.getRequests();
-    Assert.assertEquals(1, actualRequests.size());
-    DeleteLogMetricRequest actualRequest = (DeleteLogMetricRequest) actualRequests.get(0);
-
-    Assert.assertEquals(metricName, LogMetricName.parse(actualRequest.getMetricName()));
-    Assert.assertTrue(
-        channelProvider.isHeaderSent(
-            ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
-            GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
-  }
-
-  @Test
-  @SuppressWarnings("all")
-  public void deleteLogMetricExceptionTest() throws Exception {
-    StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
-    mockMetricsServiceV2.addException(exception);
-
-    try {
-      LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
-
-      client.deleteLogMetric(metricName);
       Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception

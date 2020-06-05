@@ -78,7 +78,7 @@ import javax.annotation.Generated;
  * <code>
  * try (ConfigClient configClient = ConfigClient.create()) {
  *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
- *   LogSink response = configClient.getSink(sinkName);
+ *   configClient.deleteSink(sinkName);
  * }
  * </code>
  * </pre>
@@ -183,6 +183,438 @@ public class ConfigClient implements BackgroundResource {
   @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
   public ConfigServiceV2Stub getStub() {
     return stub;
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Deletes a sink. If the sink has a unique `writer_identity`, then that service account is also
+   * deleted.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (ConfigClient configClient = ConfigClient.create()) {
+   *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+   *   configClient.deleteSink(sinkName);
+   * }
+   * </code></pre>
+   *
+   * @param sinkName Required. The full resource name of the sink to delete, including the parent
+   *     resource and the sink identifier:
+   *     <p>"projects/[PROJECT_ID]/sinks/[SINK_ID]"
+   *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+   *     "folders/[FOLDER_ID]/sinks/[SINK_ID]"
+   *     <p>Example: `"projects/my-project-id/sinks/my-sink-id"`.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final void deleteSink(LogSinkName sinkName) {
+    DeleteSinkRequest request =
+        DeleteSinkRequest.newBuilder()
+            .setSinkName(sinkName == null ? null : sinkName.toString())
+            .build();
+    deleteSink(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Deletes a sink. If the sink has a unique `writer_identity`, then that service account is also
+   * deleted.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (ConfigClient configClient = ConfigClient.create()) {
+   *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+   *   configClient.deleteSink(sinkName.toString());
+   * }
+   * </code></pre>
+   *
+   * @param sinkName Required. The full resource name of the sink to delete, including the parent
+   *     resource and the sink identifier:
+   *     <p>"projects/[PROJECT_ID]/sinks/[SINK_ID]"
+   *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+   *     "folders/[FOLDER_ID]/sinks/[SINK_ID]"
+   *     <p>Example: `"projects/my-project-id/sinks/my-sink-id"`.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final void deleteSink(String sinkName) {
+    DeleteSinkRequest request = DeleteSinkRequest.newBuilder().setSinkName(sinkName).build();
+    deleteSink(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Deletes a sink. If the sink has a unique `writer_identity`, then that service account is also
+   * deleted.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (ConfigClient configClient = ConfigClient.create()) {
+   *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+   *   DeleteSinkRequest request = DeleteSinkRequest.newBuilder()
+   *     .setSinkName(sinkName.toString())
+   *     .build();
+   *   configClient.deleteSink(request);
+   * }
+   * </code></pre>
+   *
+   * @param request The request object containing all of the parameters for the API call.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final void deleteSink(DeleteSinkRequest request) {
+    deleteSinkCallable().call(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Deletes a sink. If the sink has a unique `writer_identity`, then that service account is also
+   * deleted.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (ConfigClient configClient = ConfigClient.create()) {
+   *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+   *   DeleteSinkRequest request = DeleteSinkRequest.newBuilder()
+   *     .setSinkName(sinkName.toString())
+   *     .build();
+   *   ApiFuture&lt;Void&gt; future = configClient.deleteSinkCallable().futureCall(request);
+   *   // Do something
+   *   future.get();
+   * }
+   * </code></pre>
+   */
+  public final UnaryCallable<DeleteSinkRequest, Empty> deleteSinkCallable() {
+    return stub.deleteSinkCallable();
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Updates a sink. This method replaces the following fields in the existing sink with values from
+   * the new sink: `destination`, and `filter`.
+   *
+   * <p>The updated sink might also have a new `writer_identity`; see the `unique_writer_identity`
+   * field.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (ConfigClient configClient = ConfigClient.create()) {
+   *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+   *   LogSink sink = LogSink.newBuilder().build();
+   *   FieldMask updateMask = FieldMask.newBuilder().build();
+   *   LogSink response = configClient.updateSink(sinkName, sink, updateMask);
+   * }
+   * </code></pre>
+   *
+   * @param sinkName Required. The full resource name of the sink to update, including the parent
+   *     resource and the sink identifier:
+   *     <p>"projects/[PROJECT_ID]/sinks/[SINK_ID]"
+   *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+   *     "folders/[FOLDER_ID]/sinks/[SINK_ID]"
+   *     <p>Example: `"projects/my-project-id/sinks/my-sink-id"`.
+   * @param sink Required. The updated sink, whose name is the same identifier that appears as part
+   *     of `sink_name`.
+   * @param updateMask Optional. Field mask that specifies the fields in `sink` that need an update.
+   *     A sink field will be overwritten if, and only if, it is in the update mask. `name` and
+   *     output only fields cannot be updated.
+   *     <p>An empty updateMask is temporarily treated as using the following mask for backwards
+   *     compatibility purposes: destination,filter,includeChildren At some point in the future,
+   *     behavior will be removed and specifying an empty updateMask will be an error.
+   *     <p>For a detailed `FieldMask` definition, see
+   *     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+   *     <p>Example: `updateMask=filter`.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final LogSink updateSink(LogSinkName sinkName, LogSink sink, FieldMask updateMask) {
+    UpdateSinkRequest request =
+        UpdateSinkRequest.newBuilder()
+            .setSinkName(sinkName == null ? null : sinkName.toString())
+            .setSink(sink)
+            .setUpdateMask(updateMask)
+            .build();
+    return updateSink(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Updates a sink. This method replaces the following fields in the existing sink with values from
+   * the new sink: `destination`, and `filter`.
+   *
+   * <p>The updated sink might also have a new `writer_identity`; see the `unique_writer_identity`
+   * field.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (ConfigClient configClient = ConfigClient.create()) {
+   *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+   *   LogSink sink = LogSink.newBuilder().build();
+   *   FieldMask updateMask = FieldMask.newBuilder().build();
+   *   LogSink response = configClient.updateSink(sinkName.toString(), sink, updateMask);
+   * }
+   * </code></pre>
+   *
+   * @param sinkName Required. The full resource name of the sink to update, including the parent
+   *     resource and the sink identifier:
+   *     <p>"projects/[PROJECT_ID]/sinks/[SINK_ID]"
+   *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+   *     "folders/[FOLDER_ID]/sinks/[SINK_ID]"
+   *     <p>Example: `"projects/my-project-id/sinks/my-sink-id"`.
+   * @param sink Required. The updated sink, whose name is the same identifier that appears as part
+   *     of `sink_name`.
+   * @param updateMask Optional. Field mask that specifies the fields in `sink` that need an update.
+   *     A sink field will be overwritten if, and only if, it is in the update mask. `name` and
+   *     output only fields cannot be updated.
+   *     <p>An empty updateMask is temporarily treated as using the following mask for backwards
+   *     compatibility purposes: destination,filter,includeChildren At some point in the future,
+   *     behavior will be removed and specifying an empty updateMask will be an error.
+   *     <p>For a detailed `FieldMask` definition, see
+   *     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+   *     <p>Example: `updateMask=filter`.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final LogSink updateSink(String sinkName, LogSink sink, FieldMask updateMask) {
+    UpdateSinkRequest request =
+        UpdateSinkRequest.newBuilder()
+            .setSinkName(sinkName)
+            .setSink(sink)
+            .setUpdateMask(updateMask)
+            .build();
+    return updateSink(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Updates a sink. This method replaces the following fields in the existing sink with values from
+   * the new sink: `destination`, and `filter`.
+   *
+   * <p>The updated sink might also have a new `writer_identity`; see the `unique_writer_identity`
+   * field.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (ConfigClient configClient = ConfigClient.create()) {
+   *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+   *   LogSink sink = LogSink.newBuilder().build();
+   *   LogSink response = configClient.updateSink(sinkName, sink);
+   * }
+   * </code></pre>
+   *
+   * @param sinkName Required. The full resource name of the sink to update, including the parent
+   *     resource and the sink identifier:
+   *     <p>"projects/[PROJECT_ID]/sinks/[SINK_ID]"
+   *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+   *     "folders/[FOLDER_ID]/sinks/[SINK_ID]"
+   *     <p>Example: `"projects/my-project-id/sinks/my-sink-id"`.
+   * @param sink Required. The updated sink, whose name is the same identifier that appears as part
+   *     of `sink_name`.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final LogSink updateSink(LogSinkName sinkName, LogSink sink) {
+    UpdateSinkRequest request =
+        UpdateSinkRequest.newBuilder()
+            .setSinkName(sinkName == null ? null : sinkName.toString())
+            .setSink(sink)
+            .build();
+    return updateSink(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Updates a sink. This method replaces the following fields in the existing sink with values from
+   * the new sink: `destination`, and `filter`.
+   *
+   * <p>The updated sink might also have a new `writer_identity`; see the `unique_writer_identity`
+   * field.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (ConfigClient configClient = ConfigClient.create()) {
+   *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+   *   LogSink sink = LogSink.newBuilder().build();
+   *   LogSink response = configClient.updateSink(sinkName.toString(), sink);
+   * }
+   * </code></pre>
+   *
+   * @param sinkName Required. The full resource name of the sink to update, including the parent
+   *     resource and the sink identifier:
+   *     <p>"projects/[PROJECT_ID]/sinks/[SINK_ID]"
+   *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+   *     "folders/[FOLDER_ID]/sinks/[SINK_ID]"
+   *     <p>Example: `"projects/my-project-id/sinks/my-sink-id"`.
+   * @param sink Required. The updated sink, whose name is the same identifier that appears as part
+   *     of `sink_name`.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final LogSink updateSink(String sinkName, LogSink sink) {
+    UpdateSinkRequest request =
+        UpdateSinkRequest.newBuilder().setSinkName(sinkName).setSink(sink).build();
+    return updateSink(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Updates a sink. This method replaces the following fields in the existing sink with values from
+   * the new sink: `destination`, and `filter`.
+   *
+   * <p>The updated sink might also have a new `writer_identity`; see the `unique_writer_identity`
+   * field.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (ConfigClient configClient = ConfigClient.create()) {
+   *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+   *   LogSink sink = LogSink.newBuilder().build();
+   *   UpdateSinkRequest request = UpdateSinkRequest.newBuilder()
+   *     .setSinkName(sinkName.toString())
+   *     .setSink(sink)
+   *     .build();
+   *   LogSink response = configClient.updateSink(request);
+   * }
+   * </code></pre>
+   *
+   * @param request The request object containing all of the parameters for the API call.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final LogSink updateSink(UpdateSinkRequest request) {
+    return updateSinkCallable().call(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Updates a sink. This method replaces the following fields in the existing sink with values from
+   * the new sink: `destination`, and `filter`.
+   *
+   * <p>The updated sink might also have a new `writer_identity`; see the `unique_writer_identity`
+   * field.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (ConfigClient configClient = ConfigClient.create()) {
+   *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
+   *   LogSink sink = LogSink.newBuilder().build();
+   *   UpdateSinkRequest request = UpdateSinkRequest.newBuilder()
+   *     .setSinkName(sinkName.toString())
+   *     .setSink(sink)
+   *     .build();
+   *   ApiFuture&lt;LogSink&gt; future = configClient.updateSinkCallable().futureCall(request);
+   *   // Do something
+   *   LogSink response = future.get();
+   * }
+   * </code></pre>
+   */
+  public final UnaryCallable<UpdateSinkRequest, LogSink> updateSinkCallable() {
+    return stub.updateSinkCallable();
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Deletes an exclusion.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (ConfigClient configClient = ConfigClient.create()) {
+   *   LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
+   *   configClient.deleteExclusion(name);
+   * }
+   * </code></pre>
+   *
+   * @param name Required. The resource name of an existing exclusion to delete:
+   *     <p>"projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
+   *     "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
+   *     "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
+   *     <p>Example: `"projects/my-project-id/exclusions/my-exclusion-id"`.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final void deleteExclusion(LogExclusionName name) {
+    DeleteExclusionRequest request =
+        DeleteExclusionRequest.newBuilder().setName(name == null ? null : name.toString()).build();
+    deleteExclusion(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Deletes an exclusion.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (ConfigClient configClient = ConfigClient.create()) {
+   *   LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
+   *   configClient.deleteExclusion(name.toString());
+   * }
+   * </code></pre>
+   *
+   * @param name Required. The resource name of an existing exclusion to delete:
+   *     <p>"projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
+   *     "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
+   *     "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
+   *     <p>Example: `"projects/my-project-id/exclusions/my-exclusion-id"`.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final void deleteExclusion(String name) {
+    DeleteExclusionRequest request = DeleteExclusionRequest.newBuilder().setName(name).build();
+    deleteExclusion(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Deletes an exclusion.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (ConfigClient configClient = ConfigClient.create()) {
+   *   LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
+   *   DeleteExclusionRequest request = DeleteExclusionRequest.newBuilder()
+   *     .setName(name.toString())
+   *     .build();
+   *   configClient.deleteExclusion(request);
+   * }
+   * </code></pre>
+   *
+   * @param request The request object containing all of the parameters for the API call.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final void deleteExclusion(DeleteExclusionRequest request) {
+    deleteExclusionCallable().call(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Deletes an exclusion.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (ConfigClient configClient = ConfigClient.create()) {
+   *   LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
+   *   DeleteExclusionRequest request = DeleteExclusionRequest.newBuilder()
+   *     .setName(name.toString())
+   *     .build();
+   *   ApiFuture&lt;Void&gt; future = configClient.deleteExclusionCallable().futureCall(request);
+   *   // Do something
+   *   future.get();
+   * }
+   * </code></pre>
+   */
+  public final UnaryCallable<DeleteExclusionRequest, Empty> deleteExclusionCallable() {
+    return stub.deleteExclusionCallable();
   }
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
@@ -1072,340 +1504,6 @@ public class ConfigClient implements BackgroundResource {
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
   /**
-   * Updates a sink. This method replaces the following fields in the existing sink with values from
-   * the new sink: `destination`, and `filter`.
-   *
-   * <p>The updated sink might also have a new `writer_identity`; see the `unique_writer_identity`
-   * field.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (ConfigClient configClient = ConfigClient.create()) {
-   *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-   *   LogSink sink = LogSink.newBuilder().build();
-   *   FieldMask updateMask = FieldMask.newBuilder().build();
-   *   LogSink response = configClient.updateSink(sinkName, sink, updateMask);
-   * }
-   * </code></pre>
-   *
-   * @param sinkName Required. The full resource name of the sink to update, including the parent
-   *     resource and the sink identifier:
-   *     <p>"projects/[PROJECT_ID]/sinks/[SINK_ID]"
-   *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
-   *     "folders/[FOLDER_ID]/sinks/[SINK_ID]"
-   *     <p>Example: `"projects/my-project-id/sinks/my-sink-id"`.
-   * @param sink Required. The updated sink, whose name is the same identifier that appears as part
-   *     of `sink_name`.
-   * @param updateMask Optional. Field mask that specifies the fields in `sink` that need an update.
-   *     A sink field will be overwritten if, and only if, it is in the update mask. `name` and
-   *     output only fields cannot be updated.
-   *     <p>An empty updateMask is temporarily treated as using the following mask for backwards
-   *     compatibility purposes: destination,filter,includeChildren At some point in the future,
-   *     behavior will be removed and specifying an empty updateMask will be an error.
-   *     <p>For a detailed `FieldMask` definition, see
-   *     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
-   *     <p>Example: `updateMask=filter`.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final LogSink updateSink(LogSinkName sinkName, LogSink sink, FieldMask updateMask) {
-    UpdateSinkRequest request =
-        UpdateSinkRequest.newBuilder()
-            .setSinkName(sinkName == null ? null : sinkName.toString())
-            .setSink(sink)
-            .setUpdateMask(updateMask)
-            .build();
-    return updateSink(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Updates a sink. This method replaces the following fields in the existing sink with values from
-   * the new sink: `destination`, and `filter`.
-   *
-   * <p>The updated sink might also have a new `writer_identity`; see the `unique_writer_identity`
-   * field.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (ConfigClient configClient = ConfigClient.create()) {
-   *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-   *   LogSink sink = LogSink.newBuilder().build();
-   *   FieldMask updateMask = FieldMask.newBuilder().build();
-   *   LogSink response = configClient.updateSink(sinkName.toString(), sink, updateMask);
-   * }
-   * </code></pre>
-   *
-   * @param sinkName Required. The full resource name of the sink to update, including the parent
-   *     resource and the sink identifier:
-   *     <p>"projects/[PROJECT_ID]/sinks/[SINK_ID]"
-   *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
-   *     "folders/[FOLDER_ID]/sinks/[SINK_ID]"
-   *     <p>Example: `"projects/my-project-id/sinks/my-sink-id"`.
-   * @param sink Required. The updated sink, whose name is the same identifier that appears as part
-   *     of `sink_name`.
-   * @param updateMask Optional. Field mask that specifies the fields in `sink` that need an update.
-   *     A sink field will be overwritten if, and only if, it is in the update mask. `name` and
-   *     output only fields cannot be updated.
-   *     <p>An empty updateMask is temporarily treated as using the following mask for backwards
-   *     compatibility purposes: destination,filter,includeChildren At some point in the future,
-   *     behavior will be removed and specifying an empty updateMask will be an error.
-   *     <p>For a detailed `FieldMask` definition, see
-   *     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
-   *     <p>Example: `updateMask=filter`.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final LogSink updateSink(String sinkName, LogSink sink, FieldMask updateMask) {
-    UpdateSinkRequest request =
-        UpdateSinkRequest.newBuilder()
-            .setSinkName(sinkName)
-            .setSink(sink)
-            .setUpdateMask(updateMask)
-            .build();
-    return updateSink(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Updates a sink. This method replaces the following fields in the existing sink with values from
-   * the new sink: `destination`, and `filter`.
-   *
-   * <p>The updated sink might also have a new `writer_identity`; see the `unique_writer_identity`
-   * field.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (ConfigClient configClient = ConfigClient.create()) {
-   *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-   *   LogSink sink = LogSink.newBuilder().build();
-   *   LogSink response = configClient.updateSink(sinkName, sink);
-   * }
-   * </code></pre>
-   *
-   * @param sinkName Required. The full resource name of the sink to update, including the parent
-   *     resource and the sink identifier:
-   *     <p>"projects/[PROJECT_ID]/sinks/[SINK_ID]"
-   *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
-   *     "folders/[FOLDER_ID]/sinks/[SINK_ID]"
-   *     <p>Example: `"projects/my-project-id/sinks/my-sink-id"`.
-   * @param sink Required. The updated sink, whose name is the same identifier that appears as part
-   *     of `sink_name`.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final LogSink updateSink(LogSinkName sinkName, LogSink sink) {
-    UpdateSinkRequest request =
-        UpdateSinkRequest.newBuilder()
-            .setSinkName(sinkName == null ? null : sinkName.toString())
-            .setSink(sink)
-            .build();
-    return updateSink(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Updates a sink. This method replaces the following fields in the existing sink with values from
-   * the new sink: `destination`, and `filter`.
-   *
-   * <p>The updated sink might also have a new `writer_identity`; see the `unique_writer_identity`
-   * field.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (ConfigClient configClient = ConfigClient.create()) {
-   *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-   *   LogSink sink = LogSink.newBuilder().build();
-   *   LogSink response = configClient.updateSink(sinkName.toString(), sink);
-   * }
-   * </code></pre>
-   *
-   * @param sinkName Required. The full resource name of the sink to update, including the parent
-   *     resource and the sink identifier:
-   *     <p>"projects/[PROJECT_ID]/sinks/[SINK_ID]"
-   *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
-   *     "folders/[FOLDER_ID]/sinks/[SINK_ID]"
-   *     <p>Example: `"projects/my-project-id/sinks/my-sink-id"`.
-   * @param sink Required. The updated sink, whose name is the same identifier that appears as part
-   *     of `sink_name`.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final LogSink updateSink(String sinkName, LogSink sink) {
-    UpdateSinkRequest request =
-        UpdateSinkRequest.newBuilder().setSinkName(sinkName).setSink(sink).build();
-    return updateSink(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Updates a sink. This method replaces the following fields in the existing sink with values from
-   * the new sink: `destination`, and `filter`.
-   *
-   * <p>The updated sink might also have a new `writer_identity`; see the `unique_writer_identity`
-   * field.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (ConfigClient configClient = ConfigClient.create()) {
-   *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-   *   LogSink sink = LogSink.newBuilder().build();
-   *   UpdateSinkRequest request = UpdateSinkRequest.newBuilder()
-   *     .setSinkName(sinkName.toString())
-   *     .setSink(sink)
-   *     .build();
-   *   LogSink response = configClient.updateSink(request);
-   * }
-   * </code></pre>
-   *
-   * @param request The request object containing all of the parameters for the API call.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final LogSink updateSink(UpdateSinkRequest request) {
-    return updateSinkCallable().call(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Updates a sink. This method replaces the following fields in the existing sink with values from
-   * the new sink: `destination`, and `filter`.
-   *
-   * <p>The updated sink might also have a new `writer_identity`; see the `unique_writer_identity`
-   * field.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (ConfigClient configClient = ConfigClient.create()) {
-   *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-   *   LogSink sink = LogSink.newBuilder().build();
-   *   UpdateSinkRequest request = UpdateSinkRequest.newBuilder()
-   *     .setSinkName(sinkName.toString())
-   *     .setSink(sink)
-   *     .build();
-   *   ApiFuture&lt;LogSink&gt; future = configClient.updateSinkCallable().futureCall(request);
-   *   // Do something
-   *   LogSink response = future.get();
-   * }
-   * </code></pre>
-   */
-  public final UnaryCallable<UpdateSinkRequest, LogSink> updateSinkCallable() {
-    return stub.updateSinkCallable();
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes a sink. If the sink has a unique `writer_identity`, then that service account is also
-   * deleted.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (ConfigClient configClient = ConfigClient.create()) {
-   *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-   *   configClient.deleteSink(sinkName);
-   * }
-   * </code></pre>
-   *
-   * @param sinkName Required. The full resource name of the sink to delete, including the parent
-   *     resource and the sink identifier:
-   *     <p>"projects/[PROJECT_ID]/sinks/[SINK_ID]"
-   *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
-   *     "folders/[FOLDER_ID]/sinks/[SINK_ID]"
-   *     <p>Example: `"projects/my-project-id/sinks/my-sink-id"`.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final void deleteSink(LogSinkName sinkName) {
-    DeleteSinkRequest request =
-        DeleteSinkRequest.newBuilder()
-            .setSinkName(sinkName == null ? null : sinkName.toString())
-            .build();
-    deleteSink(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes a sink. If the sink has a unique `writer_identity`, then that service account is also
-   * deleted.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (ConfigClient configClient = ConfigClient.create()) {
-   *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-   *   configClient.deleteSink(sinkName.toString());
-   * }
-   * </code></pre>
-   *
-   * @param sinkName Required. The full resource name of the sink to delete, including the parent
-   *     resource and the sink identifier:
-   *     <p>"projects/[PROJECT_ID]/sinks/[SINK_ID]"
-   *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
-   *     "folders/[FOLDER_ID]/sinks/[SINK_ID]"
-   *     <p>Example: `"projects/my-project-id/sinks/my-sink-id"`.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final void deleteSink(String sinkName) {
-    DeleteSinkRequest request = DeleteSinkRequest.newBuilder().setSinkName(sinkName).build();
-    deleteSink(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes a sink. If the sink has a unique `writer_identity`, then that service account is also
-   * deleted.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (ConfigClient configClient = ConfigClient.create()) {
-   *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-   *   DeleteSinkRequest request = DeleteSinkRequest.newBuilder()
-   *     .setSinkName(sinkName.toString())
-   *     .build();
-   *   configClient.deleteSink(request);
-   * }
-   * </code></pre>
-   *
-   * @param request The request object containing all of the parameters for the API call.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final void deleteSink(DeleteSinkRequest request) {
-    deleteSinkCallable().call(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes a sink. If the sink has a unique `writer_identity`, then that service account is also
-   * deleted.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (ConfigClient configClient = ConfigClient.create()) {
-   *   LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
-   *   DeleteSinkRequest request = DeleteSinkRequest.newBuilder()
-   *     .setSinkName(sinkName.toString())
-   *     .build();
-   *   ApiFuture&lt;Void&gt; future = configClient.deleteSinkCallable().futureCall(request);
-   *   // Do something
-   *   future.get();
-   * }
-   * </code></pre>
-   */
-  public final UnaryCallable<DeleteSinkRequest, Empty> deleteSinkCallable() {
-    return stub.deleteSinkCallable();
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
    * Lists all the exclusions in a parent resource.
    *
    * <p>Sample code:
@@ -2064,104 +2162,6 @@ public class ConfigClient implements BackgroundResource {
    */
   public final UnaryCallable<UpdateExclusionRequest, LogExclusion> updateExclusionCallable() {
     return stub.updateExclusionCallable();
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes an exclusion.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (ConfigClient configClient = ConfigClient.create()) {
-   *   LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
-   *   configClient.deleteExclusion(name);
-   * }
-   * </code></pre>
-   *
-   * @param name Required. The resource name of an existing exclusion to delete:
-   *     <p>"projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
-   *     "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
-   *     "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
-   *     <p>Example: `"projects/my-project-id/exclusions/my-exclusion-id"`.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final void deleteExclusion(LogExclusionName name) {
-    DeleteExclusionRequest request =
-        DeleteExclusionRequest.newBuilder().setName(name == null ? null : name.toString()).build();
-    deleteExclusion(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes an exclusion.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (ConfigClient configClient = ConfigClient.create()) {
-   *   LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
-   *   configClient.deleteExclusion(name.toString());
-   * }
-   * </code></pre>
-   *
-   * @param name Required. The resource name of an existing exclusion to delete:
-   *     <p>"projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
-   *     "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
-   *     "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
-   *     <p>Example: `"projects/my-project-id/exclusions/my-exclusion-id"`.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final void deleteExclusion(String name) {
-    DeleteExclusionRequest request = DeleteExclusionRequest.newBuilder().setName(name).build();
-    deleteExclusion(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes an exclusion.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (ConfigClient configClient = ConfigClient.create()) {
-   *   LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
-   *   DeleteExclusionRequest request = DeleteExclusionRequest.newBuilder()
-   *     .setName(name.toString())
-   *     .build();
-   *   configClient.deleteExclusion(request);
-   * }
-   * </code></pre>
-   *
-   * @param request The request object containing all of the parameters for the API call.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final void deleteExclusion(DeleteExclusionRequest request) {
-    deleteExclusionCallable().call(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes an exclusion.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (ConfigClient configClient = ConfigClient.create()) {
-   *   LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
-   *   DeleteExclusionRequest request = DeleteExclusionRequest.newBuilder()
-   *     .setName(name.toString())
-   *     .build();
-   *   ApiFuture&lt;Void&gt; future = configClient.deleteExclusionCallable().futureCall(request);
-   *   // Do something
-   *   future.get();
-   * }
-   * </code></pre>
-   */
-  public final UnaryCallable<DeleteExclusionRequest, Empty> deleteExclusionCallable() {
-    return stub.deleteExclusionCallable();
   }
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
