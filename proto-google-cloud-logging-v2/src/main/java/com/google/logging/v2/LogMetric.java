@@ -336,6 +336,10 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
         };
 
     public final com.google.protobuf.Descriptors.EnumValueDescriptor getValueDescriptor() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalStateException(
+            "Can't get the descriptor of an unrecognized enum value.");
+      }
       return getDescriptor().getValues().get(ordinal());
     }
 
@@ -391,6 +395,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The name.
    */
+  @java.lang.Override
   public java.lang.String getName() {
     java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
@@ -423,6 +428,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The bytes for name.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getNameBytes() {
     java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
@@ -449,6 +455,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The description.
    */
+  @java.lang.Override
   public java.lang.String getDescription() {
     java.lang.Object ref = description_;
     if (ref instanceof java.lang.String) {
@@ -472,6 +479,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The bytes for description.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getDescriptionBytes() {
     java.lang.Object ref = description_;
     if (ref instanceof java.lang.String) {
@@ -490,7 +498,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * Required. An [advanced logs filter](/logging/docs/view/advanced_filters) which is
+   * Required. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced_filters) which is
    * used to match log entries.
    * Example:
    *     "resource.type=gae_app AND severity&gt;=ERROR"
@@ -501,6 +509,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The filter.
    */
+  @java.lang.Override
   public java.lang.String getFilter() {
     java.lang.Object ref = filter_;
     if (ref instanceof java.lang.String) {
@@ -516,7 +525,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * Required. An [advanced logs filter](/logging/docs/view/advanced_filters) which is
+   * Required. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced_filters) which is
    * used to match log entries.
    * Example:
    *     "resource.type=gae_app AND severity&gt;=ERROR"
@@ -527,6 +536,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The bytes for filter.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getFilterBytes() {
     java.lang.Object ref = filter_;
     if (ref instanceof java.lang.String) {
@@ -570,6 +580,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    * @return Whether the metricDescriptor field is set.
    */
+  @java.lang.Override
   public boolean hasMetricDescriptor() {
     return metricDescriptor_ != null;
   }
@@ -602,6 +613,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The metricDescriptor.
    */
+  @java.lang.Override
   public com.google.api.MetricDescriptor getMetricDescriptor() {
     return metricDescriptor_ == null
         ? com.google.api.MetricDescriptor.getDefaultInstance()
@@ -634,6 +646,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    * .google.api.MetricDescriptor metric_descriptor = 5 [(.google.api.field_behavior) = OPTIONAL];
    * </code>
    */
+  @java.lang.Override
   public com.google.api.MetricDescriptorOrBuilder getMetricDescriptorOrBuilder() {
     return getMetricDescriptor();
   }
@@ -667,6 +680,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The valueExtractor.
    */
+  @java.lang.Override
   public java.lang.String getValueExtractor() {
     java.lang.Object ref = valueExtractor_;
     if (ref instanceof java.lang.String) {
@@ -705,6 +719,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The bytes for valueExtractor.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getValueExtractorBytes() {
     java.lang.Object ref = valueExtractor_;
     if (ref instanceof java.lang.String) {
@@ -765,6 +780,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    * <code>map&lt;string, string&gt; label_extractors = 7 [(.google.api.field_behavior) = OPTIONAL];
    * </code>
    */
+  @java.lang.Override
   public boolean containsLabelExtractors(java.lang.String key) {
     if (key == null) {
       throw new java.lang.NullPointerException();
@@ -772,6 +788,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
     return internalGetLabelExtractors().getMap().containsKey(key);
   }
   /** Use {@link #getLabelExtractorsMap()} instead. */
+  @java.lang.Override
   @java.lang.Deprecated
   public java.util.Map<java.lang.String, java.lang.String> getLabelExtractors() {
     return getLabelExtractorsMap();
@@ -797,6 +814,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    * <code>map&lt;string, string&gt; label_extractors = 7 [(.google.api.field_behavior) = OPTIONAL];
    * </code>
    */
+  @java.lang.Override
   public java.util.Map<java.lang.String, java.lang.String> getLabelExtractorsMap() {
     return internalGetLabelExtractors().getMap();
   }
@@ -821,6 +839,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    * <code>map&lt;string, string&gt; label_extractors = 7 [(.google.api.field_behavior) = OPTIONAL];
    * </code>
    */
+  @java.lang.Override
   public java.lang.String getLabelExtractorsOrDefault(
       java.lang.String key, java.lang.String defaultValue) {
     if (key == null) {
@@ -850,6 +869,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    * <code>map&lt;string, string&gt; label_extractors = 7 [(.google.api.field_behavior) = OPTIONAL];
    * </code>
    */
+  @java.lang.Override
   public java.lang.String getLabelExtractorsOrThrow(java.lang.String key) {
     if (key == null) {
       throw new java.lang.NullPointerException();
@@ -878,6 +898,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    * @return Whether the bucketOptions field is set.
    */
+  @java.lang.Override
   public boolean hasBucketOptions() {
     return bucketOptions_ != null;
   }
@@ -896,6 +917,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The bucketOptions.
    */
+  @java.lang.Override
   public com.google.api.Distribution.BucketOptions getBucketOptions() {
     return bucketOptions_ == null
         ? com.google.api.Distribution.BucketOptions.getDefaultInstance()
@@ -914,6 +936,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    * .google.api.Distribution.BucketOptions bucket_options = 8 [(.google.api.field_behavior) = OPTIONAL];
    * </code>
    */
+  @java.lang.Override
   public com.google.api.Distribution.BucketOptionsOrBuilder getBucketOptionsOrBuilder() {
     return getBucketOptions();
   }
@@ -933,6 +956,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    * @return Whether the createTime field is set.
    */
+  @java.lang.Override
   public boolean hasCreateTime() {
     return createTime_ != null;
   }
@@ -949,6 +973,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The createTime.
    */
+  @java.lang.Override
   public com.google.protobuf.Timestamp getCreateTime() {
     return createTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : createTime_;
   }
@@ -963,6 +988,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    * <code>.google.protobuf.Timestamp create_time = 9 [(.google.api.field_behavior) = OUTPUT_ONLY];
    * </code>
    */
+  @java.lang.Override
   public com.google.protobuf.TimestampOrBuilder getCreateTimeOrBuilder() {
     return getCreateTime();
   }
@@ -982,6 +1008,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    * @return Whether the updateTime field is set.
    */
+  @java.lang.Override
   public boolean hasUpdateTime() {
     return updateTime_ != null;
   }
@@ -998,6 +1025,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The updateTime.
    */
+  @java.lang.Override
   public com.google.protobuf.Timestamp getUpdateTime() {
     return updateTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : updateTime_;
   }
@@ -1012,6 +1040,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    * <code>.google.protobuf.Timestamp update_time = 10 [(.google.api.field_behavior) = OUTPUT_ONLY];
    * </code>
    */
+  @java.lang.Override
   public com.google.protobuf.TimestampOrBuilder getUpdateTimeOrBuilder() {
     return getUpdateTime();
   }
@@ -1030,6 +1059,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The enum numeric value on the wire for version.
    */
+  @java.lang.Override
   @java.lang.Deprecated
   public int getVersionValue() {
     return version_;
@@ -1046,6 +1076,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The version.
    */
+  @java.lang.Override
   @java.lang.Deprecated
   public com.google.logging.v2.LogMetric.ApiVersion getVersion() {
     @SuppressWarnings("deprecation")
@@ -1862,7 +1893,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Required. An [advanced logs filter](/logging/docs/view/advanced_filters) which is
+     * Required. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced_filters) which is
      * used to match log entries.
      * Example:
      *     "resource.type=gae_app AND severity&gt;=ERROR"
@@ -1888,7 +1919,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Required. An [advanced logs filter](/logging/docs/view/advanced_filters) which is
+     * Required. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced_filters) which is
      * used to match log entries.
      * Example:
      *     "resource.type=gae_app AND severity&gt;=ERROR"
@@ -1914,7 +1945,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Required. An [advanced logs filter](/logging/docs/view/advanced_filters) which is
+     * Required. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced_filters) which is
      * used to match log entries.
      * Example:
      *     "resource.type=gae_app AND severity&gt;=ERROR"
@@ -1939,7 +1970,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Required. An [advanced logs filter](/logging/docs/view/advanced_filters) which is
+     * Required. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced_filters) which is
      * used to match log entries.
      * Example:
      *     "resource.type=gae_app AND severity&gt;=ERROR"
@@ -1960,7 +1991,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Required. An [advanced logs filter](/logging/docs/view/advanced_filters) which is
+     * Required. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced_filters) which is
      * used to match log entries.
      * Example:
      *     "resource.type=gae_app AND severity&gt;=ERROR"
@@ -2567,6 +2598,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
      * map&lt;string, string&gt; label_extractors = 7 [(.google.api.field_behavior) = OPTIONAL];
      * </code>
      */
+    @java.lang.Override
     public boolean containsLabelExtractors(java.lang.String key) {
       if (key == null) {
         throw new java.lang.NullPointerException();
@@ -2574,6 +2606,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
       return internalGetLabelExtractors().getMap().containsKey(key);
     }
     /** Use {@link #getLabelExtractorsMap()} instead. */
+    @java.lang.Override
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.String> getLabelExtractors() {
       return getLabelExtractorsMap();
@@ -2600,6 +2633,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
      * map&lt;string, string&gt; label_extractors = 7 [(.google.api.field_behavior) = OPTIONAL];
      * </code>
      */
+    @java.lang.Override
     public java.util.Map<java.lang.String, java.lang.String> getLabelExtractorsMap() {
       return internalGetLabelExtractors().getMap();
     }
@@ -2625,6 +2659,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
      * map&lt;string, string&gt; label_extractors = 7 [(.google.api.field_behavior) = OPTIONAL];
      * </code>
      */
+    @java.lang.Override
     public java.lang.String getLabelExtractorsOrDefault(
         java.lang.String key, java.lang.String defaultValue) {
       if (key == null) {
@@ -2655,6 +2690,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
      * map&lt;string, string&gt; label_extractors = 7 [(.google.api.field_behavior) = OPTIONAL];
      * </code>
      */
+    @java.lang.Override
     public java.lang.String getLabelExtractorsOrThrow(java.lang.String key) {
       if (key == null) {
         throw new java.lang.NullPointerException();
@@ -3418,6 +3454,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
      *
      * @return The enum numeric value on the wire for version.
      */
+    @java.lang.Override
     @java.lang.Deprecated
     public int getVersionValue() {
       return version_;
@@ -3437,6 +3474,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
      */
     @java.lang.Deprecated
     public Builder setVersionValue(int value) {
+
       version_ = value;
       onChanged();
       return this;
@@ -3453,6 +3491,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
      *
      * @return The version.
      */
+    @java.lang.Override
     @java.lang.Deprecated
     public com.google.logging.v2.LogMetric.ApiVersion getVersion() {
       @SuppressWarnings("deprecation")

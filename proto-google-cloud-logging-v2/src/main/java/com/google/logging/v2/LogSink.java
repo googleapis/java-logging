@@ -333,6 +333,10 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
         };
 
     public final com.google.protobuf.Descriptors.EnumValueDescriptor getValueDescriptor() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalStateException(
+            "Can't get the descriptor of an unrecognized enum value.");
+      }
       return getDescriptor().getValues().get(ordinal());
     }
 
@@ -426,6 +430,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The name.
    */
+  @java.lang.Override
   public java.lang.String getName() {
     java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
@@ -452,6 +457,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The bytes for name.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getNameBytes() {
     java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
@@ -477,7 +483,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    * The sink's `writer_identity`, set when the sink is created, must
    * have permission to write to the destination or else the log
    * entries are not exported. For more information, see
-   * [Exporting Logs with Sinks](/logging/docs/api/tasks/exporting-logs).
+   * [Exporting Logs with Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * </pre>
    *
    * <code>
@@ -486,6 +492,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The destination.
    */
+  @java.lang.Override
   public java.lang.String getDestination() {
     java.lang.Object ref = destination_;
     if (ref instanceof java.lang.String) {
@@ -508,7 +515,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    * The sink's `writer_identity`, set when the sink is created, must
    * have permission to write to the destination or else the log
    * entries are not exported. For more information, see
-   * [Exporting Logs with Sinks](/logging/docs/api/tasks/exporting-logs).
+   * [Exporting Logs with Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * </pre>
    *
    * <code>
@@ -517,6 +524,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The bytes for destination.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getDestinationBytes() {
     java.lang.Object ref = destination_;
     if (ref instanceof java.lang.String) {
@@ -535,7 +543,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * Optional. An [advanced logs filter](/logging/docs/view/advanced-queries). The only
+   * Optional. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries). The only
    * exported log entries are those that are in the resource owning the sink and
    * that match the filter. For example:
    *     logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity&gt;=ERROR
@@ -545,6 +553,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The filter.
    */
+  @java.lang.Override
   public java.lang.String getFilter() {
     java.lang.Object ref = filter_;
     if (ref instanceof java.lang.String) {
@@ -560,7 +569,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * Optional. An [advanced logs filter](/logging/docs/view/advanced-queries). The only
+   * Optional. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries). The only
    * exported log entries are those that are in the resource owning the sink and
    * that match the filter. For example:
    *     logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity&gt;=ERROR
@@ -570,6 +579,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The bytes for filter.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getFilterBytes() {
     java.lang.Object ref = filter_;
     if (ref instanceof java.lang.String) {
@@ -596,6 +606,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The description.
    */
+  @java.lang.Override
   public java.lang.String getDescription() {
     java.lang.Object ref = description_;
     if (ref instanceof java.lang.String) {
@@ -619,6 +630,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The bytes for description.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getDescriptionBytes() {
     java.lang.Object ref = description_;
     if (ref instanceof java.lang.String) {
@@ -645,6 +657,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The disabled.
    */
+  @java.lang.Override
   public boolean getDisabled() {
     return disabled_;
   }
@@ -664,6 +677,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The enum numeric value on the wire for outputVersionFormat.
    */
+  @java.lang.Override
   @java.lang.Deprecated
   public int getOutputVersionFormatValue() {
     return outputVersionFormat_;
@@ -681,6 +695,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The outputVersionFormat.
    */
+  @java.lang.Override
   @java.lang.Deprecated
   public com.google.logging.v2.LogSink.VersionFormat getOutputVersionFormat() {
     @SuppressWarnings("deprecation")
@@ -703,7 +718,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    * Until you grant this identity write-access to the destination, log entry
    * exports from this sink will fail. For more information,
    * see [Granting Access for a
-   * Resource](/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+   * Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
    * Consult the destination service's documentation to determine the
    * appropriate IAM roles to assign to the identity.
    * </pre>
@@ -712,6 +727,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The writerIdentity.
    */
+  @java.lang.Override
   public java.lang.String getWriterIdentity() {
     java.lang.Object ref = writerIdentity_;
     if (ref instanceof java.lang.String) {
@@ -735,7 +751,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    * Until you grant this identity write-access to the destination, log entry
    * exports from this sink will fail. For more information,
    * see [Granting Access for a
-   * Resource](/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+   * Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
    * Consult the destination service's documentation to determine the
    * appropriate IAM roles to assign to the identity.
    * </pre>
@@ -744,6 +760,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The bytes for writerIdentity.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getWriterIdentityBytes() {
     java.lang.Object ref = writerIdentity_;
     if (ref instanceof java.lang.String) {
@@ -780,6 +797,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The includeChildren.
    */
+  @java.lang.Override
   public boolean getIncludeChildren() {
     return includeChildren_;
   }
@@ -798,6 +816,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * @return Whether the bigqueryOptions field is set.
    */
+  @java.lang.Override
   public boolean hasBigqueryOptions() {
     return optionsCase_ == 12;
   }
@@ -814,6 +833,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The bigqueryOptions.
    */
+  @java.lang.Override
   public com.google.logging.v2.BigQueryOptions getBigqueryOptions() {
     if (optionsCase_ == 12) {
       return (com.google.logging.v2.BigQueryOptions) options_;
@@ -831,6 +851,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    * .google.logging.v2.BigQueryOptions bigquery_options = 12 [(.google.api.field_behavior) = OPTIONAL];
    * </code>
    */
+  @java.lang.Override
   public com.google.logging.v2.BigQueryOptionsOrBuilder getBigqueryOptionsOrBuilder() {
     if (optionsCase_ == 12) {
       return (com.google.logging.v2.BigQueryOptions) options_;
@@ -853,6 +874,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * @return Whether the createTime field is set.
    */
+  @java.lang.Override
   public boolean hasCreateTime() {
     return createTime_ != null;
   }
@@ -869,6 +891,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The createTime.
    */
+  @java.lang.Override
   public com.google.protobuf.Timestamp getCreateTime() {
     return createTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : createTime_;
   }
@@ -883,6 +906,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    * <code>.google.protobuf.Timestamp create_time = 13 [(.google.api.field_behavior) = OUTPUT_ONLY];
    * </code>
    */
+  @java.lang.Override
   public com.google.protobuf.TimestampOrBuilder getCreateTimeOrBuilder() {
     return getCreateTime();
   }
@@ -902,6 +926,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * @return Whether the updateTime field is set.
    */
+  @java.lang.Override
   public boolean hasUpdateTime() {
     return updateTime_ != null;
   }
@@ -918,6 +943,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The updateTime.
    */
+  @java.lang.Override
   public com.google.protobuf.Timestamp getUpdateTime() {
     return updateTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : updateTime_;
   }
@@ -932,6 +958,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    * <code>.google.protobuf.Timestamp update_time = 14 [(.google.api.field_behavior) = OUTPUT_ONLY];
    * </code>
    */
+  @java.lang.Override
   public com.google.protobuf.TimestampOrBuilder getUpdateTimeOrBuilder() {
     return getUpdateTime();
   }
@@ -1616,7 +1643,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * The sink's `writer_identity`, set when the sink is created, must
      * have permission to write to the destination or else the log
      * entries are not exported. For more information, see
-     * [Exporting Logs with Sinks](/logging/docs/api/tasks/exporting-logs).
+     * [Exporting Logs with Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * </pre>
      *
      * <code>
@@ -1647,7 +1674,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * The sink's `writer_identity`, set when the sink is created, must
      * have permission to write to the destination or else the log
      * entries are not exported. For more information, see
-     * [Exporting Logs with Sinks](/logging/docs/api/tasks/exporting-logs).
+     * [Exporting Logs with Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * </pre>
      *
      * <code>
@@ -1678,7 +1705,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * The sink's `writer_identity`, set when the sink is created, must
      * have permission to write to the destination or else the log
      * entries are not exported. For more information, see
-     * [Exporting Logs with Sinks](/logging/docs/api/tasks/exporting-logs).
+     * [Exporting Logs with Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * </pre>
      *
      * <code>
@@ -1708,7 +1735,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * The sink's `writer_identity`, set when the sink is created, must
      * have permission to write to the destination or else the log
      * entries are not exported. For more information, see
-     * [Exporting Logs with Sinks](/logging/docs/api/tasks/exporting-logs).
+     * [Exporting Logs with Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * </pre>
      *
      * <code>
@@ -1734,7 +1761,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * The sink's `writer_identity`, set when the sink is created, must
      * have permission to write to the destination or else the log
      * entries are not exported. For more information, see
-     * [Exporting Logs with Sinks](/logging/docs/api/tasks/exporting-logs).
+     * [Exporting Logs with Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * </pre>
      *
      * <code>
@@ -1760,7 +1787,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Optional. An [advanced logs filter](/logging/docs/view/advanced-queries). The only
+     * Optional. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries). The only
      * exported log entries are those that are in the resource owning the sink and
      * that match the filter. For example:
      *     logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity&gt;=ERROR
@@ -1785,7 +1812,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Optional. An [advanced logs filter](/logging/docs/view/advanced-queries). The only
+     * Optional. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries). The only
      * exported log entries are those that are in the resource owning the sink and
      * that match the filter. For example:
      *     logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity&gt;=ERROR
@@ -1810,7 +1837,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Optional. An [advanced logs filter](/logging/docs/view/advanced-queries). The only
+     * Optional. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries). The only
      * exported log entries are those that are in the resource owning the sink and
      * that match the filter. For example:
      *     logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity&gt;=ERROR
@@ -1834,7 +1861,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Optional. An [advanced logs filter](/logging/docs/view/advanced-queries). The only
+     * Optional. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries). The only
      * exported log entries are those that are in the resource owning the sink and
      * that match the filter. For example:
      *     logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity&gt;=ERROR
@@ -1854,7 +1881,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Optional. An [advanced logs filter](/logging/docs/view/advanced-queries). The only
+     * Optional. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries). The only
      * exported log entries are those that are in the resource owning the sink and
      * that match the filter. For example:
      *     logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity&gt;=ERROR
@@ -2000,6 +2027,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      * @return The disabled.
      */
+    @java.lang.Override
     public boolean getDisabled() {
       return disabled_;
     }
@@ -2055,6 +2083,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      * @return The enum numeric value on the wire for outputVersionFormat.
      */
+    @java.lang.Override
     @java.lang.Deprecated
     public int getOutputVersionFormatValue() {
       return outputVersionFormat_;
@@ -2075,6 +2104,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      */
     @java.lang.Deprecated
     public Builder setOutputVersionFormatValue(int value) {
+
       outputVersionFormat_ = value;
       onChanged();
       return this;
@@ -2092,6 +2122,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      * @return The outputVersionFormat.
      */
+    @java.lang.Override
     @java.lang.Deprecated
     public com.google.logging.v2.LogSink.VersionFormat getOutputVersionFormat() {
       @SuppressWarnings("deprecation")
@@ -2157,7 +2188,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * Until you grant this identity write-access to the destination, log entry
      * exports from this sink will fail. For more information,
      * see [Granting Access for a
-     * Resource](/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+     * Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
      * Consult the destination service's documentation to determine the
      * appropriate IAM roles to assign to the identity.
      * </pre>
@@ -2189,7 +2220,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * Until you grant this identity write-access to the destination, log entry
      * exports from this sink will fail. For more information,
      * see [Granting Access for a
-     * Resource](/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+     * Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
      * Consult the destination service's documentation to determine the
      * appropriate IAM roles to assign to the identity.
      * </pre>
@@ -2221,7 +2252,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * Until you grant this identity write-access to the destination, log entry
      * exports from this sink will fail. For more information,
      * see [Granting Access for a
-     * Resource](/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+     * Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
      * Consult the destination service's documentation to determine the
      * appropriate IAM roles to assign to the identity.
      * </pre>
@@ -2252,7 +2283,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * Until you grant this identity write-access to the destination, log entry
      * exports from this sink will fail. For more information,
      * see [Granting Access for a
-     * Resource](/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+     * Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
      * Consult the destination service's documentation to determine the
      * appropriate IAM roles to assign to the identity.
      * </pre>
@@ -2279,7 +2310,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * Until you grant this identity write-access to the destination, log entry
      * exports from this sink will fail. For more information,
      * see [Granting Access for a
-     * Resource](/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+     * Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
      * Consult the destination service's documentation to determine the
      * appropriate IAM roles to assign to the identity.
      * </pre>
@@ -2323,6 +2354,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      * @return The includeChildren.
      */
+    @java.lang.Override
     public boolean getIncludeChildren() {
       return includeChildren_;
     }
@@ -2402,6 +2434,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      * @return Whether the bigqueryOptions field is set.
      */
+    @java.lang.Override
     public boolean hasBigqueryOptions() {
       return optionsCase_ == 12;
     }
@@ -2418,6 +2451,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      * @return The bigqueryOptions.
      */
+    @java.lang.Override
     public com.google.logging.v2.BigQueryOptions getBigqueryOptions() {
       if (bigqueryOptionsBuilder_ == null) {
         if (optionsCase_ == 12) {
@@ -2562,6 +2596,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * .google.logging.v2.BigQueryOptions bigquery_options = 12 [(.google.api.field_behavior) = OPTIONAL];
      * </code>
      */
+    @java.lang.Override
     public com.google.logging.v2.BigQueryOptionsOrBuilder getBigqueryOptionsOrBuilder() {
       if ((optionsCase_ == 12) && (bigqueryOptionsBuilder_ != null)) {
         return bigqueryOptionsBuilder_.getMessageOrBuilder();

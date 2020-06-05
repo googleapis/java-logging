@@ -68,6 +68,29 @@ import javax.annotation.Generated;
 @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
 public class GrpcConfigServiceV2Stub extends ConfigServiceV2Stub {
 
+  private static final MethodDescriptor<DeleteSinkRequest, Empty> deleteSinkMethodDescriptor =
+      MethodDescriptor.<DeleteSinkRequest, Empty>newBuilder()
+          .setType(MethodDescriptor.MethodType.UNARY)
+          .setFullMethodName("google.logging.v2.ConfigServiceV2/DeleteSink")
+          .setRequestMarshaller(ProtoUtils.marshaller(DeleteSinkRequest.getDefaultInstance()))
+          .setResponseMarshaller(ProtoUtils.marshaller(Empty.getDefaultInstance()))
+          .build();
+  private static final MethodDescriptor<UpdateSinkRequest, LogSink> updateSinkMethodDescriptor =
+      MethodDescriptor.<UpdateSinkRequest, LogSink>newBuilder()
+          .setType(MethodDescriptor.MethodType.UNARY)
+          .setFullMethodName("google.logging.v2.ConfigServiceV2/UpdateSink")
+          .setRequestMarshaller(ProtoUtils.marshaller(UpdateSinkRequest.getDefaultInstance()))
+          .setResponseMarshaller(ProtoUtils.marshaller(LogSink.getDefaultInstance()))
+          .build();
+  private static final MethodDescriptor<DeleteExclusionRequest, Empty>
+      deleteExclusionMethodDescriptor =
+          MethodDescriptor.<DeleteExclusionRequest, Empty>newBuilder()
+              .setType(MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName("google.logging.v2.ConfigServiceV2/DeleteExclusion")
+              .setRequestMarshaller(
+                  ProtoUtils.marshaller(DeleteExclusionRequest.getDefaultInstance()))
+              .setResponseMarshaller(ProtoUtils.marshaller(Empty.getDefaultInstance()))
+              .build();
   private static final MethodDescriptor<ListBucketsRequest, ListBucketsResponse>
       listBucketsMethodDescriptor =
           MethodDescriptor.<ListBucketsRequest, ListBucketsResponse>newBuilder()
@@ -114,20 +137,6 @@ public class GrpcConfigServiceV2Stub extends ConfigServiceV2Stub {
           .setRequestMarshaller(ProtoUtils.marshaller(CreateSinkRequest.getDefaultInstance()))
           .setResponseMarshaller(ProtoUtils.marshaller(LogSink.getDefaultInstance()))
           .build();
-  private static final MethodDescriptor<UpdateSinkRequest, LogSink> updateSinkMethodDescriptor =
-      MethodDescriptor.<UpdateSinkRequest, LogSink>newBuilder()
-          .setType(MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName("google.logging.v2.ConfigServiceV2/UpdateSink")
-          .setRequestMarshaller(ProtoUtils.marshaller(UpdateSinkRequest.getDefaultInstance()))
-          .setResponseMarshaller(ProtoUtils.marshaller(LogSink.getDefaultInstance()))
-          .build();
-  private static final MethodDescriptor<DeleteSinkRequest, Empty> deleteSinkMethodDescriptor =
-      MethodDescriptor.<DeleteSinkRequest, Empty>newBuilder()
-          .setType(MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName("google.logging.v2.ConfigServiceV2/DeleteSink")
-          .setRequestMarshaller(ProtoUtils.marshaller(DeleteSinkRequest.getDefaultInstance()))
-          .setResponseMarshaller(ProtoUtils.marshaller(Empty.getDefaultInstance()))
-          .build();
   private static final MethodDescriptor<ListExclusionsRequest, ListExclusionsResponse>
       listExclusionsMethodDescriptor =
           MethodDescriptor.<ListExclusionsRequest, ListExclusionsResponse>newBuilder()
@@ -164,15 +173,6 @@ public class GrpcConfigServiceV2Stub extends ConfigServiceV2Stub {
                   ProtoUtils.marshaller(UpdateExclusionRequest.getDefaultInstance()))
               .setResponseMarshaller(ProtoUtils.marshaller(LogExclusion.getDefaultInstance()))
               .build();
-  private static final MethodDescriptor<DeleteExclusionRequest, Empty>
-      deleteExclusionMethodDescriptor =
-          MethodDescriptor.<DeleteExclusionRequest, Empty>newBuilder()
-              .setType(MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName("google.logging.v2.ConfigServiceV2/DeleteExclusion")
-              .setRequestMarshaller(
-                  ProtoUtils.marshaller(DeleteExclusionRequest.getDefaultInstance()))
-              .setResponseMarshaller(ProtoUtils.marshaller(Empty.getDefaultInstance()))
-              .build();
   private static final MethodDescriptor<GetCmekSettingsRequest, CmekSettings>
       getCmekSettingsMethodDescriptor =
           MethodDescriptor.<GetCmekSettingsRequest, CmekSettings>newBuilder()
@@ -194,6 +194,9 @@ public class GrpcConfigServiceV2Stub extends ConfigServiceV2Stub {
 
   private final BackgroundResource backgroundResources;
 
+  private final UnaryCallable<DeleteSinkRequest, Empty> deleteSinkCallable;
+  private final UnaryCallable<UpdateSinkRequest, LogSink> updateSinkCallable;
+  private final UnaryCallable<DeleteExclusionRequest, Empty> deleteExclusionCallable;
   private final UnaryCallable<ListBucketsRequest, ListBucketsResponse> listBucketsCallable;
   private final UnaryCallable<ListBucketsRequest, ListBucketsPagedResponse>
       listBucketsPagedCallable;
@@ -203,15 +206,12 @@ public class GrpcConfigServiceV2Stub extends ConfigServiceV2Stub {
   private final UnaryCallable<ListSinksRequest, ListSinksPagedResponse> listSinksPagedCallable;
   private final UnaryCallable<GetSinkRequest, LogSink> getSinkCallable;
   private final UnaryCallable<CreateSinkRequest, LogSink> createSinkCallable;
-  private final UnaryCallable<UpdateSinkRequest, LogSink> updateSinkCallable;
-  private final UnaryCallable<DeleteSinkRequest, Empty> deleteSinkCallable;
   private final UnaryCallable<ListExclusionsRequest, ListExclusionsResponse> listExclusionsCallable;
   private final UnaryCallable<ListExclusionsRequest, ListExclusionsPagedResponse>
       listExclusionsPagedCallable;
   private final UnaryCallable<GetExclusionRequest, LogExclusion> getExclusionCallable;
   private final UnaryCallable<CreateExclusionRequest, LogExclusion> createExclusionCallable;
   private final UnaryCallable<UpdateExclusionRequest, LogExclusion> updateExclusionCallable;
-  private final UnaryCallable<DeleteExclusionRequest, Empty> deleteExclusionCallable;
   private final UnaryCallable<GetCmekSettingsRequest, CmekSettings> getCmekSettingsCallable;
   private final UnaryCallable<UpdateCmekSettingsRequest, CmekSettings> updateCmekSettingsCallable;
 
@@ -256,6 +256,45 @@ public class GrpcConfigServiceV2Stub extends ConfigServiceV2Stub {
       throws IOException {
     this.callableFactory = callableFactory;
 
+    GrpcCallSettings<DeleteSinkRequest, Empty> deleteSinkTransportSettings =
+        GrpcCallSettings.<DeleteSinkRequest, Empty>newBuilder()
+            .setMethodDescriptor(deleteSinkMethodDescriptor)
+            .setParamsExtractor(
+                new RequestParamsExtractor<DeleteSinkRequest>() {
+                  @Override
+                  public Map<String, String> extract(DeleteSinkRequest request) {
+                    ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+                    params.put("sink_name", String.valueOf(request.getSinkName()));
+                    return params.build();
+                  }
+                })
+            .build();
+    GrpcCallSettings<UpdateSinkRequest, LogSink> updateSinkTransportSettings =
+        GrpcCallSettings.<UpdateSinkRequest, LogSink>newBuilder()
+            .setMethodDescriptor(updateSinkMethodDescriptor)
+            .setParamsExtractor(
+                new RequestParamsExtractor<UpdateSinkRequest>() {
+                  @Override
+                  public Map<String, String> extract(UpdateSinkRequest request) {
+                    ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+                    params.put("sink_name", String.valueOf(request.getSinkName()));
+                    return params.build();
+                  }
+                })
+            .build();
+    GrpcCallSettings<DeleteExclusionRequest, Empty> deleteExclusionTransportSettings =
+        GrpcCallSettings.<DeleteExclusionRequest, Empty>newBuilder()
+            .setMethodDescriptor(deleteExclusionMethodDescriptor)
+            .setParamsExtractor(
+                new RequestParamsExtractor<DeleteExclusionRequest>() {
+                  @Override
+                  public Map<String, String> extract(DeleteExclusionRequest request) {
+                    ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+                    params.put("name", String.valueOf(request.getName()));
+                    return params.build();
+                  }
+                })
+            .build();
     GrpcCallSettings<ListBucketsRequest, ListBucketsResponse> listBucketsTransportSettings =
         GrpcCallSettings.<ListBucketsRequest, ListBucketsResponse>newBuilder()
             .setMethodDescriptor(listBucketsMethodDescriptor)
@@ -334,32 +373,6 @@ public class GrpcConfigServiceV2Stub extends ConfigServiceV2Stub {
                   }
                 })
             .build();
-    GrpcCallSettings<UpdateSinkRequest, LogSink> updateSinkTransportSettings =
-        GrpcCallSettings.<UpdateSinkRequest, LogSink>newBuilder()
-            .setMethodDescriptor(updateSinkMethodDescriptor)
-            .setParamsExtractor(
-                new RequestParamsExtractor<UpdateSinkRequest>() {
-                  @Override
-                  public Map<String, String> extract(UpdateSinkRequest request) {
-                    ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
-                    params.put("sink_name", String.valueOf(request.getSinkName()));
-                    return params.build();
-                  }
-                })
-            .build();
-    GrpcCallSettings<DeleteSinkRequest, Empty> deleteSinkTransportSettings =
-        GrpcCallSettings.<DeleteSinkRequest, Empty>newBuilder()
-            .setMethodDescriptor(deleteSinkMethodDescriptor)
-            .setParamsExtractor(
-                new RequestParamsExtractor<DeleteSinkRequest>() {
-                  @Override
-                  public Map<String, String> extract(DeleteSinkRequest request) {
-                    ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
-                    params.put("sink_name", String.valueOf(request.getSinkName()));
-                    return params.build();
-                  }
-                })
-            .build();
     GrpcCallSettings<ListExclusionsRequest, ListExclusionsResponse>
         listExclusionsTransportSettings =
             GrpcCallSettings.<ListExclusionsRequest, ListExclusionsResponse>newBuilder()
@@ -413,19 +426,6 @@ public class GrpcConfigServiceV2Stub extends ConfigServiceV2Stub {
                   }
                 })
             .build();
-    GrpcCallSettings<DeleteExclusionRequest, Empty> deleteExclusionTransportSettings =
-        GrpcCallSettings.<DeleteExclusionRequest, Empty>newBuilder()
-            .setMethodDescriptor(deleteExclusionMethodDescriptor)
-            .setParamsExtractor(
-                new RequestParamsExtractor<DeleteExclusionRequest>() {
-                  @Override
-                  public Map<String, String> extract(DeleteExclusionRequest request) {
-                    ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
-                    params.put("name", String.valueOf(request.getName()));
-                    return params.build();
-                  }
-                })
-            .build();
     GrpcCallSettings<GetCmekSettingsRequest, CmekSettings> getCmekSettingsTransportSettings =
         GrpcCallSettings.<GetCmekSettingsRequest, CmekSettings>newBuilder()
             .setMethodDescriptor(getCmekSettingsMethodDescriptor)
@@ -453,6 +453,15 @@ public class GrpcConfigServiceV2Stub extends ConfigServiceV2Stub {
                 })
             .build();
 
+    this.deleteSinkCallable =
+        callableFactory.createUnaryCallable(
+            deleteSinkTransportSettings, settings.deleteSinkSettings(), clientContext);
+    this.updateSinkCallable =
+        callableFactory.createUnaryCallable(
+            updateSinkTransportSettings, settings.updateSinkSettings(), clientContext);
+    this.deleteExclusionCallable =
+        callableFactory.createUnaryCallable(
+            deleteExclusionTransportSettings, settings.deleteExclusionSettings(), clientContext);
     this.listBucketsCallable =
         callableFactory.createUnaryCallable(
             listBucketsTransportSettings, settings.listBucketsSettings(), clientContext);
@@ -477,12 +486,6 @@ public class GrpcConfigServiceV2Stub extends ConfigServiceV2Stub {
     this.createSinkCallable =
         callableFactory.createUnaryCallable(
             createSinkTransportSettings, settings.createSinkSettings(), clientContext);
-    this.updateSinkCallable =
-        callableFactory.createUnaryCallable(
-            updateSinkTransportSettings, settings.updateSinkSettings(), clientContext);
-    this.deleteSinkCallable =
-        callableFactory.createUnaryCallable(
-            deleteSinkTransportSettings, settings.deleteSinkSettings(), clientContext);
     this.listExclusionsCallable =
         callableFactory.createUnaryCallable(
             listExclusionsTransportSettings, settings.listExclusionsSettings(), clientContext);
@@ -498,9 +501,6 @@ public class GrpcConfigServiceV2Stub extends ConfigServiceV2Stub {
     this.updateExclusionCallable =
         callableFactory.createUnaryCallable(
             updateExclusionTransportSettings, settings.updateExclusionSettings(), clientContext);
-    this.deleteExclusionCallable =
-        callableFactory.createUnaryCallable(
-            deleteExclusionTransportSettings, settings.deleteExclusionSettings(), clientContext);
     this.getCmekSettingsCallable =
         callableFactory.createUnaryCallable(
             getCmekSettingsTransportSettings, settings.getCmekSettingsSettings(), clientContext);
@@ -511,6 +511,18 @@ public class GrpcConfigServiceV2Stub extends ConfigServiceV2Stub {
             clientContext);
 
     backgroundResources = new BackgroundResourceAggregation(clientContext.getBackgroundResources());
+  }
+
+  public UnaryCallable<DeleteSinkRequest, Empty> deleteSinkCallable() {
+    return deleteSinkCallable;
+  }
+
+  public UnaryCallable<UpdateSinkRequest, LogSink> updateSinkCallable() {
+    return updateSinkCallable;
+  }
+
+  public UnaryCallable<DeleteExclusionRequest, Empty> deleteExclusionCallable() {
+    return deleteExclusionCallable;
   }
 
   public UnaryCallable<ListBucketsRequest, ListBucketsPagedResponse> listBucketsPagedCallable() {
@@ -545,14 +557,6 @@ public class GrpcConfigServiceV2Stub extends ConfigServiceV2Stub {
     return createSinkCallable;
   }
 
-  public UnaryCallable<UpdateSinkRequest, LogSink> updateSinkCallable() {
-    return updateSinkCallable;
-  }
-
-  public UnaryCallable<DeleteSinkRequest, Empty> deleteSinkCallable() {
-    return deleteSinkCallable;
-  }
-
   public UnaryCallable<ListExclusionsRequest, ListExclusionsPagedResponse>
       listExclusionsPagedCallable() {
     return listExclusionsPagedCallable;
@@ -572,10 +576,6 @@ public class GrpcConfigServiceV2Stub extends ConfigServiceV2Stub {
 
   public UnaryCallable<UpdateExclusionRequest, LogExclusion> updateExclusionCallable() {
     return updateExclusionCallable;
-  }
-
-  public UnaryCallable<DeleteExclusionRequest, Empty> deleteExclusionCallable() {
-    return deleteExclusionCallable;
   }
 
   public UnaryCallable<GetCmekSettingsRequest, CmekSettings> getCmekSettingsCallable() {

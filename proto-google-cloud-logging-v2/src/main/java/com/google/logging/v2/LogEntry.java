@@ -380,6 +380,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The logName.
    */
+  @java.lang.Override
   public java.lang.String getLogName() {
     java.lang.Object ref = logName_;
     if (ref instanceof java.lang.String) {
@@ -419,6 +420,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The bytes for logName.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getLogNameBytes() {
     java.lang.Object ref = logName_;
     if (ref instanceof java.lang.String) {
@@ -448,6 +450,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return Whether the resource field is set.
    */
+  @java.lang.Override
   public boolean hasResource() {
     return resource_ != null;
   }
@@ -466,6 +469,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The resource.
    */
+  @java.lang.Override
   public com.google.api.MonitoredResource getResource() {
     return resource_ == null ? com.google.api.MonitoredResource.getDefaultInstance() : resource_;
   }
@@ -482,6 +486,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    * <code>.google.api.MonitoredResource resource = 8 [(.google.api.field_behavior) = REQUIRED];
    * </code>
    */
+  @java.lang.Override
   public com.google.api.MonitoredResourceOrBuilder getResourceOrBuilder() {
     return getResource();
   }
@@ -503,6 +508,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return Whether the protoPayload field is set.
    */
+  @java.lang.Override
   public boolean hasProtoPayload() {
     return payloadCase_ == 2;
   }
@@ -522,6 +528,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The protoPayload.
    */
+  @java.lang.Override
   public com.google.protobuf.Any getProtoPayload() {
     if (payloadCase_ == 2) {
       return (com.google.protobuf.Any) payload_;
@@ -542,6 +549,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * <code>.google.protobuf.Any proto_payload = 2;</code>
    */
+  @java.lang.Override
   public com.google.protobuf.AnyOrBuilder getProtoPayloadOrBuilder() {
     if (payloadCase_ == 2) {
       return (com.google.protobuf.Any) payload_;
@@ -618,6 +626,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return Whether the jsonPayload field is set.
    */
+  @java.lang.Override
   public boolean hasJsonPayload() {
     return payloadCase_ == 6;
   }
@@ -633,6 +642,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The jsonPayload.
    */
+  @java.lang.Override
   public com.google.protobuf.Struct getJsonPayload() {
     if (payloadCase_ == 6) {
       return (com.google.protobuf.Struct) payload_;
@@ -649,6 +659,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * <code>.google.protobuf.Struct json_payload = 6;</code>
    */
+  @java.lang.Override
   public com.google.protobuf.StructOrBuilder getJsonPayloadOrBuilder() {
     if (payloadCase_ == 6) {
       return (com.google.protobuf.Struct) payload_;
@@ -668,10 +679,10 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    * current time. Timestamps have nanosecond accuracy, but trailing zeros in
    * the fractional seconds might be omitted when the timestamp is displayed.
    * Incoming log entries should have timestamps that are no more than the [logs
-   * retention period](/logging/quotas) in the past, and no more than 24 hours
+   * retention period](https://cloud.google.com/logging/quotas) in the past, and no more than 24 hours
    * in the future. Log entries outside those time boundaries will not be
    * available when calling `entries.list`, but those log entries can still be
-   * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+   * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * </pre>
    *
    * <code>.google.protobuf.Timestamp timestamp = 9 [(.google.api.field_behavior) = OPTIONAL];
@@ -679,6 +690,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return Whether the timestamp field is set.
    */
+  @java.lang.Override
   public boolean hasTimestamp() {
     return timestamp_ != null;
   }
@@ -692,10 +704,10 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    * current time. Timestamps have nanosecond accuracy, but trailing zeros in
    * the fractional seconds might be omitted when the timestamp is displayed.
    * Incoming log entries should have timestamps that are no more than the [logs
-   * retention period](/logging/quotas) in the past, and no more than 24 hours
+   * retention period](https://cloud.google.com/logging/quotas) in the past, and no more than 24 hours
    * in the future. Log entries outside those time boundaries will not be
    * available when calling `entries.list`, but those log entries can still be
-   * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+   * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * </pre>
    *
    * <code>.google.protobuf.Timestamp timestamp = 9 [(.google.api.field_behavior) = OPTIONAL];
@@ -703,6 +715,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The timestamp.
    */
+  @java.lang.Override
   public com.google.protobuf.Timestamp getTimestamp() {
     return timestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
   }
@@ -716,15 +729,16 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    * current time. Timestamps have nanosecond accuracy, but trailing zeros in
    * the fractional seconds might be omitted when the timestamp is displayed.
    * Incoming log entries should have timestamps that are no more than the [logs
-   * retention period](/logging/quotas) in the past, and no more than 24 hours
+   * retention period](https://cloud.google.com/logging/quotas) in the past, and no more than 24 hours
    * in the future. Log entries outside those time boundaries will not be
    * available when calling `entries.list`, but those log entries can still be
-   * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+   * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * </pre>
    *
    * <code>.google.protobuf.Timestamp timestamp = 9 [(.google.api.field_behavior) = OPTIONAL];
    * </code>
    */
+  @java.lang.Override
   public com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder() {
     return getTimestamp();
   }
@@ -744,6 +758,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return Whether the receiveTimestamp field is set.
    */
+  @java.lang.Override
   public boolean hasReceiveTimestamp() {
     return receiveTimestamp_ != null;
   }
@@ -760,6 +775,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The receiveTimestamp.
    */
+  @java.lang.Override
   public com.google.protobuf.Timestamp getReceiveTimestamp() {
     return receiveTimestamp_ == null
         ? com.google.protobuf.Timestamp.getDefaultInstance()
@@ -776,6 +792,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    * .google.protobuf.Timestamp receive_timestamp = 24 [(.google.api.field_behavior) = OUTPUT_ONLY];
    * </code>
    */
+  @java.lang.Override
   public com.google.protobuf.TimestampOrBuilder getReceiveTimestampOrBuilder() {
     return getReceiveTimestamp();
   }
@@ -794,6 +811,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The enum numeric value on the wire for severity.
    */
+  @java.lang.Override
   public int getSeverityValue() {
     return severity_;
   }
@@ -809,6 +827,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The severity.
    */
+  @java.lang.Override
   public com.google.logging.type.LogSeverity getSeverity() {
     @SuppressWarnings("deprecation")
     com.google.logging.type.LogSeverity result =
@@ -837,6 +856,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The insertId.
    */
+  @java.lang.Override
   public java.lang.String getInsertId() {
     java.lang.Object ref = insertId_;
     if (ref instanceof java.lang.String) {
@@ -867,6 +887,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The bytes for insertId.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getInsertIdBytes() {
     java.lang.Object ref = insertId_;
     if (ref instanceof java.lang.String) {
@@ -895,6 +916,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return Whether the httpRequest field is set.
    */
+  @java.lang.Override
   public boolean hasHttpRequest() {
     return httpRequest_ != null;
   }
@@ -912,6 +934,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The httpRequest.
    */
+  @java.lang.Override
   public com.google.logging.type.HttpRequest getHttpRequest() {
     return httpRequest_ == null
         ? com.google.logging.type.HttpRequest.getDefaultInstance()
@@ -929,6 +952,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    * .google.logging.type.HttpRequest http_request = 7 [(.google.api.field_behavior) = OPTIONAL];
    * </code>
    */
+  @java.lang.Override
   public com.google.logging.type.HttpRequestOrBuilder getHttpRequestOrBuilder() {
     return getHttpRequest();
   }
@@ -968,6 +992,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * <code>map&lt;string, string&gt; labels = 11 [(.google.api.field_behavior) = OPTIONAL];</code>
    */
+  @java.lang.Override
   public boolean containsLabels(java.lang.String key) {
     if (key == null) {
       throw new java.lang.NullPointerException();
@@ -975,6 +1000,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
     return internalGetLabels().getMap().containsKey(key);
   }
   /** Use {@link #getLabelsMap()} instead. */
+  @java.lang.Override
   @java.lang.Deprecated
   public java.util.Map<java.lang.String, java.lang.String> getLabels() {
     return getLabelsMap();
@@ -989,6 +1015,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * <code>map&lt;string, string&gt; labels = 11 [(.google.api.field_behavior) = OPTIONAL];</code>
    */
+  @java.lang.Override
   public java.util.Map<java.lang.String, java.lang.String> getLabelsMap() {
     return internalGetLabels().getMap();
   }
@@ -1002,6 +1029,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * <code>map&lt;string, string&gt; labels = 11 [(.google.api.field_behavior) = OPTIONAL];</code>
    */
+  @java.lang.Override
   public java.lang.String getLabelsOrDefault(java.lang.String key, java.lang.String defaultValue) {
     if (key == null) {
       throw new java.lang.NullPointerException();
@@ -1019,6 +1047,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * <code>map&lt;string, string&gt; labels = 11 [(.google.api.field_behavior) = OPTIONAL];</code>
    */
+  @java.lang.Override
   public java.lang.String getLabelsOrThrow(java.lang.String key) {
     if (key == null) {
       throw new java.lang.NullPointerException();
@@ -1046,6 +1075,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return Whether the operation field is set.
    */
+  @java.lang.Override
   public boolean hasOperation() {
     return operation_ != null;
   }
@@ -1063,6 +1093,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The operation.
    */
+  @java.lang.Override
   public com.google.logging.v2.LogEntryOperation getOperation() {
     return operation_ == null
         ? com.google.logging.v2.LogEntryOperation.getDefaultInstance()
@@ -1080,6 +1111,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    * .google.logging.v2.LogEntryOperation operation = 15 [(.google.api.field_behavior) = OPTIONAL];
    * </code>
    */
+  @java.lang.Override
   public com.google.logging.v2.LogEntryOperationOrBuilder getOperationOrBuilder() {
     return getOperation();
   }
@@ -1100,6 +1132,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The trace.
    */
+  @java.lang.Override
   public java.lang.String getTrace() {
     java.lang.Object ref = trace_;
     if (ref instanceof java.lang.String) {
@@ -1125,6 +1158,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The bytes for trace.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getTraceBytes() {
     java.lang.Object ref = trace_;
     if (ref instanceof java.lang.String) {
@@ -1153,6 +1187,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The spanId.
    */
+  @java.lang.Override
   public java.lang.String getSpanId() {
     java.lang.Object ref = spanId_;
     if (ref instanceof java.lang.String) {
@@ -1178,6 +1213,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The bytes for spanId.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getSpanIdBytes() {
     java.lang.Object ref = spanId_;
     if (ref instanceof java.lang.String) {
@@ -1208,6 +1244,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The traceSampled.
    */
+  @java.lang.Override
   public boolean getTraceSampled() {
     return traceSampled_;
   }
@@ -1227,6 +1264,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return Whether the sourceLocation field is set.
    */
+  @java.lang.Override
   public boolean hasSourceLocation() {
     return sourceLocation_ != null;
   }
@@ -1243,6 +1281,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The sourceLocation.
    */
+  @java.lang.Override
   public com.google.logging.v2.LogEntrySourceLocation getSourceLocation() {
     return sourceLocation_ == null
         ? com.google.logging.v2.LogEntrySourceLocation.getDefaultInstance()
@@ -1259,6 +1298,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
    * .google.logging.v2.LogEntrySourceLocation source_location = 23 [(.google.api.field_behavior) = OPTIONAL];
    * </code>
    */
+  @java.lang.Override
   public com.google.logging.v2.LogEntrySourceLocationOrBuilder getSourceLocationOrBuilder() {
     return getSourceLocation();
   }
@@ -2407,6 +2447,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      *
      * @return Whether the protoPayload field is set.
      */
+    @java.lang.Override
     public boolean hasProtoPayload() {
       return payloadCase_ == 2;
     }
@@ -2426,6 +2467,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      *
      * @return The protoPayload.
      */
+    @java.lang.Override
     public com.google.protobuf.Any getProtoPayload() {
       if (protoPayloadBuilder_ == null) {
         if (payloadCase_ == 2) {
@@ -2585,6 +2627,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      *
      * <code>.google.protobuf.Any proto_payload = 2;</code>
      */
+    @java.lang.Override
     public com.google.protobuf.AnyOrBuilder getProtoPayloadOrBuilder() {
       if ((payloadCase_ == 2) && (protoPayloadBuilder_ != null)) {
         return protoPayloadBuilder_.getMessageOrBuilder();
@@ -2643,6 +2686,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      *
      * @return The textPayload.
      */
+    @java.lang.Override
     public java.lang.String getTextPayload() {
       java.lang.Object ref = "";
       if (payloadCase_ == 3) {
@@ -2670,6 +2714,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      *
      * @return The bytes for textPayload.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString getTextPayloadBytes() {
       java.lang.Object ref = "";
       if (payloadCase_ == 3) {
@@ -2766,6 +2811,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      *
      * @return Whether the jsonPayload field is set.
      */
+    @java.lang.Override
     public boolean hasJsonPayload() {
       return payloadCase_ == 6;
     }
@@ -2781,6 +2827,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      *
      * @return The jsonPayload.
      */
+    @java.lang.Override
     public com.google.protobuf.Struct getJsonPayload() {
       if (jsonPayloadBuilder_ == null) {
         if (payloadCase_ == 6) {
@@ -2916,6 +2963,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      *
      * <code>.google.protobuf.Struct json_payload = 6;</code>
      */
+    @java.lang.Override
     public com.google.protobuf.StructOrBuilder getJsonPayloadOrBuilder() {
       if ((payloadCase_ == 6) && (jsonPayloadBuilder_ != null)) {
         return jsonPayloadBuilder_.getMessageOrBuilder();
@@ -2975,10 +3023,10 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      * current time. Timestamps have nanosecond accuracy, but trailing zeros in
      * the fractional seconds might be omitted when the timestamp is displayed.
      * Incoming log entries should have timestamps that are no more than the [logs
-     * retention period](/logging/quotas) in the past, and no more than 24 hours
+     * retention period](https://cloud.google.com/logging/quotas) in the past, and no more than 24 hours
      * in the future. Log entries outside those time boundaries will not be
      * available when calling `entries.list`, but those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * </pre>
      *
      * <code>.google.protobuf.Timestamp timestamp = 9 [(.google.api.field_behavior) = OPTIONAL];
@@ -2999,10 +3047,10 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      * current time. Timestamps have nanosecond accuracy, but trailing zeros in
      * the fractional seconds might be omitted when the timestamp is displayed.
      * Incoming log entries should have timestamps that are no more than the [logs
-     * retention period](/logging/quotas) in the past, and no more than 24 hours
+     * retention period](https://cloud.google.com/logging/quotas) in the past, and no more than 24 hours
      * in the future. Log entries outside those time boundaries will not be
      * available when calling `entries.list`, but those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * </pre>
      *
      * <code>.google.protobuf.Timestamp timestamp = 9 [(.google.api.field_behavior) = OPTIONAL];
@@ -3027,10 +3075,10 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      * current time. Timestamps have nanosecond accuracy, but trailing zeros in
      * the fractional seconds might be omitted when the timestamp is displayed.
      * Incoming log entries should have timestamps that are no more than the [logs
-     * retention period](/logging/quotas) in the past, and no more than 24 hours
+     * retention period](https://cloud.google.com/logging/quotas) in the past, and no more than 24 hours
      * in the future. Log entries outside those time boundaries will not be
      * available when calling `entries.list`, but those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * </pre>
      *
      * <code>.google.protobuf.Timestamp timestamp = 9 [(.google.api.field_behavior) = OPTIONAL];
@@ -3059,10 +3107,10 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      * current time. Timestamps have nanosecond accuracy, but trailing zeros in
      * the fractional seconds might be omitted when the timestamp is displayed.
      * Incoming log entries should have timestamps that are no more than the [logs
-     * retention period](/logging/quotas) in the past, and no more than 24 hours
+     * retention period](https://cloud.google.com/logging/quotas) in the past, and no more than 24 hours
      * in the future. Log entries outside those time boundaries will not be
      * available when calling `entries.list`, but those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * </pre>
      *
      * <code>.google.protobuf.Timestamp timestamp = 9 [(.google.api.field_behavior) = OPTIONAL];
@@ -3088,10 +3136,10 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      * current time. Timestamps have nanosecond accuracy, but trailing zeros in
      * the fractional seconds might be omitted when the timestamp is displayed.
      * Incoming log entries should have timestamps that are no more than the [logs
-     * retention period](/logging/quotas) in the past, and no more than 24 hours
+     * retention period](https://cloud.google.com/logging/quotas) in the past, and no more than 24 hours
      * in the future. Log entries outside those time boundaries will not be
      * available when calling `entries.list`, but those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * </pre>
      *
      * <code>.google.protobuf.Timestamp timestamp = 9 [(.google.api.field_behavior) = OPTIONAL];
@@ -3122,10 +3170,10 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      * current time. Timestamps have nanosecond accuracy, but trailing zeros in
      * the fractional seconds might be omitted when the timestamp is displayed.
      * Incoming log entries should have timestamps that are no more than the [logs
-     * retention period](/logging/quotas) in the past, and no more than 24 hours
+     * retention period](https://cloud.google.com/logging/quotas) in the past, and no more than 24 hours
      * in the future. Log entries outside those time boundaries will not be
      * available when calling `entries.list`, but those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * </pre>
      *
      * <code>.google.protobuf.Timestamp timestamp = 9 [(.google.api.field_behavior) = OPTIONAL];
@@ -3152,10 +3200,10 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      * current time. Timestamps have nanosecond accuracy, but trailing zeros in
      * the fractional seconds might be omitted when the timestamp is displayed.
      * Incoming log entries should have timestamps that are no more than the [logs
-     * retention period](/logging/quotas) in the past, and no more than 24 hours
+     * retention period](https://cloud.google.com/logging/quotas) in the past, and no more than 24 hours
      * in the future. Log entries outside those time boundaries will not be
      * available when calling `entries.list`, but those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * </pre>
      *
      * <code>.google.protobuf.Timestamp timestamp = 9 [(.google.api.field_behavior) = OPTIONAL];
@@ -3176,10 +3224,10 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      * current time. Timestamps have nanosecond accuracy, but trailing zeros in
      * the fractional seconds might be omitted when the timestamp is displayed.
      * Incoming log entries should have timestamps that are no more than the [logs
-     * retention period](/logging/quotas) in the past, and no more than 24 hours
+     * retention period](https://cloud.google.com/logging/quotas) in the past, and no more than 24 hours
      * in the future. Log entries outside those time boundaries will not be
      * available when calling `entries.list`, but those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * </pre>
      *
      * <code>.google.protobuf.Timestamp timestamp = 9 [(.google.api.field_behavior) = OPTIONAL];
@@ -3202,10 +3250,10 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      * current time. Timestamps have nanosecond accuracy, but trailing zeros in
      * the fractional seconds might be omitted when the timestamp is displayed.
      * Incoming log entries should have timestamps that are no more than the [logs
-     * retention period](/logging/quotas) in the past, and no more than 24 hours
+     * retention period](https://cloud.google.com/logging/quotas) in the past, and no more than 24 hours
      * in the future. Log entries outside those time boundaries will not be
      * available when calling `entries.list`, but those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * </pre>
      *
      * <code>.google.protobuf.Timestamp timestamp = 9 [(.google.api.field_behavior) = OPTIONAL];
@@ -3445,6 +3493,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      *
      * @return The enum numeric value on the wire for severity.
      */
+    @java.lang.Override
     public int getSeverityValue() {
       return severity_;
     }
@@ -3463,6 +3512,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      * @return This builder for chaining.
      */
     public Builder setSeverityValue(int value) {
+
       severity_ = value;
       onChanged();
       return this;
@@ -3480,6 +3530,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      *
      * @return The severity.
      */
+    @java.lang.Override
     public com.google.logging.type.LogSeverity getSeverity() {
       @SuppressWarnings("deprecation")
       com.google.logging.type.LogSeverity result =
@@ -3922,6 +3973,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      *
      * <code>map&lt;string, string&gt; labels = 11 [(.google.api.field_behavior) = OPTIONAL];</code>
      */
+    @java.lang.Override
     public boolean containsLabels(java.lang.String key) {
       if (key == null) {
         throw new java.lang.NullPointerException();
@@ -3929,6 +3981,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
       return internalGetLabels().getMap().containsKey(key);
     }
     /** Use {@link #getLabelsMap()} instead. */
+    @java.lang.Override
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.String> getLabels() {
       return getLabelsMap();
@@ -3943,6 +3996,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      *
      * <code>map&lt;string, string&gt; labels = 11 [(.google.api.field_behavior) = OPTIONAL];</code>
      */
+    @java.lang.Override
     public java.util.Map<java.lang.String, java.lang.String> getLabelsMap() {
       return internalGetLabels().getMap();
     }
@@ -3956,6 +4010,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      *
      * <code>map&lt;string, string&gt; labels = 11 [(.google.api.field_behavior) = OPTIONAL];</code>
      */
+    @java.lang.Override
     public java.lang.String getLabelsOrDefault(
         java.lang.String key, java.lang.String defaultValue) {
       if (key == null) {
@@ -3974,6 +4029,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      *
      * <code>map&lt;string, string&gt; labels = 11 [(.google.api.field_behavior) = OPTIONAL];</code>
      */
+    @java.lang.Override
     public java.lang.String getLabelsOrThrow(java.lang.String key) {
       if (key == null) {
         throw new java.lang.NullPointerException();
@@ -4517,6 +4573,7 @@ public final class LogEntry extends com.google.protobuf.GeneratedMessageV3
      *
      * @return The traceSampled.
      */
+    @java.lang.Override
     public boolean getTraceSampled() {
       return traceSampled_;
     }

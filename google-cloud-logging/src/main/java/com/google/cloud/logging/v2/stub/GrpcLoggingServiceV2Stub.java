@@ -55,16 +55,6 @@ import javax.annotation.Generated;
 @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
 public class GrpcLoggingServiceV2Stub extends LoggingServiceV2Stub {
 
-  private static final MethodDescriptor<WriteLogEntriesRequest, WriteLogEntriesResponse>
-      writeLogEntriesMethodDescriptor =
-          MethodDescriptor.<WriteLogEntriesRequest, WriteLogEntriesResponse>newBuilder()
-              .setType(MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName("google.logging.v2.LoggingServiceV2/WriteLogEntries")
-              .setRequestMarshaller(
-                  ProtoUtils.marshaller(WriteLogEntriesRequest.getDefaultInstance()))
-              .setResponseMarshaller(
-                  ProtoUtils.marshaller(WriteLogEntriesResponse.getDefaultInstance()))
-              .build();
   private static final MethodDescriptor<DeleteLogRequest, Empty> deleteLogMethodDescriptor =
       MethodDescriptor.<DeleteLogRequest, Empty>newBuilder()
           .setType(MethodDescriptor.MethodType.UNARY)
@@ -81,6 +71,16 @@ public class GrpcLoggingServiceV2Stub extends LoggingServiceV2Stub {
                   ProtoUtils.marshaller(ListLogEntriesRequest.getDefaultInstance()))
               .setResponseMarshaller(
                   ProtoUtils.marshaller(ListLogEntriesResponse.getDefaultInstance()))
+              .build();
+  private static final MethodDescriptor<WriteLogEntriesRequest, WriteLogEntriesResponse>
+      writeLogEntriesMethodDescriptor =
+          MethodDescriptor.<WriteLogEntriesRequest, WriteLogEntriesResponse>newBuilder()
+              .setType(MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName("google.logging.v2.LoggingServiceV2/WriteLogEntries")
+              .setRequestMarshaller(
+                  ProtoUtils.marshaller(WriteLogEntriesRequest.getDefaultInstance()))
+              .setResponseMarshaller(
+                  ProtoUtils.marshaller(WriteLogEntriesResponse.getDefaultInstance()))
               .build();
   private static final MethodDescriptor<
           ListMonitoredResourceDescriptorsRequest, ListMonitoredResourceDescriptorsResponse>
@@ -109,12 +109,12 @@ public class GrpcLoggingServiceV2Stub extends LoggingServiceV2Stub {
 
   private final BackgroundResource backgroundResources;
 
-  private final UnaryCallable<WriteLogEntriesRequest, WriteLogEntriesResponse>
-      writeLogEntriesCallable;
   private final UnaryCallable<DeleteLogRequest, Empty> deleteLogCallable;
   private final UnaryCallable<ListLogEntriesRequest, ListLogEntriesResponse> listLogEntriesCallable;
   private final UnaryCallable<ListLogEntriesRequest, ListLogEntriesPagedResponse>
       listLogEntriesPagedCallable;
+  private final UnaryCallable<WriteLogEntriesRequest, WriteLogEntriesResponse>
+      writeLogEntriesCallable;
   private final UnaryCallable<
           ListMonitoredResourceDescriptorsRequest, ListMonitoredResourceDescriptorsResponse>
       listMonitoredResourceDescriptorsCallable;
@@ -165,11 +165,6 @@ public class GrpcLoggingServiceV2Stub extends LoggingServiceV2Stub {
       throws IOException {
     this.callableFactory = callableFactory;
 
-    GrpcCallSettings<WriteLogEntriesRequest, WriteLogEntriesResponse>
-        writeLogEntriesTransportSettings =
-            GrpcCallSettings.<WriteLogEntriesRequest, WriteLogEntriesResponse>newBuilder()
-                .setMethodDescriptor(writeLogEntriesMethodDescriptor)
-                .build();
     GrpcCallSettings<DeleteLogRequest, Empty> deleteLogTransportSettings =
         GrpcCallSettings.<DeleteLogRequest, Empty>newBuilder()
             .setMethodDescriptor(deleteLogMethodDescriptor)
@@ -187,6 +182,11 @@ public class GrpcLoggingServiceV2Stub extends LoggingServiceV2Stub {
         listLogEntriesTransportSettings =
             GrpcCallSettings.<ListLogEntriesRequest, ListLogEntriesResponse>newBuilder()
                 .setMethodDescriptor(listLogEntriesMethodDescriptor)
+                .build();
+    GrpcCallSettings<WriteLogEntriesRequest, WriteLogEntriesResponse>
+        writeLogEntriesTransportSettings =
+            GrpcCallSettings.<WriteLogEntriesRequest, WriteLogEntriesResponse>newBuilder()
+                .setMethodDescriptor(writeLogEntriesMethodDescriptor)
                 .build();
     GrpcCallSettings<
             ListMonitoredResourceDescriptorsRequest, ListMonitoredResourceDescriptorsResponse>
@@ -210,9 +210,6 @@ public class GrpcLoggingServiceV2Stub extends LoggingServiceV2Stub {
                 })
             .build();
 
-    this.writeLogEntriesCallable =
-        callableFactory.createBatchingCallable(
-            writeLogEntriesTransportSettings, settings.writeLogEntriesSettings(), clientContext);
     this.deleteLogCallable =
         callableFactory.createUnaryCallable(
             deleteLogTransportSettings, settings.deleteLogSettings(), clientContext);
@@ -222,6 +219,9 @@ public class GrpcLoggingServiceV2Stub extends LoggingServiceV2Stub {
     this.listLogEntriesPagedCallable =
         callableFactory.createPagedCallable(
             listLogEntriesTransportSettings, settings.listLogEntriesSettings(), clientContext);
+    this.writeLogEntriesCallable =
+        callableFactory.createBatchingCallable(
+            writeLogEntriesTransportSettings, settings.writeLogEntriesSettings(), clientContext);
     this.listMonitoredResourceDescriptorsCallable =
         callableFactory.createUnaryCallable(
             listMonitoredResourceDescriptorsTransportSettings,
@@ -242,10 +242,6 @@ public class GrpcLoggingServiceV2Stub extends LoggingServiceV2Stub {
     backgroundResources = new BackgroundResourceAggregation(clientContext.getBackgroundResources());
   }
 
-  public UnaryCallable<WriteLogEntriesRequest, WriteLogEntriesResponse> writeLogEntriesCallable() {
-    return writeLogEntriesCallable;
-  }
-
   public UnaryCallable<DeleteLogRequest, Empty> deleteLogCallable() {
     return deleteLogCallable;
   }
@@ -257,6 +253,10 @@ public class GrpcLoggingServiceV2Stub extends LoggingServiceV2Stub {
 
   public UnaryCallable<ListLogEntriesRequest, ListLogEntriesResponse> listLogEntriesCallable() {
     return listLogEntriesCallable;
+  }
+
+  public UnaryCallable<WriteLogEntriesRequest, WriteLogEntriesResponse> writeLogEntriesCallable() {
+    return writeLogEntriesCallable;
   }
 
   public UnaryCallable<

@@ -247,7 +247,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    *
    * <pre>
    * Optional. A filter that chooses which log entries to return.  See [Advanced
-   * Logs Queries](/logging/docs/view/advanced-queries).  Only log entries that
+   * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).  Only log entries that
    * match the filter are returned.  An empty filter matches all log entries in
    * the resources listed in `resource_names`. Referencing a parent resource
    * that is not listed in `resource_names` will cause the filter to return no
@@ -259,6 +259,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    *
    * @return The filter.
    */
+  @java.lang.Override
   public java.lang.String getFilter() {
     java.lang.Object ref = filter_;
     if (ref instanceof java.lang.String) {
@@ -275,7 +276,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    *
    * <pre>
    * Optional. A filter that chooses which log entries to return.  See [Advanced
-   * Logs Queries](/logging/docs/view/advanced-queries).  Only log entries that
+   * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).  Only log entries that
    * match the filter are returned.  An empty filter matches all log entries in
    * the resources listed in `resource_names`. Referencing a parent resource
    * that is not listed in `resource_names` will cause the filter to return no
@@ -287,6 +288,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    *
    * @return The bytes for filter.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getFilterBytes() {
     java.lang.Object ref = filter_;
     if (ref instanceof java.lang.String) {
@@ -317,6 +319,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    *
    * @return The orderBy.
    */
+  @java.lang.Override
   public java.lang.String getOrderBy() {
     java.lang.Object ref = orderBy_;
     if (ref instanceof java.lang.String) {
@@ -344,6 +347,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    *
    * @return The bytes for orderBy.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getOrderByBytes() {
     java.lang.Object ref = orderBy_;
     if (ref instanceof java.lang.String) {
@@ -371,6 +375,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    *
    * @return The pageSize.
    */
+  @java.lang.Override
   public int getPageSize() {
     return pageSize_;
   }
@@ -391,6 +396,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    *
    * @return The pageToken.
    */
+  @java.lang.Override
   public java.lang.String getPageToken() {
     java.lang.Object ref = pageToken_;
     if (ref instanceof java.lang.String) {
@@ -416,6 +422,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    *
    * @return The bytes for pageToken.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getPageTokenBytes() {
     java.lang.Object ref = pageToken_;
     if (ref instanceof java.lang.String) {
@@ -1073,7 +1080,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      *
      * <pre>
      * Optional. A filter that chooses which log entries to return.  See [Advanced
-     * Logs Queries](/logging/docs/view/advanced-queries).  Only log entries that
+     * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).  Only log entries that
      * match the filter are returned.  An empty filter matches all log entries in
      * the resources listed in `resource_names`. Referencing a parent resource
      * that is not listed in `resource_names` will cause the filter to return no
@@ -1101,7 +1108,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      *
      * <pre>
      * Optional. A filter that chooses which log entries to return.  See [Advanced
-     * Logs Queries](/logging/docs/view/advanced-queries).  Only log entries that
+     * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).  Only log entries that
      * match the filter are returned.  An empty filter matches all log entries in
      * the resources listed in `resource_names`. Referencing a parent resource
      * that is not listed in `resource_names` will cause the filter to return no
@@ -1129,7 +1136,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      *
      * <pre>
      * Optional. A filter that chooses which log entries to return.  See [Advanced
-     * Logs Queries](/logging/docs/view/advanced-queries).  Only log entries that
+     * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).  Only log entries that
      * match the filter are returned.  An empty filter matches all log entries in
      * the resources listed in `resource_names`. Referencing a parent resource
      * that is not listed in `resource_names` will cause the filter to return no
@@ -1156,7 +1163,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      *
      * <pre>
      * Optional. A filter that chooses which log entries to return.  See [Advanced
-     * Logs Queries](/logging/docs/view/advanced-queries).  Only log entries that
+     * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).  Only log entries that
      * match the filter are returned.  An empty filter matches all log entries in
      * the resources listed in `resource_names`. Referencing a parent resource
      * that is not listed in `resource_names` will cause the filter to return no
@@ -1179,7 +1186,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      *
      * <pre>
      * Optional. A filter that chooses which log entries to return.  See [Advanced
-     * Logs Queries](/logging/docs/view/advanced-queries).  Only log entries that
+     * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).  Only log entries that
      * match the filter are returned.  An empty filter matches all log entries in
      * the resources listed in `resource_names`. Referencing a parent resource
      * that is not listed in `resource_names` will cause the filter to return no
@@ -1348,6 +1355,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      *
      * @return The pageSize.
      */
+    @java.lang.Override
     public int getPageSize() {
       return pageSize_;
     }

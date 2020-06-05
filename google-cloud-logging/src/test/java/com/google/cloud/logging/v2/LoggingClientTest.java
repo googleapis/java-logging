@@ -105,54 +105,6 @@ public class LoggingClientTest {
 
   @Test
   @SuppressWarnings("all")
-  public void writeLogEntriesTest() {
-    WriteLogEntriesResponse expectedResponse = WriteLogEntriesResponse.newBuilder().build();
-    mockLoggingServiceV2.addResponse(expectedResponse);
-
-    LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
-    MonitoredResource resource = MonitoredResource.newBuilder().build();
-    Map<String, String> labels = new HashMap<>();
-    List<LogEntry> entries = new ArrayList<>();
-
-    WriteLogEntriesResponse actualResponse =
-        client.writeLogEntries(logName, resource, labels, entries);
-    Assert.assertEquals(expectedResponse, actualResponse);
-
-    List<AbstractMessage> actualRequests = mockLoggingServiceV2.getRequests();
-    Assert.assertEquals(1, actualRequests.size());
-    WriteLogEntriesRequest actualRequest = (WriteLogEntriesRequest) actualRequests.get(0);
-
-    Assert.assertEquals(logName, LogName.parse(actualRequest.getLogName()));
-    Assert.assertEquals(resource, actualRequest.getResource());
-    Assert.assertEquals(labels, actualRequest.getLabelsMap());
-    Assert.assertEquals(entries, actualRequest.getEntriesList());
-    Assert.assertTrue(
-        channelProvider.isHeaderSent(
-            ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
-            GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
-  }
-
-  @Test
-  @SuppressWarnings("all")
-  public void writeLogEntriesExceptionTest() throws Exception {
-    StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
-    mockLoggingServiceV2.addException(exception);
-
-    try {
-      LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
-      MonitoredResource resource = MonitoredResource.newBuilder().build();
-      Map<String, String> labels = new HashMap<>();
-      List<LogEntry> entries = new ArrayList<>();
-
-      client.writeLogEntries(logName, resource, labels, entries);
-      Assert.fail("No exception raised");
-    } catch (InvalidArgumentException e) {
-      // Expected exception
-    }
-  }
-
-  @Test
-  @SuppressWarnings("all")
   public void deleteLogTest() {
     Empty expectedResponse = Empty.newBuilder().build();
     mockLoggingServiceV2.addResponse(expectedResponse);
@@ -237,6 +189,54 @@ public class LoggingClientTest {
       String orderBy = "orderBy1234304744";
 
       client.listLogEntries(formattedResourceNames, filter, orderBy);
+      Assert.fail("No exception raised");
+    } catch (InvalidArgumentException e) {
+      // Expected exception
+    }
+  }
+
+  @Test
+  @SuppressWarnings("all")
+  public void writeLogEntriesTest() {
+    WriteLogEntriesResponse expectedResponse = WriteLogEntriesResponse.newBuilder().build();
+    mockLoggingServiceV2.addResponse(expectedResponse);
+
+    LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
+    MonitoredResource resource = MonitoredResource.newBuilder().build();
+    Map<String, String> labels = new HashMap<>();
+    List<LogEntry> entries = new ArrayList<>();
+
+    WriteLogEntriesResponse actualResponse =
+        client.writeLogEntries(logName, resource, labels, entries);
+    Assert.assertEquals(expectedResponse, actualResponse);
+
+    List<AbstractMessage> actualRequests = mockLoggingServiceV2.getRequests();
+    Assert.assertEquals(1, actualRequests.size());
+    WriteLogEntriesRequest actualRequest = (WriteLogEntriesRequest) actualRequests.get(0);
+
+    Assert.assertEquals(logName, LogName.parse(actualRequest.getLogName()));
+    Assert.assertEquals(resource, actualRequest.getResource());
+    Assert.assertEquals(labels, actualRequest.getLabelsMap());
+    Assert.assertEquals(entries, actualRequest.getEntriesList());
+    Assert.assertTrue(
+        channelProvider.isHeaderSent(
+            ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
+            GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
+  }
+
+  @Test
+  @SuppressWarnings("all")
+  public void writeLogEntriesExceptionTest() throws Exception {
+    StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
+    mockLoggingServiceV2.addException(exception);
+
+    try {
+      LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
+      MonitoredResource resource = MonitoredResource.newBuilder().build();
+      Map<String, String> labels = new HashMap<>();
+      List<LogEntry> entries = new ArrayList<>();
+
+      client.writeLogEntries(logName, resource, labels, entries);
       Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception

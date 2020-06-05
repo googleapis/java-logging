@@ -63,10 +63,7 @@ import javax.annotation.Generated;
  * <code>
  * try (LoggingClient loggingClient = LoggingClient.create()) {
  *   LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
- *   MonitoredResource resource = MonitoredResource.newBuilder().build();
- *   Map&lt;String, String&gt; labels = new HashMap&lt;&gt;();
- *   List&lt;LogEntry&gt; entries = new ArrayList&lt;&gt;();
- *   WriteLogEntriesResponse response = loggingClient.writeLogEntries(logName, resource, labels, entries);
+ *   loggingClient.deleteLog(logName);
  * }
  * </code>
  * </pre>
@@ -171,202 +168,6 @@ public class LoggingClient implements BackgroundResource {
   @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
   public LoggingServiceV2Stub getStub() {
     return stub;
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Writes log entries to Logging. This API method is the only way to send log entries to Logging.
-   * This method is used, directly or indirectly, by the Logging agent (fluentd) and all logging
-   * libraries configured to use Logging. A single request may contain log entries for a maximum of
-   * 1000 different resources (projects, organizations, billing accounts or folders)
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (LoggingClient loggingClient = LoggingClient.create()) {
-   *   LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
-   *   MonitoredResource resource = MonitoredResource.newBuilder().build();
-   *   Map&lt;String, String&gt; labels = new HashMap&lt;&gt;();
-   *   List&lt;LogEntry&gt; entries = new ArrayList&lt;&gt;();
-   *   WriteLogEntriesResponse response = loggingClient.writeLogEntries(logName, resource, labels, entries);
-   * }
-   * </code></pre>
-   *
-   * @param logName Optional. A default log resource name that is assigned to all log entries in
-   *     `entries` that do not specify a value for `log_name`:
-   *     <p>"projects/[PROJECT_ID]/logs/[LOG_ID]" "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]" "folders/[FOLDER_ID]/logs/[LOG_ID]"
-   *     <p>`[LOG_ID]` must be URL-encoded. For example:
-   *     <p>"projects/my-project-id/logs/syslog"
-   *     "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
-   *     <p>The permission `logging.logEntries.create` is needed on each project, organization,
-   *     billing account, or folder that is receiving new log entries, whether the resource is
-   *     specified in `logName` or in an individual log entry.
-   * @param resource Optional. A default monitored resource object that is assigned to all log
-   *     entries in `entries` that do not specify a value for `resource`. Example:
-   *     <p>{ "type": "gce_instance", "labels": { "zone": "us-central1-a", "instance_id":
-   *     "00000000000000000000" }}
-   *     <p>See [LogEntry][google.logging.v2.LogEntry].
-   * @param labels Optional. Default labels that are added to the `labels` field of all log entries
-   *     in `entries`. If a log entry already has a label with the same key as a label in this
-   *     parameter, then the log entry's label is not changed. See
-   *     [LogEntry][google.logging.v2.LogEntry].
-   * @param entries Required. The log entries to send to Logging. The order of log entries in this
-   *     list does not matter. Values supplied in this method's `log_name`, `resource`, and `labels`
-   *     fields are copied into those log entries in this list that do not include values for their
-   *     corresponding fields. For more information, see the [LogEntry][google.logging.v2.LogEntry]
-   *     type.
-   *     <p>If the `timestamp` or `insert_id` fields are missing in log entries, then this method
-   *     supplies the current time or a unique identifier, respectively. The supplied values are
-   *     chosen so that, among the log entries that did not supply their own values, the entries
-   *     earlier in the list will sort before the entries later in the list. See the `entries.list`
-   *     method.
-   *     <p>Log entries with timestamps that are more than the [logs retention
-   *     period](/logging/quota-policy) in the past or more than 24 hours in the future will not be
-   *     available when calling `entries.list`. However, those log entries can still be [exported
-   *     with LogSinks](/logging/docs/api/tasks/exporting-logs).
-   *     <p>To improve throughput and to avoid exceeding the [quota limit](/logging/quota-policy)
-   *     for calls to `entries.write`, you should try to include several log entries in this list,
-   *     rather than calling this method for each individual log entry.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final WriteLogEntriesResponse writeLogEntries(
-      LogName logName,
-      MonitoredResource resource,
-      Map<String, String> labels,
-      List<LogEntry> entries) {
-    WriteLogEntriesRequest request =
-        WriteLogEntriesRequest.newBuilder()
-            .setLogName(logName == null ? null : logName.toString())
-            .setResource(resource)
-            .putAllLabels(labels)
-            .addAllEntries(entries)
-            .build();
-    return writeLogEntries(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Writes log entries to Logging. This API method is the only way to send log entries to Logging.
-   * This method is used, directly or indirectly, by the Logging agent (fluentd) and all logging
-   * libraries configured to use Logging. A single request may contain log entries for a maximum of
-   * 1000 different resources (projects, organizations, billing accounts or folders)
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (LoggingClient loggingClient = LoggingClient.create()) {
-   *   LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
-   *   MonitoredResource resource = MonitoredResource.newBuilder().build();
-   *   Map&lt;String, String&gt; labels = new HashMap&lt;&gt;();
-   *   List&lt;LogEntry&gt; entries = new ArrayList&lt;&gt;();
-   *   WriteLogEntriesResponse response = loggingClient.writeLogEntries(logName.toString(), resource, labels, entries);
-   * }
-   * </code></pre>
-   *
-   * @param logName Optional. A default log resource name that is assigned to all log entries in
-   *     `entries` that do not specify a value for `log_name`:
-   *     <p>"projects/[PROJECT_ID]/logs/[LOG_ID]" "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
-   *     "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]" "folders/[FOLDER_ID]/logs/[LOG_ID]"
-   *     <p>`[LOG_ID]` must be URL-encoded. For example:
-   *     <p>"projects/my-project-id/logs/syslog"
-   *     "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
-   *     <p>The permission `logging.logEntries.create` is needed on each project, organization,
-   *     billing account, or folder that is receiving new log entries, whether the resource is
-   *     specified in `logName` or in an individual log entry.
-   * @param resource Optional. A default monitored resource object that is assigned to all log
-   *     entries in `entries` that do not specify a value for `resource`. Example:
-   *     <p>{ "type": "gce_instance", "labels": { "zone": "us-central1-a", "instance_id":
-   *     "00000000000000000000" }}
-   *     <p>See [LogEntry][google.logging.v2.LogEntry].
-   * @param labels Optional. Default labels that are added to the `labels` field of all log entries
-   *     in `entries`. If a log entry already has a label with the same key as a label in this
-   *     parameter, then the log entry's label is not changed. See
-   *     [LogEntry][google.logging.v2.LogEntry].
-   * @param entries Required. The log entries to send to Logging. The order of log entries in this
-   *     list does not matter. Values supplied in this method's `log_name`, `resource`, and `labels`
-   *     fields are copied into those log entries in this list that do not include values for their
-   *     corresponding fields. For more information, see the [LogEntry][google.logging.v2.LogEntry]
-   *     type.
-   *     <p>If the `timestamp` or `insert_id` fields are missing in log entries, then this method
-   *     supplies the current time or a unique identifier, respectively. The supplied values are
-   *     chosen so that, among the log entries that did not supply their own values, the entries
-   *     earlier in the list will sort before the entries later in the list. See the `entries.list`
-   *     method.
-   *     <p>Log entries with timestamps that are more than the [logs retention
-   *     period](/logging/quota-policy) in the past or more than 24 hours in the future will not be
-   *     available when calling `entries.list`. However, those log entries can still be [exported
-   *     with LogSinks](/logging/docs/api/tasks/exporting-logs).
-   *     <p>To improve throughput and to avoid exceeding the [quota limit](/logging/quota-policy)
-   *     for calls to `entries.write`, you should try to include several log entries in this list,
-   *     rather than calling this method for each individual log entry.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final WriteLogEntriesResponse writeLogEntries(
-      String logName,
-      MonitoredResource resource,
-      Map<String, String> labels,
-      List<LogEntry> entries) {
-    WriteLogEntriesRequest request =
-        WriteLogEntriesRequest.newBuilder()
-            .setLogName(logName)
-            .setResource(resource)
-            .putAllLabels(labels)
-            .addAllEntries(entries)
-            .build();
-    return writeLogEntries(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Writes log entries to Logging. This API method is the only way to send log entries to Logging.
-   * This method is used, directly or indirectly, by the Logging agent (fluentd) and all logging
-   * libraries configured to use Logging. A single request may contain log entries for a maximum of
-   * 1000 different resources (projects, organizations, billing accounts or folders)
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (LoggingClient loggingClient = LoggingClient.create()) {
-   *   List&lt;LogEntry&gt; entries = new ArrayList&lt;&gt;();
-   *   WriteLogEntriesRequest request = WriteLogEntriesRequest.newBuilder()
-   *     .addAllEntries(entries)
-   *     .build();
-   *   WriteLogEntriesResponse response = loggingClient.writeLogEntries(request);
-   * }
-   * </code></pre>
-   *
-   * @param request The request object containing all of the parameters for the API call.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final WriteLogEntriesResponse writeLogEntries(WriteLogEntriesRequest request) {
-    return writeLogEntriesCallable().call(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Writes log entries to Logging. This API method is the only way to send log entries to Logging.
-   * This method is used, directly or indirectly, by the Logging agent (fluentd) and all logging
-   * libraries configured to use Logging. A single request may contain log entries for a maximum of
-   * 1000 different resources (projects, organizations, billing accounts or folders)
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (LoggingClient loggingClient = LoggingClient.create()) {
-   *   List&lt;LogEntry&gt; entries = new ArrayList&lt;&gt;();
-   *   WriteLogEntriesRequest request = WriteLogEntriesRequest.newBuilder()
-   *     .addAllEntries(entries)
-   *     .build();
-   *   ApiFuture&lt;WriteLogEntriesResponse&gt; future = loggingClient.writeLogEntriesCallable().futureCall(request);
-   *   // Do something
-   *   WriteLogEntriesResponse response = future.get();
-   * }
-   * </code></pre>
-   */
-  public final UnaryCallable<WriteLogEntriesRequest, WriteLogEntriesResponse>
-      writeLogEntriesCallable() {
-    return stub.writeLogEntriesCallable();
   }
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
@@ -481,7 +282,7 @@ public class LoggingClient implements BackgroundResource {
   /**
    * Lists log entries. Use this method to retrieve log entries that originated from a
    * project/folder/organization/billing account. For ways to export log entries, see [Exporting
-   * Logs](/logging/docs/export).
+   * Logs](https://cloud.google.com/logging/docs/export).
    *
    * <p>Sample code:
    *
@@ -502,11 +303,11 @@ public class LoggingClient implements BackgroundResource {
    *     "billingAccounts/[BILLING_ACCOUNT_ID]" "folders/[FOLDER_ID]"
    *     <p>Projects listed in the `project_ids` field are added to this list.
    * @param filter Optional. A filter that chooses which log entries to return. See [Advanced Logs
-   *     Queries](/logging/docs/view/advanced-queries). Only log entries that match the filter are
-   *     returned. An empty filter matches all log entries in the resources listed in
-   *     `resource_names`. Referencing a parent resource that is not listed in `resource_names` will
-   *     cause the filter to return no results. The maximum length of the filter is 20000
-   *     characters.
+   *     Queries](https://cloud.google.com/logging/docs/view/advanced-queries). Only log entries
+   *     that match the filter are returned. An empty filter matches all log entries in the
+   *     resources listed in `resource_names`. Referencing a parent resource that is not listed in
+   *     `resource_names` will cause the filter to return no results. The maximum length of the
+   *     filter is 20000 characters.
    * @param orderBy Optional. How the results should be sorted. Presently, the only permitted values
    *     are `"timestamp asc"` (default) and `"timestamp desc"`. The first option returns entries in
    *     order of increasing values of `LogEntry.timestamp` (oldest first), and the second option
@@ -529,7 +330,7 @@ public class LoggingClient implements BackgroundResource {
   /**
    * Lists log entries. Use this method to retrieve log entries that originated from a
    * project/folder/organization/billing account. For ways to export log entries, see [Exporting
-   * Logs](/logging/docs/export).
+   * Logs](https://cloud.google.com/logging/docs/export).
    *
    * <p>Sample code:
    *
@@ -556,7 +357,7 @@ public class LoggingClient implements BackgroundResource {
   /**
    * Lists log entries. Use this method to retrieve log entries that originated from a
    * project/folder/organization/billing account. For ways to export log entries, see [Exporting
-   * Logs](/logging/docs/export).
+   * Logs](https://cloud.google.com/logging/docs/export).
    *
    * <p>Sample code:
    *
@@ -583,7 +384,7 @@ public class LoggingClient implements BackgroundResource {
   /**
    * Lists log entries. Use this method to retrieve log entries that originated from a
    * project/folder/organization/billing account. For ways to export log entries, see [Exporting
-   * Logs](/logging/docs/export).
+   * Logs](https://cloud.google.com/logging/docs/export).
    *
    * <p>Sample code:
    *
@@ -611,6 +412,206 @@ public class LoggingClient implements BackgroundResource {
   public final UnaryCallable<ListLogEntriesRequest, ListLogEntriesResponse>
       listLogEntriesCallable() {
     return stub.listLogEntriesCallable();
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Writes log entries to Logging. This API method is the only way to send log entries to Logging.
+   * This method is used, directly or indirectly, by the Logging agent (fluentd) and all logging
+   * libraries configured to use Logging. A single request may contain log entries for a maximum of
+   * 1000 different resources (projects, organizations, billing accounts or folders)
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
+   *   LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
+   *   MonitoredResource resource = MonitoredResource.newBuilder().build();
+   *   Map&lt;String, String&gt; labels = new HashMap&lt;&gt;();
+   *   List&lt;LogEntry&gt; entries = new ArrayList&lt;&gt;();
+   *   WriteLogEntriesResponse response = loggingClient.writeLogEntries(logName, resource, labels, entries);
+   * }
+   * </code></pre>
+   *
+   * @param logName Optional. A default log resource name that is assigned to all log entries in
+   *     `entries` that do not specify a value for `log_name`:
+   *     <p>"projects/[PROJECT_ID]/logs/[LOG_ID]" "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]" "folders/[FOLDER_ID]/logs/[LOG_ID]"
+   *     <p>`[LOG_ID]` must be URL-encoded. For example:
+   *     <p>"projects/my-project-id/logs/syslog"
+   *     "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
+   *     <p>The permission `logging.logEntries.create` is needed on each project, organization,
+   *     billing account, or folder that is receiving new log entries, whether the resource is
+   *     specified in `logName` or in an individual log entry.
+   * @param resource Optional. A default monitored resource object that is assigned to all log
+   *     entries in `entries` that do not specify a value for `resource`. Example:
+   *     <p>{ "type": "gce_instance", "labels": { "zone": "us-central1-a", "instance_id":
+   *     "00000000000000000000" }}
+   *     <p>See [LogEntry][google.logging.v2.LogEntry].
+   * @param labels Optional. Default labels that are added to the `labels` field of all log entries
+   *     in `entries`. If a log entry already has a label with the same key as a label in this
+   *     parameter, then the log entry's label is not changed. See
+   *     [LogEntry][google.logging.v2.LogEntry].
+   * @param entries Required. The log entries to send to Logging. The order of log entries in this
+   *     list does not matter. Values supplied in this method's `log_name`, `resource`, and `labels`
+   *     fields are copied into those log entries in this list that do not include values for their
+   *     corresponding fields. For more information, see the [LogEntry][google.logging.v2.LogEntry]
+   *     type.
+   *     <p>If the `timestamp` or `insert_id` fields are missing in log entries, then this method
+   *     supplies the current time or a unique identifier, respectively. The supplied values are
+   *     chosen so that, among the log entries that did not supply their own values, the entries
+   *     earlier in the list will sort before the entries later in the list. See the `entries.list`
+   *     method.
+   *     <p>Log entries with timestamps that are more than the [logs retention
+   *     period](https://cloud.google.com/logging/quota-policy) in the past or more than 24 hours in
+   *     the future will not be available when calling `entries.list`. However, those log entries
+   *     can still be [exported with
+   *     LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
+   *     <p>To improve throughput and to avoid exceeding the [quota
+   *     limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`, you
+   *     should try to include several log entries in this list, rather than calling this method for
+   *     each individual log entry.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final WriteLogEntriesResponse writeLogEntries(
+      LogName logName,
+      MonitoredResource resource,
+      Map<String, String> labels,
+      List<LogEntry> entries) {
+    WriteLogEntriesRequest request =
+        WriteLogEntriesRequest.newBuilder()
+            .setLogName(logName == null ? null : logName.toString())
+            .setResource(resource)
+            .putAllLabels(labels)
+            .addAllEntries(entries)
+            .build();
+    return writeLogEntries(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Writes log entries to Logging. This API method is the only way to send log entries to Logging.
+   * This method is used, directly or indirectly, by the Logging agent (fluentd) and all logging
+   * libraries configured to use Logging. A single request may contain log entries for a maximum of
+   * 1000 different resources (projects, organizations, billing accounts or folders)
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
+   *   LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
+   *   MonitoredResource resource = MonitoredResource.newBuilder().build();
+   *   Map&lt;String, String&gt; labels = new HashMap&lt;&gt;();
+   *   List&lt;LogEntry&gt; entries = new ArrayList&lt;&gt;();
+   *   WriteLogEntriesResponse response = loggingClient.writeLogEntries(logName.toString(), resource, labels, entries);
+   * }
+   * </code></pre>
+   *
+   * @param logName Optional. A default log resource name that is assigned to all log entries in
+   *     `entries` that do not specify a value for `log_name`:
+   *     <p>"projects/[PROJECT_ID]/logs/[LOG_ID]" "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]" "folders/[FOLDER_ID]/logs/[LOG_ID]"
+   *     <p>`[LOG_ID]` must be URL-encoded. For example:
+   *     <p>"projects/my-project-id/logs/syslog"
+   *     "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
+   *     <p>The permission `logging.logEntries.create` is needed on each project, organization,
+   *     billing account, or folder that is receiving new log entries, whether the resource is
+   *     specified in `logName` or in an individual log entry.
+   * @param resource Optional. A default monitored resource object that is assigned to all log
+   *     entries in `entries` that do not specify a value for `resource`. Example:
+   *     <p>{ "type": "gce_instance", "labels": { "zone": "us-central1-a", "instance_id":
+   *     "00000000000000000000" }}
+   *     <p>See [LogEntry][google.logging.v2.LogEntry].
+   * @param labels Optional. Default labels that are added to the `labels` field of all log entries
+   *     in `entries`. If a log entry already has a label with the same key as a label in this
+   *     parameter, then the log entry's label is not changed. See
+   *     [LogEntry][google.logging.v2.LogEntry].
+   * @param entries Required. The log entries to send to Logging. The order of log entries in this
+   *     list does not matter. Values supplied in this method's `log_name`, `resource`, and `labels`
+   *     fields are copied into those log entries in this list that do not include values for their
+   *     corresponding fields. For more information, see the [LogEntry][google.logging.v2.LogEntry]
+   *     type.
+   *     <p>If the `timestamp` or `insert_id` fields are missing in log entries, then this method
+   *     supplies the current time or a unique identifier, respectively. The supplied values are
+   *     chosen so that, among the log entries that did not supply their own values, the entries
+   *     earlier in the list will sort before the entries later in the list. See the `entries.list`
+   *     method.
+   *     <p>Log entries with timestamps that are more than the [logs retention
+   *     period](https://cloud.google.com/logging/quota-policy) in the past or more than 24 hours in
+   *     the future will not be available when calling `entries.list`. However, those log entries
+   *     can still be [exported with
+   *     LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
+   *     <p>To improve throughput and to avoid exceeding the [quota
+   *     limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`, you
+   *     should try to include several log entries in this list, rather than calling this method for
+   *     each individual log entry.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final WriteLogEntriesResponse writeLogEntries(
+      String logName,
+      MonitoredResource resource,
+      Map<String, String> labels,
+      List<LogEntry> entries) {
+    WriteLogEntriesRequest request =
+        WriteLogEntriesRequest.newBuilder()
+            .setLogName(logName)
+            .setResource(resource)
+            .putAllLabels(labels)
+            .addAllEntries(entries)
+            .build();
+    return writeLogEntries(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Writes log entries to Logging. This API method is the only way to send log entries to Logging.
+   * This method is used, directly or indirectly, by the Logging agent (fluentd) and all logging
+   * libraries configured to use Logging. A single request may contain log entries for a maximum of
+   * 1000 different resources (projects, organizations, billing accounts or folders)
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
+   *   List&lt;LogEntry&gt; entries = new ArrayList&lt;&gt;();
+   *   WriteLogEntriesRequest request = WriteLogEntriesRequest.newBuilder()
+   *     .addAllEntries(entries)
+   *     .build();
+   *   WriteLogEntriesResponse response = loggingClient.writeLogEntries(request);
+   * }
+   * </code></pre>
+   *
+   * @param request The request object containing all of the parameters for the API call.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final WriteLogEntriesResponse writeLogEntries(WriteLogEntriesRequest request) {
+    return writeLogEntriesCallable().call(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Writes log entries to Logging. This API method is the only way to send log entries to Logging.
+   * This method is used, directly or indirectly, by the Logging agent (fluentd) and all logging
+   * libraries configured to use Logging. A single request may contain log entries for a maximum of
+   * 1000 different resources (projects, organizations, billing accounts or folders)
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (LoggingClient loggingClient = LoggingClient.create()) {
+   *   List&lt;LogEntry&gt; entries = new ArrayList&lt;&gt;();
+   *   WriteLogEntriesRequest request = WriteLogEntriesRequest.newBuilder()
+   *     .addAllEntries(entries)
+   *     .build();
+   *   ApiFuture&lt;WriteLogEntriesResponse&gt; future = loggingClient.writeLogEntriesCallable().futureCall(request);
+   *   // Do something
+   *   WriteLogEntriesResponse response = future.get();
+   * }
+   * </code></pre>
+   */
+  public final UnaryCallable<WriteLogEntriesRequest, WriteLogEntriesResponse>
+      writeLogEntriesCallable() {
+    return stub.writeLogEntriesCallable();
   }
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD

@@ -183,6 +183,7 @@ public final class LogExclusion extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The name.
    */
+  @java.lang.Override
   public java.lang.String getName() {
     java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
@@ -208,6 +209,7 @@ public final class LogExclusion extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The bytes for name.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getNameBytes() {
     java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
@@ -233,6 +235,7 @@ public final class LogExclusion extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The description.
    */
+  @java.lang.Override
   public java.lang.String getDescription() {
     java.lang.Object ref = description_;
     if (ref instanceof java.lang.String) {
@@ -255,6 +258,7 @@ public final class LogExclusion extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The bytes for description.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getDescriptionBytes() {
     java.lang.Object ref = description_;
     if (ref instanceof java.lang.String) {
@@ -273,9 +277,9 @@ public final class LogExclusion extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * Required. An [advanced logs filter](/logging/docs/view/advanced-queries)
+   * Required. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries)
    * that matches the log entries to be excluded. By using the
-   * [sample function](/logging/docs/view/advanced-queries#sample),
+   * [sample function](https://cloud.google.com/logging/docs/view/advanced-queries#sample),
    * you can exclude less than 100% of the matching log entries.
    * For example, the following query matches 99% of low-severity log
    * entries from Google Cloud Storage buckets:
@@ -286,6 +290,7 @@ public final class LogExclusion extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The filter.
    */
+  @java.lang.Override
   public java.lang.String getFilter() {
     java.lang.Object ref = filter_;
     if (ref instanceof java.lang.String) {
@@ -301,9 +306,9 @@ public final class LogExclusion extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * Required. An [advanced logs filter](/logging/docs/view/advanced-queries)
+   * Required. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries)
    * that matches the log entries to be excluded. By using the
-   * [sample function](/logging/docs/view/advanced-queries#sample),
+   * [sample function](https://cloud.google.com/logging/docs/view/advanced-queries#sample),
    * you can exclude less than 100% of the matching log entries.
    * For example, the following query matches 99% of low-severity log
    * entries from Google Cloud Storage buckets:
@@ -314,6 +319,7 @@ public final class LogExclusion extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The bytes for filter.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getFilterBytes() {
     java.lang.Object ref = filter_;
     if (ref instanceof java.lang.String) {
@@ -342,6 +348,7 @@ public final class LogExclusion extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The disabled.
    */
+  @java.lang.Override
   public boolean getDisabled() {
     return disabled_;
   }
@@ -361,6 +368,7 @@ public final class LogExclusion extends com.google.protobuf.GeneratedMessageV3
    *
    * @return Whether the createTime field is set.
    */
+  @java.lang.Override
   public boolean hasCreateTime() {
     return createTime_ != null;
   }
@@ -377,6 +385,7 @@ public final class LogExclusion extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The createTime.
    */
+  @java.lang.Override
   public com.google.protobuf.Timestamp getCreateTime() {
     return createTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : createTime_;
   }
@@ -391,6 +400,7 @@ public final class LogExclusion extends com.google.protobuf.GeneratedMessageV3
    * <code>.google.protobuf.Timestamp create_time = 5 [(.google.api.field_behavior) = OUTPUT_ONLY];
    * </code>
    */
+  @java.lang.Override
   public com.google.protobuf.TimestampOrBuilder getCreateTimeOrBuilder() {
     return getCreateTime();
   }
@@ -410,6 +420,7 @@ public final class LogExclusion extends com.google.protobuf.GeneratedMessageV3
    *
    * @return Whether the updateTime field is set.
    */
+  @java.lang.Override
   public boolean hasUpdateTime() {
     return updateTime_ != null;
   }
@@ -426,6 +437,7 @@ public final class LogExclusion extends com.google.protobuf.GeneratedMessageV3
    *
    * @return The updateTime.
    */
+  @java.lang.Override
   public com.google.protobuf.Timestamp getUpdateTime() {
     return updateTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : updateTime_;
   }
@@ -440,6 +452,7 @@ public final class LogExclusion extends com.google.protobuf.GeneratedMessageV3
    * <code>.google.protobuf.Timestamp update_time = 6 [(.google.api.field_behavior) = OUTPUT_ONLY];
    * </code>
    */
+  @java.lang.Override
   public com.google.protobuf.TimestampOrBuilder getUpdateTimeOrBuilder() {
     return getUpdateTime();
   }
@@ -1097,9 +1110,9 @@ public final class LogExclusion extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Required. An [advanced logs filter](/logging/docs/view/advanced-queries)
+     * Required. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries)
      * that matches the log entries to be excluded. By using the
-     * [sample function](/logging/docs/view/advanced-queries#sample),
+     * [sample function](https://cloud.google.com/logging/docs/view/advanced-queries#sample),
      * you can exclude less than 100% of the matching log entries.
      * For example, the following query matches 99% of low-severity log
      * entries from Google Cloud Storage buckets:
@@ -1125,9 +1138,9 @@ public final class LogExclusion extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Required. An [advanced logs filter](/logging/docs/view/advanced-queries)
+     * Required. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries)
      * that matches the log entries to be excluded. By using the
-     * [sample function](/logging/docs/view/advanced-queries#sample),
+     * [sample function](https://cloud.google.com/logging/docs/view/advanced-queries#sample),
      * you can exclude less than 100% of the matching log entries.
      * For example, the following query matches 99% of low-severity log
      * entries from Google Cloud Storage buckets:
@@ -1153,9 +1166,9 @@ public final class LogExclusion extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Required. An [advanced logs filter](/logging/docs/view/advanced-queries)
+     * Required. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries)
      * that matches the log entries to be excluded. By using the
-     * [sample function](/logging/docs/view/advanced-queries#sample),
+     * [sample function](https://cloud.google.com/logging/docs/view/advanced-queries#sample),
      * you can exclude less than 100% of the matching log entries.
      * For example, the following query matches 99% of low-severity log
      * entries from Google Cloud Storage buckets:
@@ -1180,9 +1193,9 @@ public final class LogExclusion extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Required. An [advanced logs filter](/logging/docs/view/advanced-queries)
+     * Required. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries)
      * that matches the log entries to be excluded. By using the
-     * [sample function](/logging/docs/view/advanced-queries#sample),
+     * [sample function](https://cloud.google.com/logging/docs/view/advanced-queries#sample),
      * you can exclude less than 100% of the matching log entries.
      * For example, the following query matches 99% of low-severity log
      * entries from Google Cloud Storage buckets:
@@ -1203,9 +1216,9 @@ public final class LogExclusion extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Required. An [advanced logs filter](/logging/docs/view/advanced-queries)
+     * Required. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries)
      * that matches the log entries to be excluded. By using the
-     * [sample function](/logging/docs/view/advanced-queries#sample),
+     * [sample function](https://cloud.google.com/logging/docs/view/advanced-queries#sample),
      * you can exclude less than 100% of the matching log entries.
      * For example, the following query matches 99% of low-severity log
      * entries from Google Cloud Storage buckets:
@@ -1243,6 +1256,7 @@ public final class LogExclusion extends com.google.protobuf.GeneratedMessageV3
      *
      * @return The disabled.
      */
+    @java.lang.Override
     public boolean getDisabled() {
       return disabled_;
     }

@@ -166,6 +166,7 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
    *
    * @return The sinkName.
    */
+  @java.lang.Override
   public java.lang.String getSinkName() {
     java.lang.Object ref = sinkName_;
     if (ref instanceof java.lang.String) {
@@ -196,6 +197,7 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
    *
    * @return The bytes for sinkName.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getSinkNameBytes() {
     java.lang.Object ref = sinkName_;
     if (ref instanceof java.lang.String) {
@@ -222,6 +224,7 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
    *
    * @return Whether the sink field is set.
    */
+  @java.lang.Override
   public boolean hasSink() {
     return sink_ != null;
   }
@@ -237,6 +240,7 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
    *
    * @return The sink.
    */
+  @java.lang.Override
   public com.google.logging.v2.LogSink getSink() {
     return sink_ == null ? com.google.logging.v2.LogSink.getDefaultInstance() : sink_;
   }
@@ -250,6 +254,7 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
    *
    * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
    */
+  @java.lang.Override
   public com.google.logging.v2.LogSinkOrBuilder getSinkOrBuilder() {
     return getSink();
   }
@@ -276,6 +281,7 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
    *
    * @return The uniqueWriterIdentity.
    */
+  @java.lang.Override
   public boolean getUniqueWriterIdentity() {
     return uniqueWriterIdentity_;
   }
@@ -304,6 +310,7 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
    *
    * @return Whether the updateMask field is set.
    */
+  @java.lang.Override
   public boolean hasUpdateMask() {
     return updateMask_ != null;
   }
@@ -329,6 +336,7 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
    *
    * @return The updateMask.
    */
+  @java.lang.Override
   public com.google.protobuf.FieldMask getUpdateMask() {
     return updateMask_ == null ? com.google.protobuf.FieldMask.getDefaultInstance() : updateMask_;
   }
@@ -352,6 +360,7 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
    * <code>.google.protobuf.FieldMask update_mask = 4 [(.google.api.field_behavior) = OPTIONAL];
    * </code>
    */
+  @java.lang.Override
   public com.google.protobuf.FieldMaskOrBuilder getUpdateMaskOrBuilder() {
     return getUpdateMask();
   }
@@ -1096,6 +1105,7 @@ public final class UpdateSinkRequest extends com.google.protobuf.GeneratedMessag
      *
      * @return The uniqueWriterIdentity.
      */
+    @java.lang.Override
     public boolean getUniqueWriterIdentity() {
       return uniqueWriterIdentity_;
     }

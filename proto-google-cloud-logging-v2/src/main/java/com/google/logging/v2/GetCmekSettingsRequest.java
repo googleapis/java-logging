@@ -24,7 +24,7 @@ package com.google.logging.v2;
  * <pre>
  * The parameters to
  * [GetCmekSettings][google.logging.v2.ConfigServiceV2.GetCmekSettings].
- * See [Enabling CMEK for Logs Router](/logging/docs/routing/managed-encryption)
+ * See [Enabling CMEK for Logs Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
  * for more information.
  * </pre>
  *
@@ -137,6 +137,7 @@ public final class GetCmekSettingsRequest extends com.google.protobuf.GeneratedM
    *
    * @return The name.
    */
+  @java.lang.Override
   public java.lang.String getName() {
     java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
@@ -169,6 +170,7 @@ public final class GetCmekSettingsRequest extends com.google.protobuf.GeneratedM
    *
    * @return The bytes for name.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getNameBytes() {
     java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
@@ -346,7 +348,7 @@ public final class GetCmekSettingsRequest extends com.google.protobuf.GeneratedM
    * <pre>
    * The parameters to
    * [GetCmekSettings][google.logging.v2.ConfigServiceV2.GetCmekSettings].
-   * See [Enabling CMEK for Logs Router](/logging/docs/routing/managed-encryption)
+   * See [Enabling CMEK for Logs Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    * </pre>
    *

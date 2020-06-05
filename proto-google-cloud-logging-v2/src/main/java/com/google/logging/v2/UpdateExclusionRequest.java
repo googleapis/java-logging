@@ -161,6 +161,7 @@ public final class UpdateExclusionRequest extends com.google.protobuf.GeneratedM
    *
    * @return The name.
    */
+  @java.lang.Override
   public java.lang.String getName() {
     java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
@@ -190,6 +191,7 @@ public final class UpdateExclusionRequest extends com.google.protobuf.GeneratedM
    *
    * @return The bytes for name.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getNameBytes() {
     java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
@@ -217,6 +219,7 @@ public final class UpdateExclusionRequest extends com.google.protobuf.GeneratedM
    *
    * @return Whether the exclusion field is set.
    */
+  @java.lang.Override
   public boolean hasExclusion() {
     return exclusion_ != null;
   }
@@ -233,6 +236,7 @@ public final class UpdateExclusionRequest extends com.google.protobuf.GeneratedM
    *
    * @return The exclusion.
    */
+  @java.lang.Override
   public com.google.logging.v2.LogExclusion getExclusion() {
     return exclusion_ == null
         ? com.google.logging.v2.LogExclusion.getDefaultInstance()
@@ -249,6 +253,7 @@ public final class UpdateExclusionRequest extends com.google.protobuf.GeneratedM
    * <code>.google.logging.v2.LogExclusion exclusion = 2 [(.google.api.field_behavior) = REQUIRED];
    * </code>
    */
+  @java.lang.Override
   public com.google.logging.v2.LogExclusionOrBuilder getExclusionOrBuilder() {
     return getExclusion();
   }
@@ -272,6 +277,7 @@ public final class UpdateExclusionRequest extends com.google.protobuf.GeneratedM
    *
    * @return Whether the updateMask field is set.
    */
+  @java.lang.Override
   public boolean hasUpdateMask() {
     return updateMask_ != null;
   }
@@ -292,6 +298,7 @@ public final class UpdateExclusionRequest extends com.google.protobuf.GeneratedM
    *
    * @return The updateMask.
    */
+  @java.lang.Override
   public com.google.protobuf.FieldMask getUpdateMask() {
     return updateMask_ == null ? com.google.protobuf.FieldMask.getDefaultInstance() : updateMask_;
   }
@@ -310,6 +317,7 @@ public final class UpdateExclusionRequest extends com.google.protobuf.GeneratedM
    * <code>.google.protobuf.FieldMask update_mask = 3 [(.google.api.field_behavior) = REQUIRED];
    * </code>
    */
+  @java.lang.Override
   public com.google.protobuf.FieldMaskOrBuilder getUpdateMaskOrBuilder() {
     return getUpdateMask();
   }

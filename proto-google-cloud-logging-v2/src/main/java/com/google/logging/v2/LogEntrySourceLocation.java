@@ -139,6 +139,7 @@ public final class LogEntrySourceLocation extends com.google.protobuf.GeneratedM
    *
    * @return The file.
    */
+  @java.lang.Override
   public java.lang.String getFile() {
     java.lang.Object ref = file_;
     if (ref instanceof java.lang.String) {
@@ -162,6 +163,7 @@ public final class LogEntrySourceLocation extends com.google.protobuf.GeneratedM
    *
    * @return The bytes for file.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getFileBytes() {
     java.lang.Object ref = file_;
     if (ref instanceof java.lang.String) {
@@ -188,6 +190,7 @@ public final class LogEntrySourceLocation extends com.google.protobuf.GeneratedM
    *
    * @return The line.
    */
+  @java.lang.Override
   public long getLine() {
     return line_;
   }
@@ -210,6 +213,7 @@ public final class LogEntrySourceLocation extends com.google.protobuf.GeneratedM
    *
    * @return The function.
    */
+  @java.lang.Override
   public java.lang.String getFunction() {
     java.lang.Object ref = function_;
     if (ref instanceof java.lang.String) {
@@ -237,6 +241,7 @@ public final class LogEntrySourceLocation extends com.google.protobuf.GeneratedM
    *
    * @return The bytes for function.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getFunctionBytes() {
     java.lang.Object ref = function_;
     if (ref instanceof java.lang.String) {
@@ -721,6 +726,7 @@ public final class LogEntrySourceLocation extends com.google.protobuf.GeneratedM
      *
      * @return The line.
      */
+    @java.lang.Override
     public long getLine() {
       return line_;
     }

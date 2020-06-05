@@ -99,7 +99,7 @@ public interface LogMetricOrBuilder
    *
    *
    * <pre>
-   * Required. An [advanced logs filter](/logging/docs/view/advanced_filters) which is
+   * Required. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced_filters) which is
    * used to match log entries.
    * Example:
    *     "resource.type=gae_app AND severity&gt;=ERROR"
@@ -115,7 +115,7 @@ public interface LogMetricOrBuilder
    *
    *
    * <pre>
-   * Required. An [advanced logs filter](/logging/docs/view/advanced_filters) which is
+   * Required. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced_filters) which is
    * used to match log entries.
    * Example:
    *     "resource.type=gae_app AND severity&gt;=ERROR"

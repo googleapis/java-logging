@@ -67,7 +67,7 @@ public interface LogSinkOrBuilder
    * The sink's `writer_identity`, set when the sink is created, must
    * have permission to write to the destination or else the log
    * entries are not exported. For more information, see
-   * [Exporting Logs with Sinks](/logging/docs/api/tasks/exporting-logs).
+   * [Exporting Logs with Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * </pre>
    *
    * <code>
@@ -88,7 +88,7 @@ public interface LogSinkOrBuilder
    * The sink's `writer_identity`, set when the sink is created, must
    * have permission to write to the destination or else the log
    * entries are not exported. For more information, see
-   * [Exporting Logs with Sinks](/logging/docs/api/tasks/exporting-logs).
+   * [Exporting Logs with Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * </pre>
    *
    * <code>
@@ -103,7 +103,7 @@ public interface LogSinkOrBuilder
    *
    *
    * <pre>
-   * Optional. An [advanced logs filter](/logging/docs/view/advanced-queries). The only
+   * Optional. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries). The only
    * exported log entries are those that are in the resource owning the sink and
    * that match the filter. For example:
    *     logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity&gt;=ERROR
@@ -118,7 +118,7 @@ public interface LogSinkOrBuilder
    *
    *
    * <pre>
-   * Optional. An [advanced logs filter](/logging/docs/view/advanced-queries). The only
+   * Optional. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries). The only
    * exported log entries are those that are in the resource owning the sink and
    * that match the filter. For example:
    *     logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity&gt;=ERROR
@@ -214,7 +214,7 @@ public interface LogSinkOrBuilder
    * Until you grant this identity write-access to the destination, log entry
    * exports from this sink will fail. For more information,
    * see [Granting Access for a
-   * Resource](/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+   * Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
    * Consult the destination service's documentation to determine the
    * appropriate IAM roles to assign to the identity.
    * </pre>
@@ -236,7 +236,7 @@ public interface LogSinkOrBuilder
    * Until you grant this identity write-access to the destination, log entry
    * exports from this sink will fail. For more information,
    * see [Granting Access for a
-   * Resource](/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+   * Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
    * Consult the destination service's documentation to determine the
    * appropriate IAM roles to assign to the identity.
    * </pre>
