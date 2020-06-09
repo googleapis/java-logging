@@ -46,28 +46,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.MoreExecutors;
 import com.google.common.util.concurrent.Uninterruptibles;
-import com.google.logging.v2.CreateLogMetricRequest;
-import com.google.logging.v2.CreateSinkRequest;
-import com.google.logging.v2.DeleteLogMetricRequest;
-import com.google.logging.v2.DeleteLogRequest;
-import com.google.logging.v2.DeleteSinkRequest;
-import com.google.logging.v2.GetLogMetricRequest;
-import com.google.logging.v2.GetSinkRequest;
-import com.google.logging.v2.ListLogEntriesRequest;
-import com.google.logging.v2.ListLogEntriesResponse;
-import com.google.logging.v2.ListLogMetricsRequest;
-import com.google.logging.v2.ListLogMetricsResponse;
-import com.google.logging.v2.ListMonitoredResourceDescriptorsRequest;
-import com.google.logging.v2.ListMonitoredResourceDescriptorsResponse;
-import com.google.logging.v2.ListSinksRequest;
-import com.google.logging.v2.ListSinksResponse;
-import com.google.logging.v2.LogName;
-import com.google.logging.v2.LogSinkName;
-import com.google.logging.v2.ProjectName;
-import com.google.logging.v2.UpdateLogMetricRequest;
-import com.google.logging.v2.UpdateSinkRequest;
-import com.google.logging.v2.WriteLogEntriesRequest;
-import com.google.logging.v2.WriteLogEntriesResponse;
+import com.google.logging.v2.*;
 import com.google.protobuf.Empty;
 import java.util.ArrayList;
 import java.util.List;
@@ -443,7 +422,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   public ApiFuture<Metric> updateAsync(MetricInfo metric) {
     UpdateLogMetricRequest request =
         UpdateLogMetricRequest.newBuilder()
-            .setMetricName(LogName.of(getOptions().getProjectId(), metric.getName()).toString())
+            .setMetricName(LogMetricName.of(getOptions().getProjectId(), metric.getName()).toString())
             .setMetric(metric.toPb())
             .build();
     return transform(rpc.update(request), Metric.fromPbFunction(this));
@@ -458,7 +437,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   public ApiFuture<Metric> getMetricAsync(String metric) {
     GetLogMetricRequest request =
         GetLogMetricRequest.newBuilder()
-            .setMetricName(LogName.of(getOptions().getProjectId(), metric).toString())
+            .setMetricName(LogMetricName.of(getOptions().getProjectId(), metric).toString())
             .build();
     return transform(rpc.get(request), Metric.fromPbFunction(this));
   }
@@ -522,7 +501,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   public ApiFuture<Boolean> deleteMetricAsync(String metric) {
     DeleteLogMetricRequest request =
         DeleteLogMetricRequest.newBuilder()
-            .setMetricName(LogName.of(getOptions().getProjectId(), metric).toString())
+            .setMetricName(LogMetricName.of(getOptions().getProjectId(), metric).toString())
             .build();
     return transform(rpc.delete(request), EMPTY_TO_BOOLEAN_FUNCTION);
   }
