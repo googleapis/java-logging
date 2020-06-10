@@ -422,7 +422,8 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   public ApiFuture<Metric> updateAsync(MetricInfo metric) {
     UpdateLogMetricRequest request =
         UpdateLogMetricRequest.newBuilder()
-            .setMetricName(LogMetricName.of(getOptions().getProjectId(), metric.getName()).toString())
+            .setMetricName(
+                LogMetricName.of(getOptions().getProjectId(), metric.getName()).toString())
             .setMetric(metric.toPb())
             .build();
     return transform(rpc.update(request), Metric.fromPbFunction(this));
