@@ -1,5 +1,14 @@
 # Changelog
 
+### [1.101.3](https://www.github.com/googleapis/java-logging/compare/v1.101.2...v1.101.3) (2020-06-22)
+
+
+### Dependencies
+
+* update core dependencies ([#170](https://www.github.com/googleapis/java-logging/issues/170)) ([5ab9181](https://www.github.com/googleapis/java-logging/commit/5ab9181dd0774a631cd6997cb9d15bff1b83592f))
+* update dependency com.google.api:api-common to v1.9.2 ([#169](https://www.github.com/googleapis/java-logging/issues/169)) ([288a894](https://www.github.com/googleapis/java-logging/commit/288a894f3ec0bda774b1fbc6c81690a92c387757))
+* update dependency com.google.protobuf:protobuf-bom to v3.12.2 ([#168](https://www.github.com/googleapis/java-logging/issues/168)) ([2732f81](https://www.github.com/googleapis/java-logging/commit/2732f81d932410bc3e39d4add76bac542325a575))
+
 ### [1.101.2](https://www.github.com/googleapis/java-logging/compare/v1.101.1...v1.101.2) (2020-06-10)
 
 
