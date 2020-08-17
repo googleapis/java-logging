@@ -100,16 +100,17 @@ public class GrpcLoggingRpc implements LoggingRpc {
                 .usePlaintext()
                 .executor(executor)
                 .build();
-        TransportChannel transportChannel = GrpcTransportChannel.create(managedChannel);
-        clientContext =
-            ClientContext.newBuilder()
-                .setCredentials(null)
-                .setExecutor(executor)
-                .setTransportChannel(transportChannel)
-                .setDefaultCallContext(GrpcCallContext.of(managedChannel, CallOptions.DEFAULT))
-                .setBackgroundResources(
-                    Collections.<BackgroundResource>singletonList(transportChannel))
-                .build();
+        try (TransportChannel transportChannel = GrpcTransportChannel.create(managedChannel)) {
+          clientContext =
+              ClientContext.newBuilder()
+                  .setCredentials(null)
+                  .setExecutor(executor)
+                  .setTransportChannel(transportChannel)
+                  .setDefaultCallContext(GrpcCallContext.of(managedChannel, CallOptions.DEFAULT))
+                  .setBackgroundResources(
+                      Collections.<BackgroundResource>singletonList(transportChannel))
+                  .build();
+        }
       } else {
         LoggingSettingsBuilder settingsBuilder =
             new LoggingSettingsBuilder(LoggingSettings.newBuilder().build());
