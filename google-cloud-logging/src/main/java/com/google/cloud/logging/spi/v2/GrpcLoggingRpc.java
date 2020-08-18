@@ -110,6 +110,8 @@ public class GrpcLoggingRpc implements LoggingRpc {
                   .setBackgroundResources(
                       Collections.<BackgroundResource>singletonList(transportChannel))
                   .build();
+        } catch (Exception ex) {
+          throw new IOException(ex);
         }
       } else {
         LoggingSettingsBuilder settingsBuilder =
