@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,8 +45,15 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
     name_ = "";
     destination_ = "";
     filter_ = "";
+    description_ = "";
     outputVersionFormat_ = 0;
     writerIdentity_ = "";
+  }
+
+  @java.lang.Override
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(UnusedPrivateParameter unused) {
+    return new LogSink();
   }
 
   @java.lang.Override
@@ -62,7 +69,6 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
     if (extensionRegistry == null) {
       throw new java.lang.NullPointerException();
     }
-    int mutable_bitField0_ = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -113,36 +119,6 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
               includeChildren_ = input.readBool();
               break;
             }
-          case 82:
-            {
-              com.google.protobuf.Timestamp.Builder subBuilder = null;
-              if (startTime_ != null) {
-                subBuilder = startTime_.toBuilder();
-              }
-              startTime_ =
-                  input.readMessage(com.google.protobuf.Timestamp.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(startTime_);
-                startTime_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-          case 90:
-            {
-              com.google.protobuf.Timestamp.Builder subBuilder = null;
-              if (endTime_ != null) {
-                subBuilder = endTime_.toBuilder();
-              }
-              endTime_ =
-                  input.readMessage(com.google.protobuf.Timestamp.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(endTime_);
-                endTime_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
           case 98:
             {
               com.google.logging.v2.BigQueryOptions.Builder subBuilder = null;
@@ -187,6 +163,18 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
                 updateTime_ = subBuilder.buildPartial();
               }
 
+              break;
+            }
+          case 146:
+            {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              description_ = s;
+              break;
+            }
+          case 152:
+            {
+              disabled_ = input.readBool();
               break;
             }
           default:
@@ -306,12 +294,20 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
       return value;
     }
 
-    /** @deprecated Use {@link #forNumber(int)} instead. */
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
     @java.lang.Deprecated
     public static VersionFormat valueOf(int value) {
       return forNumber(value);
     }
 
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     */
     public static VersionFormat forNumber(int value) {
       switch (value) {
         case 0:
@@ -337,6 +333,10 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
         };
 
     public final com.google.protobuf.Descriptors.EnumValueDescriptor getValueDescriptor() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalStateException(
+            "Can't get the descriptor of an unrecognized enum value.");
+      }
       return getDescriptor().getValues().get(ordinal());
     }
 
@@ -372,7 +372,10 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
   private int optionsCase_ = 0;
   private java.lang.Object options_;
 
-  public enum OptionsCase implements com.google.protobuf.Internal.EnumLite {
+  public enum OptionsCase
+      implements
+          com.google.protobuf.Internal.EnumLite,
+          com.google.protobuf.AbstractMessage.InternalOneOfEnum {
     BIGQUERY_OPTIONS(12),
     OPTIONS_NOT_SET(0);
     private final int value;
@@ -380,7 +383,11 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
     private OptionsCase(int value) {
       this.value = value;
     }
-    /** @deprecated Use {@link #forNumber(int)} instead. */
+    /**
+     * @param value The number of the enum to look for.
+     * @return The enum associated with the given number.
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
     @java.lang.Deprecated
     public static OptionsCase valueOf(int value) {
       return forNumber(value);
@@ -412,15 +419,18 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * Required. The client-assigned sink identifier, unique within the
-   * project. Example: `"my-syslog-errors-to-pubsub"`. Sink identifiers are
-   * limited to 100 characters and can include only the following characters:
-   * upper and lower-case alphanumeric characters, underscores, hyphens, and
-   * periods.
+   * Required. The client-assigned sink identifier, unique within the project. Example:
+   * `"my-syslog-errors-to-pubsub"`. Sink identifiers are limited to 100
+   * characters and can include only the following characters: upper and
+   * lower-case alphanumeric characters, underscores, hyphens, and periods.
+   * First character has to be alphanumeric.
    * </pre>
    *
-   * <code>string name = 1;</code>
+   * <code>string name = 1 [(.google.api.field_behavior) = REQUIRED];</code>
+   *
+   * @return The name.
    */
+  @java.lang.Override
   public java.lang.String getName() {
     java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
@@ -436,15 +446,18 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * Required. The client-assigned sink identifier, unique within the
-   * project. Example: `"my-syslog-errors-to-pubsub"`. Sink identifiers are
-   * limited to 100 characters and can include only the following characters:
-   * upper and lower-case alphanumeric characters, underscores, hyphens, and
-   * periods.
+   * Required. The client-assigned sink identifier, unique within the project. Example:
+   * `"my-syslog-errors-to-pubsub"`. Sink identifiers are limited to 100
+   * characters and can include only the following characters: upper and
+   * lower-case alphanumeric characters, underscores, hyphens, and periods.
+   * First character has to be alphanumeric.
    * </pre>
    *
-   * <code>string name = 1;</code>
+   * <code>string name = 1 [(.google.api.field_behavior) = REQUIRED];</code>
+   *
+   * @return The bytes for name.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getNameBytes() {
     java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
@@ -470,11 +483,16 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    * The sink's `writer_identity`, set when the sink is created, must
    * have permission to write to the destination or else the log
    * entries are not exported. For more information, see
-   * [Exporting Logs with Sinks](/logging/docs/api/tasks/exporting-logs).
+   * [Exporting Logs with Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * </pre>
    *
-   * <code>string destination = 3;</code>
+   * <code>
+   * string destination = 3 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The destination.
    */
+  @java.lang.Override
   public java.lang.String getDestination() {
     java.lang.Object ref = destination_;
     if (ref instanceof java.lang.String) {
@@ -497,11 +515,16 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    * The sink's `writer_identity`, set when the sink is created, must
    * have permission to write to the destination or else the log
    * entries are not exported. For more information, see
-   * [Exporting Logs with Sinks](/logging/docs/api/tasks/exporting-logs).
+   * [Exporting Logs with Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * </pre>
    *
-   * <code>string destination = 3;</code>
+   * <code>
+   * string destination = 3 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The bytes for destination.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getDestinationBytes() {
     java.lang.Object ref = destination_;
     if (ref instanceof java.lang.String) {
@@ -520,14 +543,17 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * Optional. An [advanced logs filter](/logging/docs/view/advanced-queries). The only
+   * Optional. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries). The only
    * exported log entries are those that are in the resource owning the sink and
    * that match the filter. For example:
    *     logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity&gt;=ERROR
    * </pre>
    *
-   * <code>string filter = 5;</code>
+   * <code>string filter = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The filter.
    */
+  @java.lang.Override
   public java.lang.String getFilter() {
     java.lang.Object ref = filter_;
     if (ref instanceof java.lang.String) {
@@ -543,14 +569,17 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * Optional. An [advanced logs filter](/logging/docs/view/advanced-queries). The only
+   * Optional. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries). The only
    * exported log entries are those that are in the resource owning the sink and
    * that match the filter. For example:
    *     logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity&gt;=ERROR
    * </pre>
    *
-   * <code>string filter = 5;</code>
+   * <code>string filter = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The bytes for filter.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getFilterBytes() {
     java.lang.Object ref = filter_;
     if (ref instanceof java.lang.String) {
@@ -561,6 +590,76 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
+  }
+
+  public static final int DESCRIPTION_FIELD_NUMBER = 18;
+  private volatile java.lang.Object description_;
+  /**
+   *
+   *
+   * <pre>
+   * Optional. A description of this sink.
+   * The maximum length of the description is 8000 characters.
+   * </pre>
+   *
+   * <code>string description = 18 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The description.
+   */
+  @java.lang.Override
+  public java.lang.String getDescription() {
+    java.lang.Object ref = description_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      description_ = s;
+      return s;
+    }
+  }
+  /**
+   *
+   *
+   * <pre>
+   * Optional. A description of this sink.
+   * The maximum length of the description is 8000 characters.
+   * </pre>
+   *
+   * <code>string description = 18 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The bytes for description.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString getDescriptionBytes() {
+    java.lang.Object ref = description_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b =
+          com.google.protobuf.ByteString.copyFromUtf8((java.lang.String) ref);
+      description_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int DISABLED_FIELD_NUMBER = 19;
+  private boolean disabled_;
+  /**
+   *
+   *
+   * <pre>
+   * Optional. If set to True, then this sink is disabled and it does not
+   * export any log entries.
+   * </pre>
+   *
+   * <code>bool disabled = 19 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The disabled.
+   */
+  @java.lang.Override
+  public boolean getDisabled() {
+    return disabled_;
   }
 
   public static final int OUTPUT_VERSION_FORMAT_FIELD_NUMBER = 6;
@@ -575,7 +674,10 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * <code>.google.logging.v2.LogSink.VersionFormat output_version_format = 6 [deprecated = true];
    * </code>
+   *
+   * @return The enum numeric value on the wire for outputVersionFormat.
    */
+  @java.lang.Override
   @java.lang.Deprecated
   public int getOutputVersionFormatValue() {
     return outputVersionFormat_;
@@ -590,7 +692,10 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    * <code>.google.logging.v2.LogSink.VersionFormat output_version_format = 6 [deprecated = true];
    * </code>
+   *
+   * @return The outputVersionFormat.
    */
+  @java.lang.Override
   @java.lang.Deprecated
   public com.google.logging.v2.LogSink.VersionFormat getOutputVersionFormat() {
     @SuppressWarnings("deprecation")
@@ -605,23 +710,24 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * Output only. An IAM identity&amp;mdash;a service account or group&amp;mdash;under
-   * which Logging writes the exported log entries to the sink's destination.
-   * This field is set by
-   * [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink]
-   * and
-   * [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink]
-   * based on the value of `unique_writer_identity` in those methods.
+   * Output only. An IAM identity–a service account or group&amp;mdash;under which Logging
+   * writes the exported log entries to the sink's destination. This field is
+   * set by [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink] and
+   * [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink] based on the
+   * value of `unique_writer_identity` in those methods.
    * Until you grant this identity write-access to the destination, log entry
    * exports from this sink will fail. For more information,
    * see [Granting Access for a
-   * Resource](/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+   * Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
    * Consult the destination service's documentation to determine the
    * appropriate IAM roles to assign to the identity.
    * </pre>
    *
-   * <code>string writer_identity = 8;</code>
+   * <code>string writer_identity = 8 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
+   *
+   * @return The writerIdentity.
    */
+  @java.lang.Override
   public java.lang.String getWriterIdentity() {
     java.lang.Object ref = writerIdentity_;
     if (ref instanceof java.lang.String) {
@@ -637,23 +743,24 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * Output only. An IAM identity&amp;mdash;a service account or group&amp;mdash;under
-   * which Logging writes the exported log entries to the sink's destination.
-   * This field is set by
-   * [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink]
-   * and
-   * [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink]
-   * based on the value of `unique_writer_identity` in those methods.
+   * Output only. An IAM identity–a service account or group&amp;mdash;under which Logging
+   * writes the exported log entries to the sink's destination. This field is
+   * set by [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink] and
+   * [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink] based on the
+   * value of `unique_writer_identity` in those methods.
    * Until you grant this identity write-access to the destination, log entry
    * exports from this sink will fail. For more information,
    * see [Granting Access for a
-   * Resource](/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+   * Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
    * Consult the destination service's documentation to determine the
    * appropriate IAM roles to assign to the identity.
    * </pre>
    *
-   * <code>string writer_identity = 8;</code>
+   * <code>string writer_identity = 8 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
+   *
+   * @return The bytes for writerIdentity.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getWriterIdentityBytes() {
     java.lang.Object ref = writerIdentity_;
     if (ref instanceof java.lang.String) {
@@ -686,8 +793,11 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    *     resource.type=gce_instance
    * </pre>
    *
-   * <code>bool include_children = 9;</code>
+   * <code>bool include_children = 9 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The includeChildren.
    */
+  @java.lang.Override
   public boolean getIncludeChildren() {
     return includeChildren_;
   }
@@ -700,8 +810,13 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    * Optional. Options that affect sinks exporting data to BigQuery.
    * </pre>
    *
-   * <code>.google.logging.v2.BigQueryOptions bigquery_options = 12;</code>
+   * <code>
+   * .google.logging.v2.BigQueryOptions bigquery_options = 12 [(.google.api.field_behavior) = OPTIONAL];
+   * </code>
+   *
+   * @return Whether the bigqueryOptions field is set.
    */
+  @java.lang.Override
   public boolean hasBigqueryOptions() {
     return optionsCase_ == 12;
   }
@@ -712,8 +827,13 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    * Optional. Options that affect sinks exporting data to BigQuery.
    * </pre>
    *
-   * <code>.google.logging.v2.BigQueryOptions bigquery_options = 12;</code>
+   * <code>
+   * .google.logging.v2.BigQueryOptions bigquery_options = 12 [(.google.api.field_behavior) = OPTIONAL];
+   * </code>
+   *
+   * @return The bigqueryOptions.
    */
+  @java.lang.Override
   public com.google.logging.v2.BigQueryOptions getBigqueryOptions() {
     if (optionsCase_ == 12) {
       return (com.google.logging.v2.BigQueryOptions) options_;
@@ -727,8 +847,11 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    * Optional. Options that affect sinks exporting data to BigQuery.
    * </pre>
    *
-   * <code>.google.logging.v2.BigQueryOptions bigquery_options = 12;</code>
+   * <code>
+   * .google.logging.v2.BigQueryOptions bigquery_options = 12 [(.google.api.field_behavior) = OPTIONAL];
+   * </code>
    */
+  @java.lang.Override
   public com.google.logging.v2.BigQueryOptionsOrBuilder getBigqueryOptionsOrBuilder() {
     if (optionsCase_ == 12) {
       return (com.google.logging.v2.BigQueryOptions) options_;
@@ -746,8 +869,12 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    * This field may not be present for older sinks.
    * </pre>
    *
-   * <code>.google.protobuf.Timestamp create_time = 13;</code>
+   * <code>.google.protobuf.Timestamp create_time = 13 [(.google.api.field_behavior) = OUTPUT_ONLY];
+   * </code>
+   *
+   * @return Whether the createTime field is set.
    */
+  @java.lang.Override
   public boolean hasCreateTime() {
     return createTime_ != null;
   }
@@ -759,8 +886,12 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    * This field may not be present for older sinks.
    * </pre>
    *
-   * <code>.google.protobuf.Timestamp create_time = 13;</code>
+   * <code>.google.protobuf.Timestamp create_time = 13 [(.google.api.field_behavior) = OUTPUT_ONLY];
+   * </code>
+   *
+   * @return The createTime.
    */
+  @java.lang.Override
   public com.google.protobuf.Timestamp getCreateTime() {
     return createTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : createTime_;
   }
@@ -772,8 +903,10 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    * This field may not be present for older sinks.
    * </pre>
    *
-   * <code>.google.protobuf.Timestamp create_time = 13;</code>
+   * <code>.google.protobuf.Timestamp create_time = 13 [(.google.api.field_behavior) = OUTPUT_ONLY];
+   * </code>
    */
+  @java.lang.Override
   public com.google.protobuf.TimestampOrBuilder getCreateTimeOrBuilder() {
     return getCreateTime();
   }
@@ -788,8 +921,12 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    * This field may not be present for older sinks.
    * </pre>
    *
-   * <code>.google.protobuf.Timestamp update_time = 14;</code>
+   * <code>.google.protobuf.Timestamp update_time = 14 [(.google.api.field_behavior) = OUTPUT_ONLY];
+   * </code>
+   *
+   * @return Whether the updateTime field is set.
    */
+  @java.lang.Override
   public boolean hasUpdateTime() {
     return updateTime_ != null;
   }
@@ -801,8 +938,12 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    * This field may not be present for older sinks.
    * </pre>
    *
-   * <code>.google.protobuf.Timestamp update_time = 14;</code>
+   * <code>.google.protobuf.Timestamp update_time = 14 [(.google.api.field_behavior) = OUTPUT_ONLY];
+   * </code>
+   *
+   * @return The updateTime.
    */
+  @java.lang.Override
   public com.google.protobuf.Timestamp getUpdateTime() {
     return updateTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : updateTime_;
   }
@@ -814,94 +955,12 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    * This field may not be present for older sinks.
    * </pre>
    *
-   * <code>.google.protobuf.Timestamp update_time = 14;</code>
+   * <code>.google.protobuf.Timestamp update_time = 14 [(.google.api.field_behavior) = OUTPUT_ONLY];
+   * </code>
    */
+  @java.lang.Override
   public com.google.protobuf.TimestampOrBuilder getUpdateTimeOrBuilder() {
     return getUpdateTime();
-  }
-
-  public static final int START_TIME_FIELD_NUMBER = 10;
-  private com.google.protobuf.Timestamp startTime_;
-  /**
-   *
-   *
-   * <pre>
-   * Do not use. This field is ignored.
-   * </pre>
-   *
-   * <code>.google.protobuf.Timestamp start_time = 10 [deprecated = true];</code>
-   */
-  @java.lang.Deprecated
-  public boolean hasStartTime() {
-    return startTime_ != null;
-  }
-  /**
-   *
-   *
-   * <pre>
-   * Do not use. This field is ignored.
-   * </pre>
-   *
-   * <code>.google.protobuf.Timestamp start_time = 10 [deprecated = true];</code>
-   */
-  @java.lang.Deprecated
-  public com.google.protobuf.Timestamp getStartTime() {
-    return startTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : startTime_;
-  }
-  /**
-   *
-   *
-   * <pre>
-   * Do not use. This field is ignored.
-   * </pre>
-   *
-   * <code>.google.protobuf.Timestamp start_time = 10 [deprecated = true];</code>
-   */
-  @java.lang.Deprecated
-  public com.google.protobuf.TimestampOrBuilder getStartTimeOrBuilder() {
-    return getStartTime();
-  }
-
-  public static final int END_TIME_FIELD_NUMBER = 11;
-  private com.google.protobuf.Timestamp endTime_;
-  /**
-   *
-   *
-   * <pre>
-   * Do not use. This field is ignored.
-   * </pre>
-   *
-   * <code>.google.protobuf.Timestamp end_time = 11 [deprecated = true];</code>
-   */
-  @java.lang.Deprecated
-  public boolean hasEndTime() {
-    return endTime_ != null;
-  }
-  /**
-   *
-   *
-   * <pre>
-   * Do not use. This field is ignored.
-   * </pre>
-   *
-   * <code>.google.protobuf.Timestamp end_time = 11 [deprecated = true];</code>
-   */
-  @java.lang.Deprecated
-  public com.google.protobuf.Timestamp getEndTime() {
-    return endTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : endTime_;
-  }
-  /**
-   *
-   *
-   * <pre>
-   * Do not use. This field is ignored.
-   * </pre>
-   *
-   * <code>.google.protobuf.Timestamp end_time = 11 [deprecated = true];</code>
-   */
-  @java.lang.Deprecated
-  public com.google.protobuf.TimestampOrBuilder getEndTimeOrBuilder() {
-    return getEndTime();
   }
 
   private byte memoizedIsInitialized = -1;
@@ -937,12 +996,6 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
     if (includeChildren_ != false) {
       output.writeBool(9, includeChildren_);
     }
-    if (startTime_ != null) {
-      output.writeMessage(10, getStartTime());
-    }
-    if (endTime_ != null) {
-      output.writeMessage(11, getEndTime());
-    }
     if (optionsCase_ == 12) {
       output.writeMessage(12, (com.google.logging.v2.BigQueryOptions) options_);
     }
@@ -951,6 +1004,12 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
     }
     if (updateTime_ != null) {
       output.writeMessage(14, getUpdateTime());
+    }
+    if (!getDescriptionBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 18, description_);
+    }
+    if (disabled_ != false) {
+      output.writeBool(19, disabled_);
     }
     unknownFields.writeTo(output);
   }
@@ -980,12 +1039,6 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
     if (includeChildren_ != false) {
       size += com.google.protobuf.CodedOutputStream.computeBoolSize(9, includeChildren_);
     }
-    if (startTime_ != null) {
-      size += com.google.protobuf.CodedOutputStream.computeMessageSize(10, getStartTime());
-    }
-    if (endTime_ != null) {
-      size += com.google.protobuf.CodedOutputStream.computeMessageSize(11, getEndTime());
-    }
     if (optionsCase_ == 12) {
       size +=
           com.google.protobuf.CodedOutputStream.computeMessageSize(
@@ -996,6 +1049,12 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
     }
     if (updateTime_ != null) {
       size += com.google.protobuf.CodedOutputStream.computeMessageSize(14, getUpdateTime());
+    }
+    if (!getDescriptionBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(18, description_);
+    }
+    if (disabled_ != false) {
+      size += com.google.protobuf.CodedOutputStream.computeBoolSize(19, disabled_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -1015,6 +1074,8 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
     if (!getName().equals(other.getName())) return false;
     if (!getDestination().equals(other.getDestination())) return false;
     if (!getFilter().equals(other.getFilter())) return false;
+    if (!getDescription().equals(other.getDescription())) return false;
+    if (getDisabled() != other.getDisabled()) return false;
     if (outputVersionFormat_ != other.outputVersionFormat_) return false;
     if (!getWriterIdentity().equals(other.getWriterIdentity())) return false;
     if (getIncludeChildren() != other.getIncludeChildren()) return false;
@@ -1025,14 +1086,6 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
     if (hasUpdateTime() != other.hasUpdateTime()) return false;
     if (hasUpdateTime()) {
       if (!getUpdateTime().equals(other.getUpdateTime())) return false;
-    }
-    if (hasStartTime() != other.hasStartTime()) return false;
-    if (hasStartTime()) {
-      if (!getStartTime().equals(other.getStartTime())) return false;
-    }
-    if (hasEndTime() != other.hasEndTime()) return false;
-    if (hasEndTime()) {
-      if (!getEndTime().equals(other.getEndTime())) return false;
     }
     if (!getOptionsCase().equals(other.getOptionsCase())) return false;
     switch (optionsCase_) {
@@ -1059,6 +1112,10 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
     hash = (53 * hash) + getDestination().hashCode();
     hash = (37 * hash) + FILTER_FIELD_NUMBER;
     hash = (53 * hash) + getFilter().hashCode();
+    hash = (37 * hash) + DESCRIPTION_FIELD_NUMBER;
+    hash = (53 * hash) + getDescription().hashCode();
+    hash = (37 * hash) + DISABLED_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(getDisabled());
     hash = (37 * hash) + OUTPUT_VERSION_FORMAT_FIELD_NUMBER;
     hash = (53 * hash) + outputVersionFormat_;
     hash = (37 * hash) + WRITER_IDENTITY_FIELD_NUMBER;
@@ -1072,14 +1129,6 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
     if (hasUpdateTime()) {
       hash = (37 * hash) + UPDATE_TIME_FIELD_NUMBER;
       hash = (53 * hash) + getUpdateTime().hashCode();
-    }
-    if (hasStartTime()) {
-      hash = (37 * hash) + START_TIME_FIELD_NUMBER;
-      hash = (53 * hash) + getStartTime().hashCode();
-    }
-    if (hasEndTime()) {
-      hash = (37 * hash) + END_TIME_FIELD_NUMBER;
-      hash = (53 * hash) + getEndTime().hashCode();
     }
     switch (optionsCase_) {
       case 12:
@@ -1242,6 +1291,10 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
 
       filter_ = "";
 
+      description_ = "";
+
+      disabled_ = false;
+
       outputVersionFormat_ = 0;
 
       writerIdentity_ = "";
@@ -1259,18 +1312,6 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
       } else {
         updateTime_ = null;
         updateTimeBuilder_ = null;
-      }
-      if (startTimeBuilder_ == null) {
-        startTime_ = null;
-      } else {
-        startTime_ = null;
-        startTimeBuilder_ = null;
-      }
-      if (endTimeBuilder_ == null) {
-        endTime_ = null;
-      } else {
-        endTime_ = null;
-        endTimeBuilder_ = null;
       }
       optionsCase_ = 0;
       options_ = null;
@@ -1303,6 +1344,8 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
       result.name_ = name_;
       result.destination_ = destination_;
       result.filter_ = filter_;
+      result.description_ = description_;
+      result.disabled_ = disabled_;
       result.outputVersionFormat_ = outputVersionFormat_;
       result.writerIdentity_ = writerIdentity_;
       result.includeChildren_ = includeChildren_;
@@ -1322,16 +1365,6 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
         result.updateTime_ = updateTime_;
       } else {
         result.updateTime_ = updateTimeBuilder_.build();
-      }
-      if (startTimeBuilder_ == null) {
-        result.startTime_ = startTime_;
-      } else {
-        result.startTime_ = startTimeBuilder_.build();
-      }
-      if (endTimeBuilder_ == null) {
-        result.endTime_ = endTime_;
-      } else {
-        result.endTime_ = endTimeBuilder_.build();
       }
       result.optionsCase_ = optionsCase_;
       onBuilt();
@@ -1395,6 +1428,13 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
         filter_ = other.filter_;
         onChanged();
       }
+      if (!other.getDescription().isEmpty()) {
+        description_ = other.description_;
+        onChanged();
+      }
+      if (other.getDisabled() != false) {
+        setDisabled(other.getDisabled());
+      }
       if (other.outputVersionFormat_ != 0) {
         setOutputVersionFormatValue(other.getOutputVersionFormatValue());
       }
@@ -1410,12 +1450,6 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
       }
       if (other.hasUpdateTime()) {
         mergeUpdateTime(other.getUpdateTime());
-      }
-      if (other.hasStartTime()) {
-        mergeStartTime(other.getStartTime());
-      }
-      if (other.hasEndTime()) {
-        mergeEndTime(other.getEndTime());
       }
       switch (other.getOptionsCase()) {
         case BIGQUERY_OPTIONS:
@@ -1476,14 +1510,16 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Required. The client-assigned sink identifier, unique within the
-     * project. Example: `"my-syslog-errors-to-pubsub"`. Sink identifiers are
-     * limited to 100 characters and can include only the following characters:
-     * upper and lower-case alphanumeric characters, underscores, hyphens, and
-     * periods.
+     * Required. The client-assigned sink identifier, unique within the project. Example:
+     * `"my-syslog-errors-to-pubsub"`. Sink identifiers are limited to 100
+     * characters and can include only the following characters: upper and
+     * lower-case alphanumeric characters, underscores, hyphens, and periods.
+     * First character has to be alphanumeric.
      * </pre>
      *
-     * <code>string name = 1;</code>
+     * <code>string name = 1 [(.google.api.field_behavior) = REQUIRED];</code>
+     *
+     * @return The name.
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -1500,14 +1536,16 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Required. The client-assigned sink identifier, unique within the
-     * project. Example: `"my-syslog-errors-to-pubsub"`. Sink identifiers are
-     * limited to 100 characters and can include only the following characters:
-     * upper and lower-case alphanumeric characters, underscores, hyphens, and
-     * periods.
+     * Required. The client-assigned sink identifier, unique within the project. Example:
+     * `"my-syslog-errors-to-pubsub"`. Sink identifiers are limited to 100
+     * characters and can include only the following characters: upper and
+     * lower-case alphanumeric characters, underscores, hyphens, and periods.
+     * First character has to be alphanumeric.
      * </pre>
      *
-     * <code>string name = 1;</code>
+     * <code>string name = 1 [(.google.api.field_behavior) = REQUIRED];</code>
+     *
+     * @return The bytes for name.
      */
     public com.google.protobuf.ByteString getNameBytes() {
       java.lang.Object ref = name_;
@@ -1524,14 +1562,17 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Required. The client-assigned sink identifier, unique within the
-     * project. Example: `"my-syslog-errors-to-pubsub"`. Sink identifiers are
-     * limited to 100 characters and can include only the following characters:
-     * upper and lower-case alphanumeric characters, underscores, hyphens, and
-     * periods.
+     * Required. The client-assigned sink identifier, unique within the project. Example:
+     * `"my-syslog-errors-to-pubsub"`. Sink identifiers are limited to 100
+     * characters and can include only the following characters: upper and
+     * lower-case alphanumeric characters, underscores, hyphens, and periods.
+     * First character has to be alphanumeric.
      * </pre>
      *
-     * <code>string name = 1;</code>
+     * <code>string name = 1 [(.google.api.field_behavior) = REQUIRED];</code>
+     *
+     * @param value The name to set.
+     * @return This builder for chaining.
      */
     public Builder setName(java.lang.String value) {
       if (value == null) {
@@ -1546,14 +1587,16 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Required. The client-assigned sink identifier, unique within the
-     * project. Example: `"my-syslog-errors-to-pubsub"`. Sink identifiers are
-     * limited to 100 characters and can include only the following characters:
-     * upper and lower-case alphanumeric characters, underscores, hyphens, and
-     * periods.
+     * Required. The client-assigned sink identifier, unique within the project. Example:
+     * `"my-syslog-errors-to-pubsub"`. Sink identifiers are limited to 100
+     * characters and can include only the following characters: upper and
+     * lower-case alphanumeric characters, underscores, hyphens, and periods.
+     * First character has to be alphanumeric.
      * </pre>
      *
-     * <code>string name = 1;</code>
+     * <code>string name = 1 [(.google.api.field_behavior) = REQUIRED];</code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearName() {
 
@@ -1565,14 +1608,17 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Required. The client-assigned sink identifier, unique within the
-     * project. Example: `"my-syslog-errors-to-pubsub"`. Sink identifiers are
-     * limited to 100 characters and can include only the following characters:
-     * upper and lower-case alphanumeric characters, underscores, hyphens, and
-     * periods.
+     * Required. The client-assigned sink identifier, unique within the project. Example:
+     * `"my-syslog-errors-to-pubsub"`. Sink identifiers are limited to 100
+     * characters and can include only the following characters: upper and
+     * lower-case alphanumeric characters, underscores, hyphens, and periods.
+     * First character has to be alphanumeric.
      * </pre>
      *
-     * <code>string name = 1;</code>
+     * <code>string name = 1 [(.google.api.field_behavior) = REQUIRED];</code>
+     *
+     * @param value The bytes for name to set.
+     * @return This builder for chaining.
      */
     public Builder setNameBytes(com.google.protobuf.ByteString value) {
       if (value == null) {
@@ -1597,10 +1643,14 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * The sink's `writer_identity`, set when the sink is created, must
      * have permission to write to the destination or else the log
      * entries are not exported. For more information, see
-     * [Exporting Logs with Sinks](/logging/docs/api/tasks/exporting-logs).
+     * [Exporting Logs with Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * </pre>
      *
-     * <code>string destination = 3;</code>
+     * <code>
+     * string destination = 3 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return The destination.
      */
     public java.lang.String getDestination() {
       java.lang.Object ref = destination_;
@@ -1624,10 +1674,14 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * The sink's `writer_identity`, set when the sink is created, must
      * have permission to write to the destination or else the log
      * entries are not exported. For more information, see
-     * [Exporting Logs with Sinks](/logging/docs/api/tasks/exporting-logs).
+     * [Exporting Logs with Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * </pre>
      *
-     * <code>string destination = 3;</code>
+     * <code>
+     * string destination = 3 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return The bytes for destination.
      */
     public com.google.protobuf.ByteString getDestinationBytes() {
       java.lang.Object ref = destination_;
@@ -1651,10 +1705,15 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * The sink's `writer_identity`, set when the sink is created, must
      * have permission to write to the destination or else the log
      * entries are not exported. For more information, see
-     * [Exporting Logs with Sinks](/logging/docs/api/tasks/exporting-logs).
+     * [Exporting Logs with Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * </pre>
      *
-     * <code>string destination = 3;</code>
+     * <code>
+     * string destination = 3 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @param value The destination to set.
+     * @return This builder for chaining.
      */
     public Builder setDestination(java.lang.String value) {
       if (value == null) {
@@ -1676,10 +1735,14 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * The sink's `writer_identity`, set when the sink is created, must
      * have permission to write to the destination or else the log
      * entries are not exported. For more information, see
-     * [Exporting Logs with Sinks](/logging/docs/api/tasks/exporting-logs).
+     * [Exporting Logs with Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * </pre>
      *
-     * <code>string destination = 3;</code>
+     * <code>
+     * string destination = 3 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearDestination() {
 
@@ -1698,10 +1761,15 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * The sink's `writer_identity`, set when the sink is created, must
      * have permission to write to the destination or else the log
      * entries are not exported. For more information, see
-     * [Exporting Logs with Sinks](/logging/docs/api/tasks/exporting-logs).
+     * [Exporting Logs with Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * </pre>
      *
-     * <code>string destination = 3;</code>
+     * <code>
+     * string destination = 3 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @param value The bytes for destination to set.
+     * @return This builder for chaining.
      */
     public Builder setDestinationBytes(com.google.protobuf.ByteString value) {
       if (value == null) {
@@ -1719,13 +1787,15 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Optional. An [advanced logs filter](/logging/docs/view/advanced-queries). The only
+     * Optional. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries). The only
      * exported log entries are those that are in the resource owning the sink and
      * that match the filter. For example:
      *     logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity&gt;=ERROR
      * </pre>
      *
-     * <code>string filter = 5;</code>
+     * <code>string filter = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The filter.
      */
     public java.lang.String getFilter() {
       java.lang.Object ref = filter_;
@@ -1742,13 +1812,15 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Optional. An [advanced logs filter](/logging/docs/view/advanced-queries). The only
+     * Optional. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries). The only
      * exported log entries are those that are in the resource owning the sink and
      * that match the filter. For example:
      *     logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity&gt;=ERROR
      * </pre>
      *
-     * <code>string filter = 5;</code>
+     * <code>string filter = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The bytes for filter.
      */
     public com.google.protobuf.ByteString getFilterBytes() {
       java.lang.Object ref = filter_;
@@ -1765,13 +1837,16 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Optional. An [advanced logs filter](/logging/docs/view/advanced-queries). The only
+     * Optional. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries). The only
      * exported log entries are those that are in the resource owning the sink and
      * that match the filter. For example:
      *     logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity&gt;=ERROR
      * </pre>
      *
-     * <code>string filter = 5;</code>
+     * <code>string filter = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The filter to set.
+     * @return This builder for chaining.
      */
     public Builder setFilter(java.lang.String value) {
       if (value == null) {
@@ -1786,13 +1861,15 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Optional. An [advanced logs filter](/logging/docs/view/advanced-queries). The only
+     * Optional. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries). The only
      * exported log entries are those that are in the resource owning the sink and
      * that match the filter. For example:
      *     logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity&gt;=ERROR
      * </pre>
      *
-     * <code>string filter = 5;</code>
+     * <code>string filter = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearFilter() {
 
@@ -1804,13 +1881,16 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Optional. An [advanced logs filter](/logging/docs/view/advanced-queries). The only
+     * Optional. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries). The only
      * exported log entries are those that are in the resource owning the sink and
      * that match the filter. For example:
      *     logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity&gt;=ERROR
      * </pre>
      *
-     * <code>string filter = 5;</code>
+     * <code>string filter = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The bytes for filter to set.
+     * @return This builder for chaining.
      */
     public Builder setFilterBytes(com.google.protobuf.ByteString value) {
       if (value == null) {
@@ -1819,6 +1899,172 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
       checkByteStringIsUtf8(value);
 
       filter_ = value;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object description_ = "";
+    /**
+     *
+     *
+     * <pre>
+     * Optional. A description of this sink.
+     * The maximum length of the description is 8000 characters.
+     * </pre>
+     *
+     * <code>string description = 18 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The description.
+     */
+    public java.lang.String getDescription() {
+      java.lang.Object ref = description_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        description_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     *
+     *
+     * <pre>
+     * Optional. A description of this sink.
+     * The maximum length of the description is 8000 characters.
+     * </pre>
+     *
+     * <code>string description = 18 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The bytes for description.
+     */
+    public com.google.protobuf.ByteString getDescriptionBytes() {
+      java.lang.Object ref = description_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b =
+            com.google.protobuf.ByteString.copyFromUtf8((java.lang.String) ref);
+        description_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     *
+     *
+     * <pre>
+     * Optional. A description of this sink.
+     * The maximum length of the description is 8000 characters.
+     * </pre>
+     *
+     * <code>string description = 18 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The description to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDescription(java.lang.String value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+
+      description_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     *
+     *
+     * <pre>
+     * Optional. A description of this sink.
+     * The maximum length of the description is 8000 characters.
+     * </pre>
+     *
+     * <code>string description = 18 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return This builder for chaining.
+     */
+    public Builder clearDescription() {
+
+      description_ = getDefaultInstance().getDescription();
+      onChanged();
+      return this;
+    }
+    /**
+     *
+     *
+     * <pre>
+     * Optional. A description of this sink.
+     * The maximum length of the description is 8000 characters.
+     * </pre>
+     *
+     * <code>string description = 18 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The bytes for description to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDescriptionBytes(com.google.protobuf.ByteString value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      checkByteStringIsUtf8(value);
+
+      description_ = value;
+      onChanged();
+      return this;
+    }
+
+    private boolean disabled_;
+    /**
+     *
+     *
+     * <pre>
+     * Optional. If set to True, then this sink is disabled and it does not
+     * export any log entries.
+     * </pre>
+     *
+     * <code>bool disabled = 19 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The disabled.
+     */
+    @java.lang.Override
+    public boolean getDisabled() {
+      return disabled_;
+    }
+    /**
+     *
+     *
+     * <pre>
+     * Optional. If set to True, then this sink is disabled and it does not
+     * export any log entries.
+     * </pre>
+     *
+     * <code>bool disabled = 19 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The disabled to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDisabled(boolean value) {
+
+      disabled_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     *
+     *
+     * <pre>
+     * Optional. If set to True, then this sink is disabled and it does not
+     * export any log entries.
+     * </pre>
+     *
+     * <code>bool disabled = 19 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return This builder for chaining.
+     */
+    public Builder clearDisabled() {
+
+      disabled_ = false;
       onChanged();
       return this;
     }
@@ -1834,7 +2080,10 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      * <code>.google.logging.v2.LogSink.VersionFormat output_version_format = 6 [deprecated = true];
      * </code>
+     *
+     * @return The enum numeric value on the wire for outputVersionFormat.
      */
+    @java.lang.Override
     @java.lang.Deprecated
     public int getOutputVersionFormatValue() {
       return outputVersionFormat_;
@@ -1849,9 +2098,13 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      * <code>.google.logging.v2.LogSink.VersionFormat output_version_format = 6 [deprecated = true];
      * </code>
+     *
+     * @param value The enum numeric value on the wire for outputVersionFormat to set.
+     * @return This builder for chaining.
      */
     @java.lang.Deprecated
     public Builder setOutputVersionFormatValue(int value) {
+
       outputVersionFormat_ = value;
       onChanged();
       return this;
@@ -1866,7 +2119,10 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      * <code>.google.logging.v2.LogSink.VersionFormat output_version_format = 6 [deprecated = true];
      * </code>
+     *
+     * @return The outputVersionFormat.
      */
+    @java.lang.Override
     @java.lang.Deprecated
     public com.google.logging.v2.LogSink.VersionFormat getOutputVersionFormat() {
       @SuppressWarnings("deprecation")
@@ -1884,6 +2140,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      * <code>.google.logging.v2.LogSink.VersionFormat output_version_format = 6 [deprecated = true];
      * </code>
+     *
+     * @param value The outputVersionFormat to set.
+     * @return This builder for chaining.
      */
     @java.lang.Deprecated
     public Builder setOutputVersionFormat(com.google.logging.v2.LogSink.VersionFormat value) {
@@ -1905,6 +2164,8 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      * <code>.google.logging.v2.LogSink.VersionFormat output_version_format = 6 [deprecated = true];
      * </code>
+     *
+     * @return This builder for chaining.
      */
     @java.lang.Deprecated
     public Builder clearOutputVersionFormat() {
@@ -1919,22 +2180,22 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Output only. An IAM identity&amp;mdash;a service account or group&amp;mdash;under
-     * which Logging writes the exported log entries to the sink's destination.
-     * This field is set by
-     * [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink]
-     * and
-     * [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink]
-     * based on the value of `unique_writer_identity` in those methods.
+     * Output only. An IAM identity–a service account or group&amp;mdash;under which Logging
+     * writes the exported log entries to the sink's destination. This field is
+     * set by [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink] and
+     * [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink] based on the
+     * value of `unique_writer_identity` in those methods.
      * Until you grant this identity write-access to the destination, log entry
      * exports from this sink will fail. For more information,
      * see [Granting Access for a
-     * Resource](/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+     * Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
      * Consult the destination service's documentation to determine the
      * appropriate IAM roles to assign to the identity.
      * </pre>
      *
-     * <code>string writer_identity = 8;</code>
+     * <code>string writer_identity = 8 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
+     *
+     * @return The writerIdentity.
      */
     public java.lang.String getWriterIdentity() {
       java.lang.Object ref = writerIdentity_;
@@ -1951,22 +2212,22 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Output only. An IAM identity&amp;mdash;a service account or group&amp;mdash;under
-     * which Logging writes the exported log entries to the sink's destination.
-     * This field is set by
-     * [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink]
-     * and
-     * [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink]
-     * based on the value of `unique_writer_identity` in those methods.
+     * Output only. An IAM identity–a service account or group&amp;mdash;under which Logging
+     * writes the exported log entries to the sink's destination. This field is
+     * set by [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink] and
+     * [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink] based on the
+     * value of `unique_writer_identity` in those methods.
      * Until you grant this identity write-access to the destination, log entry
      * exports from this sink will fail. For more information,
      * see [Granting Access for a
-     * Resource](/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+     * Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
      * Consult the destination service's documentation to determine the
      * appropriate IAM roles to assign to the identity.
      * </pre>
      *
-     * <code>string writer_identity = 8;</code>
+     * <code>string writer_identity = 8 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
+     *
+     * @return The bytes for writerIdentity.
      */
     public com.google.protobuf.ByteString getWriterIdentityBytes() {
       java.lang.Object ref = writerIdentity_;
@@ -1983,22 +2244,23 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Output only. An IAM identity&amp;mdash;a service account or group&amp;mdash;under
-     * which Logging writes the exported log entries to the sink's destination.
-     * This field is set by
-     * [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink]
-     * and
-     * [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink]
-     * based on the value of `unique_writer_identity` in those methods.
+     * Output only. An IAM identity–a service account or group&amp;mdash;under which Logging
+     * writes the exported log entries to the sink's destination. This field is
+     * set by [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink] and
+     * [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink] based on the
+     * value of `unique_writer_identity` in those methods.
      * Until you grant this identity write-access to the destination, log entry
      * exports from this sink will fail. For more information,
      * see [Granting Access for a
-     * Resource](/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+     * Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
      * Consult the destination service's documentation to determine the
      * appropriate IAM roles to assign to the identity.
      * </pre>
      *
-     * <code>string writer_identity = 8;</code>
+     * <code>string writer_identity = 8 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
+     *
+     * @param value The writerIdentity to set.
+     * @return This builder for chaining.
      */
     public Builder setWriterIdentity(java.lang.String value) {
       if (value == null) {
@@ -2013,22 +2275,22 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Output only. An IAM identity&amp;mdash;a service account or group&amp;mdash;under
-     * which Logging writes the exported log entries to the sink's destination.
-     * This field is set by
-     * [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink]
-     * and
-     * [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink]
-     * based on the value of `unique_writer_identity` in those methods.
+     * Output only. An IAM identity–a service account or group&amp;mdash;under which Logging
+     * writes the exported log entries to the sink's destination. This field is
+     * set by [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink] and
+     * [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink] based on the
+     * value of `unique_writer_identity` in those methods.
      * Until you grant this identity write-access to the destination, log entry
      * exports from this sink will fail. For more information,
      * see [Granting Access for a
-     * Resource](/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+     * Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
      * Consult the destination service's documentation to determine the
      * appropriate IAM roles to assign to the identity.
      * </pre>
      *
-     * <code>string writer_identity = 8;</code>
+     * <code>string writer_identity = 8 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearWriterIdentity() {
 
@@ -2040,22 +2302,23 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Output only. An IAM identity&amp;mdash;a service account or group&amp;mdash;under
-     * which Logging writes the exported log entries to the sink's destination.
-     * This field is set by
-     * [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink]
-     * and
-     * [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink]
-     * based on the value of `unique_writer_identity` in those methods.
+     * Output only. An IAM identity–a service account or group&amp;mdash;under which Logging
+     * writes the exported log entries to the sink's destination. This field is
+     * set by [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink] and
+     * [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink] based on the
+     * value of `unique_writer_identity` in those methods.
      * Until you grant this identity write-access to the destination, log entry
      * exports from this sink will fail. For more information,
      * see [Granting Access for a
-     * Resource](/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+     * Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
      * Consult the destination service's documentation to determine the
      * appropriate IAM roles to assign to the identity.
      * </pre>
      *
-     * <code>string writer_identity = 8;</code>
+     * <code>string writer_identity = 8 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
+     *
+     * @param value The bytes for writerIdentity to set.
+     * @return This builder for chaining.
      */
     public Builder setWriterIdentityBytes(com.google.protobuf.ByteString value) {
       if (value == null) {
@@ -2087,8 +2350,11 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *     resource.type=gce_instance
      * </pre>
      *
-     * <code>bool include_children = 9;</code>
+     * <code>bool include_children = 9 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The includeChildren.
      */
+    @java.lang.Override
     public boolean getIncludeChildren() {
       return includeChildren_;
     }
@@ -2110,7 +2376,10 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *     resource.type=gce_instance
      * </pre>
      *
-     * <code>bool include_children = 9;</code>
+     * <code>bool include_children = 9 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The includeChildren to set.
+     * @return This builder for chaining.
      */
     public Builder setIncludeChildren(boolean value) {
 
@@ -2136,7 +2405,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      *     resource.type=gce_instance
      * </pre>
      *
-     * <code>bool include_children = 9;</code>
+     * <code>bool include_children = 9 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearIncludeChildren() {
 
@@ -2157,8 +2428,13 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * Optional. Options that affect sinks exporting data to BigQuery.
      * </pre>
      *
-     * <code>.google.logging.v2.BigQueryOptions bigquery_options = 12;</code>
+     * <code>
+     * .google.logging.v2.BigQueryOptions bigquery_options = 12 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
+     *
+     * @return Whether the bigqueryOptions field is set.
      */
+    @java.lang.Override
     public boolean hasBigqueryOptions() {
       return optionsCase_ == 12;
     }
@@ -2169,8 +2445,13 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * Optional. Options that affect sinks exporting data to BigQuery.
      * </pre>
      *
-     * <code>.google.logging.v2.BigQueryOptions bigquery_options = 12;</code>
+     * <code>
+     * .google.logging.v2.BigQueryOptions bigquery_options = 12 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
+     *
+     * @return The bigqueryOptions.
      */
+    @java.lang.Override
     public com.google.logging.v2.BigQueryOptions getBigqueryOptions() {
       if (bigqueryOptionsBuilder_ == null) {
         if (optionsCase_ == 12) {
@@ -2191,7 +2472,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * Optional. Options that affect sinks exporting data to BigQuery.
      * </pre>
      *
-     * <code>.google.logging.v2.BigQueryOptions bigquery_options = 12;</code>
+     * <code>
+     * .google.logging.v2.BigQueryOptions bigquery_options = 12 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      */
     public Builder setBigqueryOptions(com.google.logging.v2.BigQueryOptions value) {
       if (bigqueryOptionsBuilder_ == null) {
@@ -2213,7 +2496,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * Optional. Options that affect sinks exporting data to BigQuery.
      * </pre>
      *
-     * <code>.google.logging.v2.BigQueryOptions bigquery_options = 12;</code>
+     * <code>
+     * .google.logging.v2.BigQueryOptions bigquery_options = 12 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      */
     public Builder setBigqueryOptions(
         com.google.logging.v2.BigQueryOptions.Builder builderForValue) {
@@ -2233,7 +2518,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * Optional. Options that affect sinks exporting data to BigQuery.
      * </pre>
      *
-     * <code>.google.logging.v2.BigQueryOptions bigquery_options = 12;</code>
+     * <code>
+     * .google.logging.v2.BigQueryOptions bigquery_options = 12 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      */
     public Builder mergeBigqueryOptions(com.google.logging.v2.BigQueryOptions value) {
       if (bigqueryOptionsBuilder_ == null) {
@@ -2264,7 +2551,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * Optional. Options that affect sinks exporting data to BigQuery.
      * </pre>
      *
-     * <code>.google.logging.v2.BigQueryOptions bigquery_options = 12;</code>
+     * <code>
+     * .google.logging.v2.BigQueryOptions bigquery_options = 12 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      */
     public Builder clearBigqueryOptions() {
       if (bigqueryOptionsBuilder_ == null) {
@@ -2289,7 +2578,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * Optional. Options that affect sinks exporting data to BigQuery.
      * </pre>
      *
-     * <code>.google.logging.v2.BigQueryOptions bigquery_options = 12;</code>
+     * <code>
+     * .google.logging.v2.BigQueryOptions bigquery_options = 12 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      */
     public com.google.logging.v2.BigQueryOptions.Builder getBigqueryOptionsBuilder() {
       return getBigqueryOptionsFieldBuilder().getBuilder();
@@ -2301,8 +2592,11 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * Optional. Options that affect sinks exporting data to BigQuery.
      * </pre>
      *
-     * <code>.google.logging.v2.BigQueryOptions bigquery_options = 12;</code>
+     * <code>
+     * .google.logging.v2.BigQueryOptions bigquery_options = 12 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      */
+    @java.lang.Override
     public com.google.logging.v2.BigQueryOptionsOrBuilder getBigqueryOptionsOrBuilder() {
       if ((optionsCase_ == 12) && (bigqueryOptionsBuilder_ != null)) {
         return bigqueryOptionsBuilder_.getMessageOrBuilder();
@@ -2320,7 +2614,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * Optional. Options that affect sinks exporting data to BigQuery.
      * </pre>
      *
-     * <code>.google.logging.v2.BigQueryOptions bigquery_options = 12;</code>
+     * <code>
+     * .google.logging.v2.BigQueryOptions bigquery_options = 12 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
             com.google.logging.v2.BigQueryOptions,
@@ -2361,7 +2657,11 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * This field may not be present for older sinks.
      * </pre>
      *
-     * <code>.google.protobuf.Timestamp create_time = 13;</code>
+     * <code>
+     * .google.protobuf.Timestamp create_time = 13 [(.google.api.field_behavior) = OUTPUT_ONLY];
+     * </code>
+     *
+     * @return Whether the createTime field is set.
      */
     public boolean hasCreateTime() {
       return createTimeBuilder_ != null || createTime_ != null;
@@ -2374,7 +2674,11 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * This field may not be present for older sinks.
      * </pre>
      *
-     * <code>.google.protobuf.Timestamp create_time = 13;</code>
+     * <code>
+     * .google.protobuf.Timestamp create_time = 13 [(.google.api.field_behavior) = OUTPUT_ONLY];
+     * </code>
+     *
+     * @return The createTime.
      */
     public com.google.protobuf.Timestamp getCreateTime() {
       if (createTimeBuilder_ == null) {
@@ -2393,7 +2697,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * This field may not be present for older sinks.
      * </pre>
      *
-     * <code>.google.protobuf.Timestamp create_time = 13;</code>
+     * <code>
+     * .google.protobuf.Timestamp create_time = 13 [(.google.api.field_behavior) = OUTPUT_ONLY];
+     * </code>
      */
     public Builder setCreateTime(com.google.protobuf.Timestamp value) {
       if (createTimeBuilder_ == null) {
@@ -2416,7 +2722,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * This field may not be present for older sinks.
      * </pre>
      *
-     * <code>.google.protobuf.Timestamp create_time = 13;</code>
+     * <code>
+     * .google.protobuf.Timestamp create_time = 13 [(.google.api.field_behavior) = OUTPUT_ONLY];
+     * </code>
      */
     public Builder setCreateTime(com.google.protobuf.Timestamp.Builder builderForValue) {
       if (createTimeBuilder_ == null) {
@@ -2436,7 +2744,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * This field may not be present for older sinks.
      * </pre>
      *
-     * <code>.google.protobuf.Timestamp create_time = 13;</code>
+     * <code>
+     * .google.protobuf.Timestamp create_time = 13 [(.google.api.field_behavior) = OUTPUT_ONLY];
+     * </code>
      */
     public Builder mergeCreateTime(com.google.protobuf.Timestamp value) {
       if (createTimeBuilder_ == null) {
@@ -2461,7 +2771,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * This field may not be present for older sinks.
      * </pre>
      *
-     * <code>.google.protobuf.Timestamp create_time = 13;</code>
+     * <code>
+     * .google.protobuf.Timestamp create_time = 13 [(.google.api.field_behavior) = OUTPUT_ONLY];
+     * </code>
      */
     public Builder clearCreateTime() {
       if (createTimeBuilder_ == null) {
@@ -2482,7 +2794,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * This field may not be present for older sinks.
      * </pre>
      *
-     * <code>.google.protobuf.Timestamp create_time = 13;</code>
+     * <code>
+     * .google.protobuf.Timestamp create_time = 13 [(.google.api.field_behavior) = OUTPUT_ONLY];
+     * </code>
      */
     public com.google.protobuf.Timestamp.Builder getCreateTimeBuilder() {
 
@@ -2497,7 +2811,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * This field may not be present for older sinks.
      * </pre>
      *
-     * <code>.google.protobuf.Timestamp create_time = 13;</code>
+     * <code>
+     * .google.protobuf.Timestamp create_time = 13 [(.google.api.field_behavior) = OUTPUT_ONLY];
+     * </code>
      */
     public com.google.protobuf.TimestampOrBuilder getCreateTimeOrBuilder() {
       if (createTimeBuilder_ != null) {
@@ -2516,7 +2832,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * This field may not be present for older sinks.
      * </pre>
      *
-     * <code>.google.protobuf.Timestamp create_time = 13;</code>
+     * <code>
+     * .google.protobuf.Timestamp create_time = 13 [(.google.api.field_behavior) = OUTPUT_ONLY];
+     * </code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
             com.google.protobuf.Timestamp,
@@ -2549,7 +2867,11 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * This field may not be present for older sinks.
      * </pre>
      *
-     * <code>.google.protobuf.Timestamp update_time = 14;</code>
+     * <code>
+     * .google.protobuf.Timestamp update_time = 14 [(.google.api.field_behavior) = OUTPUT_ONLY];
+     * </code>
+     *
+     * @return Whether the updateTime field is set.
      */
     public boolean hasUpdateTime() {
       return updateTimeBuilder_ != null || updateTime_ != null;
@@ -2562,7 +2884,11 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * This field may not be present for older sinks.
      * </pre>
      *
-     * <code>.google.protobuf.Timestamp update_time = 14;</code>
+     * <code>
+     * .google.protobuf.Timestamp update_time = 14 [(.google.api.field_behavior) = OUTPUT_ONLY];
+     * </code>
+     *
+     * @return The updateTime.
      */
     public com.google.protobuf.Timestamp getUpdateTime() {
       if (updateTimeBuilder_ == null) {
@@ -2581,7 +2907,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * This field may not be present for older sinks.
      * </pre>
      *
-     * <code>.google.protobuf.Timestamp update_time = 14;</code>
+     * <code>
+     * .google.protobuf.Timestamp update_time = 14 [(.google.api.field_behavior) = OUTPUT_ONLY];
+     * </code>
      */
     public Builder setUpdateTime(com.google.protobuf.Timestamp value) {
       if (updateTimeBuilder_ == null) {
@@ -2604,7 +2932,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * This field may not be present for older sinks.
      * </pre>
      *
-     * <code>.google.protobuf.Timestamp update_time = 14;</code>
+     * <code>
+     * .google.protobuf.Timestamp update_time = 14 [(.google.api.field_behavior) = OUTPUT_ONLY];
+     * </code>
      */
     public Builder setUpdateTime(com.google.protobuf.Timestamp.Builder builderForValue) {
       if (updateTimeBuilder_ == null) {
@@ -2624,7 +2954,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * This field may not be present for older sinks.
      * </pre>
      *
-     * <code>.google.protobuf.Timestamp update_time = 14;</code>
+     * <code>
+     * .google.protobuf.Timestamp update_time = 14 [(.google.api.field_behavior) = OUTPUT_ONLY];
+     * </code>
      */
     public Builder mergeUpdateTime(com.google.protobuf.Timestamp value) {
       if (updateTimeBuilder_ == null) {
@@ -2649,7 +2981,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * This field may not be present for older sinks.
      * </pre>
      *
-     * <code>.google.protobuf.Timestamp update_time = 14;</code>
+     * <code>
+     * .google.protobuf.Timestamp update_time = 14 [(.google.api.field_behavior) = OUTPUT_ONLY];
+     * </code>
      */
     public Builder clearUpdateTime() {
       if (updateTimeBuilder_ == null) {
@@ -2670,7 +3004,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * This field may not be present for older sinks.
      * </pre>
      *
-     * <code>.google.protobuf.Timestamp update_time = 14;</code>
+     * <code>
+     * .google.protobuf.Timestamp update_time = 14 [(.google.api.field_behavior) = OUTPUT_ONLY];
+     * </code>
      */
     public com.google.protobuf.Timestamp.Builder getUpdateTimeBuilder() {
 
@@ -2685,7 +3021,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * This field may not be present for older sinks.
      * </pre>
      *
-     * <code>.google.protobuf.Timestamp update_time = 14;</code>
+     * <code>
+     * .google.protobuf.Timestamp update_time = 14 [(.google.api.field_behavior) = OUTPUT_ONLY];
+     * </code>
      */
     public com.google.protobuf.TimestampOrBuilder getUpdateTimeOrBuilder() {
       if (updateTimeBuilder_ != null) {
@@ -2704,7 +3042,9 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * This field may not be present for older sinks.
      * </pre>
      *
-     * <code>.google.protobuf.Timestamp update_time = 14;</code>
+     * <code>
+     * .google.protobuf.Timestamp update_time = 14 [(.google.api.field_behavior) = OUTPUT_ONLY];
+     * </code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
             com.google.protobuf.Timestamp,
@@ -2721,372 +3061,6 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
         updateTime_ = null;
       }
       return updateTimeBuilder_;
-    }
-
-    private com.google.protobuf.Timestamp startTime_;
-    private com.google.protobuf.SingleFieldBuilderV3<
-            com.google.protobuf.Timestamp,
-            com.google.protobuf.Timestamp.Builder,
-            com.google.protobuf.TimestampOrBuilder>
-        startTimeBuilder_;
-    /**
-     *
-     *
-     * <pre>
-     * Do not use. This field is ignored.
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp start_time = 10 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public boolean hasStartTime() {
-      return startTimeBuilder_ != null || startTime_ != null;
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Do not use. This field is ignored.
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp start_time = 10 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public com.google.protobuf.Timestamp getStartTime() {
-      if (startTimeBuilder_ == null) {
-        return startTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : startTime_;
-      } else {
-        return startTimeBuilder_.getMessage();
-      }
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Do not use. This field is ignored.
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp start_time = 10 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public Builder setStartTime(com.google.protobuf.Timestamp value) {
-      if (startTimeBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        startTime_ = value;
-        onChanged();
-      } else {
-        startTimeBuilder_.setMessage(value);
-      }
-
-      return this;
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Do not use. This field is ignored.
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp start_time = 10 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public Builder setStartTime(com.google.protobuf.Timestamp.Builder builderForValue) {
-      if (startTimeBuilder_ == null) {
-        startTime_ = builderForValue.build();
-        onChanged();
-      } else {
-        startTimeBuilder_.setMessage(builderForValue.build());
-      }
-
-      return this;
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Do not use. This field is ignored.
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp start_time = 10 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public Builder mergeStartTime(com.google.protobuf.Timestamp value) {
-      if (startTimeBuilder_ == null) {
-        if (startTime_ != null) {
-          startTime_ =
-              com.google.protobuf.Timestamp.newBuilder(startTime_).mergeFrom(value).buildPartial();
-        } else {
-          startTime_ = value;
-        }
-        onChanged();
-      } else {
-        startTimeBuilder_.mergeFrom(value);
-      }
-
-      return this;
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Do not use. This field is ignored.
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp start_time = 10 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public Builder clearStartTime() {
-      if (startTimeBuilder_ == null) {
-        startTime_ = null;
-        onChanged();
-      } else {
-        startTime_ = null;
-        startTimeBuilder_ = null;
-      }
-
-      return this;
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Do not use. This field is ignored.
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp start_time = 10 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public com.google.protobuf.Timestamp.Builder getStartTimeBuilder() {
-
-      onChanged();
-      return getStartTimeFieldBuilder().getBuilder();
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Do not use. This field is ignored.
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp start_time = 10 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public com.google.protobuf.TimestampOrBuilder getStartTimeOrBuilder() {
-      if (startTimeBuilder_ != null) {
-        return startTimeBuilder_.getMessageOrBuilder();
-      } else {
-        return startTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : startTime_;
-      }
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Do not use. This field is ignored.
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp start_time = 10 [deprecated = true];</code>
-     */
-    private com.google.protobuf.SingleFieldBuilderV3<
-            com.google.protobuf.Timestamp,
-            com.google.protobuf.Timestamp.Builder,
-            com.google.protobuf.TimestampOrBuilder>
-        getStartTimeFieldBuilder() {
-      if (startTimeBuilder_ == null) {
-        startTimeBuilder_ =
-            new com.google.protobuf.SingleFieldBuilderV3<
-                com.google.protobuf.Timestamp,
-                com.google.protobuf.Timestamp.Builder,
-                com.google.protobuf.TimestampOrBuilder>(
-                getStartTime(), getParentForChildren(), isClean());
-        startTime_ = null;
-      }
-      return startTimeBuilder_;
-    }
-
-    private com.google.protobuf.Timestamp endTime_;
-    private com.google.protobuf.SingleFieldBuilderV3<
-            com.google.protobuf.Timestamp,
-            com.google.protobuf.Timestamp.Builder,
-            com.google.protobuf.TimestampOrBuilder>
-        endTimeBuilder_;
-    /**
-     *
-     *
-     * <pre>
-     * Do not use. This field is ignored.
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp end_time = 11 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public boolean hasEndTime() {
-      return endTimeBuilder_ != null || endTime_ != null;
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Do not use. This field is ignored.
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp end_time = 11 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public com.google.protobuf.Timestamp getEndTime() {
-      if (endTimeBuilder_ == null) {
-        return endTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : endTime_;
-      } else {
-        return endTimeBuilder_.getMessage();
-      }
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Do not use. This field is ignored.
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp end_time = 11 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public Builder setEndTime(com.google.protobuf.Timestamp value) {
-      if (endTimeBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        endTime_ = value;
-        onChanged();
-      } else {
-        endTimeBuilder_.setMessage(value);
-      }
-
-      return this;
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Do not use. This field is ignored.
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp end_time = 11 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public Builder setEndTime(com.google.protobuf.Timestamp.Builder builderForValue) {
-      if (endTimeBuilder_ == null) {
-        endTime_ = builderForValue.build();
-        onChanged();
-      } else {
-        endTimeBuilder_.setMessage(builderForValue.build());
-      }
-
-      return this;
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Do not use. This field is ignored.
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp end_time = 11 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public Builder mergeEndTime(com.google.protobuf.Timestamp value) {
-      if (endTimeBuilder_ == null) {
-        if (endTime_ != null) {
-          endTime_ =
-              com.google.protobuf.Timestamp.newBuilder(endTime_).mergeFrom(value).buildPartial();
-        } else {
-          endTime_ = value;
-        }
-        onChanged();
-      } else {
-        endTimeBuilder_.mergeFrom(value);
-      }
-
-      return this;
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Do not use. This field is ignored.
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp end_time = 11 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public Builder clearEndTime() {
-      if (endTimeBuilder_ == null) {
-        endTime_ = null;
-        onChanged();
-      } else {
-        endTime_ = null;
-        endTimeBuilder_ = null;
-      }
-
-      return this;
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Do not use. This field is ignored.
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp end_time = 11 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public com.google.protobuf.Timestamp.Builder getEndTimeBuilder() {
-
-      onChanged();
-      return getEndTimeFieldBuilder().getBuilder();
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Do not use. This field is ignored.
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp end_time = 11 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public com.google.protobuf.TimestampOrBuilder getEndTimeOrBuilder() {
-      if (endTimeBuilder_ != null) {
-        return endTimeBuilder_.getMessageOrBuilder();
-      } else {
-        return endTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : endTime_;
-      }
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Do not use. This field is ignored.
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp end_time = 11 [deprecated = true];</code>
-     */
-    private com.google.protobuf.SingleFieldBuilderV3<
-            com.google.protobuf.Timestamp,
-            com.google.protobuf.Timestamp.Builder,
-            com.google.protobuf.TimestampOrBuilder>
-        getEndTimeFieldBuilder() {
-      if (endTimeBuilder_ == null) {
-        endTimeBuilder_ =
-            new com.google.protobuf.SingleFieldBuilderV3<
-                com.google.protobuf.Timestamp,
-                com.google.protobuf.Timestamp.Builder,
-                com.google.protobuf.TimestampOrBuilder>(
-                getEndTime(), getParentForChildren(), isClean());
-        endTime_ = null;
-      }
-      return endTimeBuilder_;
     }
 
     @java.lang.Override

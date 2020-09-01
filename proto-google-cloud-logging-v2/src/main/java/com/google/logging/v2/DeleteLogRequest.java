@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,6 +42,12 @@ public final class DeleteLogRequest extends com.google.protobuf.GeneratedMessage
   }
 
   @java.lang.Override
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(UnusedPrivateParameter unused) {
+    return new DeleteLogRequest();
+  }
+
+  @java.lang.Override
   public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
     return this.unknownFields;
   }
@@ -54,7 +60,6 @@ public final class DeleteLogRequest extends com.google.protobuf.GeneratedMessage
     if (extensionRegistry == null) {
       throw new java.lang.NullPointerException();
     }
-    int mutable_bitField0_ = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -124,8 +129,13 @@ public final class DeleteLogRequest extends com.google.protobuf.GeneratedMessage
    * [LogEntry][google.logging.v2.LogEntry].
    * </pre>
    *
-   * <code>string log_name = 1;</code>
+   * <code>
+   * string log_name = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The logName.
    */
+  @java.lang.Override
   public java.lang.String getLogName() {
     java.lang.Object ref = logName_;
     if (ref instanceof java.lang.String) {
@@ -153,8 +163,13 @@ public final class DeleteLogRequest extends com.google.protobuf.GeneratedMessage
    * [LogEntry][google.logging.v2.LogEntry].
    * </pre>
    *
-   * <code>string log_name = 1;</code>
+   * <code>
+   * string log_name = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The bytes for logName.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getLogNameBytes() {
     java.lang.Object ref = logName_;
     if (ref instanceof java.lang.String) {
@@ -499,7 +514,11 @@ public final class DeleteLogRequest extends com.google.protobuf.GeneratedMessage
      * [LogEntry][google.logging.v2.LogEntry].
      * </pre>
      *
-     * <code>string log_name = 1;</code>
+     * <code>
+     * string log_name = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return The logName.
      */
     public java.lang.String getLogName() {
       java.lang.Object ref = logName_;
@@ -528,7 +547,11 @@ public final class DeleteLogRequest extends com.google.protobuf.GeneratedMessage
      * [LogEntry][google.logging.v2.LogEntry].
      * </pre>
      *
-     * <code>string log_name = 1;</code>
+     * <code>
+     * string log_name = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return The bytes for logName.
      */
     public com.google.protobuf.ByteString getLogNameBytes() {
       java.lang.Object ref = logName_;
@@ -557,7 +580,12 @@ public final class DeleteLogRequest extends com.google.protobuf.GeneratedMessage
      * [LogEntry][google.logging.v2.LogEntry].
      * </pre>
      *
-     * <code>string log_name = 1;</code>
+     * <code>
+     * string log_name = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @param value The logName to set.
+     * @return This builder for chaining.
      */
     public Builder setLogName(java.lang.String value) {
       if (value == null) {
@@ -584,7 +612,11 @@ public final class DeleteLogRequest extends com.google.protobuf.GeneratedMessage
      * [LogEntry][google.logging.v2.LogEntry].
      * </pre>
      *
-     * <code>string log_name = 1;</code>
+     * <code>
+     * string log_name = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearLogName() {
 
@@ -608,7 +640,12 @@ public final class DeleteLogRequest extends com.google.protobuf.GeneratedMessage
      * [LogEntry][google.logging.v2.LogEntry].
      * </pre>
      *
-     * <code>string log_name = 1;</code>
+     * <code>
+     * string log_name = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @param value The bytes for logName to set.
+     * @return This builder for chaining.
      */
     public Builder setLogNameBytes(com.google.protobuf.ByteString value) {
       if (value == null) {

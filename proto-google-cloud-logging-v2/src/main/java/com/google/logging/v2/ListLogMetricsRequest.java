@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,6 +43,12 @@ public final class ListLogMetricsRequest extends com.google.protobuf.GeneratedMe
   }
 
   @java.lang.Override
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(UnusedPrivateParameter unused) {
+    return new ListLogMetricsRequest();
+  }
+
+  @java.lang.Override
   public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
     return this.unknownFields;
   }
@@ -55,7 +61,6 @@ public final class ListLogMetricsRequest extends com.google.protobuf.GeneratedMe
     if (extensionRegistry == null) {
       throw new java.lang.NullPointerException();
     }
-    int mutable_bitField0_ = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -129,8 +134,13 @@ public final class ListLogMetricsRequest extends com.google.protobuf.GeneratedMe
    *     "projects/[PROJECT_ID]"
    * </pre>
    *
-   * <code>string parent = 1;</code>
+   * <code>
+   * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The parent.
    */
+  @java.lang.Override
   public java.lang.String getParent() {
     java.lang.Object ref = parent_;
     if (ref instanceof java.lang.String) {
@@ -150,8 +160,13 @@ public final class ListLogMetricsRequest extends com.google.protobuf.GeneratedMe
    *     "projects/[PROJECT_ID]"
    * </pre>
    *
-   * <code>string parent = 1;</code>
+   * <code>
+   * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The bytes for parent.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getParentBytes() {
     java.lang.Object ref = parent_;
     if (ref instanceof java.lang.String) {
@@ -176,8 +191,11 @@ public final class ListLogMetricsRequest extends com.google.protobuf.GeneratedMe
    * parameters should be identical to those in the previous call.
    * </pre>
    *
-   * <code>string page_token = 2;</code>
+   * <code>string page_token = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The pageToken.
    */
+  @java.lang.Override
   public java.lang.String getPageToken() {
     java.lang.Object ref = pageToken_;
     if (ref instanceof java.lang.String) {
@@ -199,8 +217,11 @@ public final class ListLogMetricsRequest extends com.google.protobuf.GeneratedMe
    * parameters should be identical to those in the previous call.
    * </pre>
    *
-   * <code>string page_token = 2;</code>
+   * <code>string page_token = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The bytes for pageToken.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getPageTokenBytes() {
     java.lang.Object ref = pageToken_;
     if (ref instanceof java.lang.String) {
@@ -224,8 +245,11 @@ public final class ListLogMetricsRequest extends com.google.protobuf.GeneratedMe
    * response indicates that more results might be available.
    * </pre>
    *
-   * <code>int32 page_size = 3;</code>
+   * <code>int32 page_size = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The pageSize.
    */
+  @java.lang.Override
   public int getPageSize() {
     return pageSize_;
   }
@@ -586,7 +610,11 @@ public final class ListLogMetricsRequest extends com.google.protobuf.GeneratedMe
      *     "projects/[PROJECT_ID]"
      * </pre>
      *
-     * <code>string parent = 1;</code>
+     * <code>
+     * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return The parent.
      */
     public java.lang.String getParent() {
       java.lang.Object ref = parent_;
@@ -607,7 +635,11 @@ public final class ListLogMetricsRequest extends com.google.protobuf.GeneratedMe
      *     "projects/[PROJECT_ID]"
      * </pre>
      *
-     * <code>string parent = 1;</code>
+     * <code>
+     * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return The bytes for parent.
      */
     public com.google.protobuf.ByteString getParentBytes() {
       java.lang.Object ref = parent_;
@@ -628,7 +660,12 @@ public final class ListLogMetricsRequest extends com.google.protobuf.GeneratedMe
      *     "projects/[PROJECT_ID]"
      * </pre>
      *
-     * <code>string parent = 1;</code>
+     * <code>
+     * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @param value The parent to set.
+     * @return This builder for chaining.
      */
     public Builder setParent(java.lang.String value) {
       if (value == null) {
@@ -647,7 +684,11 @@ public final class ListLogMetricsRequest extends com.google.protobuf.GeneratedMe
      *     "projects/[PROJECT_ID]"
      * </pre>
      *
-     * <code>string parent = 1;</code>
+     * <code>
+     * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearParent() {
 
@@ -663,7 +704,12 @@ public final class ListLogMetricsRequest extends com.google.protobuf.GeneratedMe
      *     "projects/[PROJECT_ID]"
      * </pre>
      *
-     * <code>string parent = 1;</code>
+     * <code>
+     * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @param value The bytes for parent to set.
+     * @return This builder for chaining.
      */
     public Builder setParentBytes(com.google.protobuf.ByteString value) {
       if (value == null) {
@@ -687,7 +733,9 @@ public final class ListLogMetricsRequest extends com.google.protobuf.GeneratedMe
      * parameters should be identical to those in the previous call.
      * </pre>
      *
-     * <code>string page_token = 2;</code>
+     * <code>string page_token = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The pageToken.
      */
     public java.lang.String getPageToken() {
       java.lang.Object ref = pageToken_;
@@ -710,7 +758,9 @@ public final class ListLogMetricsRequest extends com.google.protobuf.GeneratedMe
      * parameters should be identical to those in the previous call.
      * </pre>
      *
-     * <code>string page_token = 2;</code>
+     * <code>string page_token = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The bytes for pageToken.
      */
     public com.google.protobuf.ByteString getPageTokenBytes() {
       java.lang.Object ref = pageToken_;
@@ -733,7 +783,10 @@ public final class ListLogMetricsRequest extends com.google.protobuf.GeneratedMe
      * parameters should be identical to those in the previous call.
      * </pre>
      *
-     * <code>string page_token = 2;</code>
+     * <code>string page_token = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The pageToken to set.
+     * @return This builder for chaining.
      */
     public Builder setPageToken(java.lang.String value) {
       if (value == null) {
@@ -754,7 +807,9 @@ public final class ListLogMetricsRequest extends com.google.protobuf.GeneratedMe
      * parameters should be identical to those in the previous call.
      * </pre>
      *
-     * <code>string page_token = 2;</code>
+     * <code>string page_token = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearPageToken() {
 
@@ -772,7 +827,10 @@ public final class ListLogMetricsRequest extends com.google.protobuf.GeneratedMe
      * parameters should be identical to those in the previous call.
      * </pre>
      *
-     * <code>string page_token = 2;</code>
+     * <code>string page_token = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The bytes for pageToken to set.
+     * @return This builder for chaining.
      */
     public Builder setPageTokenBytes(com.google.protobuf.ByteString value) {
       if (value == null) {
@@ -795,8 +853,11 @@ public final class ListLogMetricsRequest extends com.google.protobuf.GeneratedMe
      * response indicates that more results might be available.
      * </pre>
      *
-     * <code>int32 page_size = 3;</code>
+     * <code>int32 page_size = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The pageSize.
      */
+    @java.lang.Override
     public int getPageSize() {
       return pageSize_;
     }
@@ -809,7 +870,10 @@ public final class ListLogMetricsRequest extends com.google.protobuf.GeneratedMe
      * response indicates that more results might be available.
      * </pre>
      *
-     * <code>int32 page_size = 3;</code>
+     * <code>int32 page_size = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The pageSize to set.
+     * @return This builder for chaining.
      */
     public Builder setPageSize(int value) {
 
@@ -826,7 +890,9 @@ public final class ListLogMetricsRequest extends com.google.protobuf.GeneratedMe
      * response indicates that more results might be available.
      * </pre>
      *
-     * <code>int32 page_size = 3;</code>
+     * <code>int32 page_size = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearPageSize() {
 

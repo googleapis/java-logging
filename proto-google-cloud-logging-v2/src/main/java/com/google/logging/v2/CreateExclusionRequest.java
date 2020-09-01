@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,6 +42,12 @@ public final class CreateExclusionRequest extends com.google.protobuf.GeneratedM
   }
 
   @java.lang.Override
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(UnusedPrivateParameter unused) {
+    return new CreateExclusionRequest();
+  }
+
+  @java.lang.Override
   public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
     return this.unknownFields;
   }
@@ -54,7 +60,6 @@ public final class CreateExclusionRequest extends com.google.protobuf.GeneratedM
     if (extensionRegistry == null) {
       throw new java.lang.NullPointerException();
     }
-    int mutable_bitField0_ = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -135,8 +140,13 @@ public final class CreateExclusionRequest extends com.google.protobuf.GeneratedM
    * Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
    * </pre>
    *
-   * <code>string parent = 1;</code>
+   * <code>
+   * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The parent.
    */
+  @java.lang.Override
   public java.lang.String getParent() {
     java.lang.Object ref = parent_;
     if (ref instanceof java.lang.String) {
@@ -160,8 +170,13 @@ public final class CreateExclusionRequest extends com.google.protobuf.GeneratedM
    * Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
    * </pre>
    *
-   * <code>string parent = 1;</code>
+   * <code>
+   * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The bytes for parent.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getParentBytes() {
     java.lang.Object ref = parent_;
     if (ref instanceof java.lang.String) {
@@ -184,8 +199,12 @@ public final class CreateExclusionRequest extends com.google.protobuf.GeneratedM
    * that is not already used in the parent resource.
    * </pre>
    *
-   * <code>.google.logging.v2.LogExclusion exclusion = 2;</code>
+   * <code>.google.logging.v2.LogExclusion exclusion = 2 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
+   *
+   * @return Whether the exclusion field is set.
    */
+  @java.lang.Override
   public boolean hasExclusion() {
     return exclusion_ != null;
   }
@@ -197,8 +216,12 @@ public final class CreateExclusionRequest extends com.google.protobuf.GeneratedM
    * that is not already used in the parent resource.
    * </pre>
    *
-   * <code>.google.logging.v2.LogExclusion exclusion = 2;</code>
+   * <code>.google.logging.v2.LogExclusion exclusion = 2 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
+   *
+   * @return The exclusion.
    */
+  @java.lang.Override
   public com.google.logging.v2.LogExclusion getExclusion() {
     return exclusion_ == null
         ? com.google.logging.v2.LogExclusion.getDefaultInstance()
@@ -212,8 +235,10 @@ public final class CreateExclusionRequest extends com.google.protobuf.GeneratedM
    * that is not already used in the parent resource.
    * </pre>
    *
-   * <code>.google.logging.v2.LogExclusion exclusion = 2;</code>
+   * <code>.google.logging.v2.LogExclusion exclusion = 2 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
    */
+  @java.lang.Override
   public com.google.logging.v2.LogExclusionOrBuilder getExclusionOrBuilder() {
     return getExclusion();
   }
@@ -575,7 +600,11 @@ public final class CreateExclusionRequest extends com.google.protobuf.GeneratedM
      * Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
      * </pre>
      *
-     * <code>string parent = 1;</code>
+     * <code>
+     * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return The parent.
      */
     public java.lang.String getParent() {
       java.lang.Object ref = parent_;
@@ -600,7 +629,11 @@ public final class CreateExclusionRequest extends com.google.protobuf.GeneratedM
      * Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
      * </pre>
      *
-     * <code>string parent = 1;</code>
+     * <code>
+     * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return The bytes for parent.
      */
     public com.google.protobuf.ByteString getParentBytes() {
       java.lang.Object ref = parent_;
@@ -625,7 +658,12 @@ public final class CreateExclusionRequest extends com.google.protobuf.GeneratedM
      * Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
      * </pre>
      *
-     * <code>string parent = 1;</code>
+     * <code>
+     * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @param value The parent to set.
+     * @return This builder for chaining.
      */
     public Builder setParent(java.lang.String value) {
       if (value == null) {
@@ -648,7 +686,11 @@ public final class CreateExclusionRequest extends com.google.protobuf.GeneratedM
      * Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
      * </pre>
      *
-     * <code>string parent = 1;</code>
+     * <code>
+     * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearParent() {
 
@@ -668,7 +710,12 @@ public final class CreateExclusionRequest extends com.google.protobuf.GeneratedM
      * Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
      * </pre>
      *
-     * <code>string parent = 1;</code>
+     * <code>
+     * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @param value The bytes for parent to set.
+     * @return This builder for chaining.
      */
     public Builder setParentBytes(com.google.protobuf.ByteString value) {
       if (value == null) {
@@ -695,7 +742,11 @@ public final class CreateExclusionRequest extends com.google.protobuf.GeneratedM
      * that is not already used in the parent resource.
      * </pre>
      *
-     * <code>.google.logging.v2.LogExclusion exclusion = 2;</code>
+     * <code>
+     * .google.logging.v2.LogExclusion exclusion = 2 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
+     *
+     * @return Whether the exclusion field is set.
      */
     public boolean hasExclusion() {
       return exclusionBuilder_ != null || exclusion_ != null;
@@ -708,7 +759,11 @@ public final class CreateExclusionRequest extends com.google.protobuf.GeneratedM
      * that is not already used in the parent resource.
      * </pre>
      *
-     * <code>.google.logging.v2.LogExclusion exclusion = 2;</code>
+     * <code>
+     * .google.logging.v2.LogExclusion exclusion = 2 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
+     *
+     * @return The exclusion.
      */
     public com.google.logging.v2.LogExclusion getExclusion() {
       if (exclusionBuilder_ == null) {
@@ -727,7 +782,9 @@ public final class CreateExclusionRequest extends com.google.protobuf.GeneratedM
      * that is not already used in the parent resource.
      * </pre>
      *
-     * <code>.google.logging.v2.LogExclusion exclusion = 2;</code>
+     * <code>
+     * .google.logging.v2.LogExclusion exclusion = 2 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public Builder setExclusion(com.google.logging.v2.LogExclusion value) {
       if (exclusionBuilder_ == null) {
@@ -750,7 +807,9 @@ public final class CreateExclusionRequest extends com.google.protobuf.GeneratedM
      * that is not already used in the parent resource.
      * </pre>
      *
-     * <code>.google.logging.v2.LogExclusion exclusion = 2;</code>
+     * <code>
+     * .google.logging.v2.LogExclusion exclusion = 2 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public Builder setExclusion(com.google.logging.v2.LogExclusion.Builder builderForValue) {
       if (exclusionBuilder_ == null) {
@@ -770,7 +829,9 @@ public final class CreateExclusionRequest extends com.google.protobuf.GeneratedM
      * that is not already used in the parent resource.
      * </pre>
      *
-     * <code>.google.logging.v2.LogExclusion exclusion = 2;</code>
+     * <code>
+     * .google.logging.v2.LogExclusion exclusion = 2 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public Builder mergeExclusion(com.google.logging.v2.LogExclusion value) {
       if (exclusionBuilder_ == null) {
@@ -797,7 +858,9 @@ public final class CreateExclusionRequest extends com.google.protobuf.GeneratedM
      * that is not already used in the parent resource.
      * </pre>
      *
-     * <code>.google.logging.v2.LogExclusion exclusion = 2;</code>
+     * <code>
+     * .google.logging.v2.LogExclusion exclusion = 2 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public Builder clearExclusion() {
       if (exclusionBuilder_ == null) {
@@ -818,7 +881,9 @@ public final class CreateExclusionRequest extends com.google.protobuf.GeneratedM
      * that is not already used in the parent resource.
      * </pre>
      *
-     * <code>.google.logging.v2.LogExclusion exclusion = 2;</code>
+     * <code>
+     * .google.logging.v2.LogExclusion exclusion = 2 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public com.google.logging.v2.LogExclusion.Builder getExclusionBuilder() {
 
@@ -833,7 +898,9 @@ public final class CreateExclusionRequest extends com.google.protobuf.GeneratedM
      * that is not already used in the parent resource.
      * </pre>
      *
-     * <code>.google.logging.v2.LogExclusion exclusion = 2;</code>
+     * <code>
+     * .google.logging.v2.LogExclusion exclusion = 2 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public com.google.logging.v2.LogExclusionOrBuilder getExclusionOrBuilder() {
       if (exclusionBuilder_ != null) {
@@ -852,7 +919,9 @@ public final class CreateExclusionRequest extends com.google.protobuf.GeneratedM
      * that is not already used in the parent resource.
      * </pre>
      *
-     * <code>.google.logging.v2.LogExclusion exclusion = 2;</code>
+     * <code>
+     * .google.logging.v2.LogExclusion exclusion = 2 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
             com.google.logging.v2.LogExclusion,

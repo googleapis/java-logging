@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,8 +27,8 @@ public interface DeleteSinkRequestOrBuilder
    *
    *
    * <pre>
-   * Required. The full resource name of the sink to delete, including the
-   * parent resource and the sink identifier:
+   * Required. The full resource name of the sink to delete, including the parent
+   * resource and the sink identifier:
    *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
    *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
    *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
@@ -36,15 +36,19 @@ public interface DeleteSinkRequestOrBuilder
    * Example: `"projects/my-project-id/sinks/my-sink-id"`.
    * </pre>
    *
-   * <code>string sink_name = 1;</code>
+   * <code>
+   * string sink_name = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The sinkName.
    */
   java.lang.String getSinkName();
   /**
    *
    *
    * <pre>
-   * Required. The full resource name of the sink to delete, including the
-   * parent resource and the sink identifier:
+   * Required. The full resource name of the sink to delete, including the parent
+   * resource and the sink identifier:
    *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
    *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
    *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
@@ -52,7 +56,11 @@ public interface DeleteSinkRequestOrBuilder
    * Example: `"projects/my-project-id/sinks/my-sink-id"`.
    * </pre>
    *
-   * <code>string sink_name = 1;</code>
+   * <code>
+   * string sink_name = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The bytes for sinkName.
    */
   com.google.protobuf.ByteString getSinkNameBytes();
 }

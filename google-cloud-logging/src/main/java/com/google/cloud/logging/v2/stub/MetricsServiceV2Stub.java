@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,6 +40,14 @@ import javax.annotation.Generated;
 @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
 public abstract class MetricsServiceV2Stub implements BackgroundResource {
 
+  public UnaryCallable<UpdateLogMetricRequest, LogMetric> updateLogMetricCallable() {
+    throw new UnsupportedOperationException("Not implemented: updateLogMetricCallable()");
+  }
+
+  public UnaryCallable<DeleteLogMetricRequest, Empty> deleteLogMetricCallable() {
+    throw new UnsupportedOperationException("Not implemented: deleteLogMetricCallable()");
+  }
+
   public UnaryCallable<ListLogMetricsRequest, ListLogMetricsPagedResponse>
       listLogMetricsPagedCallable() {
     throw new UnsupportedOperationException("Not implemented: listLogMetricsPagedCallable()");
@@ -55,14 +63,6 @@ public abstract class MetricsServiceV2Stub implements BackgroundResource {
 
   public UnaryCallable<CreateLogMetricRequest, LogMetric> createLogMetricCallable() {
     throw new UnsupportedOperationException("Not implemented: createLogMetricCallable()");
-  }
-
-  public UnaryCallable<UpdateLogMetricRequest, LogMetric> updateLogMetricCallable() {
-    throw new UnsupportedOperationException("Not implemented: updateLogMetricCallable()");
-  }
-
-  public UnaryCallable<DeleteLogMetricRequest, Empty> deleteLogMetricCallable() {
-    throw new UnsupportedOperationException("Not implemented: deleteLogMetricCallable()");
   }
 
   @Override

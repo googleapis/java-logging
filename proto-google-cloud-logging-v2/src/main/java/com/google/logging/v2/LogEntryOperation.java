@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,6 +44,12 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
   }
 
   @java.lang.Override
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(UnusedPrivateParameter unused) {
+    return new LogEntryOperation();
+  }
+
+  @java.lang.Override
   public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
     return this.unknownFields;
   }
@@ -56,7 +62,6 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
     if (extensionRegistry == null) {
       throw new java.lang.NullPointerException();
     }
-    int mutable_bitField0_ = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -135,8 +140,11 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
    * identifier are assumed to be part of the same operation.
    * </pre>
    *
-   * <code>string id = 1;</code>
+   * <code>string id = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The id.
    */
+  @java.lang.Override
   public java.lang.String getId() {
     java.lang.Object ref = id_;
     if (ref instanceof java.lang.String) {
@@ -156,8 +164,11 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
    * identifier are assumed to be part of the same operation.
    * </pre>
    *
-   * <code>string id = 1;</code>
+   * <code>string id = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The bytes for id.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getIdBytes() {
     java.lang.Object ref = id_;
     if (ref instanceof java.lang.String) {
@@ -181,8 +192,11 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
    * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
    * </pre>
    *
-   * <code>string producer = 2;</code>
+   * <code>string producer = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The producer.
    */
+  @java.lang.Override
   public java.lang.String getProducer() {
     java.lang.Object ref = producer_;
     if (ref instanceof java.lang.String) {
@@ -203,8 +217,11 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
    * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
    * </pre>
    *
-   * <code>string producer = 2;</code>
+   * <code>string producer = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The bytes for producer.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getProducerBytes() {
     java.lang.Object ref = producer_;
     if (ref instanceof java.lang.String) {
@@ -226,8 +243,11 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
    * Optional. Set this to True if this is the first log entry in the operation.
    * </pre>
    *
-   * <code>bool first = 3;</code>
+   * <code>bool first = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The first.
    */
+  @java.lang.Override
   public boolean getFirst() {
     return first_;
   }
@@ -241,8 +261,11 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
    * Optional. Set this to True if this is the last log entry in the operation.
    * </pre>
    *
-   * <code>bool last = 4;</code>
+   * <code>bool last = 4 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The last.
    */
+  @java.lang.Override
   public boolean getLast() {
     return last_;
   }
@@ -618,7 +641,9 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * identifier are assumed to be part of the same operation.
      * </pre>
      *
-     * <code>string id = 1;</code>
+     * <code>string id = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The id.
      */
     public java.lang.String getId() {
       java.lang.Object ref = id_;
@@ -639,7 +664,9 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * identifier are assumed to be part of the same operation.
      * </pre>
      *
-     * <code>string id = 1;</code>
+     * <code>string id = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The bytes for id.
      */
     public com.google.protobuf.ByteString getIdBytes() {
       java.lang.Object ref = id_;
@@ -660,7 +687,10 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * identifier are assumed to be part of the same operation.
      * </pre>
      *
-     * <code>string id = 1;</code>
+     * <code>string id = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The id to set.
+     * @return This builder for chaining.
      */
     public Builder setId(java.lang.String value) {
       if (value == null) {
@@ -679,7 +709,9 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * identifier are assumed to be part of the same operation.
      * </pre>
      *
-     * <code>string id = 1;</code>
+     * <code>string id = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearId() {
 
@@ -695,7 +727,10 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * identifier are assumed to be part of the same operation.
      * </pre>
      *
-     * <code>string id = 1;</code>
+     * <code>string id = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The bytes for id to set.
+     * @return This builder for chaining.
      */
     public Builder setIdBytes(com.google.protobuf.ByteString value) {
       if (value == null) {
@@ -718,7 +753,9 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
      * </pre>
      *
-     * <code>string producer = 2;</code>
+     * <code>string producer = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The producer.
      */
     public java.lang.String getProducer() {
       java.lang.Object ref = producer_;
@@ -740,7 +777,9 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
      * </pre>
      *
-     * <code>string producer = 2;</code>
+     * <code>string producer = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The bytes for producer.
      */
     public com.google.protobuf.ByteString getProducerBytes() {
       java.lang.Object ref = producer_;
@@ -762,7 +801,10 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
      * </pre>
      *
-     * <code>string producer = 2;</code>
+     * <code>string producer = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The producer to set.
+     * @return This builder for chaining.
      */
     public Builder setProducer(java.lang.String value) {
       if (value == null) {
@@ -782,7 +824,9 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
      * </pre>
      *
-     * <code>string producer = 2;</code>
+     * <code>string producer = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearProducer() {
 
@@ -799,7 +843,10 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
      * </pre>
      *
-     * <code>string producer = 2;</code>
+     * <code>string producer = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The bytes for producer to set.
+     * @return This builder for chaining.
      */
     public Builder setProducerBytes(com.google.protobuf.ByteString value) {
       if (value == null) {
@@ -820,8 +867,11 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * Optional. Set this to True if this is the first log entry in the operation.
      * </pre>
      *
-     * <code>bool first = 3;</code>
+     * <code>bool first = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The first.
      */
+    @java.lang.Override
     public boolean getFirst() {
       return first_;
     }
@@ -832,7 +882,10 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * Optional. Set this to True if this is the first log entry in the operation.
      * </pre>
      *
-     * <code>bool first = 3;</code>
+     * <code>bool first = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The first to set.
+     * @return This builder for chaining.
      */
     public Builder setFirst(boolean value) {
 
@@ -847,7 +900,9 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * Optional. Set this to True if this is the first log entry in the operation.
      * </pre>
      *
-     * <code>bool first = 3;</code>
+     * <code>bool first = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearFirst() {
 
@@ -864,8 +919,11 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * Optional. Set this to True if this is the last log entry in the operation.
      * </pre>
      *
-     * <code>bool last = 4;</code>
+     * <code>bool last = 4 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The last.
      */
+    @java.lang.Override
     public boolean getLast() {
       return last_;
     }
@@ -876,7 +934,10 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * Optional. Set this to True if this is the last log entry in the operation.
      * </pre>
      *
-     * <code>bool last = 4;</code>
+     * <code>bool last = 4 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The last to set.
+     * @return This builder for chaining.
      */
     public Builder setLast(boolean value) {
 
@@ -891,7 +952,9 @@ public final class LogEntryOperation extends com.google.protobuf.GeneratedMessag
      * Optional. Set this to True if this is the last log entry in the operation.
      * </pre>
      *
-     * <code>bool last = 4;</code>
+     * <code>bool last = 4 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearLast() {
 

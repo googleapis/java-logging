@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,13 +36,17 @@ public interface WriteLogEntriesRequestOrBuilder
    * `[LOG_ID]` must be URL-encoded. For example:
    *     "projects/my-project-id/logs/syslog"
    *     "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
-   * The permission &lt;code&gt;logging.logEntries.create&lt;/code&gt; is needed on each
-   * project, organization, billing account, or folder that is receiving
-   * new log entries, whether the resource is specified in
-   * &lt;code&gt;logName&lt;/code&gt; or in an individual log entry.
+   * The permission `logging.logEntries.create` is needed on each project,
+   * organization, billing account, or folder that is receiving new log
+   * entries, whether the resource is specified in `logName` or in an
+   * individual log entry.
    * </pre>
    *
-   * <code>string log_name = 1;</code>
+   * <code>
+   * string log_name = 1 [(.google.api.field_behavior) = OPTIONAL, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The logName.
    */
   java.lang.String getLogName();
   /**
@@ -58,13 +62,17 @@ public interface WriteLogEntriesRequestOrBuilder
    * `[LOG_ID]` must be URL-encoded. For example:
    *     "projects/my-project-id/logs/syslog"
    *     "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
-   * The permission &lt;code&gt;logging.logEntries.create&lt;/code&gt; is needed on each
-   * project, organization, billing account, or folder that is receiving
-   * new log entries, whether the resource is specified in
-   * &lt;code&gt;logName&lt;/code&gt; or in an individual log entry.
+   * The permission `logging.logEntries.create` is needed on each project,
+   * organization, billing account, or folder that is receiving new log
+   * entries, whether the resource is specified in `logName` or in an
+   * individual log entry.
    * </pre>
    *
-   * <code>string log_name = 1;</code>
+   * <code>
+   * string log_name = 1 [(.google.api.field_behavior) = OPTIONAL, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The bytes for logName.
    */
   com.google.protobuf.ByteString getLogNameBytes();
 
@@ -80,7 +88,10 @@ public interface WriteLogEntriesRequestOrBuilder
    * See [LogEntry][google.logging.v2.LogEntry].
    * </pre>
    *
-   * <code>.google.api.MonitoredResource resource = 2;</code>
+   * <code>.google.api.MonitoredResource resource = 2 [(.google.api.field_behavior) = OPTIONAL];
+   * </code>
+   *
+   * @return Whether the resource field is set.
    */
   boolean hasResource();
   /**
@@ -95,7 +106,10 @@ public interface WriteLogEntriesRequestOrBuilder
    * See [LogEntry][google.logging.v2.LogEntry].
    * </pre>
    *
-   * <code>.google.api.MonitoredResource resource = 2;</code>
+   * <code>.google.api.MonitoredResource resource = 2 [(.google.api.field_behavior) = OPTIONAL];
+   * </code>
+   *
+   * @return The resource.
    */
   com.google.api.MonitoredResource getResource();
   /**
@@ -110,7 +124,8 @@ public interface WriteLogEntriesRequestOrBuilder
    * See [LogEntry][google.logging.v2.LogEntry].
    * </pre>
    *
-   * <code>.google.api.MonitoredResource resource = 2;</code>
+   * <code>.google.api.MonitoredResource resource = 2 [(.google.api.field_behavior) = OPTIONAL];
+   * </code>
    */
   com.google.api.MonitoredResourceOrBuilder getResourceOrBuilder();
 
@@ -124,7 +139,7 @@ public interface WriteLogEntriesRequestOrBuilder
    * See [LogEntry][google.logging.v2.LogEntry].
    * </pre>
    *
-   * <code>map&lt;string, string&gt; labels = 3;</code>
+   * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
    */
   int getLabelsCount();
   /**
@@ -137,7 +152,7 @@ public interface WriteLogEntriesRequestOrBuilder
    * See [LogEntry][google.logging.v2.LogEntry].
    * </pre>
    *
-   * <code>map&lt;string, string&gt; labels = 3;</code>
+   * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
    */
   boolean containsLabels(java.lang.String key);
   /** Use {@link #getLabelsMap()} instead. */
@@ -153,7 +168,7 @@ public interface WriteLogEntriesRequestOrBuilder
    * See [LogEntry][google.logging.v2.LogEntry].
    * </pre>
    *
-   * <code>map&lt;string, string&gt; labels = 3;</code>
+   * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
    */
   java.util.Map<java.lang.String, java.lang.String> getLabelsMap();
   /**
@@ -166,7 +181,7 @@ public interface WriteLogEntriesRequestOrBuilder
    * See [LogEntry][google.logging.v2.LogEntry].
    * </pre>
    *
-   * <code>map&lt;string, string&gt; labels = 3;</code>
+   * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
    */
   java.lang.String getLabelsOrDefault(java.lang.String key, java.lang.String defaultValue);
   /**
@@ -179,7 +194,7 @@ public interface WriteLogEntriesRequestOrBuilder
    * See [LogEntry][google.logging.v2.LogEntry].
    * </pre>
    *
-   * <code>map&lt;string, string&gt; labels = 3;</code>
+   * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
    */
   java.lang.String getLabelsOrThrow(java.lang.String key);
 
@@ -199,17 +214,19 @@ public interface WriteLogEntriesRequestOrBuilder
    * supply their own values, the entries earlier in the list will sort before
    * the entries later in the list. See the `entries.list` method.
    * Log entries with timestamps that are more than the
-   * [logs retention period](/logging/quota-policy) in the past or more than
+   * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
    * 24 hours in the future will not be available when calling `entries.list`.
    * However, those log entries can still be
-   * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+   * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * To improve throughput and to avoid exceeding the
-   * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+   * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
    * you should try to include several log entries in this list,
    * rather than calling this method for each individual log entry.
    * </pre>
    *
-   * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+   * <code>
+   * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
    */
   java.util.List<com.google.logging.v2.LogEntry> getEntriesList();
   /**
@@ -228,17 +245,19 @@ public interface WriteLogEntriesRequestOrBuilder
    * supply their own values, the entries earlier in the list will sort before
    * the entries later in the list. See the `entries.list` method.
    * Log entries with timestamps that are more than the
-   * [logs retention period](/logging/quota-policy) in the past or more than
+   * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
    * 24 hours in the future will not be available when calling `entries.list`.
    * However, those log entries can still be
-   * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+   * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * To improve throughput and to avoid exceeding the
-   * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+   * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
    * you should try to include several log entries in this list,
    * rather than calling this method for each individual log entry.
    * </pre>
    *
-   * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+   * <code>
+   * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
    */
   com.google.logging.v2.LogEntry getEntries(int index);
   /**
@@ -257,17 +276,19 @@ public interface WriteLogEntriesRequestOrBuilder
    * supply their own values, the entries earlier in the list will sort before
    * the entries later in the list. See the `entries.list` method.
    * Log entries with timestamps that are more than the
-   * [logs retention period](/logging/quota-policy) in the past or more than
+   * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
    * 24 hours in the future will not be available when calling `entries.list`.
    * However, those log entries can still be
-   * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+   * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * To improve throughput and to avoid exceeding the
-   * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+   * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
    * you should try to include several log entries in this list,
    * rather than calling this method for each individual log entry.
    * </pre>
    *
-   * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+   * <code>
+   * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
    */
   int getEntriesCount();
   /**
@@ -286,17 +307,19 @@ public interface WriteLogEntriesRequestOrBuilder
    * supply their own values, the entries earlier in the list will sort before
    * the entries later in the list. See the `entries.list` method.
    * Log entries with timestamps that are more than the
-   * [logs retention period](/logging/quota-policy) in the past or more than
+   * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
    * 24 hours in the future will not be available when calling `entries.list`.
    * However, those log entries can still be
-   * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+   * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * To improve throughput and to avoid exceeding the
-   * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+   * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
    * you should try to include several log entries in this list,
    * rather than calling this method for each individual log entry.
    * </pre>
    *
-   * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+   * <code>
+   * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
    */
   java.util.List<? extends com.google.logging.v2.LogEntryOrBuilder> getEntriesOrBuilderList();
   /**
@@ -315,17 +338,19 @@ public interface WriteLogEntriesRequestOrBuilder
    * supply their own values, the entries earlier in the list will sort before
    * the entries later in the list. See the `entries.list` method.
    * Log entries with timestamps that are more than the
-   * [logs retention period](/logging/quota-policy) in the past or more than
+   * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
    * 24 hours in the future will not be available when calling `entries.list`.
    * However, those log entries can still be
-   * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+   * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * To improve throughput and to avoid exceeding the
-   * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+   * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
    * you should try to include several log entries in this list,
    * rather than calling this method for each individual log entry.
    * </pre>
    *
-   * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+   * <code>
+   * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
    */
   com.google.logging.v2.LogEntryOrBuilder getEntriesOrBuilder(int index);
 
@@ -340,7 +365,9 @@ public interface WriteLogEntriesRequestOrBuilder
    * keyed by the entries' zero-based index in the `entries.write` method.
    * </pre>
    *
-   * <code>bool partial_success = 5;</code>
+   * <code>bool partial_success = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The partialSuccess.
    */
   boolean getPartialSuccess();
 
@@ -353,7 +380,9 @@ public interface WriteLogEntriesRequestOrBuilder
    * logging API endpoints are working properly before sending valuable data.
    * </pre>
    *
-   * <code>bool dry_run = 6;</code>
+   * <code>bool dry_run = 6 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The dryRun.
    */
   boolean getDryRun();
 }

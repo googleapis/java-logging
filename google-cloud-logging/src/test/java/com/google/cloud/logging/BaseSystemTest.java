@@ -22,6 +22,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import com.google.api.gax.paging.Page;
 import com.google.cloud.MonitoredResource;
@@ -37,14 +38,12 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Sets;
 import com.google.logging.v2.LogName;
-import com.google.logging.v2.ProjectLogName;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.rules.Timeout;
 
 /**
@@ -53,9 +52,7 @@ import org.junit.rules.Timeout;
  */
 public abstract class BaseSystemTest {
 
-  @Rule public ExpectedException thrown = ExpectedException.none();
-
-  @Rule public Timeout globalTimeout = Timeout.seconds(300);
+  @Rule public Timeout globalTimeout = Timeout.seconds(600);
 
   /**
    * Returns the Logging service used to issue requests. This service can be such that it interacts
@@ -114,9 +111,12 @@ public abstract class BaseSystemTest {
             .setVersionFormat(SinkInfo.VersionFormat.V2)
             .build();
     assertNull(logging().getSink(name));
-    thrown.expect(LoggingException.class);
-    thrown.expectMessage("NOT_FOUND");
-    logging().update(sinkInfo);
+    try {
+      logging().update(sinkInfo);
+      fail();
+    } catch (LoggingException expected) {
+      assertNotNull(expected.getMessage());
+    }
   }
 
   @Test
@@ -209,7 +209,7 @@ public abstract class BaseSystemTest {
   public void testWriteAndListLogEntries() throws InterruptedException {
     String logId = formatForTest("test-write-log-entries-log");
     LoggingOptions loggingOptions = logging().getOptions();
-    LogName logName = ProjectLogName.of(loggingOptions.getProjectId(), logId);
+    LogName logName = LogName.ofProjectLogName(loggingOptions.getProjectId(), logId);
     StringPayload firstPayload = StringPayload.of("stringPayload");
     LogEntry firstEntry =
         LogEntry.newBuilder(firstPayload)
@@ -279,7 +279,7 @@ public abstract class BaseSystemTest {
     int allowedDeleteAttempts = 5;
     boolean deleted = false;
     while (!deleted && deleteAttempts < allowedDeleteAttempts) {
-      Thread.sleep(1000);
+      Thread.sleep(5000);
       deleted = logging().deleteLog(logId);
       deleteAttempts++;
     }
@@ -296,7 +296,7 @@ public abstract class BaseSystemTest {
   public void testLoggingHandler() throws InterruptedException {
     String logId = formatForTest("test-logging-handler");
     LoggingOptions options = logging().getOptions();
-    LogName logName = ProjectLogName.of(options.getProjectId(), logId);
+    LogName logName = LogName.ofProjectLogName(options.getProjectId(), logId);
     LoggingHandler handler = new LoggingHandler(logId, options);
     handler.setLevel(Level.INFO);
     Logger logger = Logger.getLogger(getClass().getName());
@@ -336,7 +336,7 @@ public abstract class BaseSystemTest {
   public void testSyncLoggingHandler() throws InterruptedException {
     String logId = formatForTest("test-sync-logging-handler");
     LoggingOptions options = logging().getOptions();
-    LogName logName = ProjectLogName.of(options.getProjectId(), logId);
+    LogName logName = LogName.ofProjectLogName(options.getProjectId(), logId);
     MonitoredResource resource =
         MonitoredResource.of(
             "gce_instance",

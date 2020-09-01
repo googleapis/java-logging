@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 package com.google.cloud.logging.v2.stub;
 
+import static com.google.cloud.logging.v2.ConfigClient.ListBucketsPagedResponse;
 import static com.google.cloud.logging.v2.ConfigClient.ListExclusionsPagedResponse;
 import static com.google.cloud.logging.v2.ConfigClient.ListSinksPagedResponse;
 
@@ -44,18 +45,26 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
+import com.google.logging.v2.CmekSettings;
 import com.google.logging.v2.CreateExclusionRequest;
 import com.google.logging.v2.CreateSinkRequest;
 import com.google.logging.v2.DeleteExclusionRequest;
 import com.google.logging.v2.DeleteSinkRequest;
+import com.google.logging.v2.GetBucketRequest;
+import com.google.logging.v2.GetCmekSettingsRequest;
 import com.google.logging.v2.GetExclusionRequest;
 import com.google.logging.v2.GetSinkRequest;
+import com.google.logging.v2.ListBucketsRequest;
+import com.google.logging.v2.ListBucketsResponse;
 import com.google.logging.v2.ListExclusionsRequest;
 import com.google.logging.v2.ListExclusionsResponse;
 import com.google.logging.v2.ListSinksRequest;
 import com.google.logging.v2.ListSinksResponse;
+import com.google.logging.v2.LogBucket;
 import com.google.logging.v2.LogExclusion;
 import com.google.logging.v2.LogSink;
+import com.google.logging.v2.UpdateBucketRequest;
+import com.google.logging.v2.UpdateCmekSettingsRequest;
 import com.google.logging.v2.UpdateExclusionRequest;
 import com.google.logging.v2.UpdateSinkRequest;
 import com.google.protobuf.Empty;
@@ -79,14 +88,18 @@ import org.threeten.bp.Duration;
  * <p>The builder of this class is recursive, so contained classes are themselves builders. When
  * build() is called, the tree of builders is called to create the complete settings object.
  *
- * <p>For example, to set the total timeout of getSink to 30 seconds:
+ * <p>For example, to set the total timeout of deleteSink to 30 seconds:
  *
  * <pre>
  * <code>
  * ConfigServiceV2StubSettings.Builder configSettingsBuilder =
  *     ConfigServiceV2StubSettings.newBuilder();
- * configSettingsBuilder.getSinkSettings().getRetrySettings().toBuilder()
- *     .setTotalTimeout(Duration.ofSeconds(30));
+ * configSettingsBuilder
+ *     .deleteSinkSettings()
+ *     .setRetrySettings(
+ *         configSettingsBuilder.deleteSinkSettings().getRetrySettings().toBuilder()
+ *             .setTotalTimeout(Duration.ofSeconds(30))
+ *             .build());
  * ConfigServiceV2StubSettings configSettings = configSettingsBuilder.build();
  * </code>
  * </pre>
@@ -104,19 +117,57 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
           .add("https://www.googleapis.com/auth/logging.write")
           .build();
 
+  private final UnaryCallSettings<DeleteSinkRequest, Empty> deleteSinkSettings;
+  private final UnaryCallSettings<UpdateSinkRequest, LogSink> updateSinkSettings;
+  private final UnaryCallSettings<DeleteExclusionRequest, Empty> deleteExclusionSettings;
+  private final PagedCallSettings<ListBucketsRequest, ListBucketsResponse, ListBucketsPagedResponse>
+      listBucketsSettings;
+  private final UnaryCallSettings<GetBucketRequest, LogBucket> getBucketSettings;
+  private final UnaryCallSettings<UpdateBucketRequest, LogBucket> updateBucketSettings;
   private final PagedCallSettings<ListSinksRequest, ListSinksResponse, ListSinksPagedResponse>
       listSinksSettings;
   private final UnaryCallSettings<GetSinkRequest, LogSink> getSinkSettings;
   private final UnaryCallSettings<CreateSinkRequest, LogSink> createSinkSettings;
-  private final UnaryCallSettings<UpdateSinkRequest, LogSink> updateSinkSettings;
-  private final UnaryCallSettings<DeleteSinkRequest, Empty> deleteSinkSettings;
   private final PagedCallSettings<
           ListExclusionsRequest, ListExclusionsResponse, ListExclusionsPagedResponse>
       listExclusionsSettings;
   private final UnaryCallSettings<GetExclusionRequest, LogExclusion> getExclusionSettings;
   private final UnaryCallSettings<CreateExclusionRequest, LogExclusion> createExclusionSettings;
   private final UnaryCallSettings<UpdateExclusionRequest, LogExclusion> updateExclusionSettings;
-  private final UnaryCallSettings<DeleteExclusionRequest, Empty> deleteExclusionSettings;
+  private final UnaryCallSettings<GetCmekSettingsRequest, CmekSettings> getCmekSettingsSettings;
+  private final UnaryCallSettings<UpdateCmekSettingsRequest, CmekSettings>
+      updateCmekSettingsSettings;
+
+  /** Returns the object with the settings used for calls to deleteSink. */
+  public UnaryCallSettings<DeleteSinkRequest, Empty> deleteSinkSettings() {
+    return deleteSinkSettings;
+  }
+
+  /** Returns the object with the settings used for calls to updateSink. */
+  public UnaryCallSettings<UpdateSinkRequest, LogSink> updateSinkSettings() {
+    return updateSinkSettings;
+  }
+
+  /** Returns the object with the settings used for calls to deleteExclusion. */
+  public UnaryCallSettings<DeleteExclusionRequest, Empty> deleteExclusionSettings() {
+    return deleteExclusionSettings;
+  }
+
+  /** Returns the object with the settings used for calls to listBuckets. */
+  public PagedCallSettings<ListBucketsRequest, ListBucketsResponse, ListBucketsPagedResponse>
+      listBucketsSettings() {
+    return listBucketsSettings;
+  }
+
+  /** Returns the object with the settings used for calls to getBucket. */
+  public UnaryCallSettings<GetBucketRequest, LogBucket> getBucketSettings() {
+    return getBucketSettings;
+  }
+
+  /** Returns the object with the settings used for calls to updateBucket. */
+  public UnaryCallSettings<UpdateBucketRequest, LogBucket> updateBucketSettings() {
+    return updateBucketSettings;
+  }
 
   /** Returns the object with the settings used for calls to listSinks. */
   public PagedCallSettings<ListSinksRequest, ListSinksResponse, ListSinksPagedResponse>
@@ -132,16 +183,6 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
   /** Returns the object with the settings used for calls to createSink. */
   public UnaryCallSettings<CreateSinkRequest, LogSink> createSinkSettings() {
     return createSinkSettings;
-  }
-
-  /** Returns the object with the settings used for calls to updateSink. */
-  public UnaryCallSettings<UpdateSinkRequest, LogSink> updateSinkSettings() {
-    return updateSinkSettings;
-  }
-
-  /** Returns the object with the settings used for calls to deleteSink. */
-  public UnaryCallSettings<DeleteSinkRequest, Empty> deleteSinkSettings() {
-    return deleteSinkSettings;
   }
 
   /** Returns the object with the settings used for calls to listExclusions. */
@@ -166,9 +207,14 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
     return updateExclusionSettings;
   }
 
-  /** Returns the object with the settings used for calls to deleteExclusion. */
-  public UnaryCallSettings<DeleteExclusionRequest, Empty> deleteExclusionSettings() {
-    return deleteExclusionSettings;
+  /** Returns the object with the settings used for calls to getCmekSettings. */
+  public UnaryCallSettings<GetCmekSettingsRequest, CmekSettings> getCmekSettingsSettings() {
+    return getCmekSettingsSettings;
+  }
+
+  /** Returns the object with the settings used for calls to updateCmekSettings. */
+  public UnaryCallSettings<UpdateCmekSettingsRequest, CmekSettings> updateCmekSettingsSettings() {
+    return updateCmekSettingsSettings;
   }
 
   @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
@@ -240,17 +286,58 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
   protected ConfigServiceV2StubSettings(Builder settingsBuilder) throws IOException {
     super(settingsBuilder);
 
+    deleteSinkSettings = settingsBuilder.deleteSinkSettings().build();
+    updateSinkSettings = settingsBuilder.updateSinkSettings().build();
+    deleteExclusionSettings = settingsBuilder.deleteExclusionSettings().build();
+    listBucketsSettings = settingsBuilder.listBucketsSettings().build();
+    getBucketSettings = settingsBuilder.getBucketSettings().build();
+    updateBucketSettings = settingsBuilder.updateBucketSettings().build();
     listSinksSettings = settingsBuilder.listSinksSettings().build();
     getSinkSettings = settingsBuilder.getSinkSettings().build();
     createSinkSettings = settingsBuilder.createSinkSettings().build();
-    updateSinkSettings = settingsBuilder.updateSinkSettings().build();
-    deleteSinkSettings = settingsBuilder.deleteSinkSettings().build();
     listExclusionsSettings = settingsBuilder.listExclusionsSettings().build();
     getExclusionSettings = settingsBuilder.getExclusionSettings().build();
     createExclusionSettings = settingsBuilder.createExclusionSettings().build();
     updateExclusionSettings = settingsBuilder.updateExclusionSettings().build();
-    deleteExclusionSettings = settingsBuilder.deleteExclusionSettings().build();
+    getCmekSettingsSettings = settingsBuilder.getCmekSettingsSettings().build();
+    updateCmekSettingsSettings = settingsBuilder.updateCmekSettingsSettings().build();
   }
+
+  private static final PagedListDescriptor<ListBucketsRequest, ListBucketsResponse, LogBucket>
+      LIST_BUCKETS_PAGE_STR_DESC =
+          new PagedListDescriptor<ListBucketsRequest, ListBucketsResponse, LogBucket>() {
+            @Override
+            public String emptyToken() {
+              return "";
+            }
+
+            @Override
+            public ListBucketsRequest injectToken(ListBucketsRequest payload, String token) {
+              return ListBucketsRequest.newBuilder(payload).setPageToken(token).build();
+            }
+
+            @Override
+            public ListBucketsRequest injectPageSize(ListBucketsRequest payload, int pageSize) {
+              return ListBucketsRequest.newBuilder(payload).setPageSize(pageSize).build();
+            }
+
+            @Override
+            public Integer extractPageSize(ListBucketsRequest payload) {
+              return payload.getPageSize();
+            }
+
+            @Override
+            public String extractNextToken(ListBucketsResponse payload) {
+              return payload.getNextPageToken();
+            }
+
+            @Override
+            public Iterable<LogBucket> extractResources(ListBucketsResponse payload) {
+              return payload.getBucketsList() != null
+                  ? payload.getBucketsList()
+                  : ImmutableList.<LogBucket>of();
+            }
+          };
 
   private static final PagedListDescriptor<ListSinksRequest, ListSinksResponse, LogSink>
       LIST_SINKS_PAGE_STR_DESC =
@@ -327,6 +414,23 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
           };
 
   private static final PagedListResponseFactory<
+          ListBucketsRequest, ListBucketsResponse, ListBucketsPagedResponse>
+      LIST_BUCKETS_PAGE_STR_FACT =
+          new PagedListResponseFactory<
+              ListBucketsRequest, ListBucketsResponse, ListBucketsPagedResponse>() {
+            @Override
+            public ApiFuture<ListBucketsPagedResponse> getFuturePagedResponse(
+                UnaryCallable<ListBucketsRequest, ListBucketsResponse> callable,
+                ListBucketsRequest request,
+                ApiCallContext context,
+                ApiFuture<ListBucketsResponse> futureResponse) {
+              PageContext<ListBucketsRequest, ListBucketsResponse, LogBucket> pageContext =
+                  PageContext.create(callable, LIST_BUCKETS_PAGE_STR_DESC, request, context);
+              return ListBucketsPagedResponse.createAsync(pageContext, futureResponse);
+            }
+          };
+
+  private static final PagedListResponseFactory<
           ListSinksRequest, ListSinksResponse, ListSinksPagedResponse>
       LIST_SINKS_PAGE_STR_FACT =
           new PagedListResponseFactory<
@@ -364,13 +468,19 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
   public static class Builder extends StubSettings.Builder<ConfigServiceV2StubSettings, Builder> {
     private final ImmutableList<UnaryCallSettings.Builder<?, ?>> unaryMethodSettingsBuilders;
 
+    private final UnaryCallSettings.Builder<DeleteSinkRequest, Empty> deleteSinkSettings;
+    private final UnaryCallSettings.Builder<UpdateSinkRequest, LogSink> updateSinkSettings;
+    private final UnaryCallSettings.Builder<DeleteExclusionRequest, Empty> deleteExclusionSettings;
+    private final PagedCallSettings.Builder<
+            ListBucketsRequest, ListBucketsResponse, ListBucketsPagedResponse>
+        listBucketsSettings;
+    private final UnaryCallSettings.Builder<GetBucketRequest, LogBucket> getBucketSettings;
+    private final UnaryCallSettings.Builder<UpdateBucketRequest, LogBucket> updateBucketSettings;
     private final PagedCallSettings.Builder<
             ListSinksRequest, ListSinksResponse, ListSinksPagedResponse>
         listSinksSettings;
     private final UnaryCallSettings.Builder<GetSinkRequest, LogSink> getSinkSettings;
     private final UnaryCallSettings.Builder<CreateSinkRequest, LogSink> createSinkSettings;
-    private final UnaryCallSettings.Builder<UpdateSinkRequest, LogSink> updateSinkSettings;
-    private final UnaryCallSettings.Builder<DeleteSinkRequest, Empty> deleteSinkSettings;
     private final PagedCallSettings.Builder<
             ListExclusionsRequest, ListExclusionsResponse, ListExclusionsPagedResponse>
         listExclusionsSettings;
@@ -379,7 +489,10 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
         createExclusionSettings;
     private final UnaryCallSettings.Builder<UpdateExclusionRequest, LogExclusion>
         updateExclusionSettings;
-    private final UnaryCallSettings.Builder<DeleteExclusionRequest, Empty> deleteExclusionSettings;
+    private final UnaryCallSettings.Builder<GetCmekSettingsRequest, CmekSettings>
+        getCmekSettingsSettings;
+    private final UnaryCallSettings.Builder<UpdateCmekSettingsRequest, CmekSettings>
+        updateCmekSettingsSettings;
 
     private static final ImmutableMap<String, ImmutableSet<StatusCode.Code>>
         RETRYABLE_CODE_DEFINITIONS;
@@ -395,6 +508,11 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
                   StatusCode.Code.INTERNAL,
                   StatusCode.Code.UNAVAILABLE)));
       definitions.put("non_idempotent", ImmutableSet.copyOf(Lists.<StatusCode.Code>newArrayList()));
+      definitions.put(
+          "idempotent2",
+          ImmutableSet.copyOf(
+              Lists.<StatusCode.Code>newArrayList(
+                  StatusCode.Code.DEADLINE_EXCEEDED, StatusCode.Code.UNAVAILABLE)));
       RETRYABLE_CODE_DEFINITIONS = definitions.build();
     }
 
@@ -414,17 +532,6 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
               .setTotalTimeout(Duration.ofMillis(600000L))
               .build();
       definitions.put("default", settings);
-      settings =
-          RetrySettings.newBuilder()
-              .setInitialRetryDelay(Duration.ofMillis(100L))
-              .setRetryDelayMultiplier(1.3)
-              .setMaxRetryDelay(Duration.ofMillis(60000L))
-              .setInitialRpcTimeout(Duration.ofMillis(20000L))
-              .setRpcTimeoutMultiplier(1.0)
-              .setMaxRpcTimeout(Duration.ofMillis(20000L))
-              .setTotalTimeout(Duration.ofMillis(600000L))
-              .build();
-      definitions.put("write_sink", settings);
       RETRY_PARAM_DEFINITIONS = definitions.build();
     }
 
@@ -435,15 +542,23 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
     protected Builder(ClientContext clientContext) {
       super(clientContext);
 
+      deleteSinkSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
+
+      updateSinkSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
+
+      deleteExclusionSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
+
+      listBucketsSettings = PagedCallSettings.newBuilder(LIST_BUCKETS_PAGE_STR_FACT);
+
+      getBucketSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
+
+      updateBucketSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
+
       listSinksSettings = PagedCallSettings.newBuilder(LIST_SINKS_PAGE_STR_FACT);
 
       getSinkSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
 
       createSinkSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
-
-      updateSinkSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
-
-      deleteSinkSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
 
       listExclusionsSettings = PagedCallSettings.newBuilder(LIST_EXCLUSIONS_PAGE_STR_FACT);
 
@@ -453,20 +568,27 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
 
       updateExclusionSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
 
-      deleteExclusionSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
+      getCmekSettingsSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
+
+      updateCmekSettingsSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
 
       unaryMethodSettingsBuilders =
           ImmutableList.<UnaryCallSettings.Builder<?, ?>>of(
+              deleteSinkSettings,
+              updateSinkSettings,
+              deleteExclusionSettings,
+              listBucketsSettings,
+              getBucketSettings,
+              updateBucketSettings,
               listSinksSettings,
               getSinkSettings,
               createSinkSettings,
-              updateSinkSettings,
-              deleteSinkSettings,
               listExclusionsSettings,
               getExclusionSettings,
               createExclusionSettings,
               updateExclusionSettings,
-              deleteExclusionSettings);
+              getCmekSettingsSettings,
+              updateCmekSettingsSettings);
 
       initDefaults(this);
     }
@@ -483,18 +605,8 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
     private static Builder initDefaults(Builder builder) {
 
       builder
-          .listSinksSettings()
+          .deleteSinkSettings()
           .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent"))
-          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
-
-      builder
-          .getSinkSettings()
-          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent"))
-          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
-
-      builder
-          .createSinkSettings()
-          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("non_idempotent"))
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
 
       builder
@@ -503,18 +615,48 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
 
       builder
-          .deleteSinkSettings()
+          .deleteExclusionSettings()
           .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent"))
+          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
+
+      builder
+          .listBucketsSettings()
+          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent2"))
+          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
+
+      builder
+          .getBucketSettings()
+          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent2"))
+          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
+
+      builder
+          .updateBucketSettings()
+          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("non_idempotent"))
+          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
+
+      builder
+          .listSinksSettings()
+          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent2"))
+          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
+
+      builder
+          .getSinkSettings()
+          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent2"))
+          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
+
+      builder
+          .createSinkSettings()
+          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("non_idempotent"))
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
 
       builder
           .listExclusionsSettings()
-          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent"))
+          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent2"))
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
 
       builder
           .getExclusionSettings()
-          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent"))
+          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent2"))
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
 
       builder
@@ -528,8 +670,13 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
 
       builder
-          .deleteExclusionSettings()
-          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent"))
+          .getCmekSettingsSettings()
+          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent2"))
+          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
+
+      builder
+          .updateCmekSettingsSettings()
+          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("non_idempotent"))
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
 
       return builder;
@@ -538,29 +685,39 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
     protected Builder(ConfigServiceV2StubSettings settings) {
       super(settings);
 
+      deleteSinkSettings = settings.deleteSinkSettings.toBuilder();
+      updateSinkSettings = settings.updateSinkSettings.toBuilder();
+      deleteExclusionSettings = settings.deleteExclusionSettings.toBuilder();
+      listBucketsSettings = settings.listBucketsSettings.toBuilder();
+      getBucketSettings = settings.getBucketSettings.toBuilder();
+      updateBucketSettings = settings.updateBucketSettings.toBuilder();
       listSinksSettings = settings.listSinksSettings.toBuilder();
       getSinkSettings = settings.getSinkSettings.toBuilder();
       createSinkSettings = settings.createSinkSettings.toBuilder();
-      updateSinkSettings = settings.updateSinkSettings.toBuilder();
-      deleteSinkSettings = settings.deleteSinkSettings.toBuilder();
       listExclusionsSettings = settings.listExclusionsSettings.toBuilder();
       getExclusionSettings = settings.getExclusionSettings.toBuilder();
       createExclusionSettings = settings.createExclusionSettings.toBuilder();
       updateExclusionSettings = settings.updateExclusionSettings.toBuilder();
-      deleteExclusionSettings = settings.deleteExclusionSettings.toBuilder();
+      getCmekSettingsSettings = settings.getCmekSettingsSettings.toBuilder();
+      updateCmekSettingsSettings = settings.updateCmekSettingsSettings.toBuilder();
 
       unaryMethodSettingsBuilders =
           ImmutableList.<UnaryCallSettings.Builder<?, ?>>of(
+              deleteSinkSettings,
+              updateSinkSettings,
+              deleteExclusionSettings,
+              listBucketsSettings,
+              getBucketSettings,
+              updateBucketSettings,
               listSinksSettings,
               getSinkSettings,
               createSinkSettings,
-              updateSinkSettings,
-              deleteSinkSettings,
               listExclusionsSettings,
               getExclusionSettings,
               createExclusionSettings,
               updateExclusionSettings,
-              deleteExclusionSettings);
+              getCmekSettingsSettings,
+              updateCmekSettingsSettings);
     }
 
     // NEXT_MAJOR_VER: remove 'throws Exception'
@@ -579,6 +736,38 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
       return unaryMethodSettingsBuilders;
     }
 
+    /** Returns the builder for the settings used for calls to deleteSink. */
+    public UnaryCallSettings.Builder<DeleteSinkRequest, Empty> deleteSinkSettings() {
+      return deleteSinkSettings;
+    }
+
+    /** Returns the builder for the settings used for calls to updateSink. */
+    public UnaryCallSettings.Builder<UpdateSinkRequest, LogSink> updateSinkSettings() {
+      return updateSinkSettings;
+    }
+
+    /** Returns the builder for the settings used for calls to deleteExclusion. */
+    public UnaryCallSettings.Builder<DeleteExclusionRequest, Empty> deleteExclusionSettings() {
+      return deleteExclusionSettings;
+    }
+
+    /** Returns the builder for the settings used for calls to listBuckets. */
+    public PagedCallSettings.Builder<
+            ListBucketsRequest, ListBucketsResponse, ListBucketsPagedResponse>
+        listBucketsSettings() {
+      return listBucketsSettings;
+    }
+
+    /** Returns the builder for the settings used for calls to getBucket. */
+    public UnaryCallSettings.Builder<GetBucketRequest, LogBucket> getBucketSettings() {
+      return getBucketSettings;
+    }
+
+    /** Returns the builder for the settings used for calls to updateBucket. */
+    public UnaryCallSettings.Builder<UpdateBucketRequest, LogBucket> updateBucketSettings() {
+      return updateBucketSettings;
+    }
+
     /** Returns the builder for the settings used for calls to listSinks. */
     public PagedCallSettings.Builder<ListSinksRequest, ListSinksResponse, ListSinksPagedResponse>
         listSinksSettings() {
@@ -593,16 +782,6 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
     /** Returns the builder for the settings used for calls to createSink. */
     public UnaryCallSettings.Builder<CreateSinkRequest, LogSink> createSinkSettings() {
       return createSinkSettings;
-    }
-
-    /** Returns the builder for the settings used for calls to updateSink. */
-    public UnaryCallSettings.Builder<UpdateSinkRequest, LogSink> updateSinkSettings() {
-      return updateSinkSettings;
-    }
-
-    /** Returns the builder for the settings used for calls to deleteSink. */
-    public UnaryCallSettings.Builder<DeleteSinkRequest, Empty> deleteSinkSettings() {
-      return deleteSinkSettings;
     }
 
     /** Returns the builder for the settings used for calls to listExclusions. */
@@ -629,9 +808,16 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
       return updateExclusionSettings;
     }
 
-    /** Returns the builder for the settings used for calls to deleteExclusion. */
-    public UnaryCallSettings.Builder<DeleteExclusionRequest, Empty> deleteExclusionSettings() {
-      return deleteExclusionSettings;
+    /** Returns the builder for the settings used for calls to getCmekSettings. */
+    public UnaryCallSettings.Builder<GetCmekSettingsRequest, CmekSettings>
+        getCmekSettingsSettings() {
+      return getCmekSettingsSettings;
+    }
+
+    /** Returns the builder for the settings used for calls to updateCmekSettings. */
+    public UnaryCallSettings.Builder<UpdateCmekSettingsRequest, CmekSettings>
+        updateCmekSettingsSettings() {
+      return updateCmekSettingsSettings;
     }
 
     @Override

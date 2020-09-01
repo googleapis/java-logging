@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,11 @@ public interface CreateExclusionRequestOrBuilder
    * Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
    * </pre>
    *
-   * <code>string parent = 1;</code>
+   * <code>
+   * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The parent.
    */
   java.lang.String getParent();
   /**
@@ -50,7 +54,11 @@ public interface CreateExclusionRequestOrBuilder
    * Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
    * </pre>
    *
-   * <code>string parent = 1;</code>
+   * <code>
+   * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The bytes for parent.
    */
   com.google.protobuf.ByteString getParentBytes();
 
@@ -62,7 +70,10 @@ public interface CreateExclusionRequestOrBuilder
    * that is not already used in the parent resource.
    * </pre>
    *
-   * <code>.google.logging.v2.LogExclusion exclusion = 2;</code>
+   * <code>.google.logging.v2.LogExclusion exclusion = 2 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
+   *
+   * @return Whether the exclusion field is set.
    */
   boolean hasExclusion();
   /**
@@ -73,7 +84,10 @@ public interface CreateExclusionRequestOrBuilder
    * that is not already used in the parent resource.
    * </pre>
    *
-   * <code>.google.logging.v2.LogExclusion exclusion = 2;</code>
+   * <code>.google.logging.v2.LogExclusion exclusion = 2 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
+   *
+   * @return The exclusion.
    */
   com.google.logging.v2.LogExclusion getExclusion();
   /**
@@ -84,7 +98,8 @@ public interface CreateExclusionRequestOrBuilder
    * that is not already used in the parent resource.
    * </pre>
    *
-   * <code>.google.logging.v2.LogExclusion exclusion = 2;</code>
+   * <code>.google.logging.v2.LogExclusion exclusion = 2 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
    */
   com.google.logging.v2.LogExclusionOrBuilder getExclusionOrBuilder();
 }

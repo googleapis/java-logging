@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,11 +38,16 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
   }
 
   private ListLogEntriesRequest() {
-    projectIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     resourceNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     filter_ = "";
     orderBy_ = "";
     pageToken_ = "";
+  }
+
+  @java.lang.Override
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(UnusedPrivateParameter unused) {
+    return new ListLogEntriesRequest();
   }
 
   @java.lang.Override
@@ -69,16 +74,6 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
           case 0:
             done = true;
             break;
-          case 10:
-            {
-              java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                projectIds_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              projectIds_.add(s);
-              break;
-            }
           case 18:
             {
               java.lang.String s = input.readStringRequireUtf8();
@@ -108,9 +103,9 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
           case 66:
             {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 resourceNames_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000001;
               }
               resourceNames_.add(s);
               break;
@@ -130,9 +125,6 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
       throw new com.google.protobuf.InvalidProtocolBufferException(e).setUnfinishedMessage(this);
     } finally {
       if (((mutable_bitField0_ & 0x00000001) != 0)) {
-        projectIds_ = projectIds_.getUnmodifiableView();
-      }
-      if (((mutable_bitField0_ & 0x00000002) != 0)) {
         resourceNames_ = resourceNames_.getUnmodifiableView();
       }
       this.unknownFields = unknownFields.build();
@@ -155,70 +147,6 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
             com.google.logging.v2.ListLogEntriesRequest.Builder.class);
   }
 
-  private int bitField0_;
-  public static final int PROJECT_IDS_FIELD_NUMBER = 1;
-  private com.google.protobuf.LazyStringList projectIds_;
-  /**
-   *
-   *
-   * <pre>
-   * Deprecated. Use `resource_names` instead.  One or more project identifiers
-   * or project numbers from which to retrieve log entries.  Example:
-   * `"my-project-1A"`.
-   * </pre>
-   *
-   * <code>repeated string project_ids = 1 [deprecated = true];</code>
-   */
-  @java.lang.Deprecated
-  public com.google.protobuf.ProtocolStringList getProjectIdsList() {
-    return projectIds_;
-  }
-  /**
-   *
-   *
-   * <pre>
-   * Deprecated. Use `resource_names` instead.  One or more project identifiers
-   * or project numbers from which to retrieve log entries.  Example:
-   * `"my-project-1A"`.
-   * </pre>
-   *
-   * <code>repeated string project_ids = 1 [deprecated = true];</code>
-   */
-  @java.lang.Deprecated
-  public int getProjectIdsCount() {
-    return projectIds_.size();
-  }
-  /**
-   *
-   *
-   * <pre>
-   * Deprecated. Use `resource_names` instead.  One or more project identifiers
-   * or project numbers from which to retrieve log entries.  Example:
-   * `"my-project-1A"`.
-   * </pre>
-   *
-   * <code>repeated string project_ids = 1 [deprecated = true];</code>
-   */
-  @java.lang.Deprecated
-  public java.lang.String getProjectIds(int index) {
-    return projectIds_.get(index);
-  }
-  /**
-   *
-   *
-   * <pre>
-   * Deprecated. Use `resource_names` instead.  One or more project identifiers
-   * or project numbers from which to retrieve log entries.  Example:
-   * `"my-project-1A"`.
-   * </pre>
-   *
-   * <code>repeated string project_ids = 1 [deprecated = true];</code>
-   */
-  @java.lang.Deprecated
-  public com.google.protobuf.ByteString getProjectIdsBytes(int index) {
-    return projectIds_.getByteString(index);
-  }
-
   public static final int RESOURCE_NAMES_FIELD_NUMBER = 8;
   private com.google.protobuf.LazyStringList resourceNames_;
   /**
@@ -234,7 +162,11 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    * Projects listed in the `project_ids` field are added to this list.
    * </pre>
    *
-   * <code>repeated string resource_names = 8;</code>
+   * <code>
+   * repeated string resource_names = 8 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return A list containing the resourceNames.
    */
   public com.google.protobuf.ProtocolStringList getResourceNamesList() {
     return resourceNames_;
@@ -252,7 +184,11 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    * Projects listed in the `project_ids` field are added to this list.
    * </pre>
    *
-   * <code>repeated string resource_names = 8;</code>
+   * <code>
+   * repeated string resource_names = 8 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The count of resourceNames.
    */
   public int getResourceNamesCount() {
     return resourceNames_.size();
@@ -270,7 +206,12 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    * Projects listed in the `project_ids` field are added to this list.
    * </pre>
    *
-   * <code>repeated string resource_names = 8;</code>
+   * <code>
+   * repeated string resource_names = 8 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @param index The index of the element to return.
+   * @return The resourceNames at the given index.
    */
   public java.lang.String getResourceNames(int index) {
     return resourceNames_.get(index);
@@ -288,7 +229,12 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    * Projects listed in the `project_ids` field are added to this list.
    * </pre>
    *
-   * <code>repeated string resource_names = 8;</code>
+   * <code>
+   * repeated string resource_names = 8 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @param index The index of the value to return.
+   * @return The bytes of the resourceNames at the given index.
    */
   public com.google.protobuf.ByteString getResourceNamesBytes(int index) {
     return resourceNames_.getByteString(index);
@@ -301,7 +247,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    *
    * <pre>
    * Optional. A filter that chooses which log entries to return.  See [Advanced
-   * Logs Filters](/logging/docs/view/advanced_filters).  Only log entries that
+   * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).  Only log entries that
    * match the filter are returned.  An empty filter matches all log entries in
    * the resources listed in `resource_names`. Referencing a parent resource
    * that is not listed in `resource_names` will cause the filter to return no
@@ -309,8 +255,11 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    * The maximum length of the filter is 20000 characters.
    * </pre>
    *
-   * <code>string filter = 2;</code>
+   * <code>string filter = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The filter.
    */
+  @java.lang.Override
   public java.lang.String getFilter() {
     java.lang.Object ref = filter_;
     if (ref instanceof java.lang.String) {
@@ -327,7 +276,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    *
    * <pre>
    * Optional. A filter that chooses which log entries to return.  See [Advanced
-   * Logs Filters](/logging/docs/view/advanced_filters).  Only log entries that
+   * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).  Only log entries that
    * match the filter are returned.  An empty filter matches all log entries in
    * the resources listed in `resource_names`. Referencing a parent resource
    * that is not listed in `resource_names` will cause the filter to return no
@@ -335,8 +284,11 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    * The maximum length of the filter is 20000 characters.
    * </pre>
    *
-   * <code>string filter = 2;</code>
+   * <code>string filter = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The bytes for filter.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getFilterBytes() {
     java.lang.Object ref = filter_;
     if (ref instanceof java.lang.String) {
@@ -363,8 +315,11 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    * timestamps are returned in order of their `insert_id` values.
    * </pre>
    *
-   * <code>string order_by = 3;</code>
+   * <code>string order_by = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The orderBy.
    */
+  @java.lang.Override
   public java.lang.String getOrderBy() {
     java.lang.Object ref = orderBy_;
     if (ref instanceof java.lang.String) {
@@ -388,8 +343,11 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    * timestamps are returned in order of their `insert_id` values.
    * </pre>
    *
-   * <code>string order_by = 3;</code>
+   * <code>string order_by = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The bytes for orderBy.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getOrderByBytes() {
     java.lang.Object ref = orderBy_;
     if (ref instanceof java.lang.String) {
@@ -413,8 +371,11 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    * response indicates that more results might be available.
    * </pre>
    *
-   * <code>int32 page_size = 4;</code>
+   * <code>int32 page_size = 4 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The pageSize.
    */
+  @java.lang.Override
   public int getPageSize() {
     return pageSize_;
   }
@@ -431,8 +392,11 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    * parameters should be identical to those in the previous call.
    * </pre>
    *
-   * <code>string page_token = 5;</code>
+   * <code>string page_token = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The pageToken.
    */
+  @java.lang.Override
   public java.lang.String getPageToken() {
     java.lang.Object ref = pageToken_;
     if (ref instanceof java.lang.String) {
@@ -454,8 +418,11 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
    * parameters should be identical to those in the previous call.
    * </pre>
    *
-   * <code>string page_token = 5;</code>
+   * <code>string page_token = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The bytes for pageToken.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getPageTokenBytes() {
     java.lang.Object ref = pageToken_;
     if (ref instanceof java.lang.String) {
@@ -482,9 +449,6 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
 
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output) throws java.io.IOException {
-    for (int i = 0; i < projectIds_.size(); i++) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, projectIds_.getRaw(i));
-    }
     if (!getFilterBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, filter_);
     }
@@ -509,14 +473,6 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
     if (size != -1) return size;
 
     size = 0;
-    {
-      int dataSize = 0;
-      for (int i = 0; i < projectIds_.size(); i++) {
-        dataSize += computeStringSizeNoTag(projectIds_.getRaw(i));
-      }
-      size += dataSize;
-      size += 1 * getProjectIdsList().size();
-    }
     if (!getFilterBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, filter_);
     }
@@ -553,7 +509,6 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
     com.google.logging.v2.ListLogEntriesRequest other =
         (com.google.logging.v2.ListLogEntriesRequest) obj;
 
-    if (!getProjectIdsList().equals(other.getProjectIdsList())) return false;
     if (!getResourceNamesList().equals(other.getResourceNamesList())) return false;
     if (!getFilter().equals(other.getFilter())) return false;
     if (!getOrderBy().equals(other.getOrderBy())) return false;
@@ -570,10 +525,6 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    if (getProjectIdsCount() > 0) {
-      hash = (37 * hash) + PROJECT_IDS_FIELD_NUMBER;
-      hash = (53 * hash) + getProjectIdsList().hashCode();
-    }
     if (getResourceNamesCount() > 0) {
       hash = (37 * hash) + RESOURCE_NAMES_FIELD_NUMBER;
       hash = (53 * hash) + getResourceNamesList().hashCode();
@@ -731,10 +682,8 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      projectIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      bitField0_ = (bitField0_ & ~0x00000001);
       resourceNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      bitField0_ = (bitField0_ & ~0x00000002);
+      bitField0_ = (bitField0_ & ~0x00000001);
       filter_ = "";
 
       orderBy_ = "";
@@ -771,22 +720,15 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
       com.google.logging.v2.ListLogEntriesRequest result =
           new com.google.logging.v2.ListLogEntriesRequest(this);
       int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
       if (((bitField0_ & 0x00000001) != 0)) {
-        projectIds_ = projectIds_.getUnmodifiableView();
-        bitField0_ = (bitField0_ & ~0x00000001);
-      }
-      result.projectIds_ = projectIds_;
-      if (((bitField0_ & 0x00000002) != 0)) {
         resourceNames_ = resourceNames_.getUnmodifiableView();
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
       }
       result.resourceNames_ = resourceNames_;
       result.filter_ = filter_;
       result.orderBy_ = orderBy_;
       result.pageSize_ = pageSize_;
       result.pageToken_ = pageToken_;
-      result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
     }
@@ -836,20 +778,10 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
 
     public Builder mergeFrom(com.google.logging.v2.ListLogEntriesRequest other) {
       if (other == com.google.logging.v2.ListLogEntriesRequest.getDefaultInstance()) return this;
-      if (!other.projectIds_.isEmpty()) {
-        if (projectIds_.isEmpty()) {
-          projectIds_ = other.projectIds_;
-          bitField0_ = (bitField0_ & ~0x00000001);
-        } else {
-          ensureProjectIdsIsMutable();
-          projectIds_.addAll(other.projectIds_);
-        }
-        onChanged();
-      }
       if (!other.resourceNames_.isEmpty()) {
         if (resourceNames_.isEmpty()) {
           resourceNames_ = other.resourceNames_;
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
           ensureResourceNamesIsMutable();
           resourceNames_.addAll(other.resourceNames_);
@@ -902,183 +834,13 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
 
     private int bitField0_;
 
-    private com.google.protobuf.LazyStringList projectIds_ =
-        com.google.protobuf.LazyStringArrayList.EMPTY;
-
-    private void ensureProjectIdsIsMutable() {
-      if (!((bitField0_ & 0x00000001) != 0)) {
-        projectIds_ = new com.google.protobuf.LazyStringArrayList(projectIds_);
-        bitField0_ |= 0x00000001;
-      }
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Deprecated. Use `resource_names` instead.  One or more project identifiers
-     * or project numbers from which to retrieve log entries.  Example:
-     * `"my-project-1A"`.
-     * </pre>
-     *
-     * <code>repeated string project_ids = 1 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public com.google.protobuf.ProtocolStringList getProjectIdsList() {
-      return projectIds_.getUnmodifiableView();
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Deprecated. Use `resource_names` instead.  One or more project identifiers
-     * or project numbers from which to retrieve log entries.  Example:
-     * `"my-project-1A"`.
-     * </pre>
-     *
-     * <code>repeated string project_ids = 1 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public int getProjectIdsCount() {
-      return projectIds_.size();
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Deprecated. Use `resource_names` instead.  One or more project identifiers
-     * or project numbers from which to retrieve log entries.  Example:
-     * `"my-project-1A"`.
-     * </pre>
-     *
-     * <code>repeated string project_ids = 1 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public java.lang.String getProjectIds(int index) {
-      return projectIds_.get(index);
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Deprecated. Use `resource_names` instead.  One or more project identifiers
-     * or project numbers from which to retrieve log entries.  Example:
-     * `"my-project-1A"`.
-     * </pre>
-     *
-     * <code>repeated string project_ids = 1 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public com.google.protobuf.ByteString getProjectIdsBytes(int index) {
-      return projectIds_.getByteString(index);
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Deprecated. Use `resource_names` instead.  One or more project identifiers
-     * or project numbers from which to retrieve log entries.  Example:
-     * `"my-project-1A"`.
-     * </pre>
-     *
-     * <code>repeated string project_ids = 1 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public Builder setProjectIds(int index, java.lang.String value) {
-      if (value == null) {
-        throw new NullPointerException();
-      }
-      ensureProjectIdsIsMutable();
-      projectIds_.set(index, value);
-      onChanged();
-      return this;
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Deprecated. Use `resource_names` instead.  One or more project identifiers
-     * or project numbers from which to retrieve log entries.  Example:
-     * `"my-project-1A"`.
-     * </pre>
-     *
-     * <code>repeated string project_ids = 1 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public Builder addProjectIds(java.lang.String value) {
-      if (value == null) {
-        throw new NullPointerException();
-      }
-      ensureProjectIdsIsMutable();
-      projectIds_.add(value);
-      onChanged();
-      return this;
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Deprecated. Use `resource_names` instead.  One or more project identifiers
-     * or project numbers from which to retrieve log entries.  Example:
-     * `"my-project-1A"`.
-     * </pre>
-     *
-     * <code>repeated string project_ids = 1 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public Builder addAllProjectIds(java.lang.Iterable<java.lang.String> values) {
-      ensureProjectIdsIsMutable();
-      com.google.protobuf.AbstractMessageLite.Builder.addAll(values, projectIds_);
-      onChanged();
-      return this;
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Deprecated. Use `resource_names` instead.  One or more project identifiers
-     * or project numbers from which to retrieve log entries.  Example:
-     * `"my-project-1A"`.
-     * </pre>
-     *
-     * <code>repeated string project_ids = 1 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public Builder clearProjectIds() {
-      projectIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      bitField0_ = (bitField0_ & ~0x00000001);
-      onChanged();
-      return this;
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Deprecated. Use `resource_names` instead.  One or more project identifiers
-     * or project numbers from which to retrieve log entries.  Example:
-     * `"my-project-1A"`.
-     * </pre>
-     *
-     * <code>repeated string project_ids = 1 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated
-    public Builder addProjectIdsBytes(com.google.protobuf.ByteString value) {
-      if (value == null) {
-        throw new NullPointerException();
-      }
-      checkByteStringIsUtf8(value);
-      ensureProjectIdsIsMutable();
-      projectIds_.add(value);
-      onChanged();
-      return this;
-    }
-
     private com.google.protobuf.LazyStringList resourceNames_ =
         com.google.protobuf.LazyStringArrayList.EMPTY;
 
     private void ensureResourceNamesIsMutable() {
-      if (!((bitField0_ & 0x00000002) != 0)) {
+      if (!((bitField0_ & 0x00000001) != 0)) {
         resourceNames_ = new com.google.protobuf.LazyStringArrayList(resourceNames_);
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000001;
       }
     }
     /**
@@ -1094,7 +856,11 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * Projects listed in the `project_ids` field are added to this list.
      * </pre>
      *
-     * <code>repeated string resource_names = 8;</code>
+     * <code>
+     * repeated string resource_names = 8 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return A list containing the resourceNames.
      */
     public com.google.protobuf.ProtocolStringList getResourceNamesList() {
       return resourceNames_.getUnmodifiableView();
@@ -1112,7 +878,11 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * Projects listed in the `project_ids` field are added to this list.
      * </pre>
      *
-     * <code>repeated string resource_names = 8;</code>
+     * <code>
+     * repeated string resource_names = 8 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return The count of resourceNames.
      */
     public int getResourceNamesCount() {
       return resourceNames_.size();
@@ -1130,7 +900,12 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * Projects listed in the `project_ids` field are added to this list.
      * </pre>
      *
-     * <code>repeated string resource_names = 8;</code>
+     * <code>
+     * repeated string resource_names = 8 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @param index The index of the element to return.
+     * @return The resourceNames at the given index.
      */
     public java.lang.String getResourceNames(int index) {
       return resourceNames_.get(index);
@@ -1148,7 +923,12 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * Projects listed in the `project_ids` field are added to this list.
      * </pre>
      *
-     * <code>repeated string resource_names = 8;</code>
+     * <code>
+     * repeated string resource_names = 8 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @param index The index of the value to return.
+     * @return The bytes of the resourceNames at the given index.
      */
     public com.google.protobuf.ByteString getResourceNamesBytes(int index) {
       return resourceNames_.getByteString(index);
@@ -1166,7 +946,13 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * Projects listed in the `project_ids` field are added to this list.
      * </pre>
      *
-     * <code>repeated string resource_names = 8;</code>
+     * <code>
+     * repeated string resource_names = 8 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @param index The index to set the value at.
+     * @param value The resourceNames to set.
+     * @return This builder for chaining.
      */
     public Builder setResourceNames(int index, java.lang.String value) {
       if (value == null) {
@@ -1190,7 +976,12 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * Projects listed in the `project_ids` field are added to this list.
      * </pre>
      *
-     * <code>repeated string resource_names = 8;</code>
+     * <code>
+     * repeated string resource_names = 8 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @param value The resourceNames to add.
+     * @return This builder for chaining.
      */
     public Builder addResourceNames(java.lang.String value) {
       if (value == null) {
@@ -1214,7 +1005,12 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * Projects listed in the `project_ids` field are added to this list.
      * </pre>
      *
-     * <code>repeated string resource_names = 8;</code>
+     * <code>
+     * repeated string resource_names = 8 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @param values The resourceNames to add.
+     * @return This builder for chaining.
      */
     public Builder addAllResourceNames(java.lang.Iterable<java.lang.String> values) {
       ensureResourceNamesIsMutable();
@@ -1235,11 +1031,15 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * Projects listed in the `project_ids` field are added to this list.
      * </pre>
      *
-     * <code>repeated string resource_names = 8;</code>
+     * <code>
+     * repeated string resource_names = 8 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearResourceNames() {
       resourceNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      bitField0_ = (bitField0_ & ~0x00000002);
+      bitField0_ = (bitField0_ & ~0x00000001);
       onChanged();
       return this;
     }
@@ -1256,7 +1056,12 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * Projects listed in the `project_ids` field are added to this list.
      * </pre>
      *
-     * <code>repeated string resource_names = 8;</code>
+     * <code>
+     * repeated string resource_names = 8 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @param value The bytes of the resourceNames to add.
+     * @return This builder for chaining.
      */
     public Builder addResourceNamesBytes(com.google.protobuf.ByteString value) {
       if (value == null) {
@@ -1275,7 +1080,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      *
      * <pre>
      * Optional. A filter that chooses which log entries to return.  See [Advanced
-     * Logs Filters](/logging/docs/view/advanced_filters).  Only log entries that
+     * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).  Only log entries that
      * match the filter are returned.  An empty filter matches all log entries in
      * the resources listed in `resource_names`. Referencing a parent resource
      * that is not listed in `resource_names` will cause the filter to return no
@@ -1283,7 +1088,9 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * The maximum length of the filter is 20000 characters.
      * </pre>
      *
-     * <code>string filter = 2;</code>
+     * <code>string filter = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The filter.
      */
     public java.lang.String getFilter() {
       java.lang.Object ref = filter_;
@@ -1301,7 +1108,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      *
      * <pre>
      * Optional. A filter that chooses which log entries to return.  See [Advanced
-     * Logs Filters](/logging/docs/view/advanced_filters).  Only log entries that
+     * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).  Only log entries that
      * match the filter are returned.  An empty filter matches all log entries in
      * the resources listed in `resource_names`. Referencing a parent resource
      * that is not listed in `resource_names` will cause the filter to return no
@@ -1309,7 +1116,9 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * The maximum length of the filter is 20000 characters.
      * </pre>
      *
-     * <code>string filter = 2;</code>
+     * <code>string filter = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The bytes for filter.
      */
     public com.google.protobuf.ByteString getFilterBytes() {
       java.lang.Object ref = filter_;
@@ -1327,7 +1136,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      *
      * <pre>
      * Optional. A filter that chooses which log entries to return.  See [Advanced
-     * Logs Filters](/logging/docs/view/advanced_filters).  Only log entries that
+     * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).  Only log entries that
      * match the filter are returned.  An empty filter matches all log entries in
      * the resources listed in `resource_names`. Referencing a parent resource
      * that is not listed in `resource_names` will cause the filter to return no
@@ -1335,7 +1144,10 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * The maximum length of the filter is 20000 characters.
      * </pre>
      *
-     * <code>string filter = 2;</code>
+     * <code>string filter = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The filter to set.
+     * @return This builder for chaining.
      */
     public Builder setFilter(java.lang.String value) {
       if (value == null) {
@@ -1351,7 +1163,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      *
      * <pre>
      * Optional. A filter that chooses which log entries to return.  See [Advanced
-     * Logs Filters](/logging/docs/view/advanced_filters).  Only log entries that
+     * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).  Only log entries that
      * match the filter are returned.  An empty filter matches all log entries in
      * the resources listed in `resource_names`. Referencing a parent resource
      * that is not listed in `resource_names` will cause the filter to return no
@@ -1359,7 +1171,9 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * The maximum length of the filter is 20000 characters.
      * </pre>
      *
-     * <code>string filter = 2;</code>
+     * <code>string filter = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearFilter() {
 
@@ -1372,7 +1186,7 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      *
      * <pre>
      * Optional. A filter that chooses which log entries to return.  See [Advanced
-     * Logs Filters](/logging/docs/view/advanced_filters).  Only log entries that
+     * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).  Only log entries that
      * match the filter are returned.  An empty filter matches all log entries in
      * the resources listed in `resource_names`. Referencing a parent resource
      * that is not listed in `resource_names` will cause the filter to return no
@@ -1380,7 +1194,10 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * The maximum length of the filter is 20000 characters.
      * </pre>
      *
-     * <code>string filter = 2;</code>
+     * <code>string filter = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The bytes for filter to set.
+     * @return This builder for chaining.
      */
     public Builder setFilterBytes(com.google.protobuf.ByteString value) {
       if (value == null) {
@@ -1406,7 +1223,9 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * timestamps are returned in order of their `insert_id` values.
      * </pre>
      *
-     * <code>string order_by = 3;</code>
+     * <code>string order_by = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The orderBy.
      */
     public java.lang.String getOrderBy() {
       java.lang.Object ref = orderBy_;
@@ -1431,7 +1250,9 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * timestamps are returned in order of their `insert_id` values.
      * </pre>
      *
-     * <code>string order_by = 3;</code>
+     * <code>string order_by = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The bytes for orderBy.
      */
     public com.google.protobuf.ByteString getOrderByBytes() {
       java.lang.Object ref = orderBy_;
@@ -1456,7 +1277,10 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * timestamps are returned in order of their `insert_id` values.
      * </pre>
      *
-     * <code>string order_by = 3;</code>
+     * <code>string order_by = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The orderBy to set.
+     * @return This builder for chaining.
      */
     public Builder setOrderBy(java.lang.String value) {
       if (value == null) {
@@ -1479,7 +1303,9 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * timestamps are returned in order of their `insert_id` values.
      * </pre>
      *
-     * <code>string order_by = 3;</code>
+     * <code>string order_by = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearOrderBy() {
 
@@ -1499,7 +1325,10 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * timestamps are returned in order of their `insert_id` values.
      * </pre>
      *
-     * <code>string order_by = 3;</code>
+     * <code>string order_by = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The bytes for orderBy to set.
+     * @return This builder for chaining.
      */
     public Builder setOrderByBytes(com.google.protobuf.ByteString value) {
       if (value == null) {
@@ -1522,8 +1351,11 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * response indicates that more results might be available.
      * </pre>
      *
-     * <code>int32 page_size = 4;</code>
+     * <code>int32 page_size = 4 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The pageSize.
      */
+    @java.lang.Override
     public int getPageSize() {
       return pageSize_;
     }
@@ -1536,7 +1368,10 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * response indicates that more results might be available.
      * </pre>
      *
-     * <code>int32 page_size = 4;</code>
+     * <code>int32 page_size = 4 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The pageSize to set.
+     * @return This builder for chaining.
      */
     public Builder setPageSize(int value) {
 
@@ -1553,7 +1388,9 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * response indicates that more results might be available.
      * </pre>
      *
-     * <code>int32 page_size = 4;</code>
+     * <code>int32 page_size = 4 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearPageSize() {
 
@@ -1573,7 +1410,9 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * parameters should be identical to those in the previous call.
      * </pre>
      *
-     * <code>string page_token = 5;</code>
+     * <code>string page_token = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The pageToken.
      */
     public java.lang.String getPageToken() {
       java.lang.Object ref = pageToken_;
@@ -1596,7 +1435,9 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * parameters should be identical to those in the previous call.
      * </pre>
      *
-     * <code>string page_token = 5;</code>
+     * <code>string page_token = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The bytes for pageToken.
      */
     public com.google.protobuf.ByteString getPageTokenBytes() {
       java.lang.Object ref = pageToken_;
@@ -1619,7 +1460,10 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * parameters should be identical to those in the previous call.
      * </pre>
      *
-     * <code>string page_token = 5;</code>
+     * <code>string page_token = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The pageToken to set.
+     * @return This builder for chaining.
      */
     public Builder setPageToken(java.lang.String value) {
       if (value == null) {
@@ -1640,7 +1484,9 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * parameters should be identical to those in the previous call.
      * </pre>
      *
-     * <code>string page_token = 5;</code>
+     * <code>string page_token = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearPageToken() {
 
@@ -1658,7 +1504,10 @@ public final class ListLogEntriesRequest extends com.google.protobuf.GeneratedMe
      * parameters should be identical to those in the previous call.
      * </pre>
      *
-     * <code>string page_token = 5;</code>
+     * <code>string page_token = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The bytes for pageToken to set.
+     * @return This builder for chaining.
      */
     public Builder setPageTokenBytes(com.google.protobuf.ByteString value) {
       if (value == null) {

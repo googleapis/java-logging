@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,6 +42,12 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
   }
 
   @java.lang.Override
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(UnusedPrivateParameter unused) {
+    return new CreateSinkRequest();
+  }
+
+  @java.lang.Override
   public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
     return this.unknownFields;
   }
@@ -54,7 +60,6 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
     if (extensionRegistry == null) {
       throw new java.lang.NullPointerException();
     }
-    int mutable_bitField0_ = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -139,8 +144,13 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
    * Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
    * </pre>
    *
-   * <code>string parent = 1;</code>
+   * <code>
+   * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The parent.
    */
+  @java.lang.Override
   public java.lang.String getParent() {
     java.lang.Object ref = parent_;
     if (ref instanceof java.lang.String) {
@@ -164,8 +174,13 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
    * Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
    * </pre>
    *
-   * <code>string parent = 1;</code>
+   * <code>
+   * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The bytes for parent.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getParentBytes() {
     java.lang.Object ref = parent_;
     if (ref instanceof java.lang.String) {
@@ -188,8 +203,11 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
    * is not already in use.
    * </pre>
    *
-   * <code>.google.logging.v2.LogSink sink = 2;</code>
+   * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
+   *
+   * @return Whether the sink field is set.
    */
+  @java.lang.Override
   public boolean hasSink() {
     return sink_ != null;
   }
@@ -201,8 +219,11 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
    * is not already in use.
    * </pre>
    *
-   * <code>.google.logging.v2.LogSink sink = 2;</code>
+   * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
+   *
+   * @return The sink.
    */
+  @java.lang.Override
   public com.google.logging.v2.LogSink getSink() {
     return sink_ == null ? com.google.logging.v2.LogSink.getDefaultInstance() : sink_;
   }
@@ -214,8 +235,9 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
    * is not already in use.
    * </pre>
    *
-   * <code>.google.logging.v2.LogSink sink = 2;</code>
+   * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
    */
+  @java.lang.Override
   public com.google.logging.v2.LogSinkOrBuilder getSinkOrBuilder() {
     return getSink();
   }
@@ -238,8 +260,11 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
    * more information, see `writer_identity` in [LogSink][google.logging.v2.LogSink].
    * </pre>
    *
-   * <code>bool unique_writer_identity = 3;</code>
+   * <code>bool unique_writer_identity = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The uniqueWriterIdentity.
    */
+  @java.lang.Override
   public boolean getUniqueWriterIdentity() {
     return uniqueWriterIdentity_;
   }
@@ -615,7 +640,11 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
      * Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
      * </pre>
      *
-     * <code>string parent = 1;</code>
+     * <code>
+     * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return The parent.
      */
     public java.lang.String getParent() {
       java.lang.Object ref = parent_;
@@ -640,7 +669,11 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
      * Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
      * </pre>
      *
-     * <code>string parent = 1;</code>
+     * <code>
+     * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return The bytes for parent.
      */
     public com.google.protobuf.ByteString getParentBytes() {
       java.lang.Object ref = parent_;
@@ -665,7 +698,12 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
      * Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
      * </pre>
      *
-     * <code>string parent = 1;</code>
+     * <code>
+     * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @param value The parent to set.
+     * @return This builder for chaining.
      */
     public Builder setParent(java.lang.String value) {
       if (value == null) {
@@ -688,7 +726,11 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
      * Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
      * </pre>
      *
-     * <code>string parent = 1;</code>
+     * <code>
+     * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearParent() {
 
@@ -708,7 +750,12 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
      * Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
      * </pre>
      *
-     * <code>string parent = 1;</code>
+     * <code>
+     * string parent = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @param value The bytes for parent to set.
+     * @return This builder for chaining.
      */
     public Builder setParentBytes(com.google.protobuf.ByteString value) {
       if (value == null) {
@@ -735,7 +782,9 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
      * is not already in use.
      * </pre>
      *
-     * <code>.google.logging.v2.LogSink sink = 2;</code>
+     * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
+     *
+     * @return Whether the sink field is set.
      */
     public boolean hasSink() {
       return sinkBuilder_ != null || sink_ != null;
@@ -748,7 +797,9 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
      * is not already in use.
      * </pre>
      *
-     * <code>.google.logging.v2.LogSink sink = 2;</code>
+     * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
+     *
+     * @return The sink.
      */
     public com.google.logging.v2.LogSink getSink() {
       if (sinkBuilder_ == null) {
@@ -765,7 +816,7 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
      * is not already in use.
      * </pre>
      *
-     * <code>.google.logging.v2.LogSink sink = 2;</code>
+     * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
      */
     public Builder setSink(com.google.logging.v2.LogSink value) {
       if (sinkBuilder_ == null) {
@@ -788,7 +839,7 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
      * is not already in use.
      * </pre>
      *
-     * <code>.google.logging.v2.LogSink sink = 2;</code>
+     * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
      */
     public Builder setSink(com.google.logging.v2.LogSink.Builder builderForValue) {
       if (sinkBuilder_ == null) {
@@ -808,7 +859,7 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
      * is not already in use.
      * </pre>
      *
-     * <code>.google.logging.v2.LogSink sink = 2;</code>
+     * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
      */
     public Builder mergeSink(com.google.logging.v2.LogSink value) {
       if (sinkBuilder_ == null) {
@@ -832,7 +883,7 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
      * is not already in use.
      * </pre>
      *
-     * <code>.google.logging.v2.LogSink sink = 2;</code>
+     * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
      */
     public Builder clearSink() {
       if (sinkBuilder_ == null) {
@@ -853,7 +904,7 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
      * is not already in use.
      * </pre>
      *
-     * <code>.google.logging.v2.LogSink sink = 2;</code>
+     * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
      */
     public com.google.logging.v2.LogSink.Builder getSinkBuilder() {
 
@@ -868,7 +919,7 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
      * is not already in use.
      * </pre>
      *
-     * <code>.google.logging.v2.LogSink sink = 2;</code>
+     * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
      */
     public com.google.logging.v2.LogSinkOrBuilder getSinkOrBuilder() {
       if (sinkBuilder_ != null) {
@@ -885,7 +936,7 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
      * is not already in use.
      * </pre>
      *
-     * <code>.google.logging.v2.LogSink sink = 2;</code>
+     * <code>.google.logging.v2.LogSink sink = 2 [(.google.api.field_behavior) = REQUIRED];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
             com.google.logging.v2.LogSink,
@@ -921,8 +972,11 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
      * more information, see `writer_identity` in [LogSink][google.logging.v2.LogSink].
      * </pre>
      *
-     * <code>bool unique_writer_identity = 3;</code>
+     * <code>bool unique_writer_identity = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The uniqueWriterIdentity.
      */
+    @java.lang.Override
     public boolean getUniqueWriterIdentity() {
       return uniqueWriterIdentity_;
     }
@@ -942,7 +996,10 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
      * more information, see `writer_identity` in [LogSink][google.logging.v2.LogSink].
      * </pre>
      *
-     * <code>bool unique_writer_identity = 3;</code>
+     * <code>bool unique_writer_identity = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The uniqueWriterIdentity to set.
+     * @return This builder for chaining.
      */
     public Builder setUniqueWriterIdentity(boolean value) {
 
@@ -966,7 +1023,9 @@ public final class CreateSinkRequest extends com.google.protobuf.GeneratedMessag
      * more information, see `writer_identity` in [LogSink][google.logging.v2.LogSink].
      * </pre>
      *
-     * <code>bool unique_writer_identity = 3;</code>
+     * <code>bool unique_writer_identity = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearUniqueWriterIdentity() {
 

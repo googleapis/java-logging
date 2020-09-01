@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,6 +40,12 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
   private BigQueryOptions() {}
 
   @java.lang.Override
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(UnusedPrivateParameter unused) {
+    return new BigQueryOptions();
+  }
+
+  @java.lang.Override
   public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
     return this.unknownFields;
   }
@@ -52,7 +58,6 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
     if (extensionRegistry == null) {
       throw new java.lang.NullPointerException();
     }
-    int mutable_bitField0_ = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -66,6 +71,11 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
           case 8:
             {
               usePartitionedTables_ = input.readBool();
+              break;
+            }
+          case 24:
+            {
+              usesTimestampColumnPartitioning_ = input.readBool();
               break;
             }
           default:
@@ -109,18 +119,45 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
    *
    * <pre>
    * Optional. Whether to use [BigQuery's partition
-   * tables](/bigquery/docs/partitioned-tables). By default, Logging
+   * tables](https://cloud.google.com/bigquery/docs/partitioned-tables). By default, Logging
    * creates dated tables based on the log entries' timestamps, e.g.
    * syslog_20170523. With partitioned tables the date suffix is no longer
    * present and [special query
-   * syntax](/bigquery/docs/querying-partitioned-tables) has to be used instead.
+   * syntax](https://cloud.google.com/bigquery/docs/querying-partitioned-tables) has to be used instead.
    * In both cases, tables are sharded based on UTC timezone.
    * </pre>
    *
-   * <code>bool use_partitioned_tables = 1;</code>
+   * <code>bool use_partitioned_tables = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The usePartitionedTables.
    */
+  @java.lang.Override
   public boolean getUsePartitionedTables() {
     return usePartitionedTables_;
+  }
+
+  public static final int USES_TIMESTAMP_COLUMN_PARTITIONING_FIELD_NUMBER = 3;
+  private boolean usesTimestampColumnPartitioning_;
+  /**
+   *
+   *
+   * <pre>
+   * Output only. True if new timestamp column based partitioning is in use,
+   * false if legacy ingestion-time partitioning is in use.
+   * All new sinks will have this field set true and will use timestamp column
+   * based partitioning. If use_partitioned_tables is false, this value has no
+   * meaning and will be false. Legacy sinks using partitioned tables will have
+   * this field set to false.
+   * </pre>
+   *
+   * <code>bool uses_timestamp_column_partitioning = 3 [(.google.api.field_behavior) = OUTPUT_ONLY];
+   * </code>
+   *
+   * @return The usesTimestampColumnPartitioning.
+   */
+  @java.lang.Override
+  public boolean getUsesTimestampColumnPartitioning() {
+    return usesTimestampColumnPartitioning_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -140,6 +177,9 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
     if (usePartitionedTables_ != false) {
       output.writeBool(1, usePartitionedTables_);
     }
+    if (usesTimestampColumnPartitioning_ != false) {
+      output.writeBool(3, usesTimestampColumnPartitioning_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -151,6 +191,11 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
     size = 0;
     if (usePartitionedTables_ != false) {
       size += com.google.protobuf.CodedOutputStream.computeBoolSize(1, usePartitionedTables_);
+    }
+    if (usesTimestampColumnPartitioning_ != false) {
+      size +=
+          com.google.protobuf.CodedOutputStream.computeBoolSize(
+              3, usesTimestampColumnPartitioning_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -168,6 +213,8 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
     com.google.logging.v2.BigQueryOptions other = (com.google.logging.v2.BigQueryOptions) obj;
 
     if (getUsePartitionedTables() != other.getUsePartitionedTables()) return false;
+    if (getUsesTimestampColumnPartitioning() != other.getUsesTimestampColumnPartitioning())
+      return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -181,6 +228,10 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + USE_PARTITIONED_TABLES_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(getUsePartitionedTables());
+    hash = (37 * hash) + USES_TIMESTAMP_COLUMN_PARTITIONING_FIELD_NUMBER;
+    hash =
+        (53 * hash)
+            + com.google.protobuf.Internal.hashBoolean(getUsesTimestampColumnPartitioning());
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -327,6 +378,8 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
       super.clear();
       usePartitionedTables_ = false;
 
+      usesTimestampColumnPartitioning_ = false;
+
       return this;
     }
 
@@ -355,6 +408,7 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
       com.google.logging.v2.BigQueryOptions result =
           new com.google.logging.v2.BigQueryOptions(this);
       result.usePartitionedTables_ = usePartitionedTables_;
+      result.usesTimestampColumnPartitioning_ = usesTimestampColumnPartitioning_;
       onBuilt();
       return result;
     }
@@ -407,6 +461,9 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
       if (other.getUsePartitionedTables() != false) {
         setUsePartitionedTables(other.getUsePartitionedTables());
       }
+      if (other.getUsesTimestampColumnPartitioning() != false) {
+        setUsesTimestampColumnPartitioning(other.getUsesTimestampColumnPartitioning());
+      }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
@@ -442,16 +499,19 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
      *
      * <pre>
      * Optional. Whether to use [BigQuery's partition
-     * tables](/bigquery/docs/partitioned-tables). By default, Logging
+     * tables](https://cloud.google.com/bigquery/docs/partitioned-tables). By default, Logging
      * creates dated tables based on the log entries' timestamps, e.g.
      * syslog_20170523. With partitioned tables the date suffix is no longer
      * present and [special query
-     * syntax](/bigquery/docs/querying-partitioned-tables) has to be used instead.
+     * syntax](https://cloud.google.com/bigquery/docs/querying-partitioned-tables) has to be used instead.
      * In both cases, tables are sharded based on UTC timezone.
      * </pre>
      *
-     * <code>bool use_partitioned_tables = 1;</code>
+     * <code>bool use_partitioned_tables = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The usePartitionedTables.
      */
+    @java.lang.Override
     public boolean getUsePartitionedTables() {
       return usePartitionedTables_;
     }
@@ -460,15 +520,18 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
      *
      * <pre>
      * Optional. Whether to use [BigQuery's partition
-     * tables](/bigquery/docs/partitioned-tables). By default, Logging
+     * tables](https://cloud.google.com/bigquery/docs/partitioned-tables). By default, Logging
      * creates dated tables based on the log entries' timestamps, e.g.
      * syslog_20170523. With partitioned tables the date suffix is no longer
      * present and [special query
-     * syntax](/bigquery/docs/querying-partitioned-tables) has to be used instead.
+     * syntax](https://cloud.google.com/bigquery/docs/querying-partitioned-tables) has to be used instead.
      * In both cases, tables are sharded based on UTC timezone.
      * </pre>
      *
-     * <code>bool use_partitioned_tables = 1;</code>
+     * <code>bool use_partitioned_tables = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The usePartitionedTables to set.
+     * @return This builder for chaining.
      */
     public Builder setUsePartitionedTables(boolean value) {
 
@@ -481,19 +544,94 @@ public final class BigQueryOptions extends com.google.protobuf.GeneratedMessageV
      *
      * <pre>
      * Optional. Whether to use [BigQuery's partition
-     * tables](/bigquery/docs/partitioned-tables). By default, Logging
+     * tables](https://cloud.google.com/bigquery/docs/partitioned-tables). By default, Logging
      * creates dated tables based on the log entries' timestamps, e.g.
      * syslog_20170523. With partitioned tables the date suffix is no longer
      * present and [special query
-     * syntax](/bigquery/docs/querying-partitioned-tables) has to be used instead.
+     * syntax](https://cloud.google.com/bigquery/docs/querying-partitioned-tables) has to be used instead.
      * In both cases, tables are sharded based on UTC timezone.
      * </pre>
      *
-     * <code>bool use_partitioned_tables = 1;</code>
+     * <code>bool use_partitioned_tables = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearUsePartitionedTables() {
 
       usePartitionedTables_ = false;
+      onChanged();
+      return this;
+    }
+
+    private boolean usesTimestampColumnPartitioning_;
+    /**
+     *
+     *
+     * <pre>
+     * Output only. True if new timestamp column based partitioning is in use,
+     * false if legacy ingestion-time partitioning is in use.
+     * All new sinks will have this field set true and will use timestamp column
+     * based partitioning. If use_partitioned_tables is false, this value has no
+     * meaning and will be false. Legacy sinks using partitioned tables will have
+     * this field set to false.
+     * </pre>
+     *
+     * <code>
+     * bool uses_timestamp_column_partitioning = 3 [(.google.api.field_behavior) = OUTPUT_ONLY];
+     * </code>
+     *
+     * @return The usesTimestampColumnPartitioning.
+     */
+    @java.lang.Override
+    public boolean getUsesTimestampColumnPartitioning() {
+      return usesTimestampColumnPartitioning_;
+    }
+    /**
+     *
+     *
+     * <pre>
+     * Output only. True if new timestamp column based partitioning is in use,
+     * false if legacy ingestion-time partitioning is in use.
+     * All new sinks will have this field set true and will use timestamp column
+     * based partitioning. If use_partitioned_tables is false, this value has no
+     * meaning and will be false. Legacy sinks using partitioned tables will have
+     * this field set to false.
+     * </pre>
+     *
+     * <code>
+     * bool uses_timestamp_column_partitioning = 3 [(.google.api.field_behavior) = OUTPUT_ONLY];
+     * </code>
+     *
+     * @param value The usesTimestampColumnPartitioning to set.
+     * @return This builder for chaining.
+     */
+    public Builder setUsesTimestampColumnPartitioning(boolean value) {
+
+      usesTimestampColumnPartitioning_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     *
+     *
+     * <pre>
+     * Output only. True if new timestamp column based partitioning is in use,
+     * false if legacy ingestion-time partitioning is in use.
+     * All new sinks will have this field set true and will use timestamp column
+     * based partitioning. If use_partitioned_tables is false, this value has no
+     * meaning and will be false. Legacy sinks using partitioned tables will have
+     * this field set to false.
+     * </pre>
+     *
+     * <code>
+     * bool uses_timestamp_column_partitioning = 3 [(.google.api.field_behavior) = OUTPUT_ONLY];
+     * </code>
+     *
+     * @return This builder for chaining.
+     */
+    public Builder clearUsesTimestampColumnPartitioning() {
+
+      usesTimestampColumnPartitioning_ = false;
       onChanged();
       return this;
     }

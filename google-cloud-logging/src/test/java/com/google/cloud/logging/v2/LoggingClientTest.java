@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,10 @@ package com.google.cloud.logging.v2;
 
 import static com.google.cloud.logging.v2.LoggingClient.ListLogEntriesPagedResponse;
 import static com.google.cloud.logging.v2.LoggingClient.ListLogsPagedResponse;
+import static com.google.cloud.logging.v2.LoggingClient.ListMonitoredResourceDescriptorsPagedResponse;
 
 import com.google.api.MonitoredResource;
+import com.google.api.MonitoredResourceDescriptor;
 import com.google.api.gax.core.NoCredentialsProvider;
 import com.google.api.gax.grpc.GaxGrpcProperties;
 import com.google.api.gax.grpc.testing.LocalChannelProvider;
@@ -32,12 +34,10 @@ import com.google.logging.v2.ListLogEntriesRequest;
 import com.google.logging.v2.ListLogEntriesResponse;
 import com.google.logging.v2.ListLogsRequest;
 import com.google.logging.v2.ListLogsResponse;
+import com.google.logging.v2.ListMonitoredResourceDescriptorsRequest;
+import com.google.logging.v2.ListMonitoredResourceDescriptorsResponse;
 import com.google.logging.v2.LogEntry;
 import com.google.logging.v2.LogName;
-import com.google.logging.v2.LogNames;
-import com.google.logging.v2.ParentName;
-import com.google.logging.v2.ParentNames;
-import com.google.logging.v2.ProjectLogName;
 import com.google.logging.v2.ProjectName;
 import com.google.logging.v2.WriteLogEntriesRequest;
 import com.google.logging.v2.WriteLogEntriesResponse;
@@ -109,7 +109,7 @@ public class LoggingClientTest {
     Empty expectedResponse = Empty.newBuilder().build();
     mockLoggingServiceV2.addResponse(expectedResponse);
 
-    LogName logName = ProjectLogName.of("[PROJECT]", "[LOG]");
+    LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
 
     client.deleteLog(logName);
 
@@ -117,7 +117,7 @@ public class LoggingClientTest {
     Assert.assertEquals(1, actualRequests.size());
     DeleteLogRequest actualRequest = (DeleteLogRequest) actualRequests.get(0);
 
-    Assert.assertEquals(logName, LogNames.parse(actualRequest.getLogName()));
+    Assert.assertEquals(logName, LogName.parse(actualRequest.getLogName()));
     Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
@@ -131,57 +131,9 @@ public class LoggingClientTest {
     mockLoggingServiceV2.addException(exception);
 
     try {
-      LogName logName = ProjectLogName.of("[PROJECT]", "[LOG]");
+      LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
 
       client.deleteLog(logName);
-      Assert.fail("No exception raised");
-    } catch (InvalidArgumentException e) {
-      // Expected exception
-    }
-  }
-
-  @Test
-  @SuppressWarnings("all")
-  public void writeLogEntriesTest() {
-    WriteLogEntriesResponse expectedResponse = WriteLogEntriesResponse.newBuilder().build();
-    mockLoggingServiceV2.addResponse(expectedResponse);
-
-    LogName logName = ProjectLogName.of("[PROJECT]", "[LOG]");
-    MonitoredResource resource = MonitoredResource.newBuilder().build();
-    Map<String, String> labels = new HashMap<>();
-    List<LogEntry> entries = new ArrayList<>();
-
-    WriteLogEntriesResponse actualResponse =
-        client.writeLogEntries(logName, resource, labels, entries);
-    Assert.assertEquals(expectedResponse, actualResponse);
-
-    List<AbstractMessage> actualRequests = mockLoggingServiceV2.getRequests();
-    Assert.assertEquals(1, actualRequests.size());
-    WriteLogEntriesRequest actualRequest = (WriteLogEntriesRequest) actualRequests.get(0);
-
-    Assert.assertEquals(logName, LogNames.parse(actualRequest.getLogName()));
-    Assert.assertEquals(resource, actualRequest.getResource());
-    Assert.assertEquals(labels, actualRequest.getLabelsMap());
-    Assert.assertEquals(entries, actualRequest.getEntriesList());
-    Assert.assertTrue(
-        channelProvider.isHeaderSent(
-            ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
-            GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
-  }
-
-  @Test
-  @SuppressWarnings("all")
-  public void writeLogEntriesExceptionTest() throws Exception {
-    StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
-    mockLoggingServiceV2.addException(exception);
-
-    try {
-      LogName logName = ProjectLogName.of("[PROJECT]", "[LOG]");
-      MonitoredResource resource = MonitoredResource.newBuilder().build();
-      Map<String, String> labels = new HashMap<>();
-      List<LogEntry> entries = new ArrayList<>();
-
-      client.writeLogEntries(logName, resource, labels, entries);
       Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception
@@ -245,6 +197,108 @@ public class LoggingClientTest {
 
   @Test
   @SuppressWarnings("all")
+  public void writeLogEntriesTest() {
+    WriteLogEntriesResponse expectedResponse = WriteLogEntriesResponse.newBuilder().build();
+    mockLoggingServiceV2.addResponse(expectedResponse);
+
+    LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
+    MonitoredResource resource = MonitoredResource.newBuilder().build();
+    Map<String, String> labels = new HashMap<>();
+    List<LogEntry> entries = new ArrayList<>();
+
+    WriteLogEntriesResponse actualResponse =
+        client.writeLogEntries(logName, resource, labels, entries);
+    Assert.assertEquals(expectedResponse, actualResponse);
+
+    List<AbstractMessage> actualRequests = mockLoggingServiceV2.getRequests();
+    Assert.assertEquals(1, actualRequests.size());
+    WriteLogEntriesRequest actualRequest = (WriteLogEntriesRequest) actualRequests.get(0);
+
+    Assert.assertEquals(logName, LogName.parse(actualRequest.getLogName()));
+    Assert.assertEquals(resource, actualRequest.getResource());
+    Assert.assertEquals(labels, actualRequest.getLabelsMap());
+    Assert.assertEquals(entries, actualRequest.getEntriesList());
+    Assert.assertTrue(
+        channelProvider.isHeaderSent(
+            ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
+            GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
+  }
+
+  @Test
+  @SuppressWarnings("all")
+  public void writeLogEntriesExceptionTest() throws Exception {
+    StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
+    mockLoggingServiceV2.addException(exception);
+
+    try {
+      LogName logName = LogName.ofProjectLogName("[PROJECT]", "[LOG]");
+      MonitoredResource resource = MonitoredResource.newBuilder().build();
+      Map<String, String> labels = new HashMap<>();
+      List<LogEntry> entries = new ArrayList<>();
+
+      client.writeLogEntries(logName, resource, labels, entries);
+      Assert.fail("No exception raised");
+    } catch (InvalidArgumentException e) {
+      // Expected exception
+    }
+  }
+
+  @Test
+  @SuppressWarnings("all")
+  public void listMonitoredResourceDescriptorsTest() {
+    String nextPageToken = "";
+    MonitoredResourceDescriptor resourceDescriptorsElement =
+        MonitoredResourceDescriptor.newBuilder().build();
+    List<MonitoredResourceDescriptor> resourceDescriptors =
+        Arrays.asList(resourceDescriptorsElement);
+    ListMonitoredResourceDescriptorsResponse expectedResponse =
+        ListMonitoredResourceDescriptorsResponse.newBuilder()
+            .setNextPageToken(nextPageToken)
+            .addAllResourceDescriptors(resourceDescriptors)
+            .build();
+    mockLoggingServiceV2.addResponse(expectedResponse);
+
+    ListMonitoredResourceDescriptorsRequest request =
+        ListMonitoredResourceDescriptorsRequest.newBuilder().build();
+
+    ListMonitoredResourceDescriptorsPagedResponse pagedListResponse =
+        client.listMonitoredResourceDescriptors(request);
+
+    List<MonitoredResourceDescriptor> resources =
+        Lists.newArrayList(pagedListResponse.iterateAll());
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getResourceDescriptorsList().get(0), resources.get(0));
+
+    List<AbstractMessage> actualRequests = mockLoggingServiceV2.getRequests();
+    Assert.assertEquals(1, actualRequests.size());
+    ListMonitoredResourceDescriptorsRequest actualRequest =
+        (ListMonitoredResourceDescriptorsRequest) actualRequests.get(0);
+
+    Assert.assertTrue(
+        channelProvider.isHeaderSent(
+            ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
+            GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
+  }
+
+  @Test
+  @SuppressWarnings("all")
+  public void listMonitoredResourceDescriptorsExceptionTest() throws Exception {
+    StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
+    mockLoggingServiceV2.addException(exception);
+
+    try {
+      ListMonitoredResourceDescriptorsRequest request =
+          ListMonitoredResourceDescriptorsRequest.newBuilder().build();
+
+      client.listMonitoredResourceDescriptors(request);
+      Assert.fail("No exception raised");
+    } catch (InvalidArgumentException e) {
+      // Expected exception
+    }
+  }
+
+  @Test
+  @SuppressWarnings("all")
   public void listLogsTest() {
     String nextPageToken = "";
     String logNamesElement = "logNamesElement-1079688374";
@@ -256,7 +310,7 @@ public class LoggingClientTest {
             .build();
     mockLoggingServiceV2.addResponse(expectedResponse);
 
-    ParentName parent = ProjectName.of("[PROJECT]");
+    ProjectName parent = ProjectName.of("[PROJECT]");
 
     ListLogsPagedResponse pagedListResponse = client.listLogs(parent);
 
@@ -268,7 +322,7 @@ public class LoggingClientTest {
     Assert.assertEquals(1, actualRequests.size());
     ListLogsRequest actualRequest = (ListLogsRequest) actualRequests.get(0);
 
-    Assert.assertEquals(parent, ParentNames.parse(actualRequest.getParent()));
+    Assert.assertEquals(parent, ProjectName.parse(actualRequest.getParent()));
     Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
@@ -282,7 +336,7 @@ public class LoggingClientTest {
     mockLoggingServiceV2.addException(exception);
 
     try {
-      ParentName parent = ProjectName.of("[PROJECT]");
+      ProjectName parent = ProjectName.of("[PROJECT]");
 
       client.listLogs(parent);
       Assert.fail("No exception raised");

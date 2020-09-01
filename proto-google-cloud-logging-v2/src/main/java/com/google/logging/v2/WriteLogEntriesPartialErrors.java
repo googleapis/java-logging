@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,6 +38,12 @@ public final class WriteLogEntriesPartialErrors extends com.google.protobuf.Gene
   }
 
   private WriteLogEntriesPartialErrors() {}
+
+  @java.lang.Override
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(UnusedPrivateParameter unused) {
+    return new WriteLogEntriesPartialErrors();
+  }
 
   @java.lang.Override
   public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
@@ -168,11 +174,13 @@ public final class WriteLogEntriesPartialErrors extends com.google.protobuf.Gene
    *
    * <code>map&lt;int32, .google.rpc.Status&gt; log_entry_errors = 1;</code>
    */
+  @java.lang.Override
   public boolean containsLogEntryErrors(int key) {
 
     return internalGetLogEntryErrors().getMap().containsKey(key);
   }
   /** Use {@link #getLogEntryErrorsMap()} instead. */
+  @java.lang.Override
   @java.lang.Deprecated
   public java.util.Map<java.lang.Integer, com.google.rpc.Status> getLogEntryErrors() {
     return getLogEntryErrorsMap();
@@ -190,6 +198,7 @@ public final class WriteLogEntriesPartialErrors extends com.google.protobuf.Gene
    *
    * <code>map&lt;int32, .google.rpc.Status&gt; log_entry_errors = 1;</code>
    */
+  @java.lang.Override
   public java.util.Map<java.lang.Integer, com.google.rpc.Status> getLogEntryErrorsMap() {
     return internalGetLogEntryErrors().getMap();
   }
@@ -206,6 +215,7 @@ public final class WriteLogEntriesPartialErrors extends com.google.protobuf.Gene
    *
    * <code>map&lt;int32, .google.rpc.Status&gt; log_entry_errors = 1;</code>
    */
+  @java.lang.Override
   public com.google.rpc.Status getLogEntryErrorsOrDefault(
       int key, com.google.rpc.Status defaultValue) {
 
@@ -226,6 +236,7 @@ public final class WriteLogEntriesPartialErrors extends com.google.protobuf.Gene
    *
    * <code>map&lt;int32, .google.rpc.Status&gt; log_entry_errors = 1;</code>
    */
+  @java.lang.Override
   public com.google.rpc.Status getLogEntryErrorsOrThrow(int key) {
 
     java.util.Map<java.lang.Integer, com.google.rpc.Status> map =
@@ -623,11 +634,13 @@ public final class WriteLogEntriesPartialErrors extends com.google.protobuf.Gene
      *
      * <code>map&lt;int32, .google.rpc.Status&gt; log_entry_errors = 1;</code>
      */
+    @java.lang.Override
     public boolean containsLogEntryErrors(int key) {
 
       return internalGetLogEntryErrors().getMap().containsKey(key);
     }
     /** Use {@link #getLogEntryErrorsMap()} instead. */
+    @java.lang.Override
     @java.lang.Deprecated
     public java.util.Map<java.lang.Integer, com.google.rpc.Status> getLogEntryErrors() {
       return getLogEntryErrorsMap();
@@ -645,6 +658,7 @@ public final class WriteLogEntriesPartialErrors extends com.google.protobuf.Gene
      *
      * <code>map&lt;int32, .google.rpc.Status&gt; log_entry_errors = 1;</code>
      */
+    @java.lang.Override
     public java.util.Map<java.lang.Integer, com.google.rpc.Status> getLogEntryErrorsMap() {
       return internalGetLogEntryErrors().getMap();
     }
@@ -661,6 +675,7 @@ public final class WriteLogEntriesPartialErrors extends com.google.protobuf.Gene
      *
      * <code>map&lt;int32, .google.rpc.Status&gt; log_entry_errors = 1;</code>
      */
+    @java.lang.Override
     public com.google.rpc.Status getLogEntryErrorsOrDefault(
         int key, com.google.rpc.Status defaultValue) {
 
@@ -681,6 +696,7 @@ public final class WriteLogEntriesPartialErrors extends com.google.protobuf.Gene
      *
      * <code>map&lt;int32, .google.rpc.Status&gt; log_entry_errors = 1;</code>
      */
+    @java.lang.Override
     public com.google.rpc.Status getLogEntryErrorsOrThrow(int key) {
 
       java.util.Map<java.lang.Integer, com.google.rpc.Status> map =

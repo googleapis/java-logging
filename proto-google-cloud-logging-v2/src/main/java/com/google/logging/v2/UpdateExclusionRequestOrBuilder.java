@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,11 @@ public interface UpdateExclusionRequestOrBuilder
    * Example: `"projects/my-project-id/exclusions/my-exclusion-id"`.
    * </pre>
    *
-   * <code>string name = 1;</code>
+   * <code>
+   * string name = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The name.
    */
   java.lang.String getName();
   /**
@@ -50,7 +54,11 @@ public interface UpdateExclusionRequestOrBuilder
    * Example: `"projects/my-project-id/exclusions/my-exclusion-id"`.
    * </pre>
    *
-   * <code>string name = 1;</code>
+   * <code>
+   * string name = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The bytes for name.
    */
   com.google.protobuf.ByteString getNameBytes();
 
@@ -58,33 +66,40 @@ public interface UpdateExclusionRequestOrBuilder
    *
    *
    * <pre>
-   * Required. New values for the existing exclusion. Only the fields specified
-   * in `update_mask` are relevant.
+   * Required. New values for the existing exclusion. Only the fields specified in
+   * `update_mask` are relevant.
    * </pre>
    *
-   * <code>.google.logging.v2.LogExclusion exclusion = 2;</code>
+   * <code>.google.logging.v2.LogExclusion exclusion = 2 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
+   *
+   * @return Whether the exclusion field is set.
    */
   boolean hasExclusion();
   /**
    *
    *
    * <pre>
-   * Required. New values for the existing exclusion. Only the fields specified
-   * in `update_mask` are relevant.
+   * Required. New values for the existing exclusion. Only the fields specified in
+   * `update_mask` are relevant.
    * </pre>
    *
-   * <code>.google.logging.v2.LogExclusion exclusion = 2;</code>
+   * <code>.google.logging.v2.LogExclusion exclusion = 2 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
+   *
+   * @return The exclusion.
    */
   com.google.logging.v2.LogExclusion getExclusion();
   /**
    *
    *
    * <pre>
-   * Required. New values for the existing exclusion. Only the fields specified
-   * in `update_mask` are relevant.
+   * Required. New values for the existing exclusion. Only the fields specified in
+   * `update_mask` are relevant.
    * </pre>
    *
-   * <code>.google.logging.v2.LogExclusion exclusion = 2;</code>
+   * <code>.google.logging.v2.LogExclusion exclusion = 2 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
    */
   com.google.logging.v2.LogExclusionOrBuilder getExclusionOrBuilder();
 
@@ -92,45 +107,52 @@ public interface UpdateExclusionRequestOrBuilder
    *
    *
    * <pre>
-   * Required. A non-empty list of fields to change in the existing exclusion.
-   * New values for the fields are taken from the corresponding fields in the
+   * Required. A non-empty list of fields to change in the existing exclusion. New values
+   * for the fields are taken from the corresponding fields in the
    * [LogExclusion][google.logging.v2.LogExclusion] included in this request. Fields not mentioned in
    * `update_mask` are not changed and are ignored in the request.
    * For example, to change the filter and description of an exclusion,
    * specify an `update_mask` of `"filter,description"`.
    * </pre>
    *
-   * <code>.google.protobuf.FieldMask update_mask = 3;</code>
+   * <code>.google.protobuf.FieldMask update_mask = 3 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
+   *
+   * @return Whether the updateMask field is set.
    */
   boolean hasUpdateMask();
   /**
    *
    *
    * <pre>
-   * Required. A non-empty list of fields to change in the existing exclusion.
-   * New values for the fields are taken from the corresponding fields in the
+   * Required. A non-empty list of fields to change in the existing exclusion. New values
+   * for the fields are taken from the corresponding fields in the
    * [LogExclusion][google.logging.v2.LogExclusion] included in this request. Fields not mentioned in
    * `update_mask` are not changed and are ignored in the request.
    * For example, to change the filter and description of an exclusion,
    * specify an `update_mask` of `"filter,description"`.
    * </pre>
    *
-   * <code>.google.protobuf.FieldMask update_mask = 3;</code>
+   * <code>.google.protobuf.FieldMask update_mask = 3 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
+   *
+   * @return The updateMask.
    */
   com.google.protobuf.FieldMask getUpdateMask();
   /**
    *
    *
    * <pre>
-   * Required. A non-empty list of fields to change in the existing exclusion.
-   * New values for the fields are taken from the corresponding fields in the
+   * Required. A non-empty list of fields to change in the existing exclusion. New values
+   * for the fields are taken from the corresponding fields in the
    * [LogExclusion][google.logging.v2.LogExclusion] included in this request. Fields not mentioned in
    * `update_mask` are not changed and are ignored in the request.
    * For example, to change the filter and description of an exclusion,
    * specify an `update_mask` of `"filter,description"`.
    * </pre>
    *
-   * <code>.google.protobuf.FieldMask update_mask = 3;</code>
+   * <code>.google.protobuf.FieldMask update_mask = 3 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
    */
   com.google.protobuf.FieldMaskOrBuilder getUpdateMaskOrBuilder();
 }

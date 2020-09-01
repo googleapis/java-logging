@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,59 +27,6 @@ public interface ListLogEntriesRequestOrBuilder
    *
    *
    * <pre>
-   * Deprecated. Use `resource_names` instead.  One or more project identifiers
-   * or project numbers from which to retrieve log entries.  Example:
-   * `"my-project-1A"`.
-   * </pre>
-   *
-   * <code>repeated string project_ids = 1 [deprecated = true];</code>
-   */
-  @java.lang.Deprecated
-  java.util.List<java.lang.String> getProjectIdsList();
-  /**
-   *
-   *
-   * <pre>
-   * Deprecated. Use `resource_names` instead.  One or more project identifiers
-   * or project numbers from which to retrieve log entries.  Example:
-   * `"my-project-1A"`.
-   * </pre>
-   *
-   * <code>repeated string project_ids = 1 [deprecated = true];</code>
-   */
-  @java.lang.Deprecated
-  int getProjectIdsCount();
-  /**
-   *
-   *
-   * <pre>
-   * Deprecated. Use `resource_names` instead.  One or more project identifiers
-   * or project numbers from which to retrieve log entries.  Example:
-   * `"my-project-1A"`.
-   * </pre>
-   *
-   * <code>repeated string project_ids = 1 [deprecated = true];</code>
-   */
-  @java.lang.Deprecated
-  java.lang.String getProjectIds(int index);
-  /**
-   *
-   *
-   * <pre>
-   * Deprecated. Use `resource_names` instead.  One or more project identifiers
-   * or project numbers from which to retrieve log entries.  Example:
-   * `"my-project-1A"`.
-   * </pre>
-   *
-   * <code>repeated string project_ids = 1 [deprecated = true];</code>
-   */
-  @java.lang.Deprecated
-  com.google.protobuf.ByteString getProjectIdsBytes(int index);
-
-  /**
-   *
-   *
-   * <pre>
    * Required. Names of one or more parent resources from which to
    * retrieve log entries:
    *     "projects/[PROJECT_ID]"
@@ -89,7 +36,11 @@ public interface ListLogEntriesRequestOrBuilder
    * Projects listed in the `project_ids` field are added to this list.
    * </pre>
    *
-   * <code>repeated string resource_names = 8;</code>
+   * <code>
+   * repeated string resource_names = 8 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return A list containing the resourceNames.
    */
   java.util.List<java.lang.String> getResourceNamesList();
   /**
@@ -105,7 +56,11 @@ public interface ListLogEntriesRequestOrBuilder
    * Projects listed in the `project_ids` field are added to this list.
    * </pre>
    *
-   * <code>repeated string resource_names = 8;</code>
+   * <code>
+   * repeated string resource_names = 8 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The count of resourceNames.
    */
   int getResourceNamesCount();
   /**
@@ -121,7 +76,12 @@ public interface ListLogEntriesRequestOrBuilder
    * Projects listed in the `project_ids` field are added to this list.
    * </pre>
    *
-   * <code>repeated string resource_names = 8;</code>
+   * <code>
+   * repeated string resource_names = 8 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @param index The index of the element to return.
+   * @return The resourceNames at the given index.
    */
   java.lang.String getResourceNames(int index);
   /**
@@ -137,7 +97,12 @@ public interface ListLogEntriesRequestOrBuilder
    * Projects listed in the `project_ids` field are added to this list.
    * </pre>
    *
-   * <code>repeated string resource_names = 8;</code>
+   * <code>
+   * repeated string resource_names = 8 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @param index The index of the value to return.
+   * @return The bytes of the resourceNames at the given index.
    */
   com.google.protobuf.ByteString getResourceNamesBytes(int index);
 
@@ -146,7 +111,7 @@ public interface ListLogEntriesRequestOrBuilder
    *
    * <pre>
    * Optional. A filter that chooses which log entries to return.  See [Advanced
-   * Logs Filters](/logging/docs/view/advanced_filters).  Only log entries that
+   * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).  Only log entries that
    * match the filter are returned.  An empty filter matches all log entries in
    * the resources listed in `resource_names`. Referencing a parent resource
    * that is not listed in `resource_names` will cause the filter to return no
@@ -154,7 +119,9 @@ public interface ListLogEntriesRequestOrBuilder
    * The maximum length of the filter is 20000 characters.
    * </pre>
    *
-   * <code>string filter = 2;</code>
+   * <code>string filter = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The filter.
    */
   java.lang.String getFilter();
   /**
@@ -162,7 +129,7 @@ public interface ListLogEntriesRequestOrBuilder
    *
    * <pre>
    * Optional. A filter that chooses which log entries to return.  See [Advanced
-   * Logs Filters](/logging/docs/view/advanced_filters).  Only log entries that
+   * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).  Only log entries that
    * match the filter are returned.  An empty filter matches all log entries in
    * the resources listed in `resource_names`. Referencing a parent resource
    * that is not listed in `resource_names` will cause the filter to return no
@@ -170,7 +137,9 @@ public interface ListLogEntriesRequestOrBuilder
    * The maximum length of the filter is 20000 characters.
    * </pre>
    *
-   * <code>string filter = 2;</code>
+   * <code>string filter = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The bytes for filter.
    */
   com.google.protobuf.ByteString getFilterBytes();
 
@@ -186,7 +155,9 @@ public interface ListLogEntriesRequestOrBuilder
    * timestamps are returned in order of their `insert_id` values.
    * </pre>
    *
-   * <code>string order_by = 3;</code>
+   * <code>string order_by = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The orderBy.
    */
   java.lang.String getOrderBy();
   /**
@@ -201,7 +172,9 @@ public interface ListLogEntriesRequestOrBuilder
    * timestamps are returned in order of their `insert_id` values.
    * </pre>
    *
-   * <code>string order_by = 3;</code>
+   * <code>string order_by = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The bytes for orderBy.
    */
   com.google.protobuf.ByteString getOrderByBytes();
 
@@ -214,7 +187,9 @@ public interface ListLogEntriesRequestOrBuilder
    * response indicates that more results might be available.
    * </pre>
    *
-   * <code>int32 page_size = 4;</code>
+   * <code>int32 page_size = 4 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The pageSize.
    */
   int getPageSize();
 
@@ -228,7 +203,9 @@ public interface ListLogEntriesRequestOrBuilder
    * parameters should be identical to those in the previous call.
    * </pre>
    *
-   * <code>string page_token = 5;</code>
+   * <code>string page_token = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The pageToken.
    */
   java.lang.String getPageToken();
   /**
@@ -241,7 +218,9 @@ public interface ListLogEntriesRequestOrBuilder
    * parameters should be identical to those in the previous call.
    * </pre>
    *
-   * <code>string page_token = 5;</code>
+   * <code>string page_token = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The bytes for pageToken.
    */
   com.google.protobuf.ByteString getPageTokenBytes();
 }

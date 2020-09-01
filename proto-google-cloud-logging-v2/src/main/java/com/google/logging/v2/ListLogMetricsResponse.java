@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,6 +40,12 @@ public final class ListLogMetricsResponse extends com.google.protobuf.GeneratedM
   private ListLogMetricsResponse() {
     metrics_ = java.util.Collections.emptyList();
     nextPageToken_ = "";
+  }
+
+  @java.lang.Override
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(UnusedPrivateParameter unused) {
+    return new ListLogMetricsResponse();
   }
 
   @java.lang.Override
@@ -120,7 +126,6 @@ public final class ListLogMetricsResponse extends com.google.protobuf.GeneratedM
             com.google.logging.v2.ListLogMetricsResponse.Builder.class);
   }
 
-  private int bitField0_;
   public static final int METRICS_FIELD_NUMBER = 1;
   private java.util.List<com.google.logging.v2.LogMetric> metrics_;
   /**
@@ -132,6 +137,7 @@ public final class ListLogMetricsResponse extends com.google.protobuf.GeneratedM
    *
    * <code>repeated .google.logging.v2.LogMetric metrics = 1;</code>
    */
+  @java.lang.Override
   public java.util.List<com.google.logging.v2.LogMetric> getMetricsList() {
     return metrics_;
   }
@@ -144,6 +150,7 @@ public final class ListLogMetricsResponse extends com.google.protobuf.GeneratedM
    *
    * <code>repeated .google.logging.v2.LogMetric metrics = 1;</code>
    */
+  @java.lang.Override
   public java.util.List<? extends com.google.logging.v2.LogMetricOrBuilder>
       getMetricsOrBuilderList() {
     return metrics_;
@@ -157,6 +164,7 @@ public final class ListLogMetricsResponse extends com.google.protobuf.GeneratedM
    *
    * <code>repeated .google.logging.v2.LogMetric metrics = 1;</code>
    */
+  @java.lang.Override
   public int getMetricsCount() {
     return metrics_.size();
   }
@@ -169,6 +177,7 @@ public final class ListLogMetricsResponse extends com.google.protobuf.GeneratedM
    *
    * <code>repeated .google.logging.v2.LogMetric metrics = 1;</code>
    */
+  @java.lang.Override
   public com.google.logging.v2.LogMetric getMetrics(int index) {
     return metrics_.get(index);
   }
@@ -181,6 +190,7 @@ public final class ListLogMetricsResponse extends com.google.protobuf.GeneratedM
    *
    * <code>repeated .google.logging.v2.LogMetric metrics = 1;</code>
    */
+  @java.lang.Override
   public com.google.logging.v2.LogMetricOrBuilder getMetricsOrBuilder(int index) {
     return metrics_.get(index);
   }
@@ -197,7 +207,10 @@ public final class ListLogMetricsResponse extends com.google.protobuf.GeneratedM
    * </pre>
    *
    * <code>string next_page_token = 2;</code>
+   *
+   * @return The nextPageToken.
    */
+  @java.lang.Override
   public java.lang.String getNextPageToken() {
     java.lang.Object ref = nextPageToken_;
     if (ref instanceof java.lang.String) {
@@ -219,7 +232,10 @@ public final class ListLogMetricsResponse extends com.google.protobuf.GeneratedM
    * </pre>
    *
    * <code>string next_page_token = 2;</code>
+   *
+   * @return The bytes for nextPageToken.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getNextPageTokenBytes() {
     java.lang.Object ref = nextPageToken_;
     if (ref instanceof java.lang.String) {
@@ -485,7 +501,6 @@ public final class ListLogMetricsResponse extends com.google.protobuf.GeneratedM
       com.google.logging.v2.ListLogMetricsResponse result =
           new com.google.logging.v2.ListLogMetricsResponse(this);
       int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
       if (metricsBuilder_ == null) {
         if (((bitField0_ & 0x00000001) != 0)) {
           metrics_ = java.util.Collections.unmodifiableList(metrics_);
@@ -496,7 +511,6 @@ public final class ListLogMetricsResponse extends com.google.protobuf.GeneratedM
         result.metrics_ = metricsBuilder_.build();
       }
       result.nextPageToken_ = nextPageToken_;
-      result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
     }
@@ -965,6 +979,8 @@ public final class ListLogMetricsResponse extends com.google.protobuf.GeneratedM
      * </pre>
      *
      * <code>string next_page_token = 2;</code>
+     *
+     * @return The nextPageToken.
      */
     public java.lang.String getNextPageToken() {
       java.lang.Object ref = nextPageToken_;
@@ -987,6 +1003,8 @@ public final class ListLogMetricsResponse extends com.google.protobuf.GeneratedM
      * </pre>
      *
      * <code>string next_page_token = 2;</code>
+     *
+     * @return The bytes for nextPageToken.
      */
     public com.google.protobuf.ByteString getNextPageTokenBytes() {
       java.lang.Object ref = nextPageToken_;
@@ -1009,6 +1027,9 @@ public final class ListLogMetricsResponse extends com.google.protobuf.GeneratedM
      * </pre>
      *
      * <code>string next_page_token = 2;</code>
+     *
+     * @param value The nextPageToken to set.
+     * @return This builder for chaining.
      */
     public Builder setNextPageToken(java.lang.String value) {
       if (value == null) {
@@ -1029,6 +1050,8 @@ public final class ListLogMetricsResponse extends com.google.protobuf.GeneratedM
      * </pre>
      *
      * <code>string next_page_token = 2;</code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearNextPageToken() {
 
@@ -1046,6 +1069,9 @@ public final class ListLogMetricsResponse extends com.google.protobuf.GeneratedM
      * </pre>
      *
      * <code>string next_page_token = 2;</code>
+     *
+     * @param value The bytes for nextPageToken to set.
+     * @return This builder for chaining.
      */
     public Builder setNextPageTokenBytes(com.google.protobuf.ByteString value) {
       if (value == null) {

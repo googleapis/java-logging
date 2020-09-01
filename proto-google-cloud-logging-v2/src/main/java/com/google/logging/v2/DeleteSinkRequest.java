@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,6 +42,12 @@ public final class DeleteSinkRequest extends com.google.protobuf.GeneratedMessag
   }
 
   @java.lang.Override
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(UnusedPrivateParameter unused) {
+    return new DeleteSinkRequest();
+  }
+
+  @java.lang.Override
   public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
     return this.unknownFields;
   }
@@ -54,7 +60,6 @@ public final class DeleteSinkRequest extends com.google.protobuf.GeneratedMessag
     if (extensionRegistry == null) {
       throw new java.lang.NullPointerException();
     }
-    int mutable_bitField0_ = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -112,8 +117,8 @@ public final class DeleteSinkRequest extends com.google.protobuf.GeneratedMessag
    *
    *
    * <pre>
-   * Required. The full resource name of the sink to delete, including the
-   * parent resource and the sink identifier:
+   * Required. The full resource name of the sink to delete, including the parent
+   * resource and the sink identifier:
    *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
    *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
    *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
@@ -121,8 +126,13 @@ public final class DeleteSinkRequest extends com.google.protobuf.GeneratedMessag
    * Example: `"projects/my-project-id/sinks/my-sink-id"`.
    * </pre>
    *
-   * <code>string sink_name = 1;</code>
+   * <code>
+   * string sink_name = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The sinkName.
    */
+  @java.lang.Override
   public java.lang.String getSinkName() {
     java.lang.Object ref = sinkName_;
     if (ref instanceof java.lang.String) {
@@ -138,8 +148,8 @@ public final class DeleteSinkRequest extends com.google.protobuf.GeneratedMessag
    *
    *
    * <pre>
-   * Required. The full resource name of the sink to delete, including the
-   * parent resource and the sink identifier:
+   * Required. The full resource name of the sink to delete, including the parent
+   * resource and the sink identifier:
    *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
    *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
    *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
@@ -147,8 +157,13 @@ public final class DeleteSinkRequest extends com.google.protobuf.GeneratedMessag
    * Example: `"projects/my-project-id/sinks/my-sink-id"`.
    * </pre>
    *
-   * <code>string sink_name = 1;</code>
+   * <code>
+   * string sink_name = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The bytes for sinkName.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getSinkNameBytes() {
     java.lang.Object ref = sinkName_;
     if (ref instanceof java.lang.String) {
@@ -481,8 +496,8 @@ public final class DeleteSinkRequest extends com.google.protobuf.GeneratedMessag
      *
      *
      * <pre>
-     * Required. The full resource name of the sink to delete, including the
-     * parent resource and the sink identifier:
+     * Required. The full resource name of the sink to delete, including the parent
+     * resource and the sink identifier:
      *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
      *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
      *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
@@ -490,7 +505,11 @@ public final class DeleteSinkRequest extends com.google.protobuf.GeneratedMessag
      * Example: `"projects/my-project-id/sinks/my-sink-id"`.
      * </pre>
      *
-     * <code>string sink_name = 1;</code>
+     * <code>
+     * string sink_name = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return The sinkName.
      */
     public java.lang.String getSinkName() {
       java.lang.Object ref = sinkName_;
@@ -507,8 +526,8 @@ public final class DeleteSinkRequest extends com.google.protobuf.GeneratedMessag
      *
      *
      * <pre>
-     * Required. The full resource name of the sink to delete, including the
-     * parent resource and the sink identifier:
+     * Required. The full resource name of the sink to delete, including the parent
+     * resource and the sink identifier:
      *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
      *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
      *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
@@ -516,7 +535,11 @@ public final class DeleteSinkRequest extends com.google.protobuf.GeneratedMessag
      * Example: `"projects/my-project-id/sinks/my-sink-id"`.
      * </pre>
      *
-     * <code>string sink_name = 1;</code>
+     * <code>
+     * string sink_name = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return The bytes for sinkName.
      */
     public com.google.protobuf.ByteString getSinkNameBytes() {
       java.lang.Object ref = sinkName_;
@@ -533,8 +556,8 @@ public final class DeleteSinkRequest extends com.google.protobuf.GeneratedMessag
      *
      *
      * <pre>
-     * Required. The full resource name of the sink to delete, including the
-     * parent resource and the sink identifier:
+     * Required. The full resource name of the sink to delete, including the parent
+     * resource and the sink identifier:
      *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
      *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
      *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
@@ -542,7 +565,12 @@ public final class DeleteSinkRequest extends com.google.protobuf.GeneratedMessag
      * Example: `"projects/my-project-id/sinks/my-sink-id"`.
      * </pre>
      *
-     * <code>string sink_name = 1;</code>
+     * <code>
+     * string sink_name = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @param value The sinkName to set.
+     * @return This builder for chaining.
      */
     public Builder setSinkName(java.lang.String value) {
       if (value == null) {
@@ -557,8 +585,8 @@ public final class DeleteSinkRequest extends com.google.protobuf.GeneratedMessag
      *
      *
      * <pre>
-     * Required. The full resource name of the sink to delete, including the
-     * parent resource and the sink identifier:
+     * Required. The full resource name of the sink to delete, including the parent
+     * resource and the sink identifier:
      *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
      *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
      *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
@@ -566,7 +594,11 @@ public final class DeleteSinkRequest extends com.google.protobuf.GeneratedMessag
      * Example: `"projects/my-project-id/sinks/my-sink-id"`.
      * </pre>
      *
-     * <code>string sink_name = 1;</code>
+     * <code>
+     * string sink_name = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearSinkName() {
 
@@ -578,8 +610,8 @@ public final class DeleteSinkRequest extends com.google.protobuf.GeneratedMessag
      *
      *
      * <pre>
-     * Required. The full resource name of the sink to delete, including the
-     * parent resource and the sink identifier:
+     * Required. The full resource name of the sink to delete, including the parent
+     * resource and the sink identifier:
      *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
      *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
      *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
@@ -587,7 +619,12 @@ public final class DeleteSinkRequest extends com.google.protobuf.GeneratedMessag
      * Example: `"projects/my-project-id/sinks/my-sink-id"`.
      * </pre>
      *
-     * <code>string sink_name = 1;</code>
+     * <code>
+     * string sink_name = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @param value The bytes for sinkName to set.
+     * @return This builder for chaining.
      */
     public Builder setSinkNameBytes(com.google.protobuf.ByteString value) {
       if (value == null) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -85,103 +85,106 @@ public final class LoggingProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\037google/logging/v2/logging.proto\022\021googl"
-          + "e.logging.v2\032#google/api/monitored_resou"
-          + "rce.proto\032!google/logging/v2/log_entry.p"
-          + "roto\032&google/logging/v2/logging_config.p"
-          + "roto\032\036google/protobuf/duration.proto\032\033go"
-          + "ogle/protobuf/empty.proto\032\037google/protob"
-          + "uf/timestamp.proto\032\027google/rpc/status.pr"
-          + "oto\032\034google/api/annotations.proto\032\027googl"
-          + "e/api/client.proto\"$\n\020DeleteLogRequest\022\020"
-          + "\n\010log_name\030\001 \001(\t\"\251\002\n\026WriteLogEntriesRequ"
-          + "est\022\020\n\010log_name\030\001 \001(\t\022/\n\010resource\030\002 \001(\0132"
-          + "\035.google.api.MonitoredResource\022E\n\006labels"
-          + "\030\003 \003(\01325.google.logging.v2.WriteLogEntri"
-          + "esRequest.LabelsEntry\022,\n\007entries\030\004 \003(\0132\033"
-          + ".google.logging.v2.LogEntry\022\027\n\017partial_s"
-          + "uccess\030\005 \001(\010\022\017\n\007dry_run\030\006 \001(\010\032-\n\013LabelsE"
-          + "ntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\031\n\027"
-          + "WriteLogEntriesResponse\"\310\001\n\034WriteLogEntr"
-          + "iesPartialErrors\022]\n\020log_entry_errors\030\001 \003"
-          + "(\0132C.google.logging.v2.WriteLogEntriesPa"
-          + "rtialErrors.LogEntryErrorsEntry\032I\n\023LogEn"
-          + "tryErrorsEntry\022\013\n\003key\030\001 \001(\005\022!\n\005value\030\002 \001"
-          + "(\0132\022.google.rpc.Status:\0028\001\"\221\001\n\025ListLogEn"
-          + "triesRequest\022\027\n\013project_ids\030\001 \003(\tB\002\030\001\022\026\n"
-          + "\016resource_names\030\010 \003(\t\022\016\n\006filter\030\002 \001(\t\022\020\n"
-          + "\010order_by\030\003 \001(\t\022\021\n\tpage_size\030\004 \001(\005\022\022\n\npa"
-          + "ge_token\030\005 \001(\t\"_\n\026ListLogEntriesResponse"
-          + "\022,\n\007entries\030\001 \003(\0132\033.google.logging.v2.Lo"
-          + "gEntry\022\027\n\017next_page_token\030\002 \001(\t\"P\n\'ListM"
-          + "onitoredResourceDescriptorsRequest\022\021\n\tpa"
-          + "ge_size\030\001 \001(\005\022\022\n\npage_token\030\002 \001(\t\"\212\001\n(Li"
-          + "stMonitoredResourceDescriptorsResponse\022E"
-          + "\n\024resource_descriptors\030\001 \003(\0132\'.google.ap"
-          + "i.MonitoredResourceDescriptor\022\027\n\017next_pa"
-          + "ge_token\030\002 \001(\t\"H\n\017ListLogsRequest\022\016\n\006par"
-          + "ent\030\001 \001(\t\022\021\n\tpage_size\030\002 \001(\005\022\022\n\npage_tok"
-          + "en\030\003 \001(\t\">\n\020ListLogsResponse\022\021\n\tlog_name"
-          + "s\030\003 \003(\t\022\027\n\017next_page_token\030\002 \001(\t2\205\n\n\020Log"
-          + "gingServiceV2\022\210\002\n\tDeleteLog\022#.google.log"
-          + "ging.v2.DeleteLogRequest\032\026.google.protob"
-          + "uf.Empty\"\275\001\202\323\344\223\002\266\001* /v2/{log_name=projec"
-          + "ts/*/logs/*}Z\033*\031/v2/{log_name=*/*/logs/*"
-          + "}Z\'*%/v2/{log_name=organizations/*/logs/"
-          + "*}Z!*\037/v2/{log_name=folders/*/logs/*}Z)*"
-          + "\'/v2/{log_name=billingAccounts/*/logs/*}"
-          + "\022\206\001\n\017WriteLogEntries\022).google.logging.v2"
-          + ".WriteLogEntriesRequest\032*.google.logging"
-          + ".v2.WriteLogEntriesResponse\"\034\202\323\344\223\002\026\"\021/v2"
-          + "/entries:write:\001*\022\202\001\n\016ListLogEntries\022(.g"
-          + "oogle.logging.v2.ListLogEntriesRequest\032)"
-          + ".google.logging.v2.ListLogEntriesRespons"
-          + "e\"\033\202\323\344\223\002\025\"\020/v2/entries:list:\001*\022\305\001\n ListM"
-          + "onitoredResourceDescriptors\022:.google.log"
-          + "ging.v2.ListMonitoredResourceDescriptors"
-          + "Request\032;.google.logging.v2.ListMonitore"
-          + "dResourceDescriptorsResponse\"(\202\323\344\223\002\"\022 /v"
-          + "2/monitoredResourceDescriptors\022\377\001\n\010ListL"
-          + "ogs\022\".google.logging.v2.ListLogsRequest\032"
-          + "#.google.logging.v2.ListLogsResponse\"\251\001\202"
-          + "\323\344\223\002\242\001\022\025/v2/{parent=*/*}/logsZ\036\022\034/v2/{pa"
-          + "rent=projects/*}/logsZ#\022!/v2/{parent=org"
-          + "anizations/*}/logsZ\035\022\033/v2/{parent=folder"
-          + "s/*}/logsZ%\022#/v2/{parent=billingAccounts"
-          + "/*}/logs\032\215\002\312A\026logging.googleapis.com\322A\360\001"
-          + "https://www.googleapis.com/auth/cloud-pl"
-          + "atform,https://www.googleapis.com/auth/c"
-          + "loud-platform.read-only,https://www.goog"
-          + "leapis.com/auth/logging.admin,https://ww"
-          + "w.googleapis.com/auth/logging.read,https"
-          + "://www.googleapis.com/auth/logging.write"
-          + "B\230\001\n\025com.google.logging.v2B\014LoggingProto"
-          + "P\001Z8google.golang.org/genproto/googleapi"
-          + "s/logging/v2;logging\370\001\001\252\002\027Google.Cloud.L"
-          + "ogging.V2\312\002\027Google\\Cloud\\Logging\\V2b\006pro"
-          + "to3"
+          + "e.logging.v2\032\027google/api/client.proto\032\037g"
+          + "oogle/api/field_behavior.proto\032#google/a"
+          + "pi/monitored_resource.proto\032\031google/api/"
+          + "resource.proto\032!google/logging/v2/log_en"
+          + "try.proto\032&google/logging/v2/logging_con"
+          + "fig.proto\032\036google/protobuf/duration.prot"
+          + "o\032\033google/protobuf/empty.proto\032\037google/p"
+          + "rotobuf/timestamp.proto\032\027google/rpc/stat"
+          + "us.proto\032\034google/api/annotations.proto\"H"
+          + "\n\020DeleteLogRequest\0224\n\010log_name\030\001 \001(\tB\"\340A"
+          + "\002\372A\034\n\032logging.googleapis.com/Log\"\346\002\n\026Wri"
+          + "teLogEntriesRequest\0224\n\010log_name\030\001 \001(\tB\"\340"
+          + "A\001\372A\034\n\032logging.googleapis.com/Log\0224\n\010res"
+          + "ource\030\002 \001(\0132\035.google.api.MonitoredResour"
+          + "ceB\003\340A\001\022J\n\006labels\030\003 \003(\01325.google.logging"
+          + ".v2.WriteLogEntriesRequest.LabelsEntryB\003"
+          + "\340A\001\0221\n\007entries\030\004 \003(\0132\033.google.logging.v2"
+          + ".LogEntryB\003\340A\002\022\034\n\017partial_success\030\005 \001(\010B"
+          + "\003\340A\001\022\024\n\007dry_run\030\006 \001(\010B\003\340A\001\032-\n\013LabelsEntr"
+          + "y\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\031\n\027Wri"
+          + "teLogEntriesResponse\"\310\001\n\034WriteLogEntries"
+          + "PartialErrors\022]\n\020log_entry_errors\030\001 \003(\0132"
+          + "C.google.logging.v2.WriteLogEntriesParti"
+          + "alErrors.LogEntryErrorsEntry\032I\n\023LogEntry"
+          + "ErrorsEntry\022\013\n\003key\030\001 \001(\005\022!\n\005value\030\002 \001(\0132"
+          + "\022.google.rpc.Status:\0028\001\"\260\001\n\025ListLogEntri"
+          + "esRequest\022:\n\016resource_names\030\010 \003(\tB\"\340A\002\372A"
+          + "\034\022\032logging.googleapis.com/Log\022\023\n\006filter\030"
+          + "\002 \001(\tB\003\340A\001\022\025\n\010order_by\030\003 \001(\tB\003\340A\001\022\026\n\tpag"
+          + "e_size\030\004 \001(\005B\003\340A\001\022\027\n\npage_token\030\005 \001(\tB\003\340"
+          + "A\001\"_\n\026ListLogEntriesResponse\022,\n\007entries\030"
+          + "\001 \003(\0132\033.google.logging.v2.LogEntry\022\027\n\017ne"
+          + "xt_page_token\030\002 \001(\t\"Z\n\'ListMonitoredReso"
+          + "urceDescriptorsRequest\022\026\n\tpage_size\030\001 \001("
+          + "\005B\003\340A\001\022\027\n\npage_token\030\002 \001(\tB\003\340A\001\"\212\001\n(List"
+          + "MonitoredResourceDescriptorsResponse\022E\n\024"
+          + "resource_descriptors\030\001 \003(\0132\'.google.api."
+          + "MonitoredResourceDescriptor\022\027\n\017next_page"
+          + "_token\030\002 \001(\t\"v\n\017ListLogsRequest\0222\n\006paren"
+          + "t\030\001 \001(\tB\"\340A\002\372A\034\022\032logging.googleapis.com/"
+          + "Log\022\026\n\tpage_size\030\002 \001(\005B\003\340A\001\022\027\n\npage_toke"
+          + "n\030\003 \001(\tB\003\340A\001\">\n\020ListLogsResponse\022\021\n\tlog_"
+          + "names\030\003 \003(\t\022\027\n\017next_page_token\030\002 \001(\t2\335\n\n"
+          + "\020LoggingServiceV2\022\223\002\n\tDeleteLog\022#.google"
+          + ".logging.v2.DeleteLogRequest\032\026.google.pr"
+          + "otobuf.Empty\"\310\001\202\323\344\223\002\266\001* /v2/{log_name=pr"
+          + "ojects/*/logs/*}Z\033*\031/v2/{log_name=*/*/lo"
+          + "gs/*}Z\'*%/v2/{log_name=organizations/*/l"
+          + "ogs/*}Z!*\037/v2/{log_name=folders/*/logs/*"
+          + "}Z)*\'/v2/{log_name=billingAccounts/*/log"
+          + "s/*}\332A\010log_name\022\251\001\n\017WriteLogEntries\022).go"
+          + "ogle.logging.v2.WriteLogEntriesRequest\032*"
+          + ".google.logging.v2.WriteLogEntriesRespon"
+          + "se\"?\202\323\344\223\002\026\"\021/v2/entries:write:\001*\332A log_n"
+          + "ame,resource,labels,entries\022\243\001\n\016ListLogE"
+          + "ntries\022(.google.logging.v2.ListLogEntrie"
+          + "sRequest\032).google.logging.v2.ListLogEntr"
+          + "iesResponse\"<\202\323\344\223\002\025\"\020/v2/entries:list:\001*"
+          + "\332A\036resource_names,filter,order_by\022\305\001\n Li"
+          + "stMonitoredResourceDescriptors\022:.google."
+          + "logging.v2.ListMonitoredResourceDescript"
+          + "orsRequest\032;.google.logging.v2.ListMonit"
+          + "oredResourceDescriptorsResponse\"(\202\323\344\223\002\"\022"
+          + " /v2/monitoredResourceDescriptors\022\210\002\n\010Li"
+          + "stLogs\022\".google.logging.v2.ListLogsReque"
+          + "st\032#.google.logging.v2.ListLogsResponse\""
+          + "\262\001\202\323\344\223\002\242\001\022\025/v2/{parent=*/*}/logsZ\036\022\034/v2/"
+          + "{parent=projects/*}/logsZ#\022!/v2/{parent="
+          + "organizations/*}/logsZ\035\022\033/v2/{parent=fol"
+          + "ders/*}/logsZ%\022#/v2/{parent=billingAccou"
+          + "nts/*}/logs\332A\006parent\032\215\002\312A\026logging.google"
+          + "apis.com\322A\360\001https://www.googleapis.com/a"
+          + "uth/cloud-platform,https://www.googleapi"
+          + "s.com/auth/cloud-platform.read-only,http"
+          + "s://www.googleapis.com/auth/logging.admi"
+          + "n,https://www.googleapis.com/auth/loggin"
+          + "g.read,https://www.googleapis.com/auth/l"
+          + "ogging.writeB\265\001\n\025com.google.logging.v2B\014"
+          + "LoggingProtoP\001Z8google.golang.org/genpro"
+          + "to/googleapis/logging/v2;logging\370\001\001\252\002\027Go"
+          + "ogle.Cloud.Logging.V2\312\002\027Google\\Cloud\\Log"
+          + "ging\\V2\352\002\032Google::Cloud::Logging::V2b\006pr"
+          + "oto3"
     };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor.internalBuildGeneratedFileFrom(
-        descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.google.api.MonitoredResourceProto.getDescriptor(),
-          com.google.logging.v2.LogEntryProto.getDescriptor(),
-          com.google.logging.v2.LoggingConfigProto.getDescriptor(),
-          com.google.protobuf.DurationProto.getDescriptor(),
-          com.google.protobuf.EmptyProto.getDescriptor(),
-          com.google.protobuf.TimestampProto.getDescriptor(),
-          com.google.rpc.StatusProto.getDescriptor(),
-          com.google.api.AnnotationsProto.getDescriptor(),
-          com.google.api.ClientProto.getDescriptor(),
-        },
-        assigner);
+    descriptor =
+        com.google.protobuf.Descriptors.FileDescriptor.internalBuildGeneratedFileFrom(
+            descriptorData,
+            new com.google.protobuf.Descriptors.FileDescriptor[] {
+              com.google.api.ClientProto.getDescriptor(),
+              com.google.api.FieldBehaviorProto.getDescriptor(),
+              com.google.api.MonitoredResourceProto.getDescriptor(),
+              com.google.api.ResourceProto.getDescriptor(),
+              com.google.logging.v2.LogEntryProto.getDescriptor(),
+              com.google.logging.v2.LoggingConfigProto.getDescriptor(),
+              com.google.protobuf.DurationProto.getDescriptor(),
+              com.google.protobuf.EmptyProto.getDescriptor(),
+              com.google.protobuf.TimestampProto.getDescriptor(),
+              com.google.rpc.StatusProto.getDescriptor(),
+              com.google.api.AnnotationsProto.getDescriptor(),
+            });
     internal_static_google_logging_v2_DeleteLogRequest_descriptor =
         getDescriptor().getMessageTypes().get(0);
     internal_static_google_logging_v2_DeleteLogRequest_fieldAccessorTable =
@@ -236,7 +239,7 @@ public final class LoggingProto {
         new com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
             internal_static_google_logging_v2_ListLogEntriesRequest_descriptor,
             new java.lang.String[] {
-              "ProjectIds", "ResourceNames", "Filter", "OrderBy", "PageSize", "PageToken",
+              "ResourceNames", "Filter", "OrderBy", "PageSize", "PageToken",
             });
     internal_static_google_logging_v2_ListLogEntriesResponse_descriptor =
         getDescriptor().getMessageTypes().get(5);
@@ -281,11 +284,17 @@ public final class LoggingProto {
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(com.google.api.ClientProto.defaultHost);
+    registry.add(com.google.api.FieldBehaviorProto.fieldBehavior);
     registry.add(com.google.api.AnnotationsProto.http);
+    registry.add(com.google.api.ClientProto.methodSignature);
     registry.add(com.google.api.ClientProto.oauthScopes);
+    registry.add(com.google.api.ResourceProto.resourceReference);
     com.google.protobuf.Descriptors.FileDescriptor.internalUpdateFileDescriptor(
         descriptor, registry);
+    com.google.api.ClientProto.getDescriptor();
+    com.google.api.FieldBehaviorProto.getDescriptor();
     com.google.api.MonitoredResourceProto.getDescriptor();
+    com.google.api.ResourceProto.getDescriptor();
     com.google.logging.v2.LogEntryProto.getDescriptor();
     com.google.logging.v2.LoggingConfigProto.getDescriptor();
     com.google.protobuf.DurationProto.getDescriptor();
@@ -293,7 +302,6 @@ public final class LoggingProto {
     com.google.protobuf.TimestampProto.getDescriptor();
     com.google.rpc.StatusProto.getDescriptor();
     com.google.api.AnnotationsProto.getDescriptor();
-    com.google.api.ClientProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

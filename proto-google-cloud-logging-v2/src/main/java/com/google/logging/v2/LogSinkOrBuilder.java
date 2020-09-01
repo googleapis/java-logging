@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,28 +27,32 @@ public interface LogSinkOrBuilder
    *
    *
    * <pre>
-   * Required. The client-assigned sink identifier, unique within the
-   * project. Example: `"my-syslog-errors-to-pubsub"`. Sink identifiers are
-   * limited to 100 characters and can include only the following characters:
-   * upper and lower-case alphanumeric characters, underscores, hyphens, and
-   * periods.
+   * Required. The client-assigned sink identifier, unique within the project. Example:
+   * `"my-syslog-errors-to-pubsub"`. Sink identifiers are limited to 100
+   * characters and can include only the following characters: upper and
+   * lower-case alphanumeric characters, underscores, hyphens, and periods.
+   * First character has to be alphanumeric.
    * </pre>
    *
-   * <code>string name = 1;</code>
+   * <code>string name = 1 [(.google.api.field_behavior) = REQUIRED];</code>
+   *
+   * @return The name.
    */
   java.lang.String getName();
   /**
    *
    *
    * <pre>
-   * Required. The client-assigned sink identifier, unique within the
-   * project. Example: `"my-syslog-errors-to-pubsub"`. Sink identifiers are
-   * limited to 100 characters and can include only the following characters:
-   * upper and lower-case alphanumeric characters, underscores, hyphens, and
-   * periods.
+   * Required. The client-assigned sink identifier, unique within the project. Example:
+   * `"my-syslog-errors-to-pubsub"`. Sink identifiers are limited to 100
+   * characters and can include only the following characters: upper and
+   * lower-case alphanumeric characters, underscores, hyphens, and periods.
+   * First character has to be alphanumeric.
    * </pre>
    *
-   * <code>string name = 1;</code>
+   * <code>string name = 1 [(.google.api.field_behavior) = REQUIRED];</code>
+   *
+   * @return The bytes for name.
    */
   com.google.protobuf.ByteString getNameBytes();
 
@@ -63,10 +67,14 @@ public interface LogSinkOrBuilder
    * The sink's `writer_identity`, set when the sink is created, must
    * have permission to write to the destination or else the log
    * entries are not exported. For more information, see
-   * [Exporting Logs with Sinks](/logging/docs/api/tasks/exporting-logs).
+   * [Exporting Logs with Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * </pre>
    *
-   * <code>string destination = 3;</code>
+   * <code>
+   * string destination = 3 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The destination.
    */
   java.lang.String getDestination();
   /**
@@ -80,10 +88,14 @@ public interface LogSinkOrBuilder
    * The sink's `writer_identity`, set when the sink is created, must
    * have permission to write to the destination or else the log
    * entries are not exported. For more information, see
-   * [Exporting Logs with Sinks](/logging/docs/api/tasks/exporting-logs).
+   * [Exporting Logs with Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * </pre>
    *
-   * <code>string destination = 3;</code>
+   * <code>
+   * string destination = 3 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The bytes for destination.
    */
   com.google.protobuf.ByteString getDestinationBytes();
 
@@ -91,28 +103,73 @@ public interface LogSinkOrBuilder
    *
    *
    * <pre>
-   * Optional. An [advanced logs filter](/logging/docs/view/advanced-queries). The only
+   * Optional. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries). The only
    * exported log entries are those that are in the resource owning the sink and
    * that match the filter. For example:
    *     logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity&gt;=ERROR
    * </pre>
    *
-   * <code>string filter = 5;</code>
+   * <code>string filter = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The filter.
    */
   java.lang.String getFilter();
   /**
    *
    *
    * <pre>
-   * Optional. An [advanced logs filter](/logging/docs/view/advanced-queries). The only
+   * Optional. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries). The only
    * exported log entries are those that are in the resource owning the sink and
    * that match the filter. For example:
    *     logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity&gt;=ERROR
    * </pre>
    *
-   * <code>string filter = 5;</code>
+   * <code>string filter = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The bytes for filter.
    */
   com.google.protobuf.ByteString getFilterBytes();
+
+  /**
+   *
+   *
+   * <pre>
+   * Optional. A description of this sink.
+   * The maximum length of the description is 8000 characters.
+   * </pre>
+   *
+   * <code>string description = 18 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The description.
+   */
+  java.lang.String getDescription();
+  /**
+   *
+   *
+   * <pre>
+   * Optional. A description of this sink.
+   * The maximum length of the description is 8000 characters.
+   * </pre>
+   *
+   * <code>string description = 18 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The bytes for description.
+   */
+  com.google.protobuf.ByteString getDescriptionBytes();
+
+  /**
+   *
+   *
+   * <pre>
+   * Optional. If set to True, then this sink is disabled and it does not
+   * export any log entries.
+   * </pre>
+   *
+   * <code>bool disabled = 19 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The disabled.
+   */
+  boolean getDisabled();
 
   /**
    *
@@ -124,6 +181,8 @@ public interface LogSinkOrBuilder
    *
    * <code>.google.logging.v2.LogSink.VersionFormat output_version_format = 6 [deprecated = true];
    * </code>
+   *
+   * @return The enum numeric value on the wire for outputVersionFormat.
    */
   @java.lang.Deprecated
   int getOutputVersionFormatValue();
@@ -137,6 +196,8 @@ public interface LogSinkOrBuilder
    *
    * <code>.google.logging.v2.LogSink.VersionFormat output_version_format = 6 [deprecated = true];
    * </code>
+   *
+   * @return The outputVersionFormat.
    */
   @java.lang.Deprecated
   com.google.logging.v2.LogSink.VersionFormat getOutputVersionFormat();
@@ -145,44 +206,44 @@ public interface LogSinkOrBuilder
    *
    *
    * <pre>
-   * Output only. An IAM identity&amp;mdash;a service account or group&amp;mdash;under
-   * which Logging writes the exported log entries to the sink's destination.
-   * This field is set by
-   * [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink]
-   * and
-   * [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink]
-   * based on the value of `unique_writer_identity` in those methods.
+   * Output only. An IAM identity–a service account or group&amp;mdash;under which Logging
+   * writes the exported log entries to the sink's destination. This field is
+   * set by [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink] and
+   * [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink] based on the
+   * value of `unique_writer_identity` in those methods.
    * Until you grant this identity write-access to the destination, log entry
    * exports from this sink will fail. For more information,
    * see [Granting Access for a
-   * Resource](/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+   * Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
    * Consult the destination service's documentation to determine the
    * appropriate IAM roles to assign to the identity.
    * </pre>
    *
-   * <code>string writer_identity = 8;</code>
+   * <code>string writer_identity = 8 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
+   *
+   * @return The writerIdentity.
    */
   java.lang.String getWriterIdentity();
   /**
    *
    *
    * <pre>
-   * Output only. An IAM identity&amp;mdash;a service account or group&amp;mdash;under
-   * which Logging writes the exported log entries to the sink's destination.
-   * This field is set by
-   * [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink]
-   * and
-   * [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink]
-   * based on the value of `unique_writer_identity` in those methods.
+   * Output only. An IAM identity–a service account or group&amp;mdash;under which Logging
+   * writes the exported log entries to the sink's destination. This field is
+   * set by [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink] and
+   * [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink] based on the
+   * value of `unique_writer_identity` in those methods.
    * Until you grant this identity write-access to the destination, log entry
    * exports from this sink will fail. For more information,
    * see [Granting Access for a
-   * Resource](/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+   * Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
    * Consult the destination service's documentation to determine the
    * appropriate IAM roles to assign to the identity.
    * </pre>
    *
-   * <code>string writer_identity = 8;</code>
+   * <code>string writer_identity = 8 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
+   *
+   * @return The bytes for writerIdentity.
    */
   com.google.protobuf.ByteString getWriterIdentityBytes();
 
@@ -204,7 +265,9 @@ public interface LogSinkOrBuilder
    *     resource.type=gce_instance
    * </pre>
    *
-   * <code>bool include_children = 9;</code>
+   * <code>bool include_children = 9 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The includeChildren.
    */
   boolean getIncludeChildren();
 
@@ -215,7 +278,11 @@ public interface LogSinkOrBuilder
    * Optional. Options that affect sinks exporting data to BigQuery.
    * </pre>
    *
-   * <code>.google.logging.v2.BigQueryOptions bigquery_options = 12;</code>
+   * <code>
+   * .google.logging.v2.BigQueryOptions bigquery_options = 12 [(.google.api.field_behavior) = OPTIONAL];
+   * </code>
+   *
+   * @return Whether the bigqueryOptions field is set.
    */
   boolean hasBigqueryOptions();
   /**
@@ -225,7 +292,11 @@ public interface LogSinkOrBuilder
    * Optional. Options that affect sinks exporting data to BigQuery.
    * </pre>
    *
-   * <code>.google.logging.v2.BigQueryOptions bigquery_options = 12;</code>
+   * <code>
+   * .google.logging.v2.BigQueryOptions bigquery_options = 12 [(.google.api.field_behavior) = OPTIONAL];
+   * </code>
+   *
+   * @return The bigqueryOptions.
    */
   com.google.logging.v2.BigQueryOptions getBigqueryOptions();
   /**
@@ -235,7 +306,9 @@ public interface LogSinkOrBuilder
    * Optional. Options that affect sinks exporting data to BigQuery.
    * </pre>
    *
-   * <code>.google.logging.v2.BigQueryOptions bigquery_options = 12;</code>
+   * <code>
+   * .google.logging.v2.BigQueryOptions bigquery_options = 12 [(.google.api.field_behavior) = OPTIONAL];
+   * </code>
    */
   com.google.logging.v2.BigQueryOptionsOrBuilder getBigqueryOptionsOrBuilder();
 
@@ -247,7 +320,10 @@ public interface LogSinkOrBuilder
    * This field may not be present for older sinks.
    * </pre>
    *
-   * <code>.google.protobuf.Timestamp create_time = 13;</code>
+   * <code>.google.protobuf.Timestamp create_time = 13 [(.google.api.field_behavior) = OUTPUT_ONLY];
+   * </code>
+   *
+   * @return Whether the createTime field is set.
    */
   boolean hasCreateTime();
   /**
@@ -258,7 +334,10 @@ public interface LogSinkOrBuilder
    * This field may not be present for older sinks.
    * </pre>
    *
-   * <code>.google.protobuf.Timestamp create_time = 13;</code>
+   * <code>.google.protobuf.Timestamp create_time = 13 [(.google.api.field_behavior) = OUTPUT_ONLY];
+   * </code>
+   *
+   * @return The createTime.
    */
   com.google.protobuf.Timestamp getCreateTime();
   /**
@@ -269,7 +348,8 @@ public interface LogSinkOrBuilder
    * This field may not be present for older sinks.
    * </pre>
    *
-   * <code>.google.protobuf.Timestamp create_time = 13;</code>
+   * <code>.google.protobuf.Timestamp create_time = 13 [(.google.api.field_behavior) = OUTPUT_ONLY];
+   * </code>
    */
   com.google.protobuf.TimestampOrBuilder getCreateTimeOrBuilder();
 
@@ -281,7 +361,10 @@ public interface LogSinkOrBuilder
    * This field may not be present for older sinks.
    * </pre>
    *
-   * <code>.google.protobuf.Timestamp update_time = 14;</code>
+   * <code>.google.protobuf.Timestamp update_time = 14 [(.google.api.field_behavior) = OUTPUT_ONLY];
+   * </code>
+   *
+   * @return Whether the updateTime field is set.
    */
   boolean hasUpdateTime();
   /**
@@ -292,7 +375,10 @@ public interface LogSinkOrBuilder
    * This field may not be present for older sinks.
    * </pre>
    *
-   * <code>.google.protobuf.Timestamp update_time = 14;</code>
+   * <code>.google.protobuf.Timestamp update_time = 14 [(.google.api.field_behavior) = OUTPUT_ONLY];
+   * </code>
+   *
+   * @return The updateTime.
    */
   com.google.protobuf.Timestamp getUpdateTime();
   /**
@@ -303,77 +389,10 @@ public interface LogSinkOrBuilder
    * This field may not be present for older sinks.
    * </pre>
    *
-   * <code>.google.protobuf.Timestamp update_time = 14;</code>
+   * <code>.google.protobuf.Timestamp update_time = 14 [(.google.api.field_behavior) = OUTPUT_ONLY];
+   * </code>
    */
   com.google.protobuf.TimestampOrBuilder getUpdateTimeOrBuilder();
-
-  /**
-   *
-   *
-   * <pre>
-   * Do not use. This field is ignored.
-   * </pre>
-   *
-   * <code>.google.protobuf.Timestamp start_time = 10 [deprecated = true];</code>
-   */
-  @java.lang.Deprecated
-  boolean hasStartTime();
-  /**
-   *
-   *
-   * <pre>
-   * Do not use. This field is ignored.
-   * </pre>
-   *
-   * <code>.google.protobuf.Timestamp start_time = 10 [deprecated = true];</code>
-   */
-  @java.lang.Deprecated
-  com.google.protobuf.Timestamp getStartTime();
-  /**
-   *
-   *
-   * <pre>
-   * Do not use. This field is ignored.
-   * </pre>
-   *
-   * <code>.google.protobuf.Timestamp start_time = 10 [deprecated = true];</code>
-   */
-  @java.lang.Deprecated
-  com.google.protobuf.TimestampOrBuilder getStartTimeOrBuilder();
-
-  /**
-   *
-   *
-   * <pre>
-   * Do not use. This field is ignored.
-   * </pre>
-   *
-   * <code>.google.protobuf.Timestamp end_time = 11 [deprecated = true];</code>
-   */
-  @java.lang.Deprecated
-  boolean hasEndTime();
-  /**
-   *
-   *
-   * <pre>
-   * Do not use. This field is ignored.
-   * </pre>
-   *
-   * <code>.google.protobuf.Timestamp end_time = 11 [deprecated = true];</code>
-   */
-  @java.lang.Deprecated
-  com.google.protobuf.Timestamp getEndTime();
-  /**
-   *
-   *
-   * <pre>
-   * Do not use. This field is ignored.
-   * </pre>
-   *
-   * <code>.google.protobuf.Timestamp end_time = 11 [deprecated = true];</code>
-   */
-  @java.lang.Deprecated
-  com.google.protobuf.TimestampOrBuilder getEndTimeOrBuilder();
 
   public com.google.logging.v2.LogSink.OptionsCase getOptionsCase();
 }

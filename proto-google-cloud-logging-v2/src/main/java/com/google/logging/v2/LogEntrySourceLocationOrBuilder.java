@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,9 @@ public interface LogEntrySourceLocationOrBuilder
    * might be a simple name or a fully-qualified name.
    * </pre>
    *
-   * <code>string file = 1;</code>
+   * <code>string file = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The file.
    */
   java.lang.String getFile();
   /**
@@ -42,7 +44,9 @@ public interface LogEntrySourceLocationOrBuilder
    * might be a simple name or a fully-qualified name.
    * </pre>
    *
-   * <code>string file = 1;</code>
+   * <code>string file = 1 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The bytes for file.
    */
   com.google.protobuf.ByteString getFileBytes();
 
@@ -54,7 +58,9 @@ public interface LogEntrySourceLocationOrBuilder
    * available.
    * </pre>
    *
-   * <code>int64 line = 2;</code>
+   * <code>int64 line = 2 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The line.
    */
   long getLine();
 
@@ -70,7 +76,9 @@ public interface LogEntrySourceLocationOrBuilder
    * (Python).
    * </pre>
    *
-   * <code>string function = 3;</code>
+   * <code>string function = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The function.
    */
   java.lang.String getFunction();
   /**
@@ -85,7 +93,9 @@ public interface LogEntrySourceLocationOrBuilder
    * (Python).
    * </pre>
    *
-   * <code>string function = 3;</code>
+   * <code>string function = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The bytes for function.
    */
   com.google.protobuf.ByteString getFunctionBytes();
 }

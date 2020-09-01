@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -67,8 +67,12 @@ import javax.annotation.Generated;
  * <code>
  * LoggingSettings.Builder loggingSettingsBuilder =
  *     LoggingSettings.newBuilder();
- * loggingSettingsBuilder.deleteLogSettings().getRetrySettings().toBuilder()
- *     .setTotalTimeout(Duration.ofSeconds(30));
+ * loggingSettingsBuilder
+ *     .deleteLogSettings()
+ *     .setRetrySettings(
+ *         loggingSettingsBuilder.deleteLogSettings().getRetrySettings().toBuilder()
+ *             .setTotalTimeout(Duration.ofSeconds(30))
+ *             .build());
  * LoggingSettings loggingSettings = loggingSettingsBuilder.build();
  * </code>
  * </pre>
@@ -81,17 +85,17 @@ public class LoggingSettings extends ClientSettings<LoggingSettings> {
     return ((LoggingServiceV2StubSettings) getStubSettings()).deleteLogSettings();
   }
 
-  /** Returns the object with the settings used for calls to writeLogEntries. */
-  public BatchingCallSettings<WriteLogEntriesRequest, WriteLogEntriesResponse>
-      writeLogEntriesSettings() {
-    return ((LoggingServiceV2StubSettings) getStubSettings()).writeLogEntriesSettings();
-  }
-
   /** Returns the object with the settings used for calls to listLogEntries. */
   public PagedCallSettings<
           ListLogEntriesRequest, ListLogEntriesResponse, ListLogEntriesPagedResponse>
       listLogEntriesSettings() {
     return ((LoggingServiceV2StubSettings) getStubSettings()).listLogEntriesSettings();
+  }
+
+  /** Returns the object with the settings used for calls to writeLogEntries. */
+  public BatchingCallSettings<WriteLogEntriesRequest, WriteLogEntriesResponse>
+      writeLogEntriesSettings() {
+    return ((LoggingServiceV2StubSettings) getStubSettings()).writeLogEntriesSettings();
   }
 
   /** Returns the object with the settings used for calls to listMonitoredResourceDescriptors. */
@@ -211,17 +215,17 @@ public class LoggingSettings extends ClientSettings<LoggingSettings> {
       return getStubSettingsBuilder().deleteLogSettings();
     }
 
-    /** Returns the builder for the settings used for calls to writeLogEntries. */
-    public BatchingCallSettings.Builder<WriteLogEntriesRequest, WriteLogEntriesResponse>
-        writeLogEntriesSettings() {
-      return getStubSettingsBuilder().writeLogEntriesSettings();
-    }
-
     /** Returns the builder for the settings used for calls to listLogEntries. */
     public PagedCallSettings.Builder<
             ListLogEntriesRequest, ListLogEntriesResponse, ListLogEntriesPagedResponse>
         listLogEntriesSettings() {
       return getStubSettingsBuilder().listLogEntriesSettings();
+    }
+
+    /** Returns the builder for the settings used for calls to writeLogEntries. */
+    public BatchingCallSettings.Builder<WriteLogEntriesRequest, WriteLogEntriesResponse>
+        writeLogEntriesSettings() {
+      return getStubSettingsBuilder().writeLogEntriesSettings();
     }
 
     /** Returns the builder for the settings used for calls to listMonitoredResourceDescriptors. */

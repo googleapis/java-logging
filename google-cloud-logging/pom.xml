@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.google.cloud</groupId>
   <artifactId>google-cloud-logging</artifactId>
-  <version>1.99.0</version><!-- {x-version-update:google-cloud-logging:current} -->
+  <version>1.101.3-SNAPSHOT</version><!-- {x-version-update:google-cloud-logging:current} -->
   <packaging>jar</packaging>
   <name>Google Cloud Logging</name>
   <url>https://github.com/googleapis/java-logging</url>
@@ -11,12 +11,16 @@
   <parent>
     <groupId>com.google.cloud</groupId>
     <artifactId>google-cloud-logging-parent</artifactId>
-    <version>1.99.0</version><!-- {x-version-update:google-cloud-logging:current} -->
+    <version>1.101.3-SNAPSHOT</version><!-- {x-version-update:google-cloud-logging:current} -->
   </parent>
   <properties>
     <site.installationModule>google-cloud-logging</site.installationModule>
   </properties>
   <dependencies>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+    </dependency>
     <dependency>
       <groupId>io.grpc</groupId>
       <artifactId>grpc-api</artifactId>
@@ -45,10 +49,6 @@
     <dependency>
       <groupId>com.google.api.grpc</groupId>
       <artifactId>proto-google-cloud-logging-v2</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
     </dependency>
     <dependency>
       <groupId>com.google.api</groupId>
@@ -124,4 +124,13 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
 </project>

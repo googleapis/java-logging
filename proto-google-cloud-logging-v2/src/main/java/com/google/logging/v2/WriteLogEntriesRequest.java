@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,6 +40,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
   private WriteLogEntriesRequest() {
     logName_ = "";
     entries_ = java.util.Collections.emptyList();
+  }
+
+  @java.lang.Override
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(UnusedPrivateParameter unused) {
+    return new WriteLogEntriesRequest();
   }
 
   @java.lang.Override
@@ -90,10 +96,10 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
             }
           case 26:
             {
-              if (!((mutable_bitField0_ & 0x00000004) != 0)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 labels_ =
                     com.google.protobuf.MapField.newMapField(LabelsDefaultEntryHolder.defaultEntry);
-                mutable_bitField0_ |= 0x00000004;
+                mutable_bitField0_ |= 0x00000001;
               }
               com.google.protobuf.MapEntry<java.lang.String, java.lang.String> labels__ =
                   input.readMessage(
@@ -103,9 +109,9 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
             }
           case 34:
             {
-              if (!((mutable_bitField0_ & 0x00000008) != 0)) {
+              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
                 entries_ = new java.util.ArrayList<com.google.logging.v2.LogEntry>();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000002;
               }
               entries_.add(
                   input.readMessage(com.google.logging.v2.LogEntry.parser(), extensionRegistry));
@@ -135,7 +141,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
     } catch (java.io.IOException e) {
       throw new com.google.protobuf.InvalidProtocolBufferException(e).setUnfinishedMessage(this);
     } finally {
-      if (((mutable_bitField0_ & 0x00000008) != 0)) {
+      if (((mutable_bitField0_ & 0x00000002) != 0)) {
         entries_ = java.util.Collections.unmodifiableList(entries_);
       }
       this.unknownFields = unknownFields.build();
@@ -169,7 +175,6 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
             com.google.logging.v2.WriteLogEntriesRequest.Builder.class);
   }
 
-  private int bitField0_;
   public static final int LOG_NAME_FIELD_NUMBER = 1;
   private volatile java.lang.Object logName_;
   /**
@@ -185,14 +190,19 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * `[LOG_ID]` must be URL-encoded. For example:
    *     "projects/my-project-id/logs/syslog"
    *     "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
-   * The permission &lt;code&gt;logging.logEntries.create&lt;/code&gt; is needed on each
-   * project, organization, billing account, or folder that is receiving
-   * new log entries, whether the resource is specified in
-   * &lt;code&gt;logName&lt;/code&gt; or in an individual log entry.
+   * The permission `logging.logEntries.create` is needed on each project,
+   * organization, billing account, or folder that is receiving new log
+   * entries, whether the resource is specified in `logName` or in an
+   * individual log entry.
    * </pre>
    *
-   * <code>string log_name = 1;</code>
+   * <code>
+   * string log_name = 1 [(.google.api.field_behavior) = OPTIONAL, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The logName.
    */
+  @java.lang.Override
   public java.lang.String getLogName() {
     java.lang.Object ref = logName_;
     if (ref instanceof java.lang.String) {
@@ -217,14 +227,19 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * `[LOG_ID]` must be URL-encoded. For example:
    *     "projects/my-project-id/logs/syslog"
    *     "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
-   * The permission &lt;code&gt;logging.logEntries.create&lt;/code&gt; is needed on each
-   * project, organization, billing account, or folder that is receiving
-   * new log entries, whether the resource is specified in
-   * &lt;code&gt;logName&lt;/code&gt; or in an individual log entry.
+   * The permission `logging.logEntries.create` is needed on each project,
+   * organization, billing account, or folder that is receiving new log
+   * entries, whether the resource is specified in `logName` or in an
+   * individual log entry.
    * </pre>
    *
-   * <code>string log_name = 1;</code>
+   * <code>
+   * string log_name = 1 [(.google.api.field_behavior) = OPTIONAL, (.google.api.resource_reference) = { ... }
+   * </code>
+   *
+   * @return The bytes for logName.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString getLogNameBytes() {
     java.lang.Object ref = logName_;
     if (ref instanceof java.lang.String) {
@@ -251,8 +266,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * See [LogEntry][google.logging.v2.LogEntry].
    * </pre>
    *
-   * <code>.google.api.MonitoredResource resource = 2;</code>
+   * <code>.google.api.MonitoredResource resource = 2 [(.google.api.field_behavior) = OPTIONAL];
+   * </code>
+   *
+   * @return Whether the resource field is set.
    */
+  @java.lang.Override
   public boolean hasResource() {
     return resource_ != null;
   }
@@ -268,8 +287,12 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * See [LogEntry][google.logging.v2.LogEntry].
    * </pre>
    *
-   * <code>.google.api.MonitoredResource resource = 2;</code>
+   * <code>.google.api.MonitoredResource resource = 2 [(.google.api.field_behavior) = OPTIONAL];
+   * </code>
+   *
+   * @return The resource.
    */
+  @java.lang.Override
   public com.google.api.MonitoredResource getResource() {
     return resource_ == null ? com.google.api.MonitoredResource.getDefaultInstance() : resource_;
   }
@@ -285,8 +308,10 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * See [LogEntry][google.logging.v2.LogEntry].
    * </pre>
    *
-   * <code>.google.api.MonitoredResource resource = 2;</code>
+   * <code>.google.api.MonitoredResource resource = 2 [(.google.api.field_behavior) = OPTIONAL];
+   * </code>
    */
+  @java.lang.Override
   public com.google.api.MonitoredResourceOrBuilder getResourceOrBuilder() {
     return getResource();
   }
@@ -326,8 +351,9 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * See [LogEntry][google.logging.v2.LogEntry].
    * </pre>
    *
-   * <code>map&lt;string, string&gt; labels = 3;</code>
+   * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
    */
+  @java.lang.Override
   public boolean containsLabels(java.lang.String key) {
     if (key == null) {
       throw new java.lang.NullPointerException();
@@ -335,6 +361,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
     return internalGetLabels().getMap().containsKey(key);
   }
   /** Use {@link #getLabelsMap()} instead. */
+  @java.lang.Override
   @java.lang.Deprecated
   public java.util.Map<java.lang.String, java.lang.String> getLabels() {
     return getLabelsMap();
@@ -349,8 +376,9 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * See [LogEntry][google.logging.v2.LogEntry].
    * </pre>
    *
-   * <code>map&lt;string, string&gt; labels = 3;</code>
+   * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
    */
+  @java.lang.Override
   public java.util.Map<java.lang.String, java.lang.String> getLabelsMap() {
     return internalGetLabels().getMap();
   }
@@ -364,8 +392,9 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * See [LogEntry][google.logging.v2.LogEntry].
    * </pre>
    *
-   * <code>map&lt;string, string&gt; labels = 3;</code>
+   * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
    */
+  @java.lang.Override
   public java.lang.String getLabelsOrDefault(java.lang.String key, java.lang.String defaultValue) {
     if (key == null) {
       throw new java.lang.NullPointerException();
@@ -383,8 +412,9 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * See [LogEntry][google.logging.v2.LogEntry].
    * </pre>
    *
-   * <code>map&lt;string, string&gt; labels = 3;</code>
+   * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
    */
+  @java.lang.Override
   public java.lang.String getLabelsOrThrow(java.lang.String key) {
     if (key == null) {
       throw new java.lang.NullPointerException();
@@ -414,18 +444,21 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * supply their own values, the entries earlier in the list will sort before
    * the entries later in the list. See the `entries.list` method.
    * Log entries with timestamps that are more than the
-   * [logs retention period](/logging/quota-policy) in the past or more than
+   * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
    * 24 hours in the future will not be available when calling `entries.list`.
    * However, those log entries can still be
-   * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+   * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * To improve throughput and to avoid exceeding the
-   * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+   * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
    * you should try to include several log entries in this list,
    * rather than calling this method for each individual log entry.
    * </pre>
    *
-   * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+   * <code>
+   * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
    */
+  @java.lang.Override
   public java.util.List<com.google.logging.v2.LogEntry> getEntriesList() {
     return entries_;
   }
@@ -445,18 +478,21 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * supply their own values, the entries earlier in the list will sort before
    * the entries later in the list. See the `entries.list` method.
    * Log entries with timestamps that are more than the
-   * [logs retention period](/logging/quota-policy) in the past or more than
+   * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
    * 24 hours in the future will not be available when calling `entries.list`.
    * However, those log entries can still be
-   * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+   * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * To improve throughput and to avoid exceeding the
-   * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+   * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
    * you should try to include several log entries in this list,
    * rather than calling this method for each individual log entry.
    * </pre>
    *
-   * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+   * <code>
+   * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
    */
+  @java.lang.Override
   public java.util.List<? extends com.google.logging.v2.LogEntryOrBuilder>
       getEntriesOrBuilderList() {
     return entries_;
@@ -477,18 +513,21 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * supply their own values, the entries earlier in the list will sort before
    * the entries later in the list. See the `entries.list` method.
    * Log entries with timestamps that are more than the
-   * [logs retention period](/logging/quota-policy) in the past or more than
+   * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
    * 24 hours in the future will not be available when calling `entries.list`.
    * However, those log entries can still be
-   * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+   * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * To improve throughput and to avoid exceeding the
-   * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+   * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
    * you should try to include several log entries in this list,
    * rather than calling this method for each individual log entry.
    * </pre>
    *
-   * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+   * <code>
+   * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
    */
+  @java.lang.Override
   public int getEntriesCount() {
     return entries_.size();
   }
@@ -508,18 +547,21 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * supply their own values, the entries earlier in the list will sort before
    * the entries later in the list. See the `entries.list` method.
    * Log entries with timestamps that are more than the
-   * [logs retention period](/logging/quota-policy) in the past or more than
+   * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
    * 24 hours in the future will not be available when calling `entries.list`.
    * However, those log entries can still be
-   * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+   * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * To improve throughput and to avoid exceeding the
-   * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+   * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
    * you should try to include several log entries in this list,
    * rather than calling this method for each individual log entry.
    * </pre>
    *
-   * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+   * <code>
+   * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
    */
+  @java.lang.Override
   public com.google.logging.v2.LogEntry getEntries(int index) {
     return entries_.get(index);
   }
@@ -539,18 +581,21 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * supply their own values, the entries earlier in the list will sort before
    * the entries later in the list. See the `entries.list` method.
    * Log entries with timestamps that are more than the
-   * [logs retention period](/logging/quota-policy) in the past or more than
+   * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
    * 24 hours in the future will not be available when calling `entries.list`.
    * However, those log entries can still be
-   * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+   * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    * To improve throughput and to avoid exceeding the
-   * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+   * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
    * you should try to include several log entries in this list,
    * rather than calling this method for each individual log entry.
    * </pre>
    *
-   * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+   * <code>
+   * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+   * </code>
    */
+  @java.lang.Override
   public com.google.logging.v2.LogEntryOrBuilder getEntriesOrBuilder(int index) {
     return entries_.get(index);
   }
@@ -568,8 +613,11 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * keyed by the entries' zero-based index in the `entries.write` method.
    * </pre>
    *
-   * <code>bool partial_success = 5;</code>
+   * <code>bool partial_success = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The partialSuccess.
    */
+  @java.lang.Override
   public boolean getPartialSuccess() {
     return partialSuccess_;
   }
@@ -585,8 +633,11 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
    * logging API endpoints are working properly before sending valuable data.
    * </pre>
    *
-   * <code>bool dry_run = 6;</code>
+   * <code>bool dry_run = 6 [(.google.api.field_behavior) = OPTIONAL];</code>
+   *
+   * @return The dryRun.
    */
+  @java.lang.Override
   public boolean getDryRun() {
     return dryRun_;
   }
@@ -888,7 +939,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
       internalGetMutableLabels().clear();
       if (entriesBuilder_ == null) {
         entries_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000002);
       } else {
         entriesBuilder_.clear();
       }
@@ -924,7 +975,6 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
       com.google.logging.v2.WriteLogEntriesRequest result =
           new com.google.logging.v2.WriteLogEntriesRequest(this);
       int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
       result.logName_ = logName_;
       if (resourceBuilder_ == null) {
         result.resource_ = resource_;
@@ -934,9 +984,9 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
       result.labels_ = internalGetLabels();
       result.labels_.makeImmutable();
       if (entriesBuilder_ == null) {
-        if (((bitField0_ & 0x00000008) != 0)) {
+        if (((bitField0_ & 0x00000002) != 0)) {
           entries_ = java.util.Collections.unmodifiableList(entries_);
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.entries_ = entries_;
       } else {
@@ -944,7 +994,6 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
       }
       result.partialSuccess_ = partialSuccess_;
       result.dryRun_ = dryRun_;
-      result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
     }
@@ -1006,7 +1055,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
         if (!other.entries_.isEmpty()) {
           if (entries_.isEmpty()) {
             entries_ = other.entries_;
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000002);
           } else {
             ensureEntriesIsMutable();
             entries_.addAll(other.entries_);
@@ -1019,7 +1068,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
             entriesBuilder_.dispose();
             entriesBuilder_ = null;
             entries_ = other.entries_;
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000002);
             entriesBuilder_ =
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders
                     ? getEntriesFieldBuilder()
@@ -1080,13 +1129,17 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * `[LOG_ID]` must be URL-encoded. For example:
      *     "projects/my-project-id/logs/syslog"
      *     "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
-     * The permission &lt;code&gt;logging.logEntries.create&lt;/code&gt; is needed on each
-     * project, organization, billing account, or folder that is receiving
-     * new log entries, whether the resource is specified in
-     * &lt;code&gt;logName&lt;/code&gt; or in an individual log entry.
+     * The permission `logging.logEntries.create` is needed on each project,
+     * organization, billing account, or folder that is receiving new log
+     * entries, whether the resource is specified in `logName` or in an
+     * individual log entry.
      * </pre>
      *
-     * <code>string log_name = 1;</code>
+     * <code>
+     * string log_name = 1 [(.google.api.field_behavior) = OPTIONAL, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return The logName.
      */
     public java.lang.String getLogName() {
       java.lang.Object ref = logName_;
@@ -1112,13 +1165,17 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * `[LOG_ID]` must be URL-encoded. For example:
      *     "projects/my-project-id/logs/syslog"
      *     "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
-     * The permission &lt;code&gt;logging.logEntries.create&lt;/code&gt; is needed on each
-     * project, organization, billing account, or folder that is receiving
-     * new log entries, whether the resource is specified in
-     * &lt;code&gt;logName&lt;/code&gt; or in an individual log entry.
+     * The permission `logging.logEntries.create` is needed on each project,
+     * organization, billing account, or folder that is receiving new log
+     * entries, whether the resource is specified in `logName` or in an
+     * individual log entry.
      * </pre>
      *
-     * <code>string log_name = 1;</code>
+     * <code>
+     * string log_name = 1 [(.google.api.field_behavior) = OPTIONAL, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return The bytes for logName.
      */
     public com.google.protobuf.ByteString getLogNameBytes() {
       java.lang.Object ref = logName_;
@@ -1144,13 +1201,18 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * `[LOG_ID]` must be URL-encoded. For example:
      *     "projects/my-project-id/logs/syslog"
      *     "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
-     * The permission &lt;code&gt;logging.logEntries.create&lt;/code&gt; is needed on each
-     * project, organization, billing account, or folder that is receiving
-     * new log entries, whether the resource is specified in
-     * &lt;code&gt;logName&lt;/code&gt; or in an individual log entry.
+     * The permission `logging.logEntries.create` is needed on each project,
+     * organization, billing account, or folder that is receiving new log
+     * entries, whether the resource is specified in `logName` or in an
+     * individual log entry.
      * </pre>
      *
-     * <code>string log_name = 1;</code>
+     * <code>
+     * string log_name = 1 [(.google.api.field_behavior) = OPTIONAL, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @param value The logName to set.
+     * @return This builder for chaining.
      */
     public Builder setLogName(java.lang.String value) {
       if (value == null) {
@@ -1174,13 +1236,17 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * `[LOG_ID]` must be URL-encoded. For example:
      *     "projects/my-project-id/logs/syslog"
      *     "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
-     * The permission &lt;code&gt;logging.logEntries.create&lt;/code&gt; is needed on each
-     * project, organization, billing account, or folder that is receiving
-     * new log entries, whether the resource is specified in
-     * &lt;code&gt;logName&lt;/code&gt; or in an individual log entry.
+     * The permission `logging.logEntries.create` is needed on each project,
+     * organization, billing account, or folder that is receiving new log
+     * entries, whether the resource is specified in `logName` or in an
+     * individual log entry.
      * </pre>
      *
-     * <code>string log_name = 1;</code>
+     * <code>
+     * string log_name = 1 [(.google.api.field_behavior) = OPTIONAL, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearLogName() {
 
@@ -1201,13 +1267,18 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * `[LOG_ID]` must be URL-encoded. For example:
      *     "projects/my-project-id/logs/syslog"
      *     "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
-     * The permission &lt;code&gt;logging.logEntries.create&lt;/code&gt; is needed on each
-     * project, organization, billing account, or folder that is receiving
-     * new log entries, whether the resource is specified in
-     * &lt;code&gt;logName&lt;/code&gt; or in an individual log entry.
+     * The permission `logging.logEntries.create` is needed on each project,
+     * organization, billing account, or folder that is receiving new log
+     * entries, whether the resource is specified in `logName` or in an
+     * individual log entry.
      * </pre>
      *
-     * <code>string log_name = 1;</code>
+     * <code>
+     * string log_name = 1 [(.google.api.field_behavior) = OPTIONAL, (.google.api.resource_reference) = { ... }
+     * </code>
+     *
+     * @param value The bytes for logName to set.
+     * @return This builder for chaining.
      */
     public Builder setLogNameBytes(com.google.protobuf.ByteString value) {
       if (value == null) {
@@ -1238,7 +1309,10 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * See [LogEntry][google.logging.v2.LogEntry].
      * </pre>
      *
-     * <code>.google.api.MonitoredResource resource = 2;</code>
+     * <code>.google.api.MonitoredResource resource = 2 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
+     *
+     * @return Whether the resource field is set.
      */
     public boolean hasResource() {
       return resourceBuilder_ != null || resource_ != null;
@@ -1255,7 +1329,10 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * See [LogEntry][google.logging.v2.LogEntry].
      * </pre>
      *
-     * <code>.google.api.MonitoredResource resource = 2;</code>
+     * <code>.google.api.MonitoredResource resource = 2 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
+     *
+     * @return The resource.
      */
     public com.google.api.MonitoredResource getResource() {
       if (resourceBuilder_ == null) {
@@ -1278,7 +1355,8 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * See [LogEntry][google.logging.v2.LogEntry].
      * </pre>
      *
-     * <code>.google.api.MonitoredResource resource = 2;</code>
+     * <code>.google.api.MonitoredResource resource = 2 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      */
     public Builder setResource(com.google.api.MonitoredResource value) {
       if (resourceBuilder_ == null) {
@@ -1305,7 +1383,8 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * See [LogEntry][google.logging.v2.LogEntry].
      * </pre>
      *
-     * <code>.google.api.MonitoredResource resource = 2;</code>
+     * <code>.google.api.MonitoredResource resource = 2 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      */
     public Builder setResource(com.google.api.MonitoredResource.Builder builderForValue) {
       if (resourceBuilder_ == null) {
@@ -1329,7 +1408,8 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * See [LogEntry][google.logging.v2.LogEntry].
      * </pre>
      *
-     * <code>.google.api.MonitoredResource resource = 2;</code>
+     * <code>.google.api.MonitoredResource resource = 2 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      */
     public Builder mergeResource(com.google.api.MonitoredResource value) {
       if (resourceBuilder_ == null) {
@@ -1360,7 +1440,8 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * See [LogEntry][google.logging.v2.LogEntry].
      * </pre>
      *
-     * <code>.google.api.MonitoredResource resource = 2;</code>
+     * <code>.google.api.MonitoredResource resource = 2 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      */
     public Builder clearResource() {
       if (resourceBuilder_ == null) {
@@ -1385,7 +1466,8 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * See [LogEntry][google.logging.v2.LogEntry].
      * </pre>
      *
-     * <code>.google.api.MonitoredResource resource = 2;</code>
+     * <code>.google.api.MonitoredResource resource = 2 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      */
     public com.google.api.MonitoredResource.Builder getResourceBuilder() {
 
@@ -1404,7 +1486,8 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * See [LogEntry][google.logging.v2.LogEntry].
      * </pre>
      *
-     * <code>.google.api.MonitoredResource resource = 2;</code>
+     * <code>.google.api.MonitoredResource resource = 2 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      */
     public com.google.api.MonitoredResourceOrBuilder getResourceOrBuilder() {
       if (resourceBuilder_ != null) {
@@ -1427,7 +1510,8 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * See [LogEntry][google.logging.v2.LogEntry].
      * </pre>
      *
-     * <code>.google.api.MonitoredResource resource = 2;</code>
+     * <code>.google.api.MonitoredResource resource = 2 [(.google.api.field_behavior) = OPTIONAL];
+     * </code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
             com.google.api.MonitoredResource,
@@ -1481,8 +1565,9 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * See [LogEntry][google.logging.v2.LogEntry].
      * </pre>
      *
-     * <code>map&lt;string, string&gt; labels = 3;</code>
+     * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      */
+    @java.lang.Override
     public boolean containsLabels(java.lang.String key) {
       if (key == null) {
         throw new java.lang.NullPointerException();
@@ -1490,6 +1575,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
       return internalGetLabels().getMap().containsKey(key);
     }
     /** Use {@link #getLabelsMap()} instead. */
+    @java.lang.Override
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.String> getLabels() {
       return getLabelsMap();
@@ -1504,8 +1590,9 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * See [LogEntry][google.logging.v2.LogEntry].
      * </pre>
      *
-     * <code>map&lt;string, string&gt; labels = 3;</code>
+     * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      */
+    @java.lang.Override
     public java.util.Map<java.lang.String, java.lang.String> getLabelsMap() {
       return internalGetLabels().getMap();
     }
@@ -1519,8 +1606,9 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * See [LogEntry][google.logging.v2.LogEntry].
      * </pre>
      *
-     * <code>map&lt;string, string&gt; labels = 3;</code>
+     * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      */
+    @java.lang.Override
     public java.lang.String getLabelsOrDefault(
         java.lang.String key, java.lang.String defaultValue) {
       if (key == null) {
@@ -1539,8 +1627,9 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * See [LogEntry][google.logging.v2.LogEntry].
      * </pre>
      *
-     * <code>map&lt;string, string&gt; labels = 3;</code>
+     * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      */
+    @java.lang.Override
     public java.lang.String getLabelsOrThrow(java.lang.String key) {
       if (key == null) {
         throw new java.lang.NullPointerException();
@@ -1566,7 +1655,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * See [LogEntry][google.logging.v2.LogEntry].
      * </pre>
      *
-     * <code>map&lt;string, string&gt; labels = 3;</code>
+     * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      */
     public Builder removeLabels(java.lang.String key) {
       if (key == null) {
@@ -1590,7 +1679,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * See [LogEntry][google.logging.v2.LogEntry].
      * </pre>
      *
-     * <code>map&lt;string, string&gt; labels = 3;</code>
+     * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      */
     public Builder putLabels(java.lang.String key, java.lang.String value) {
       if (key == null) {
@@ -1612,7 +1701,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * See [LogEntry][google.logging.v2.LogEntry].
      * </pre>
      *
-     * <code>map&lt;string, string&gt; labels = 3;</code>
+     * <code>map&lt;string, string&gt; labels = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      */
     public Builder putAllLabels(java.util.Map<java.lang.String, java.lang.String> values) {
       internalGetMutableLabels().getMutableMap().putAll(values);
@@ -1623,9 +1712,9 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
         java.util.Collections.emptyList();
 
     private void ensureEntriesIsMutable() {
-      if (!((bitField0_ & 0x00000008) != 0)) {
+      if (!((bitField0_ & 0x00000002) != 0)) {
         entries_ = new java.util.ArrayList<com.google.logging.v2.LogEntry>(entries_);
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000002;
       }
     }
 
@@ -1651,17 +1740,19 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
      *
-     * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+     * <code>
+     * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public java.util.List<com.google.logging.v2.LogEntry> getEntriesList() {
       if (entriesBuilder_ == null) {
@@ -1686,17 +1777,19 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
      *
-     * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+     * <code>
+     * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public int getEntriesCount() {
       if (entriesBuilder_ == null) {
@@ -1721,17 +1814,19 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
      *
-     * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+     * <code>
+     * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public com.google.logging.v2.LogEntry getEntries(int index) {
       if (entriesBuilder_ == null) {
@@ -1756,17 +1851,19 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
      *
-     * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+     * <code>
+     * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public Builder setEntries(int index, com.google.logging.v2.LogEntry value) {
       if (entriesBuilder_ == null) {
@@ -1797,17 +1894,19 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
      *
-     * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+     * <code>
+     * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public Builder setEntries(int index, com.google.logging.v2.LogEntry.Builder builderForValue) {
       if (entriesBuilder_ == null) {
@@ -1835,17 +1934,19 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
      *
-     * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+     * <code>
+     * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public Builder addEntries(com.google.logging.v2.LogEntry value) {
       if (entriesBuilder_ == null) {
@@ -1876,17 +1977,19 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
      *
-     * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+     * <code>
+     * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public Builder addEntries(int index, com.google.logging.v2.LogEntry value) {
       if (entriesBuilder_ == null) {
@@ -1917,17 +2020,19 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
      *
-     * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+     * <code>
+     * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public Builder addEntries(com.google.logging.v2.LogEntry.Builder builderForValue) {
       if (entriesBuilder_ == null) {
@@ -1955,17 +2060,19 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
      *
-     * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+     * <code>
+     * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public Builder addEntries(int index, com.google.logging.v2.LogEntry.Builder builderForValue) {
       if (entriesBuilder_ == null) {
@@ -1993,17 +2100,19 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
      *
-     * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+     * <code>
+     * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public Builder addAllEntries(
         java.lang.Iterable<? extends com.google.logging.v2.LogEntry> values) {
@@ -2032,22 +2141,24 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
      *
-     * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+     * <code>
+     * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public Builder clearEntries() {
       if (entriesBuilder_ == null) {
         entries_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
       } else {
         entriesBuilder_.clear();
@@ -2070,17 +2181,19 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
      *
-     * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+     * <code>
+     * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public Builder removeEntries(int index) {
       if (entriesBuilder_ == null) {
@@ -2108,17 +2221,19 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
      *
-     * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+     * <code>
+     * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public com.google.logging.v2.LogEntry.Builder getEntriesBuilder(int index) {
       return getEntriesFieldBuilder().getBuilder(index);
@@ -2139,17 +2254,19 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
      *
-     * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+     * <code>
+     * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public com.google.logging.v2.LogEntryOrBuilder getEntriesOrBuilder(int index) {
       if (entriesBuilder_ == null) {
@@ -2174,17 +2291,19 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
      *
-     * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+     * <code>
+     * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public java.util.List<? extends com.google.logging.v2.LogEntryOrBuilder>
         getEntriesOrBuilderList() {
@@ -2210,17 +2329,19 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
      *
-     * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+     * <code>
+     * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public com.google.logging.v2.LogEntry.Builder addEntriesBuilder() {
       return getEntriesFieldBuilder()
@@ -2242,17 +2363,19 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
      *
-     * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+     * <code>
+     * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public com.google.logging.v2.LogEntry.Builder addEntriesBuilder(int index) {
       return getEntriesFieldBuilder()
@@ -2274,17 +2397,19 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * supply their own values, the entries earlier in the list will sort before
      * the entries later in the list. See the `entries.list` method.
      * Log entries with timestamps that are more than the
-     * [logs retention period](/logging/quota-policy) in the past or more than
+     * [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
      * 24 hours in the future will not be available when calling `entries.list`.
      * However, those log entries can still be
-     * [exported with LogSinks](/logging/docs/api/tasks/exporting-logs).
+     * [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
      * To improve throughput and to avoid exceeding the
-     * [quota limit](/logging/quota-policy) for calls to `entries.write`,
+     * [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
      * you should try to include several log entries in this list,
      * rather than calling this method for each individual log entry.
      * </pre>
      *
-     * <code>repeated .google.logging.v2.LogEntry entries = 4;</code>
+     * <code>
+     * repeated .google.logging.v2.LogEntry entries = 4 [(.google.api.field_behavior) = REQUIRED];
+     * </code>
      */
     public java.util.List<com.google.logging.v2.LogEntry.Builder> getEntriesBuilderList() {
       return getEntriesFieldBuilder().getBuilderList();
@@ -2301,7 +2426,7 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
                 com.google.logging.v2.LogEntry,
                 com.google.logging.v2.LogEntry.Builder,
                 com.google.logging.v2.LogEntryOrBuilder>(
-                entries_, ((bitField0_ & 0x00000008) != 0), getParentForChildren(), isClean());
+                entries_, ((bitField0_ & 0x00000002) != 0), getParentForChildren(), isClean());
         entries_ = null;
       }
       return entriesBuilder_;
@@ -2319,8 +2444,11 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * keyed by the entries' zero-based index in the `entries.write` method.
      * </pre>
      *
-     * <code>bool partial_success = 5;</code>
+     * <code>bool partial_success = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The partialSuccess.
      */
+    @java.lang.Override
     public boolean getPartialSuccess() {
       return partialSuccess_;
     }
@@ -2335,7 +2463,10 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * keyed by the entries' zero-based index in the `entries.write` method.
      * </pre>
      *
-     * <code>bool partial_success = 5;</code>
+     * <code>bool partial_success = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The partialSuccess to set.
+     * @return This builder for chaining.
      */
     public Builder setPartialSuccess(boolean value) {
 
@@ -2354,7 +2485,9 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * keyed by the entries' zero-based index in the `entries.write` method.
      * </pre>
      *
-     * <code>bool partial_success = 5;</code>
+     * <code>bool partial_success = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearPartialSuccess() {
 
@@ -2373,8 +2506,11 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * logging API endpoints are working properly before sending valuable data.
      * </pre>
      *
-     * <code>bool dry_run = 6;</code>
+     * <code>bool dry_run = 6 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return The dryRun.
      */
+    @java.lang.Override
     public boolean getDryRun() {
       return dryRun_;
     }
@@ -2387,7 +2523,10 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * logging API endpoints are working properly before sending valuable data.
      * </pre>
      *
-     * <code>bool dry_run = 6;</code>
+     * <code>bool dry_run = 6 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @param value The dryRun to set.
+     * @return This builder for chaining.
      */
     public Builder setDryRun(boolean value) {
 
@@ -2404,7 +2543,9 @@ public final class WriteLogEntriesRequest extends com.google.protobuf.GeneratedM
      * logging API endpoints are working properly before sending valuable data.
      * </pre>
      *
-     * <code>bool dry_run = 6;</code>
+     * <code>bool dry_run = 6 [(.google.api.field_behavior) = OPTIONAL];</code>
+     *
+     * @return This builder for chaining.
      */
     public Builder clearDryRun() {
 
