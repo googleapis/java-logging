@@ -20,16 +20,14 @@ import com.google.api.gax.paging.Page;
 import com.google.cloud.logging.testing.RemoteLoggingHelper;
 import com.google.common.collect.Iterators;
 import com.google.logging.v2.LogName;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Iterator;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.rules.Timeout;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
 
 /**
  * A base class for system tests. This class can be extended to run system tests in different
@@ -37,8 +35,7 @@ import java.util.Iterator;
  */
 public class BaseSystemTest {
 
-  @Rule
-  public Timeout globalTimeout = Timeout.seconds(600);
+  @Rule public Timeout globalTimeout = Timeout.seconds(600);
 
   private static DateFormat RFC_3339 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
@@ -59,18 +56,17 @@ public class BaseSystemTest {
    * Creates an equality expression for logging filter.
    *
    * @see <a href="https://cloud.google.com/logging/docs/view/advanced_filters">Advanced Logs
-   * Filters Documentation</a>
+   *     Filters Documentation</a>
    */
   protected static <V> String createEqualityFilter(String name, V value) {
     return name + " = " + "\"" + value.toString() + "\"";
   }
 
-
   /**
    * Creates an equality expression for logging filter.
    *
    * @see <a href="https://cloud.google.com/logging/docs/view/advanced_filters">Advanced Logs
-   * Filters Documentation</a>
+   *     Filters Documentation</a>
    */
   protected static String createTimestampFilter(int hoursAgo) {
     Calendar calendar = Calendar.getInstance();
@@ -78,24 +74,23 @@ public class BaseSystemTest {
     return "timestamp>=\"" + RFC_3339.format(calendar.getTime()) + "\"";
   }
 
-  /**
-   * Helper to poll for logs until they are returned by the backend.
-   */
+  /** Helper to poll for logs until they are returned by the backend. */
   protected static Iterator<LogEntry> waitForLogs(LogName logName) throws InterruptedException {
     return waitForLogs(logName, 1);
   }
 
-  /**
-   * Helper to poll for logs until they are returned by the backend.
-   */
-  protected static Iterator<LogEntry> waitForLogs(LogName logName, int minLogs) throws InterruptedException {
+  /** Helper to poll for logs until they are returned by the backend. */
+  protected static Iterator<LogEntry> waitForLogs(LogName logName, int minLogs)
+      throws InterruptedException {
     String filter = createEqualityFilter("logName", logName) + " AND " + createTimestampFilter(1);
     Logging.EntryListOption[] options = {Logging.EntryListOption.filter(filter)};
     return waitForLogs(options, minLogs);
   }
 
-  private final static DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-  protected static Iterator<LogEntry> waitForLogs(Logging.EntryListOption[] options, int minLogs) throws InterruptedException {
+  private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+  protected static Iterator<LogEntry> waitForLogs(Logging.EntryListOption[] options, int minLogs)
+      throws InterruptedException {
     Page<LogEntry> page = logging.listLogEntries(options);
     while (Iterators.size(page.iterateAll().iterator()) < minLogs) {
       Thread.sleep(500);

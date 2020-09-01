@@ -16,6 +16,14 @@
 
 package com.google.cloud.logging.it;
 
+import static com.google.cloud.logging.testing.RemoteLoggingHelper.formatForTest;
+import static com.google.common.truth.Truth.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import com.google.cloud.MonitoredResource;
 import com.google.cloud.logging.BaseSystemTest;
 import com.google.cloud.logging.HttpRequest;
@@ -28,25 +36,17 @@ import com.google.cloud.logging.Severity;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.logging.v2.LogName;
+import java.util.Iterator;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.Iterator;
-
-import static com.google.cloud.logging.testing.RemoteLoggingHelper.formatForTest;
-import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 public class ITLoggingTest extends BaseSystemTest {
 
-  private final static String LOG_ID = formatForTest("test-write-log-entries-log");
-  private final static Payload.StringPayload FIRST_PAYLOAD = Payload.StringPayload.of("stringPayload");
-  private final static Payload.JsonPayload SECOND_PAYLOAD =
+  private static final String LOG_ID = formatForTest("test-write-log-entries-log");
+  private static final Payload.StringPayload FIRST_PAYLOAD =
+      Payload.StringPayload.of("stringPayload");
+  private static final Payload.JsonPayload SECOND_PAYLOAD =
       Payload.JsonPayload.of(ImmutableMap.<String, Object>of("jsonKey", "jsonValue"));
 
   @BeforeClass
@@ -125,8 +125,9 @@ public class ITLoggingTest extends BaseSystemTest {
     String filter = createEqualityFilter("logName", logName) + " AND " + createTimestampFilter(1);
     Logging.EntryListOption[] options =
         new Logging.EntryListOption[] {
-            Logging.EntryListOption.filter(filter),
-            Logging.EntryListOption.sortOrder(Logging.SortingField.TIMESTAMP, Logging.SortingOrder.DESCENDING)
+          Logging.EntryListOption.filter(filter),
+          Logging.EntryListOption.sortOrder(
+              Logging.SortingField.TIMESTAMP, Logging.SortingOrder.DESCENDING)
         };
     Iterator<LogEntry> iterator = waitForLogs(options, 2);
 

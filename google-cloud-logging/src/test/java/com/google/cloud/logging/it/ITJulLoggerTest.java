@@ -16,6 +16,14 @@
 
 package com.google.cloud.logging.it;
 
+import static com.google.cloud.logging.testing.RemoteLoggingHelper.formatForTest;
+import static com.google.common.truth.Truth.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import com.google.cloud.MonitoredResource;
 import com.google.cloud.logging.BaseSystemTest;
 import com.google.cloud.logging.LogEntry;
@@ -26,19 +34,10 @@ import com.google.cloud.logging.Severity;
 import com.google.cloud.logging.Synchronicity;
 import com.google.common.collect.ImmutableMap;
 import com.google.logging.v2.LogName;
-import org.junit.Test;
-
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import static com.google.cloud.logging.testing.RemoteLoggingHelper.formatForTest;
-import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 public class ITJulLoggerTest extends BaseSystemTest {
 

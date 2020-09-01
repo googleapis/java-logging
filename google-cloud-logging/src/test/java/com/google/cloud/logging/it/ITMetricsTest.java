@@ -16,6 +16,13 @@
 
 package com.google.cloud.logging.it;
 
+import static com.google.cloud.logging.testing.RemoteLoggingHelper.formatForTest;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import com.google.api.gax.paging.Page;
 import com.google.cloud.MonitoredResourceDescriptor;
 import com.google.cloud.logging.Logging;
@@ -23,19 +30,11 @@ import com.google.cloud.logging.Metric;
 import com.google.cloud.logging.MetricInfo;
 import com.google.cloud.logging.testing.RemoteLoggingHelper;
 import com.google.common.collect.Sets;
+import java.util.Iterator;
+import java.util.Set;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.Iterator;
-import java.util.Set;
-
-import static com.google.cloud.logging.testing.RemoteLoggingHelper.formatForTest;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 public class ITMetricsTest {
 

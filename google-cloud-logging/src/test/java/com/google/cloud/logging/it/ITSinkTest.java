@@ -16,17 +16,6 @@
 
 package com.google.cloud.logging.it;
 
-import com.google.api.gax.paging.Page;
-import com.google.cloud.logging.BaseSystemTest;
-import com.google.cloud.logging.Logging;
-import com.google.cloud.logging.LoggingException;
-import com.google.cloud.logging.Sink;
-import com.google.cloud.logging.SinkInfo;
-import com.google.common.collect.Sets;
-import org.junit.Test;
-
-import java.util.Set;
-
 import static com.google.cloud.logging.testing.RemoteLoggingHelper.formatForTest;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -34,6 +23,16 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
+import com.google.api.gax.paging.Page;
+import com.google.cloud.logging.BaseSystemTest;
+import com.google.cloud.logging.Logging;
+import com.google.cloud.logging.LoggingException;
+import com.google.cloud.logging.Sink;
+import com.google.cloud.logging.SinkInfo;
+import com.google.common.collect.Sets;
+import java.util.Set;
+import org.junit.Test;
 
 public class ITSinkTest extends BaseSystemTest {
 
@@ -82,8 +81,12 @@ public class ITSinkTest extends BaseSystemTest {
   public void testListSinks() throws InterruptedException {
     String firstName = formatForTest("test-list-sinks-1");
     String secondName = formatForTest("test-list-sinks-2");
-    Sink firstSink = logging.create(SinkInfo.of(firstName, SinkInfo.Destination.DatasetDestination.of("dataset")));
-    Sink secondSink = logging.create(SinkInfo.of(secondName, SinkInfo.Destination.DatasetDestination.of("dataset")));
+    Sink firstSink =
+        logging.create(
+            SinkInfo.of(firstName, SinkInfo.Destination.DatasetDestination.of("dataset")));
+    Sink secondSink =
+        logging.create(
+            SinkInfo.of(secondName, SinkInfo.Destination.DatasetDestination.of("dataset")));
     Logging.ListOption[] options = {Logging.ListOption.pageSize(1)};
     Page<Sink> sinkPage = logging.listSinks(options);
     Set<Sink> sinks = Sets.newHashSet(sinkPage.iterateAll());
