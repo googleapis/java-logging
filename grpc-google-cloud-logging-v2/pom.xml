@@ -10,7 +10,7 @@
   <parent>
     <groupId>com.google.cloud</groupId>
     <artifactId>google-cloud-logging-parent</artifactId>
-    <version>1.101.3-SNAPSHOT</version><!-- {x-version-update:google-cloud-logging:current} -->
+    <version>1.102.0</version><!-- {x-version-update:google-cloud-logging:current} -->
   </parent>
   <dependencies>
     <dependency>
