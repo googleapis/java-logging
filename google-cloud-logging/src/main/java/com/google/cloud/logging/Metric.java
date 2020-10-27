@@ -26,7 +26,7 @@ import java.io.ObjectInputStream;
 import java.util.Objects;
 
 /**
- * Stackdriver Logging metrics describe logs-based metric. The value of the metric is the number of
+ * Cloud Logging metrics describe logs-based metric. The value of the metric is the number of
  * log entries that match a logs filter (see {@link #getFilter()}).
  *
  * <p>{@code Metric} adds a layer of service-related functionality over {@link MetricInfo}. Objects

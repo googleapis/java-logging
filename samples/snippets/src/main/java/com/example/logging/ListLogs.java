@@ -22,10 +22,10 @@ import com.google.cloud.logging.Logging;
 import com.google.cloud.logging.Logging.EntryListOption;
 import com.google.cloud.logging.LoggingOptions;
 
-/** List logs programmatically using the StackDriver Logging API. */
+/** List logs programmatically using the Cloud Logging API. */
 public class ListLogs {
 
-  /** Expects an existing Stackdriver log name as an argument. */
+  /** Expects an existing Cloud log name as an argument. */
   public static void main(String... args) throws Exception {
     // [START logging_list_log_entries]
     // Instantiates a client
