@@ -455,8 +455,8 @@ public class SinkInfo implements Serializable {
   }
 
   /**
-   * Available log entry formats. Log entries can be written to Cloud Logging in either format
-   * and can be exported in either format. Version 2 is the preferred format.
+   * Available log entry formats. Log entries can be written to Cloud Logging in either format and
+   * can be exported in either format. Version 2 is the preferred format.
    */
   public enum VersionFormat {
     V1(LogSink.VersionFormat.V1),
@@ -614,8 +614,8 @@ public class SinkInfo implements Serializable {
   /**
    * Returns an advanced logs filter. Only log entries matching that filter are exported. The filter
    * must be consistent with the log entry format specified in {@link #getVersionFormat()},
-   * regardless of the format of the log entry that wa originally written to Cloud Logging.
-   * Example (V2 format): {@code logName=projects/my-projectid/logs/syslog AND severity>=ERROR}.
+   * regardless of the format of the log entry that wa originally written to Cloud Logging. Example
+   * (V2 format): {@code logName=projects/my-projectid/logs/syslog AND severity>=ERROR}.
    *
    * @see <a href="https://cloud.google.com/logging/docs/view/advanced_filters">Advanced Log
    *     Filters</a>

@@ -76,18 +76,16 @@ public class BaseSystemTest {
   }
 
   protected static String appendResourceTypeFilter(
-    String currentFilter, 
-    MonitoredResource[] monitoredResources) {
+      String currentFilter, MonitoredResource[] monitoredResources) {
     StringBuilder filter = new StringBuilder(currentFilter);
     if (monitoredResources != null && monitoredResources.length > 0) {
-      if (monitoredResources.length==1){
+      if (monitoredResources.length == 1) {
         filter.append(" AND resource.type=");
         filter.append(monitoredResources[0].getType());
-      }
-      else {
+      } else {
         filter.append(" AND resource.type=(");
         filter.append(monitoredResources[0].getType());
-        
+
         // OR between all monitored resources we search
         for (int i = 1; i < monitoredResources.length; i++) {
           filter.append(" OR ");
@@ -102,24 +100,22 @@ public class BaseSystemTest {
 
   /** Helper to poll for logs until they are returned by the backend. */
   protected static Iterator<LogEntry> waitForLogs(
-    LogName logName,
-    MonitoredResource[] monitoredResources,
-    int minLogs
-    )
+      LogName logName, MonitoredResource[] monitoredResources, int minLogs)
       throws InterruptedException {
     StringBuilder filter = new StringBuilder();
     filter.append(createTimestampFilter(1));
     filter.append(" AND ");
     filter.append(createEqualityFilter("logName", logName));
-    
-    String monitoredResourceFilter = appendResourceTypeFilter(filter.toString(), monitoredResources);
 
-    Logging.EntryListOption[] options = { Logging.EntryListOption.filter(monitoredResourceFilter) };
+    String monitoredResourceFilter =
+        appendResourceTypeFilter(filter.toString(), monitoredResources);
+
+    Logging.EntryListOption[] options = {Logging.EntryListOption.filter(monitoredResourceFilter)};
     return waitForLogs(options, minLogs);
   }
 
   protected static Iterator<LogEntry> waitForLogs(LogName logName) throws InterruptedException {
-      return waitForLogs(logName, null, 1);
+    return waitForLogs(logName, null, 1);
   }
 
   private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
