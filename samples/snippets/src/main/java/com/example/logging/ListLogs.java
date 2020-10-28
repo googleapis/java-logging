@@ -21,6 +21,7 @@ import com.google.cloud.logging.LogEntry;
 import com.google.cloud.logging.Logging;
 import com.google.cloud.logging.Logging.EntryListOption;
 import com.google.cloud.logging.LoggingOptions;
+import java.util.Calendar;
 
 /** List logs programmatically using the Cloud Logging API. */
 public class ListLogs {
