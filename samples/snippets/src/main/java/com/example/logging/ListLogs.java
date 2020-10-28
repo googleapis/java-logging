@@ -40,7 +40,7 @@ public class ListLogs {
       // When composing a filter, using indexed fields, such as
       // timestamp, resource.type, logName and others can help accelerate the results
       // Full list of indexed fields here: https://cloud.google.com/logging/docs/view/advanced-queries#finding-quickly
-      // Below we are retricting the results to only last hour to speedup getting the results back
+      // Below we are restricting the results to only last hour to speedup getting the results back
       Calendar calendar = Calendar.getInstance();
       calendar.add(Calendar.HOUR, -1);
       SimpleDateFormat RFC_3339 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
