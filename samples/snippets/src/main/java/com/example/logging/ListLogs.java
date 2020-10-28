@@ -21,6 +21,7 @@ import com.google.cloud.logging.LogEntry;
 import com.google.cloud.logging.Logging;
 import com.google.cloud.logging.Logging.EntryListOption;
 import com.google.cloud.logging.LoggingOptions;
+
 import java.util.Calendar;
 
 /** List logs programmatically using the Cloud Logging API. */
@@ -42,6 +43,7 @@ public class ListLogs {
       // Below we are retricting the results to only last hour to speedup getting the results back
       Calendar calendar = Calendar.getInstance();
       calendar.add(Calendar.HOUR, -1);
+      SimpleDateFormat RFC_3339 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
       String logFilter = "logName=projects/" + options.getProjectId() + "/logs/" + logName
           + " AND timestamp>=\"" + RFC_3339.format(calendar.getTime()) + "\"";
 
