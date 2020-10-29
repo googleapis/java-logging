@@ -36,6 +36,7 @@ import com.google.cloud.BaseService;
 import com.google.cloud.MonitoredResource;
 import com.google.cloud.MonitoredResourceDescriptor;
 import com.google.cloud.PageImpl;
+import com.google.cloud.logging.Logging.EntryListOption.OptionType;
 import com.google.cloud.logging.spi.v2.LoggingRpc;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Function;
@@ -48,7 +49,12 @@ import com.google.common.util.concurrent.MoreExecutors;
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.logging.v2.*;
 import com.google.protobuf.Empty;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -631,6 +637,11 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     if (filter != null) {
       builder.setFilter(filter);
     }
+    else {
+      // If filter is not specified, default filter is looking back 24 hours in line with gcloud behavior
+      builder.setFilter(createDefaultTimeRangeFilter());
+    }
+
     return builder.build();
   }
 
@@ -691,5 +702,21 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   @VisibleForTesting
   int getNumPendingWrites() {
     return pendingWrites.size();
+  }
+
+  private static String createDefaultTimeRangeFilter() {
+    DateFormat rfcDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+    return  "timestamp>=\"" + rfcDateFormat.format(yesterday()) + "\"";
+  }
+
+  private static Date yesterday() {
+    Calendar calendar = Calendar.getInstance();
+    calendar.add(Calendar.DATE, -1);
+    calendar.set(Calendar.HOUR_OF_DAY, 0);
+    calendar.set(Calendar.MINUTE, 0);
+    calendar.set(Calendar.SECOND, 0);
+    calendar.set(Calendar.MILLISECOND, 0);
+
+    return calendar.getTime();
   }
 }

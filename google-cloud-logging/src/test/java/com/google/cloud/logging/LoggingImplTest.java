@@ -68,6 +68,11 @@ import com.google.logging.v2.UpdateSinkRequest;
 import com.google.logging.v2.WriteLogEntriesRequest;
 import com.google.logging.v2.WriteLogEntriesResponse;
 import com.google.protobuf.Empty;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -1291,8 +1296,11 @@ public class LoggingImplTest {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
-    ListLogEntriesRequest request =
-        ListLogEntriesRequest.newBuilder().addResourceNames(PROJECT_PB).build();
+    ListLogEntriesRequest request = ListLogEntriesRequest.newBuilder()
+       .addResourceNames(PROJECT_PB)
+       .setFilter(createDefaultTimeRangeFilter())
+       .build();
+        
     List<LogEntry> entriesList = ImmutableList.of(LOG_ENTRY1, LOG_ENTRY2);
     ListLogEntriesResponse response =
         ListLogEntriesResponse.newBuilder()
@@ -1312,12 +1320,16 @@ public class LoggingImplTest {
     String cursor1 = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
-    ListLogEntriesRequest request1 =
-        ListLogEntriesRequest.newBuilder().addResourceNames(PROJECT_PB).build();
+    ListLogEntriesRequest request1 = ListLogEntriesRequest
+       .newBuilder()
+       .addResourceNames(PROJECT_PB)
+       .setFilter(createDefaultTimeRangeFilter())
+       .build();
     ListLogEntriesRequest request2 =
         ListLogEntriesRequest.newBuilder()
             .addResourceNames(PROJECT_PB)
             .setPageToken(cursor1)
+            .setFilter(createDefaultTimeRangeFilter())
             .build();
     List<LogEntry> descriptorList1 = ImmutableList.of(LOG_ENTRY1, LOG_ENTRY2);
     List<LogEntry> descriptorList2 = ImmutableList.of(LOG_ENTRY1);
@@ -1353,7 +1365,10 @@ public class LoggingImplTest {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ListLogEntriesRequest request =
-        ListLogEntriesRequest.newBuilder().addResourceNames(PROJECT_PB).build();
+        ListLogEntriesRequest.newBuilder()
+        .addResourceNames(PROJECT_PB)
+        .setFilter(createDefaultTimeRangeFilter()).build();
+
     List<LogEntry> entriesList = ImmutableList.of();
     ListLogEntriesResponse response =
         ListLogEntriesResponse.newBuilder()
@@ -1401,8 +1416,9 @@ public class LoggingImplTest {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
-    ListLogEntriesRequest request =
-        ListLogEntriesRequest.newBuilder().addResourceNames(PROJECT_PB).build();
+    ListLogEntriesRequest request = ListLogEntriesRequest.newBuilder()
+        .addResourceNames(PROJECT_PB)
+        .setFilter(createDefaultTimeRangeFilter()).build();
     List<LogEntry> entriesList = ImmutableList.of(LOG_ENTRY1, LOG_ENTRY2);
     ListLogEntriesResponse response =
         ListLogEntriesResponse.newBuilder()
@@ -1422,13 +1438,17 @@ public class LoggingImplTest {
     String cursor1 = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
-    ListLogEntriesRequest request1 =
-        ListLogEntriesRequest.newBuilder().addResourceNames(PROJECT_PB).build();
-    ListLogEntriesRequest request2 =
-        ListLogEntriesRequest.newBuilder()
-            .addResourceNames(PROJECT_PB)
-            .setPageToken(cursor1)
-            .build();
+    ListLogEntriesRequest request1 = ListLogEntriesRequest
+       .newBuilder()
+       .addResourceNames(PROJECT_PB)
+       .setFilter(createDefaultTimeRangeFilter())
+       .build();
+    ListLogEntriesRequest request2 = ListLogEntriesRequest
+       .newBuilder()
+       .addResourceNames(PROJECT_PB)
+       .setFilter(createDefaultTimeRangeFilter())
+       .setPageToken(cursor1)
+       .build();
     List<LogEntry> descriptorList1 = ImmutableList.of(LOG_ENTRY1, LOG_ENTRY2);
     List<LogEntry> descriptorList2 = ImmutableList.of(LOG_ENTRY1);
     ListLogEntriesResponse response1 =
@@ -1458,12 +1478,14 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogEntriesAyncEmpty() throws ExecutionException, InterruptedException {
+  public void testListLogEntriesAsyncEmpty() throws ExecutionException, InterruptedException {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ListLogEntriesRequest request =
-        ListLogEntriesRequest.newBuilder().addResourceNames(PROJECT_PB).build();
+        ListLogEntriesRequest.newBuilder()
+            .addResourceNames(PROJECT_PB)
+            .setFilter(createDefaultTimeRangeFilter()).build();
     List<LogEntry> entriesList = ImmutableList.of();
     ListLogEntriesResponse response =
         ListLogEntriesResponse.newBuilder()
@@ -1583,5 +1605,21 @@ public class LoggingImplTest {
       threads[i].join();
     }
     assertSame(0, exceptions.get());
+  }
+
+  private static String createDefaultTimeRangeFilter() {
+    DateFormat rfcDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+    return  "timestamp>=\"" + rfcDateFormat.format(yesterday()) + "\"";
+  }
+
+  private static Date yesterday() {
+    Calendar calendar = Calendar.getInstance();
+    calendar.add(Calendar.DATE, -1);
+    calendar.set(Calendar.HOUR_OF_DAY, 0);
+    calendar.set(Calendar.MINUTE, 0);
+    calendar.set(Calendar.SECOND, 0);
+    calendar.set(Calendar.MILLISECOND, 0);
+
+    return calendar.getTime();
   }
 }
