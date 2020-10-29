@@ -49,7 +49,6 @@ import com.google.common.util.concurrent.MoreExecutors;
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.logging.v2.*;
 import com.google.protobuf.Empty;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -706,7 +705,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
 
   private static String createDefaultTimeRangeFilter() {
     DateFormat rfcDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-    return  "timestamp>=\"" + rfcDateFormat.format(yesterday()) + "\"";
+    return "timestamp>=\"" + rfcDateFormat.format(yesterday()) + "\"";
   }
 
   private static Date yesterday() {
