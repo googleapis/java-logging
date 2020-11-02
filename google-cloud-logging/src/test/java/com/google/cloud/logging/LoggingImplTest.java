@@ -1441,8 +1441,8 @@ public class LoggingImplTest {
     String cursor1 = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
-    ListLogEntriesRequest request1 = 
-        ListLogEntriesRequest.newBuilder()
+    ListLogEntriesRequest request1 =
+    ListLogEntriesRequest request2 =
             .addResourceNames(PROJECT_PB)
             .setFilter(createDefaultTimeRangeFilter())
             .build();
