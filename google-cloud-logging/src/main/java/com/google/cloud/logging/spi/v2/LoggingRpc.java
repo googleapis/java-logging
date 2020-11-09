@@ -178,8 +178,7 @@ public interface LoggingRpc extends AutoCloseable, ServiceRpc {
   ApiFuture<Empty> delete(DeleteLogMetricRequest request);
 
   /**
-<<<<<<< HEAD
-   * <<<<<<< HEAD Sends a request to create a new exclusion in a specified parent resource. This
+   * Sends a request to create a new exclusion in a specified parent resource. This
    * method returns an {@code ApiFuture} object to consume the result. {@link ApiFuture#get()}
    * returns the created exclusion.
    *
