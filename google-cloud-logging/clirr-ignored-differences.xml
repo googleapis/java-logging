@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- see http://www.mojohaus.org/clirr-maven-plugin/examples/ignored-differences.html -->
+<differences>
+  <difference>
+    <className>com/google/cloud/logging/Logging</className>
+    <method>com.google.cloud.logging.CmekSettings getCmekSettings(java.lang.String)</method>
+    <differenceType>7012</differenceType>
+  </difference>
+  <difference>
+    <className>com/google/cloud/logging/Logging</className>
+    <method>com.google.api.core.ApiFuture getCmekSettingsAsync(java.lang.String)</method>
+    <differenceType>7012</differenceType>
+  </difference>
+  <difference>
+    <className>com/google/cloud/logging/Logging</className>
+    <method>com.google.cloud.logging.CmekSettings updateCmekSettings(com.google.cloud.logging.CmekSettings)</method>
+    <differenceType>7012</differenceType>
+  </difference>
+  <difference>
+    <className>com/google/cloud/logging/Logging</className>
+    <method>com.google.api.core.ApiFuture updateCmekSettingsAsync(com.google.cloud.logging.CmekSettings)</method>
+    <differenceType>7012</differenceType>
+  </difference>
+  <difference>
+    <className>com/google/cloud/logging/spi/v2/LoggingRpc</className>
+    <method>com.google.api.core.ApiFuture updateCmekSettingsAsync(com.google.cloud.logging.CmekSettings)</method>
+    <differenceType>7012</differenceType>
+  </difference>
+  <difference>
+    <className>com/google/cloud/logging/spi/v2/LoggingRpc</className>
+    <method> com.google.api.core.ApiFuture getCmekSettings(com.google.logging.v2.GetCmekSettingsRequest)</method>
+    <differenceType>7012</differenceType>
+  </difference>
+  <difference>
+    <className>com/google/cloud/logging/spi/v2/LoggingRpc</className>
+    <method>com.google.api.core.ApiFuture updateCmekSettings(com.google.logging.v2.UpdateCmekSettingsRequest)</method>
+    <differenceType>7012</differenceType>
+  </difference>
+</differences>

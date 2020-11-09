@@ -687,8 +687,8 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
   ApiFuture<Boolean> deleteMetricAsync(String metric);
 
   /**
-   * Creates a new exclusion in a specified parent resource. Only log entries belonging
-   * to that resource can be excluded. You can have up to 10 exclusions in a resource.
+   * Creates a new exclusion in a specified parent resource. Only log entries belonging to that
+   * resource can be excluded. You can have up to 10 exclusions in a resource.
    *
    * <p>Example of creating the exclusion:
    *
