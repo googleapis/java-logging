@@ -36,7 +36,6 @@ import com.google.cloud.BaseService;
 import com.google.cloud.MonitoredResource;
 import com.google.cloud.MonitoredResourceDescriptor;
 import com.google.cloud.PageImpl;
-import com.google.cloud.logging.Logging.EntryListOption.OptionType;
 import com.google.cloud.logging.spi.v2.LoggingRpc;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Function;
@@ -785,8 +784,8 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     }
     String filter = FILTER.get(options);
     if (filter != null) {
-      builder.setFilter(filter);
-    }
+        builder.setFilter(filter);
+      }
     else {
       // If filter is not specified, default filter is looking back 24 hours in line with gcloud behavior
       builder.setFilter(createDefaultTimeRangeFilter());

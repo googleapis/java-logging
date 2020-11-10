@@ -76,11 +76,11 @@ import com.google.logging.v2.UpdateSinkRequest;
 import com.google.logging.v2.WriteLogEntriesRequest;
 import com.google.logging.v2.WriteLogEntriesResponse;
 import com.google.protobuf.Empty;
+import com.google.protobuf.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import com.google.protobuf.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -1727,12 +1727,12 @@ public class LoggingImplTest {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
-    ListLogEntriesRequest request = 
+    ListLogEntriesRequest request =
         ListLogEntriesRequest.newBuilder()
-           .addResourceNames(PROJECT_PB)
-           .setFilter(createDefaultTimeRangeFilter())
-           .build();
-        
+            .addResourceNames(PROJECT_PB)
+            .setFilter(createDefaultTimeRangeFilter())
+            .build();
+
     List<LogEntry> entriesList = ImmutableList.of(LOG_ENTRY1, LOG_ENTRY2);
     ListLogEntriesResponse response =
         ListLogEntriesResponse.newBuilder()
@@ -1752,12 +1752,12 @@ public class LoggingImplTest {
     String cursor1 = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
-    ListLogEntriesRequest request1 = 
+    ListLogEntriesRequest request1 =
         ListLogEntriesRequest.newBuilder()
             .addResourceNames(PROJECT_PB)
             .setFilter(createDefaultTimeRangeFilter())
             .build();
-    ListLogEntriesRequest request2 = 
+    ListLogEntriesRequest request2 =
         ListLogEntriesRequest.newBuilder()
             .addResourceNames(PROJECT_PB)
             .setPageToken(cursor1)
@@ -1874,11 +1874,11 @@ public class LoggingImplTest {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ListLogEntriesRequest request1 =
-    ListLogEntriesRequest request2 =
+        ListLogEntriesRequest.newBuilder()
             .addResourceNames(PROJECT_PB)
             .setFilter(createDefaultTimeRangeFilter())
             .build();
-    ListLogEntriesRequest request2 = 
+    ListLogEntriesRequest request2 =
         ListLogEntriesRequest.newBuilder()
             .addResourceNames(PROJECT_PB)
             .setFilter(createDefaultTimeRangeFilter())
@@ -1920,7 +1920,8 @@ public class LoggingImplTest {
     ListLogEntriesRequest request =
         ListLogEntriesRequest.newBuilder()
             .addResourceNames(PROJECT_PB)
-            .setFilter(createDefaultTimeRangeFilter()).build();
+            .setFilter(createDefaultTimeRangeFilter())
+            .build();
     List<LogEntry> entriesList = ImmutableList.of();
     ListLogEntriesResponse response =
         ListLogEntriesResponse.newBuilder()
