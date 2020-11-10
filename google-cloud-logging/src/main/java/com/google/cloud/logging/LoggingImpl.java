@@ -784,10 +784,10 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     }
     String filter = FILTER.get(options);
     if (filter != null) {
-        builder.setFilter(filter);
-      }
-    else {
-      // If filter is not specified, default filter is looking back 24 hours in line with gcloud behavior
+      builder.setFilter(filter);
+    } else {
+      // If filter is not specified, default filter is looking back 24 hours in line with gcloud
+      // behavior
       builder.setFilter(createDefaultTimeRangeFilter());
     }
 
