@@ -1825,7 +1825,8 @@ public class LoggingImplTest {
         ListLogEntriesRequest.newBuilder()
             .addResourceNames(PROJECT_PB)
             .setOrderBy("timestamp desc")
-            .setFilter("logName:syslog")
+            .setFilter(
+                String.format("logName:syslog AND %s", LoggingImpl.createDefaultTimeRangeFilter()))
             .build();
     List<LogEntry> entriesList = ImmutableList.of(LOG_ENTRY1, LOG_ENTRY2);
     ListLogEntriesResponse response =
@@ -1945,7 +1946,8 @@ public class LoggingImplTest {
         ListLogEntriesRequest.newBuilder()
             .addResourceNames(PROJECT_PB)
             .setOrderBy("timestamp desc")
-            .setFilter("logName:syslog")
+            .setFilter(
+                String.format("logName:syslog AND %s", LoggingImpl.createDefaultTimeRangeFilter()))
             .build();
     List<LogEntry> entriesList = ImmutableList.of(LOG_ENTRY1, LOG_ENTRY2);
     ListLogEntriesResponse response =

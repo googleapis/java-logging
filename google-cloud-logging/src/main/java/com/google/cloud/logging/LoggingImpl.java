@@ -783,7 +783,12 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
       builder.setOrderBy(orderBy);
     }
     String filter = FILTER.get(options);
+    // Make sure timestamp filter is either explicitly specified or we add a default time filter
+    // of 24 hours back to be inline with gcloud behavior for the same API
     if (filter != null) {
+      if (!filter.contains("timestamp")) {
+        filter = String.format("%s AND %s", filter, createDefaultTimeRangeFilter());
+      }
       builder.setFilter(filter);
     } else {
       // If filter is not specified, default filter is looking back 24 hours in line with gcloud
@@ -853,7 +858,8 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     return pendingWrites.size();
   }
 
-  private static String createDefaultTimeRangeFilter() {
+  @VisibleForTesting
+  static String createDefaultTimeRangeFilter() {
     DateFormat rfcDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
     return "timestamp>=\"" + rfcDateFormat.format(yesterday()) + "\"";
   }
