@@ -782,7 +782,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     // Make sure timestamp filter is either explicitly specified or we add a default time filter
     // of 24 hours back to be inline with gcloud behavior for the same API
     if (filter != null) {
-      if (!filter.contains("timestamp")) {
+      if (!filter.toLowerCase().contains("timestamp")) {
         filter = String.format("%s AND %s", filter, defaultTimestampFilterCreator.createDefaultTimestampFilter());
       }
       builder.setFilter(filter);
