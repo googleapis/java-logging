@@ -77,13 +77,7 @@ import com.google.logging.v2.UpdateSinkRequest;
 import com.google.logging.v2.WriteLogEntriesRequest;
 import com.google.logging.v2.WriteLogEntriesResponse;
 import com.google.protobuf.Empty;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -114,6 +108,9 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
         }
       };
   private static final ThreadLocal<Boolean> inWriteCall = new ThreadLocal<>();
+
+  @VisibleForTesting
+  static ITimestampDefaultFilter defaultTimestampFilterCreator = new TimestampDefaultFilter();
 
   LoggingImpl(LoggingOptions options) {
     super(options);
@@ -709,8 +706,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   public void flush() {
     // BUG(1795): We should force batcher to issue RPC call for buffered messages,
     // so the code below doesn't wait uselessly.
-    ArrayList<ApiFuture<Void>> writesToFlush = new ArrayList<>();
-    writesToFlush.addAll(pendingWrites.values());
+    ArrayList<ApiFuture<Void>> writesToFlush = new ArrayList<>(pendingWrites.values());
 
     try {
       ApiFutures.allAsList(writesToFlush).get(FLUSH_WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
@@ -787,13 +783,13 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     // of 24 hours back to be inline with gcloud behavior for the same API
     if (filter != null) {
       if (!filter.contains("timestamp")) {
-        filter = String.format("%s AND %s", filter, createDefaultTimeRangeFilter());
+        filter = String.format("%s AND %s", filter, defaultTimestampFilterCreator.createDefaultTimestampFilter());
       }
       builder.setFilter(filter);
     } else {
       // If filter is not specified, default filter is looking back 24 hours in line with gcloud
       // behavior
-      builder.setFilter(createDefaultTimeRangeFilter());
+      builder.setFilter(defaultTimestampFilterCreator.createDefaultTimestampFilter());
     }
 
     return builder.build();
@@ -808,16 +804,16 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
         list,
         new Function<ListLogEntriesResponse, AsyncPage<LogEntry>>() {
           @Override
-          public AsyncPage<LogEntry> apply(ListLogEntriesResponse listLogEntrysResponse) {
+          public AsyncPage<LogEntry> apply(ListLogEntriesResponse listLogEntriesResponse) {
             List<LogEntry> entries =
-                listLogEntrysResponse.getEntriesList() == null
+                    listLogEntriesResponse.getEntriesList() == null
                     ? ImmutableList.<LogEntry>of()
                     : Lists.transform(
-                        listLogEntrysResponse.getEntriesList(), LogEntry.FROM_PB_FUNCTION);
+                            listLogEntriesResponse.getEntriesList(), LogEntry.FROM_PB_FUNCTION);
             String cursor =
-                listLogEntrysResponse.getNextPageToken().equals("")
+                    listLogEntriesResponse.getNextPageToken().equals("")
                     ? null
-                    : listLogEntrysResponse.getNextPageToken();
+                    : listLogEntriesResponse.getNextPageToken();
             return new AsyncPageImpl<>(
                 new LogEntryPageFetcher(serviceOptions, cursor, options), cursor, entries);
           }
@@ -856,22 +852,5 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   @VisibleForTesting
   int getNumPendingWrites() {
     return pendingWrites.size();
-  }
-
-  @VisibleForTesting
-  static String createDefaultTimeRangeFilter() {
-    DateFormat rfcDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-    return "timestamp>=\"" + rfcDateFormat.format(yesterday()) + "\"";
-  }
-
-  private static Date yesterday() {
-    Calendar calendar = Calendar.getInstance();
-    calendar.add(Calendar.DATE, -1);
-    calendar.set(Calendar.HOUR_OF_DAY, 0);
-    calendar.set(Calendar.MINUTE, 0);
-    calendar.set(Calendar.SECOND, 0);
-    calendar.set(Calendar.MILLISECOND, 0);
-
-    return calendar.getTime();
   }
 }
