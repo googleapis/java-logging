@@ -16,42 +16,40 @@
 
 package com.google.cloud.logging;
 
-import org.junit.Test;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import javax.management.timer.Timer;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
-
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import javax.management.timer.Timer;
+import org.junit.Test;
 
 public class TimestampDefaultFilterTest {
 
-    @Test
-    public void DefaultTimestampFilterTest() {
-        ITimestampDefaultFilter filter = new TimestampDefaultFilter();
+  @Test
+  public void DefaultTimestampFilterTest() {
+    ITimestampDefaultFilter filter = new TimestampDefaultFilter();
 
-        TimeZone timeZone = TimeZone.getTimeZone("UTC");
-        Calendar calendar = Calendar.getInstance(timeZone);
-        calendar.add(Calendar.DATE, -1);
-        Date expected = calendar.getTime();
+    TimeZone timeZone = TimeZone.getTimeZone("UTC");
+    Calendar calendar = Calendar.getInstance(timeZone);
+    calendar.add(Calendar.DATE, -1);
+    Date expected = calendar.getTime();
 
-        // Timestamp filter exists
-        String defaultFilter = filter.createDefaultTimestampFilter();
-        assertTrue(defaultFilter.contains("timestamp>="));
+    // Timestamp filter exists
+    String defaultFilter = filter.createDefaultTimestampFilter();
+    assertTrue(defaultFilter.contains("timestamp>="));
 
-        // Time is last 24 hours
-        try {
-            DateFormat rfcDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-            rfcDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-            Date actual = rfcDateFormat.parse(defaultFilter.substring(12, defaultFilter.length() - 1));
-            assertTrue(Math.abs(expected.getTime() - actual.getTime()) < Timer.ONE_MINUTE);
-        }
-        catch (java.text.ParseException ex) {
-            fail(); // Just fail if exception is thrown
-        }
+    // Time is last 24 hours
+    try {
+      DateFormat rfcDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+      rfcDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+      Date actual = rfcDateFormat.parse(defaultFilter.substring(12, defaultFilter.length() - 1));
+      assertTrue(Math.abs(expected.getTime() - actual.getTime()) < Timer.ONE_MINUTE);
+    } catch (java.text.ParseException ex) {
+      fail(); // Just fail if exception is thrown
     }
+  }
 }

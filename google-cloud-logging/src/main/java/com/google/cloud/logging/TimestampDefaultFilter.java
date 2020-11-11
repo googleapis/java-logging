@@ -23,18 +23,18 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class TimestampDefaultFilter implements ITimestampDefaultFilter {
-    @Override
-    public String createDefaultTimestampFilter() {
-        DateFormat rfcDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        rfcDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        return "timestamp>=\"" + rfcDateFormat.format(yesterday()) + "\"";
-    }
+  @Override
+  public String createDefaultTimestampFilter() {
+    DateFormat rfcDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+    rfcDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+    return "timestamp>=\"" + rfcDateFormat.format(yesterday()) + "\"";
+  }
 
-    private Date yesterday() {
-        TimeZone timeZone = TimeZone.getTimeZone("UTC");
-        Calendar calendar = Calendar.getInstance(timeZone);
-        calendar.add(Calendar.DATE, -1);
+  private Date yesterday() {
+    TimeZone timeZone = TimeZone.getTimeZone("UTC");
+    Calendar calendar = Calendar.getInstance(timeZone);
+    calendar.add(Calendar.DATE, -1);
 
-        return calendar.getTime();
-    }
+    return calendar.getTime();
+  }
 }

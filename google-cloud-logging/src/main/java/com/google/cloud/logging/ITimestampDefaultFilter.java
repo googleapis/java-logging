@@ -17,15 +17,15 @@
 package com.google.cloud.logging;
 
 /**
- * Encapsulates implementation of default time filter.
- * This is needed for testing since we can't mock static classes
- * with EasyMock
+ * Encapsulates implementation of default time filter. This is needed for testing since we can't
+ * mock static classes with EasyMock
  */
 public interface ITimestampDefaultFilter {
 
-    /**
-     * Creates a default filter with timestamp to query Cloud Logging
-     * @return The filter using timestamp field
-     */
-    String createDefaultTimestampFilter();
+  /**
+   * Creates a default filter with timestamp to query Cloud Logging
+   *
+   * @return The filter using timestamp field
+   */
+  String createDefaultTimestampFilter();
 }

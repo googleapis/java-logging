@@ -77,8 +77,6 @@ import com.google.logging.v2.WriteLogEntriesRequest;
 import com.google.logging.v2.WriteLogEntriesResponse;
 import com.google.protobuf.Empty;
 import com.google.protobuf.Timestamp;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -192,12 +190,13 @@ public class LoggingImplTest {
     // However when testing, the time when it was called by the test and by the method
     // implementation might differ by microseconds so we use the same time filter implementation
     // for test and in "real" method
-    LoggingImpl.defaultTimestampFilterCreator = new ITimestampDefaultFilter() {
-      @Override
-      public String createDefaultTimestampFilter() {
-        return "timestamp>=\"2020-10-30T15:39:09Z\"";
-      }
-    };
+    LoggingImpl.defaultTimestampFilterCreator =
+        new ITimestampDefaultFilter() {
+          @Override
+          public String createDefaultTimestampFilter() {
+            return "timestamp>=\"2020-10-30T15:39:09Z\"";
+          }
+        };
   }
 
   @After
@@ -1744,7 +1743,8 @@ public class LoggingImplTest {
             .addAllEntries(Lists.transform(entriesList, LogEntry.toPbFunction(PROJECT)))
             .build();
     ApiFuture<ListLogEntriesResponse> futureResponse = ApiFutures.immediateFuture(response);
-    EasyMock.expect(loggingRpcMock.list(EasyMock.anyObject(ListLogEntriesRequest.class))).andReturn(futureResponse);
+    EasyMock.expect(loggingRpcMock.list(EasyMock.anyObject(ListLogEntriesRequest.class)))
+        .andReturn(futureResponse);
     EasyMock.replay(loggingRpcMock);
     Page<LogEntry> page = logging.listLogEntries();
     assertEquals(cursor, page.getNextPageToken());
@@ -1757,7 +1757,8 @@ public class LoggingImplTest {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
 
-    String defaultTimeFilter = LoggingImpl.defaultTimestampFilterCreator.createDefaultTimestampFilter();
+    String defaultTimeFilter =
+        LoggingImpl.defaultTimestampFilterCreator.createDefaultTimestampFilter();
     ListLogEntriesRequest request1 =
         ListLogEntriesRequest.newBuilder()
             .addResourceNames(PROJECT_PB)
@@ -1832,7 +1833,9 @@ public class LoggingImplTest {
             .addResourceNames(PROJECT_PB)
             .setOrderBy("timestamp desc")
             .setFilter(
-                String.format("logName:syslog AND %s", LoggingImpl.defaultTimestampFilterCreator.createDefaultTimestampFilter()))
+                String.format(
+                    "logName:syslog AND %s",
+                    LoggingImpl.defaultTimestampFilterCreator.createDefaultTimestampFilter()))
             .build();
     List<LogEntry> entriesList = ImmutableList.of(LOG_ENTRY1, LOG_ENTRY2);
     ListLogEntriesResponse response =
@@ -1948,7 +1951,10 @@ public class LoggingImplTest {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
-    String filter = String.format("logName:syslog AND %s", LoggingImpl.defaultTimestampFilterCreator.createDefaultTimestampFilter());
+    String filter =
+        String.format(
+            "logName:syslog AND %s",
+            LoggingImpl.defaultTimestampFilterCreator.createDefaultTimestampFilter());
     ListLogEntriesRequest request =
         ListLogEntriesRequest.newBuilder()
             .addResourceNames(PROJECT_PB)

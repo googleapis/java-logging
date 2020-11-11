@@ -783,7 +783,9 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     // of 24 hours back to be inline with gcloud behavior for the same API
     if (filter != null) {
       if (!filter.toLowerCase().contains("timestamp")) {
-        filter = String.format("%s AND %s", filter, defaultTimestampFilterCreator.createDefaultTimestampFilter());
+        filter =
+            String.format(
+                "%s AND %s", filter, defaultTimestampFilterCreator.createDefaultTimestampFilter());
       }
       builder.setFilter(filter);
     } else {
@@ -806,12 +808,12 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
           @Override
           public AsyncPage<LogEntry> apply(ListLogEntriesResponse listLogEntriesResponse) {
             List<LogEntry> entries =
-                    listLogEntriesResponse.getEntriesList() == null
+                listLogEntriesResponse.getEntriesList() == null
                     ? ImmutableList.<LogEntry>of()
                     : Lists.transform(
-                            listLogEntriesResponse.getEntriesList(), LogEntry.FROM_PB_FUNCTION);
+                        listLogEntriesResponse.getEntriesList(), LogEntry.FROM_PB_FUNCTION);
             String cursor =
-                    listLogEntriesResponse.getNextPageToken().equals("")
+                listLogEntriesResponse.getNextPageToken().equals("")
                     ? null
                     : listLogEntriesResponse.getNextPageToken();
             return new AsyncPageImpl<>(
