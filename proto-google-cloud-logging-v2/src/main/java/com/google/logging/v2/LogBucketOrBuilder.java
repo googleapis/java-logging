@@ -32,7 +32,6 @@ public interface LogBucketOrBuilder
    * "projects/my-project-id/locations/my-location/buckets/my-bucket-id The
    * supported locations are:
    *   "global"
-   *   "us-central1"
    * For the location of `global` it is unspecified where logs are actually
    * stored.
    * Once a bucket has been created, the location can not be changed.
@@ -52,7 +51,6 @@ public interface LogBucketOrBuilder
    * "projects/my-project-id/locations/my-location/buckets/my-bucket-id The
    * supported locations are:
    *   "global"
-   *   "us-central1"
    * For the location of `global` it is unspecified where logs are actually
    * stored.
    * Once a bucket has been created, the location can not be changed.
@@ -183,6 +181,21 @@ public interface LogBucketOrBuilder
    * @return The retentionDays.
    */
   int getRetentionDays();
+
+  /**
+   *
+   *
+   * <pre>
+   * Whether the bucket has been locked.
+   * The retention period on a locked bucket may not be changed.
+   * Locked buckets may only be deleted if they are empty.
+   * </pre>
+   *
+   * <code>bool locked = 9;</code>
+   *
+   * @return The locked.
+   */
+  boolean getLocked();
 
   /**
    *

@@ -17,7 +17,7 @@ If you are using Maven with [BOM][libraries-bom], add this to your pom.xml file
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>libraries-bom</artifactId>
-      <version>13.4.0</version>
+      <version>16.0.0</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -39,18 +39,18 @@ If you are using Maven without BOM, add this to your dependencies:
 <dependency>
   <groupId>com.google.cloud</groupId>
   <artifactId>google-cloud-logging</artifactId>
-  <version>1.101.3-SNAPSHOT</version>
+  <version>2.0.2-SNAPSHOT</version>
 </dependency>
 
 ```
 
 If you are using Gradle, add this to your dependencies
 ```Groovy
-compile 'com.google.cloud:google-cloud-logging:1.102.0'
+compile 'com.google.cloud:google-cloud-logging:2.0.1'
 ```
 If you are using SBT, add this to your dependencies
 ```Scala
-libraryDependencies += "com.google.cloud" % "google-cloud-logging" % "1.102.0"
+libraryDependencies += "com.google.cloud" % "google-cloud-logging" % "2.0.1"
 ```
 
 ## Authentication

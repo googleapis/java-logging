@@ -22,7 +22,7 @@ package com.google.logging.v2;
  *
  *
  * <pre>
- * Describes a repository of logs (Beta).
+ * Describes a repository of logs.
  * </pre>
  *
  * Protobuf type {@code google.logging.v2.LogBucket}
@@ -116,6 +116,11 @@ public final class LogBucket extends com.google.protobuf.GeneratedMessageV3
 
               break;
             }
+          case 72:
+            {
+              locked_ = input.readBool();
+              break;
+            }
           case 88:
             {
               retentionDays_ = input.readInt32();
@@ -172,7 +177,6 @@ public final class LogBucket extends com.google.protobuf.GeneratedMessageV3
    * "projects/my-project-id/locations/my-location/buckets/my-bucket-id The
    * supported locations are:
    *   "global"
-   *   "us-central1"
    * For the location of `global` it is unspecified where logs are actually
    * stored.
    * Once a bucket has been created, the location can not be changed.
@@ -203,7 +207,6 @@ public final class LogBucket extends com.google.protobuf.GeneratedMessageV3
    * "projects/my-project-id/locations/my-location/buckets/my-bucket-id The
    * supported locations are:
    *   "global"
-   *   "us-central1"
    * For the location of `global` it is unspecified where logs are actually
    * stored.
    * Once a bucket has been created, the location can not be changed.
@@ -397,6 +400,26 @@ public final class LogBucket extends com.google.protobuf.GeneratedMessageV3
     return retentionDays_;
   }
 
+  public static final int LOCKED_FIELD_NUMBER = 9;
+  private boolean locked_;
+  /**
+   *
+   *
+   * <pre>
+   * Whether the bucket has been locked.
+   * The retention period on a locked bucket may not be changed.
+   * Locked buckets may only be deleted if they are empty.
+   * </pre>
+   *
+   * <code>bool locked = 9;</code>
+   *
+   * @return The locked.
+   */
+  @java.lang.Override
+  public boolean getLocked() {
+    return locked_;
+  }
+
   public static final int LIFECYCLE_STATE_FIELD_NUMBER = 12;
   private int lifecycleState_;
   /**
@@ -463,6 +486,9 @@ public final class LogBucket extends com.google.protobuf.GeneratedMessageV3
     if (updateTime_ != null) {
       output.writeMessage(5, getUpdateTime());
     }
+    if (locked_ != false) {
+      output.writeBool(9, locked_);
+    }
     if (retentionDays_ != 0) {
       output.writeInt32(11, retentionDays_);
     }
@@ -490,6 +516,9 @@ public final class LogBucket extends com.google.protobuf.GeneratedMessageV3
     }
     if (updateTime_ != null) {
       size += com.google.protobuf.CodedOutputStream.computeMessageSize(5, getUpdateTime());
+    }
+    if (locked_ != false) {
+      size += com.google.protobuf.CodedOutputStream.computeBoolSize(9, locked_);
     }
     if (retentionDays_ != 0) {
       size += com.google.protobuf.CodedOutputStream.computeInt32Size(11, retentionDays_);
@@ -524,6 +553,7 @@ public final class LogBucket extends com.google.protobuf.GeneratedMessageV3
       if (!getUpdateTime().equals(other.getUpdateTime())) return false;
     }
     if (getRetentionDays() != other.getRetentionDays()) return false;
+    if (getLocked() != other.getLocked()) return false;
     if (lifecycleState_ != other.lifecycleState_) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
@@ -550,6 +580,8 @@ public final class LogBucket extends com.google.protobuf.GeneratedMessageV3
     }
     hash = (37 * hash) + RETENTION_DAYS_FIELD_NUMBER;
     hash = (53 * hash) + getRetentionDays();
+    hash = (37 * hash) + LOCKED_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(getLocked());
     hash = (37 * hash) + LIFECYCLE_STATE_FIELD_NUMBER;
     hash = (53 * hash) + lifecycleState_;
     hash = (29 * hash) + unknownFields.hashCode();
@@ -655,7 +687,7 @@ public final class LogBucket extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * Describes a repository of logs (Beta).
+   * Describes a repository of logs.
    * </pre>
    *
    * Protobuf type {@code google.logging.v2.LogBucket}
@@ -713,6 +745,8 @@ public final class LogBucket extends com.google.protobuf.GeneratedMessageV3
       }
       retentionDays_ = 0;
 
+      locked_ = false;
+
       lifecycleState_ = 0;
 
       return this;
@@ -754,6 +788,7 @@ public final class LogBucket extends com.google.protobuf.GeneratedMessageV3
         result.updateTime_ = updateTimeBuilder_.build();
       }
       result.retentionDays_ = retentionDays_;
+      result.locked_ = locked_;
       result.lifecycleState_ = lifecycleState_;
       onBuilt();
       return result;
@@ -821,6 +856,9 @@ public final class LogBucket extends com.google.protobuf.GeneratedMessageV3
       if (other.getRetentionDays() != 0) {
         setRetentionDays(other.getRetentionDays());
       }
+      if (other.getLocked() != false) {
+        setLocked(other.getLocked());
+      }
       if (other.lifecycleState_ != 0) {
         setLifecycleStateValue(other.getLifecycleStateValue());
       }
@@ -863,7 +901,6 @@ public final class LogBucket extends com.google.protobuf.GeneratedMessageV3
      * "projects/my-project-id/locations/my-location/buckets/my-bucket-id The
      * supported locations are:
      *   "global"
-     *   "us-central1"
      * For the location of `global` it is unspecified where logs are actually
      * stored.
      * Once a bucket has been created, the location can not be changed.
@@ -893,7 +930,6 @@ public final class LogBucket extends com.google.protobuf.GeneratedMessageV3
      * "projects/my-project-id/locations/my-location/buckets/my-bucket-id The
      * supported locations are:
      *   "global"
-     *   "us-central1"
      * For the location of `global` it is unspecified where logs are actually
      * stored.
      * Once a bucket has been created, the location can not be changed.
@@ -923,7 +959,6 @@ public final class LogBucket extends com.google.protobuf.GeneratedMessageV3
      * "projects/my-project-id/locations/my-location/buckets/my-bucket-id The
      * supported locations are:
      *   "global"
-     *   "us-central1"
      * For the location of `global` it is unspecified where logs are actually
      * stored.
      * Once a bucket has been created, the location can not be changed.
@@ -952,7 +987,6 @@ public final class LogBucket extends com.google.protobuf.GeneratedMessageV3
      * "projects/my-project-id/locations/my-location/buckets/my-bucket-id The
      * supported locations are:
      *   "global"
-     *   "us-central1"
      * For the location of `global` it is unspecified where logs are actually
      * stored.
      * Once a bucket has been created, the location can not be changed.
@@ -977,7 +1011,6 @@ public final class LogBucket extends com.google.protobuf.GeneratedMessageV3
      * "projects/my-project-id/locations/my-location/buckets/my-bucket-id The
      * supported locations are:
      *   "global"
-     *   "us-central1"
      * For the location of `global` it is unspecified where logs are actually
      * stored.
      * Once a bucket has been created, the location can not be changed.
@@ -1573,6 +1606,64 @@ public final class LogBucket extends com.google.protobuf.GeneratedMessageV3
     public Builder clearRetentionDays() {
 
       retentionDays_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private boolean locked_;
+    /**
+     *
+     *
+     * <pre>
+     * Whether the bucket has been locked.
+     * The retention period on a locked bucket may not be changed.
+     * Locked buckets may only be deleted if they are empty.
+     * </pre>
+     *
+     * <code>bool locked = 9;</code>
+     *
+     * @return The locked.
+     */
+    @java.lang.Override
+    public boolean getLocked() {
+      return locked_;
+    }
+    /**
+     *
+     *
+     * <pre>
+     * Whether the bucket has been locked.
+     * The retention period on a locked bucket may not be changed.
+     * Locked buckets may only be deleted if they are empty.
+     * </pre>
+     *
+     * <code>bool locked = 9;</code>
+     *
+     * @param value The locked to set.
+     * @return This builder for chaining.
+     */
+    public Builder setLocked(boolean value) {
+
+      locked_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     *
+     *
+     * <pre>
+     * Whether the bucket has been locked.
+     * The retention period on a locked bucket may not be changed.
+     * Locked buckets may only be deleted if they are empty.
+     * </pre>
+     *
+     * <code>bool locked = 9;</code>
+     *
+     * @return This builder for chaining.
+     */
+    public Builder clearLocked() {
+
+      locked_ = false;
       onChanged();
       return this;
     }

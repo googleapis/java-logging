@@ -46,11 +46,38 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.MoreExecutors;
 import com.google.common.util.concurrent.Uninterruptibles;
-import com.google.logging.v2.*;
+import com.google.logging.v2.CreateExclusionRequest;
+import com.google.logging.v2.CreateLogMetricRequest;
+import com.google.logging.v2.CreateSinkRequest;
+import com.google.logging.v2.DeleteExclusionRequest;
+import com.google.logging.v2.DeleteLogMetricRequest;
+import com.google.logging.v2.DeleteLogRequest;
+import com.google.logging.v2.DeleteSinkRequest;
+import com.google.logging.v2.GetExclusionRequest;
+import com.google.logging.v2.GetLogMetricRequest;
+import com.google.logging.v2.GetSinkRequest;
+import com.google.logging.v2.ListExclusionsRequest;
+import com.google.logging.v2.ListExclusionsResponse;
+import com.google.logging.v2.ListLogEntriesRequest;
+import com.google.logging.v2.ListLogEntriesResponse;
+import com.google.logging.v2.ListLogMetricsRequest;
+import com.google.logging.v2.ListLogMetricsResponse;
+import com.google.logging.v2.ListMonitoredResourceDescriptorsRequest;
+import com.google.logging.v2.ListMonitoredResourceDescriptorsResponse;
+import com.google.logging.v2.ListSinksRequest;
+import com.google.logging.v2.ListSinksResponse;
+import com.google.logging.v2.LogExclusionName;
+import com.google.logging.v2.LogMetricName;
+import com.google.logging.v2.LogName;
+import com.google.logging.v2.LogSinkName;
+import com.google.logging.v2.ProjectName;
+import com.google.logging.v2.UpdateExclusionRequest;
+import com.google.logging.v2.UpdateLogMetricRequest;
+import com.google.logging.v2.UpdateSinkRequest;
+import com.google.logging.v2.WriteLogEntriesRequest;
+import com.google.logging.v2.WriteLogEntriesResponse;
 import com.google.protobuf.Empty;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -81,6 +108,9 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
         }
       };
   private static final ThreadLocal<Boolean> inWriteCall = new ThreadLocal<>();
+
+  @VisibleForTesting
+  static ITimestampDefaultFilter defaultTimestampFilterCreator = new TimestampDefaultFilter();
 
   LoggingImpl(LoggingOptions options) {
     super(options);
@@ -190,6 +220,19 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     @Override
     public ApiFuture<AsyncPage<Metric>> getNextPage() {
       return listMetricsAsync(serviceOptions(), requestOptions());
+    }
+  }
+
+  private static class ExclusionPageFetcher extends BasePageFetcher<Exclusion> {
+
+    ExclusionPageFetcher(
+        LoggingOptions serviceOptions, String cursor, Map<Option.OptionType, ?> requestOptions) {
+      super(serviceOptions, cursor, requestOptions);
+    }
+
+    @Override
+    public ApiFuture<AsyncPage<Exclusion>> getNextPage() {
+      return listExclusionAsync(serviceOptions(), requestOptions());
     }
   }
 
@@ -507,6 +550,115 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     return transform(rpc.delete(request), EMPTY_TO_BOOLEAN_FUNCTION);
   }
 
+  @Override
+  public Exclusion create(Exclusion exclusion) {
+    return get(createAsync(exclusion));
+  }
+
+  @Override
+  public ApiFuture<Exclusion> createAsync(Exclusion exclusion) {
+    CreateExclusionRequest request =
+        CreateExclusionRequest.newBuilder()
+            .setParent(ProjectName.of(getOptions().getProjectId()).toString())
+            .setExclusion(exclusion.toProtobuf())
+            .build();
+    return transform(rpc.create(request), Exclusion.FROM_PROTOBUF_FUNCTION);
+  }
+
+  @Override
+  public Exclusion getExclusion(String exclusion) {
+    return get(getExclusionAsync(exclusion));
+  }
+
+  @Override
+  public ApiFuture<Exclusion> getExclusionAsync(String exclusion) {
+    GetExclusionRequest request =
+        GetExclusionRequest.newBuilder()
+            .setName(LogExclusionName.of(getOptions().getProjectId(), exclusion).toString())
+            .build();
+    return transform(rpc.get(request), Exclusion.FROM_PROTOBUF_FUNCTION);
+  }
+
+  @Override
+  public Exclusion update(Exclusion exclusion) {
+    return get(updateAsync(exclusion));
+  }
+
+  @Override
+  public ApiFuture<Exclusion> updateAsync(Exclusion exclusion) {
+    UpdateExclusionRequest request =
+        UpdateExclusionRequest.newBuilder()
+            .setName(
+                LogExclusionName.of(getOptions().getProjectId(), exclusion.getName()).toString())
+            .setExclusion(exclusion.toProtobuf())
+            .build();
+    return transform(rpc.update(request), Exclusion.FROM_PROTOBUF_FUNCTION);
+  }
+
+  @Override
+  public boolean deleteExclusion(String exclusion) {
+    return get(deleteExclusionAsync(exclusion));
+  }
+
+  @Override
+  public ApiFuture<Boolean> deleteExclusionAsync(String exclusion) {
+    DeleteExclusionRequest request =
+        DeleteExclusionRequest.newBuilder()
+            .setName(LogExclusionName.of(getOptions().getProjectId(), exclusion).toString())
+            .build();
+    return transform(rpc.delete(request), EMPTY_TO_BOOLEAN_FUNCTION);
+  }
+
+  @Override
+  public Page<Exclusion> listExclusions(ListOption... options) {
+    return get(listExclusionsAsync(options));
+  }
+
+  @Override
+  public ApiFuture<AsyncPage<Exclusion>> listExclusionsAsync(ListOption... options) {
+    return listExclusionAsync(getOptions(), optionMap(options));
+  }
+
+  private static ListExclusionsRequest listExclusionsRequest(
+      LoggingOptions serviceOptions, Map<Option.OptionType, ?> options) {
+    ListExclusionsRequest.Builder builder = ListExclusionsRequest.newBuilder();
+    builder.setParent(ProjectName.of(serviceOptions.getProjectId()).toString());
+    Integer pageSize = PAGE_SIZE.get(options);
+    String pageToken = PAGE_TOKEN.get(options);
+    if (pageSize != null) {
+      builder.setPageSize(pageSize);
+    }
+    if (pageToken != null) {
+      builder.setPageToken(pageToken);
+    }
+    return builder.build();
+  }
+
+  private static ApiFuture<AsyncPage<Exclusion>> listExclusionAsync(
+      final LoggingOptions serviceOptions, final Map<Option.OptionType, ?> options) {
+    final ListExclusionsRequest request = listExclusionsRequest(serviceOptions, options);
+    ApiFuture<ListExclusionsResponse> list = serviceOptions.getLoggingRpcV2().list(request);
+    return transform(
+        list,
+        new Function<ListExclusionsResponse, AsyncPage<Exclusion>>() {
+          @Override
+          public AsyncPage<Exclusion> apply(ListExclusionsResponse listExclusionsResponse) {
+            List<Exclusion> exclusions =
+                listExclusionsResponse.getExclusionsList() == null
+                    ? ImmutableList.<Exclusion>of()
+                    : Lists.transform(
+                        listExclusionsResponse.getExclusionsList(),
+                        Exclusion.FROM_PROTOBUF_FUNCTION);
+            String cursor =
+                listExclusionsResponse.getNextPageToken().equals("")
+                    ? null
+                    : listExclusionsResponse.getNextPageToken();
+            return new AsyncPageImpl<>(
+                new ExclusionPageFetcher(serviceOptions, cursor, options), cursor, exclusions);
+          }
+        });
+  }
+
   private static WriteLogEntriesRequest writeLogEntriesRequest(
       LoggingOptions serviceOptions,
       Iterable<LogEntry> logEntries,
@@ -554,8 +706,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   public void flush() {
     // BUG(1795): We should force batcher to issue RPC call for buffered messages,
     // so the code below doesn't wait uselessly.
-    ArrayList<ApiFuture<Void>> writesToFlush = new ArrayList<>();
-    writesToFlush.addAll(pendingWrites.values());
+    ArrayList<ApiFuture<Void>> writesToFlush = new ArrayList<>(pendingWrites.values());
 
     try {
       ApiFutures.allAsList(writesToFlush).get(FLUSH_WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
@@ -628,9 +779,21 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
       builder.setOrderBy(orderBy);
     }
     String filter = FILTER.get(options);
+    // Make sure timestamp filter is either explicitly specified or we add a default time filter
+    // of 24 hours back to be inline with gcloud behavior for the same API
     if (filter != null) {
+      if (!filter.toLowerCase().contains("timestamp")) {
+        filter =
+            String.format(
+                "%s AND %s", filter, defaultTimestampFilterCreator.createDefaultTimestampFilter());
+      }
       builder.setFilter(filter);
+    } else {
+      // If filter is not specified, default filter is looking back 24 hours in line with gcloud
+      // behavior
+      builder.setFilter(defaultTimestampFilterCreator.createDefaultTimestampFilter());
     }
+
     return builder.build();
   }
 
@@ -643,16 +806,16 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
         list,
         new Function<ListLogEntriesResponse, AsyncPage<LogEntry>>() {
           @Override
-          public AsyncPage<LogEntry> apply(ListLogEntriesResponse listLogEntrysResponse) {
+          public AsyncPage<LogEntry> apply(ListLogEntriesResponse listLogEntriesResponse) {
             List<LogEntry> entries =
-                listLogEntrysResponse.getEntriesList() == null
+                listLogEntriesResponse.getEntriesList() == null
                     ? ImmutableList.<LogEntry>of()
                     : Lists.transform(
-                        listLogEntrysResponse.getEntriesList(), LogEntry.FROM_PB_FUNCTION);
+                        listLogEntriesResponse.getEntriesList(), LogEntry.FROM_PB_FUNCTION);
             String cursor =
-                listLogEntrysResponse.getNextPageToken().equals("")
+                listLogEntriesResponse.getNextPageToken().equals("")
                     ? null
-                    : listLogEntrysResponse.getNextPageToken();
+                    : listLogEntriesResponse.getNextPageToken();
             return new AsyncPageImpl<>(
                 new LogEntryPageFetcher(serviceOptions, cursor, options), cursor, entries);
           }

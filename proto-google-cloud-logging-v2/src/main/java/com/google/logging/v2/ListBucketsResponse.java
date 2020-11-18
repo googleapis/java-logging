@@ -22,7 +22,7 @@ package com.google.logging.v2;
  *
  *
  * <pre>
- * The response from ListBuckets (Beta).
+ * The response from ListBuckets.
  * </pre>
  *
  * Protobuf type {@code google.logging.v2.ListBucketsResponse}
@@ -422,7 +422,7 @@ public final class ListBucketsResponse extends com.google.protobuf.GeneratedMess
    *
    *
    * <pre>
-   * The response from ListBuckets (Beta).
+   * The response from ListBuckets.
    * </pre>
    *
    * Protobuf type {@code google.logging.v2.ListBucketsResponse}

@@ -22,7 +22,7 @@ package com.google.logging.v2;
  *
  *
  * <pre>
- * The parameters to `ListBuckets` (Beta).
+ * The parameters to `ListBuckets`.
  * </pre>
  *
  * Protobuf type {@code google.logging.v2.ListBucketsRequest}
@@ -446,7 +446,7 @@ public final class ListBucketsRequest extends com.google.protobuf.GeneratedMessa
    *
    *
    * <pre>
-   * The parameters to `ListBuckets` (Beta).
+   * The parameters to `ListBuckets`.
    * </pre>
    *
    * Protobuf type {@code google.logging.v2.ListBucketsRequest}

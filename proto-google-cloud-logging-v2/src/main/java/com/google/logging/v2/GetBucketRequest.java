@@ -22,7 +22,7 @@ package com.google.logging.v2;
  *
  *
  * <pre>
- * The parameters to `GetBucket` (Beta).
+ * The parameters to `GetBucket`.
  * </pre>
  *
  * Protobuf type {@code google.logging.v2.GetBucketRequest}
@@ -338,7 +338,7 @@ public final class GetBucketRequest extends com.google.protobuf.GeneratedMessage
    *
    *
    * <pre>
-   * The parameters to `GetBucket` (Beta).
+   * The parameters to `GetBucket`.
    * </pre>
    *
    * Protobuf type {@code google.logging.v2.GetBucketRequest}

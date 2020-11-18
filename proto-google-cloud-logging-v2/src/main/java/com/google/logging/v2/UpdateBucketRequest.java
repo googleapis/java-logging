@@ -22,7 +22,7 @@ package com.google.logging.v2;
  *
  *
  * <pre>
- * The parameters to `UpdateBucket` (Beta).
+ * The parameters to `UpdateBucket`.
  * </pre>
  *
  * Protobuf type {@code google.logging.v2.UpdateBucketRequest}
@@ -511,7 +511,7 @@ public final class UpdateBucketRequest extends com.google.protobuf.GeneratedMess
    *
    *
    * <pre>
-   * The parameters to `UpdateBucket` (Beta).
+   * The parameters to `UpdateBucket`.
    * </pre>
    *
    * Protobuf type {@code google.logging.v2.UpdateBucketRequest}
