@@ -22,13 +22,7 @@ import static io.grpc.stub.ClientCalls.futureUnaryCall;
 import static io.grpc.stub.ServerCalls.asyncUnaryCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
-/**
- *
- *
- * <pre>
- * Service for configuring logs-based metrics.
- * </pre>
- */
+/** */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler",
     comments = "Source: google/logging/v2/logging_metrics.proto")
@@ -289,22 +283,10 @@ public final class MetricsServiceV2Grpc {
     return MetricsServiceV2FutureStub.newStub(factory, channel);
   }
 
-  /**
-   *
-   *
-   * <pre>
-   * Service for configuring logs-based metrics.
-   * </pre>
-   */
+  /** */
   public abstract static class MetricsServiceV2ImplBase implements io.grpc.BindableService {
 
-    /**
-     *
-     *
-     * <pre>
-     * Lists logs-based metrics.
-     * </pre>
-     */
+    /** */
     public void listLogMetrics(
         com.google.logging.v2.ListLogMetricsRequest request,
         io.grpc.stub.StreamObserver<com.google.logging.v2.ListLogMetricsResponse>
@@ -312,52 +294,28 @@ public final class MetricsServiceV2Grpc {
       asyncUnimplementedUnaryCall(getListLogMetricsMethod(), responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Gets a logs-based metric.
-     * </pre>
-     */
+    /** */
     public void getLogMetric(
         com.google.logging.v2.GetLogMetricRequest request,
         io.grpc.stub.StreamObserver<com.google.logging.v2.LogMetric> responseObserver) {
       asyncUnimplementedUnaryCall(getGetLogMetricMethod(), responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Creates a logs-based metric.
-     * </pre>
-     */
+    /** */
     public void createLogMetric(
         com.google.logging.v2.CreateLogMetricRequest request,
         io.grpc.stub.StreamObserver<com.google.logging.v2.LogMetric> responseObserver) {
       asyncUnimplementedUnaryCall(getCreateLogMetricMethod(), responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Creates or updates a logs-based metric.
-     * </pre>
-     */
+    /** */
     public void updateLogMetric(
         com.google.logging.v2.UpdateLogMetricRequest request,
         io.grpc.stub.StreamObserver<com.google.logging.v2.LogMetric> responseObserver) {
       asyncUnimplementedUnaryCall(getUpdateLogMetricMethod(), responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Deletes a logs-based metric.
-     * </pre>
-     */
+    /** */
     public void deleteLogMetric(
         com.google.logging.v2.DeleteLogMetricRequest request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
@@ -402,13 +360,7 @@ public final class MetricsServiceV2Grpc {
     }
   }
 
-  /**
-   *
-   *
-   * <pre>
-   * Service for configuring logs-based metrics.
-   * </pre>
-   */
+  /** */
   public static final class MetricsServiceV2Stub
       extends io.grpc.stub.AbstractAsyncStub<MetricsServiceV2Stub> {
     private MetricsServiceV2Stub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
@@ -420,13 +372,7 @@ public final class MetricsServiceV2Grpc {
       return new MetricsServiceV2Stub(channel, callOptions);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Lists logs-based metrics.
-     * </pre>
-     */
+    /** */
     public void listLogMetrics(
         com.google.logging.v2.ListLogMetricsRequest request,
         io.grpc.stub.StreamObserver<com.google.logging.v2.ListLogMetricsResponse>
@@ -437,13 +383,7 @@ public final class MetricsServiceV2Grpc {
           responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Gets a logs-based metric.
-     * </pre>
-     */
+    /** */
     public void getLogMetric(
         com.google.logging.v2.GetLogMetricRequest request,
         io.grpc.stub.StreamObserver<com.google.logging.v2.LogMetric> responseObserver) {
@@ -453,13 +393,7 @@ public final class MetricsServiceV2Grpc {
           responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Creates a logs-based metric.
-     * </pre>
-     */
+    /** */
     public void createLogMetric(
         com.google.logging.v2.CreateLogMetricRequest request,
         io.grpc.stub.StreamObserver<com.google.logging.v2.LogMetric> responseObserver) {
@@ -469,13 +403,7 @@ public final class MetricsServiceV2Grpc {
           responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Creates or updates a logs-based metric.
-     * </pre>
-     */
+    /** */
     public void updateLogMetric(
         com.google.logging.v2.UpdateLogMetricRequest request,
         io.grpc.stub.StreamObserver<com.google.logging.v2.LogMetric> responseObserver) {
@@ -485,13 +413,7 @@ public final class MetricsServiceV2Grpc {
           responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Deletes a logs-based metric.
-     * </pre>
-     */
+    /** */
     public void deleteLogMetric(
         com.google.logging.v2.DeleteLogMetricRequest request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
@@ -502,13 +424,7 @@ public final class MetricsServiceV2Grpc {
     }
   }
 
-  /**
-   *
-   *
-   * <pre>
-   * Service for configuring logs-based metrics.
-   * </pre>
-   */
+  /** */
   public static final class MetricsServiceV2BlockingStub
       extends io.grpc.stub.AbstractBlockingStub<MetricsServiceV2BlockingStub> {
     private MetricsServiceV2BlockingStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
@@ -521,74 +437,38 @@ public final class MetricsServiceV2Grpc {
       return new MetricsServiceV2BlockingStub(channel, callOptions);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Lists logs-based metrics.
-     * </pre>
-     */
+    /** */
     public com.google.logging.v2.ListLogMetricsResponse listLogMetrics(
         com.google.logging.v2.ListLogMetricsRequest request) {
       return blockingUnaryCall(getChannel(), getListLogMetricsMethod(), getCallOptions(), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Gets a logs-based metric.
-     * </pre>
-     */
+    /** */
     public com.google.logging.v2.LogMetric getLogMetric(
         com.google.logging.v2.GetLogMetricRequest request) {
       return blockingUnaryCall(getChannel(), getGetLogMetricMethod(), getCallOptions(), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Creates a logs-based metric.
-     * </pre>
-     */
+    /** */
     public com.google.logging.v2.LogMetric createLogMetric(
         com.google.logging.v2.CreateLogMetricRequest request) {
       return blockingUnaryCall(getChannel(), getCreateLogMetricMethod(), getCallOptions(), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Creates or updates a logs-based metric.
-     * </pre>
-     */
+    /** */
     public com.google.logging.v2.LogMetric updateLogMetric(
         com.google.logging.v2.UpdateLogMetricRequest request) {
       return blockingUnaryCall(getChannel(), getUpdateLogMetricMethod(), getCallOptions(), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Deletes a logs-based metric.
-     * </pre>
-     */
+    /** */
     public com.google.protobuf.Empty deleteLogMetric(
         com.google.logging.v2.DeleteLogMetricRequest request) {
       return blockingUnaryCall(getChannel(), getDeleteLogMetricMethod(), getCallOptions(), request);
     }
   }
 
-  /**
-   *
-   *
-   * <pre>
-   * Service for configuring logs-based metrics.
-   * </pre>
-   */
+  /** */
   public static final class MetricsServiceV2FutureStub
       extends io.grpc.stub.AbstractFutureStub<MetricsServiceV2FutureStub> {
     private MetricsServiceV2FutureStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
@@ -601,13 +481,7 @@ public final class MetricsServiceV2Grpc {
       return new MetricsServiceV2FutureStub(channel, callOptions);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Lists logs-based metrics.
-     * </pre>
-     */
+    /** */
     public com.google.common.util.concurrent.ListenableFuture<
             com.google.logging.v2.ListLogMetricsResponse>
         listLogMetrics(com.google.logging.v2.ListLogMetricsRequest request) {
@@ -615,52 +489,28 @@ public final class MetricsServiceV2Grpc {
           getChannel().newCall(getListLogMetricsMethod(), getCallOptions()), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Gets a logs-based metric.
-     * </pre>
-     */
+    /** */
     public com.google.common.util.concurrent.ListenableFuture<com.google.logging.v2.LogMetric>
         getLogMetric(com.google.logging.v2.GetLogMetricRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getGetLogMetricMethod(), getCallOptions()), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Creates a logs-based metric.
-     * </pre>
-     */
+    /** */
     public com.google.common.util.concurrent.ListenableFuture<com.google.logging.v2.LogMetric>
         createLogMetric(com.google.logging.v2.CreateLogMetricRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getCreateLogMetricMethod(), getCallOptions()), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Creates or updates a logs-based metric.
-     * </pre>
-     */
+    /** */
     public com.google.common.util.concurrent.ListenableFuture<com.google.logging.v2.LogMetric>
         updateLogMetric(com.google.logging.v2.UpdateLogMetricRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getUpdateLogMetricMethod(), getCallOptions()), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Deletes a logs-based metric.
-     * </pre>
-     */
+    /** */
     public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty>
         deleteLogMetric(com.google.logging.v2.DeleteLogMetricRequest request) {
       return futureUnaryCall(
