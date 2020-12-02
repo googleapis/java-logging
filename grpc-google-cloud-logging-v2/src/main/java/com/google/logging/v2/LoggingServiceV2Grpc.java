@@ -25,7 +25,13 @@ import static io.grpc.stub.ServerCalls.asyncUnaryCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
-/** */
+/**
+ *
+ *
+ * <pre>
+ * Service for ingesting and querying logs.
+ * </pre>
+ */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler",
     comments = "Source: google/logging/v2/logging.proto")
@@ -342,17 +348,44 @@ public final class LoggingServiceV2Grpc {
     return LoggingServiceV2FutureStub.newStub(factory, channel);
   }
 
-  /** */
+  /**
+   *
+   *
+   * <pre>
+   * Service for ingesting and querying logs.
+   * </pre>
+   */
   public abstract static class LoggingServiceV2ImplBase implements io.grpc.BindableService {
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Deletes all the log entries in a log. The log reappears if it receives new
+     * entries. Log entries written shortly before the delete operation might not
+     * be deleted. Entries received after the delete operation with a timestamp
+     * before the operation will be deleted.
+     * </pre>
+     */
     public void deleteLog(
         com.google.logging.v2.DeleteLogRequest request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
       asyncUnimplementedUnaryCall(getDeleteLogMethod(), responseObserver);
     }
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Writes log entries to Logging. This API method is the
+     * only way to send log entries to Logging. This method
+     * is used, directly or indirectly, by the Logging agent
+     * (fluentd) and all logging libraries configured to use Logging.
+     * A single request may contain log entries for a maximum of 1000
+     * different resources (projects, organizations, billing accounts or
+     * folders)
+     * </pre>
+     */
     public void writeLogEntries(
         com.google.logging.v2.WriteLogEntriesRequest request,
         io.grpc.stub.StreamObserver<com.google.logging.v2.WriteLogEntriesResponse>
@@ -360,7 +393,16 @@ public final class LoggingServiceV2Grpc {
       asyncUnimplementedUnaryCall(getWriteLogEntriesMethod(), responseObserver);
     }
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Lists log entries.  Use this method to retrieve log entries that originated
+     * from a project/folder/organization/billing account.  For ways to export log
+     * entries, see [Exporting
+     * Logs](https://cloud.google.com/logging/docs/export).
+     * </pre>
+     */
     public void listLogEntries(
         com.google.logging.v2.ListLogEntriesRequest request,
         io.grpc.stub.StreamObserver<com.google.logging.v2.ListLogEntriesResponse>
@@ -368,7 +410,13 @@ public final class LoggingServiceV2Grpc {
       asyncUnimplementedUnaryCall(getListLogEntriesMethod(), responseObserver);
     }
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Lists the descriptors for monitored resource types used by Logging.
+     * </pre>
+     */
     public void listMonitoredResourceDescriptors(
         com.google.logging.v2.ListMonitoredResourceDescriptorsRequest request,
         io.grpc.stub.StreamObserver<com.google.logging.v2.ListMonitoredResourceDescriptorsResponse>
@@ -376,14 +424,28 @@ public final class LoggingServiceV2Grpc {
       asyncUnimplementedUnaryCall(getListMonitoredResourceDescriptorsMethod(), responseObserver);
     }
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Lists the logs in projects, organizations, folders, or billing accounts.
+     * Only logs that have entries are listed.
+     * </pre>
+     */
     public void listLogs(
         com.google.logging.v2.ListLogsRequest request,
         io.grpc.stub.StreamObserver<com.google.logging.v2.ListLogsResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getListLogsMethod(), responseObserver);
     }
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Streaming read of log entries as they are ingested. Until the stream is
+     * terminated, it will continue reading logs.
+     * </pre>
+     */
     public io.grpc.stub.StreamObserver<com.google.logging.v2.TailLogEntriesRequest> tailLogEntries(
         io.grpc.stub.StreamObserver<com.google.logging.v2.TailLogEntriesResponse>
             responseObserver) {
@@ -437,7 +499,13 @@ public final class LoggingServiceV2Grpc {
     }
   }
 
-  /** */
+  /**
+   *
+   *
+   * <pre>
+   * Service for ingesting and querying logs.
+   * </pre>
+   */
   public static final class LoggingServiceV2Stub
       extends io.grpc.stub.AbstractAsyncStub<LoggingServiceV2Stub> {
     private LoggingServiceV2Stub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
@@ -449,7 +517,16 @@ public final class LoggingServiceV2Grpc {
       return new LoggingServiceV2Stub(channel, callOptions);
     }
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Deletes all the log entries in a log. The log reappears if it receives new
+     * entries. Log entries written shortly before the delete operation might not
+     * be deleted. Entries received after the delete operation with a timestamp
+     * before the operation will be deleted.
+     * </pre>
+     */
     public void deleteLog(
         com.google.logging.v2.DeleteLogRequest request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
@@ -457,7 +534,19 @@ public final class LoggingServiceV2Grpc {
           getChannel().newCall(getDeleteLogMethod(), getCallOptions()), request, responseObserver);
     }
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Writes log entries to Logging. This API method is the
+     * only way to send log entries to Logging. This method
+     * is used, directly or indirectly, by the Logging agent
+     * (fluentd) and all logging libraries configured to use Logging.
+     * A single request may contain log entries for a maximum of 1000
+     * different resources (projects, organizations, billing accounts or
+     * folders)
+     * </pre>
+     */
     public void writeLogEntries(
         com.google.logging.v2.WriteLogEntriesRequest request,
         io.grpc.stub.StreamObserver<com.google.logging.v2.WriteLogEntriesResponse>
@@ -468,7 +557,16 @@ public final class LoggingServiceV2Grpc {
           responseObserver);
     }
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Lists log entries.  Use this method to retrieve log entries that originated
+     * from a project/folder/organization/billing account.  For ways to export log
+     * entries, see [Exporting
+     * Logs](https://cloud.google.com/logging/docs/export).
+     * </pre>
+     */
     public void listLogEntries(
         com.google.logging.v2.ListLogEntriesRequest request,
         io.grpc.stub.StreamObserver<com.google.logging.v2.ListLogEntriesResponse>
@@ -479,7 +577,13 @@ public final class LoggingServiceV2Grpc {
           responseObserver);
     }
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Lists the descriptors for monitored resource types used by Logging.
+     * </pre>
+     */
     public void listMonitoredResourceDescriptors(
         com.google.logging.v2.ListMonitoredResourceDescriptorsRequest request,
         io.grpc.stub.StreamObserver<com.google.logging.v2.ListMonitoredResourceDescriptorsResponse>
@@ -490,7 +594,14 @@ public final class LoggingServiceV2Grpc {
           responseObserver);
     }
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Lists the logs in projects, organizations, folders, or billing accounts.
+     * Only logs that have entries are listed.
+     * </pre>
+     */
     public void listLogs(
         com.google.logging.v2.ListLogsRequest request,
         io.grpc.stub.StreamObserver<com.google.logging.v2.ListLogsResponse> responseObserver) {
@@ -498,7 +609,14 @@ public final class LoggingServiceV2Grpc {
           getChannel().newCall(getListLogsMethod(), getCallOptions()), request, responseObserver);
     }
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Streaming read of log entries as they are ingested. Until the stream is
+     * terminated, it will continue reading logs.
+     * </pre>
+     */
     public io.grpc.stub.StreamObserver<com.google.logging.v2.TailLogEntriesRequest> tailLogEntries(
         io.grpc.stub.StreamObserver<com.google.logging.v2.TailLogEntriesResponse>
             responseObserver) {
@@ -507,7 +625,13 @@ public final class LoggingServiceV2Grpc {
     }
   }
 
-  /** */
+  /**
+   *
+   *
+   * <pre>
+   * Service for ingesting and querying logs.
+   * </pre>
+   */
   public static final class LoggingServiceV2BlockingStub
       extends io.grpc.stub.AbstractBlockingStub<LoggingServiceV2BlockingStub> {
     private LoggingServiceV2BlockingStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
@@ -520,24 +644,60 @@ public final class LoggingServiceV2Grpc {
       return new LoggingServiceV2BlockingStub(channel, callOptions);
     }
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Deletes all the log entries in a log. The log reappears if it receives new
+     * entries. Log entries written shortly before the delete operation might not
+     * be deleted. Entries received after the delete operation with a timestamp
+     * before the operation will be deleted.
+     * </pre>
+     */
     public com.google.protobuf.Empty deleteLog(com.google.logging.v2.DeleteLogRequest request) {
       return blockingUnaryCall(getChannel(), getDeleteLogMethod(), getCallOptions(), request);
     }
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Writes log entries to Logging. This API method is the
+     * only way to send log entries to Logging. This method
+     * is used, directly or indirectly, by the Logging agent
+     * (fluentd) and all logging libraries configured to use Logging.
+     * A single request may contain log entries for a maximum of 1000
+     * different resources (projects, organizations, billing accounts or
+     * folders)
+     * </pre>
+     */
     public com.google.logging.v2.WriteLogEntriesResponse writeLogEntries(
         com.google.logging.v2.WriteLogEntriesRequest request) {
       return blockingUnaryCall(getChannel(), getWriteLogEntriesMethod(), getCallOptions(), request);
     }
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Lists log entries.  Use this method to retrieve log entries that originated
+     * from a project/folder/organization/billing account.  For ways to export log
+     * entries, see [Exporting
+     * Logs](https://cloud.google.com/logging/docs/export).
+     * </pre>
+     */
     public com.google.logging.v2.ListLogEntriesResponse listLogEntries(
         com.google.logging.v2.ListLogEntriesRequest request) {
       return blockingUnaryCall(getChannel(), getListLogEntriesMethod(), getCallOptions(), request);
     }
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Lists the descriptors for monitored resource types used by Logging.
+     * </pre>
+     */
     public com.google.logging.v2.ListMonitoredResourceDescriptorsResponse
         listMonitoredResourceDescriptors(
             com.google.logging.v2.ListMonitoredResourceDescriptorsRequest request) {
@@ -545,14 +705,27 @@ public final class LoggingServiceV2Grpc {
           getChannel(), getListMonitoredResourceDescriptorsMethod(), getCallOptions(), request);
     }
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Lists the logs in projects, organizations, folders, or billing accounts.
+     * Only logs that have entries are listed.
+     * </pre>
+     */
     public com.google.logging.v2.ListLogsResponse listLogs(
         com.google.logging.v2.ListLogsRequest request) {
       return blockingUnaryCall(getChannel(), getListLogsMethod(), getCallOptions(), request);
     }
   }
 
-  /** */
+  /**
+   *
+   *
+   * <pre>
+   * Service for ingesting and querying logs.
+   * </pre>
+   */
   public static final class LoggingServiceV2FutureStub
       extends io.grpc.stub.AbstractFutureStub<LoggingServiceV2FutureStub> {
     private LoggingServiceV2FutureStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
@@ -565,13 +738,34 @@ public final class LoggingServiceV2Grpc {
       return new LoggingServiceV2FutureStub(channel, callOptions);
     }
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Deletes all the log entries in a log. The log reappears if it receives new
+     * entries. Log entries written shortly before the delete operation might not
+     * be deleted. Entries received after the delete operation with a timestamp
+     * before the operation will be deleted.
+     * </pre>
+     */
     public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> deleteLog(
         com.google.logging.v2.DeleteLogRequest request) {
       return futureUnaryCall(getChannel().newCall(getDeleteLogMethod(), getCallOptions()), request);
     }
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Writes log entries to Logging. This API method is the
+     * only way to send log entries to Logging. This method
+     * is used, directly or indirectly, by the Logging agent
+     * (fluentd) and all logging libraries configured to use Logging.
+     * A single request may contain log entries for a maximum of 1000
+     * different resources (projects, organizations, billing accounts or
+     * folders)
+     * </pre>
+     */
     public com.google.common.util.concurrent.ListenableFuture<
             com.google.logging.v2.WriteLogEntriesResponse>
         writeLogEntries(com.google.logging.v2.WriteLogEntriesRequest request) {
@@ -579,7 +773,16 @@ public final class LoggingServiceV2Grpc {
           getChannel().newCall(getWriteLogEntriesMethod(), getCallOptions()), request);
     }
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Lists log entries.  Use this method to retrieve log entries that originated
+     * from a project/folder/organization/billing account.  For ways to export log
+     * entries, see [Exporting
+     * Logs](https://cloud.google.com/logging/docs/export).
+     * </pre>
+     */
     public com.google.common.util.concurrent.ListenableFuture<
             com.google.logging.v2.ListLogEntriesResponse>
         listLogEntries(com.google.logging.v2.ListLogEntriesRequest request) {
@@ -587,7 +790,13 @@ public final class LoggingServiceV2Grpc {
           getChannel().newCall(getListLogEntriesMethod(), getCallOptions()), request);
     }
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Lists the descriptors for monitored resource types used by Logging.
+     * </pre>
+     */
     public com.google.common.util.concurrent.ListenableFuture<
             com.google.logging.v2.ListMonitoredResourceDescriptorsResponse>
         listMonitoredResourceDescriptors(
@@ -597,7 +806,14 @@ public final class LoggingServiceV2Grpc {
           request);
     }
 
-    /** */
+    /**
+     *
+     *
+     * <pre>
+     * Lists the logs in projects, organizations, folders, or billing accounts.
+     * Only logs that have entries are listed.
+     * </pre>
+     */
     public com.google.common.util.concurrent.ListenableFuture<
             com.google.logging.v2.ListLogsResponse>
         listLogs(com.google.logging.v2.ListLogsRequest request) {
