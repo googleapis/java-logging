@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
  * A Cloud Logging log entry. All log entries are represented via objects of this class. Log
  * entries can have different type of payloads: an UTF-8 string (see {@link Payload.StringPayload}),
  * a JSON object (see {@link Payload.JsonPayload}, or a protobuf object (see {@link
