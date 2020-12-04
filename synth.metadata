@@ -4,22 +4,22 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/java-logging.git",
-        "sha": "6f5c8546b5677f3176b73d0b6ed3abaf24473e00"
+        "sha": "ccb3a73e133f6def4f29b47359b7f0eb66101a54"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "be0bdf86cd31aa7c1a7b30a9a2e9f2fd53ee3d91",
-        "internalRef": "342353190"
+        "sha": "8cfc6c874574b649b4524a4ef6a0651533325a84",
+        "internalRef": "345067549"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "7fcc405a579d5d53a726ff3da1b7c8c08f0f2d58"
+        "sha": "943bb78606d035001123030067dffcc34f4645f2"
       }
     }
   ],
@@ -40,6 +40,7 @@
     ".github/ISSUE_TEMPLATE/feature_request.md",
     ".github/ISSUE_TEMPLATE/support_request.md",
     ".github/PULL_REQUEST_TEMPLATE.md",
+    ".github/blunderbuss.yml",
     ".github/generated-files-bot.yml",
     ".github/readme/synth.py",
     ".github/release-please.yml",
@@ -239,6 +240,10 @@
     "proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/OrganizationLocationName.java",
     "proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/OrganizationName.java",
     "proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ProjectName.java",
+    "proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/TailLogEntriesRequest.java",
+    "proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/TailLogEntriesRequestOrBuilder.java",
+    "proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/TailLogEntriesResponse.java",
+    "proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/TailLogEntriesResponseOrBuilder.java",
     "proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UndeleteBucketRequest.java",
     "proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UndeleteBucketRequestOrBuilder.java",
     "proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateBucketRequest.java",
