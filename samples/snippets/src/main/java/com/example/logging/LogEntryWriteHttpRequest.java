@@ -33,12 +33,12 @@ public class LogEntryWriteHttpRequest {
     // TODO(developer): Replace these variables before running the sample.
     String logName = "log-name"; // i.e "my-log"
     String payLoad = "payload"; // i.e "Hello world!"
-    HttpRequest httpRequest = HttpRequest.newBuilder().build();
-    // i.e HttpRequest request = HttpRequest.newBuilder()
-    //     .setRequestUrl("www.example.com")
-    //     .setRequestMethod(HttpRequest.RequestMethod.GET)
-    //     .setStatus(200)
-    //     .build();
+    HttpRequest httpRequest =
+        HttpRequest.newBuilder()
+            .setRequestUrl("www.example.com")
+            .setRequestMethod(HttpRequest.RequestMethod.GET) // Supported method GET,POST,PUT,HEAD
+            .setStatus(200)
+            .build();
     createLogEntryRequest(logName, payLoad, httpRequest);
   }
 
