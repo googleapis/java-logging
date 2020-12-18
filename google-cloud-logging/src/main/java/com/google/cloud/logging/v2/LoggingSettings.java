@@ -26,6 +26,7 @@ import com.google.api.gax.core.GoogleCredentialsProvider;
 import com.google.api.gax.core.InstantiatingExecutorProvider;
 import com.google.api.gax.grpc.InstantiatingGrpcChannelProvider;
 import com.google.api.gax.rpc.ApiClientHeaderProvider;
+import com.google.api.gax.rpc.BatchingCallSettings;
 import com.google.api.gax.rpc.ClientContext;
 import com.google.api.gax.rpc.ClientSettings;
 import com.google.api.gax.rpc.PagedCallSettings;
@@ -89,7 +90,7 @@ public class LoggingSettings extends ClientSettings<LoggingSettings> {
   }
 
   /** Returns the object with the settings used for calls to writeLogEntries. */
-  public UnaryCallSettings<WriteLogEntriesRequest, WriteLogEntriesResponse>
+  public BatchingCallSettings<WriteLogEntriesRequest, WriteLogEntriesResponse>
       writeLogEntriesSettings() {
     return ((LoggingServiceV2StubSettings) getStubSettings()).writeLogEntriesSettings();
   }
@@ -226,7 +227,7 @@ public class LoggingSettings extends ClientSettings<LoggingSettings> {
     }
 
     /** Returns the builder for the settings used for calls to writeLogEntries. */
-    public UnaryCallSettings.Builder<WriteLogEntriesRequest, WriteLogEntriesResponse>
+    public BatchingCallSettings.Builder<WriteLogEntriesRequest, WriteLogEntriesResponse>
         writeLogEntriesSettings() {
       return getStubSettingsBuilder().writeLogEntriesSettings();
     }
