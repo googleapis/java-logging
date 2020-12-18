@@ -1103,7 +1103,7 @@ public class ConfigClientTest {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
-            .setDestination("destination-1429847026")
+            .setDestination(FolderLocationName.of("[FOLDER]", "[LOCATION]").toString())
             .setFilter("filter-1274492040")
             .setDescription("description-1724546052")
             .setDisabled(true)
@@ -1150,7 +1150,7 @@ public class ConfigClientTest {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
-            .setDestination("destination-1429847026")
+            .setDestination(FolderLocationName.of("[FOLDER]", "[LOCATION]").toString())
             .setFilter("filter-1274492040")
             .setDescription("description-1724546052")
             .setDisabled(true)
@@ -1197,7 +1197,7 @@ public class ConfigClientTest {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
-            .setDestination("destination-1429847026")
+            .setDestination(FolderLocationName.of("[FOLDER]", "[LOCATION]").toString())
             .setFilter("filter-1274492040")
             .setDescription("description-1724546052")
             .setDisabled(true)
@@ -1247,7 +1247,7 @@ public class ConfigClientTest {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
-            .setDestination("destination-1429847026")
+            .setDestination(FolderLocationName.of("[FOLDER]", "[LOCATION]").toString())
             .setFilter("filter-1274492040")
             .setDescription("description-1724546052")
             .setDisabled(true)
@@ -1297,7 +1297,7 @@ public class ConfigClientTest {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
-            .setDestination("destination-1429847026")
+            .setDestination(FolderLocationName.of("[FOLDER]", "[LOCATION]").toString())
             .setFilter("filter-1274492040")
             .setDescription("description-1724546052")
             .setDisabled(true)
@@ -1347,7 +1347,7 @@ public class ConfigClientTest {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
-            .setDestination("destination-1429847026")
+            .setDestination(FolderLocationName.of("[FOLDER]", "[LOCATION]").toString())
             .setFilter("filter-1274492040")
             .setDescription("description-1724546052")
             .setDisabled(true)
@@ -1397,7 +1397,7 @@ public class ConfigClientTest {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
-            .setDestination("destination-1429847026")
+            .setDestination(FolderLocationName.of("[FOLDER]", "[LOCATION]").toString())
             .setFilter("filter-1274492040")
             .setDescription("description-1724546052")
             .setDisabled(true)
@@ -1447,7 +1447,7 @@ public class ConfigClientTest {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
-            .setDestination("destination-1429847026")
+            .setDestination(FolderLocationName.of("[FOLDER]", "[LOCATION]").toString())
             .setFilter("filter-1274492040")
             .setDescription("description-1724546052")
             .setDisabled(true)
@@ -1497,7 +1497,7 @@ public class ConfigClientTest {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
-            .setDestination("destination-1429847026")
+            .setDestination(FolderLocationName.of("[FOLDER]", "[LOCATION]").toString())
             .setFilter("filter-1274492040")
             .setDescription("description-1724546052")
             .setDisabled(true)
@@ -1547,7 +1547,7 @@ public class ConfigClientTest {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
-            .setDestination("destination-1429847026")
+            .setDestination(FolderLocationName.of("[FOLDER]", "[LOCATION]").toString())
             .setFilter("filter-1274492040")
             .setDescription("description-1724546052")
             .setDisabled(true)
@@ -1600,7 +1600,7 @@ public class ConfigClientTest {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
-            .setDestination("destination-1429847026")
+            .setDestination(FolderLocationName.of("[FOLDER]", "[LOCATION]").toString())
             .setFilter("filter-1274492040")
             .setDescription("description-1724546052")
             .setDisabled(true)
