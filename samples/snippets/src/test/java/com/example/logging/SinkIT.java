@@ -13,8 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.example.logging;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import com.google.cloud.logging.Logging;
@@ -33,8 +35,9 @@ import org.junit.runners.JUnit4;
 /** Tests for sink sample. */
 @RunWith(JUnit4.class)
 public class SinkIT {
-  private static Logging logging = LoggingOptions.getDefaultInstance().getService();
-  private static final String SINK_NAME = "test-sink" + UUID.randomUUID().toString();;
+
+  private Logging logging = LoggingOptions.getDefaultInstance().getService();
+  private static final String SINK_NAME = "test-sink" + UUID.randomUUID().toString();
 
   @Before
   public void setUp() {
@@ -47,16 +50,18 @@ public class SinkIT {
   }
 
   @After
-  public void tearDown() {
+  public void tearDown() throws Exception {
     // Delete sink
     logging.deleteSink(SINK_NAME);
+    logging.close();
   }
 
   @Test
   public void testGetSinkMetadata() throws Exception {
     Sink sink = logging.getSink(SINK_NAME);
+    assertNotNull(sink);
     PrintStream standardOut = System.out;
-    final ByteArrayOutputStream snippetOutputCapture = new ByteArrayOutputStream();
+    ByteArrayOutputStream snippetOutputCapture = new ByteArrayOutputStream();
     System.setOut(new PrintStream(snippetOutputCapture));
     GetSinkMetadata.getSinkMetadata(SINK_NAME);
     String snippetOutput = snippetOutputCapture.toString();
