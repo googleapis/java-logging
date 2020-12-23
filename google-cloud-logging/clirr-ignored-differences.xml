@@ -28,7 +28,7 @@
   </difference>
   <difference>
     <className>com/google/cloud/logging/spi/v2/LoggingRpc</className>
-    <method> com.google.api.core.ApiFuture getCmekSettings(com.google.logging.v2.GetCmekSettingsRequest)</method>
+    <method>com.google.api.core.ApiFuture getCmekSettings(com.google.logging.v2.GetCmekSettingsRequest)</method>
     <differenceType>7012</differenceType>
   </difference>
   <difference>
