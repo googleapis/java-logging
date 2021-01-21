@@ -35,8 +35,8 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 /**
- * A logging handler that outputs logs generated with {@link java.util.logging.Logger} to
- * Cloud Logging.
+ * A logging handler that outputs logs generated with {@link java.util.logging.Logger} to Cloud
+ * Logging.
  *
  * <p>Java logging levels (see {@link java.util.logging.Level}) are mapped to the following Google
  * Cloud Logging severities:
@@ -53,9 +53,9 @@ import java.util.logging.SimpleFormatter;
  * </table>
  *
  * <p>Original Java logging levels are added as labels (with {@code levelName} and {@code
- * levelValue} keys, respectively) to the corresponding Cloud Logging {@link LogEntry}. You
- * can read entry labels using {@link LogEntry#getLabels()}. To use logging levels that correspond
- * to Cloud Logging severities you can use {@link LoggingLevel}.
+ * levelValue} keys, respectively) to the corresponding Cloud Logging {@link LogEntry}. You can read
+ * entry labels using {@link LogEntry#getLabels()}. To use logging levels that correspond to Cloud
+ * Logging severities you can use {@link LoggingLevel}.
  *
  * <p><b>Configuration</b>: By default each {@code LoggingHandler} is initialized using the
  * following {@code LogManager} configuration properties (that you can set in the {@code
@@ -72,8 +72,8 @@ import java.util.logging.SimpleFormatter;
  *   <li>{@code com.google.cloud.logging.LoggingHandler.formatter} specifies the name of a {@link
  *       Formatter} class to use (defaults to {@link SimpleFormatter}).
  *   <li>{@code com.google.cloud.logging.LoggingHandler.flushLevel} specifies the flush log level.
- *       When a log with this level is published, logs are transmitted to the Cloud Logging
- *       service (defaults to {@link LoggingLevel#ERROR}).
+ *       When a log with this level is published, logs are transmitted to the Cloud Logging service
+ *       (defaults to {@link LoggingLevel#ERROR}).
  *   <li>{@code com.google.cloud.logging.LoggingHandler.enhancers} specifies a comma separated list
  *       of {@link LoggingEnhancer} classes. This handler will call each enhancer list whenever it
  *       builds a {@link LogEntry} instance (defaults to empty list).

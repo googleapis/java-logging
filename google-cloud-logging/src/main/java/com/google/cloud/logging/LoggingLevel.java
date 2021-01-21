@@ -19,8 +19,8 @@ package com.google.cloud.logging;
 import java.util.logging.Level;
 
 /**
- * This class adds some additional Java logging levels for Cloud Logging. Added levels fill in
- * the gap between Java logging levels and Cloud Logging severities.
+ * This class adds some additional Java logging levels for Cloud Logging. Added levels fill in the
+ * gap between Java logging levels and Cloud Logging severities.
  *
  * <p>Added levels in descending order are (between parenthesis the relation with Java logging
  * levels):
