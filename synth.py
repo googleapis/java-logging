@@ -47,4 +47,10 @@ for version in versions:
 
   java.format_code(f'proto-google-cloud-{service}-{version}/src')
 
-java.common_templates()
+java.common_templates(excludes=[
+    '.gitignore',
+    '.github/CODEOWNERS',
+    '.github/blunderbuss.yml',
+    'CONTRIBUTING.md',
+])
+
