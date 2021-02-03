@@ -30,7 +30,7 @@ for version in versions:
       bazel_target=f'//google/{service}/{version}:google-cloud-{service}-{version}-java',
   )
 
-  # The method renamings will be removed in the next major release(lines 34 - 48)
+  # The method renamings will be removed in the next major release(lines 34 - 51)
   s.replace('**/CmekSettingsName.java', 'formatBillingAccountName', 'formatBillingAccountCmekSettingsName')
   s.replace('**/CmekSettingsName.java', 'formatFolderName', 'formatFolderCmekSettingsName')
   s.replace('**/CmekSettingsName.java', 'formatOrganizationName', 'formatOrganizationCmekSettingsName')
@@ -43,6 +43,9 @@ for version in versions:
   s.replace('**/CmekSettingsName.java', 'ofFolderName', 'ofFolderCmekSettingsName')
   s.replace('**/CmekSettingsName.java', 'ofOrganizationName', 'ofOrganizationCmekSettingsName')
   s.replace('**/CmekSettingsName.java', 'ofProjectName', 'ofProjectCmekSettingsName')
+  s.replace('**/CmekSettingsName.java', 'BillingAccountBuilder', 'BillingAccountCmekSettingsBuilder')
+  s.replace('**/CmekSettingsName.java', 'FolderBuilder', 'FolderCmekSettingsBuilder')
+  s.replace('**/CmekSettingsName.java', 'OrganizationBuilder', 'OrganizationCmekSettingsBuilder')
   s.replace('**/ConfigClientTest.java', 'CmekSettingsName.ofProjectName', 'CmekSettingsName.ofProjectCmekSettingsName')
 
   java.format_code(f'proto-google-cloud-{service}-{version}/src')

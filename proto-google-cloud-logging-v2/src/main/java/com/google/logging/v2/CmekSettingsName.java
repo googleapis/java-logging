@@ -63,7 +63,7 @@ public class CmekSettingsName implements ResourceName {
     pathTemplate = PROJECT;
   }
 
-  private CmekSettingsName(OrganizationBuilder builder) {
+  private CmekSettingsName(OrganizationCmekSettingsBuilder builder) {
     organization = Preconditions.checkNotNull(builder.getOrganization());
     project = null;
     folder = null;
@@ -71,7 +71,7 @@ public class CmekSettingsName implements ResourceName {
     pathTemplate = ORGANIZATION;
   }
 
-  private CmekSettingsName(FolderBuilder builder) {
+  private CmekSettingsName(FolderCmekSettingsBuilder builder) {
     folder = Preconditions.checkNotNull(builder.getFolder());
     project = null;
     organization = null;
@@ -79,7 +79,7 @@ public class CmekSettingsName implements ResourceName {
     pathTemplate = FOLDER;
   }
 
-  private CmekSettingsName(BillingAccountBuilder builder) {
+  private CmekSettingsName(BillingAccountCmekSettingsBuilder builder) {
     billingAccount = Preconditions.checkNotNull(builder.getBillingAccount());
     project = null;
     organization = null;
@@ -113,18 +113,18 @@ public class CmekSettingsName implements ResourceName {
   }
 
   @BetaApi("The per-pattern Builders are not stable yet and may be changed in the future.")
-  public static OrganizationBuilder newOrganizationCmekSettingsBuilder() {
-    return new OrganizationBuilder();
+  public static OrganizationCmekSettingsBuilder newOrganizationCmekSettingsBuilder() {
+    return new OrganizationCmekSettingsBuilder();
   }
 
   @BetaApi("The per-pattern Builders are not stable yet and may be changed in the future.")
-  public static FolderBuilder newFolderCmekSettingsBuilder() {
-    return new FolderBuilder();
+  public static FolderCmekSettingsBuilder newFolderCmekSettingsBuilder() {
+    return new FolderCmekSettingsBuilder();
   }
 
   @BetaApi("The per-pattern Builders are not stable yet and may be changed in the future.")
-  public static BillingAccountBuilder newBillingAccountCmekSettingsBuilder() {
-    return new BillingAccountBuilder();
+  public static BillingAccountCmekSettingsBuilder newBillingAccountCmekSettingsBuilder() {
+    return new BillingAccountCmekSettingsBuilder();
   }
 
   public Builder toBuilder() {
@@ -323,16 +323,16 @@ public class CmekSettingsName implements ResourceName {
 
   /** Builder for organizations/{organization}/cmekSettings. */
   @BetaApi("The per-pattern Builders are not stable yet and may be changed in the future.")
-  public static class OrganizationBuilder {
+  public static class OrganizationCmekSettingsBuilder {
     private String organization;
 
-    protected OrganizationBuilder() {}
+    protected OrganizationCmekSettingsBuilder() {}
 
     public String getOrganization() {
       return organization;
     }
 
-    public OrganizationBuilder setOrganization(String organization) {
+    public OrganizationCmekSettingsBuilder setOrganization(String organization) {
       this.organization = organization;
       return this;
     }
@@ -344,16 +344,16 @@ public class CmekSettingsName implements ResourceName {
 
   /** Builder for folders/{folder}/cmekSettings. */
   @BetaApi("The per-pattern Builders are not stable yet and may be changed in the future.")
-  public static class FolderBuilder {
+  public static class FolderCmekSettingsBuilder {
     private String folder;
 
-    protected FolderBuilder() {}
+    protected FolderCmekSettingsBuilder() {}
 
     public String getFolder() {
       return folder;
     }
 
-    public FolderBuilder setFolder(String folder) {
+    public FolderCmekSettingsBuilder setFolder(String folder) {
       this.folder = folder;
       return this;
     }
@@ -365,16 +365,16 @@ public class CmekSettingsName implements ResourceName {
 
   /** Builder for billingAccounts/{billing_account}/cmekSettings. */
   @BetaApi("The per-pattern Builders are not stable yet and may be changed in the future.")
-  public static class BillingAccountBuilder {
+  public static class BillingAccountCmekSettingsBuilder {
     private String billingAccount;
 
-    protected BillingAccountBuilder() {}
+    protected BillingAccountCmekSettingsBuilder() {}
 
     public String getBillingAccount() {
       return billingAccount;
     }
 
-    public BillingAccountBuilder setBillingAccount(String billingAccount) {
+    public BillingAccountCmekSettingsBuilder setBillingAccount(String billingAccount) {
       this.billingAccount = billingAccount;
       return this;
     }
