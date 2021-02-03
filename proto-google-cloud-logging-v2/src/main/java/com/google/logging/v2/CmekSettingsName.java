@@ -108,22 +108,22 @@ public class CmekSettingsName implements ResourceName {
   }
 
   @BetaApi("The per-pattern Builders are not stable yet and may be changed in the future.")
-  public static Builder newProjectBuilder() {
+  public static Builder newProjectCmekSettingsBuilder() {
     return new Builder();
   }
 
   @BetaApi("The per-pattern Builders are not stable yet and may be changed in the future.")
-  public static OrganizationBuilder newOrganizationBuilder() {
+  public static OrganizationBuilder newOrganizationCmekSettingsBuilder() {
     return new OrganizationBuilder();
   }
 
   @BetaApi("The per-pattern Builders are not stable yet and may be changed in the future.")
-  public static FolderBuilder newFolderBuilder() {
+  public static FolderBuilder newFolderCmekSettingsBuilder() {
     return new FolderBuilder();
   }
 
   @BetaApi("The per-pattern Builders are not stable yet and may be changed in the future.")
-  public static BillingAccountBuilder newBillingAccountBuilder() {
+  public static BillingAccountBuilder newBillingAccountCmekSettingsBuilder() {
     return new BillingAccountBuilder();
   }
 
@@ -136,23 +136,23 @@ public class CmekSettingsName implements ResourceName {
   }
 
   @BetaApi("The static create methods are not stable yet and may be changed in the future.")
-  public static CmekSettingsName ofProjectName(String project) {
+  public static CmekSettingsName ofProjectCmekSettingsName(String project) {
     return newBuilder().setProject(project).build();
   }
 
   @BetaApi("The static create methods are not stable yet and may be changed in the future.")
-  public static CmekSettingsName ofOrganizationName(String organization) {
-    return newOrganizationBuilder().setOrganization(organization).build();
+  public static CmekSettingsName ofOrganizationCmekSettingsName(String organization) {
+    return newOrganizationCmekSettingsBuilder().setOrganization(organization).build();
   }
 
   @BetaApi("The static create methods are not stable yet and may be changed in the future.")
-  public static CmekSettingsName ofFolderName(String folder) {
-    return newFolderBuilder().setFolder(folder).build();
+  public static CmekSettingsName ofFolderCmekSettingsName(String folder) {
+    return newFolderCmekSettingsBuilder().setFolder(folder).build();
   }
 
   @BetaApi("The static create methods are not stable yet and may be changed in the future.")
-  public static CmekSettingsName ofBillingAccountName(String billingAccount) {
-    return newBillingAccountBuilder().setBillingAccount(billingAccount).build();
+  public static CmekSettingsName ofBillingAccountCmekSettingsName(String billingAccount) {
+    return newBillingAccountCmekSettingsBuilder().setBillingAccount(billingAccount).build();
   }
 
   public static String format(String project) {
@@ -160,23 +160,26 @@ public class CmekSettingsName implements ResourceName {
   }
 
   @BetaApi("The static format methods are not stable yet and may be changed in the future.")
-  public static String formatProjectName(String project) {
+  public static String formatProjectCmekSettingsName(String project) {
     return newBuilder().setProject(project).build().toString();
   }
 
   @BetaApi("The static format methods are not stable yet and may be changed in the future.")
-  public static String formatOrganizationName(String organization) {
-    return newOrganizationBuilder().setOrganization(organization).build().toString();
+  public static String formatOrganizationCmekSettingsName(String organization) {
+    return newOrganizationCmekSettingsBuilder().setOrganization(organization).build().toString();
   }
 
   @BetaApi("The static format methods are not stable yet and may be changed in the future.")
-  public static String formatFolderName(String folder) {
-    return newFolderBuilder().setFolder(folder).build().toString();
+  public static String formatFolderCmekSettingsName(String folder) {
+    return newFolderCmekSettingsBuilder().setFolder(folder).build().toString();
   }
 
   @BetaApi("The static format methods are not stable yet and may be changed in the future.")
-  public static String formatBillingAccountName(String billingAccount) {
-    return newBillingAccountBuilder().setBillingAccount(billingAccount).build().toString();
+  public static String formatBillingAccountCmekSettingsName(String billingAccount) {
+    return newBillingAccountCmekSettingsBuilder()
+        .setBillingAccount(billingAccount)
+        .build()
+        .toString();
   }
 
   public static CmekSettingsName parse(String formattedString) {
@@ -185,16 +188,16 @@ public class CmekSettingsName implements ResourceName {
     }
     if (PROJECT.matches(formattedString)) {
       Map<String, String> matchMap = PROJECT.match(formattedString);
-      return ofProjectName(matchMap.get("project"));
+      return ofProjectCmekSettingsName(matchMap.get("project"));
     } else if (ORGANIZATION.matches(formattedString)) {
       Map<String, String> matchMap = ORGANIZATION.match(formattedString);
-      return ofOrganizationName(matchMap.get("organization"));
+      return ofOrganizationCmekSettingsName(matchMap.get("organization"));
     } else if (FOLDER.matches(formattedString)) {
       Map<String, String> matchMap = FOLDER.match(formattedString);
-      return ofFolderName(matchMap.get("folder"));
+      return ofFolderCmekSettingsName(matchMap.get("folder"));
     } else if (BILLING_ACCOUNT.matches(formattedString)) {
       Map<String, String> matchMap = BILLING_ACCOUNT.match(formattedString);
-      return ofBillingAccountName(matchMap.get("billing_account"));
+      return ofBillingAccountCmekSettingsName(matchMap.get("billing_account"));
     }
     throw new ValidationException("CmekSettingsName.parse: formattedString not in valid format");
   }
