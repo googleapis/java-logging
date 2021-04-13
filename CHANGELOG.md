@@ -1,5 +1,84 @@
 # Changelog
 
+### [2.2.1](https://www.github.com/googleapis/java-logging/compare/v2.2.0...v2.2.1) (2021-04-09)
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v0.21.0 ([#481](https://www.github.com/googleapis/java-logging/issues/481)) ([944e190](https://www.github.com/googleapis/java-logging/commit/944e19060b6e1f47567783365e80a54b153d472c))
+
+## [2.2.0](https://www.github.com/googleapis/java-logging/compare/v2.1.5...v2.2.0) (2021-03-11)
+
+
+### Features
+
+* **generator:** update protoc to v3.15.3 ([#454](https://www.github.com/googleapis/java-logging/issues/454)) ([1e61adb](https://www.github.com/googleapis/java-logging/commit/1e61adb4b817ff099e17ccc9a4433fc5061a4826))
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v0.20.1 ([#465](https://www.github.com/googleapis/java-logging/issues/465)) ([676d0ba](https://www.github.com/googleapis/java-logging/commit/676d0baea2c591f477c0036191874c3d40288251))
+
+### [2.1.5](https://www.github.com/googleapis/java-logging/compare/v2.1.4...v2.1.5) (2021-02-25)
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v0.20.0 ([#449](https://www.github.com/googleapis/java-logging/issues/449)) ([921553a](https://www.github.com/googleapis/java-logging/commit/921553a44e04afed95d6482eda210df43baf177d))
+
+### [2.1.4](https://www.github.com/googleapis/java-logging/compare/v2.1.3...v2.1.4) (2021-02-22)
+
+
+### Documentation
+
+* generate sample code in the Java microgenerator ([#423](https://www.github.com/googleapis/java-logging/issues/423)) ([8649f2f](https://www.github.com/googleapis/java-logging/commit/8649f2fa8d8d730422ea426142fba2bf3ebfec94))
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v0.19.0 ([#439](https://www.github.com/googleapis/java-logging/issues/439)) ([9cd8474](https://www.github.com/googleapis/java-logging/commit/9cd8474fdcd313f08216642254d72de9ce1a3214))
+
+### [2.1.3](https://www.github.com/googleapis/java-logging/compare/v2.1.2...v2.1.3) (2021-01-22)
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v0.17.1 ([#390](https://www.github.com/googleapis/java-logging/issues/390)) ([3054f17](https://www.github.com/googleapis/java-logging/commit/3054f17bb23f9ac99e373d5368f5e18b9668b917))
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v0.18.0 ([#392](https://www.github.com/googleapis/java-logging/issues/392)) ([219a7f8](https://www.github.com/googleapis/java-logging/commit/219a7f85d06327fe0bac4b7c1a36bda17bbb3382))
+
+### [2.1.2](https://www.github.com/googleapis/java-logging/compare/v2.1.1...v2.1.2) (2020-12-15)
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v0.17.0 ([#373](https://www.github.com/googleapis/java-logging/issues/373)) ([af43940](https://www.github.com/googleapis/java-logging/commit/af439404fb7786e8bc1856ee4b03796110677c98))
+
+### [2.1.1](https://www.github.com/googleapis/java-logging/compare/v2.1.0...v2.1.1) (2020-12-14)
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v0.16.1 ([84c8865](https://www.github.com/googleapis/java-logging/commit/84c88659d1a47633bcd545609262f71e747aaaed))
+
+## [2.1.0](https://www.github.com/googleapis/java-logging/compare/v2.0.1...v2.1.0) (2020-12-10)
+
+
+### Features
+
+* add support for k8s_container resource type ([#207](https://www.github.com/googleapis/java-logging/issues/207)) ([233efcc](https://www.github.com/googleapis/java-logging/commit/233efcce7d08cc66088d367b7fb6c104cb2f3a46))
+* fix resourceNames ([#24](https://www.github.com/googleapis/java-logging/issues/24)) ([70242d5](https://www.github.com/googleapis/java-logging/commit/70242d525dc3164c043f86d720e9210af40c6af5))
+* Makes remaining LogBucket and LogViews methods public ([#336](https://www.github.com/googleapis/java-logging/issues/336)) ([f3472c2](https://www.github.com/googleapis/java-logging/commit/f3472c27c79740cb62f83eaff66bb48f3e4ac723))
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v0.16.0 ([#350](https://www.github.com/googleapis/java-logging/issues/350)) ([ea92588](https://www.github.com/googleapis/java-logging/commit/ea9258838c66be244c440c76f84e5db729661791))
+
+
+### Documentation
+
+* specify current version ([#356](https://www.github.com/googleapis/java-logging/issues/356)) ([729b650](https://www.github.com/googleapis/java-logging/commit/729b650ff6a5f5022e5e5a32b0ef7b2c1642858f))
+
 ### [2.0.1](https://www.github.com/googleapis/java-logging/compare/v2.0.0...v2.0.1) (2020-11-12)
 
 

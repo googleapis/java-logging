@@ -4,22 +4,22 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/java-logging.git",
-        "sha": "ccb3a73e133f6def4f29b47359b7f0eb66101a54"
+        "sha": "471f5fac46cc1fa3da3aab4214806328e67e992d"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "8cfc6c874574b649b4524a4ef6a0651533325a84",
-        "internalRef": "345067549"
+        "sha": "1305ca41d554eb0725237561e34129373bb8cbc1",
+        "internalRef": "362856902"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "943bb78606d035001123030067dffcc34f4645f2"
+        "sha": "082e1ca0863b13ada8594fe91845380765da5b70"
       }
     }
   ],
@@ -35,21 +35,19 @@
     }
   ],
   "generatedFiles": [
-    ".github/CODEOWNERS",
     ".github/ISSUE_TEMPLATE/bug_report.md",
     ".github/ISSUE_TEMPLATE/feature_request.md",
     ".github/ISSUE_TEMPLATE/support_request.md",
     ".github/PULL_REQUEST_TEMPLATE.md",
-    ".github/blunderbuss.yml",
     ".github/generated-files-bot.yml",
     ".github/readme/synth.py",
     ".github/release-please.yml",
     ".github/snippet-bot.yml",
+    ".github/sync-repo-settings.yaml",
     ".github/trusted-contribution.yml",
     ".github/workflows/approve-readme.yaml",
     ".github/workflows/auto-release.yaml",
     ".github/workflows/ci.yaml",
-    ".github/workflows/formatting.yaml",
     ".github/workflows/samples.yaml",
     ".kokoro/build.bat",
     ".kokoro/build.sh",
@@ -60,7 +58,6 @@
     ".kokoro/continuous/java8.cfg",
     ".kokoro/continuous/readme.cfg",
     ".kokoro/dependencies.sh",
-    ".kokoro/linkage-monitor.sh",
     ".kokoro/nightly/common.cfg",
     ".kokoro/nightly/integration.cfg",
     ".kokoro/nightly/java11.cfg",
@@ -92,13 +89,14 @@
     ".kokoro/release/promote.sh",
     ".kokoro/release/publish_javadoc.cfg",
     ".kokoro/release/publish_javadoc.sh",
+    ".kokoro/release/publish_javadoc11.cfg",
+    ".kokoro/release/publish_javadoc11.sh",
     ".kokoro/release/snapshot.cfg",
     ".kokoro/release/snapshot.sh",
     ".kokoro/release/stage.cfg",
     ".kokoro/release/stage.sh",
     ".kokoro/trampoline.sh",
     "CODE_OF_CONDUCT.md",
-    "CONTRIBUTING.md",
     "LICENSE",
     "codecov.yaml",
     "google-cloud-logging/src/main/java/com/google/cloud/logging/v2/ConfigClient.java",
@@ -107,6 +105,7 @@
     "google-cloud-logging/src/main/java/com/google/cloud/logging/v2/LoggingSettings.java",
     "google-cloud-logging/src/main/java/com/google/cloud/logging/v2/MetricsClient.java",
     "google-cloud-logging/src/main/java/com/google/cloud/logging/v2/MetricsSettings.java",
+    "google-cloud-logging/src/main/java/com/google/cloud/logging/v2/gapic_metadata.json",
     "google-cloud-logging/src/main/java/com/google/cloud/logging/v2/package-info.java",
     "google-cloud-logging/src/main/java/com/google/cloud/logging/v2/stub/ConfigServiceV2Stub.java",
     "google-cloud-logging/src/main/java/com/google/cloud/logging/v2/stub/ConfigServiceV2StubSettings.java",

@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     https://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.google.cloud.logging.v2;
 
 import com.google.api.core.BetaApi;
@@ -56,9 +57,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import javax.annotation.Generated;
 
-@javax.annotation.Generated("by GAPIC")
 @BetaApi
+@Generated("by gapic-generator-java")
 public class MockConfigServiceV2Impl extends ConfigServiceV2ImplBase {
   private List<AbstractMessage> requests;
   private Queue<Object> responses;
@@ -92,335 +94,473 @@ public class MockConfigServiceV2Impl extends ConfigServiceV2ImplBase {
   @Override
   public void listBuckets(
       ListBucketsRequest request, StreamObserver<ListBucketsResponse> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof ListBucketsResponse) {
       requests.add(request);
-      responseObserver.onNext((ListBucketsResponse) response);
+      responseObserver.onNext(((ListBucketsResponse) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method ListBuckets, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  ListBucketsResponse.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void getBucket(GetBucketRequest request, StreamObserver<LogBucket> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof LogBucket) {
       requests.add(request);
-      responseObserver.onNext((LogBucket) response);
+      responseObserver.onNext(((LogBucket) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method GetBucket, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  LogBucket.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void createBucket(
       CreateBucketRequest request, StreamObserver<LogBucket> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof LogBucket) {
       requests.add(request);
-      responseObserver.onNext((LogBucket) response);
+      responseObserver.onNext(((LogBucket) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method CreateBucket, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  LogBucket.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void updateBucket(
       UpdateBucketRequest request, StreamObserver<LogBucket> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof LogBucket) {
       requests.add(request);
-      responseObserver.onNext((LogBucket) response);
+      responseObserver.onNext(((LogBucket) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method UpdateBucket, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  LogBucket.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void deleteBucket(DeleteBucketRequest request, StreamObserver<Empty> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof Empty) {
       requests.add(request);
-      responseObserver.onNext((Empty) response);
+      responseObserver.onNext(((Empty) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method DeleteBucket, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  Empty.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void undeleteBucket(
       UndeleteBucketRequest request, StreamObserver<Empty> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof Empty) {
       requests.add(request);
-      responseObserver.onNext((Empty) response);
+      responseObserver.onNext(((Empty) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method UndeleteBucket, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  Empty.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void listViews(
       ListViewsRequest request, StreamObserver<ListViewsResponse> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof ListViewsResponse) {
       requests.add(request);
-      responseObserver.onNext((ListViewsResponse) response);
+      responseObserver.onNext(((ListViewsResponse) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method ListViews, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  ListViewsResponse.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void getView(GetViewRequest request, StreamObserver<LogView> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof LogView) {
       requests.add(request);
-      responseObserver.onNext((LogView) response);
+      responseObserver.onNext(((LogView) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method GetView, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  LogView.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void createView(CreateViewRequest request, StreamObserver<LogView> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof LogView) {
       requests.add(request);
-      responseObserver.onNext((LogView) response);
+      responseObserver.onNext(((LogView) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method CreateView, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  LogView.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void updateView(UpdateViewRequest request, StreamObserver<LogView> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof LogView) {
       requests.add(request);
-      responseObserver.onNext((LogView) response);
+      responseObserver.onNext(((LogView) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method UpdateView, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  LogView.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void deleteView(DeleteViewRequest request, StreamObserver<Empty> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof Empty) {
       requests.add(request);
-      responseObserver.onNext((Empty) response);
+      responseObserver.onNext(((Empty) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method DeleteView, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  Empty.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void listSinks(
       ListSinksRequest request, StreamObserver<ListSinksResponse> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof ListSinksResponse) {
       requests.add(request);
-      responseObserver.onNext((ListSinksResponse) response);
+      responseObserver.onNext(((ListSinksResponse) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method ListSinks, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  ListSinksResponse.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void getSink(GetSinkRequest request, StreamObserver<LogSink> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof LogSink) {
       requests.add(request);
-      responseObserver.onNext((LogSink) response);
+      responseObserver.onNext(((LogSink) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method GetSink, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  LogSink.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void createSink(CreateSinkRequest request, StreamObserver<LogSink> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof LogSink) {
       requests.add(request);
-      responseObserver.onNext((LogSink) response);
+      responseObserver.onNext(((LogSink) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method CreateSink, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  LogSink.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void updateSink(UpdateSinkRequest request, StreamObserver<LogSink> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof LogSink) {
       requests.add(request);
-      responseObserver.onNext((LogSink) response);
+      responseObserver.onNext(((LogSink) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method UpdateSink, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  LogSink.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void deleteSink(DeleteSinkRequest request, StreamObserver<Empty> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof Empty) {
       requests.add(request);
-      responseObserver.onNext((Empty) response);
+      responseObserver.onNext(((Empty) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method DeleteSink, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  Empty.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void listExclusions(
       ListExclusionsRequest request, StreamObserver<ListExclusionsResponse> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof ListExclusionsResponse) {
       requests.add(request);
-      responseObserver.onNext((ListExclusionsResponse) response);
+      responseObserver.onNext(((ListExclusionsResponse) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method ListExclusions, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  ListExclusionsResponse.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void getExclusion(
       GetExclusionRequest request, StreamObserver<LogExclusion> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof LogExclusion) {
       requests.add(request);
-      responseObserver.onNext((LogExclusion) response);
+      responseObserver.onNext(((LogExclusion) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method GetExclusion, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  LogExclusion.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void createExclusion(
       CreateExclusionRequest request, StreamObserver<LogExclusion> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof LogExclusion) {
       requests.add(request);
-      responseObserver.onNext((LogExclusion) response);
+      responseObserver.onNext(((LogExclusion) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method CreateExclusion, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  LogExclusion.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void updateExclusion(
       UpdateExclusionRequest request, StreamObserver<LogExclusion> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof LogExclusion) {
       requests.add(request);
-      responseObserver.onNext((LogExclusion) response);
+      responseObserver.onNext(((LogExclusion) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method UpdateExclusion, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  LogExclusion.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void deleteExclusion(
       DeleteExclusionRequest request, StreamObserver<Empty> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof Empty) {
       requests.add(request);
-      responseObserver.onNext((Empty) response);
+      responseObserver.onNext(((Empty) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method DeleteExclusion, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  Empty.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void getCmekSettings(
       GetCmekSettingsRequest request, StreamObserver<CmekSettings> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof CmekSettings) {
       requests.add(request);
-      responseObserver.onNext((CmekSettings) response);
+      responseObserver.onNext(((CmekSettings) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method GetCmekSettings, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  CmekSettings.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void updateCmekSettings(
       UpdateCmekSettingsRequest request, StreamObserver<CmekSettings> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof CmekSettings) {
       requests.add(request);
-      responseObserver.onNext((CmekSettings) response);
+      responseObserver.onNext(((CmekSettings) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method UpdateCmekSettings, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  CmekSettings.class.getName(),
+                  Exception.class.getName())));
     }
   }
 }

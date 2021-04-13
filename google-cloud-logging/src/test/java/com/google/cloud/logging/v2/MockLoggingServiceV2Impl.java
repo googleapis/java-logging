@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     https://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.google.cloud.logging.v2;
 
 import com.google.api.core.BetaApi;
@@ -35,9 +36,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import javax.annotation.Generated;
 
-@javax.annotation.Generated("by GAPIC")
 @BetaApi
+@Generated("by gapic-generator-java")
 public class MockLoggingServiceV2Impl extends LoggingServiceV2ImplBase {
   private List<AbstractMessage> requests;
   private Queue<Object> responses;
@@ -70,45 +72,63 @@ public class MockLoggingServiceV2Impl extends LoggingServiceV2ImplBase {
 
   @Override
   public void deleteLog(DeleteLogRequest request, StreamObserver<Empty> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof Empty) {
       requests.add(request);
-      responseObserver.onNext((Empty) response);
+      responseObserver.onNext(((Empty) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method DeleteLog, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  Empty.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void writeLogEntries(
       WriteLogEntriesRequest request, StreamObserver<WriteLogEntriesResponse> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof WriteLogEntriesResponse) {
       requests.add(request);
-      responseObserver.onNext((WriteLogEntriesResponse) response);
+      responseObserver.onNext(((WriteLogEntriesResponse) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method WriteLogEntries, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  WriteLogEntriesResponse.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void listLogEntries(
       ListLogEntriesRequest request, StreamObserver<ListLogEntriesResponse> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof ListLogEntriesResponse) {
       requests.add(request);
-      responseObserver.onNext((ListLogEntriesResponse) response);
+      responseObserver.onNext(((ListLogEntriesResponse) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method ListLogEntries, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  ListLogEntriesResponse.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
@@ -116,29 +136,41 @@ public class MockLoggingServiceV2Impl extends LoggingServiceV2ImplBase {
   public void listMonitoredResourceDescriptors(
       ListMonitoredResourceDescriptorsRequest request,
       StreamObserver<ListMonitoredResourceDescriptorsResponse> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof ListMonitoredResourceDescriptorsResponse) {
       requests.add(request);
-      responseObserver.onNext((ListMonitoredResourceDescriptorsResponse) response);
+      responseObserver.onNext(((ListMonitoredResourceDescriptorsResponse) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method ListMonitoredResourceDescriptors, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  ListMonitoredResourceDescriptorsResponse.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void listLogs(ListLogsRequest request, StreamObserver<ListLogsResponse> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof ListLogsResponse) {
       requests.add(request);
-      responseObserver.onNext((ListLogsResponse) response);
+      responseObserver.onNext(((ListLogsResponse) response));
       responseObserver.onCompleted();
     } else if (response instanceof Exception) {
-      responseObserver.onError((Exception) response);
+      responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method ListLogs, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  ListLogsResponse.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
@@ -152,11 +184,17 @@ public class MockLoggingServiceV2Impl extends LoggingServiceV2ImplBase {
             requests.add(value);
             final Object response = responses.remove();
             if (response instanceof TailLogEntriesResponse) {
-              responseObserver.onNext((TailLogEntriesResponse) response);
+              responseObserver.onNext(((TailLogEntriesResponse) response));
             } else if (response instanceof Exception) {
-              responseObserver.onError((Exception) response);
+              responseObserver.onError(((Exception) response));
             } else {
-              responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+              responseObserver.onError(
+                  new IllegalArgumentException(
+                      String.format(
+                          "Unrecognized response type %s for method TailLogEntries, expected %s or %s",
+                          response == null ? "null" : response.getClass().getName(),
+                          TailLogEntriesResponse.class.getName(),
+                          Exception.class.getName())));
             }
           }
 
