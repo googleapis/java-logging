@@ -28,7 +28,7 @@ import java.util.Calendar;
 /** List logs programmatically using the Cloud Logging API. */
 public class ListLogs {
 
-  /** Expects an existing Cloud log name as an argument. */
+  /** Expects an existing Cloud Logging log name as an argument. */
   public static void main(String... args) throws Exception {
     // [START logging_list_log_entries]
     // Instantiates a client
