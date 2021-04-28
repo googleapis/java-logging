@@ -160,7 +160,11 @@ public class MonitoredResourceUtil {
       case ContainerName:
         if (resourceType.equals("k8s_container")) {
           String hostName = System.getenv("HOSTNAME");
-          value = hostName.substring(0, hostName.indexOf("-"));
+          if (hostName != null && hostName.contains("-")) {
+            value = hostName.substring(0, hostName.indexOf("-"));
+          } else {
+            value = null;
+          }
         } else {
           value = MetadataConfig.getContainerName();
         }
@@ -188,7 +192,7 @@ public class MonitoredResourceUtil {
         try {
           value = new String(Files.readAllBytes(Paths.get(filePath)), StandardCharsets.UTF_8);
         } catch (IOException e) {
-          throw new LoggingException(e, true);
+          value = null;
         }
         break;
       case PodName:
@@ -254,7 +258,7 @@ public class MonitoredResourceUtil {
     String zone = MetadataConfig.getZone();
     // for Cloud Run managed, the zone is "REGION-1"
     // So, we need to strip the "-1" to set location to just the region
-    if (zone.endsWith("-1")) return zone.substring(0, zone.length() - 2);
+    if (zone != null && zone.endsWith("-1")) return zone.substring(0, zone.length() - 2);
     else return zone;
   }
 
