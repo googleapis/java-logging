@@ -44,6 +44,7 @@ public class MonitoredResourceUtil {
     ContainerName("container_name"),
     InstanceId("instance_id"),
     InstanceName("instance_name"),
+    Function_Name("function_name"),
     Location("location"),
     ModuleId("module_id"),
     NamespaceId("namespace_id"),
@@ -54,6 +55,7 @@ public class MonitoredResourceUtil {
     RevisionName("revision_name"),
     ServiceName("service_name"),
     VersionId("version_id"),
+    Region("region"),
     Zone("zone");
 
     private final String key;
@@ -74,6 +76,7 @@ public class MonitoredResourceUtil {
     GaeAppStandard("gae_app_standard"),
     GceInstance("gce_instance"),
     K8sContainer("k8s_container"),
+    CloudFunction("cloud_function"),
     Global("global");
 
     private final String key;
@@ -110,6 +113,10 @@ public class MonitoredResourceUtil {
               Label.NamespaceName,
               Label.PodName,
               Label.ContainerName)
+          .putAll(
+              Resource.CloudFunction.getKey(),
+              Label.Function_Name,
+              Label.Region)
           .build();
 
   private MonitoredResourceUtil() {}
@@ -207,6 +214,10 @@ public class MonitoredResourceUtil {
       case Zone:
         value = MetadataConfig.getZone();
         break;
+      case Region:
+        Object region = MetadataConfig.getAttribute("instance/region");
+        value = (region != null) ? region.toString() : "";
+
       default:
         value = null;
         break;
@@ -216,6 +227,12 @@ public class MonitoredResourceUtil {
 
   /* Detect monitored Resource type using environment variables, else return global as default. */
   private static Resource getAutoDetectedResourceType() {
+
+    // TODO detect the function from metadata server. If not available - use env var
+    if (System.getenv("FUNCTION_NAME") != null) {
+      return Resource.CloudFunction;
+    }
+
     if (System.getenv("K_SERVICE") != null
         && System.getenv("K_REVISION") != null
         && System.getenv("K_CONFIGURATION") != null
