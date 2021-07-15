@@ -11,6 +11,7 @@ Java idiomatic client for [Cloud Logging][product-docs].
 ## Quickstart
 
 If you are using Maven with [BOM][libraries-bom], add this to your pom.xml file
+
 ```xml
 <dependencyManagement>
   <dependencies>
@@ -45,17 +46,21 @@ If you are using Maven without BOM, add this to your dependencies:
 ```
 
 If you are using Gradle 5.x or later, add this to your dependencies
+
 ```Groovy
 implementation platform('com.google.cloud:libraries-bom:20.8.0')
 
 compile 'com.google.cloud:google-cloud-logging'
 ```
+
 If you are using Gradle without BOM, add this to your dependencies
+
 ```Groovy
 compile 'com.google.cloud:google-cloud-logging:2.3.2'
 ```
 
 If you are using SBT, add this to your dependencies
+
 ```Scala
 libraryDependencies += "com.google.cloud" % "google-cloud-logging" % "2.3.2"
 ```
@@ -63,6 +68,10 @@ libraryDependencies += "com.google.cloud" % "google-cloud-logging" % "2.3.2"
 ## Authentication
 
 See the [Authentication][authentication] section in the base directory's README.
+
+## Authorization
+
+Consult with [Access control guide](https://cloud.google.com/logging/docs/access-control) about IAM permissions that are required to call different Logging APIs.
 
 ## Getting Started
 
@@ -81,17 +90,16 @@ to add `google-cloud-logging` as a dependency in your code.
 
 ## About Cloud Logging
 
-
 [Cloud Logging][product-docs] allows you to store, search, analyze, monitor, and alert on log data and events from Google Cloud and Amazon Web Services. Using the BindPlane service, you can also collect this data from over 150 common application components, on-premises systems, and hybrid cloud systems. BindPlane is included with your Google Cloud project at no additional cost.
 
 See the [Cloud Logging client library docs][javadocs] to learn how to
 use this Cloud Logging Client Library.
 
-
 #### Creating an authorized service object
-To make authenticated requests to Cloud Logging, you must create a service object with
-credentials. You can then make API calls by calling methods on the Logging service object. The
-simplest way to authenticate is to use
+
+To make requests to Cloud Logging, you must create a service object with valid credentials.
+You can then make API calls by calling methods on the Logging service object. The
+simplest way to get credentials is to use
 [Application Default Credentials](https://developers.google.com/identity/protocols/application-default-credentials).
 These credentials are automatically inferred from your environment, so you only need the following
 code to create your service object:
@@ -106,10 +114,13 @@ try(Logging logging = options.getService()) {
 }
 ```
 
-For other authentication options, see the
-[Authentication](https://github.com/googleapis/google-cloud-java#authentication) page.
+For other options, see the [Authentication](https://github.com/googleapis/google-cloud-java#authentication) page.
+The service object should be granted permissions to make API calls.
+Each API call describes the permissions under Authorized Scopes section.
+See [Logging API](https://cloud.google.com/logging/docs/reference/v2/rest) to find the required list of permissions or consult with [Access control guide](https://cloud.google.com/logging/docs/access-control) for predefined IAM roles that can be granted to the Logging service object.
 
 #### Creating a metric
+
 With Logging you can create logs-based metrics. Logs-based metrics allow to keep track of the number
 of log messages associated to specific events. Add the following imports at the top of your file:
 
