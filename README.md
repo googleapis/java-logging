@@ -98,11 +98,11 @@ use this Cloud Logging Client Library.
 #### Creating an authorized service object
 
 To make requests to Cloud Logging, you must create a service object with valid credentials.
-You can then make API calls by calling methods on the Logging service object. The
-simplest way to get credentials is to use
-[Application Default Credentials](https://developers.google.com/identity/protocols/application-default-credentials).
-These credentials are automatically inferred from your environment, so you only need the following
-code to create your service object:
+You can then make API calls by calling methods on the Logging service object. 
+You can obtain credentials by using [Application Default Credentials](https://developers.google.com/identity/protocols/application-default-credentials).
+Or you can use a [Service Account](https://cloud.google.com/iam/docs/service-accounts) which is a recommended way to obtain credentials.
+The credentials can be automatically inferred from your [environment](https://cloud.google.com/docs/authentication/getting-started#setting_the_environment_variable).
+Then you only need the following code to create your service object:
 
 ```java
 import com.google.cloud.logging.Logging;
