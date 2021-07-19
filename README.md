@@ -71,7 +71,7 @@ See the [Authentication][authentication] section in the base directory's README.
 
 ## Authorization
 
-Consult with [Access control guide](https://cloud.google.com/logging/docs/access-control) about IAM permissions that are required to call different Logging APIs.
+A GCP account credentials that are used in API calls should be granted [Authorization Scopes](https://developers.google.com/identity/protocols/oauth2/scopes) to call these APIs. You can also review existing [predefined IAM roles](https://cloud.google.com/iam/docs/understanding-roles#predefined_roles) that can be granted to GCP account which is used for authentication.
 
 ## Getting Started
 
