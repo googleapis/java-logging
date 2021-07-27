@@ -142,11 +142,11 @@ public class CmekSettingsName implements ResourceName {
   }
 
   @BetaApi("The static create methods are not stable yet and may be changed in the future.")
-  public static CmekSettingsName ofProjectCmekSettingsName(String project) {
+  public static CmekSettingsName ofProjectName(String project) {
     return newBuilder().setProject(project).build();
   }
 
-  /** @deprecated Please use {@link #ofProjectCmekSettingsName()} instead */
+  /** @deprecated Please use {@link #ofProjectName()} instead */
   @Deprecated
   public static CmekSettingsName ofProjectCmekSettingsName(String project) {
     return newBuilder().setProject(project).build();

@@ -89,7 +89,7 @@ for version in versions:
   
   java.copy_and_rename_method('proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CmekSettingsName.java', 'public static CmekSettingsName ofProjectName(String project)', 'ofProjectName', 'ofProjectCmekSettingsName')
   java.deprecate_method('proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CmekSettingsName.java','public static CmekSettingsName ofProjectCmekSettingsName(String project)', DEPRECATION_JAVADOC.format(new_method='ofProjectName'))
-  s.replace('**/CmekSettingsName.java', 'ofProjectName', 'ofProjectCmekSettingsName')
+  s.replace('**/CmekSettingsName.java', 'return ofProjectName', 'return ofProjectCmekSettingsName')
 
   s.replace('**/CmekSettingsName.java', 'BillingAccountBuilder', 'BillingAccountCmekSettingsBuilder')
   s.replace('**/CmekSettingsName.java', 'FolderBuilder', 'FolderCmekSettingsBuilder')
