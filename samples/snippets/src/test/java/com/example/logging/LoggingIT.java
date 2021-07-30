@@ -120,7 +120,7 @@ public class LoggingIT {
   }
 
   @Test(timeout = 60000)
-  public void testListLogNames() {
+  public void testListLogNames() throws Exception {
     QuickstartSample.main(TEST_LOG);
     ListLogs.printLogNames();
     // Check for mocked STDOUT having data
