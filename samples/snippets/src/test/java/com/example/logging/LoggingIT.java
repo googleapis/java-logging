@@ -39,6 +39,7 @@ import org.junit.runners.JUnit4;
 public class LoggingIT {
 
   private static final String TEST_LOG = "test-log";
+  private static final String GOOGLEAPIS_AUDIT_LOGNAME = "cloudaudit.googleapis.com%2Factivity";
   private static final String STRING_PAYLOAD = "Hello, world!";
   private static final String STRING_PAYLOAD2 = "Hello world again";
 
@@ -85,9 +86,9 @@ public class LoggingIT {
     logging.flush();
     bout.reset();
 
-    ListLogs.main(TEST_LOG);
     // Check for mocked STDOUT having data
     while (bout.toString().isEmpty()) {
+      ListLogs.printLogEntries(TEST_LOG);
       Thread.sleep(5000);
     }
     assertThat(bout.toString().contains(STRING_PAYLOAD2)).isTrue();
@@ -108,9 +109,9 @@ public class LoggingIT {
     assertThat(got).contains(String.format("Logged: %s", STRING_PAYLOAD));
     bout.reset();
 
-    ListLogs.printLogEntries(TEST_LOG);
     // Check for mocked STDOUT having data
     while (bout.toString().isEmpty()) {
+      ListLogs.printLogEntries(TEST_LOG);
       Thread.sleep(5000);
     }
 
@@ -121,12 +122,12 @@ public class LoggingIT {
 
   @Test(timeout = 60000)
   public void testListLogNames() throws Exception {
-    QuickstartSample.main(TEST_LOG);
     ListLogs.printLogNames();
     // Check for mocked STDOUT having data
     while (bout.toString().isEmpty()) {
       Thread.sleep(5000);
     }
-    assertThat(bout.toString().contains(TEST_LOG)).isTrue();
+
+    assertThat(bout.toString().contains(GOOGLEAPIS_AUDIT_LOGNAME)).isTrue();
   }
 }
