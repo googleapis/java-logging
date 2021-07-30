@@ -28,35 +28,64 @@ import java.util.Calendar;
 /** List logs programmatically using the Cloud Logging API. */
 public class ListLogs {
 
-  /** Expects an existing Cloud Logging log name as an argument. */
   public static void main(String... args) throws Exception {
+
+    printLogNames();
+
+    /** Expects an existing Cloud Logging log name as an argument. */
+    String logName = args[0];
+
+    printLogEntries(logName);
+  }
+
+  public static final printLogNames() {
+    // [START logging_list_logs]
+    // Instantiates a client
+    LoggingOptions options = LoggingOptions.getDefaultInstance();
+    Logging logging = options.getService();
+
+    // List all log names
+    Page<String> logNames = logging.listLogs();
+    do {
+      for (String logName : logNames.iterateAll()) {
+        System.out.println(logName);
+      }
+      logNames = logNames.getNextPage();
+    } while (logNames != null);
+    // [END logging_list_logs]
+  }
+
+  public static final printLogEntries(String logName) {
     // [START logging_list_log_entries]
     // Instantiates a client
     LoggingOptions options = LoggingOptions.getDefaultInstance();
+    Logging logging = options.getService();
 
-    String logName = args[0];
+    // When composing a filter, using indexed fields, such as
+    // timestamp, resource.type, logName and others can help accelerate the results
+    // Full list of indexed fields here:
+    // https://cloud.google.com/logging/docs/view/advanced-queries#finding-quickly
+    // Below we are restricting the results to only last hour to speedup getting the results back
+    Calendar calendar = Calendar.getInstance();
+    calendar.add(Calendar.HOUR, -1);
+    DateFormat rfc3339 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+    String logFilter =
+        "logName=projects/"
+            + options.getProjectId()
+            + "/logs/"
+            + logName
+            + " AND timestamp>=\""
+            + rfc3339.format(calendar.getTime())
+            + "\"";
 
-    try (Logging logging = options.getService()) {
-
-      // When composing a filter, using indexed fields, such as
-      // timestamp, resource.type, logName and others can help accelerate the results
-      // Full list of indexed fields here: https://cloud.google.com/logging/docs/view/advanced-queries#finding-quickly
-      // Below we are restricting the results to only last hour to speedup getting the results back
-      Calendar calendar = Calendar.getInstance();
-      calendar.add(Calendar.HOUR, -1);
-      DateFormat rfc3339 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-      String logFilter = "logName=projects/" + options.getProjectId() + "/logs/" + logName
-          + " AND timestamp>=\"" + rfc3339.format(calendar.getTime()) + "\"";
-
-      // List all log entries
-      Page<LogEntry> entries = logging.listLogEntries(EntryListOption.filter(logFilter));
-      do {
-        for (LogEntry logEntry : entries.iterateAll()) {
-          System.out.println(logEntry);
-        }
-        entries = entries.getNextPage();
-      } while (entries != null);
-    }
+    // List all log entries
+    Page<LogEntry> entries = logging.listLogEntries(EntryListOption.filter(logFilter));
+    do {
+      for (LogEntry logEntry : entries.iterateAll()) {
+        System.out.println(logEntry);
+      }
+      entries = entries.getNextPage();
+    } while (entries != null);
     // [END logging_list_log_entries]
   }
 }
