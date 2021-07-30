@@ -38,7 +38,7 @@ public class ListLogs {
     printLogEntries(logName);
   }
 
-  public static final printLogNames() {
+  public static final void printLogNames() {
     // [START logging_list_logs]
     // Instantiates a client
     LoggingOptions options = LoggingOptions.getDefaultInstance();
@@ -55,7 +55,7 @@ public class ListLogs {
     // [END logging_list_logs]
   }
 
-  public static final printLogEntries(String logName) {
+  public static final void printLogEntries(String logName) {
     // [START logging_list_log_entries]
     // Instantiates a client
     LoggingOptions options = LoggingOptions.getDefaultInstance();
