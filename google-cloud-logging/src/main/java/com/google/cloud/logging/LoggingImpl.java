@@ -199,7 +199,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
 
   private static class LogNamePageFetcher extends BasePageFetcher<String> {
 
-    private static final long serialVersionUID = 5L;
+    private static final long serialVersionUID = 7156613795615829594L;
 
     LogNamePageFetcher(
         LoggingOptions serviceOptions, String cursor, Map<Option.OptionType, ?> requestOptions) {
