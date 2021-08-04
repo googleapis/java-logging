@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://www.github.com/googleapis/java-logging/compare/v2.3.2...v2.4.0) (2021-08-04)
+
+
+### Features
+
+* configure initial sp version ([#604](https://www.github.com/googleapis/java-logging/issues/604)) ([0b8e707](https://www.github.com/googleapis/java-logging/commit/0b8e707cb007f572a27804e15237a6e584b20b5a))
+
 ### [2.3.2](https://www.github.com/googleapis/java-logging/compare/v2.3.1...v2.3.2) (2021-07-01)
 
 
