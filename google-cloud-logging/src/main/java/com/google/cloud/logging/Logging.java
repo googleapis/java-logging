@@ -432,7 +432,10 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
    *
    * @throws LoggingException upon failure
    */
-  Page<String> listLogs(ListOption... options);
+  default Page<String> listLogs(ListOption... options) {
+    throw new UnsupportedOperationException(
+        "method listLogs() does not have default implementation");
+  }
 
   /**
    * Sends a request for listing log names. This method returns a {@code ApiFuture} object to
@@ -453,7 +456,10 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
    * }
    * }</pre>
    */
-  ApiFuture<AsyncPage<String>> listLogsAsync(ListOption... options);
+  default ApiFuture<AsyncPage<String>> listLogsAsync(ListOption... options) {
+    throw new UnsupportedOperationException(
+        "method listLogsAsync() does not have default implementation");
+  }
 
   /**
    * Deletes a log and all its log entries. The log will reappear if new entries are written to it.
