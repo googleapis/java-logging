@@ -42,7 +42,7 @@ echo $GOOGLE_APPLICATION_CREDENTIALS
 gcloud config get-value project
 
 # Setup service account credentials.
-gcloud auth activate-service-account --key-file=$KOKORO_GFILE_DIR/kokoro-trampoline.service-account.json
+#gcloud auth activate-service-account --key-file=$KOKORO_GFILE_DIR/kokoro-trampoline.service-account.json
 
 gcloud config get-value project
 
@@ -83,7 +83,7 @@ TEST_STATUS_CODE=$?
 
 # destroy resources
 echo "cleaning up..."
-${PROJECT_ROOT}/tests/environment/envctl/envctl java $ENVIRONMENT destroy
+${PROJECT_ROOT}/env_tests_logging/envctl/envctl java $ENVIRONMENT destroy
 
 # exit with proper status code
 exit $TEST_STATUS_CODE
