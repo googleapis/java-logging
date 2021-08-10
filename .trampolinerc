@@ -24,6 +24,9 @@ pass_down_envvars+=(
     "STAGING_BUCKET"
     "V2_STAGING_BUCKET"
     "NOX_SESSION"
+    "GOOGLE_CLOUD_PROJECT"
+    "GOOGLE_APPLICATION_CREDENTIALS"
+    "SECRET_MANAGER_KEYS"
 )
 
 # Prevent unintentional override on the default image.

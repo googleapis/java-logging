@@ -36,12 +36,10 @@ export PYTHONUNBUFFERED=1
 env | grep KOKORO
 
 # Setup service account credentials.
-export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json
 gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 
 # Setup project id.
-export PROJECT_ID=$(cat "${KOKORO_GFILE_DIR}/project-id.json")
-gcloud config set project $PROJECT_ID
+gcloud config set project $GOOGLE_CLOUD_PROJECT
 
 # set a default zone.
 gcloud config set compute/zone us-central1-b
