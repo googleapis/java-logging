@@ -83,7 +83,7 @@ TEST_STATUS_CODE=$?
 
 # destroy resources
 echo "cleaning up..."
-${PROJECT_ROOT}/env_tests_logging/envctl/envctl java $ENVIRONMENT destroy
+${PROJECT_ROOT}/env-tests-logging/envctl/envctl java $ENVIRONMENT destroy
 
 # exit with proper status code
 exit $TEST_STATUS_CODE
