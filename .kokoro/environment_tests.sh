@@ -42,12 +42,12 @@ echo $GOOGLE_APPLICATION_CREDENTIALS
 gcloud config get-value project
 
 # Setup service account credentials.
-#gcloud auth activate-service-account --key-file=$KOKORO_GFILE_DIR/kokoro-trampoline.service-account.json
-
-gcloud config get-value project
+export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json
+gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 
 # Setup project id.
-#gcloud config set project $GOOGLE_CLOUD_PROJECT
+export PROJECT_ID=$(cat "${KOKORO_GFILE_DIR}/project-id.json")
+gcloud config set project $PROJECT_ID
 
 # set a default zone.
 gcloud config set compute/zone us-central1-b
