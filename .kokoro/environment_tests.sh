@@ -38,10 +38,14 @@ env | grep KOKORO
 # print some more info
 ls $KOKORO_KEYSTORE_DIR
 ls $KOKORO_GFILE_DIR
+echo $GOOGLE_APPLICATION_CREDENTIALS
 gcloud config get-value project
 
 # Setup service account credentials.
-gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+gcloud auth activate-service-account --key-file=$KOKORO_KEYSTORE_DIR/kokoro-trampoline.service-account.json
+
+
+gcloud config get-value project
 
 # Setup project id.
 gcloud config set project $GOOGLE_CLOUD_PROJECT
