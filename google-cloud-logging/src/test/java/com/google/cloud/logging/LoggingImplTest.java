@@ -1683,7 +1683,8 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogsAsyncNextPageWithLogNames() throws ExecutionException, InterruptedException {
+  public void testListLogsAsyncNextPageWithLogNames()
+      throws ExecutionException, InterruptedException {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     List<String> logNames1 = ImmutableList.of(LOG_NAME1, LOG_NAME2);

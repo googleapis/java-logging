@@ -384,9 +384,8 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   /**
    * Creates a new {@code ListLogsRequest} object.
    *
-   * Builds an instance of {@code ListLogsRequest} using page size, page token and project id
-   * from the {@code LoggingOptions}.
-   * The project id is used as the request's parent parameter.
+   * <p>Builds an instance of {@code ListLogsRequest} using page size, page token and project id
+   * from the {@code LoggingOptions}. The project id is used as the request's parent parameter.
    *
    * @see com.google.logging.v2.ListLogEntriesRequest
    * @return the created {@code ListLogsRequest} object

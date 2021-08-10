@@ -38,10 +38,10 @@ public class ListLogEntries {
     // List all log entries
     Page<LogEntry> entries = logging.listLogEntries(EntryListOption.filter(logFilter));
     while (entries != null) {
-        for (LogEntry logEntry : entries.iterateAll()) {
-            System.out.println(logEntry);
-        }
-        entries = entries.getNextPage();
+      for (LogEntry logEntry : entries.iterateAll()) {
+        System.out.println(logEntry);
+      }
+      entries = entries.getNextPage();
     }
   }
 }
