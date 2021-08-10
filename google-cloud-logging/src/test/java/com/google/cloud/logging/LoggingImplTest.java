@@ -183,7 +183,7 @@ public class LoggingImplTest {
     ListLogsResponse response =
         ListLogsResponse.newBuilder().setNextPageToken(cursor).addAllLogNames(returnedList).build();
     ApiFuture<ListLogsResponse> futureResponse = ApiFutures.immediateFuture(response);
-    EasyMock.expect(loggingRpcMock.list(request)).andReturn(futureResponse);
+    EasyMock.expect(loggingRpcMock.listLogs(request)).andReturn(futureResponse);
     EasyMock.replay(loggingRpcMock);
   }
 
@@ -207,8 +207,8 @@ public class LoggingImplTest {
             .build();
     ApiFuture<ListLogsResponse> futureResponse1 = ApiFutures.immediateFuture(response1);
     ApiFuture<ListLogsResponse> futureResponse2 = ApiFutures.immediateFuture(response2);
-    EasyMock.expect(loggingRpcMock.list(request1)).andReturn(futureResponse1);
-    EasyMock.expect(loggingRpcMock.list(request2)).andReturn(futureResponse2);
+    EasyMock.expect(loggingRpcMock.listLogs(request1)).andReturn(futureResponse1);
+    EasyMock.expect(loggingRpcMock.listLogs(request2)).andReturn(futureResponse2);
     EasyMock.replay(loggingRpcMock);
   }
 
@@ -1618,7 +1618,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogs() {
+  public void testListLogsWithLogNames() {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     List<String> logNames = ImmutableList.of(LOG_NAME1, LOG_NAME2);
@@ -1630,7 +1630,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogsEmpty() {
+  public void testListLogsWithEmptySet() {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     List<String> emptyList = ImmutableList.of();
@@ -1642,7 +1642,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogsNextPage() throws ExecutionException, InterruptedException {
+  public void testListLogsNextPageWithLogNames() throws ExecutionException, InterruptedException {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     List<String> logNames1 = ImmutableList.of(LOG_NAME1, LOG_NAME2);
@@ -1659,7 +1659,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogsAsync() throws ExecutionException, InterruptedException {
+  public void testListLogsAsyncWithLogNames() throws ExecutionException, InterruptedException {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     List<String> logNames = ImmutableList.of(LOG_NAME1, LOG_NAME2);
@@ -1671,7 +1671,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogsAsyncEmpty() throws ExecutionException, InterruptedException {
+  public void testListLogsAsyncWithEmptySet() throws ExecutionException, InterruptedException {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     List<String> emptyList = ImmutableList.of();
@@ -1683,7 +1683,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogsAsyncNextPage() throws ExecutionException, InterruptedException {
+  public void testListLogsAsyncNextPageWithLogNames() throws ExecutionException, InterruptedException {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     List<String> logNames1 = ImmutableList.of(LOG_NAME1, LOG_NAME2);

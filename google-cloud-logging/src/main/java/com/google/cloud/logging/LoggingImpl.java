@@ -381,6 +381,16 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     return transform(rpc.delete(request), EMPTY_TO_BOOLEAN_FUNCTION);
   }
 
+  /**
+   * Creates a new {@code ListLogsRequest} object.
+   *
+   * Builds an instance of {@code ListLogsRequest} using page size, page token and project id
+   * from the {@code LoggingOptions}.
+   * The project id is used as the request's parent parameter.
+   *
+   * @see com.google.logging.v2.ListLogEntriesRequest
+   * @return the created {@code ListLogsRequest} object
+   */
   private static ListLogsRequest listLogsRequest(
       LoggingOptions serviceOptions, Map<Option.OptionType, ?> options) {
     ListLogsRequest.Builder builder = ListLogsRequest.newBuilder();
@@ -399,7 +409,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   private static ApiFuture<AsyncPage<String>> listLogsAsync(
       final LoggingOptions serviceOptions, final Map<Option.OptionType, ?> options) {
     final ListLogsRequest request = listLogsRequest(serviceOptions, options);
-    ApiFuture<ListLogsResponse> list = serviceOptions.getLoggingRpcV2().list(request);
+    ApiFuture<ListLogsResponse> list = serviceOptions.getLoggingRpcV2().listLogs(request);
     return transform(
         list,
         new Function<ListLogsResponse, AsyncPage<String>>() {

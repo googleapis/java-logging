@@ -16,26 +16,33 @@
 
 package com.example.logging;
 
-// [START logging_list_logs]
+// [START logging_list_log_entries]
 import com.google.api.gax.paging.Page;
+import com.google.cloud.logging.LogEntry;
 import com.google.cloud.logging.Logging;
+import com.google.cloud.logging.Logging.EntryListOption;
 import com.google.cloud.logging.LoggingOptions;
 
-public class ListLogs {
+public class ListLogEntries {
 
-  public static void main(String... args) throws Exception {
+  public static void main(String[] args) throws Exception {
+    // TODO(developer): Replace the variable value with valid log name before running the sample
+    // or provide it as an argument.
+    String logName = args.length > 0 ? args[0] : "test-log";
 
     LoggingOptions options = LoggingOptions.getDefaultInstance();
     Logging logging = options.getService();
 
-    // List all log names
-    Page<String> logNames = logging.listLogs();
-    while (logNames != null) {
-      for (String logName : logNames.iterateAll()) {
-        System.out.println(logName);
-      }
-      logNames = logNames.getNextPage();
+    String logFilter = "logName=projects/" + options.getProjectId() + "/logs/" + logName;
+
+    // List all log entries
+    Page<LogEntry> entries = logging.listLogEntries(EntryListOption.filter(logFilter));
+    while (entries != null) {
+        for (LogEntry logEntry : entries.iterateAll()) {
+            System.out.println(logEntry);
+        }
+        entries = entries.getNextPage();
     }
   }
 }
-// [END logging_list_logs]
+// [END logging_list_log_entries]

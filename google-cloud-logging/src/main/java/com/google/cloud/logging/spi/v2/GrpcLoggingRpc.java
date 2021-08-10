@@ -263,7 +263,7 @@ public class GrpcLoggingRpc implements LoggingRpc {
   }
 
   @Override
-  public ApiFuture<ListLogsResponse> list(ListLogsRequest request) {
+  public ApiFuture<ListLogsResponse> listLogs(ListLogsRequest request) {
     return translate(loggingClient.listLogsCallable().futureCall(request), true);
   }
 

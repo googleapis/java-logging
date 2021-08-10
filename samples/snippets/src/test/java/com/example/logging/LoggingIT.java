@@ -87,8 +87,9 @@ public class LoggingIT {
     bout.reset();
 
     // Check for mocked STDOUT having data
+    String[] args = new String[] {TEST_LOG};
     while (bout.toString().isEmpty()) {
-      ListLogs.printLogEntries(TEST_LOG);
+      ListLogEntries.main(args);
       Thread.sleep(5000);
     }
     assertThat(bout.toString().contains(STRING_PAYLOAD2)).isTrue();
@@ -110,8 +111,9 @@ public class LoggingIT {
     bout.reset();
 
     // Check for mocked STDOUT having data
+    String[] args = new String[] {TEST_LOG};
     while (bout.toString().isEmpty()) {
-      ListLogs.printLogEntries(TEST_LOG);
+      ListLogEntries.main(args);
       Thread.sleep(5000);
     }
 
@@ -121,8 +123,8 @@ public class LoggingIT {
   }
 
   @Test(timeout = 60000)
-  public void testListLogNames() throws Exception {
-    ListLogs.printLogNames();
+  public void testListLogNames_shouldPass() throws Exception {
+    ListLogs.main();
     // Check for mocked STDOUT having data
     while (bout.toString().isEmpty()) {
       Thread.sleep(5000);

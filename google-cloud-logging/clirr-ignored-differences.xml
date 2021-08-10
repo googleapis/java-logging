@@ -12,6 +12,6 @@
     <difference>
         <differenceType>7012</differenceType>
         <className>com/google/cloud/logging/spi/v2/LoggingRpc</className>
-        <method>* list(com.google.logging.v2.ListLogsRequest)</method>
+        <method>* listLogs(com.google.logging.v2.ListLogsRequest)</method>
     </difference>
 </differences>

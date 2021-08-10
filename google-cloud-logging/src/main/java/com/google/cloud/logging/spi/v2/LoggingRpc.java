@@ -102,7 +102,7 @@ public interface LoggingRpc extends AutoCloseable, ServiceRpc {
    *
    * @param request the request object containing all of the parameters for the API call
    */
-  default ApiFuture<ListLogsResponse> list(ListLogsRequest request) {
+  default ApiFuture<ListLogsResponse> listLogs(ListLogsRequest request) {
     throw new UnsupportedOperationException(
         "method list(ListLogsRequest request) does not have default implementation");
   }
