@@ -35,6 +35,11 @@ export PYTHONUNBUFFERED=1
 # Debug: show build environment
 env | grep KOKORO
 
+# print some more info
+ls $KOKORO_KEYSTORE_DIR
+ls $KOKORO_GFILE_DIR
+gcloud config get-value project
+
 # Setup service account credentials.
 gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 
