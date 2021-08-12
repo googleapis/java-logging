@@ -21,15 +21,12 @@ if [[ -z "${ENVIRONMENT:-}" ]]; then
 fi
 
 if [[ -z "${PROJECT_ROOT:-}"  ]]; then
-    PROJECT_ROOT="github/java-logging"
+    PROJECT_ROOT="${KOKORO_ARTIFACTS_DIR}/github/java-logging"
 fi
 
-pwd
-ls
-
 # make sure submodule is up to date
+cd "$PROJECT_ROOT"
 git submodule update --init --recursive
-
 cd "${PROJECT_ROOT}/env-tests-logging"
 
 # Disable buffering, so that the logs stream through.
@@ -39,20 +36,19 @@ export PYTHONUNBUFFERED=1
 env | grep KOKORO
 
 # print some more info
-ls $KOKORO_KEYSTORE_DIR
-ls $KOKORO_GFILE_DIR
+#ls $KOKORO_KEYSTORE_DIR
+ls $KOKORO_GFILE_DIR/secret_manager
 echo $GOOGLE_APPLICATION_CREDENTIALS
-ls secret_manager
 gcloud config get-value project
 
 # Setup service account credentials.
+export GOOGLE_APPLICATION_CREDENTIALS=$KOKORO_GFILE_DIR/secret_manager/java-it-service-account
 gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 
 gcloud config get-value project
 
 # Setup project id.
-#export PROJECT_ID=$(cat "${KOKORO_GFILE_DIR}/project-id.json")
-#gcloud config set project $PROJECT_ID
+gcloud config set project $GOOGLE_CLOUD_PROJECT
 
 # set a default zone.
 gcloud config set compute/zone us-central1-b
