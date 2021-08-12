@@ -24,6 +24,9 @@ if [[ -z "${PROJECT_ROOT:-}"  ]]; then
     PROJECT_ROOT="github/java-logging"
 fi
 
+pwd
+ls
+
 # make sure submodule is up to date
 git submodule update --init --recursive
 
