@@ -1082,7 +1082,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
    * server before being returned. entries. Use {@link TailEntryOption#filter(String)} to filter
    * tailed log entries.
    */
-  default Iterator<LogEntry> tailLogEntriesCallable(TailEntryOption... options) {
+  default Iterator<LogEntry> tailLogEntries(TailEntryOption... options) {
     throw new UnsupportedOperationException(
         "method tailLogEntriesCallable() does not have default implementation");
   }
