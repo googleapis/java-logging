@@ -23,6 +23,7 @@ import com.google.cloud.MonitoredResource;
 import com.google.cloud.MonitoredResourceDescriptor;
 import com.google.cloud.Service;
 import com.google.common.collect.ImmutableMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public interface Logging extends AutoCloseable, Service<LoggingOptions> {
@@ -194,6 +195,71 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
     /** Returns an option to specify a folder for the log entries to be listed. */
     public static EntryListOption folder(String folder) {
       return new EntryListOption(OptionType.FOLDER, folder);
+    }
+  }
+
+  /** Class for specifying options for tailing log entries. */
+  final class TailEntryOption extends Option {
+
+    enum OptionType implements Option.OptionType {
+      FILTER,
+      BUFFERWINDOW,
+      PROJECT,
+      ORGANIZATION,
+      BILLINGACCOUNT,
+      FOLDER;
+
+      @SuppressWarnings("unchecked")
+      <T> T get(Map<Option.OptionType, ?> options) {
+        return (T) options.get(this);
+      }
+    }
+
+    private TailEntryOption(Option.OptionType option, Object value) {
+      super(option, value);
+    }
+
+    /**
+     * Returns an option to specify a filter to the log entries to be tailed.
+     *
+     * @see <a href="https://cloud.google.com/logging/docs/view/advanced_filters">Advanced Logs
+     *     Filters</a>
+     */
+    public static TailEntryOption filter(String filter) {
+      return new TailEntryOption(OptionType.FILTER, filter);
+    }
+
+    /**
+     * Returns an option to specify the amount of time to buffer log entries at the server before
+     * being returned to prevent out of order results due to late arriving log entries. Valid values
+     * are between 0-60000 ms. Default is 2000 ms.
+     *
+     * @see <a
+     *     href="https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.Duration">Duration
+     *     format</a>
+     */
+    public static TailEntryOption bufferWindow(String duration) {
+      return new TailEntryOption(OptionType.BUFFERWINDOW, duration);
+    }
+
+    /** Returns an option to specify an organization for the log entries to be tailed. */
+    public static TailEntryOption organization(String organization) {
+      return new TailEntryOption(OptionType.ORGANIZATION, organization);
+    }
+
+    /** Returns an option to specify a billingAccount for the log entries to be tailed. */
+    public static TailEntryOption billingAccount(String billingAccount) {
+      return new TailEntryOption(OptionType.BILLINGACCOUNT, billingAccount);
+    }
+
+    /** Returns an option to specify a folder for the log entries to be tailed. */
+    public static TailEntryOption folder(String folder) {
+      return new TailEntryOption(OptionType.FOLDER, folder);
+    }
+
+    /** Returns an option to specify a project for the log entries to be tailed. */
+    public static TailEntryOption project(String project) {
+      return new TailEntryOption(OptionType.PROJECT, project);
     }
   }
 
@@ -1008,4 +1074,16 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
    * @throws LoggingException upon failure
    */
   ApiFuture<AsyncPage<LogEntry>> listLogEntriesAsync(EntryListOption... options);
+
+  /**
+   * Tails freshly induced log entries. This method returns a {@link Iterator} object that can be
+   * used to iterate over new log entries streamed from the server. Use {@link
+   * EntryListOption#bufferWindow(String)} to specify amount of time to buffer log entries at the
+   * server before being returned. entries. Use {@link TailEntryOption#filter(String)} to filter
+   * tailed log entries.
+   */
+  default Iterator<LogEntry> tailLogEntriesCallable(TailEntryOption... options) {
+    throw new UnsupportedOperationException(
+        "method tailLogEntriesCallable() does not have default implementation");
+  }
 }
