@@ -79,6 +79,11 @@ echo $ENVCTL_ID
 
 # Run the specified environment test
 set +e
+
+##### Try spinning up environment
+${PROJECT_ROOT}/env-tests-logging/envctl/envctl java $ENVIRONMENT deploy
+#####
+
 python3.6 -m nox --session "tests(language='java', platform='$ENVIRONMENT')"
 TEST_STATUS_CODE=$?
 
