@@ -32,6 +32,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.google.cloud.logging.K8sContainerUtil.getContainerNameFromHostName;
+
 /**
  * Monitored resource construction utilities to detect resource type and add labels. Used by logging
  * framework adapters to configure default resource. See usage in {@link LoggingHandler}.
@@ -160,7 +162,11 @@ public class MonitoredResourceUtil {
       case ContainerName:
         if (resourceType.equals("k8s_container")) {
           String hostName = System.getenv("HOSTNAME");
-          value = hostName.substring(0, hostName.lastIndexOf("-", hostName.lastIndexOf("-") - 1));
+          if (hostName == null) {
+            value = "unknown";
+          } else {
+            value = getContainerNameFromHostName(hostName);
+          }
         } else {
           value = MetadataConfig.getContainerName();
         }
