@@ -34,8 +34,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.google.cloud.logging.K8sContainerUtil.getContainerNameFromHostName;
-
 /**
  * Monitored resource construction utilities to detect resource type and add labels. Used by logging
  * framework adapters to configure default resource. See usage in {@link LoggingHandler}.
