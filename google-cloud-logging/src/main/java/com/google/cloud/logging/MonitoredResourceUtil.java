@@ -160,15 +160,9 @@ public class MonitoredResourceUtil {
         value = MetadataConfig.getClusterName();
         break;
       case ContainerName:
-        if (resourceType.equals("k8s_container")) {
-          String hostName = System.getenv("HOSTNAME");
-          if (hostName == null) {
-            value = "unknown";
-          } else {
-            value = getContainerNameFromHostName(hostName);
-          }
-        } else {
-          value = MetadataConfig.getContainerName();
+        value = MetadataConfig.getContainerName();
+        if (value == null && resourceType.equals("k8s_container")) {
+          value = getContainerNameFromHostName(System.getenv("HOSTNAME"));
         }
         break;
       case InstanceId:

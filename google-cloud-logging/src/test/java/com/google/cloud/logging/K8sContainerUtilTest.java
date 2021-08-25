@@ -41,5 +41,13 @@ public class K8sContainerUtilTest {
     assertThat(getContainerNameFromHostName("test-host")).isEqualTo("test-host");
     assertThat(getContainerNameFromHostName("test-host-something"))
         .isEqualTo("test-host-something");
+    assertThat(getContainerNameFromHostName("test")).isEqualTo("test");
+    assertThat(getContainerNameFromHostName("x--x")).isEqualTo("x--x");
+  }
+
+  @Test
+  public void testGetContainerNameNullOrEmpty() {
+    assertThat(getContainerNameFromHostName(null)).isEqualTo("unknown");
+    assertThat(getContainerNameFromHostName("")).isEqualTo("unknown");
   }
 }
