@@ -160,7 +160,7 @@ public class MonitoredResourceUtil {
       case ContainerName:
         if (resourceType.equals("k8s_container")) {
           String hostName = System.getenv("HOSTNAME");
-          value = hostName.substring(0, hostName.indexOf("-"));
+          value = hostName.substring(0, hostName.lastIndexOf("-", hostName.lastIndexOf("-") - 1));
         } else {
           value = MetadataConfig.getContainerName();
         }
