@@ -16,6 +16,8 @@
 
 package com.google.cloud.logging;
 
+import static com.google.cloud.logging.K8sContainerUtil.getContainerNameFromHostName;
+
 import com.google.cloud.MetadataConfig;
 import com.google.cloud.MonitoredResource;
 import com.google.cloud.ServiceOptions;
