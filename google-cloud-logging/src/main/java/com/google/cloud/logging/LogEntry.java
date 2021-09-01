@@ -26,10 +26,10 @@ import com.google.logging.v2.LogEntryOperation;
 import com.google.logging.v2.LogEntrySourceLocation;
 import com.google.logging.v2.LogName;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.time.Instant;
 
 /**
  * A Cloud Logging log entry. All log entries are represented via objects of this class. Log entries

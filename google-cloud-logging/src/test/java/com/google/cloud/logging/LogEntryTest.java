@@ -27,8 +27,8 @@ import com.google.cloud.logging.Payload.StringPayload;
 import com.google.common.collect.ImmutableMap;
 import com.google.protobuf.Any;
 import com.google.protobuf.Empty;
-import java.util.Map;
 import java.time.Instant;
+import java.util.Map;
 import org.junit.Test;
 
 public class LogEntryTest {

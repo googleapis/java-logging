@@ -38,7 +38,7 @@ import java.time.Instant;
  */
 class JavaTimeConversions {
   static final long NANOS_PER_SECOND = 1000000000;
-  
+
   private JavaTimeConversions() {}
 
   /**
@@ -62,9 +62,7 @@ class JavaTimeConversions {
     return normalizedTimestamp(instant.getEpochSecond(), instant.getNano());
   }
 
-  /**
-   * Exposes {@link Timestamps#normalizedTimestamp} internal method.
-   */
+  /** Exposes {@link Timestamps#normalizedTimestamp} internal method. */
   static Timestamp normalizedTimestamp(long seconds, int nanos) {
     if (nanos <= -NANOS_PER_SECOND || nanos >= NANOS_PER_SECOND) {
       seconds = checkedAdd(seconds, nanos / NANOS_PER_SECOND);
@@ -79,5 +77,4 @@ class JavaTimeConversions {
     Timestamp timestamp = Timestamp.newBuilder().setSeconds(seconds).setNanos(nanos).build();
     return Timestamps.checkValid(timestamp);
   }
-  
 }
