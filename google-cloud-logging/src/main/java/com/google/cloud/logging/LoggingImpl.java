@@ -17,11 +17,7 @@
 package com.google.cloud.logging;
 
 import static com.google.api.client.util.Preconditions.checkArgument;
-import static com.google.cloud.logging.Logging.EntryListOption.OptionType.BILLINGACCOUNT;
-import static com.google.cloud.logging.Logging.EntryListOption.OptionType.FILTER;
-import static com.google.cloud.logging.Logging.EntryListOption.OptionType.FOLDER;
 import static com.google.cloud.logging.Logging.EntryListOption.OptionType.ORDER_BY;
-import static com.google.cloud.logging.Logging.EntryListOption.OptionType.ORGANIZATION;
 import static com.google.cloud.logging.Logging.ListOption.OptionType.PAGE_SIZE;
 import static com.google.cloud.logging.Logging.ListOption.OptionType.PAGE_TOKEN;
 import static com.google.cloud.logging.Logging.WriteOption.OptionType.LABELS;
@@ -34,6 +30,9 @@ import com.google.api.core.ApiFutureCallback;
 import com.google.api.core.ApiFutures;
 import com.google.api.gax.paging.AsyncPage;
 import com.google.api.gax.paging.Page;
+import com.google.api.gax.rpc.BidiStreamObserver;
+import com.google.api.gax.rpc.ClientStream;
+import com.google.api.gax.rpc.StreamController;
 import com.google.cloud.AsyncPageImpl;
 import com.google.cloud.BaseService;
 import com.google.cloud.MonitoredResource;
@@ -76,6 +75,8 @@ import com.google.logging.v2.LogMetricName;
 import com.google.logging.v2.LogName;
 import com.google.logging.v2.LogSinkName;
 import com.google.logging.v2.ProjectName;
+import com.google.logging.v2.TailLogEntriesRequest;
+import com.google.logging.v2.TailLogEntriesResponse;
 import com.google.logging.v2.UpdateExclusionRequest;
 import com.google.logging.v2.UpdateLogMetricRequest;
 import com.google.logging.v2.UpdateSinkRequest;
@@ -841,15 +842,15 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
       String projectId, Map<Option.OptionType, ?> options) {
     ListLogEntriesRequest.Builder builder = ListLogEntriesRequest.newBuilder();
     builder.addResourceNames("projects/" + projectId);
-    String organization = ORGANIZATION.get(options);
+    String organization = EntryListOption.OptionType.ORGANIZATION.get(options);
     if (organization != null) {
       builder.addResourceNames("organizations/" + organization);
     }
-    String billingAccount = BILLINGACCOUNT.get(options);
+    String billingAccount = EntryListOption.OptionType.BILLINGACCOUNT.get(options);
     if (billingAccount != null) {
       builder.addResourceNames("billingAccounts/" + billingAccount);
     }
-    String folder = FOLDER.get(options);
+    String folder = EntryListOption.OptionType.FOLDER.get(options);
     if (folder != null) {
       builder.addResourceNames("folders/" + folder);
     }
@@ -865,7 +866,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     if (orderBy != null) {
       builder.setOrderBy(orderBy);
     }
-    String filter = FILTER.get(options);
+    String filter = EntryListOption.OptionType.FILTER.get(options);
     // Make sure timestamp filter is either explicitly specified or we add a default time filter
     // of 24 hours back to be inline with gcloud behavior for the same API
     if (filter != null) {
@@ -917,6 +918,79 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   @Override
   public ApiFuture<AsyncPage<LogEntry>> listLogEntriesAsync(EntryListOption... options) {
     return listLogEntriesAsync(getOptions(), optionMap(options));
+  }
+
+  static TailLogEntriesRequest tailLogEntriesRequest(
+      Map<Option.OptionType, ?> options, String defaultProjectId) {
+    TailLogEntriesRequest.Builder builder = TailLogEntriesRequest.newBuilder();
+
+    String organization = TailEntryOption.OptionType.ORGANIZATION.get(options);
+    if (organization != null) {
+      builder.addResourceNames("organizations/" + organization);
+    }
+    String billingAccount = TailEntryOption.OptionType.BILLINGACCOUNT.get(options);
+    if (billingAccount != null) {
+      builder.addResourceNames("billingAccounts/" + billingAccount);
+    }
+    String folder = TailEntryOption.OptionType.FOLDER.get(options);
+    if (folder != null) {
+      builder.addResourceNames("folders/" + folder);
+    }
+    String project = TailEntryOption.OptionType.PROJECT.get(options);
+    if (project != null) {
+      builder.addResourceNames("projects/" + project);
+    } else if (defaultProjectId != null) {
+      builder.addResourceNames("projects/" + defaultProjectId);
+    }
+    // TODO: check filter syntax!!
+    String filter = TailEntryOption.OptionType.FILTER.get(options);
+    if (filter != null) {
+      if (!filter.toLowerCase().contains("timestamp")) {
+        filter =
+            String.format(
+                "%s AND %s", filter, defaultTimestampFilterCreator.createDefaultTimestampFilter());
+      }
+      builder.setFilter(filter);
+    }
+    return builder.build();
+  }
+
+  @Override
+  public void tailLogEntries(TailLogEntriesObserver observer, TailEntryOption... options) {
+    LoggingOptions serviceOptions = getOptions();
+    final TailLogEntriesRequest request =
+        tailLogEntriesRequest(optionMap(options), serviceOptions.getProjectId());
+
+    serviceOptions
+        .getLoggingRpcV2()
+        .tailLogEntries(
+            new BidiStreamObserver<TailLogEntriesRequest, TailLogEntriesResponse>() {
+              @Override
+              public void onReady(ClientStream<TailLogEntriesRequest> stream) {
+                stream.send(request);
+              }
+
+              @Override
+              public void onStart(StreamController controller) {
+                observer.onStart(controller);
+              }
+
+              @Override
+              public void onResponse(TailLogEntriesResponse response) {
+                observer.onResponse(
+                    Lists.transform(response.getEntriesList(), LogEntry.FROM_PB_FUNCTION));
+              }
+
+              @Override
+              public void onError(Throwable t) {
+                observer.setError(t);
+              }
+
+              @Override
+              public void onComplete() {
+                observer.onComplete();
+              }
+            });
   }
 
   @Override
