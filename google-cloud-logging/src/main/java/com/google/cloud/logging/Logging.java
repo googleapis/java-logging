@@ -17,6 +17,7 @@
 package com.google.cloud.logging;
 
 import com.google.api.core.ApiFuture;
+import com.google.api.core.BetaApi;
 import com.google.api.gax.paging.AsyncPage;
 import com.google.api.gax.paging.Page;
 import com.google.cloud.MonitoredResource;
@@ -1081,6 +1082,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
    * buffer log entries at the server before being returned. entries. Use {@link
    * TailEntryOption#filter(String)} to filter tailed log entries.
    */
+  @BetaApi("A tail API is in Beta. Its functionality may change in the future")
   default void tailLogEntries(TailLogEntriesObserver observer, TailEntryOption... options) {
     throw new UnsupportedOperationException(
         "method tailLogEntriesCallable() does not have default implementation");
