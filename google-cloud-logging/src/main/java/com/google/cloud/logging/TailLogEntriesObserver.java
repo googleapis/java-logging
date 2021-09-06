@@ -49,7 +49,7 @@ public abstract class TailLogEntriesObserver
     onError(t);
   }
 
-  public void cancel() {
+  public void close() {
     if (controller != null && !finished) {
       controller.cancel();
       finished = true;
