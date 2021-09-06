@@ -26,6 +26,7 @@ import com.google.api.gax.core.GaxProperties;
 import com.google.api.gax.grpc.GrpcCallContext;
 import com.google.api.gax.grpc.GrpcTransportChannel;
 import com.google.api.gax.rpc.ApiException;
+import com.google.api.gax.rpc.BidiStreamObserver;
 import com.google.api.gax.rpc.ClientContext;
 import com.google.api.gax.rpc.HeaderProvider;
 import com.google.api.gax.rpc.StatusCode;
@@ -70,6 +71,8 @@ import com.google.logging.v2.ListSinksResponse;
 import com.google.logging.v2.LogExclusion;
 import com.google.logging.v2.LogMetric;
 import com.google.logging.v2.LogSink;
+import com.google.logging.v2.TailLogEntriesRequest;
+import com.google.logging.v2.TailLogEntriesResponse;
 import com.google.logging.v2.UpdateExclusionRequest;
 import com.google.logging.v2.UpdateLogMetricRequest;
 import com.google.logging.v2.UpdateSinkRequest;
@@ -281,6 +284,12 @@ public class GrpcLoggingRpc implements LoggingRpc {
   @Override
   public ApiFuture<ListLogEntriesResponse> list(ListLogEntriesRequest request) {
     return translate(loggingClient.listLogEntriesCallable().futureCall(request), true);
+  }
+
+  @Override
+  public void tailLogEntries(
+      BidiStreamObserver<TailLogEntriesRequest, TailLogEntriesResponse> observer) {
+    loggingClient.tailLogEntriesCallable().call(observer);
   }
 
   @Override

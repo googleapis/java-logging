@@ -23,7 +23,6 @@ import com.google.cloud.MonitoredResource;
 import com.google.cloud.MonitoredResourceDescriptor;
 import com.google.cloud.Service;
 import com.google.common.collect.ImmutableMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public interface Logging extends AutoCloseable, Service<LoggingOptions> {
@@ -1076,13 +1075,13 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
   ApiFuture<AsyncPage<LogEntry>> listLogEntriesAsync(EntryListOption... options);
 
   /**
-   * Tails freshly induced log entries. This method returns a {@link Iterator} object that can be
-   * used to iterate over new log entries streamed from the server. Use {@link
-   * EntryListOption#bufferWindow(String)} to specify amount of time to buffer log entries at the
-   * server before being returned. entries. Use {@link TailEntryOption#filter(String)} to filter
-   * tailed log entries.
+   * Tails freshly induced log entries. Extend the {@link TailLogEntriesObserver} with
+   * implementation of the {@link TailLogEntriesObserver#onResponse(List<LogEntry>)} to process
+   * streamed log entries. Use EntryListOption#bufferWindow(String)} to specify amount of time to
+   * buffer log entries at the server before being returned. entries. Use {@link
+   * TailEntryOption#filter(String)} to filter tailed log entries.
    */
-  default Iterator<LogEntry> tailLogEntries(TailEntryOption... options) {
+  default void tailLogEntries(TailLogEntriesObserver observer, TailEntryOption... options) {
     throw new UnsupportedOperationException(
         "method tailLogEntriesCallable() does not have default implementation");
   }
