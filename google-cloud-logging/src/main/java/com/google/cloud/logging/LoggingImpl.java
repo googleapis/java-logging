@@ -942,14 +942,8 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     } else if (defaultProjectId != null) {
       builder.addResourceNames("projects/" + defaultProjectId);
     }
-    // TODO: check filter syntax!!
     String filter = TailEntryOption.OptionType.FILTER.get(options);
     if (filter != null) {
-      if (!filter.toLowerCase().contains("timestamp")) {
-        filter =
-            String.format(
-                "%s AND %s", filter, defaultTimestampFilterCreator.createDefaultTimestampFilter());
-      }
       builder.setFilter(filter);
     }
     return builder.build();
