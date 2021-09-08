@@ -1,5 +1,24 @@
 # Changelog
 
+### [3.1.1](https://www.github.com/googleapis/java-logging/compare/v3.1.0...v3.1.1) (2021-08-31)
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v2.2.0 ([#649](https://www.github.com/googleapis/java-logging/issues/649)) ([8af8d14](https://www.github.com/googleapis/java-logging/commit/8af8d142eb3d90cd5fba5b3e34d388db1867a56a))
+
+## [3.1.0](https://www.github.com/googleapis/java-logging/compare/v3.0.1...v3.1.0) (2021-08-24)
+
+
+### Features
+
+* implement listLogs API and provide sample snippet ([#602](https://www.github.com/googleapis/java-logging/issues/602)) ([9359569](https://www.github.com/googleapis/java-logging/commit/935956944200d978738d86ae4adff6107532531c))
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v2.1.0 ([#636](https://www.github.com/googleapis/java-logging/issues/636)) ([fb9ac95](https://www.github.com/googleapis/java-logging/commit/fb9ac954293f5a281024e122d06e8487cb3a62c1))
+
 ### [3.0.1](https://www.github.com/googleapis/java-logging/compare/v3.0.0...v3.0.1) (2021-08-11)
 
 
