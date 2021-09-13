@@ -1076,14 +1076,25 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
   ApiFuture<AsyncPage<LogEntry>> listLogEntriesAsync(EntryListOption... options);
 
   /**
-   * Tails freshly induced log entries. Extend the {@link TailLogEntriesObserver} with
-   * implementation of the {@link TailLogEntriesObserver#onResponse(List<LogEntry>)} to process
-   * streamed log entries. Use EntryListOption#bufferWindow(String)} to specify amount of time to
-   * buffer log entries at the server before being returned. entries. Use {@link
-   * TailEntryOption#filter(String)} to filter tailed log entries.
+   * Sends a request to stream fresh log entries. The method returns a {@code LogEntryServerStream}
+   * object to iterate through the returned stream of the log entries. Use
+   * EntryListOption#bufferWindow(String)} to specify amount of time to buffer log entries at the
+   * server before being returned. entries. Use {@link TailEntryOption#filter(String)} to filter
+   * tailed log entries.
+   *
+   * <p>Example of streaming log entries for a specific project.
+   *
+   * <pre>{@code}
+   * LogEntryServerStream stream = logging.tailLogEntries(TailEntryOption.project("my_project_id"));
+   * Iterator<LogEntry> it = stream.iterator();
+   * while (it.hasNext()) {
+   *   // do something with entry
+   *   // call stream.cancel(); to stop streaming
+   * }
+   * }</pre>
    */
-  @BetaApi("A tail API is in Beta. Its functionality may change in the future")
-  default void tailLogEntries(TailLogEntriesObserver observer, TailEntryOption... options) {
+  @BetaApi("The surface for the tail streaming is not stable yet and may change in the future.")
+  default LogEntryServerStream tailLogEntries(TailEntryOption... options) {
     throw new UnsupportedOperationException(
         "method tailLogEntriesCallable() does not have default implementation");
   }

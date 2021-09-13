@@ -26,7 +26,7 @@ import com.google.api.gax.core.GaxProperties;
 import com.google.api.gax.grpc.GrpcCallContext;
 import com.google.api.gax.grpc.GrpcTransportChannel;
 import com.google.api.gax.rpc.ApiException;
-import com.google.api.gax.rpc.BidiStreamObserver;
+import com.google.api.gax.rpc.BidiStream;
 import com.google.api.gax.rpc.ClientContext;
 import com.google.api.gax.rpc.HeaderProvider;
 import com.google.api.gax.rpc.StatusCode;
@@ -287,9 +287,9 @@ public class GrpcLoggingRpc implements LoggingRpc {
   }
 
   @Override
-  public void tailLogEntries(
-      BidiStreamObserver<TailLogEntriesRequest, TailLogEntriesResponse> observer) {
-    loggingClient.tailLogEntriesCallable().call(observer);
+  public BidiStream<TailLogEntriesRequest, TailLogEntriesResponse> tailLogEntries(
+      TailLogEntriesRequest request) {
+    return loggingClient.tailLogEntriesCallable().call();
   }
 
   @Override
