@@ -82,6 +82,7 @@ import com.google.logging.v2.UpdateLogMetricRequest;
 import com.google.logging.v2.UpdateSinkRequest;
 import com.google.logging.v2.WriteLogEntriesRequest;
 import com.google.logging.v2.WriteLogEntriesResponse;
+import com.google.protobuf.util.Durations;
 import com.google.protobuf.Empty;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -945,6 +946,15 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     String filter = TailEntryOption.OptionType.FILTER.get(options);
     if (filter != null) {
       builder.setFilter(filter);
+    }
+    String bufferWindow = TailEntryOption.OptionType.BUFFERWINDOW.get(options);
+    if (bufferWindow != null) {
+      try {
+        builder.setBufferWindow(Durations.parse(bufferWindow));
+      }
+      catch (java.text.ParseException err) {
+        System.err.println("ERROR: invalid duration format: " + bufferWindow);
+      }
     }
     return builder.build();
   }
