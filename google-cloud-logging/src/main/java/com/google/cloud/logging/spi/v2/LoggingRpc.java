@@ -17,7 +17,7 @@
 package com.google.cloud.logging.spi.v2;
 
 import com.google.api.core.ApiFuture;
-import com.google.api.gax.rpc.BidiStreamObserver;
+import com.google.api.gax.rpc.BidiStream;
 import com.google.cloud.ServiceRpc;
 import com.google.logging.v2.CreateExclusionRequest;
 import com.google.logging.v2.CreateLogMetricRequest;
@@ -138,15 +138,15 @@ public interface LoggingRpc extends AutoCloseable, ServiceRpc {
   ApiFuture<ListLogEntriesResponse> list(ListLogEntriesRequest request);
 
   /**
-   * Creates a new log entries stream and registers observer to handle the stream. Use this method
-   * to stream new log entries from Cloud Logging.
+   * Sends a request to stream new log. This method returns a {code BidiStream} object to consume
+   * the stream of log entries.
    *
-   * @param observer the bi-directional observer object to handle stream events
+   * @param request the request object containing all of the parameters for the API call
    */
-  default void tailLogEntries(
-      BidiStreamObserver<TailLogEntriesRequest, TailLogEntriesResponse> observer) {
+  default BidiStream<TailLogEntriesRequest, TailLogEntriesResponse> tailLogEntries(
+      TailLogEntriesRequest request) {
     throw new UnsupportedOperationException(
-        "method tailLogEntries(BidiStreamObserver<TailLogEntriesRequest, TailLogEntriesResponse> observer) does not have default implementation");
+        "method tailLogEntries(TailLogEntriesRequest request) does not have default implementation");
   }
 
   /**

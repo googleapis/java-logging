@@ -30,9 +30,7 @@ import com.google.api.core.ApiFutureCallback;
 import com.google.api.core.ApiFutures;
 import com.google.api.gax.paging.AsyncPage;
 import com.google.api.gax.paging.Page;
-import com.google.api.gax.rpc.BidiStreamObserver;
-import com.google.api.gax.rpc.ClientStream;
-import com.google.api.gax.rpc.StreamController;
+import com.google.api.gax.rpc.BidiStream;
 import com.google.cloud.AsyncPageImpl;
 import com.google.cloud.BaseService;
 import com.google.cloud.MonitoredResource;
@@ -82,8 +80,8 @@ import com.google.logging.v2.UpdateLogMetricRequest;
 import com.google.logging.v2.UpdateSinkRequest;
 import com.google.logging.v2.WriteLogEntriesRequest;
 import com.google.logging.v2.WriteLogEntriesResponse;
-import com.google.protobuf.util.Durations;
 import com.google.protobuf.Empty;
+import com.google.protobuf.util.Durations;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
@@ -951,8 +949,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     if (bufferWindow != null) {
       try {
         builder.setBufferWindow(Durations.parse(bufferWindow));
-      }
-      catch (java.text.ParseException err) {
+      } catch (java.text.ParseException err) {
         System.err.println("ERROR: invalid duration format: " + bufferWindow);
       }
     }
@@ -960,41 +957,41 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   }
 
   @Override
-  public void tailLogEntries(TailLogEntriesObserver observer, TailEntryOption... options) {
+  public LogEntryServerStream tailLogEntries(TailEntryOption... options) {
     LoggingOptions serviceOptions = getOptions();
     final TailLogEntriesRequest request =
         tailLogEntriesRequest(optionMap(options), serviceOptions.getProjectId());
+    BidiStream<TailLogEntriesRequest, TailLogEntriesResponse> bidiStream =
+        serviceOptions.getLoggingRpcV2().tailLogEntries(request);
+    return new LogEntryServerStream(bidiStream);
 
-    serviceOptions
-        .getLoggingRpcV2()
-        .tailLogEntries(
-            new BidiStreamObserver<TailLogEntriesRequest, TailLogEntriesResponse>() {
-              @Override
-              public void onReady(ClientStream<TailLogEntriesRequest> stream) {
-                stream.send(request);
-              }
+    // new BidiStreamObserver<TailLogEntriesRequest, TailLogEntriesResponse>() {
+    //   @Override
+    //   public void onReady(ClientStream<TailLogEntriesRequest> stream) {
+    //     stream.send(request);
+    //   }
 
-              @Override
-              public void onStart(StreamController controller) {
-                observer.onStart(controller);
-              }
+    //   @Override
+    //   public void onStart(StreamController controller) {
+    //     observer.onStart(controller);
+    //   }
 
-              @Override
-              public void onResponse(TailLogEntriesResponse response) {
-                observer.onResponse(
-                    Lists.transform(response.getEntriesList(), LogEntry.FROM_PB_FUNCTION));
-              }
+    //   @Override
+    //   public void onResponse(TailLogEntriesResponse response) {
+    //     observer.onResponse(
+    //         Lists.transform(response.getEntriesList(), LogEntry.FROM_PB_FUNCTION));
+    //   }
 
-              @Override
-              public void onError(Throwable t) {
-                observer.setError(t);
-              }
+    //   @Override
+    //   public void onError(Throwable t) {
+    //     observer.setError(t);
+    //   }
 
-              @Override
-              public void onComplete() {
-                observer.onComplete();
-              }
-            });
+    //   @Override
+    //   public void onComplete() {
+    //     observer.onComplete();
+    //   }
+    // });
   }
 
   @Override
