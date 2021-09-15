@@ -959,39 +959,12 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   @Override
   public LogEntryServerStream tailLogEntries(TailOption... options) {
     LoggingOptions serviceOptions = getOptions();
-    final TailLogEntriesRequest request =
-        tailLogEntriesRequest(optionMap(options), serviceOptions.getProjectId());
     BidiStream<TailLogEntriesRequest, TailLogEntriesResponse> bidiStream =
-        serviceOptions.getLoggingRpcV2().tailLogEntries(request);
+        serviceOptions.getLoggingRpcV2().getTailLogEntriesStream();
+    final TailLogEntriesRequest request =
+    tailLogEntriesRequest(optionMap(options), serviceOptions.getProjectId());
+    bidiStream.send(request);
     return new LogEntryServerStream(bidiStream);
-
-    // new BidiStreamObserver<TailLogEntriesRequest, TailLogEntriesResponse>() {
-    //   @Override
-    //   public void onReady(ClientStream<TailLogEntriesRequest> stream) {
-    //     stream.send(request);
-    //   }
-
-    //   @Override
-    //   public void onStart(StreamController controller) {
-    //     observer.onStart(controller);
-    //   }
-
-    //   @Override
-    //   public void onResponse(TailLogEntriesResponse response) {
-    //     observer.onResponse(
-    //         Lists.transform(response.getEntriesList(), LogEntry.FROM_PB_FUNCTION));
-    //   }
-
-    //   @Override
-    //   public void onError(Throwable t) {
-    //     observer.setError(t);
-    //   }
-
-    //   @Override
-    //   public void onComplete() {
-    //     observer.onComplete();
-    //   }
-    // });
   }
 
   @Override

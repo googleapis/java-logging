@@ -287,8 +287,7 @@ public class GrpcLoggingRpc implements LoggingRpc {
   }
 
   @Override
-  public BidiStream<TailLogEntriesRequest, TailLogEntriesResponse> tailLogEntries(
-      TailLogEntriesRequest request) {
+  public BidiStream<TailLogEntriesRequest, TailLogEntriesResponse> getTailLogEntriesStream() {
     return loggingClient.tailLogEntriesCallable().call();
   }
 

@@ -16,95 +16,41 @@
 
 package com.google.cloud.logging;
 
-import static org.easymock.EasyMock.replay;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static com.google.cloud.logging.Logging.TailOption;
+import static com.google.common.truth.Truth.assertThat;
 
-import com.google.cloud.logging.Logging.TailEntryOption;
-import java.util.List;
+import com.google.logging.v2.TailLogEntriesRequest;
+import com.google.protobuf.Duration;
 
+import org.junit.Test;
 
 public class TailLogEntriesTest {
+  private static final String WINDOW = "20s";
+  private static final Duration WINDOW_DURATION = Duration.newBuilder().setSeconds(20).build();
+  private static final String FILTER = "severity<INFO";
+  private static final String PROJECT_ID = "test-project-id";
+  private static final String DEFAULT_PROJECT_ID = "test-default-project-id";
+  private static final String BILLING_ACCOUNT_ID = "test-billing-acc-number";
+  private static final String FOLDER_ID = "test-folder-id";
+  private static final String ORG_ID = "test-org-id";
 
-    private static final String PROJECT = "utest-project";
+  @Test
+  public void testTailOptions() {
+    TailLogEntriesRequest request = LoggingImpl.tailLogEntriesRequest(LoggingImpl.optionMap(TailOption.filter(FILTER),
+        TailOption.bufferWindow(WINDOW), TailOption.project(PROJECT_ID), TailOption.billingAccount(BILLING_ACCOUNT_ID),
+        TailOption.folder(FOLDER_ID), TailOption.organization(ORG_ID)), DEFAULT_PROJECT_ID);
 
-    private LoggingOptions options;
-    private LoggingRpcFactory rpcFactoryMock;
-    private LoggingRpc loggingRpcMock;
-    private Logging logging;
-  
-    @Before
-    public void setUp() {
-      rpcFactoryMock = EasyMock.createStrictMock(LoggingRpcFactory.class);
-      loggingRpcMock = EasyMock.createStrictMock(LoggingRpc.class);
-      EasyMock.expect(rpcFactoryMock.create(EasyMock.anyObject(LoggingOptions.class)))
-          .andReturn(loggingRpcMock);
-      options =
-          LoggingOptions.newBuilder()
-              .setProjectId(PROJECT)
-              .setServiceRpcFactory(rpcFactoryMock)
-              .setRetrySettings(ServiceOptions.getNoRetrySettings())
-              .build();
-      }
-  
-    @After
-    public void tearDown() {
-      EasyMock.verify(rpcFactoryMock, loggingRpcMock);
-    }
-  
-    private static TailLogEntriesObserver createObserver() {
-        TailLogEntriesObserver observer = new TailLogEntriesObserver() {
-            public List<LogEntry> receivedEntries = new List<>();
-            public Throwable lastError;
-
-            @Override
-            public void onResponse(List<LogEntry> response) {
-                receivedEntries.addAll(response);
-            }
-            @Override
-            public void onError(Throwable t) {
-                lastError = t;
-            }
-        };
-    }
-
-    private static StreamController createStreamController() {
-        return new StreamController() {
-            @Override
-            public void cancel() {
-                // no-op
-            }
-  
-            @Override
-            public void disableAutoInboundFlowControl() {
-              // no-op
-            }
-  
-            @Override
-            public void request(int count) {
-              // no-op
-            }
-          };
-    }
-
-    @Test
-    public void testTailLogEntriesObserverIsStopped() {
-        TailLogEntriesObserver observer = createObserver();
-        observer.onStart(createStreamController());
-
-        observer.onComplete();
-        assertTrue(observer.isFinished());
-
-        observer = createObserver();
-        observer.close();
-        assertTrue(observer.isFinished());
-
-        observer = createObserver();
-        observer.setError(new Exception("test error"));
-        assertTrue(observer.isFinished());
-    }
+    assertThat(request.getFilter()).isEqualTo(FILTER);
+    assertThat(request.getBufferWindow()).isEqualTo(WINDOW_DURATION);
+    assertThat(request.getResourceNamesList()).containsExactly("projects/" + PROJECT_ID, "organizations/" + ORG_ID,
+        "billingAccounts/" + BILLING_ACCOUNT_ID, "folders/" + FOLDER_ID);
   }
+
+  @Test
+  public void testEmptyTailOptions() {
+    TailLogEntriesRequest request = LoggingImpl.tailLogEntriesRequest(LoggingImpl.optionMap(), DEFAULT_PROJECT_ID);
+    assertThat(request.getFilter()).isEqualTo("");
+    assertThat(request.getBufferWindow()).isEqualTo(Duration.newBuilder().build());
+    assertThat(request.getResourceNamesList()).containsExactly("projects/" + DEFAULT_PROJECT_ID);
+  }
+}
