@@ -42,7 +42,7 @@ echo $GOOGLE_APPLICATION_CREDENTIALS
 gcloud config get-value project
 
 # Setup service account credentials.
-export GOOGLE_APPLICATION_CREDENTIALS=$KOKORO_GFILE_DIR/secret_manager/java-it-service-account
+export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json
 gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 
 gcloud config get-value project
@@ -79,10 +79,6 @@ echo $ENVCTL_ID
 
 # Run the specified environment test
 set +e
-
-##### Try spinning up environment
-${PROJECT_ROOT}/env-tests-logging/envctl/envctl java $ENVIRONMENT deploy
-#####
 
 python3.6 -m nox --session "tests(language='java', platform='$ENVIRONMENT')"
 TEST_STATUS_CODE=$?
