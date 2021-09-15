@@ -18,11 +18,13 @@ package com.example.logging;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static com.google.cloud.logging.testing.RemoteLoggingHelper.formatForTest;
 import com.google.cloud.MonitoredResource;
 import com.google.cloud.logging.HttpRequest;
 import com.google.cloud.logging.LogEntry;
 import com.google.cloud.logging.Logging;
 import com.google.cloud.logging.LoggingOptions;
+import com.google.cloud.logging.Synchronicity;
 import com.google.cloud.logging.Payload.StringPayload;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -38,7 +40,7 @@ import org.junit.runners.JUnit4;
 @SuppressWarnings("checkstyle:abbreviationaswordinname")
 public class LoggingIT {
 
-  private static final String TEST_LOG = "test-log";
+  private static final String TEST_LOG = formatForTest("test-log");
   private static final String GOOGLEAPIS_AUDIT_LOGNAME = "cloudaudit.googleapis.com%2Factivity";
   private static final String STRING_PAYLOAD = "Hello, world!";
   private static final String STRING_PAYLOAD2 = "Hello world again";
@@ -74,13 +76,14 @@ public class LoggingIT {
   }
 
   @Test(timeout = 60000)
-  public void testWriteAndListLogs() throws Exception {
+  public void testListLogEntries() throws Exception {
     // write a log entry
     LogEntry entry =
         LogEntry.newBuilder(StringPayload.of(STRING_PAYLOAD2))
             .setLogName(TEST_LOG)
             .setResource(MonitoredResource.newBuilder("global").build())
             .build();
+    logging.setWriteSynchronicity(Synchronicity.SYNC);
     logging.write(Collections.singleton(entry));
     // flush out log immediately
     logging.flush();
