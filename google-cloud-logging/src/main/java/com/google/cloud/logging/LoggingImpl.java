@@ -923,29 +923,29 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
       Map<Option.OptionType, ?> options, String defaultProjectId) {
     TailLogEntriesRequest.Builder builder = TailLogEntriesRequest.newBuilder();
 
-    String organization = TailEntryOption.OptionType.ORGANIZATION.get(options);
+    String organization = TailOption.OptionType.ORGANIZATION.get(options);
     if (organization != null) {
       builder.addResourceNames("organizations/" + organization);
     }
-    String billingAccount = TailEntryOption.OptionType.BILLINGACCOUNT.get(options);
+    String billingAccount = TailOption.OptionType.BILLINGACCOUNT.get(options);
     if (billingAccount != null) {
       builder.addResourceNames("billingAccounts/" + billingAccount);
     }
-    String folder = TailEntryOption.OptionType.FOLDER.get(options);
+    String folder = TailOption.OptionType.FOLDER.get(options);
     if (folder != null) {
       builder.addResourceNames("folders/" + folder);
     }
-    String project = TailEntryOption.OptionType.PROJECT.get(options);
+    String project = TailOption.OptionType.PROJECT.get(options);
     if (project != null) {
       builder.addResourceNames("projects/" + project);
     } else if (defaultProjectId != null) {
       builder.addResourceNames("projects/" + defaultProjectId);
     }
-    String filter = TailEntryOption.OptionType.FILTER.get(options);
+    String filter = TailOption.OptionType.FILTER.get(options);
     if (filter != null) {
       builder.setFilter(filter);
     }
-    String bufferWindow = TailEntryOption.OptionType.BUFFERWINDOW.get(options);
+    String bufferWindow = TailOption.OptionType.BUFFERWINDOW.get(options);
     if (bufferWindow != null) {
       try {
         builder.setBufferWindow(Durations.parse(bufferWindow));
@@ -957,7 +957,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   }
 
   @Override
-  public LogEntryServerStream tailLogEntries(TailEntryOption... options) {
+  public LogEntryServerStream tailLogEntries(TailOption... options) {
     LoggingOptions serviceOptions = getOptions();
     final TailLogEntriesRequest request =
         tailLogEntriesRequest(optionMap(options), serviceOptions.getProjectId());

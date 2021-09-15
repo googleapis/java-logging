@@ -199,7 +199,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
   }
 
   /** Class for specifying options for tailing log entries. */
-  final class TailEntryOption extends Option {
+  final class TailOption extends Option {
 
     enum OptionType implements Option.OptionType {
       FILTER,
@@ -215,7 +215,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
       }
     }
 
-    private TailEntryOption(Option.OptionType option, Object value) {
+    private TailOption(Option.OptionType option, Object value) {
       super(option, value);
     }
 
@@ -225,8 +225,8 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
      * @see <a href="https://cloud.google.com/logging/docs/view/advanced_filters">Advanced Logs
      *     Filters</a>
      */
-    public static TailEntryOption filter(String filter) {
-      return new TailEntryOption(OptionType.FILTER, filter);
+    public static TailOption filter(String filter) {
+      return new TailOption(OptionType.FILTER, filter);
     }
 
     /**
@@ -238,28 +238,28 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
      *     href="https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.Duration">Duration
      *     format</a>
      */
-    public static TailEntryOption bufferWindow(String duration) {
-      return new TailEntryOption(OptionType.BUFFERWINDOW, duration);
+    public static TailOption bufferWindow(String duration) {
+      return new TailOption(OptionType.BUFFERWINDOW, duration);
     }
 
     /** Returns an option to specify an organization for the log entries to be tailed. */
-    public static TailEntryOption organization(String organization) {
-      return new TailEntryOption(OptionType.ORGANIZATION, organization);
+    public static TailOption organization(String organization) {
+      return new TailOption(OptionType.ORGANIZATION, organization);
     }
 
     /** Returns an option to specify a billingAccount for the log entries to be tailed. */
-    public static TailEntryOption billingAccount(String billingAccount) {
-      return new TailEntryOption(OptionType.BILLINGACCOUNT, billingAccount);
+    public static TailOption billingAccount(String billingAccount) {
+      return new TailOption(OptionType.BILLINGACCOUNT, billingAccount);
     }
 
     /** Returns an option to specify a folder for the log entries to be tailed. */
-    public static TailEntryOption folder(String folder) {
-      return new TailEntryOption(OptionType.FOLDER, folder);
+    public static TailOption folder(String folder) {
+      return new TailOption(OptionType.FOLDER, folder);
     }
 
     /** Returns an option to specify a project for the log entries to be tailed. */
-    public static TailEntryOption project(String project) {
-      return new TailEntryOption(OptionType.PROJECT, project);
+    public static TailOption project(String project) {
+      return new TailOption(OptionType.PROJECT, project);
     }
   }
 
@@ -1079,13 +1079,13 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
    * Sends a request to stream fresh log entries. The method returns a {@code LogEntryServerStream}
    * object to iterate through the returned stream of the log entries. Use
    * EntryListOption#bufferWindow(String)} to specify amount of time to buffer log entries at the
-   * server before being returned. entries. Use {@link TailEntryOption#filter(String)} to filter
+   * server before being returned. entries. Use {@link TailOption#filter(String)} to filter
    * tailed log entries.
    *
    * <p>Example of streaming log entries for a specific project.
    *
    * <pre>{@code}
-   * LogEntryServerStream stream = logging.tailLogEntries(TailEntryOption.project("my_project_id"));
+   * LogEntryServerStream stream = logging.tailLogEntries(TailOption.project("my_project_id"));
    * Iterator<LogEntry> it = stream.iterator();
    * while (it.hasNext()) {
    *   // do something with entry
@@ -1094,7 +1094,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
    * }</pre>
    */
   @BetaApi("The surface for the tail streaming is not stable yet and may change in the future.")
-  default LogEntryServerStream tailLogEntries(TailEntryOption... options) {
+  default LogEntryServerStream tailLogEntries(TailOption... options) {
     throw new UnsupportedOperationException(
         "method tailLogEntriesCallable() does not have default implementation");
   }
