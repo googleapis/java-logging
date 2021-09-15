@@ -42,7 +42,7 @@ echo $GOOGLE_APPLICATION_CREDENTIALS
 gcloud config get-value project
 
 # Setup service account credentials.
-export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json
+export GOOGLE_APPLICATION_CREDENTIALS=$KOKORO_GFILE_DIR/secret_manager/java-it-service-account
 gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 
 gcloud config get-value project
