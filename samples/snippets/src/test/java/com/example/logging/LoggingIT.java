@@ -16,16 +16,16 @@
 
 package com.example.logging;
 
+import static com.google.cloud.logging.testing.RemoteLoggingHelper.formatForTest;
 import static com.google.common.truth.Truth.assertThat;
 
-import static com.google.cloud.logging.testing.RemoteLoggingHelper.formatForTest;
 import com.google.cloud.MonitoredResource;
 import com.google.cloud.logging.HttpRequest;
 import com.google.cloud.logging.LogEntry;
 import com.google.cloud.logging.Logging;
 import com.google.cloud.logging.LoggingOptions;
-import com.google.cloud.logging.Synchronicity;
 import com.google.cloud.logging.Payload.StringPayload;
+import com.google.cloud.logging.Synchronicity;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Collections;
