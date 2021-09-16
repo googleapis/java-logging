@@ -31,7 +31,8 @@ import org.junit.Test;
 public class ITTailLogsTest extends BaseSystemTest {
 
   private static final String LOG_ID = formatForTest("test-tail-log-entries-log");
-  private static final MonitoredResource GLOBAL_RESOURCE = MonitoredResource.newBuilder("global").build();
+  private static final MonitoredResource GLOBAL_RESOURCE =
+      MonitoredResource.newBuilder("global").build();
 
   // @BeforeClass
   // public static void configureWriteLogs() {
@@ -45,16 +46,33 @@ public class ITTailLogsTest extends BaseSystemTest {
   @Test(timeout = 120_000) // Note: the test should not take longer than 2 min
   public void testTailLogEntries() throws InterruptedException {
     LogEntry[] logEntriesSet = {
-        LogEntry.newBuilder(Payload.StringPayload.of("stringPayload1")).addLabel("key1", "value1").setLogName(LOG_ID)
-            .setHttpRequest(HttpRequest.newBuilder().setStatus(200).build()).setResource(GLOBAL_RESOURCE).build(),
-        LogEntry.newBuilder(Payload.JsonPayload.of(ImmutableMap.<String, Object>of("message", "jsonPayload1")))
-            .addLabel("key2", "value2").setLogName(LOG_ID)
-            .setHttpRequest(HttpRequest.newBuilder().setStatus(200).build()).setResource(GLOBAL_RESOURCE).build(),
-        LogEntry.newBuilder(Payload.StringPayload.of("stringPayload2")).addLabel("key1", "value3").setLogName(LOG_ID)
-            .setHttpRequest(HttpRequest.newBuilder().setStatus(500).build()).setResource(GLOBAL_RESOURCE).build(),
-        LogEntry.newBuilder(Payload.JsonPayload.of(ImmutableMap.<String, Object>of("message", "jsonPayload2")))
-            .addLabel("key1", "value4").setLogName(LOG_ID)
-            .setHttpRequest(HttpRequest.newBuilder().setStatus(500).build()).setResource(GLOBAL_RESOURCE).build(), };
+      LogEntry.newBuilder(Payload.StringPayload.of("stringPayload1"))
+          .addLabel("key1", "value1")
+          .setLogName(LOG_ID)
+          .setHttpRequest(HttpRequest.newBuilder().setStatus(200).build())
+          .setResource(GLOBAL_RESOURCE)
+          .build(),
+      LogEntry.newBuilder(
+              Payload.JsonPayload.of(ImmutableMap.<String, Object>of("message", "jsonPayload1")))
+          .addLabel("key2", "value2")
+          .setLogName(LOG_ID)
+          .setHttpRequest(HttpRequest.newBuilder().setStatus(200).build())
+          .setResource(GLOBAL_RESOURCE)
+          .build(),
+      LogEntry.newBuilder(Payload.StringPayload.of("stringPayload2"))
+          .addLabel("key1", "value3")
+          .setLogName(LOG_ID)
+          .setHttpRequest(HttpRequest.newBuilder().setStatus(500).build())
+          .setResource(GLOBAL_RESOURCE)
+          .build(),
+      LogEntry.newBuilder(
+              Payload.JsonPayload.of(ImmutableMap.<String, Object>of("message", "jsonPayload2")))
+          .addLabel("key1", "value4")
+          .setLogName(LOG_ID)
+          .setHttpRequest(HttpRequest.newBuilder().setStatus(500).build())
+          .setResource(GLOBAL_RESOURCE)
+          .build(),
+    };
 
     String filter = "logName=projects/" + logging.getOptions().getProjectId() + "/logs/" + LOG_ID;
     LogEntryServerStream stream = logging.tailLogEntries(TailOption.filter(filter));

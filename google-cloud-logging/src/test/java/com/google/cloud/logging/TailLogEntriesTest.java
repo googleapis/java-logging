@@ -18,9 +18,16 @@ package com.google.cloud.logging;
 
 import static com.google.cloud.logging.Logging.TailOption;
 import static com.google.common.truth.Truth.assertThat;
+import static org.junit.Assert.assertNotNull;
 
+import com.google.api.gax.rpc.BidiStream;
+import com.google.cloud.ServiceOptions;
+import com.google.cloud.logging.spi.LoggingRpcFactory;
+import com.google.cloud.logging.spi.v2.LoggingRpc;
 import com.google.logging.v2.TailLogEntriesRequest;
+import com.google.logging.v2.TailLogEntriesResponse;
 import com.google.protobuf.Duration;
+import org.easymock.EasyMock;
 import org.junit.Test;
 
 public class TailLogEntriesTest {
@@ -63,5 +70,40 @@ public class TailLogEntriesTest {
     assertThat(request.getFilter()).isEqualTo("");
     assertThat(request.getBufferWindow()).isEqualTo(Duration.newBuilder().build());
     assertThat(request.getResourceNamesList()).containsExactly("projects/" + DEFAULT_PROJECT_ID);
+  }
+
+  @Test
+  public void testBidiStreamSendIsCalled() {
+    // setup
+    LoggingRpcFactory rpcFactoryMock = EasyMock.createStrictMock(LoggingRpcFactory.class);
+    LoggingRpc loggingRpcMock = EasyMock.createStrictMock(LoggingRpc.class);
+    @SuppressWarnings("unchecked")
+    BidiStream<TailLogEntriesRequest, TailLogEntriesResponse> bidiStreamMock =
+        EasyMock.createStrictMock(BidiStream.class);
+    EasyMock.expect(rpcFactoryMock.create(EasyMock.anyObject(LoggingOptions.class)))
+        .andReturn(loggingRpcMock);
+    EasyMock.expect(loggingRpcMock.getTailLogEntriesStream())
+        .andReturn((BidiStream<TailLogEntriesRequest, TailLogEntriesResponse>) bidiStreamMock);
+    bidiStreamMock.send(EasyMock.anyObject(TailLogEntriesRequest.class));
+    EasyMock.expectLastCall()
+        .andAnswer(
+            () -> {
+              return null;
+            });
+    EasyMock.replay(rpcFactoryMock, loggingRpcMock, bidiStreamMock);
+
+    // execute
+    LoggingOptions options =
+        LoggingOptions.newBuilder()
+            .setProjectId(PROJECT_ID)
+            .setServiceRpcFactory(rpcFactoryMock)
+            .setRetrySettings(ServiceOptions.getNoRetrySettings())
+            .build();
+    Logging logging = options.getService();
+    LogEntryServerStream stream = logging.tailLogEntries();
+
+    // verify
+    assertNotNull(stream);
+    EasyMock.verify(bidiStreamMock);
   }
 }
