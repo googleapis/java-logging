@@ -21,7 +21,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import com.google.logging.v2.TailLogEntriesRequest;
 import com.google.protobuf.Duration;
-
 import org.junit.Test;
 
 public class TailLogEntriesTest {
@@ -36,19 +35,31 @@ public class TailLogEntriesTest {
 
   @Test
   public void testTailOptions() {
-    TailLogEntriesRequest request = LoggingImpl.tailLogEntriesRequest(LoggingImpl.optionMap(TailOption.filter(FILTER),
-        TailOption.bufferWindow(WINDOW), TailOption.project(PROJECT_ID), TailOption.billingAccount(BILLING_ACCOUNT_ID),
-        TailOption.folder(FOLDER_ID), TailOption.organization(ORG_ID)), DEFAULT_PROJECT_ID);
+    TailLogEntriesRequest request =
+        LoggingImpl.tailLogEntriesRequest(
+            LoggingImpl.optionMap(
+                TailOption.filter(FILTER),
+                TailOption.bufferWindow(WINDOW),
+                TailOption.project(PROJECT_ID),
+                TailOption.billingAccount(BILLING_ACCOUNT_ID),
+                TailOption.folder(FOLDER_ID),
+                TailOption.organization(ORG_ID)),
+            DEFAULT_PROJECT_ID);
 
     assertThat(request.getFilter()).isEqualTo(FILTER);
     assertThat(request.getBufferWindow()).isEqualTo(WINDOW_DURATION);
-    assertThat(request.getResourceNamesList()).containsExactly("projects/" + PROJECT_ID, "organizations/" + ORG_ID,
-        "billingAccounts/" + BILLING_ACCOUNT_ID, "folders/" + FOLDER_ID);
+    assertThat(request.getResourceNamesList())
+        .containsExactly(
+            "projects/" + PROJECT_ID,
+            "organizations/" + ORG_ID,
+            "billingAccounts/" + BILLING_ACCOUNT_ID,
+            "folders/" + FOLDER_ID);
   }
 
   @Test
   public void testEmptyTailOptions() {
-    TailLogEntriesRequest request = LoggingImpl.tailLogEntriesRequest(LoggingImpl.optionMap(), DEFAULT_PROJECT_ID);
+    TailLogEntriesRequest request =
+        LoggingImpl.tailLogEntriesRequest(LoggingImpl.optionMap(), DEFAULT_PROJECT_ID);
     assertThat(request.getFilter()).isEqualTo("");
     assertThat(request.getBufferWindow()).isEqualTo(Duration.newBuilder().build());
     assertThat(request.getResourceNamesList()).containsExactly("projects/" + DEFAULT_PROJECT_ID);

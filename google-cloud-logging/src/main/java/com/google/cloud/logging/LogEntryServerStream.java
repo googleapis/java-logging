@@ -17,10 +17,10 @@
 package com.google.cloud.logging;
 
 import com.google.api.gax.rpc.BidiStream;
+import com.google.common.collect.Lists;
 import com.google.logging.v2.TailLogEntriesRequest;
 import com.google.logging.v2.TailLogEntriesResponse;
 import java.util.Iterator;
-import com.google.common.collect.Lists;
 
 public class LogEntryServerStream implements Iterable<LogEntry> {
   private final BidiStream<TailLogEntriesRequest, TailLogEntriesResponse> serverStream;
