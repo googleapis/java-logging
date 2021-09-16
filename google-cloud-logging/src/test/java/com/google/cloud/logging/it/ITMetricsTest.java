@@ -25,6 +25,7 @@ import static org.junit.Assert.assertTrue;
 
 import com.google.api.gax.paging.Page;
 import com.google.cloud.MonitoredResourceDescriptor;
+import com.google.cloud.logging.BaseSystemTest;
 import com.google.cloud.logging.Logging;
 import com.google.cloud.logging.Metric;
 import com.google.cloud.logging.MetricInfo;
@@ -32,32 +33,14 @@ import com.google.cloud.logging.testing.RemoteLoggingHelper;
 import com.google.common.collect.Sets;
 import java.util.Iterator;
 import java.util.Set;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ITMetricsTest {
-
-  private static Logging logging;
-
-  @BeforeClass
-  public static void beforeClass() {
-    RemoteLoggingHelper helper = RemoteLoggingHelper.create();
-    logging = helper.getOptions().getService();
-  }
-
-  @AfterClass
-  public static void afterClass() throws Exception {
-    logging.close();
-  }
+public class ITMetricsTest extends BaseSystemTest {
 
   @Test
   public void testListMonitoredResourceDescriptors() {
-    Iterator<MonitoredResourceDescriptor> iterator =
-        logging
-            .listMonitoredResourceDescriptors(Logging.ListOption.pageSize(100))
-            .iterateAll()
-            .iterator();
+    Iterator<MonitoredResourceDescriptor> iterator = logging
+        .listMonitoredResourceDescriptors(Logging.ListOption.pageSize(100)).iterateAll().iterator();
     int count = 0;
     while (iterator.hasNext()) {
       assertNotNull(iterator.next().getType());
@@ -69,20 +52,13 @@ public class ITMetricsTest {
   @Test
   public void testCreateGetUpdateAndDeleteMetric() {
     String name = formatForTest("test-create-get-update-metric");
-    MetricInfo metricInfo =
-        MetricInfo.newBuilder(name, "severity>=ERROR").setDescription("description").build();
+    MetricInfo metricInfo = MetricInfo.newBuilder(name, "severity>=ERROR").setDescription("description").build();
     Metric metric = logging.create(metricInfo);
     assertEquals(name, metric.getName());
     assertEquals("severity>=ERROR", metric.getFilter());
     assertEquals("description", metric.getDescription());
     assertEquals(metric, logging.getMetric(name));
-    metric =
-        metric
-            .toBuilder()
-            .setDescription("newDescription")
-            .setFilter("severity>=WARNING")
-            .build()
-            .update();
+    metric = metric.toBuilder().setDescription("newDescription").setFilter("severity>=WARNING").build().update();
     assertEquals(name, metric.getName());
     assertEquals("severity>=WARNING", metric.getFilter());
     assertEquals("newDescription", metric.getDescription());
@@ -93,8 +69,7 @@ public class ITMetricsTest {
   @Test
   public void testUpdateNonExistingMetric() {
     String name = formatForTest("test-update-non-existing-metric");
-    MetricInfo metricInfo =
-        MetricInfo.newBuilder(name, "severity>=ERROR").setDescription("description").build();
+    MetricInfo metricInfo = MetricInfo.newBuilder(name, "severity>=ERROR").setDescription("description").build();
     assertNull(logging.getMetric(name));
     Metric metric = logging.update(metricInfo);
     assertEquals(name, metric.getName());
@@ -109,7 +84,7 @@ public class ITMetricsTest {
     String secondName = formatForTest("test-list-metrics-2");
     Metric firstMetric = logging.create(MetricInfo.of(firstName, "severity>=ERROR"));
     Metric secondMetric = logging.create(MetricInfo.of(secondName, "severity>=ERROR"));
-    Logging.ListOption[] options = {Logging.ListOption.pageSize(1)};
+    Logging.ListOption[] options = { Logging.ListOption.pageSize(1) };
     Page<Metric> metricPage = logging.listMetrics(options);
     Set<Metric> metrics = Sets.newHashSet(metricPage.iterateAll());
     while (!metrics.contains(firstMetric) || !metrics.contains(secondMetric)) {

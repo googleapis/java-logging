@@ -38,17 +38,24 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Test;
+import org.junit.After;
 
 public class ITJulLoggerTest extends BaseSystemTest {
 
+  private static final String LOG_ID = formatForTest("test-jul-log-handler-log");
+
+  @After
+  public void tearDown() throws InterruptedException {
+    assertTrue(cleanupLog(LOG_ID));
+  }
+
   @Test
   public void testLoggingHandler() throws InterruptedException {
-    String logId = formatForTest("test-logging-handler");
     LoggingOptions options = logging.getOptions();
-    LogName logName = LogName.ofProjectLogName(options.getProjectId(), logId);
+    LogName logName = LogName.ofProjectLogName(options.getProjectId(), LOG_ID);
 
     // Create a jul logger at with INFO level
-    LoggingHandler handler = new LoggingHandler(logId, options);
+    LoggingHandler handler = new LoggingHandler(LOG_ID, options);
     handler.setLevel(Level.INFO);
     Logger logger = Logger.getLogger(getClass().getName());
     logger.addHandler(handler);
@@ -65,9 +72,9 @@ public class ITJulLoggerTest extends BaseSystemTest {
     LogEntry entry = iterator.next();
     assertThat(entry.getPayload() instanceof Payload.StringPayload).isTrue();
     assertThat(entry.<Payload.StringPayload>getPayload().getData()).contains("Message");
-    assertThat(entry.getLogName()).isEqualTo(logId);
-    assertThat(entry.getLabels())
-        .containsExactly("levelName", "INFO", "levelValue", String.valueOf(Level.INFO.intValue()));
+    assertThat(entry.getLogName()).isEqualTo(LOG_ID);
+    assertThat(entry.getLabels()).containsExactly("levelName", "INFO", "levelValue",
+        String.valueOf(Level.INFO.intValue()));
 
     assertThat(entry.getResource().getLabels()).containsEntry("project_id", options.getProjectId());
     assertThat(entry.getHttpRequest()).isNull();
@@ -77,27 +84,17 @@ public class ITJulLoggerTest extends BaseSystemTest {
     assertThat(entry.getTimestamp()).isNotNull();
     assertThat(iterator.hasNext()).isFalse();
     logger.removeHandler(handler);
-    logging.deleteLog(logId);
   }
 
   @Test
   public void testSyncLoggingHandler() throws InterruptedException {
-    String logId = formatForTest("test-sync-logging-handler");
     LoggingOptions options = logging.getOptions();
-    LogName logName = LogName.ofProjectLogName(options.getProjectId(), logId);
-    MonitoredResource resource =
-        MonitoredResource.of(
-            "gce_instance",
-            ImmutableMap.of(
-                "project_id",
-                options.getProjectId(),
-                "instance_id",
-                "instance",
-                "zone",
-                "us-central1-a"));
+    LogName logName = LogName.ofProjectLogName(options.getProjectId(), LOG_ID);
+    MonitoredResource resource = MonitoredResource.of("gce_instance",
+        ImmutableMap.of("project_id", options.getProjectId(), "instance_id", "instance", "zone", "us-central1-a"));
 
     // Create a jul logger at with INFO level
-    LoggingHandler handler = new LoggingHandler(logId, options, resource);
+    LoggingHandler handler = new LoggingHandler(LOG_ID, options, resource);
     handler.setLevel(Level.WARNING);
     handler.setSynchronicity(Synchronicity.SYNC);
     Logger logger = Logger.getLogger(getClass().getName());
@@ -113,10 +110,8 @@ public class ITJulLoggerTest extends BaseSystemTest {
     LogEntry entry = iterator.next();
     assertTrue(entry.getPayload() instanceof Payload.StringPayload);
     assertTrue(entry.<Payload.StringPayload>getPayload().getData().contains("Message"));
-    assertEquals(logId, entry.getLogName());
-    assertEquals(
-        ImmutableMap.of(
-            "levelName", "WARNING", "levelValue", String.valueOf(Level.WARNING.intValue())),
+    assertEquals(LOG_ID, entry.getLogName());
+    assertEquals(ImmutableMap.of("levelName", "WARNING", "levelValue", String.valueOf(Level.WARNING.intValue())),
         entry.getLabels());
     assertEquals(resource, entry.getResource());
     assertNull(entry.getHttpRequest());
@@ -126,6 +121,5 @@ public class ITJulLoggerTest extends BaseSystemTest {
     assertNotNull(entry.getTimestamp());
     assertFalse(iterator.hasNext());
     logger.removeHandler(handler);
-    logging.deleteLog(logId);
   }
 }

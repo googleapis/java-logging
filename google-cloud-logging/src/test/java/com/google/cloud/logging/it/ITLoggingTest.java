@@ -37,39 +37,28 @@ import org.junit.Test;
 public class ITLoggingTest extends BaseSystemTest {
 
   private static final String LOG_ID = formatForTest("test-write-log-entries-log");
-  private static final Payload.StringPayload FIRST_PAYLOAD =
-      Payload.StringPayload.of("stringPayload");
-  private static final Payload.JsonPayload SECOND_PAYLOAD =
-      Payload.JsonPayload.of(ImmutableMap.<String, Object>of("jsonKey", "jsonValue"));
+  private static final Payload.StringPayload FIRST_PAYLOAD = Payload.StringPayload.of("stringPayload");
+  private static final Payload.JsonPayload SECOND_PAYLOAD = Payload.JsonPayload
+      .of(ImmutableMap.<String, Object>of("jsonKey", "jsonValue"));
 
-  private static final MonitoredResource GLOBAL_RESOURCE =
-      MonitoredResource.newBuilder("global").build();
-  private static final MonitoredResource CLOUDSQL_RESOURCE =
-      MonitoredResource.newBuilder("cloudsql_database").build();
-  private static final MonitoredResource[] MONITORED_RESOURCES_IN_TEST =
-      new MonitoredResource[] {GLOBAL_RESOURCE, CLOUDSQL_RESOURCE};
+  private static final MonitoredResource GLOBAL_RESOURCE = MonitoredResource.newBuilder("global").build();
+  private static final MonitoredResource CLOUDSQL_RESOURCE = MonitoredResource.newBuilder("cloudsql_database").build();
+  private static final MonitoredResource[] MONITORED_RESOURCES_IN_TEST = new MonitoredResource[] { GLOBAL_RESOURCE,
+      CLOUDSQL_RESOURCE };
 
   @BeforeClass
   public static void insertLogs() {
     // This ensures predictability of the test:
-    // with batching enabled by default, it's possible that for two log entries, batching
-    // will send them together, so they might be stored not in the same logical order.
+    // with batching enabled by default, it's possible that for two log entries,
+    // batching
+    // will send them together, so they might be stored not in the same logical
+    // order.
     logging.setWriteSynchronicity(Synchronicity.SYNC);
-    LogEntry firstEntry =
-        LogEntry.newBuilder(FIRST_PAYLOAD)
-            .addLabel("key1", "value1")
-            .setLogName(LOG_ID)
-            .setHttpRequest(HttpRequest.newBuilder().setStatus(500).build())
-            .setResource(GLOBAL_RESOURCE)
-            .build();
+    LogEntry firstEntry = LogEntry.newBuilder(FIRST_PAYLOAD).addLabel("key1", "value1").setLogName(LOG_ID)
+        .setHttpRequest(HttpRequest.newBuilder().setStatus(500).build()).setResource(GLOBAL_RESOURCE).build();
 
-    LogEntry secondEntry =
-        LogEntry.newBuilder(SECOND_PAYLOAD)
-            .addLabel("key2", "value2")
-            .setLogName(LOG_ID)
-            .setOperation(Operation.of("operationId", "operationProducer"))
-            .setResource(CLOUDSQL_RESOURCE)
-            .build();
+    LogEntry secondEntry = LogEntry.newBuilder(SECOND_PAYLOAD).addLabel("key2", "value2").setLogName(LOG_ID)
+        .setOperation(Operation.of("operationId", "operationProducer")).setResource(CLOUDSQL_RESOURCE).build();
     logging.write(ImmutableList.of(firstEntry));
     logging.write(ImmutableList.of(secondEntry));
     logging.flush();
@@ -77,15 +66,7 @@ public class ITLoggingTest extends BaseSystemTest {
 
   @AfterClass
   public static void cleanUpLogs() throws InterruptedException {
-    int deleteAttempts = 0;
-    int allowedDeleteAttempts = 5;
-    boolean deleted = false;
-    while (!deleted && deleteAttempts < allowedDeleteAttempts) {
-      Thread.sleep(5000);
-      deleted = logging.deleteLog(LOG_ID);
-      deleteAttempts++;
-    }
-    assertTrue(deleted);
+    assertTrue(cleanupLog(LOG_ID));
   }
 
   @Test(timeout = 600_000) // Note: it can take ~10 minutes for logs to propagate!
@@ -126,16 +107,11 @@ public class ITLoggingTest extends BaseSystemTest {
     LoggingOptions loggingOptions = logging.getOptions();
     LogName logName = LogName.ofProjectLogName(loggingOptions.getProjectId(), LOG_ID);
 
-    String tempFilter =
-        createTimestampFilter(1) + " AND " + createEqualityFilter("logName", logName);
+    String tempFilter = createTimestampFilter(1) + " AND " + createEqualityFilter("logName", logName);
     String filter = appendResourceTypeFilter(tempFilter, MONITORED_RESOURCES_IN_TEST);
 
-    Logging.EntryListOption[] options =
-        new Logging.EntryListOption[] {
-          Logging.EntryListOption.filter(filter),
-          Logging.EntryListOption.sortOrder(
-              Logging.SortingField.TIMESTAMP, Logging.SortingOrder.DESCENDING)
-        };
+    Logging.EntryListOption[] options = new Logging.EntryListOption[] { Logging.EntryListOption.filter(filter),
+        Logging.EntryListOption.sortOrder(Logging.SortingField.TIMESTAMP, Logging.SortingOrder.DESCENDING) };
     Iterator<LogEntry> iterator = waitForLogs(options, 2);
 
     Long lastTimestamp = iterator.next().getTimestamp();

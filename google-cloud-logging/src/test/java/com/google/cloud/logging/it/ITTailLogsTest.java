@@ -26,14 +26,12 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import java.util.ArrayList;
 import org.junit.AfterClass;
-//import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ITTailLogsTest extends BaseSystemTest {
 
     private static final String LOG_ID = formatForTest("test-tail-log-entries-log");
     private static final MonitoredResource GLOBAL_RESOURCE = MonitoredResource.newBuilder("global").build();
-    private static Logging auxLogging;
 
     // @BeforeClass
     // public static void configureWriteLogs() {
@@ -41,15 +39,7 @@ public class ITTailLogsTest extends BaseSystemTest {
 
     @AfterClass
     public static void cleanUpLogs() throws InterruptedException {
-        int deleteAttempts = 0;
-        int allowedDeleteAttempts = 5;
-        boolean deleted = false;
-        while (!deleted && deleteAttempts < allowedDeleteAttempts) {
-            Thread.sleep(5000);
-            deleted = logging.deleteLog(LOG_ID);
-            deleteAttempts++;
-        }
-        assertTrue(deleted);
+        assertTrue(cleanupLog(LOG_ID));
     }
 
     @Test(timeout = 120_000) // Note: the test should not take longer than 2 min
