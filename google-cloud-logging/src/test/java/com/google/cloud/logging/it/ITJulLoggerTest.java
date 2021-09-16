@@ -37,8 +37,8 @@ import com.google.logging.v2.LogName;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.junit.Test;
 import org.junit.After;
+import org.junit.Test;
 
 public class ITJulLoggerTest extends BaseSystemTest {
 
@@ -73,8 +73,8 @@ public class ITJulLoggerTest extends BaseSystemTest {
     assertThat(entry.getPayload() instanceof Payload.StringPayload).isTrue();
     assertThat(entry.<Payload.StringPayload>getPayload().getData()).contains("Message");
     assertThat(entry.getLogName()).isEqualTo(LOG_ID);
-    assertThat(entry.getLabels()).containsExactly("levelName", "INFO", "levelValue",
-        String.valueOf(Level.INFO.intValue()));
+    assertThat(entry.getLabels())
+        .containsExactly("levelName", "INFO", "levelValue", String.valueOf(Level.INFO.intValue()));
 
     assertThat(entry.getResource().getLabels()).containsEntry("project_id", options.getProjectId());
     assertThat(entry.getHttpRequest()).isNull();
@@ -90,8 +90,16 @@ public class ITJulLoggerTest extends BaseSystemTest {
   public void testSyncLoggingHandler() throws InterruptedException {
     LoggingOptions options = logging.getOptions();
     LogName logName = LogName.ofProjectLogName(options.getProjectId(), LOG_ID);
-    MonitoredResource resource = MonitoredResource.of("gce_instance",
-        ImmutableMap.of("project_id", options.getProjectId(), "instance_id", "instance", "zone", "us-central1-a"));
+    MonitoredResource resource =
+        MonitoredResource.of(
+            "gce_instance",
+            ImmutableMap.of(
+                "project_id",
+                options.getProjectId(),
+                "instance_id",
+                "instance",
+                "zone",
+                "us-central1-a"));
 
     // Create a jul logger at with INFO level
     LoggingHandler handler = new LoggingHandler(LOG_ID, options, resource);
@@ -111,7 +119,9 @@ public class ITJulLoggerTest extends BaseSystemTest {
     assertTrue(entry.getPayload() instanceof Payload.StringPayload);
     assertTrue(entry.<Payload.StringPayload>getPayload().getData().contains("Message"));
     assertEquals(LOG_ID, entry.getLogName());
-    assertEquals(ImmutableMap.of("levelName", "WARNING", "levelValue", String.valueOf(Level.WARNING.intValue())),
+    assertEquals(
+        ImmutableMap.of(
+            "levelName", "WARNING", "levelValue", String.valueOf(Level.WARNING.intValue())),
         entry.getLabels());
     assertEquals(resource, entry.getResource());
     assertNull(entry.getHttpRequest());

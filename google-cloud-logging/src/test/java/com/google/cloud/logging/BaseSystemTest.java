@@ -31,13 +31,12 @@ import org.junit.Rule;
 import org.junit.rules.Timeout;
 
 /**
- * A base class for system tests. This class can be extended to run system tests
- * in different environments (e.g. local emulator or remote Logging service).
+ * A base class for system tests. This class can be extended to run system tests in different
+ * environments (e.g. local emulator or remote Logging service).
  */
 public class BaseSystemTest {
 
-  @Rule
-  public Timeout globalTimeout = Timeout.seconds(600);
+  @Rule public Timeout globalTimeout = Timeout.seconds(600);
 
   private static DateFormat RFC_3339 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
@@ -57,9 +56,8 @@ public class BaseSystemTest {
   /**
    * Creates an equality expression for logging filter.
    *
-   * @see <a href=
-   *      "https://cloud.google.com/logging/docs/view/advanced_filters">Advanced
-   *      Logs Filters Documentation</a>
+   * @see <a href= "https://cloud.google.com/logging/docs/view/advanced_filters">Advanced Logs
+   *     Filters Documentation</a>
    */
   protected static <V> String createEqualityFilter(String name, V value) {
     return name + "=" + "\"" + value.toString() + "\"";
@@ -80,9 +78,8 @@ public class BaseSystemTest {
   /**
    * Creates an equality expression for logging filter.
    *
-   * @see <a href=
-   *      "https://cloud.google.com/logging/docs/view/advanced_filters">Advanced
-   *      Logs Filters Documentation</a>
+   * @see <a href= "https://cloud.google.com/logging/docs/view/advanced_filters">Advanced Logs
+   *     Filters Documentation</a>
    */
   protected static String createTimestampFilter(int hoursAgo) {
     Calendar calendar = Calendar.getInstance();
@@ -90,7 +87,8 @@ public class BaseSystemTest {
     return "timestamp>=\"" + RFC_3339.format(calendar.getTime()) + "\"";
   }
 
-  protected static String appendResourceTypeFilter(String currentFilter, MonitoredResource[] monitoredResources) {
+  protected static String appendResourceTypeFilter(
+      String currentFilter, MonitoredResource[] monitoredResources) {
     StringBuilder filter = new StringBuilder(currentFilter);
     if (monitoredResources != null && monitoredResources.length > 0) {
       if (monitoredResources.length == 1) {
@@ -113,16 +111,18 @@ public class BaseSystemTest {
   }
 
   /** Helper to poll for logs until they are returned by the backend. */
-  protected static Iterator<LogEntry> waitForLogs(LogName logName, MonitoredResource[] monitoredResources, int minLogs)
+  protected static Iterator<LogEntry> waitForLogs(
+      LogName logName, MonitoredResource[] monitoredResources, int minLogs)
       throws InterruptedException {
     StringBuilder filter = new StringBuilder();
     filter.append(createTimestampFilter(1));
     filter.append(" AND ");
     filter.append(createEqualityFilter("logName", logName));
 
-    String monitoredResourceFilter = appendResourceTypeFilter(filter.toString(), monitoredResources);
+    String monitoredResourceFilter =
+        appendResourceTypeFilter(filter.toString(), monitoredResources);
 
-    Logging.EntryListOption[] options = { Logging.EntryListOption.filter(monitoredResourceFilter) };
+    Logging.EntryListOption[] options = {Logging.EntryListOption.filter(monitoredResourceFilter)};
     return waitForLogs(options, minLogs);
   }
 
