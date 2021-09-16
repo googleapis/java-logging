@@ -144,18 +144,6 @@ public interface LoggingRpc extends AutoCloseable, ServiceRpc {
   }
 
   /**
-   * Sends a request to stream new log. This method returns a {code BidiStream} object to consume
-   * the stream of log entries.
-   *
-   * @param request the request object containing all of the parameters for the API call
-   */
-  default BidiStream<TailLogEntriesRequest, TailLogEntriesResponse> tailLogEntries(
-      TailLogEntriesRequest request) {
-    throw new UnsupportedOperationException(
-        "method tailLogEntries(TailLogEntriesRequest request) does not have default implementation");
-  }
-
-  /**
    * Sends a request to list monitored resource descriptors. This method returns a {@code ApiFuture}
    * object to consume the result. {@link ApiFuture#get()} returns a response object containing the
    * listing result.
