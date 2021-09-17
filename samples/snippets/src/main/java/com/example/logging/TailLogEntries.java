@@ -14,8 +14,41 @@
  * limitations under the License.
  */
 
+package com.example.logging;
+
+// [START logging_write_log_entry]
+import com.google.cloud.logging.LogEntry;
+import com.google.cloud.logging.LogEntryServerStream;
+import com.google.cloud.logging.Logging;
+import com.google.cloud.logging.Logging.TailOption;
+import com.google.cloud.logging.LoggingOptions;
+
 public class TailLogEntries {
 
-    public static void main(String[] args) throws Exception {
+  public static void main(String[] args) throws Exception {
+    // TODO(developer): Optionally provide the logname as an argument.
+    String logName = args.length > 0 ? args[0] : "";
+
+    LoggingOptions options = LoggingOptions.getDefaultInstance();
+    try (Logging logging = options.getService()) {
+
+      // Optionally compose a filter to tail log entries only from specific log
+      LogEntryServerStream stream;
+
+      if (logName != "") {
+        stream =
+            logging.tailLogEntries(
+                TailOption.filter(
+                    "logName=projects/" + options.getProjectId() + "/logs/" + logName));
+      } else {
+        stream = logging.tailLogEntries();
+      }
+      System.out.println("start streaming..");
+      for (LogEntry log : stream) {
+        System.out.println(logEntry);
+      }
+      stream.cancel();
     }
+  }
 }
+// [END logging_write_log_entry]
