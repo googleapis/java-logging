@@ -140,17 +140,19 @@ public class LoggingIT {
     Runnable task =
         () -> {
           // wait 10 seconds to allow establishing tail stream in the sample
-          Thread.sleep(10_000);
-          try (Logging logging = LoggingOptions.getDefaultInstance().getService()) {
-            // create an instance of LogEntry with HTTP request
-            LogEntry logEntry =
-                LogEntry.newBuilder(Payload.StringPayload.of(STRING_PAYLOAD))
-                    .setSeverity(Severity.INFO)
-                    .setLogName(TEST_LOG)
-                    .setResource(MonitoredResource.newBuilder("global").build())
-                    .build();
-            // Writes the log entry asynchronously
-            logging.write(Collections.singleton(logEntry));
+          try {
+            Thread.sleep(10_000);
+            try (Logging logging = LoggingOptions.getDefaultInstance().getService()) {
+              // create an instance of LogEntry with HTTP request
+              LogEntry logEntry =
+                  LogEntry.newBuilder(StringPayload.of(STRING_PAYLOAD))
+                      .setLogName(TEST_LOG)
+                      .setResource(MonitoredResource.newBuilder("global").build())
+                      .build();
+              // Writes the log entry asynchronously
+              logging.write(Collections.singleton(logEntry));
+            }
+          } catch (Exception t) {
           }
         };
     Thread thread = new Thread(task);
