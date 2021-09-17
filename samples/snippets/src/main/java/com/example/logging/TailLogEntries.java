@@ -45,7 +45,7 @@ public class TailLogEntries {
       }
       System.out.println("start streaming..");
       for (LogEntry log : stream) {
-        System.out.println(logEntry);
+        System.out.println(log);
         // cancel infinite streaming after receiving first entry
         stream.cancel();
       }
