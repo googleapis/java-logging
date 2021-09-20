@@ -81,10 +81,10 @@ echo $ENVCTL_ID
 set +e
 
 ##### Try spinning up environment
-set -x
-${PROJECT_ROOT}/env-tests-logging/envctl/envctl java $ENVIRONMENT deploy
-${PROJECT_ROOT}/env-tests-logging/envctl/envctl java $ENVIRONMENT destroy
-set +x
+#set -x
+#${PROJECT_ROOT}/env-tests-logging/envctl/envctl java $ENVIRONMENT deploy
+#${PROJECT_ROOT}/env-tests-logging/envctl/envctl java $ENVIRONMENT destroy
+#set +x
 #####
 
 python3.6 -m nox --session "tests(language='java', platform='$ENVIRONMENT')"
