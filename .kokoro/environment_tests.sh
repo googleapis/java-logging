@@ -32,15 +32,6 @@ cd "${PROJECT_ROOT}/env-tests-logging"
 # Disable buffering, so that the logs stream through.
 export PYTHONUNBUFFERED=1
 
-# Debug: show build environment
-env | grep KOKORO
-
-# print some more info
-#ls $KOKORO_KEYSTORE_DIR
-ls $KOKORO_GFILE_DIR/secret_manager
-echo $GOOGLE_APPLICATION_CREDENTIALS
-gcloud config get-value project
-
 # Setup service account credentials.
 export GOOGLE_APPLICATION_CREDENTIALS=$KOKORO_GFILE_DIR/secret_manager/java-it-service-account
 gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
@@ -79,14 +70,6 @@ echo $ENVCTL_ID
 
 # Run the specified environment test
 set +e
-
-##### Try spinning up environment
-#set -x
-#${PROJECT_ROOT}/env-tests-logging/envctl/envctl java $ENVIRONMENT deploy
-#${PROJECT_ROOT}/env-tests-logging/envctl/envctl java $ENVIRONMENT destroy
-#set +x
-#####
-
 python3.6 -m nox --session "tests(language='java', platform='$ENVIRONMENT')"
 TEST_STATUS_CODE=$?
 
