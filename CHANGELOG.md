@@ -1,5 +1,80 @@
 # Changelog
 
+### [3.1.2](https://www.github.com/googleapis/java-logging/compare/v3.1.1...v3.1.2) (2021-09-16)
+
+
+### Bug Fixes
+
+* Change timestamp type to support nanosecond resolution ([#654](https://www.github.com/googleapis/java-logging/issues/654)) ([7ae1537](https://www.github.com/googleapis/java-logging/commit/7ae153789268629539cf1ea5246597aae7aa8d19)), closes [#598](https://www.github.com/googleapis/java-logging/issues/598)
+* Return Resource.K8sContainer when autodetecting resource type ([#641](https://www.github.com/googleapis/java-logging/issues/641)) ([6103560](https://www.github.com/googleapis/java-logging/commit/6103560c1c59c3c1ba83a4c9f2be5b5781640c36))
+* update CI to use maven 3.8.1 ([#662](https://www.github.com/googleapis/java-logging/issues/662)) ([9beb2ed](https://www.github.com/googleapis/java-logging/commit/9beb2ed44e3b7ad3eeaf6710b2195e50ac39016f))
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v2.2.1 ([#667](https://www.github.com/googleapis/java-logging/issues/667)) ([8190656](https://www.github.com/googleapis/java-logging/commit/8190656732d3d388569b02dbd0aeefe0e0c7fdff))
+
+### [3.1.1](https://www.github.com/googleapis/java-logging/compare/v3.1.0...v3.1.1) (2021-08-31)
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v2.2.0 ([#649](https://www.github.com/googleapis/java-logging/issues/649)) ([8af8d14](https://www.github.com/googleapis/java-logging/commit/8af8d142eb3d90cd5fba5b3e34d388db1867a56a))
+
+## [3.1.0](https://www.github.com/googleapis/java-logging/compare/v3.0.1...v3.1.0) (2021-08-24)
+
+
+### Features
+
+* implement listLogs API and provide sample snippet ([#602](https://www.github.com/googleapis/java-logging/issues/602)) ([9359569](https://www.github.com/googleapis/java-logging/commit/935956944200d978738d86ae4adff6107532531c))
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v2.1.0 ([#636](https://www.github.com/googleapis/java-logging/issues/636)) ([fb9ac95](https://www.github.com/googleapis/java-logging/commit/fb9ac954293f5a281024e122d06e8487cb3a62c1))
+
+### [3.0.1](https://www.github.com/googleapis/java-logging/compare/v3.0.0...v3.0.1) (2021-08-11)
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v2.0.1 ([#616](https://www.github.com/googleapis/java-logging/issues/616)) ([02a00a2](https://www.github.com/googleapis/java-logging/commit/02a00a2a417445bb12389e278288c5bac4fd3c81))
+
+## [3.0.0](https://www.github.com/googleapis/java-logging/compare/v2.3.2...v3.0.0) (2021-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* release gapic-generator-java v2.0.0 (#605)
+
+### Features
+
+* deprecate methods ([#587](https://www.github.com/googleapis/java-logging/issues/587)) ([85e496d](https://www.github.com/googleapis/java-logging/commit/85e496d5884143ecc6cd1757fcce31d5b83ecda5))
+* release gapic-generator-java v2.0.0 ([#605](https://www.github.com/googleapis/java-logging/issues/605)) ([8fa5c5a](https://www.github.com/googleapis/java-logging/commit/8fa5c5ae1d76d9a0959add1036300a799918dcb4))
+
+
+### Bug Fixes
+
+* describe authorization required for service object ([#582](https://www.github.com/googleapis/java-logging/issues/582)) ([4fd3cdc](https://www.github.com/googleapis/java-logging/commit/4fd3cdc4b4c564da026a0a424ba8d49c8390982e))
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v2 ([#606](https://www.github.com/googleapis/java-logging/issues/606)) ([99cb3a0](https://www.github.com/googleapis/java-logging/commit/99cb3a005f2775034d2df207dcb1a6c7f19b6fd4))
+
+### [2.3.2](https://www.github.com/googleapis/java-logging/compare/v2.3.1...v2.3.2) (2021-07-01)
+
+
+### Bug Fixes
+
+* Add `shopt -s nullglob` to dependencies script ([#564](https://www.github.com/googleapis/java-logging/issues/564)) ([5a5f737](https://www.github.com/googleapis/java-logging/commit/5a5f7371569f3e5656a3e40fcc2d72b7a8e0e916))
+* Update dependencies.sh to not break on mac ([#559](https://www.github.com/googleapis/java-logging/issues/559)) ([5877a06](https://www.github.com/googleapis/java-logging/commit/5877a068ae466b0e61d240674263ddb772b43cb2))
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v1.4.0 ([#568](https://www.github.com/googleapis/java-logging/issues/568)) ([623a85b](https://www.github.com/googleapis/java-logging/commit/623a85b0ca9ab893b925522fe38f1b03ab822d7e))
+
 ### [2.3.1](https://www.github.com/googleapis/java-logging/compare/v2.3.0...v2.3.1) (2021-06-04)
 
 

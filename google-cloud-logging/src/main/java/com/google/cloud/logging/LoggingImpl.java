@@ -17,11 +17,7 @@
 package com.google.cloud.logging;
 
 import static com.google.api.client.util.Preconditions.checkArgument;
-import static com.google.cloud.logging.Logging.EntryListOption.OptionType.BILLINGACCOUNT;
-import static com.google.cloud.logging.Logging.EntryListOption.OptionType.FILTER;
-import static com.google.cloud.logging.Logging.EntryListOption.OptionType.FOLDER;
 import static com.google.cloud.logging.Logging.EntryListOption.OptionType.ORDER_BY;
-import static com.google.cloud.logging.Logging.EntryListOption.OptionType.ORGANIZATION;
 import static com.google.cloud.logging.Logging.ListOption.OptionType.PAGE_SIZE;
 import static com.google.cloud.logging.Logging.ListOption.OptionType.PAGE_TOKEN;
 import static com.google.cloud.logging.Logging.WriteOption.OptionType.LABELS;
@@ -34,6 +30,7 @@ import com.google.api.core.ApiFutureCallback;
 import com.google.api.core.ApiFutures;
 import com.google.api.gax.paging.AsyncPage;
 import com.google.api.gax.paging.Page;
+import com.google.api.gax.rpc.BidiStream;
 import com.google.cloud.AsyncPageImpl;
 import com.google.cloud.BaseService;
 import com.google.cloud.MonitoredResource;
@@ -65,6 +62,8 @@ import com.google.logging.v2.ListLogEntriesRequest;
 import com.google.logging.v2.ListLogEntriesResponse;
 import com.google.logging.v2.ListLogMetricsRequest;
 import com.google.logging.v2.ListLogMetricsResponse;
+import com.google.logging.v2.ListLogsRequest;
+import com.google.logging.v2.ListLogsResponse;
 import com.google.logging.v2.ListMonitoredResourceDescriptorsRequest;
 import com.google.logging.v2.ListMonitoredResourceDescriptorsResponse;
 import com.google.logging.v2.ListSinksRequest;
@@ -74,12 +73,15 @@ import com.google.logging.v2.LogMetricName;
 import com.google.logging.v2.LogName;
 import com.google.logging.v2.LogSinkName;
 import com.google.logging.v2.ProjectName;
+import com.google.logging.v2.TailLogEntriesRequest;
+import com.google.logging.v2.TailLogEntriesResponse;
 import com.google.logging.v2.UpdateExclusionRequest;
 import com.google.logging.v2.UpdateLogMetricRequest;
 import com.google.logging.v2.UpdateSinkRequest;
 import com.google.logging.v2.WriteLogEntriesRequest;
 import com.google.logging.v2.WriteLogEntriesResponse;
 import com.google.protobuf.Empty;
+import com.google.protobuf.util.Durations;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
@@ -192,6 +194,19 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     @Override
     public ApiFuture<AsyncPage<Sink>> getNextPage() {
       return listSinksAsync(serviceOptions(), requestOptions());
+    }
+  }
+
+  private static class LogNamePageFetcher extends BasePageFetcher<String> {
+
+    LogNamePageFetcher(
+        LoggingOptions serviceOptions, String cursor, Map<Option.OptionType, ?> requestOptions) {
+      super(serviceOptions, cursor, requestOptions);
+    }
+
+    @Override
+    public ApiFuture<AsyncPage<String>> getNextPage() {
+      return listLogsAsync(serviceOptions(), requestOptions());
     }
   }
 
@@ -364,6 +379,63 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
                 LogSinkName.ofProjectSinkName(getOptions().getProjectId(), sink).toString())
             .build();
     return transform(rpc.delete(request), EMPTY_TO_BOOLEAN_FUNCTION);
+  }
+
+  /**
+   * Creates a new {@code ListLogsRequest} object.
+   *
+   * <p>Builds an instance of {@code ListLogsRequest} using page size, page token and project id
+   * from the {@code LoggingOptions}. The project id is used as the request's parent parameter.
+   *
+   * @see com.google.logging.v2.ListLogEntriesRequest
+   * @return the created {@code ListLogsRequest} object
+   */
+  private static ListLogsRequest listLogsRequest(
+      LoggingOptions serviceOptions, Map<Option.OptionType, ?> options) {
+    ListLogsRequest.Builder builder = ListLogsRequest.newBuilder();
+    builder.setParent(ProjectName.of(serviceOptions.getProjectId()).toString());
+    Integer pageSize = PAGE_SIZE.get(options);
+    String pageToken = PAGE_TOKEN.get(options);
+    if (pageSize != null) {
+      builder.setPageSize(pageSize);
+    }
+    if (pageToken != null) {
+      builder.setPageToken(pageToken);
+    }
+    return builder.build();
+  }
+
+  private static ApiFuture<AsyncPage<String>> listLogsAsync(
+      final LoggingOptions serviceOptions, final Map<Option.OptionType, ?> options) {
+    final ListLogsRequest request = listLogsRequest(serviceOptions, options);
+    ApiFuture<ListLogsResponse> list = serviceOptions.getLoggingRpcV2().listLogs(request);
+    return transform(
+        list,
+        new Function<ListLogsResponse, AsyncPage<String>>() {
+          @Override
+          public AsyncPage<String> apply(ListLogsResponse listLogsResponse) {
+            List<String> logNames =
+                listLogsResponse.getLogNamesList() == null
+                    ? ImmutableList.<String>of()
+                    : listLogsResponse.getLogNamesList();
+            String cursor =
+                listLogsResponse.getNextPageToken().equals("")
+                    ? null
+                    : listLogsResponse.getNextPageToken();
+            return new AsyncPageImpl<>(
+                new LogNamePageFetcher(serviceOptions, cursor, options), cursor, logNames);
+          }
+        });
+  }
+
+  @Override
+  public Page<String> listLogs(ListOption... options) {
+    return get(listLogsAsync(options));
+  }
+
+  @Override
+  public ApiFuture<AsyncPage<String>> listLogsAsync(ListOption... options) {
+    return listLogsAsync(getOptions(), optionMap(options));
   }
 
   public boolean deleteLog(String log) {
@@ -718,7 +790,10 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     }
   }
 
-  /* Write logs synchronously or asynchronously based on writeSynchronicity setting. */
+  /*
+   * Write logs synchronously or asynchronously based on writeSynchronicity
+   * setting.
+   */
   private void writeLogEntries(Iterable<LogEntry> logEntries, WriteOption... writeOptions) {
     if (closed) return;
 
@@ -769,15 +844,15 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
       String projectId, Map<Option.OptionType, ?> options) {
     ListLogEntriesRequest.Builder builder = ListLogEntriesRequest.newBuilder();
     builder.addResourceNames("projects/" + projectId);
-    String organization = ORGANIZATION.get(options);
+    String organization = EntryListOption.OptionType.ORGANIZATION.get(options);
     if (organization != null) {
       builder.addResourceNames("organizations/" + organization);
     }
-    String billingAccount = BILLINGACCOUNT.get(options);
+    String billingAccount = EntryListOption.OptionType.BILLINGACCOUNT.get(options);
     if (billingAccount != null) {
       builder.addResourceNames("billingAccounts/" + billingAccount);
     }
-    String folder = FOLDER.get(options);
+    String folder = EntryListOption.OptionType.FOLDER.get(options);
     if (folder != null) {
       builder.addResourceNames("folders/" + folder);
     }
@@ -793,8 +868,9 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     if (orderBy != null) {
       builder.setOrderBy(orderBy);
     }
-    String filter = FILTER.get(options);
-    // Make sure timestamp filter is either explicitly specified or we add a default time filter
+    String filter = EntryListOption.OptionType.FILTER.get(options);
+    // Make sure timestamp filter is either explicitly specified or we add a default
+    // time filter
     // of 24 hours back to be inline with gcloud behavior for the same API
     if (filter != null) {
       if (!filter.toLowerCase().contains("timestamp")) {
@@ -804,7 +880,8 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
       }
       builder.setFilter(filter);
     } else {
-      // If filter is not specified, default filter is looking back 24 hours in line with gcloud
+      // If filter is not specified, default filter is looking back 24 hours in line
+      // with gcloud
       // behavior
       builder.setFilter(defaultTimestampFilterCreator.createDefaultTimestampFilter());
     }
@@ -845,6 +922,54 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   @Override
   public ApiFuture<AsyncPage<LogEntry>> listLogEntriesAsync(EntryListOption... options) {
     return listLogEntriesAsync(getOptions(), optionMap(options));
+  }
+
+  static TailLogEntriesRequest buildTailLogEntriesRequest(
+      Map<Option.OptionType, ?> options, String defaultProjectId) {
+    TailLogEntriesRequest.Builder builder = TailLogEntriesRequest.newBuilder();
+
+    String organization = TailOption.OptionType.ORGANIZATION.get(options);
+    if (organization != null) {
+      builder.addResourceNames("organizations/" + organization);
+    }
+    String billingAccount = TailOption.OptionType.BILLINGACCOUNT.get(options);
+    if (billingAccount != null) {
+      builder.addResourceNames("billingAccounts/" + billingAccount);
+    }
+    String folder = TailOption.OptionType.FOLDER.get(options);
+    if (folder != null) {
+      builder.addResourceNames("folders/" + folder);
+    }
+    String project = TailOption.OptionType.PROJECT.get(options);
+    if (project != null) {
+      builder.addResourceNames("projects/" + project);
+    } else if (defaultProjectId != null) {
+      builder.addResourceNames("projects/" + defaultProjectId);
+    }
+    String filter = TailOption.OptionType.FILTER.get(options);
+    if (filter != null) {
+      builder.setFilter(filter);
+    }
+    String bufferWindow = TailOption.OptionType.BUFFERWINDOW.get(options);
+    if (bufferWindow != null) {
+      try {
+        builder.setBufferWindow(Durations.parse(bufferWindow));
+      } catch (java.text.ParseException err) {
+        System.err.println("ERROR: invalid duration format: " + bufferWindow);
+      }
+    }
+    return builder.build();
+  }
+
+  @Override
+  public LogEntryServerStream tailLogEntries(TailOption... options) {
+    LoggingOptions serviceOptions = getOptions();
+    BidiStream<TailLogEntriesRequest, TailLogEntriesResponse> bidiStream =
+        serviceOptions.getLoggingRpcV2().getTailLogEntriesStream();
+    final TailLogEntriesRequest request =
+        buildTailLogEntriesRequest(optionMap(options), serviceOptions.getProjectId());
+    bidiStream.send(request);
+    return new LogEntryServerStream(bidiStream);
   }
 
   @Override

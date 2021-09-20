@@ -17,6 +17,7 @@
 package com.google.cloud.logging.spi.v2;
 
 import com.google.api.core.ApiFuture;
+import com.google.api.gax.rpc.BidiStream;
 import com.google.cloud.ServiceRpc;
 import com.google.logging.v2.CreateExclusionRequest;
 import com.google.logging.v2.CreateLogMetricRequest;
@@ -34,6 +35,8 @@ import com.google.logging.v2.ListLogEntriesRequest;
 import com.google.logging.v2.ListLogEntriesResponse;
 import com.google.logging.v2.ListLogMetricsRequest;
 import com.google.logging.v2.ListLogMetricsResponse;
+import com.google.logging.v2.ListLogsRequest;
+import com.google.logging.v2.ListLogsResponse;
 import com.google.logging.v2.ListMonitoredResourceDescriptorsRequest;
 import com.google.logging.v2.ListMonitoredResourceDescriptorsResponse;
 import com.google.logging.v2.ListSinksRequest;
@@ -41,6 +44,8 @@ import com.google.logging.v2.ListSinksResponse;
 import com.google.logging.v2.LogExclusion;
 import com.google.logging.v2.LogMetric;
 import com.google.logging.v2.LogSink;
+import com.google.logging.v2.TailLogEntriesRequest;
+import com.google.logging.v2.TailLogEntriesResponse;
 import com.google.logging.v2.UpdateExclusionRequest;
 import com.google.logging.v2.UpdateLogMetricRequest;
 import com.google.logging.v2.UpdateSinkRequest;
@@ -94,6 +99,18 @@ public interface LoggingRpc extends AutoCloseable, ServiceRpc {
   ApiFuture<Empty> delete(DeleteSinkRequest request);
 
   /**
+   * Sends a request to list the log names in a project. This method returns a {@code ApiFuture}
+   * object to consume the result. {@link ApiFuture#get()} returns a response object containing the
+   * listing result.
+   *
+   * @param request the request object containing all of the parameters for the API call
+   */
+  default ApiFuture<ListLogsResponse> listLogs(ListLogsRequest request) {
+    throw new UnsupportedOperationException(
+        "method list(ListLogsRequest request) does not have default implementation");
+  }
+
+  /**
    * Sends a request to deletes a log. This method returns a {@code ApiFuture} object to consume the
    * result. {@link ApiFuture#get()} returns {@link Empty#getDefaultInstance()} or {@code null} if
    * the log was not found. The deleted log will reappear if it receives new log entries.
@@ -119,6 +136,12 @@ public interface LoggingRpc extends AutoCloseable, ServiceRpc {
    * @param request the request object containing all of the parameters for the API call
    */
   ApiFuture<ListLogEntriesResponse> list(ListLogEntriesRequest request);
+
+  /** This method returns a {code BidiStream} object to consume the stream of log entries. */
+  default BidiStream<TailLogEntriesRequest, TailLogEntriesResponse> getTailLogEntriesStream() {
+    throw new UnsupportedOperationException(
+        "method tailLogEntries() does not have default implementation");
+  }
 
   /**
    * Sends a request to list monitored resource descriptors. This method returns a {@code ApiFuture}

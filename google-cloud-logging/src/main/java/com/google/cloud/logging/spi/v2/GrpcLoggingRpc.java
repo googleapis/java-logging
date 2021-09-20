@@ -26,6 +26,7 @@ import com.google.api.gax.core.GaxProperties;
 import com.google.api.gax.grpc.GrpcCallContext;
 import com.google.api.gax.grpc.GrpcTransportChannel;
 import com.google.api.gax.rpc.ApiException;
+import com.google.api.gax.rpc.BidiStream;
 import com.google.api.gax.rpc.ClientContext;
 import com.google.api.gax.rpc.HeaderProvider;
 import com.google.api.gax.rpc.StatusCode;
@@ -61,6 +62,8 @@ import com.google.logging.v2.ListLogEntriesRequest;
 import com.google.logging.v2.ListLogEntriesResponse;
 import com.google.logging.v2.ListLogMetricsRequest;
 import com.google.logging.v2.ListLogMetricsResponse;
+import com.google.logging.v2.ListLogsRequest;
+import com.google.logging.v2.ListLogsResponse;
 import com.google.logging.v2.ListMonitoredResourceDescriptorsRequest;
 import com.google.logging.v2.ListMonitoredResourceDescriptorsResponse;
 import com.google.logging.v2.ListSinksRequest;
@@ -68,6 +71,8 @@ import com.google.logging.v2.ListSinksResponse;
 import com.google.logging.v2.LogExclusion;
 import com.google.logging.v2.LogMetric;
 import com.google.logging.v2.LogSink;
+import com.google.logging.v2.TailLogEntriesRequest;
+import com.google.logging.v2.TailLogEntriesResponse;
 import com.google.logging.v2.UpdateExclusionRequest;
 import com.google.logging.v2.UpdateLogMetricRequest;
 import com.google.logging.v2.UpdateSinkRequest;
@@ -99,7 +104,8 @@ public class GrpcLoggingRpc implements LoggingRpc {
     executorFactory = transportOptions.getExecutorFactory();
     executor = executorFactory.get();
     try {
-      // todo(mziccard): ChannelProvider should support null/absent credentials for testing
+      // todo(mziccard): ChannelProvider should support null/absent credentials for
+      // testing
       if (options.getHost().contains("localhost")
           || NoCredentials.getInstance().equals(options.getCredentials())) {
         ManagedChannel managedChannel =
@@ -156,7 +162,8 @@ public class GrpcLoggingRpc implements LoggingRpc {
       MetricsSettings.Builder metricsBuilder =
           MetricsSettings.newBuilder(clientContext).applyToAllUnaryMethods(retrySettingsSetter);
 
-      // TODO(pongad): Take advantage of https://github.com/googleapis/gax-java/pull/452 when it's
+      // TODO(pongad): Take advantage of
+      // https://github.com/googleapis/gax-java/pull/452 when it's
       // released.
       BatchingSettings oldBatchSettings =
           logBuilder.writeLogEntriesSettings().getBatchingSettings();
@@ -261,6 +268,11 @@ public class GrpcLoggingRpc implements LoggingRpc {
   }
 
   @Override
+  public ApiFuture<ListLogsResponse> listLogs(ListLogsRequest request) {
+    return translate(loggingClient.listLogsCallable().futureCall(request), true);
+  }
+
+  @Override
   public ApiFuture<Empty> delete(DeleteLogRequest request) {
     return translate(
         loggingClient.deleteLogCallable().futureCall(request), true, StatusCode.Code.NOT_FOUND);
@@ -274,6 +286,11 @@ public class GrpcLoggingRpc implements LoggingRpc {
   @Override
   public ApiFuture<ListLogEntriesResponse> list(ListLogEntriesRequest request) {
     return translate(loggingClient.listLogEntriesCallable().futureCall(request), true);
+  }
+
+  @Override
+  public BidiStream<TailLogEntriesRequest, TailLogEntriesResponse> getTailLogEntriesStream() {
+    return loggingClient.tailLogEntriesCallable().call();
   }
 
   @Override
@@ -327,7 +344,8 @@ public class GrpcLoggingRpc implements LoggingRpc {
     executorFactory.release(executor);
   }
 
-  // This class is needed solely to get access to protected method setInternalHeaderProvider()
+  // This class is needed solely to get access to protected method
+  // setInternalHeaderProvider()
   private static class LoggingSettingsBuilder extends LoggingSettings.Builder {
     private LoggingSettingsBuilder(LoggingSettings settings) {
       super(settings);
