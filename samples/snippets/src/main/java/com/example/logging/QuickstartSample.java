@@ -37,27 +37,24 @@ public class QuickstartSample {
 
   /** Expects a new or existing Cloud log name as the first argument. */
   public static void main(String... args) throws Exception {
-
-    // Instantiates a client
-    Logging logging = LoggingOptions.getDefaultInstance().getService();
-
     // The name of the log to write to
     String logName = args[0]; // "my-log";
+    String textPayload = "Hello, world!";
 
-    // The data to write to the log
-    String text = "Hello, world!";
+    // Instantiates a client
+    try (Logging logging = LoggingOptions.getDefaultInstance().getService()) {
 
-    LogEntry entry =
-        LogEntry.newBuilder(StringPayload.of(text))
-            .setSeverity(Severity.ERROR)
-            .setLogName(logName)
-            .setResource(MonitoredResource.newBuilder("global").build())
-            .build();
+      LogEntry entry =
+          LogEntry.newBuilder(StringPayload.of(textPayload))
+              .setSeverity(Severity.ERROR)
+              .setLogName(logName)
+              .setResource(MonitoredResource.newBuilder("global").build())
+              .build();
 
-    // Writes the log entry asynchronously
-    logging.write(Collections.singleton(entry));
-
-    System.out.printf("Logged: %s%n", text);
+      // Writes the log entry asynchronously
+      logging.write(Collections.singleton(entry));
+    }
+    System.out.printf("Logged: %s%n", textPayload);
   }
 }
 // [END logging_quickstart]
