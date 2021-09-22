@@ -113,10 +113,7 @@ public class MonitoredResourceUtil {
               Label.NamespaceName,
               Label.PodName,
               Label.ContainerName)
-          .putAll(
-              Resource.CloudFunction.getKey(),
-              Label.Function_Name,
-              Label.Region)
+          .putAll(Resource.CloudFunction.getKey(), Label.Function_Name, Label.Region)
           .build();
 
   private MonitoredResourceUtil() {}
@@ -217,7 +214,7 @@ public class MonitoredResourceUtil {
       case Region:
         Object region = MetadataConfig.getAttribute("instance/region");
         value = (region != null) ? region.toString() : "";
-
+        break;
       default:
         value = null;
         break;
