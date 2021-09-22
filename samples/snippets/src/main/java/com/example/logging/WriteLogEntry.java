@@ -30,9 +30,8 @@ import java.util.Map;
 public class WriteLogEntry {
 
   public static void main(String[] args) throws Exception {
-    // TODO(developer): Optionally provide the logname and payload string as arguments
+    // TODO(developer): Optionally provide the logname as an argument
     String logName = args.length > 0 ? args[0] : "test-log";
-    String textPayload = args.length > 0 ? args[0] : "application log payload";
 
     // Instantiates a client
     try (Logging logging = LoggingOptions.getDefaultInstance().getService()) {

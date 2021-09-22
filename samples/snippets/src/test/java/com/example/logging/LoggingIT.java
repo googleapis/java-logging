@@ -149,6 +149,13 @@ public class LoggingIT {
   }
 
   @Test(timeout = 60000)
+  public void testWriteLogEntrySample() throws Exception {
+    WriteLogEntry.main(new String[] {TEST_LOG});
+    String got = bout.toString();
+    assertThat(got).contains(String.format("Wrote to %s", TEST_LOG));
+  }
+
+  @Test(timeout = 60000)
   public void testTailLogEntriesSample() throws Exception {
     Runnable task =
         () -> {
