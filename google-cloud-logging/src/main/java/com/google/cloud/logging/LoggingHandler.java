@@ -103,7 +103,7 @@ public class LoggingHandler extends Handler {
   private final List<LoggingEnhancer> enhancers;
   private final LoggingOptions loggingOptions;
 
-  private volatile Logging logging;
+  private final Logging logging;
 
   // Logs with the same severity with the base could be more efficiently sent to Cloud.
   // Defaults to level of the handler or Level.FINEST if the handler is set to Level.ALL.
@@ -168,6 +168,7 @@ public class LoggingHandler extends Handler {
       List<LoggingEnhancer> enhancers) {
     try {
       loggingOptions = options != null ? options : LoggingOptions.getDefaultInstance();
+      logging = loggingOptions.getService();
       LoggingConfig config = new LoggingConfig(getClass().getName());
       setFilter(config.getFilter());
       setFormatter(config.getFormatter());
@@ -192,8 +193,8 @@ public class LoggingHandler extends Handler {
                     String.valueOf(baseLevel.intValue())))
           };
 
-      getLogging().setFlushSeverity(severityFor(flushLevel));
-      getLogging().setWriteSynchronicity(config.getSynchronicity());
+      logging.setFlushSeverity(severityFor(flushLevel));
+      logging.setWriteSynchronicity(config.getSynchronicity());
 
       this.enhancers = new LinkedList<>();
 
@@ -234,7 +235,7 @@ public class LoggingHandler extends Handler {
     }
     if (logEntry != null) {
       try {
-        getLogging().write(ImmutableList.of(logEntry), defaultWriteOptions);
+        logging.write(ImmutableList.of(logEntry), defaultWriteOptions);
       } catch (Exception ex) {
         getErrorManager().error(null, ex, ErrorManager.WRITE_FAILURE);
       }
@@ -264,7 +265,7 @@ public class LoggingHandler extends Handler {
   @Override
   public void flush() {
     try {
-      getLogging().flush();
+      logging.flush();
     } catch (Exception ex) {
       getErrorManager().error(null, ex, ErrorManager.FLUSH_FAILURE);
     }
@@ -273,14 +274,11 @@ public class LoggingHandler extends Handler {
   /** Closes the handler and the associated {@link Logging} object. */
   @Override
   public synchronized void close() throws SecurityException {
-    if (logging != null) {
-      try {
-        logging.close();
-      } catch (Exception ex) {
-        // ignore
-      }
+    try {
+      logging.close();
+    } catch (Exception ex) {
+      // ignore
     }
-    logging = null;
   }
 
   /** Get the flush log level. */
@@ -295,7 +293,7 @@ public class LoggingHandler extends Handler {
    */
   public void setFlushLevel(Level flushLevel) {
     this.flushLevel = flushLevel;
-    getLogging().setFlushSeverity(severityFor(flushLevel));
+    logging.setFlushSeverity(severityFor(flushLevel));
   }
 
   /**
@@ -304,12 +302,12 @@ public class LoggingHandler extends Handler {
    * @param synchronicity {@link Synchronicity}
    */
   public void setSynchronicity(Synchronicity synchronicity) {
-    getLogging().setWriteSynchronicity(synchronicity);
+    logging.setWriteSynchronicity(synchronicity);
   }
 
   /** Get the flush log level. */
   public Synchronicity getSynchronicity() {
-    return getLogging().getWriteSynchronicity();
+    return logging.getWriteSynchronicity();
   }
 
   /**
@@ -351,17 +349,5 @@ public class LoggingHandler extends Handler {
       default:
         return Severity.DEFAULT;
     }
-  }
-
-  /** Returns an instance of the logging service. */
-  private Logging getLogging() {
-    if (logging == null) {
-      synchronized (this) {
-        if (logging == null) {
-          logging = loggingOptions.getService();
-        }
-      }
-    }
-    return logging;
   }
 }

@@ -220,6 +220,7 @@ public class LoggingHandlerTest {
   public void setUp() {
     logging = EasyMock.createMock(Logging.class);
     options = EasyMock.createStrictMock(LoggingOptions.class);
+    expect(options.getService()).andReturn(logging);
   }
 
   @After
@@ -236,7 +237,6 @@ public class LoggingHandlerTest {
   @Test
   public void testPublishLevels() {
     expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
     logging.setWriteSynchronicity(Synchronicity.ASYNC);
@@ -291,7 +291,6 @@ public class LoggingHandlerTest {
   @Test
   public void testPublishCustomResource() {
     expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
     logging.setWriteSynchronicity(Synchronicity.ASYNC);
@@ -313,7 +312,6 @@ public class LoggingHandlerTest {
   @Test
   public void testPublishKubernetesContainerResource() {
     expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
     logging.setWriteSynchronicity(Synchronicity.ASYNC);
@@ -348,7 +346,6 @@ public class LoggingHandlerTest {
   @Test
   public void testEnhancedLogEntry() {
     expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     MonitoredResource resource = MonitoredResource.of("custom", ImmutableMap.<String, String>of());
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
@@ -378,7 +375,6 @@ public class LoggingHandlerTest {
   @Test
   public void testTraceEnhancedLogEntry() {
     expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     MonitoredResource resource = MonitoredResource.of("custom", ImmutableMap.<String, String>of());
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
@@ -403,7 +399,6 @@ public class LoggingHandlerTest {
   @Test
   public void testReportWriteError() {
     expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     RuntimeException ex = new RuntimeException();
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
@@ -427,7 +422,6 @@ public class LoggingHandlerTest {
   @Test
   public void testReportFlushError() {
     expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     RuntimeException ex = new RuntimeException();
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
@@ -454,7 +448,6 @@ public class LoggingHandlerTest {
   @Test
   public void testReportFormatError() {
     expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
     logging.setWriteSynchronicity(Synchronicity.ASYNC);
@@ -480,7 +473,6 @@ public class LoggingHandlerTest {
   // @Test
   public void testFlushLevel() {
     expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
     logging.setWriteSynchronicity(Synchronicity.ASYNC);
@@ -508,7 +500,6 @@ public class LoggingHandlerTest {
   @Test
   public void testSyncWrite() {
     expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     LogEntry entry =
         LogEntry.newBuilder(Payload.StringPayload.of(MESSAGE))
             .setSeverity(Severity.DEBUG)
@@ -539,7 +530,6 @@ public class LoggingHandlerTest {
   @Test
   public void testAddHandler() {
     expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
     logging.setWriteSynchronicity(Synchronicity.ASYNC);
@@ -565,7 +555,6 @@ public class LoggingHandlerTest {
   @Test
   public void testClose() throws Exception {
     expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
     logging.setWriteSynchronicity(Synchronicity.ASYNC);
@@ -579,7 +568,6 @@ public class LoggingHandlerTest {
     handler.setLevel(Level.ALL);
     handler.setFormatter(new TestFormatter());
     handler.publish(newLogRecord(Level.FINEST, MESSAGE));
-    handler.close();
     handler.close();
   }
 }
