@@ -22,7 +22,6 @@ import com.google.cloud.MonitoredResource;
 import com.google.cloud.logging.Logging.WriteOption;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-
 import java.time.Instant;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -37,12 +36,11 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 /**
- * A logging handler that outputs logs generated with
- * {@link java.util.logging.Logger} to Cloud Logging.
+ * A logging handler that outputs logs generated with {@link java.util.logging.Logger} to Cloud
+ * Logging.
  *
- * <p>
- * Java logging levels (see {@link java.util.logging.Level}) are mapped to the
- * following Google Cloud Logging severities:
+ * <p>Java logging levels (see {@link java.util.logging.Level}) are mapped to the following Google
+ * Cloud Logging severities:
  *
  * <table summary="Mapping of Java logging level to Cloud Logging severities">
  * <tr>
@@ -79,54 +77,41 @@ import java.util.logging.SimpleFormatter;
  * </tr>
  * </table>
  *
- * <p>
- * Original Java logging levels are added as labels (with {@code levelName} and
- * {@code
- * levelValue} keys, respectively) to the corresponding Cloud Logging
- * {@link LogEntry}. You can read entry labels using
- * {@link LogEntry#getLabels()}. To use logging levels that correspond to Cloud
+ * <p>Original Java logging levels are added as labels (with {@code levelName} and {@code
+ * levelValue} keys, respectively) to the corresponding Cloud Logging {@link LogEntry}. You can read
+ * entry labels using {@link LogEntry#getLabels()}. To use logging levels that correspond to Cloud
  * Logging severities you can use {@link LoggingLevel}.
  *
- * <p>
- * <b>Configuration</b>: By default each {@code LoggingHandler} is initialized
- * using the following {@code LogManager} configuration properties (that you can
- * set in the {@code
- * logging.properties} file). If properties are not defined (or have invalid
- * values) then the specified default values are used.
+ * <p><b>Configuration</b>: By default each {@code LoggingHandler} is initialized using the
+ * following {@code LogManager} configuration properties (that you can set in the {@code
+ * logging.properties} file). If properties are not defined (or have invalid values) then the
+ * specified default values are used.
  *
  * <ul>
- * <li>{@code com.google.cloud.logging.LoggingHandler.log} the log name
- * (defaults to {@code
+ *   <li>{@code com.google.cloud.logging.LoggingHandler.log} the log name (defaults to {@code
  *       java.log}).
- * <li>{@code com.google.cloud.logging.LoggingHandler.level} specifies the
- * default level for the handler (defaults to {@code Level.INFO}).
- * <li>{@code com.google.cloud.logging.LoggingHandler.filter} specifies the name
- * of a {@link Filter} class to use (defaults to no filter).
- * <li>{@code com.google.cloud.logging.LoggingHandler.formatter} specifies the
- * name of a {@link Formatter} class to use (defaults to
- * {@link SimpleFormatter}).
- * <li>{@code com.google.cloud.logging.LoggingHandler.flushLevel} specifies the
- * flush log level. When a log with this level is published, logs are
- * transmitted to the Cloud Logging service (defaults to
- * {@link LoggingLevel#ERROR}).
- * <li>{@code com.google.cloud.logging.LoggingHandler.enhancers} specifies a
- * comma separated list of {@link LoggingEnhancer} classes. This handler will
- * call each enhancer list whenever it builds a {@link LogEntry} instance
- * (defaults to empty list).
- * <li>{@code com.google.cloud.logging.LoggingHandler.resourceType} the type
- * name to use when creating the default {@link MonitoredResource} (defaults to
- * auto-detected resource type, else "global").
- * <li>{@code com.google.cloud.logging.Synchronicity} the synchronicity of the
- * write method to use to write logs to the Cloud Logging service (defaults to
- * {@link Synchronicity#ASYNC}).
+ *   <li>{@code com.google.cloud.logging.LoggingHandler.level} specifies the default level for the
+ *       handler (defaults to {@code Level.INFO}).
+ *   <li>{@code com.google.cloud.logging.LoggingHandler.filter} specifies the name of a {@link
+ *       Filter} class to use (defaults to no filter).
+ *   <li>{@code com.google.cloud.logging.LoggingHandler.formatter} specifies the name of a {@link
+ *       Formatter} class to use (defaults to {@link SimpleFormatter}).
+ *   <li>{@code com.google.cloud.logging.LoggingHandler.flushLevel} specifies the flush log level.
+ *       When a log with this level is published, logs are transmitted to the Cloud Logging service
+ *       (defaults to {@link LoggingLevel#ERROR}).
+ *   <li>{@code com.google.cloud.logging.LoggingHandler.enhancers} specifies a comma separated list
+ *       of {@link LoggingEnhancer} classes. This handler will call each enhancer list whenever it
+ *       builds a {@link LogEntry} instance (defaults to empty list).
+ *   <li>{@code com.google.cloud.logging.LoggingHandler.resourceType} the type name to use when
+ *       creating the default {@link MonitoredResource} (defaults to auto-detected resource type,
+ *       else "global").
+ *   <li>{@code com.google.cloud.logging.Synchronicity} the synchronicity of the write method to use
+ *       to write logs to the Cloud Logging service (defaults to {@link Synchronicity#ASYNC}).
  * </ul>
  *
- * <p>
- * To add a {@code LoggingHandler} to an existing {@link Logger} and be sure to
- * avoid infinite recursion when logging, use the
- * {@link #addHandler(Logger, LoggingHandler)} method. Alternatively you can add
- * the handler via {@code logging.properties}. For example using the following
- * line:
+ * <p>To add a {@code LoggingHandler} to an existing {@link Logger} and be sure to avoid infinite
+ * recursion when logging, use the {@link #addHandler(Logger, LoggingHandler)} method. Alternatively
+ * you can add the handler via {@code logging.properties}. For example using the following line:
  *
  * <pre>
  * {@code com.example.mypackage.handlers=com.google.cloud.logging.LoggingHandler}
@@ -171,7 +156,7 @@ public class LoggingHandler extends Handler {
   /**
    * Creates a handler that publishes messages to Cloud Logging.
    *
-   * @param log     the name of the log to which log entries are written
+   * @param log the name of the log to which log entries are written
    * @param options options for the Cloud Logging service
    */
   public LoggingHandler(String log, LoggingOptions options) {
@@ -181,11 +166,10 @@ public class LoggingHandler extends Handler {
   /**
    * Creates a handler that publishes messages to Cloud Logging.
    *
-   * @param log               the name of the log to which log entries are written
-   * @param options           options for the Cloud Logging service
-   * @param monitoredResource the monitored resource to which log entries refer.
-   *                          If it is null then a default resource is created
-   *                          based on the project ID and deployment environment.
+   * @param log the name of the log to which log entries are written
+   * @param options options for the Cloud Logging service
+   * @param monitoredResource the monitored resource to which log entries refer. If it is null then
+   *     a default resource is created based on the project ID and deployment environment.
    */
   public LoggingHandler(String log, LoggingOptions options, MonitoredResource monitoredResource) {
     this(log, options, monitoredResource, null);
@@ -194,16 +178,17 @@ public class LoggingHandler extends Handler {
   /**
    * Creates a handler that publishes messages to Cloud Logging.
    *
-   * @param log               the name of the log to which log entries are written
-   * @param options           options for the Cloud Logging service
-   * @param monitoredResource the monitored resource to which log entries refer.
-   *                          If it is null then a default resource is created
-   *                          based on the project ID and deployment environment.
-   * @param enhancers         List of {@link LoggingEnhancer} instances used to
-   *                          enhance any{@link LogEntry} instances built by this
-   *                          handler.
+   * @param log the name of the log to which log entries are written
+   * @param options options for the Cloud Logging service
+   * @param monitoredResource the monitored resource to which log entries refer. If it is null then
+   *     a default resource is created based on the project ID and deployment environment.
+   * @param enhancers List of {@link LoggingEnhancer} instances used to enhance any{@link LogEntry}
+   *     instances built by this handler.
    */
-  public LoggingHandler(String log, LoggingOptions options, MonitoredResource monitoredResource,
+  public LoggingHandler(
+      String log,
+      LoggingOptions options,
+      MonitoredResource monitoredResource,
       List<LoggingEnhancer> enhancers) {
     try {
       loggingOptions = options != null ? options : LoggingOptions.getDefaultInstance();
@@ -216,19 +201,30 @@ public class LoggingHandler extends Handler {
       flushLevel = config.getFlushLevel();
       String logName = log != null ? log : config.getLogName();
 
-      MonitoredResource resource = firstNonNull(monitoredResource,
-          config.getMonitoredResource(loggingOptions.getProjectId()));
-      defaultWriteOptions = new WriteOption[] { WriteOption.logName(logName), WriteOption.resource(resource),
-          WriteOption.labels(ImmutableMap.of(LEVEL_NAME_KEY, baseLevel.getName(), LEVEL_VALUE_KEY,
-              String.valueOf(baseLevel.intValue()))) };
+      MonitoredResource resource =
+          firstNonNull(
+              monitoredResource, config.getMonitoredResource(loggingOptions.getProjectId()));
+      defaultWriteOptions =
+          new WriteOption[] {
+            WriteOption.logName(logName),
+            WriteOption.resource(resource),
+            WriteOption.labels(
+                ImmutableMap.of(
+                    LEVEL_NAME_KEY,
+                    baseLevel.getName(),
+                    LEVEL_VALUE_KEY,
+                    String.valueOf(baseLevel.intValue())))
+          };
 
       getLogging().setFlushSeverity(severityFor(flushLevel));
       getLogging().setWriteSynchronicity(config.getSynchronicity());
 
       this.enhancers = new LinkedList<>();
 
-      List<LoggingEnhancer> enhancersParam = firstNonNull(enhancers,
-          firstNonNull(config.getEnhancers(), Collections.<LoggingEnhancer>emptyList()));
+      List<LoggingEnhancer> enhancersParam =
+          firstNonNull(
+              enhancers,
+              firstNonNull(config.getEnhancers(), Collections.<LoggingEnhancer>emptyList()));
 
       this.enhancers.addAll(enhancersParam);
 
@@ -275,11 +271,15 @@ public class LoggingHandler extends Handler {
   private LogEntry logEntryFor(LogRecord record) throws Exception {
     String payload = getFormatter().format(record);
     Level level = record.getLevel();
-    LogEntry.Builder builder = LogEntry.newBuilder(Payload.StringPayload.of(payload))
-        .setTimestamp(Instant.ofEpochMilli(record.getMillis())).setSeverity(severityFor(level));
+    LogEntry.Builder builder =
+        LogEntry.newBuilder(Payload.StringPayload.of(payload))
+            .setTimestamp(Instant.ofEpochMilli(record.getMillis()))
+            .setSeverity(severityFor(level));
 
     if (!baseLevel.equals(level)) {
-      builder.addLabel("levelName", level.getName()).addLabel("levelValue", String.valueOf(level.intValue()));
+      builder
+          .addLabel("levelName", level.getName())
+          .addLabel("levelValue", String.valueOf(level.intValue()));
     }
 
     for (LoggingEnhancer enhancer : enhancers) {
@@ -340,9 +340,9 @@ public class LoggingHandler extends Handler {
   }
 
   /**
-   * Adds the provided {@code LoggingHandler} to {@code logger}. Use this method
-   * to register Cloud Logging handlers instead of
-   * {@link Logger#addHandler(Handler)} to avoid infinite recursion when logging.
+   * Adds the provided {@code LoggingHandler} to {@code logger}. Use this method to register Cloud
+   * Logging handlers instead of {@link Logger#addHandler(Handler)} to avoid infinite recursion when
+   * logging.
    */
   public static void addHandler(Logger logger, LoggingHandler handler) {
     logger.addHandler(handler);
@@ -354,29 +354,29 @@ public class LoggingHandler extends Handler {
     }
 
     switch (level.intValue()) {
-    // FINEST
-    case 300:
-      return Severity.DEBUG;
-    // FINER
-    case 400:
-      return Severity.DEBUG;
-    // FINE
-    case 500:
-      return Severity.DEBUG;
-    // CONFIG
-    case 700:
-      return Severity.INFO;
-    // INFO
-    case 800:
-      return Severity.INFO;
-    // WARNING
-    case 900:
-      return Severity.WARNING;
-    // SEVERE
-    case 1000:
-      return Severity.ERROR;
-    default:
-      return Severity.DEFAULT;
+        // FINEST
+      case 300:
+        return Severity.DEBUG;
+        // FINER
+      case 400:
+        return Severity.DEBUG;
+        // FINE
+      case 500:
+        return Severity.DEBUG;
+        // CONFIG
+      case 700:
+        return Severity.INFO;
+        // INFO
+      case 800:
+        return Severity.INFO;
+        // WARNING
+      case 900:
+        return Severity.WARNING;
+        // SEVERE
+      case 1000:
+        return Severity.ERROR;
+      default:
+        return Severity.DEFAULT;
     }
   }
 
