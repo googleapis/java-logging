@@ -16,7 +16,6 @@
 
 package com.google.cloud.logging;
 
-import com.google.cloud.MetadataConfig;
 import com.google.cloud.MonitoredResource;
 import com.google.cloud.logging.LogEntry.Builder;
 import com.google.common.base.Strings;
@@ -37,9 +36,11 @@ import java.util.Map;
  */
 public class MonitoredResourceUtil {
 
-  static String K8S_POD_NAMESPACE_PATH = "/var/run/secrets/kubernetes.io/serviceaccount/namespace";
-  static String FLEX_ENV = "flex";
-  static String STD_ENV = "standard";
+  private static final String APPENGINE_LABEL_PREFIX = "appengine.googleapis.com/";
+  private static final String K8S_POD_NAMESPACE_PATH =
+      "/var/run/secrets/kubernetes.io/serviceaccount/namespace";
+  private static final String FLEX_ENV = "flex";
+  private static final String STD_ENV = "standard";
 
   private enum Label {
     ClusterName("cluster_name"),
@@ -90,8 +91,6 @@ public class MonitoredResourceUtil {
     }
   }
 
-  private static final String APPENGINE_LABEL_PREFIX = "appengine.googleapis.com/";
-
   private static ImmutableMultimap<String, Label> resourceTypeWithLabels =
       ImmutableMultimap.<String, Label>builder()
           .putAll(Resource.CloudFunction.getKey(), Label.FunctionName, Label.Region)
@@ -114,8 +113,18 @@ public class MonitoredResourceUtil {
           .build();
 
   private static Map<String, MonitoredResource> cachedMonitoredResources = new HashMap<>();
-  
+  private static ResourceTypeEnvironmentGetter getter = new ResourceTypeEnvironmentGetterImpl();
+
   private MonitoredResourceUtil() {}
+
+  /**
+   * Method is intended to assist in testing <code>MonitoredResourceUtil</code> class only.
+   *
+   * @param getter A mocked environment getter for simulated test environments.
+   */
+  protected static void setEnvironmentGetter(ResourceTypeEnvironmentGetter getter) {
+    MonitoredResourceUtil.getter = getter;
+  }
 
   /**
    * Build {@link MonitoredResource} based on detected resource type and populate it with labels
@@ -128,7 +137,7 @@ public class MonitoredResourceUtil {
    */
   public static MonitoredResource getResource(String projectId, String resourceType) {
     if (projectId == null || projectId.trim().isEmpty()) {
-      projectId = MetadataConfig.getProjectId();
+      projectId = getter.getAttribute("project/project-id");
     }
 
     MonitoredResource result = cachedMonitoredResources.get(projectId + "/" + resourceType);
@@ -160,31 +169,31 @@ public class MonitoredResourceUtil {
    */
   private static Resource detectResourceType() {
     // expects supported Google Cloud resource to have access to metadata server
-    if (MetadataConfig.getAttribute("") == null) {
+    if (getter.getAttribute("") == null) {
       return Resource.Global;
     }
 
-    if (System.getenv("K_SERVICE") != null
-        && System.getenv("K_REVISION") != null
-        && System.getenv("K_CONFIGURATION") != null) {
+    if (getter.getEnv("K_SERVICE") != null
+        && getter.getEnv("K_REVISION") != null
+        && getter.getEnv("K_CONFIGURATION") != null) {
       return Resource.CloudRun;
     }
-    if (System.getenv("GAE_INSTANCE") != null
-        && System.getenv("GAE_RUNTIME") != null
-        && System.getenv("GAE_SERVICE") != null
-        && System.getenv("GAE_VERSION") != null) {
+    if (getter.getEnv("GAE_INSTANCE") != null
+        && getter.getEnv("GAE_RUNTIME") != null
+        && getter.getEnv("GAE_SERVICE") != null
+        && getter.getEnv("GAE_VERSION") != null) {
       return Resource.AppEngine;
     }
-    if (System.getenv("FUNCTION_SIGNATURE_TYPE") != null
-        && System.getenv("FUNCTION_TARGET") != null) {
+    if (getter.getEnv("FUNCTION_SIGNATURE_TYPE") != null
+        && getter.getEnv("FUNCTION_TARGET") != null) {
       return Resource.CloudFunction;
     }
-    if (MetadataConfig.getAttribute("instance/attributes/cluster-name") != null) {
+    if (getter.getAttribute("instance/attributes/cluster-name") != null) {
       return Resource.K8sContainer;
     }
-    if (MetadataConfig.getAttribute("instance/preempted") != null
-        && MetadataConfig.getAttribute("instance/cpu-platform") != null
-        && MetadataConfig.getAttribute("instance/attributes/gae_app_bucket") == null) {
+    if (getter.getAttribute("instance/preempted") != null
+        && getter.getAttribute("instance/cpu-platform") != null
+        && getter.getAttribute("instance/attributes/gae_app_bucket") == null) {
       return Resource.GceInstance;
     }
     // other Google Cloud resources (e.g. CloudBuild) might be misdetected
@@ -207,15 +216,15 @@ public class MonitoredResourceUtil {
 
     switch (label) {
       case ClusterName:
-        value = MetadataConfig.getClusterName();
+        value = getter.getAttribute("instance/attributes/cluster-name");
         break;
       case ConfigurationName:
-        value = System.getenv("K_CONFIGURATION");
+        value = getter.getEnv("K_CONFIGURATION");
         break;
       case ContainerName:
         // there is no determenistic way to discover name of container
         // allow users to define the container name explicitly
-        value = System.getenv("CONTAINER_NAME");
+        value = getter.getEnv("CONTAINER_NAME");
         if (value == null) {
           value = "";
         }
@@ -225,16 +234,16 @@ public class MonitoredResourceUtil {
         break;
       case FunctionName:
       case ServiceName:
-        value = System.getenv("K_SERVICE");
+        value = getter.getEnv("K_SERVICE");
         if (value == null) {
-          value = System.getenv("FUNCTION_NAME");
+          value = getter.getEnv("FUNCTION_NAME");
         }
         break;
       case InstanceId:
-        value = MetadataConfig.getInstanceId();
+        value = getter.getAttribute("instance/id");
         break;
       case InstanceName:
-        value = MetadataConfig.getAttribute("instance/name");
+        value = getter.getAttribute("instance/name");
         break;
       case Location:
         if (Resource.CloudFunction.getKey() == resourceType
@@ -245,7 +254,7 @@ public class MonitoredResourceUtil {
         }
         break;
       case ModuleId:
-        value = System.getenv("GAE_SERVICE");
+        value = getter.getEnv("GAE_SERVICE");
         break;
       case NamespaceName:
         value = getK8sNamespace();
@@ -254,16 +263,16 @@ public class MonitoredResourceUtil {
         // there is no determenistic way to discover name of container
         // by default the pod name is set as pod's hostname
         // note that hostname can be overriden in pod manifest or at runtime
-        value = System.getenv("HOSTNAME");
+        value = getter.getEnv("HOSTNAME");
         break;
       case Region:
         value = getRegion();
         break;
       case RevisionName:
-        value = System.getenv("K_REVISION");
+        value = getter.getEnv("K_REVISION");
         break;
       case VersionId:
-        value = System.getenv("GAE_VERSION");
+        value = getter.getEnv("GAE_VERSION");
         break;
       case Zone:
         value = getZone();
@@ -289,7 +298,7 @@ public class MonitoredResourceUtil {
     } catch (IOException e) {
       // if SA token is not shared the info about namespace is unavailable
       // allow users to define the namespace name explicitly
-      value = System.getenv("NAMESPACE_NAME");
+      value = getter.getEnv("NAMESPACE_NAME");
       if (value == null) {
         value = "";
       }
@@ -307,7 +316,7 @@ public class MonitoredResourceUtil {
    * @return "flex" {@link String} for the Flexible environment and "standard" for the Standard.
    */
   private static String getAppEngineEnvironment() {
-    String value = MetadataConfig.getAttribute("instance/attributes/startup-script");
+    String value = getter.getAttribute("instance/attributes/startup-script");
     if (value == "/var/lib/flex/startup_script.sh") {
       return FLEX_ENV;
     }
@@ -315,22 +324,22 @@ public class MonitoredResourceUtil {
   }
 
   /**
-   * Retrieves a region from the qualified region of '/projects/[PROJECT_NUMBER]/regions/[REGION]'
+   * Retrieves a region from the qualified region of 'projects/[PROJECT_NUMBER]/regions/[REGION]'
    *
    * @return region string id
    */
   private static String getRegion() {
-    String loc = MetadataConfig.getAttribute("instance/region");
+    String loc = getter.getAttribute("instance/region");
     return loc.substring(loc.lastIndexOf('/') + 1);
   }
 
   /**
-   * Retrieves a zone from the qualified zone of '/projects/[PROJECT_NUMBER]/zones/[ZONE]'
+   * Retrieves a zone from the qualified zone of 'projects/[PROJECT_NUMBER]/zones/[ZONE]'
    *
    * @return zone string id
    */
   private static String getZone() {
-    String loc = MetadataConfig.getAttribute("instance/zone");
+    String loc = getter.getAttribute("instance/zone");
     return loc.substring(loc.lastIndexOf('/') + 1);
   }
 
