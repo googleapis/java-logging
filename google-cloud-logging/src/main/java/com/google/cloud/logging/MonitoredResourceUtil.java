@@ -37,6 +37,7 @@ import java.util.Map;
 public class MonitoredResourceUtil {
 
   private static final String APPENGINE_LABEL_PREFIX = "appengine.googleapis.com/";
+  private static final String CLUSTER_NAME_ATTRIBUTE = "instance/attributes/cluster-name";
   private static final String K8S_POD_NAMESPACE_PATH =
       "/var/run/secrets/kubernetes.io/serviceaccount/namespace";
   private static final String FLEX_ENV = "flex";
@@ -188,7 +189,7 @@ public class MonitoredResourceUtil {
         && getter.getEnv("FUNCTION_TARGET") != null) {
       return Resource.CloudFunction;
     }
-    if (getter.getAttribute("instance/attributes/cluster-name") != null) {
+    if (getter.getAttribute(CLUSTER_NAME_ATTRIBUTE) != null) {
       return Resource.K8sContainer;
     }
     if (getter.getAttribute("instance/preempted") != null
@@ -216,7 +217,7 @@ public class MonitoredResourceUtil {
 
     switch (label) {
       case ClusterName:
-        value = getter.getAttribute("instance/attributes/cluster-name");
+        value = getter.getAttribute(CLUSTER_NAME_ATTRIBUTE);
         break;
       case ConfigurationName:
         value = getter.getEnv("K_CONFIGURATION");

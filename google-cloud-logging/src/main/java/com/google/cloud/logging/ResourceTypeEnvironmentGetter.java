@@ -45,7 +45,13 @@ final class ResourceTypeEnvironmentGetterImpl implements ResourceTypeEnvironment
 
   @Override
   public String getEnv(String name) {
-    return System.getenv(name);
+    // handle exception thrown if a security manager exists and blocks access to the
+    // process environment
+    try {
+      return System.getenv(name);
+    } catch (SecurityException ex) {
+      return null;
+    }
   }
 
   @Override
