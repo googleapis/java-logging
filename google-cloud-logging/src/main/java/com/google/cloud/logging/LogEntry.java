@@ -66,7 +66,7 @@ public class LogEntry implements Serializable {
   private final boolean traceSampled;
   private final SourceLocation sourceLocation;
   private final Payload<?> payload;
-  private final ResourceName destination;
+  private final LogDestinationName destination;
 
   /** A builder for {@code LogEntry} objects. */
   public static class Builder {
@@ -85,7 +85,7 @@ public class LogEntry implements Serializable {
     private boolean traceSampled;
     private SourceLocation sourceLocation;
     private Payload<?> payload;
-    private ResourceName destination;
+    private LogDestinationName destination;
 
     Builder(Payload<?> payload) {
       this.payload = payload;
@@ -285,8 +285,8 @@ public class LogEntry implements Serializable {
       return this;
     }
 
-    /** Sets the log path destination type associated with the log entry. */
-    public Builder setDestination(ResourceName destination) {
+    /** Sets the log path destination name type associated with the log entry. */
+    public Builder setDestination(LogDestinationName destination) {
       this.destination = destination;
       return this;
     }
@@ -449,12 +449,12 @@ public class LogEntry implements Serializable {
   }
 
   /**
-   * Returns the log path destination type associated with log entry. By default, project name based
-   * destination is used.
+   * Returns the log path destination name type associated with log entry. By default, project name
+   * based destination is used.
    *
    * @see <a href="https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry">logName</a>
    */
-  public ResourceName getDestination() {
+  public LogDestinationName getDestination() {
     return destination;
   }
 
@@ -535,7 +535,7 @@ public class LogEntry implements Serializable {
     builder.putAllLabels(labels);
 
     if (logName != null) {
-      LogName name = ResourceName.toLogName(logName, destination);
+      LogName name = LogDestinationName.toLogName(logName, destination);
 
       if (name == null) {
         builder.setLogName(LogName.ofProjectLogName(projectId, logName).toString());
@@ -602,7 +602,7 @@ public class LogEntry implements Serializable {
     if (!entryPb.getLogName().equals("")) {
       LogName name = LogName.parse(entryPb.getLogName());
       builder.setLogName(name.getLog());
-      ResourceName resource = ResourceName.fromLogName(name);
+      LogDestinationName resource = LogDestinationName.fromLogName(name);
       /**
        * Limitation: we dont know if project ID was provided originally by destination parameter
        * explicitly or was taken from credentials (since we do not serialize ResourceName object
@@ -610,8 +610,8 @@ public class LogEntry implements Serializable {
        * (thus we never create destination object for project ID based path)
        */
       if (resource != null
-          && !resource.getOptionType().equals(ResourceName.DestinationType.PROJECT)) {
-        builder.setDestination(ResourceName.fromLogName(name));
+          && !resource.getOptionType().equals(LogDestinationName.DestinationType.PROJECT)) {
+        builder.setDestination(LogDestinationName.fromLogName(name));
       }
     }
     if (!entryPb.getResource().equals(com.google.api.MonitoredResource.getDefaultInstance())) {

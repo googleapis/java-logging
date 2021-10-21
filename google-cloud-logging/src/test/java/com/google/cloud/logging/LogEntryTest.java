@@ -74,6 +74,11 @@ public class LogEntryTest {
       JsonPayload.of(ImmutableMap.<String, Object>of("key", "val"));
   private static final ProtoPayload PROTO_PAYLOAD =
       ProtoPayload.of(Any.pack(Empty.getDefaultInstance()));
+  private static final LogDestinationName projectName = LogDestinationName.project("project");
+  private static final LogDestinationName billingName =
+      LogDestinationName.billingAccount("000000-111111-222222");
+  private static final LogDestinationName folderName = LogDestinationName.folder("123456789");
+  private static final LogDestinationName orgName = LogDestinationName.organization("1122334455");
   private static final LogEntry STRING_ENTRY =
       LogEntry.newBuilder(STRING_PAYLOAD)
           .setLogName(LOG_NAME)
@@ -125,7 +130,7 @@ public class LogEntryTest {
   private static final LogEntry STRING_ENTRY_BILLING =
       LogEntry.newBuilder(STRING_PAYLOAD)
           .setLogName(LOG_NAME)
-          .setDestination(ResourceName.billingAccount("billing"))
+          .setDestination(billingName)
           .setResource(RESOURCE)
           .setTimestamp(TIMESTAMP)
           .setReceiveTimestamp(RECEIVE_TIMESTAMP)
@@ -142,7 +147,7 @@ public class LogEntryTest {
   private static final LogEntry STRING_ENTRY_FOLDER =
       LogEntry.newBuilder(STRING_PAYLOAD)
           .setLogName(LOG_NAME)
-          .setDestination(ResourceName.folder("folder"))
+          .setDestination(folderName)
           .setResource(RESOURCE)
           .setTimestamp(TIMESTAMP)
           .setReceiveTimestamp(RECEIVE_TIMESTAMP)
@@ -159,7 +164,7 @@ public class LogEntryTest {
   private static final LogEntry STRING_ENTRY_ORG =
       LogEntry.newBuilder(STRING_PAYLOAD)
           .setLogName(LOG_NAME)
-          .setDestination(ResourceName.organization("org"))
+          .setDestination(orgName)
           .setResource(RESOURCE)
           .setTimestamp(TIMESTAMP)
           .setReceiveTimestamp(RECEIVE_TIMESTAMP)
@@ -379,7 +384,7 @@ public class LogEntryTest {
         LogEntry.newBuilder(STRING_PAYLOAD)
             .setLogName(LOG_NAME)
             .setResource(RESOURCE)
-            .setDestination(ResourceName.folder("folder"))
+            .setDestination(folderName)
             .build();
     compareLogEntry(logEntry, LogEntry.fromPb(logEntry.toPb("project")));
   }
@@ -390,7 +395,7 @@ public class LogEntryTest {
         LogEntry.newBuilder(STRING_PAYLOAD)
             .setLogName(LOG_NAME)
             .setResource(RESOURCE)
-            .setDestination(ResourceName.project("project"))
+            .setDestination(projectName)
             .build();
     /**
      * Project ID destination should never be serialized into PB payload, thus below call should
