@@ -42,8 +42,7 @@ public final class LogDestinationName extends Option {
 
   private LogDestinationName(Option.OptionType option, Object value) {
     super(option, value);
-    checkNotNull(value);
-    checkArgument(!value.toString().isBlank());
+    checkArgument(!checkNotNull(value).toString().trim().isEmpty());
   }
 
   /**
