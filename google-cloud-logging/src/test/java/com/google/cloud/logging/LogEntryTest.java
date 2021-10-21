@@ -382,7 +382,11 @@ public class LogEntryTest {
             .setDestination(ResourceName.folder("folder"))
             .build();
     compareLogEntry(logEntry, LogEntry.fromPb(logEntry.toPb("project")));
-    logEntry =
+  }
+
+  @Test(expected = AssertionError.class)
+  public void testToAndFromPbWithExpectedFailure() {
+    LogEntry logEntry =
         LogEntry.newBuilder(STRING_PAYLOAD)
             .setLogName(LOG_NAME)
             .setResource(RESOURCE)
@@ -392,13 +396,7 @@ public class LogEntryTest {
      * Project ID destination should never be serialized into PB payload, thus below call should
      * always fail for inconsistency
      */
-    try {
-      compareLogEntry(logEntry, LogEntry.fromPb(logEntry.toPb("project")));
-    } catch (AssertionError err) {
-      return;
-    }
-    throw new AssertionError(
-        "Log entry with project ID should not be the same after serialization");
+    compareLogEntry(logEntry, LogEntry.fromPb(logEntry.toPb("project")));
   }
 
   private void compareLogEntry(LogEntry expected, LogEntry value) {
