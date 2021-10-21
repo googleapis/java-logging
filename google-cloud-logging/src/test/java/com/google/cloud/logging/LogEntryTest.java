@@ -122,6 +122,57 @@ public class LogEntryTest {
           .setTraceSampled(TRACE_SAMPLED)
           .setSourceLocation(SOURCE_LOCATION)
           .build();
+  private static final LogEntry STRING_ENTRY_BILLING =
+      LogEntry.newBuilder(STRING_PAYLOAD)
+          .setLogName(LOG_NAME)
+          .setDestination(ResourceName.billingAccount("billing"))
+          .setResource(RESOURCE)
+          .setTimestamp(TIMESTAMP)
+          .setReceiveTimestamp(RECEIVE_TIMESTAMP)
+          .setSeverity(SEVERITY)
+          .setInsertId(INSERT_ID)
+          .setHttpRequest(HTTP_REQUEST)
+          .setLabels(LABELS)
+          .setOperation(OPERATION)
+          .setTrace(TRACE_FORMATTER)
+          .setSpanId(SPAN_ID_FORMATTER)
+          .setTraceSampled(TRACE_SAMPLED)
+          .setSourceLocation(SOURCE_LOCATION)
+          .build();
+  private static final LogEntry STRING_ENTRY_FOLDER =
+      LogEntry.newBuilder(STRING_PAYLOAD)
+          .setLogName(LOG_NAME)
+          .setDestination(ResourceName.folder("folder"))
+          .setResource(RESOURCE)
+          .setTimestamp(TIMESTAMP)
+          .setReceiveTimestamp(RECEIVE_TIMESTAMP)
+          .setSeverity(SEVERITY)
+          .setInsertId(INSERT_ID)
+          .setHttpRequest(HTTP_REQUEST)
+          .setLabels(LABELS)
+          .setOperation(OPERATION)
+          .setTrace(TRACE_FORMATTER)
+          .setSpanId(SPAN_ID_FORMATTER)
+          .setTraceSampled(TRACE_SAMPLED)
+          .setSourceLocation(SOURCE_LOCATION)
+          .build();
+  private static final LogEntry STRING_ENTRY_ORG =
+      LogEntry.newBuilder(STRING_PAYLOAD)
+          .setLogName(LOG_NAME)
+          .setDestination(ResourceName.organization("org"))
+          .setResource(RESOURCE)
+          .setTimestamp(TIMESTAMP)
+          .setReceiveTimestamp(RECEIVE_TIMESTAMP)
+          .setSeverity(SEVERITY)
+          .setInsertId(INSERT_ID)
+          .setHttpRequest(HTTP_REQUEST)
+          .setLabels(LABELS)
+          .setOperation(OPERATION)
+          .setTrace(TRACE_FORMATTER)
+          .setSpanId(SPAN_ID_FORMATTER)
+          .setTraceSampled(TRACE_SAMPLED)
+          .setSourceLocation(SOURCE_LOCATION)
+          .build();
 
   @Test
   public void testOf() {
@@ -317,10 +368,37 @@ public class LogEntryTest {
     compareLogEntry(STRING_ENTRY, LogEntry.fromPb(STRING_ENTRY.toPb("project")));
     compareLogEntry(JSON_ENTRY, LogEntry.fromPb(JSON_ENTRY.toPb("project")));
     compareLogEntry(PROTO_ENTRY, LogEntry.fromPb(PROTO_ENTRY.toPb("project")));
+    compareLogEntry(STRING_ENTRY_BILLING, LogEntry.fromPb(STRING_ENTRY_BILLING.toPb("project")));
+    compareLogEntry(STRING_ENTRY_FOLDER, LogEntry.fromPb(STRING_ENTRY_FOLDER.toPb("project")));
+    compareLogEntry(STRING_ENTRY_ORG, LogEntry.fromPb(STRING_ENTRY_ORG.toPb("project")));
     LogEntry logEntry = LogEntry.of(STRING_PAYLOAD);
     compareLogEntry(logEntry, LogEntry.fromPb(logEntry.toPb("project")));
     logEntry = LogEntry.of(LOG_NAME, RESOURCE, STRING_PAYLOAD);
     compareLogEntry(logEntry, LogEntry.fromPb(logEntry.toPb("project")));
+    logEntry =
+        LogEntry.newBuilder(STRING_PAYLOAD)
+            .setLogName(LOG_NAME)
+            .setResource(RESOURCE)
+            .setDestination(ResourceName.folder("folder"))
+            .build();
+    compareLogEntry(logEntry, LogEntry.fromPb(logEntry.toPb("project")));
+    logEntry =
+        LogEntry.newBuilder(STRING_PAYLOAD)
+            .setLogName(LOG_NAME)
+            .setResource(RESOURCE)
+            .setDestination(ResourceName.project("project"))
+            .build();
+    /**
+     * Project ID destination should never be serialized into PB payload, thus below call should
+     * always fail for inconsistency
+     */
+    try {
+      compareLogEntry(logEntry, LogEntry.fromPb(logEntry.toPb("project")));
+    } catch (AssertionError err) {
+      return;
+    }
+    throw new AssertionError(
+        "Log entry with project ID should not be the same after serialization");
   }
 
   private void compareLogEntry(LogEntry expected, LogEntry value) {
