@@ -535,12 +535,10 @@ public class LogEntry implements Serializable {
     builder.putAllLabels(labels);
 
     if (logName != null) {
-      LogName name = LogDestinationName.toLogName(logName, destination);
-
-      if (name == null) {
+      if (destination == null) {
         builder.setLogName(LogName.ofProjectLogName(projectId, logName).toString());
       } else {
-        builder.setLogName(name.toString());
+        builder.setLogName(destination.toLogName(logName).toString());
       }
     }
     if (resource != null) {
@@ -603,14 +601,7 @@ public class LogEntry implements Serializable {
       LogName name = LogName.parse(entryPb.getLogName());
       builder.setLogName(name.getLog());
       LogDestinationName resource = LogDestinationName.fromLogName(name);
-      /**
-       * Limitation: we dont know if project ID was provided originally by destination parameter
-       * explicitly or was taken from credentials (since we do not serialize ResourceName object
-       * into PB payload). This mean that for project ID we assume it was taken from credentials
-       * (thus we never create destination object for project ID based path)
-       */
-      if (resource != null
-          && !resource.getOptionType().equals(LogDestinationName.DestinationType.PROJECT)) {
+      if (resource != null) {
         builder.setDestination(LogDestinationName.fromLogName(name));
       }
     }

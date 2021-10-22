@@ -85,20 +85,24 @@ public final class LogDestinationName extends Option {
     return new LogDestinationName(DestinationType.BILLINGACCOUNT, id);
   }
 
-  /** Creates a {@code LogEntry} object from given log ID and the destination resource. */
-  public static LogName toLogName(String logId, LogDestinationName destination) {
-    if (logId == null || destination == null) {
+  /** Creates a {@code LogEntry} object for given log ID. */
+  public LogName toLogName(String logId) {
+    if (logId == null) {
       return null;
     }
 
-    if (DestinationType.PROJECT == destination.getOptionType()) {
-      return LogName.ofProjectLogName(destination.getValue().toString(), logId);
-    } else if (DestinationType.FOLDER == destination.getOptionType()) {
-      return LogName.ofFolderLogName(destination.getValue().toString(), logId);
-    } else if (DestinationType.ORGANIZATION == destination.getOptionType()) {
-      return LogName.ofOrganizationLogName(destination.getValue().toString(), logId);
-    } else if (DestinationType.BILLINGACCOUNT == destination.getOptionType()) {
-      return LogName.ofBillingAccountLogName(destination.getValue().toString(), logId);
+    switch ((DestinationType) getOptionType()) {
+      case PROJECT:
+        return LogName.ofProjectLogName(getValue().toString(), logId);
+
+      case FOLDER:
+        return LogName.ofFolderLogName(getValue().toString(), logId);
+
+      case ORGANIZATION:
+        return LogName.ofOrganizationLogName(getValue().toString(), logId);
+
+      case BILLINGACCOUNT:
+        return LogName.ofBillingAccountLogName(getValue().toString(), logId);
     }
 
     return null;
