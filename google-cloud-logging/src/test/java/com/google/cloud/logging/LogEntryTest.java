@@ -77,6 +77,7 @@ public class LogEntryTest {
       ProtoPayload.of(Any.pack(Empty.getDefaultInstance()));
   private static final LogDestinationName BILLING_NAME =
       LogDestinationName.billingAccount("000000-111111-222222");
+  private static final LogDestinationName PROJECT_NAME = LogDestinationName.project(PROJECT);
   private static final LogDestinationName FOLDER_NAME = LogDestinationName.folder("123456789");
   private static final LogDestinationName ORG_NAME = LogDestinationName.organization("1122334455");
   private static final LogEntry STRING_ENTRY =
@@ -131,6 +132,23 @@ public class LogEntryTest {
       LogEntry.newBuilder(STRING_PAYLOAD)
           .setLogName(LOG_NAME)
           .setDestination(BILLING_NAME)
+          .setResource(RESOURCE)
+          .setTimestamp(TIMESTAMP)
+          .setReceiveTimestamp(RECEIVE_TIMESTAMP)
+          .setSeverity(SEVERITY)
+          .setInsertId(INSERT_ID)
+          .setHttpRequest(HTTP_REQUEST)
+          .setLabels(LABELS)
+          .setOperation(OPERATION)
+          .setTrace(TRACE_FORMATTER)
+          .setSpanId(SPAN_ID_FORMATTER)
+          .setTraceSampled(TRACE_SAMPLED)
+          .setSourceLocation(SOURCE_LOCATION)
+          .build();
+  private static final LogEntry STRING_ENTRY_PROJECT =
+      LogEntry.newBuilder(STRING_PAYLOAD)
+          .setLogName(LOG_NAME)
+          .setDestination(PROJECT_NAME)
           .setResource(RESOURCE)
           .setTimestamp(TIMESTAMP)
           .setReceiveTimestamp(RECEIVE_TIMESTAMP)
@@ -377,6 +395,8 @@ public class LogEntryTest {
         STRING_ENTRY_BILLING, LogEntry.fromPb(STRING_ENTRY_BILLING.toPb(PROJECT)), true);
     compareLogEntry(STRING_ENTRY_FOLDER, LogEntry.fromPb(STRING_ENTRY_FOLDER.toPb(PROJECT)), true);
     compareLogEntry(STRING_ENTRY_ORG, LogEntry.fromPb(STRING_ENTRY_ORG.toPb(PROJECT)), true);
+    compareLogEntry(
+        STRING_ENTRY_PROJECT, LogEntry.fromPb(STRING_ENTRY_PROJECT.toPb(PROJECT)), true);
     LogEntry logEntry = LogEntry.of(STRING_PAYLOAD);
     compareLogEntry(logEntry, LogEntry.fromPb(logEntry.toPb(PROJECT)), true);
     logEntry = LogEntry.of(LOG_NAME, RESOURCE, STRING_PAYLOAD);
