@@ -108,7 +108,7 @@ public final class LogDestinationName extends Option {
     return null;
   }
 
-  /** Creates a {@code LogDestinationName} object given from given {@code LogName}. */
+  /** Creates a {@code LogDestinationName} object from given {@code LogName}. */
   public static LogDestinationName fromLogName(LogName logName) {
     if (logName == null) {
       return null;
