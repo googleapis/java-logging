@@ -129,73 +129,13 @@ public class LogEntryTest {
           .setSourceLocation(SOURCE_LOCATION)
           .build();
   private static final LogEntry STRING_ENTRY_BILLING =
-      LogEntry.newBuilder(STRING_PAYLOAD)
-          .setLogName(LOG_NAME)
-          .setDestination(BILLING_NAME)
-          .setResource(RESOURCE)
-          .setTimestamp(TIMESTAMP)
-          .setReceiveTimestamp(RECEIVE_TIMESTAMP)
-          .setSeverity(SEVERITY)
-          .setInsertId(INSERT_ID)
-          .setHttpRequest(HTTP_REQUEST)
-          .setLabels(LABELS)
-          .setOperation(OPERATION)
-          .setTrace(TRACE_FORMATTER)
-          .setSpanId(SPAN_ID_FORMATTER)
-          .setTraceSampled(TRACE_SAMPLED)
-          .setSourceLocation(SOURCE_LOCATION)
-          .build();
+      STRING_ENTRY.toBuilder().setDestination(BILLING_NAME).build();
   private static final LogEntry STRING_ENTRY_PROJECT =
-      LogEntry.newBuilder(STRING_PAYLOAD)
-          .setLogName(LOG_NAME)
-          .setDestination(PROJECT_NAME)
-          .setResource(RESOURCE)
-          .setTimestamp(TIMESTAMP)
-          .setReceiveTimestamp(RECEIVE_TIMESTAMP)
-          .setSeverity(SEVERITY)
-          .setInsertId(INSERT_ID)
-          .setHttpRequest(HTTP_REQUEST)
-          .setLabels(LABELS)
-          .setOperation(OPERATION)
-          .setTrace(TRACE_FORMATTER)
-          .setSpanId(SPAN_ID_FORMATTER)
-          .setTraceSampled(TRACE_SAMPLED)
-          .setSourceLocation(SOURCE_LOCATION)
-          .build();
+      STRING_ENTRY.toBuilder().setDestination(PROJECT_NAME).build();
   private static final LogEntry STRING_ENTRY_FOLDER =
-      LogEntry.newBuilder(STRING_PAYLOAD)
-          .setLogName(LOG_NAME)
-          .setDestination(FOLDER_NAME)
-          .setResource(RESOURCE)
-          .setTimestamp(TIMESTAMP)
-          .setReceiveTimestamp(RECEIVE_TIMESTAMP)
-          .setSeverity(SEVERITY)
-          .setInsertId(INSERT_ID)
-          .setHttpRequest(HTTP_REQUEST)
-          .setLabels(LABELS)
-          .setOperation(OPERATION)
-          .setTrace(TRACE_FORMATTER)
-          .setSpanId(SPAN_ID_FORMATTER)
-          .setTraceSampled(TRACE_SAMPLED)
-          .setSourceLocation(SOURCE_LOCATION)
-          .build();
+      STRING_ENTRY.toBuilder().setDestination(FOLDER_NAME).build();
   private static final LogEntry STRING_ENTRY_ORG =
-      LogEntry.newBuilder(STRING_PAYLOAD)
-          .setLogName(LOG_NAME)
-          .setDestination(ORG_NAME)
-          .setResource(RESOURCE)
-          .setTimestamp(TIMESTAMP)
-          .setReceiveTimestamp(RECEIVE_TIMESTAMP)
-          .setSeverity(SEVERITY)
-          .setInsertId(INSERT_ID)
-          .setHttpRequest(HTTP_REQUEST)
-          .setLabels(LABELS)
-          .setOperation(OPERATION)
-          .setTrace(TRACE_FORMATTER)
-          .setSpanId(SPAN_ID_FORMATTER)
-          .setTraceSampled(TRACE_SAMPLED)
-          .setSourceLocation(SOURCE_LOCATION)
-          .build();
+      STRING_ENTRY.toBuilder().setDestination(ORG_NAME).build();
 
   @Test
   public void testOf() {
