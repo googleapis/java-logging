@@ -602,7 +602,7 @@ public class LogEntry implements Serializable {
       builder.setLogName(name.getLog());
       LogDestinationName resource = LogDestinationName.fromLogName(name);
       if (resource != null) {
-        builder.setDestination(LogDestinationName.fromLogName(name));
+        builder.setDestination(resource);
       }
     }
     if (!entryPb.getResource().equals(com.google.api.MonitoredResource.getDefaultInstance())) {

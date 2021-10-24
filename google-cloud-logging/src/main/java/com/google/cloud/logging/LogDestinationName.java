@@ -19,7 +19,6 @@ package com.google.cloud.logging;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.google.api.pathtemplate.ValidationException;
 import com.google.logging.v2.LogName;
 import java.util.Map;
 
@@ -125,6 +124,6 @@ public final class LogDestinationName extends Option {
       return organization(logName.getOrganization());
     }
 
-    throw new ValidationException("LogDestinationName.fromLogName: logName not in valid format");
+    return null;
   }
 }
