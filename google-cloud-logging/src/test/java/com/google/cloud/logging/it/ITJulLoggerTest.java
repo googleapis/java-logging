@@ -40,6 +40,7 @@ import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.Test;
 
+@SuppressWarnings("deprecation")
 public class ITJulLoggerTest extends BaseSystemTest {
 
   private static final String LOG_ID = formatForTest("test-jul-log-handler-log");

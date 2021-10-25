@@ -25,6 +25,7 @@ import com.google.cloud.logging.Option.OptionType;
 import org.junit.Assert;
 import org.junit.Test;
 
+@SuppressWarnings("serial")
 public class OptionTest {
 
   private static final OptionType OPTION_TYPE = ListOption.OptionType.PAGE_SIZE;

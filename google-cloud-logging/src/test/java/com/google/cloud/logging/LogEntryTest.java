@@ -31,6 +31,7 @@ import java.time.Instant;
 import java.util.Map;
 import org.junit.Test;
 
+@SuppressWarnings("deprecation")
 public class LogEntryTest {
 
   private static final String LOG_NAME = "syslog";

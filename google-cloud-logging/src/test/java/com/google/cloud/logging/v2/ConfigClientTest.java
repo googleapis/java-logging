@@ -2426,7 +2426,7 @@ public class ConfigClientTest {
   public void getCmekSettingsTest() throws Exception {
     CmekSettings expectedResponse =
         CmekSettings.newBuilder()
-            .setName(CmekSettingsName.ofProjectCmekSettingsName("[PROJECT]").toString())
+            .setName(CmekSettingsName.ofProjectName("[PROJECT]").toString())
             .setKmsKeyName("kmsKeyName412586233")
             .setServiceAccountId("serviceAccountId1964232947")
             .build();
@@ -2434,7 +2434,7 @@ public class ConfigClientTest {
 
     GetCmekSettingsRequest request =
         GetCmekSettingsRequest.newBuilder()
-            .setName(CmekSettingsName.ofProjectCmekSettingsName("[PROJECT]").toString())
+            .setName(CmekSettingsName.ofProjectName("[PROJECT]").toString())
             .build();
 
     CmekSettings actualResponse = client.getCmekSettings(request);
@@ -2459,7 +2459,7 @@ public class ConfigClientTest {
     try {
       GetCmekSettingsRequest request =
           GetCmekSettingsRequest.newBuilder()
-              .setName(CmekSettingsName.ofProjectCmekSettingsName("[PROJECT]").toString())
+              .setName(CmekSettingsName.ofProjectName("[PROJECT]").toString())
               .build();
       client.getCmekSettings(request);
       Assert.fail("No exception raised");
@@ -2472,7 +2472,7 @@ public class ConfigClientTest {
   public void updateCmekSettingsTest() throws Exception {
     CmekSettings expectedResponse =
         CmekSettings.newBuilder()
-            .setName(CmekSettingsName.ofProjectCmekSettingsName("[PROJECT]").toString())
+            .setName(CmekSettingsName.ofProjectName("[PROJECT]").toString())
             .setKmsKeyName("kmsKeyName412586233")
             .setServiceAccountId("serviceAccountId1964232947")
             .build();

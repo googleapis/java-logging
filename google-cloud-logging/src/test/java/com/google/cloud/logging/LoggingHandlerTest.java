@@ -28,7 +28,6 @@ import com.google.cloud.logging.Payload.StringPayload;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import java.util.Collections;
-import java.util.Map;
 import java.util.logging.ErrorManager;
 import java.util.logging.Filter;
 import java.util.logging.Formatter;
@@ -41,6 +40,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+@SuppressWarnings("deprecation")
 public class LoggingHandlerTest {
 
   private static final String LOG_NAME = "java.log";
@@ -156,18 +156,6 @@ public class LoggingHandlerTest {
           .setTimestamp(123456789L)
           .build();
 
-  private static final String CONFIG_NAMESPACE = "com.google.cloud.logging.LoggingHandler";
-  private static final ImmutableMap<String, String> CONFIG_MAP =
-      ImmutableMap.<String, String>builder()
-          .put("log", "testLogName")
-          .put("level", "ALL")
-          .put("filter", "com.google.cloud.logging.LoggingHandlerTest$TestFilter")
-          .put("formatter", "com.google.cloud.logging.LoggingHandlerTest$TestFormatter")
-          .put("flushLevel", "CRITICAL")
-          .put("enhancers", "com.google.cloud.logging.LoggingHandlerTest$TestLoggingEnhancer")
-          .put("resourceType", "testResourceType")
-          .put("synchronicity", "SYNC")
-          .build();
   private static final ImmutableMap<String, String> BASE_SEVERITY_MAP =
       ImmutableMap.of(
           "levelName", Level.INFO.getName(), "levelValue", String.valueOf(Level.INFO.intValue()));
@@ -177,19 +165,6 @@ public class LoggingHandlerTest {
         WriteOption.resource(DEFAULT_RESOURCE),
         WriteOption.labels(BASE_SEVERITY_MAP)
       };
-
-  private static byte[] renderConfig(Map<String, String> config) {
-    StringBuilder str = new StringBuilder();
-    for (Map.Entry<String, String> entry : config.entrySet()) {
-      str.append(CONFIG_NAMESPACE)
-          .append('.')
-          .append(entry.getKey())
-          .append('=')
-          .append(entry.getValue())
-          .append(System.lineSeparator());
-    }
-    return str.toString().getBytes();
-  }
 
   private Logging logging;
   private LoggingOptions options;

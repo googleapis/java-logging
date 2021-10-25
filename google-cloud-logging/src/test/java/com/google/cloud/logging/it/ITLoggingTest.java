@@ -34,6 +34,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+@SuppressWarnings("deprecation")
 public class ITLoggingTest extends BaseSystemTest {
 
   private static final String LOG_ID = formatForTest("test-write-log-entries-log");

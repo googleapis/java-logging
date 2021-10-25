@@ -645,7 +645,7 @@ public class LoggingClientTest {
     requestObserver.onNext(request);
 
     try {
-      List<TailLogEntriesResponse> actualResponses = responseObserver.future().get();
+      responseObserver.future().get();
       Assert.fail("No exception thrown");
     } catch (ExecutionException e) {
       Assert.assertTrue(e.getCause() instanceof InvalidArgumentException);
