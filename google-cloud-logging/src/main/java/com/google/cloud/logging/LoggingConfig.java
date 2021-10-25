@@ -89,7 +89,8 @@ class LoggingConfig {
         for (String e_name : items) {
           Class<?> clazz = ClassLoader.getSystemClassLoader().loadClass(e_name);
           if (LoggingEnhancer.class.isAssignableFrom(clazz)) {
-            LoggingEnhancer enhancer = (LoggingEnhancer)clazz.getDeclaredConstructor().newInstance();
+            LoggingEnhancer enhancer =
+                (LoggingEnhancer) clazz.getDeclaredConstructor().newInstance();
             enhancers.add(enhancer);
           }
         }

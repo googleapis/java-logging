@@ -158,9 +158,9 @@ public final class SourceLocation implements Serializable {
   }
 
   /**
-   * Creates instance of {@link SourceLocation} based on stack trace information. Caller should
-   * provide the level in the stack where the information can be located. The stack trace level
-   * should be {@code 0} to display information for the caller of the method.
+   * Creates a new instance of {@link SourceLocation} based on stack trace information. A caller
+   * should provide the level in the stack where the information can be located. The stack trace
+   * level should be {@code 0} to display information for the caller of the method.
    *
    * @param level Zero-based non-negative integer defining the level in the stack trace where {@code
    *     0} is topmost element.
