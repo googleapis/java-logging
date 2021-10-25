@@ -27,6 +27,7 @@ import java.util.Map;
  * parameter in https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry)
  */
 public final class LogDestinationName extends Option {
+  private static final long serialVersionUID = -1948159887779744186L;
 
   enum DestinationType implements Option.OptionType {
     PROJECT,

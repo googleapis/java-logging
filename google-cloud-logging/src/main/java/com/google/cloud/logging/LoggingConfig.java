@@ -87,10 +87,11 @@ class LoggingConfig {
       if (list != null) {
         String[] items = list.split(",");
         for (String e_name : items) {
-          Class<? extends LoggingEnhancer> clz =
-              (Class<? extends LoggingEnhancer>)
-                  ClassLoader.getSystemClassLoader().loadClass(e_name);
-          enhancers.add(clz.getDeclaredConstructor().newInstance());
+          Class<?> clazz = ClassLoader.getSystemClassLoader().loadClass(e_name);
+          if (LoggingEnhancer.class.isAssignableFrom(clazz)) {
+            LoggingEnhancer enhancer = (LoggingEnhancer)clazz.getDeclaredConstructor().newInstance();
+            enhancers.add(enhancer);
+          }
         }
       }
       return enhancers;
@@ -121,7 +122,7 @@ class LoggingConfig {
     String stringFilter = getProperty(name);
     try {
       if (stringFilter != null) {
-        Class clz = ClassLoader.getSystemClassLoader().loadClass(stringFilter);
+        Class<?> clz = ClassLoader.getSystemClassLoader().loadClass(stringFilter);
         return (Filter) clz.getDeclaredConstructor().newInstance();
       }
     } catch (Exception ex) {
@@ -134,7 +135,7 @@ class LoggingConfig {
     String stringFilter = getProperty(name);
     try {
       if (stringFilter != null) {
-        Class clz = ClassLoader.getSystemClassLoader().loadClass(stringFilter);
+        Class<?> clz = ClassLoader.getSystemClassLoader().loadClass(stringFilter);
         return (Formatter) clz.getDeclaredConstructor().newInstance();
       }
     } catch (Exception ex) {
