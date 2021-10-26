@@ -91,6 +91,10 @@ import org.junit.Test;
 public class LoggingImplTest {
 
   private static final String PROJECT = "project";
+  private static final String PROJECT_OVERRIDE = "projectoverride";
+  private static final String FOLDER = "folder";
+  private static final String BILLING = "billing";
+  private static final String ORGANIZATION = "organization";
   private static final String PROJECT_PB = "projects/" + PROJECT;
   private static final String SINK_NAME = "sink";
   private static final SinkInfo SINK_INFO =
@@ -113,6 +117,12 @@ public class LoggingImplTest {
   private static final String LOG_NAMES_CURSOR = "cursor";
   private static final String LOG_NAME = "log";
   private static final String LOG_NAME_PB = "projects/" + PROJECT + "/logs/" + LOG_NAME;
+  private static final String LOG_NAME_OVERRIDE_PB =
+      "projects/" + PROJECT_OVERRIDE + "/logs/" + LOG_NAME;
+  private static final String LOG_NAME_FOLDER = "folders/" + FOLDER + "/logs/" + LOG_NAME;
+  private static final String LOG_NAME_BILLING = "billingAccounts/" + BILLING + "/logs/" + LOG_NAME;
+  private static final String LOG_NAME_ORGANIZATION =
+      "organizations/" + ORGANIZATION + "/logs/" + LOG_NAME;
   private static final MonitoredResource MONITORED_RESOURCE =
       MonitoredResource.newBuilder("global").addLabel("project-id", PROJECT).build();
   private static final LogEntry LOG_ENTRY1 =
@@ -1795,25 +1805,32 @@ public class LoggingImplTest {
 
   @Test
   public void testWriteLogEntriesWithOptions() {
-    Map<String, String> labels = ImmutableMap.of("key", "value");
-    WriteLogEntriesRequest request =
-        WriteLogEntriesRequest.newBuilder()
-            .putAllLabels(labels)
-            .setLogName(LOG_NAME_PB)
-            .setResource(MONITORED_RESOURCE.toPb())
-            .addAllEntries(
-                Iterables.transform(
-                    ImmutableList.of(LOG_ENTRY1, LOG_ENTRY2), LogEntry.toPbFunction(PROJECT)))
-            .build();
-    WriteLogEntriesResponse response = WriteLogEntriesResponse.newBuilder().build();
-    EasyMock.expect(loggingRpcMock.write(request)).andReturn(ApiFutures.immediateFuture(response));
-    EasyMock.replay(rpcFactoryMock, loggingRpcMock);
-    logging = options.getService();
-    logging.write(
-        ImmutableList.of(LOG_ENTRY1, LOG_ENTRY2),
-        WriteOption.logName(LOG_NAME),
-        WriteOption.resource(MONITORED_RESOURCE),
-        WriteOption.labels(labels));
+    test_write_log_entries_with_destination(
+        PROJECT, LOG_NAME_PB, LogDestinationName.project(PROJECT));
+  }
+
+  @Test
+  public void testWriteLogEntriesWithProjectOverrideOptions() {
+    test_write_log_entries_with_destination(
+        PROJECT_OVERRIDE, LOG_NAME_OVERRIDE_PB, LogDestinationName.project(PROJECT_OVERRIDE));
+  }
+
+  @Test
+  public void testWriteLogEntriesWithFolderOptions() {
+    test_write_log_entries_with_destination(
+        PROJECT, LOG_NAME_FOLDER, LogDestinationName.folder(FOLDER));
+  }
+
+  @Test
+  public void testWriteLogEntriesWithBillingOptions() {
+    test_write_log_entries_with_destination(
+        PROJECT, LOG_NAME_BILLING, LogDestinationName.billingAccount(BILLING));
+  }
+
+  @Test
+  public void testWriteLogEntriesWithOrganizationOptions() {
+    test_write_log_entries_with_destination(
+        PROJECT, LOG_NAME_ORGANIZATION, LogDestinationName.organization(ORGANIZATION));
   }
 
   @Test
@@ -1852,7 +1869,8 @@ public class LoggingImplTest {
         ImmutableList.of(LOG_ENTRY1, LOG_ENTRY2),
         WriteOption.logName(LOG_NAME),
         WriteOption.resource(MONITORED_RESOURCE),
-        WriteOption.labels(labels));
+        WriteOption.labels(labels),
+        WriteOption.destination(LogDestinationName.project(PROJECT)));
     logging.flush();
   }
 
@@ -2182,5 +2200,29 @@ public class LoggingImplTest {
       thread.join();
     }
     assertSame(0, exceptions.get());
+  }
+
+  private void test_write_log_entries_with_destination(
+      String projectId, String logName, LogDestinationName destination) {
+    Map<String, String> labels = ImmutableMap.of("key", "value");
+    WriteLogEntriesRequest request =
+        WriteLogEntriesRequest.newBuilder()
+            .putAllLabels(labels)
+            .setLogName(logName)
+            .setResource(MONITORED_RESOURCE.toPb())
+            .addAllEntries(
+                Iterables.transform(
+                    ImmutableList.of(LOG_ENTRY1, LOG_ENTRY2), LogEntry.toPbFunction(projectId)))
+            .build();
+    WriteLogEntriesResponse response = WriteLogEntriesResponse.newBuilder().build();
+    EasyMock.expect(loggingRpcMock.write(request)).andReturn(ApiFutures.immediateFuture(response));
+    EasyMock.replay(rpcFactoryMock, loggingRpcMock);
+    logging = options.getService();
+    logging.write(
+        ImmutableList.of(LOG_ENTRY1, LOG_ENTRY2),
+        WriteOption.logName(LOG_NAME),
+        WriteOption.resource(MONITORED_RESOURCE),
+        WriteOption.labels(labels),
+        WriteOption.destination(destination));
   }
 }
