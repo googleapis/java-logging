@@ -740,15 +740,18 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
       Iterable<LogEntry> logEntries,
       Map<Option.OptionType, ?> options) {
     WriteLogEntriesRequest.Builder builder = WriteLogEntriesRequest.newBuilder();
-    String projectId = null;
+    String projectId = serviceOptions.getProjectId();
 
-    LogName logName =
-        getLogName(
-            serviceOptions.getProjectId(), LOG_NAME.get(options), LOG_DESTINATION.get(options));
+    LogName logName = getLogName(projectId, LOG_NAME.get(options), LOG_DESTINATION.get(options));
 
     if (logName != null) {
       builder.setLogName(logName.toString());
-      projectId = logName.getProject();
+
+      // In case if project ID was provided in request options, it should be used also to
+      // generate log entries in case if those does not have any destination set.
+      if (logName.getProject() != null) {
+        projectId = logName.getProject();
+      }
     }
     MonitoredResource resource = RESOURCE.get(options);
     if (resource != null) {
@@ -759,7 +762,6 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
       builder.putAllLabels(labels);
     }
 
-    if (projectId == null) projectId = serviceOptions.getProjectId();
     builder.addAllEntries(Iterables.transform(logEntries, LogEntry.toPbFunction(projectId)));
     return builder.build();
   }

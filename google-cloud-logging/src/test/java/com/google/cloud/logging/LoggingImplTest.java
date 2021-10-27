@@ -1812,7 +1812,7 @@ public class LoggingImplTest {
   @Test
   public void testWriteLogEntriesWithProjectOverrideOptions() {
     test_write_log_entries_with_destination(
-        PROJECT_OVERRIDE, LOG_NAME_OVERRIDE_PB, LogDestinationName.project(PROJECT_OVERRIDE));
+        PROJECT, LOG_NAME_OVERRIDE_PB, LogDestinationName.project(PROJECT_OVERRIDE));
   }
 
   @Test
