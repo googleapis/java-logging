@@ -39,6 +39,7 @@ import com.google.cloud.PageImpl;
 import com.google.cloud.logging.spi.v2.LoggingRpc;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -442,11 +443,23 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     return get(deleteLogAsync(log));
   }
 
+  public boolean deleteLog(String log, LogDestinationName destination) {
+    return get(deleteLogAsyncImpl(log, destination));
+  }
+
   public ApiFuture<Boolean> deleteLogAsync(String log) {
-    DeleteLogRequest request =
-        DeleteLogRequest.newBuilder()
-            .setLogName(LogName.ofProjectLogName(getOptions().getProjectId(), log).toString())
-            .build();
+    return deleteLogAsyncImpl(log, null);
+  }
+
+  public ApiFuture<Boolean> deleteLogAsync(String log, LogDestinationName destination) {
+    return deleteLogAsyncImpl(log, destination);
+  }
+
+  private ApiFuture<Boolean> deleteLogAsyncImpl(String log, LogDestinationName destination) {
+    LogName name =
+        Preconditions.checkNotNull(getLogName(getOptions().getProjectId(), log, destination));
+
+    DeleteLogRequest request = DeleteLogRequest.newBuilder().setLogName(name.toString()).build();
     return transform(rpc.delete(request), EMPTY_TO_BOOLEAN_FUNCTION);
   }
 
@@ -754,6 +767,20 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     }
     builder.addAllEntries(Iterables.transform(logEntries, LogEntry.toPbFunction(projectId)));
     return builder.build();
+  }
+
+  private static LogName getLogName(
+      String projectId, String logName, LogDestinationName destination) {
+    if (logName == null) {
+      return null;
+    }
+
+    // If no destination specified, fallback to project based log name
+    if (destination == null) {
+      return LogName.ofProjectLogName(projectId, logName);
+    }
+
+    return destination.toLogName(logName);
   }
 
   public void write(Iterable<LogEntry> logEntries, WriteOption... options) {

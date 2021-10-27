@@ -91,6 +91,9 @@ import org.junit.Test;
 public class LoggingImplTest {
 
   private static final String PROJECT = "project";
+  private static final String FOLDER = "folder";
+  private static final String BILLING = "billing";
+  private static final String ORGANIZATION = "organization";
   private static final String PROJECT_PB = "projects/" + PROJECT;
   private static final String SINK_NAME = "sink";
   private static final SinkInfo SINK_INFO =
@@ -113,6 +116,10 @@ public class LoggingImplTest {
   private static final String LOG_NAMES_CURSOR = "cursor";
   private static final String LOG_NAME = "log";
   private static final String LOG_NAME_PB = "projects/" + PROJECT + "/logs/" + LOG_NAME;
+  private static final String LOG_NAME_FOLDER = "folders/" + FOLDER + "/logs/" + LOG_NAME;
+  private static final String LOG_NAME_BILLING = "billingAccounts/" + BILLING + "/logs/" + LOG_NAME;
+  private static final String LOG_NAME_ORGANIZATION =
+      "organizations/" + ORGANIZATION + "/logs/" + LOG_NAME;
   private static final MonitoredResource MONITORED_RESOURCE =
       MonitoredResource.newBuilder("global").addLabel("project-id", PROJECT).build();
   private static final LogEntry LOG_ENTRY1 =
@@ -1713,6 +1720,12 @@ public class LoggingImplTest {
   }
 
   @Test
+  public void testDeleteLog_BillingDestination() {
+    test_delete_by_destination(
+        LOG_NAME, LOG_NAME_BILLING, LogDestinationName.billingAccount(BILLING));
+  }
+
+  @Test
   public void testDeleteLog_Null() {
     DeleteLogRequest request = DeleteLogRequest.newBuilder().setLogName(LOG_NAME_PB).build();
     EasyMock.expect(loggingRpcMock.delete(request))
@@ -1730,6 +1743,24 @@ public class LoggingImplTest {
     EasyMock.replay(rpcFactoryMock, loggingRpcMock);
     logging = options.getService();
     assertTrue(logging.deleteLogAsync(LOG_NAME).get());
+  }
+
+  @Test
+  public void testDeleteLogAsync_FolderDestination()
+      throws ExecutionException, InterruptedException {
+    test_delete_by_destination(LOG_NAME, LOG_NAME_FOLDER, LogDestinationName.folder(FOLDER));
+  }
+
+  @Test
+  public void testDeleteLogAsync_OrgDestination() throws ExecutionException, InterruptedException {
+    test_delete_by_destination(
+        LOG_NAME, LOG_NAME_ORGANIZATION, LogDestinationName.organization(ORGANIZATION));
+  }
+
+  @Test
+  public void testDeleteLogAsync_ProjectDestination()
+      throws ExecutionException, InterruptedException {
+    test_delete_by_destination(LOG_NAME, LOG_NAME_PB, LogDestinationName.project(PROJECT));
   }
 
   @Test
@@ -2182,5 +2213,15 @@ public class LoggingImplTest {
       thread.join();
     }
     assertSame(0, exceptions.get());
+  }
+
+  private void test_delete_by_destination(
+      String logId, String logName, LogDestinationName destination) {
+    DeleteLogRequest request = DeleteLogRequest.newBuilder().setLogName(logName).build();
+    ApiFuture<Empty> response = ApiFutures.immediateFuture(Empty.getDefaultInstance());
+    EasyMock.expect(loggingRpcMock.delete(request)).andReturn(response);
+    EasyMock.replay(rpcFactoryMock, loggingRpcMock);
+    logging = options.getService();
+    assertTrue(logging.deleteLog(logId, destination));
   }
 }
