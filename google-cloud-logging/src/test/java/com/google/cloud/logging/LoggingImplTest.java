@@ -160,6 +160,8 @@ public class LoggingImplTest {
           .setLogName(LOG_NAME)
           .setResource(MONITORED_RESOURCE)
           .build();
+  private static final LogEntry LOG_ENTRY_EMPTY =
+      LogEntry.newBuilder(StringPayload.of("empty-entry")).build();
   private static final Function<SinkInfo, LogSink> SINK_TO_PB_FUNCTION =
       new Function<SinkInfo, LogSink>() {
         @Override
@@ -2240,7 +2242,8 @@ public class LoggingImplTest {
                         LOG_ENTRY_BILLING,
                         LOG_ENTRY_FOLDER,
                         LOG_ENTRY_ORGANIZATION,
-                        LOG_ENTRY_NO_DESTINATION),
+                        LOG_ENTRY_NO_DESTINATION,
+                        LOG_ENTRY_EMPTY),
                     LogEntry.toPbFunction(projectId)))
             .build();
     WriteLogEntriesResponse response = WriteLogEntriesResponse.newBuilder().build();
@@ -2249,7 +2252,12 @@ public class LoggingImplTest {
     logging = options.getService();
     logging.write(
         ImmutableList.of(
-            LOG_ENTRY1, LOG_ENTRY_BILLING, LOG_ENTRY_FOLDER, LOG_ENTRY_ORGANIZATION, LOG_ENTRY2),
+            LOG_ENTRY1,
+            LOG_ENTRY_BILLING,
+            LOG_ENTRY_FOLDER,
+            LOG_ENTRY_ORGANIZATION,
+            LOG_ENTRY2,
+            LOG_ENTRY_EMPTY),
         WriteOption.logName(LOG_NAME),
         WriteOption.resource(MONITORED_RESOURCE),
         WriteOption.labels(labels),
