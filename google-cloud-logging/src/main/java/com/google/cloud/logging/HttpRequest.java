@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *       https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -51,6 +51,7 @@ public final class HttpRequest implements Serializable {
   private final boolean cacheValidatedWithOriginServer;
   private final Long cacheFillBytes;
   private final Duration latency;
+  private final String protocol;
 
   /** The HTTP request method. */
   public static final class RequestMethod extends StringEnumValue {
@@ -112,6 +113,7 @@ public final class HttpRequest implements Serializable {
     private boolean cacheValidatedWithOriginServer;
     private Long cacheFillBytes;
     private Duration latency;
+    private String protocol;
 
     Builder() {}
 
@@ -130,6 +132,7 @@ public final class HttpRequest implements Serializable {
       this.cacheValidatedWithOriginServer = request.cacheValidatedWithOriginServer;
       this.cacheFillBytes = request.cacheFillBytes;
       this.latency = request.latency;
+      this.protocol = request.protocol;
     }
 
     /** Sets the HTTP request method. */
@@ -202,7 +205,7 @@ public final class HttpRequest implements Serializable {
     /**
      * Sets the referer URL of the request, as defined in HTTP/1.1 Header Field Definitions.
      *
-     * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html">HTTP/1.1 Header Field
+     * @see <a href= "http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html">HTTP/1.1 Header Field
      *     Definitions</a>
      */
     public Builder setReferer(String referer) {
@@ -253,6 +256,12 @@ public final class HttpRequest implements Serializable {
       return this;
     }
 
+    /** Sets the request protocol name and version. */
+    public Builder setProtocol(String protocol) {
+      this.protocol = protocol;
+      return this;
+    }
+
     /** Creates a {@code HttpRequest} object for this builder. */
     public HttpRequest build() {
       return new HttpRequest(this);
@@ -274,6 +283,7 @@ public final class HttpRequest implements Serializable {
     this.cacheValidatedWithOriginServer = builder.cacheValidatedWithOriginServer;
     this.cacheFillBytes = builder.cacheFillBytes;
     this.latency = builder.latency;
+    this.protocol = builder.protocol;
   }
 
   /** Returns the HTTP request method. */
@@ -338,7 +348,7 @@ public final class HttpRequest implements Serializable {
   /**
    * Returns the referer URL of the request, as defined in HTTP/1.1 Header Field Definitions.
    *
-   * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html">HTTP/1.1 Header Field
+   * @see <a href= "http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html">HTTP/1.1 Header Field
    *     Definitions</a>
    */
   public String getReferer() {
@@ -388,6 +398,11 @@ public final class HttpRequest implements Serializable {
     return latency;
   }
 
+  /** Returns the protocol name and version of the request. */
+  public String getProtocol() {
+    return protocol;
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(
@@ -404,7 +419,8 @@ public final class HttpRequest implements Serializable {
         referer,
         cacheHit,
         cacheValidatedWithOriginServer,
-        latency);
+        latency,
+        protocol);
   }
 
   @Override
@@ -424,6 +440,7 @@ public final class HttpRequest implements Serializable {
         .add("cacheValidatedWithOriginServer", cacheValidatedWithOriginServer)
         .add("cacheFillBytes", cacheFillBytes)
         .add("latency", latency)
+        .add("protocol", protocol)
         .toString();
   }
 
@@ -449,7 +466,8 @@ public final class HttpRequest implements Serializable {
         && cacheLookup == other.cacheLookup
         && cacheHit == other.cacheHit
         && cacheValidatedWithOriginServer == other.cacheValidatedWithOriginServer
-        && Objects.equals(cacheFillBytes, other.cacheFillBytes);
+        && Objects.equals(cacheFillBytes, other.cacheFillBytes)
+        && Objects.equals(protocol, other.protocol);
   }
 
   /** Returns a builder for this object. */
@@ -501,6 +519,9 @@ public final class HttpRequest implements Serializable {
               .setNanos(latency.getNano())
               .build());
     }
+    if (protocol != null) {
+      builder.setProtocol(protocol);
+    }
     return builder.build();
   }
 
@@ -550,6 +571,32 @@ public final class HttpRequest implements Serializable {
           Duration.ofSeconds(
               requestPb.getLatency().getSeconds(), requestPb.getLatency().getNanos()));
     }
+    if (!Strings.isNullOrEmpty(requestPb.getProtocol())) {
+      builder.setProtocol(requestPb.getProtocol());
+    }
     return builder.build();
+  }
+
+  /**
+   * Creates a new instance of {@link HttpRequest} based on the current context. The context depends
+   * on the Web application framework that the runtime using. Supported contexts:
+   *
+   * <ul>
+   *   <li>* Spring (from v2 to v5)
+   * </ul>
+   *
+   * TODO: add more info here
+   *
+   * @return a new instance of {@link HttpRequest} with initialized fields or {@code null} if the
+   *     current context does not have information about HTTP request.
+   * @see <a href=
+   *     "https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/context/request/RequestContextHolder.html">RequestContextHolder</a>
+   */
+  static HttpRequest fromCurrentContext() {
+    HttpRequest request = HttpCurrentContext.getHttpRequest();
+    if (request != null) {
+      return request;
+    }
+    return HttpRequest.newBuilder().build();
   }
 }
