@@ -137,6 +137,29 @@ public class LoggingImplTest {
           .setDestination(LogDestinationName.project(PROJECT))
           .setResource(MONITORED_RESOURCE)
           .build();
+  private static final LogEntry LOG_ENTRY_BILLING =
+      LogEntry.newBuilder(StringPayload.of("entry-billing"))
+          .setLogName(LOG_NAME)
+          .setDestination(LogDestinationName.billingAccount(BILLING))
+          .setResource(MONITORED_RESOURCE)
+          .build();
+  private static final LogEntry LOG_ENTRY_FOLDER =
+      LogEntry.newBuilder(StringPayload.of("entry-folder"))
+          .setLogName(LOG_NAME)
+          .setDestination(LogDestinationName.folder(FOLDER))
+          .setResource(MONITORED_RESOURCE)
+          .build();
+  private static final LogEntry LOG_ENTRY_ORGANIZATION =
+      LogEntry.newBuilder(StringPayload.of("entry-organization"))
+          .setLogName(LOG_NAME)
+          .setDestination(LogDestinationName.organization(ORGANIZATION))
+          .setResource(MONITORED_RESOURCE)
+          .build();
+  private static final LogEntry LOG_ENTRY_NO_DESTINATION =
+      LogEntry.newBuilder(StringPayload.of("entry2"))
+          .setLogName(LOG_NAME)
+          .setResource(MONITORED_RESOURCE)
+          .build();
   private static final Function<SinkInfo, LogSink> SINK_TO_PB_FUNCTION =
       new Function<SinkInfo, LogSink>() {
         @Override
@@ -2212,14 +2235,21 @@ public class LoggingImplTest {
             .setResource(MONITORED_RESOURCE.toPb())
             .addAllEntries(
                 Iterables.transform(
-                    ImmutableList.of(LOG_ENTRY1, LOG_ENTRY2), LogEntry.toPbFunction(projectId)))
+                    ImmutableList.of(
+                        LOG_ENTRY1,
+                        LOG_ENTRY_BILLING,
+                        LOG_ENTRY_FOLDER,
+                        LOG_ENTRY_ORGANIZATION,
+                        LOG_ENTRY_NO_DESTINATION),
+                    LogEntry.toPbFunction(projectId)))
             .build();
     WriteLogEntriesResponse response = WriteLogEntriesResponse.newBuilder().build();
     EasyMock.expect(loggingRpcMock.write(request)).andReturn(ApiFutures.immediateFuture(response));
     EasyMock.replay(rpcFactoryMock, loggingRpcMock);
     logging = options.getService();
     logging.write(
-        ImmutableList.of(LOG_ENTRY1, LOG_ENTRY2),
+        ImmutableList.of(
+            LOG_ENTRY1, LOG_ENTRY_BILLING, LOG_ENTRY_FOLDER, LOG_ENTRY_ORGANIZATION, LOG_ENTRY2),
         WriteOption.logName(LOG_NAME),
         WriteOption.resource(MONITORED_RESOURCE),
         WriteOption.labels(labels),

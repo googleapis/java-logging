@@ -746,12 +746,6 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
 
     if (logName != null) {
       builder.setLogName(logName.toString());
-
-      // In case if project ID was provided in request options, it should be used also to
-      // generate log entries in case if those does not have any destination set.
-      if (logName.getProject() != null) {
-        projectId = logName.getProject();
-      }
     }
     MonitoredResource resource = RESOURCE.get(options);
     if (resource != null) {
