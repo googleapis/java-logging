@@ -1016,7 +1016,10 @@ public class LoggingImplTest {
     LogExclusion exclusionPb = EXCLUSION.toProtobuf();
     ApiFuture<LogExclusion> response = ApiFutures.immediateFuture(exclusionPb);
     CreateExclusionRequest request =
-        CreateExclusionRequest.newBuilder().setParent(PROJECT_PARENT).setExclusion(exclusionPb).build();
+        CreateExclusionRequest.newBuilder()
+            .setParent(PROJECT_PARENT)
+            .setExclusion(exclusionPb)
+            .build();
     EasyMock.expect(loggingRpcMock.create(request)).andReturn(response);
     EasyMock.replay(rpcFactoryMock, loggingRpcMock);
     logging = options.getService();
@@ -1033,7 +1036,10 @@ public class LoggingImplTest {
     LogExclusion exclusionPb = EXCLUSION.toProtobuf();
     ApiFuture<LogExclusion> response = ApiFutures.immediateFuture(exclusionPb);
     CreateExclusionRequest request =
-        CreateExclusionRequest.newBuilder().setParent(PROJECT_PARENT).setExclusion(exclusionPb).build();
+        CreateExclusionRequest.newBuilder()
+            .setParent(PROJECT_PARENT)
+            .setExclusion(exclusionPb)
+            .build();
     EasyMock.expect(loggingRpcMock.create(request)).andReturn(response);
     EasyMock.replay(rpcFactoryMock, loggingRpcMock);
     logging = options.getService();

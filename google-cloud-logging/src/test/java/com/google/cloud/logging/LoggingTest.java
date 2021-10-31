@@ -101,7 +101,7 @@ public class LoggingTest {
     WriteOption writeOption = WriteOption.labels(LABELS);
     assertEquals(LABELS, writeOption.getValue());
     assertEquals(WriteOption.OptionType.LABELS, writeOption.getOptionType());
-    
+
     writeOption = WriteOption.logName(LOG_NAME);
     assertEquals(LOG_NAME, writeOption.getValue());
     assertEquals(WriteOption.OptionType.LOG_NAME, writeOption.getOptionType());
