@@ -101,6 +101,7 @@ public class LoggingTest {
     WriteOption writeOption = WriteOption.labels(LABELS);
     assertEquals(LABELS, writeOption.getValue());
     assertEquals(WriteOption.OptionType.LABELS, writeOption.getOptionType());
+    
     writeOption = WriteOption.logName(LOG_NAME);
     assertEquals(LOG_NAME, writeOption.getValue());
     assertEquals(WriteOption.OptionType.LOG_NAME, writeOption.getOptionType());
@@ -108,8 +109,11 @@ public class LoggingTest {
     writeOption = WriteOption.resource(RESOURCE);
     assertEquals(RESOURCE, writeOption.getValue());
     assertEquals(WriteOption.OptionType.RESOURCE, writeOption.getOptionType());
+  }
 
-    writeOption = WriteOption.destination(LogDestinationName.project(PROJECT_NAME));
+  @Test
+  public void testWriteOptionWithDestination() {
+    WriteOption writeOption = WriteOption.destination(LogDestinationName.project(PROJECT_NAME));
     LogDestinationName resource = (LogDestinationName) writeOption.getValue();
     assertEquals(WriteOption.OptionType.LOG_DESTINATION, writeOption.getOptionType());
     assertEquals(LogDestinationName.DestinationType.PROJECT, resource.getOptionType());
