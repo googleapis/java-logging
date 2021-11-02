@@ -127,13 +127,13 @@ public class LoggingImplTest {
   private static final MonitoredResource MONITORED_RESOURCE =
       MonitoredResource.newBuilder("global").addLabel("project-id", PROJECT).build();
   private static final LogEntry LOG_ENTRY1 =
-      LogEntry.newBuilder(StringPayload.of("entry1"))
+      LogEntry.newBuilder(StringPayload.of("entry-1"))
           .setLogName(LOG_NAME)
           .setDestination(LogDestinationName.project(PROJECT))
           .setResource(MONITORED_RESOURCE)
           .build();
   private static final LogEntry LOG_ENTRY2 =
-      LogEntry.newBuilder(StringPayload.of("entry2"))
+      LogEntry.newBuilder(StringPayload.of("entry-2"))
           .setLogName(LOG_NAME)
           .setDestination(LogDestinationName.project(PROJECT))
           .setResource(MONITORED_RESOURCE)
@@ -157,12 +157,12 @@ public class LoggingImplTest {
           .setResource(MONITORED_RESOURCE)
           .build();
   private static final LogEntry LOG_ENTRY_NO_DESTINATION =
-      LogEntry.newBuilder(StringPayload.of("entry2"))
+      LogEntry.newBuilder(StringPayload.of("entry-no-destination"))
           .setLogName(LOG_NAME)
           .setResource(MONITORED_RESOURCE)
           .build();
   private static final LogEntry LOG_ENTRY_EMPTY =
-      LogEntry.newBuilder(StringPayload.of("empty-entry")).build();
+      LogEntry.newBuilder(StringPayload.of("entry-empty")).build();
   private static final Function<SinkInfo, LogSink> SINK_TO_PB_FUNCTION =
       new Function<SinkInfo, LogSink>() {
         @Override
@@ -1875,13 +1875,16 @@ public class LoggingImplTest {
         WriteLogEntriesRequest.newBuilder()
             .addAllEntries(
                 Iterables.transform(
-                    ImmutableList.of(LOG_ENTRY1, LOG_ENTRY2), LogEntry.toPbFunction(PROJECT)))
+                    ImmutableList.of(
+                        LOG_ENTRY1, LOG_ENTRY2, LOG_ENTRY_NO_DESTINATION, LOG_ENTRY_EMPTY),
+                    LogEntry.toPbFunction(PROJECT)))
             .build();
     WriteLogEntriesResponse response = WriteLogEntriesResponse.newBuilder().build();
     EasyMock.expect(loggingRpcMock.write(request)).andReturn(ApiFutures.immediateFuture(response));
     EasyMock.replay(rpcFactoryMock, loggingRpcMock);
     logging = options.getService();
-    logging.write(ImmutableList.of(LOG_ENTRY1, LOG_ENTRY2));
+    logging.write(
+        ImmutableList.of(LOG_ENTRY1, LOG_ENTRY2, LOG_ENTRY_NO_DESTINATION, LOG_ENTRY_EMPTY));
     logging.flush();
   }
 
@@ -2241,7 +2244,7 @@ public class LoggingImplTest {
   private void testWriteLogEntriesWithDestination(
       String projectId, String fullLogNamePath, LogDestinationName destination) {
     Map<String, String> labels = ImmutableMap.of("key", "value");
-    WriteLogEntriesRequest request =
+    WriteLogEntriesRequest expectedWriteLogEntriesRequest =
         WriteLogEntriesRequest.newBuilder()
             .putAllLabels(labels)
             .setLogName(fullLogNamePath)
@@ -2258,7 +2261,8 @@ public class LoggingImplTest {
                     LogEntry.toPbFunction(projectId)))
             .build();
     WriteLogEntriesResponse response = WriteLogEntriesResponse.newBuilder().build();
-    EasyMock.expect(loggingRpcMock.write(request)).andReturn(ApiFutures.immediateFuture(response));
+    EasyMock.expect(loggingRpcMock.write(expectedWriteLogEntriesRequest))
+        .andReturn(ApiFutures.immediateFuture(response));
     EasyMock.replay(rpcFactoryMock, loggingRpcMock);
     logging = options.getService();
     logging.write(
@@ -2267,7 +2271,7 @@ public class LoggingImplTest {
             LOG_ENTRY_BILLING,
             LOG_ENTRY_FOLDER,
             LOG_ENTRY_ORGANIZATION,
-            LOG_ENTRY2,
+            LOG_ENTRY_NO_DESTINATION,
             LOG_ENTRY_EMPTY),
         WriteOption.logName(LOG_NAME),
         WriteOption.resource(MONITORED_RESOURCE),
