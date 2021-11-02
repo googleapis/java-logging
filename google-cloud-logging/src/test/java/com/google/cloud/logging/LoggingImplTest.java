@@ -1779,45 +1779,45 @@ public class LoggingImplTest {
 
   @Test
   public void testDeleteLogBillingDestination() throws ExecutionException, InterruptedException {
-    testDeleteByBestination(
+    testDeleteByDestination(
         LOG_NAME, LOG_NAME_BILLING_PATH, LogDestinationName.billingAccount(BILLING), false);
   }
 
   @Test
   public void testDeleteLogBillingDestinationAsync()
       throws ExecutionException, InterruptedException {
-    testDeleteByBestination(
+    testDeleteByDestination(
         LOG_NAME, LOG_NAME_BILLING_PATH, LogDestinationName.billingAccount(BILLING), true);
   }
 
   @Test
   public void testDeleteLogFolderDestination() throws ExecutionException, InterruptedException {
-    testDeleteByBestination(
+    testDeleteByDestination(
         LOG_NAME, LOG_NAME_FOLDER_PATH, LogDestinationName.folder(FOLDER), false);
   }
 
   @Test
   public void testDeleteLogFolderDestinationAsync()
       throws ExecutionException, InterruptedException {
-    testDeleteByBestination(
+    testDeleteByDestination(
         LOG_NAME, LOG_NAME_FOLDER_PATH, LogDestinationName.folder(FOLDER), true);
   }
 
   @Test
   public void testDeleteLogOrgDestination() throws ExecutionException, InterruptedException {
-    testDeleteByBestination(
+    testDeleteByDestination(
         LOG_NAME, LOG_NAME_ORGANIZATION_PATH, LogDestinationName.organization(ORGANIZATION), false);
   }
 
   @Test
   public void testDeleteLogOrgDestinationAsync() throws ExecutionException, InterruptedException {
-    testDeleteByBestination(
+    testDeleteByDestination(
         LOG_NAME, LOG_NAME_ORGANIZATION_PATH, LogDestinationName.organization(ORGANIZATION), true);
   }
 
   @Test
   public void testDeleteLogProjectDestination() throws ExecutionException, InterruptedException {
-    testDeleteByBestination(
+    testDeleteByDestination(
         LOG_NAME, LOG_NAME_PROJECT_PATH, LogDestinationName.project(PROJECT), false);
   }
 
@@ -2285,7 +2285,7 @@ public class LoggingImplTest {
     assertSame(0, exceptions.get());
   }
 
-  private void testDeleteByBestination(
+  private void testDeleteByDestination(
       String logId, String logName, LogDestinationName destination, boolean useAsyncDelete)
       throws ExecutionException, InterruptedException {
     DeleteLogRequest request = DeleteLogRequest.newBuilder().setLogName(logName).build();
