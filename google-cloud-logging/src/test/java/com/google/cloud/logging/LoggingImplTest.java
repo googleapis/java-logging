@@ -1756,12 +1756,6 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testDeleteLogBillingDestination() {
-    testDeleteByBestination(
-        LOG_NAME, LOG_NAME_BILLING_PATH, LogDestinationName.billingAccount(BILLING));
-  }
-
-  @Test
   public void testDeleteLog_Null() {
     DeleteLogRequest request =
         DeleteLogRequest.newBuilder().setLogName(LOG_NAME_PROJECT_PATH).build();
@@ -1784,21 +1778,47 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testDeleteLogAsyncFolderDestination()
-      throws ExecutionException, InterruptedException {
-    testDeleteByBestination(LOG_NAME, LOG_NAME_FOLDER_PATH, LogDestinationName.folder(FOLDER));
-  }
-
-  @Test
-  public void testDeleteLogAsyncOrgDestination() throws ExecutionException, InterruptedException {
+  public void testDeleteLogBillingDestination() throws ExecutionException, InterruptedException {
     testDeleteByBestination(
-        LOG_NAME, LOG_NAME_ORGANIZATION_PATH, LogDestinationName.organization(ORGANIZATION));
+        LOG_NAME, LOG_NAME_BILLING_PATH, LogDestinationName.billingAccount(BILLING), false);
   }
 
   @Test
-  public void testDeleteLogAsyncProjectDestination()
+  public void testDeleteLogBillingDestinationAsync()
       throws ExecutionException, InterruptedException {
-    testDeleteByBestination(LOG_NAME, LOG_NAME_PROJECT_PATH, LogDestinationName.project(PROJECT));
+    testDeleteByBestination(
+        LOG_NAME, LOG_NAME_BILLING_PATH, LogDestinationName.billingAccount(BILLING), true);
+  }
+
+  @Test
+  public void testDeleteLogFolderDestination() throws ExecutionException, InterruptedException {
+    testDeleteByBestination(
+        LOG_NAME, LOG_NAME_FOLDER_PATH, LogDestinationName.folder(FOLDER), false);
+  }
+
+  @Test
+  public void testDeleteLogFolderDestinationAsync()
+      throws ExecutionException, InterruptedException {
+    testDeleteByBestination(
+        LOG_NAME, LOG_NAME_FOLDER_PATH, LogDestinationName.folder(FOLDER), true);
+  }
+
+  @Test
+  public void testDeleteLogOrgDestination() throws ExecutionException, InterruptedException {
+    testDeleteByBestination(
+        LOG_NAME, LOG_NAME_ORGANIZATION_PATH, LogDestinationName.organization(ORGANIZATION), false);
+  }
+
+  @Test
+  public void testDeleteLogOrgDestinationAsync() throws ExecutionException, InterruptedException {
+    testDeleteByBestination(
+        LOG_NAME, LOG_NAME_ORGANIZATION_PATH, LogDestinationName.organization(ORGANIZATION), true);
+  }
+
+  @Test
+  public void testDeleteLogProjectDestination() throws ExecutionException, InterruptedException {
+    testDeleteByBestination(
+        LOG_NAME, LOG_NAME_PROJECT_PATH, LogDestinationName.project(PROJECT), false);
   }
 
   @Test
@@ -2266,13 +2286,17 @@ public class LoggingImplTest {
   }
 
   private void testDeleteByBestination(
-      String logId, String logName, LogDestinationName destination) {
+      String logId, String logName, LogDestinationName destination, boolean useAsyncDelete)
+      throws ExecutionException, InterruptedException {
     DeleteLogRequest request = DeleteLogRequest.newBuilder().setLogName(logName).build();
     ApiFuture<Empty> response = ApiFutures.immediateFuture(Empty.getDefaultInstance());
     EasyMock.expect(loggingRpcMock.delete(request)).andReturn(response);
     EasyMock.replay(rpcFactoryMock, loggingRpcMock);
     logging = options.getService();
-    assertTrue(logging.deleteLog(logId, destination));
+    assertTrue(
+        useAsyncDelete
+            ? logging.deleteLogAsync(logId, destination).get()
+            : logging.deleteLog(logId, destination));
   }
 
   private void testWriteLogEntriesWithDestination(
