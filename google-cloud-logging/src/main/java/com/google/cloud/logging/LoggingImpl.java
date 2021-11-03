@@ -455,7 +455,12 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
 
   @Override
   public ApiFuture<Boolean> deleteLogAsync(String log, LogDestinationName destination) {
-    LogName name = getLogName(getOptions().getProjectId(), log, destination, true);
+    Preconditions.checkNotNull(log, "log parameter cannot be null");
+    String projectId = getOptions().getProjectId();
+    if (destination == null) {
+      Preconditions.checkNotNull(projectId, "projectId parameter cannot be null");
+    }
+    LogName name = getLogName(projectId, log, destination);
     DeleteLogRequest request = DeleteLogRequest.newBuilder().setLogName(name.toString()).build();
     return transform(rpc.delete(request), EMPTY_TO_BOOLEAN_FUNCTION);
   }
@@ -751,8 +756,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     WriteLogEntriesRequest.Builder builder = WriteLogEntriesRequest.newBuilder();
     String projectId = serviceOptions.getProjectId();
 
-    LogName logName =
-        getLogName(projectId, LOG_NAME.get(options), LOG_DESTINATION.get(options), false);
+    LogName logName = getLogName(projectId, LOG_NAME.get(options), LOG_DESTINATION.get(options));
 
     if (logName != null) {
       builder.setLogName(logName.toString());
@@ -771,21 +775,13 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   }
 
   private static LogName getLogName(
-      String projectId,
-      String logName,
-      LogDestinationName destination,
-      boolean validateParameters) {
-    if (validateParameters) {
-      Preconditions.checkNotNull(logName, "logName parameter cannot be null");
-    } else if (logName == null) {
+      String projectId, String logName, LogDestinationName destination) {
+    if (logName == null) {
       return null;
     }
 
     // If no destination specified, fallback to project based log name
     if (destination == null) {
-      if (validateParameters) {
-        Preconditions.checkNotNull(projectId, "projectId parameter cannot be null");
-      }
       return LogName.ofProjectLogName(projectId, logName);
     }
 
