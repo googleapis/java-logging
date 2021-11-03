@@ -441,22 +441,20 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   }
 
   public boolean deleteLog(String log) {
-    return get(deleteLogAsync(log));
+    return get(deleteLogAsync(log, null));
   }
 
+  @Override
   public boolean deleteLog(String log, LogDestinationName destination) {
-    return get(deleteLogAsyncImpl(log, destination));
+    return get(deleteLogAsync(log, destination));
   }
 
   public ApiFuture<Boolean> deleteLogAsync(String log) {
-    return deleteLogAsyncImpl(log, null);
+    return deleteLogAsync(log, null);
   }
 
+  @Override
   public ApiFuture<Boolean> deleteLogAsync(String log, LogDestinationName destination) {
-    return deleteLogAsyncImpl(log, destination);
-  }
-
-  private ApiFuture<Boolean> deleteLogAsyncImpl(String log, LogDestinationName destination) {
     LogName name = getLogName(getOptions().getProjectId(), log, destination, true);
     DeleteLogRequest request = DeleteLogRequest.newBuilder().setLogName(name.toString()).build();
     return transform(rpc.delete(request), EMPTY_TO_BOOLEAN_FUNCTION);

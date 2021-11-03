@@ -602,7 +602,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
    * https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry). The log will reappear if
    * new entries are written to it.
    *
-   * <p>Example of deleting a log.
+   * <p>Example of deleting a log by folder destination.
    *
    * <pre>
    * {
@@ -620,7 +620,10 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
    *
    * @return {@code true} if the log was deleted, {@code false} if it was not found
    */
-  boolean deleteLog(String log, LogDestinationName destination);
+  default boolean deleteLog(String log, LogDestinationName destination) {
+    throw new UnsupportedOperationException(
+        "method deleteLog() does not have default implementation");
+  }
 
   /**
    * Sends a request for deleting a log and all its log entries for given log destination (see
@@ -628,7 +631,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
    * This method returns a {@code ApiFuture} object to consume the result. {@link ApiFuture#get()}
    * returns {@code true} if the log was deleted, {@code false} if it was not found.
    *
-   * <p>Example of asynchronously deleting a log.
+   * <p>Example of asynchronously deleting a log by folder destination.
    *
    * <pre>
    * {
@@ -646,7 +649,10 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
    * }
    * </pre>
    */
-  ApiFuture<Boolean> deleteLogAsync(String log, LogDestinationName destination);
+  default ApiFuture<Boolean> deleteLogAsync(String log, LogDestinationName destination) {
+    throw new UnsupportedOperationException(
+        "method deleteLogAsync() does not have default implementation");
+  }
 
   /**
    * Sends a request for deleting a log and all its log entries. This method returns a {@code

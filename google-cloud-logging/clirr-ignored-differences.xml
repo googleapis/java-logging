@@ -4,6 +4,6 @@
   <difference>
     <differenceType>7012</differenceType>
     <className>com/google/cloud/logging/Logging</className>
-    <method>* deleteLog*(*)</method>
+    <method>* deleteLog*(java.lang.String, com.google.cloud.logging.LogDestinationName)</method>
   </difference>
 </differences>
