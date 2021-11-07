@@ -19,6 +19,8 @@ package com.google.cloud.logging;
 import com.google.api.core.ApiFunction;
 import com.google.cloud.StringEnumType;
 import com.google.cloud.StringEnumValue;
+import com.google.cloud.logging.context.ContextFactory;
+import com.google.cloud.logging.context.CurrentContext;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Strings;
 import java.io.Serializable;
@@ -585,18 +587,16 @@ public final class HttpRequest implements Serializable {
    *   <li>* Spring (from v2 to v5)
    * </ul>
    *
-   * TODO: add more info here
-   *
    * @return a new instance of {@link HttpRequest} with initialized fields or {@code null} if the
    *     current context does not have information about HTTP request.
    * @see <a href=
    *     "https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/context/request/RequestContextHolder.html">RequestContextHolder</a>
    */
   static HttpRequest fromCurrentContext() {
-    HttpRequest request = HttpCurrentContext.getHttpRequest();
-    if (request != null) {
-      return request;
+    CurrentContext context = ContextFactory.getContext();
+    if (context != null) {
+      return context.get();
     }
-    return HttpRequest.newBuilder().build();
+    return null;
   }
 }
