@@ -33,16 +33,12 @@ public class SpringContextExtractor implements ContextExtractor {
     return context;
   }
 
-  /** This method intended for unit testing. Do not use it. */
-  protected static void setClassLoader(ClassLoader classLoader) {
-    SpringContextExtractor.classLoader = classLoader;
-  }
-
   public static class SpringContext implements CurrentContext {
+    static final String USER_AGENT_HEADER = "User-Agent";
+    static final String REFERER_HEADER = "Referer";
     RequestContextHolder contextHolder;
 
-    private SpringContext() {
-    }
+    private SpringContext() {}
 
     protected static SpringContext build(ClassLoader classLoader) {
       SpringContext context = new SpringContext();
@@ -51,7 +47,8 @@ public class SpringContextExtractor implements ContextExtractor {
         classLoader = ClassLoader.getSystemClassLoader();
       }
       try {
-        Class<?> clz = classLoader.loadClass("org.springframework.web.context.request.RequestContextHolder");
+        Class<?> clz =
+            classLoader.loadClass("org.springframework.web.context.request.RequestContextHolder");
         Method method = clz.getMethod("getRequestAttributes");
         context.contextHolder = new RequestContextHolder(method);
       } catch (ClassNotFoundException | NoSuchMethodException | SecurityException ex) {
@@ -62,7 +59,31 @@ public class SpringContextExtractor implements ContextExtractor {
 
     @Override
     public HttpRequest get() {
-      throw new NullPointerException();
+      if (contextHolder == null) {
+        return null;
+      }
+      ServletRequestAttributes attrs = contextHolder.getRequestAttributes();
+      if (attrs == null) {
+        return null;
+      }
+      HttpServletRequest servletRequest = attrs.getRequest();
+      if (servletRequest == null) {
+        return null;
+      }
+      HttpRequest request =
+          HttpRequest.newBuilder()
+              .setRemoteIp(servletRequest.getRemoteAddr())
+              .setServerIp(servletRequest.getLocalAddr())
+              .setUserAgent(servletRequest.getHeader(USER_AGENT_HEADER))
+              // TBD: calculate the size to include header size
+              // .setRequestSize(invoke(httpRequestMethod.get(CONTENT_SIZE_METHOD),
+              // httpServletRequest))
+              .setRequestUrl(servletRequest.getRequestURI() + "?" + servletRequest.getQueryString())
+              .setRequestMethod(HttpRequest.RequestMethod.valueOf(servletRequest.getMethod()))
+              .setProtocol(servletRequest.getProtocol())
+              .setReferer(servletRequest.getHeader(REFERER_HEADER))
+              .build();
+      return request;
     }
   }
 

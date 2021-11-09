@@ -592,7 +592,7 @@ public final class HttpRequest implements Serializable {
    * @see <a href=
    *     "https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/context/request/RequestContextHolder.html">RequestContextHolder</a>
    */
-  static HttpRequest fromCurrentContext() {
+  public static HttpRequest fromCurrentContext() {
     CurrentContext context = ContextFactory.getContext();
     if (context != null) {
       return context.get();
