@@ -49,11 +49,22 @@ public class HttpRequestFromContextTest {
 
   @Test
   public void testBuildFromContextWithExistingContextAndRequest() {
-    final HttpRequest HTTP_REQUEST = HttpRequest.newBuilder().setRequestMethod(RequestMethod.GET)
-        .setRequestUrl("https://www.example.com").setRequestSize(12345L).setStatus(200).setResponseSize(54321L)
-        .setUserAgent("Mozilla/4.0 (compatible;)").setRemoteIp("192.168.1.1").setServerIp("192.168.1.2")
-        .setReferer("Referer: https://www.example.com").setCacheLookup(true).setCacheHit(true)
-        .setCacheValidatedWithOriginServer(false).setCacheFillBytes(1L).build();
+    final HttpRequest HTTP_REQUEST =
+        HttpRequest.newBuilder()
+            .setRequestMethod(RequestMethod.GET)
+            .setRequestUrl("https://www.example.com")
+            .setRequestSize(12345L)
+            .setStatus(200)
+            .setResponseSize(54321L)
+            .setUserAgent("Mozilla/4.0 (compatible;)")
+            .setRemoteIp("192.168.1.1")
+            .setServerIp("192.168.1.2")
+            .setReferer("Referer: https://www.example.com")
+            .setCacheLookup(true)
+            .setCacheHit(true)
+            .setCacheValidatedWithOriginServer(false)
+            .setCacheFillBytes(1L)
+            .build();
     CurrentContext mockedContext = createMock(CurrentContext.class);
     expect(mockedContext.get()).andReturn(HTTP_REQUEST);
     replay(mockedContext);
