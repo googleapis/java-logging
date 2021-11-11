@@ -202,7 +202,8 @@ import com.google.cloud.logging.Logging.EntryListOption;
 Then, to list the log entries, use the following code:
 
 ``` java
-Page<LogEntry> entries = logging.listLogEntries(EntryListOption.filter(logFilter));
+Page<LogEntry> entries = logging.listLogEntries(
+    EntryListOption.filter("logName=projects/" + options.getProjectId() + "/logs/test-log"));
 while (entries != null) {
   for (LogEntry logEntry : entries.iterateAll()) {
     System.out.println(logEntry);
