@@ -23,9 +23,9 @@ import java.util.Objects;
 
 /** Class to hold context attributes including information about {@see HttoRequest} and tracing. */
 public class Context {
-  private HttpRequest request;
-  private String traceId;
-  private String spanId;
+  private final HttpRequest request;
+  private final String traceId;
+  private final String spanId;
 
   /** A builder for {@see Context} objects. */
   public static final class Builder {
@@ -134,9 +134,8 @@ public class Context {
     /**
      * Sets the trace id and span id values by parsing the string which represents the standard W3C
      * trace context propagation header. The context propagation header is passed as {@code
-     * traceparent} header. The method currently supports ONLY version {@code "00"}. The trace id is
-     * retrieved from {@code trace-id} field and the span id is retrieved from {@code parent-id}
-     * field of the {@code version-format} value.
+     * traceparent} header. The method currently supports ONLY version {@code "00"}. The string
+     * format is <code>00-TRACE_ID-SPAN_ID-FLAGS</code>. field of the {@code version-format} value.
      *
      * @see <a href=
      *     "https://www.w3.org/TR/trace-context/#traceparent-header-field-values">traceparent header
@@ -144,12 +143,12 @@ public class Context {
      * @throws IllegalArgumentException if passed argument does not follow the @W3C trace format or
      *     the format version is not supported.
      */
-    public Builder loadTraceParentContext(String traceParent) throws IllegalArgumentException {
+    public Builder loadW3CTraceParentContext(String traceParent) throws IllegalArgumentException {
       if (traceParent != null) {
         String[] fields = traceParent.split("-");
         if (fields.length > 0) {
           String versionFormat = fields[0];
-          if (versionFormat != "00") {
+          if (!versionFormat.equals("00")) {
             throw new IllegalArgumentException("Not supporting versionFormat other than \"00\"");
           }
         } else {
@@ -179,7 +178,12 @@ public class Context {
   }
 
   Context(Builder builder) {
-    this.request = builder.requestBuilder.build();
+    HttpRequest request = builder.requestBuilder.build();
+    if (!HttpRequest.EMPTY.equals(request)) {
+      this.request = request;
+    } else {
+      this.request = null;
+    }
     this.traceId = builder.traceId;
     this.spanId = builder.spanId;
   }
