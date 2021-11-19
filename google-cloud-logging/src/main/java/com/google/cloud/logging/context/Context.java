@@ -19,9 +19,10 @@ package com.google.cloud.logging.context;
 import com.google.cloud.logging.HttpRequest;
 import com.google.cloud.logging.HttpRequest.RequestMethod;
 import com.google.common.base.MoreObjects;
+import com.google.common.base.Strings;
 import java.util.Objects;
 
-/** Class to hold context attributes including information about {@see HttoRequest} and tracing. */
+/** Class to hold context attributes including information about {@see HttpRequest} and tracing. */
 public class Context {
   private final HttpRequest request;
   private final String traceId;
@@ -109,11 +110,8 @@ public class Context {
      */
     public Builder loadCloudTraceContext(String cloudTrace) {
       if (cloudTrace != null) {
-        int split = cloudTrace.indexOf(';');
-        if (split >= 0) {
-          cloudTrace = cloudTrace.substring(0, split);
-        }
-        split = cloudTrace.indexOf('/');
+        cloudTrace = cloudTrace.split(";")[0];
+        int split = cloudTrace.indexOf('/');
         if (split >= 0) {
           String traceId = cloudTrace.substring(0, split);
           String spanId = cloudTrace.substring(split + 1);
@@ -159,12 +157,12 @@ public class Context {
           String traceId = fields[1];
           if (traceId.length() > 0) {
             setTraceId(traceId);
-            if (fields.length > 2) {
-              String spanId = fields[2];
-              if (spanId.length() > 0) {
-                setSpanId(spanId);
-              }
-            }
+          }
+        }
+        if (!Strings.isNullOrEmpty(traceId) && fields.length > 2) {
+          String spanId = fields[2];
+          if (spanId.length() > 0) {
+            setSpanId(spanId);
           }
         }
       }
