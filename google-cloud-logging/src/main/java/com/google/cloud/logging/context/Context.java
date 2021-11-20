@@ -115,14 +115,14 @@ public class Context {
         if (split >= 0) {
           String traceId = cloudTrace.substring(0, split);
           String spanId = cloudTrace.substring(split + 1);
-          if (traceId.length() > 0) {
+          if (!traceId.isEmpty()) {
             setTraceId(traceId);
             // do not set span Id without trace Id
-            if (spanId.length() > 0) {
+            if (!spanId.isEmpty()) {
               setSpanId(spanId);
             }
           }
-        } else if (cloudTrace.length() > 0) {
+        } else if (!cloudTrace.isEmpty()) {
           setTraceId(cloudTrace);
         }
       }
@@ -144,7 +144,7 @@ public class Context {
     public Builder loadW3CTraceParentContext(String traceParent) throws IllegalArgumentException {
       if (traceParent != null) {
         String[] fields = traceParent.split("-");
-        if (fields.length > 0) {
+        if (fields.length > 3) {
           String versionFormat = fields[0];
           if (!versionFormat.equals("00")) {
             throw new IllegalArgumentException("Not supporting versionFormat other than \"00\"");
@@ -153,15 +153,13 @@ public class Context {
           throw new IllegalArgumentException(
               "Invalid format of the header value. Expected \"00-traceid-spanid-arguments\"");
         }
-        if (fields.length > 1) {
-          String traceId = fields[1];
-          if (traceId.length() > 0) {
-            setTraceId(traceId);
-          }
+        String traceId = fields[1];
+        if (!traceId.isEmpty()) {
+          setTraceId(traceId);
         }
-        if (!Strings.isNullOrEmpty(traceId) && fields.length > 2) {
+        if (!Strings.isNullOrEmpty(traceId)) {
           String spanId = fields[2];
-          if (spanId.length() > 0) {
+          if (!spanId.isEmpty()) {
             setSpanId(spanId);
           }
         }
