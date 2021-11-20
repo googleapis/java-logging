@@ -134,8 +134,7 @@ public class ContextTest {
   @Test
   public void testParsingW3CTraceParent() {
     final String TRACEPARENT_NO_TRACE = "00--SPAN_ID-FLAGS";
-    final String TRACEPARENT_TRACE_ONLY = "00-" + TEST_TRACE_ID;
-    final String TRACEPARENT_TRACE_WITH_SPAN = "00-" + TEST_TRACE_ID + "-" + TEST_SPAN_ID;
+    final String TRACEPARENT_TRACE_ONLY = "00-" + TEST_TRACE_ID + "--SPAN_ID-FLAGS";
     final String TRACEPARENT_TRACE_FULL = "00-" + TEST_TRACE_ID + "-" + TEST_SPAN_ID + "-FLAGS";
 
     Context.Builder builder = Context.newBuilder();
@@ -146,8 +145,6 @@ public class ContextTest {
     assertTraceAndSpan(builder.build(), null, null);
     builder.loadW3CTraceParentContext(TRACEPARENT_TRACE_ONLY);
     assertTraceAndSpan(builder.build(), TEST_TRACE_ID, null);
-    builder.loadW3CTraceParentContext(TRACEPARENT_TRACE_WITH_SPAN);
-    assertTraceAndSpan(builder.build(), TEST_TRACE_ID, TEST_SPAN_ID);
     builder.loadW3CTraceParentContext(TRACEPARENT_TRACE_FULL);
     assertTraceAndSpan(builder.build(), TEST_TRACE_ID, TEST_SPAN_ID);
   }
@@ -162,6 +159,18 @@ public class ContextTest {
   public void testInvalidFormatW3CTraceParent() {
     Context.Builder builder = Context.newBuilder();
     builder.loadW3CTraceParentContext("TRACE_ID/SPAN_ID;o=TRACE_TRUE");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidFormatW3CTraceParent1Dash() {
+    Context.Builder builder = Context.newBuilder();
+    builder.loadW3CTraceParentContext("00-TRACE_ID");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidFormatW3CTraceParentWithoutFlag() {
+    Context.Builder builder = Context.newBuilder();
+    builder.loadW3CTraceParentContext("00-TRACE_ID-SPAN_ID-");
   }
 
   @Test(expected = IllegalArgumentException.class)
