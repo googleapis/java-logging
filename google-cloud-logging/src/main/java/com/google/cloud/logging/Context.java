@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.google.cloud.logging.context;
+package com.google.cloud.logging;
 
-import com.google.cloud.logging.HttpRequest;
 import com.google.cloud.logging.HttpRequest.RequestMethod;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Strings;
