@@ -22,7 +22,7 @@ public class ContextHandler {
 
   /**
    * Initializes the context holder to {@link InheritableThreadLocal} if {@link LogManager}
-   * configuration property {@code com.google.cloud.logging.Context.useInheritedContext} is set to
+   * configuration property {@code com.google.cloud.logging.ContextHandler.useInheritedContext} is set to
    * {@code true} or to {@link ThreadLocal} otherwise.
    *
    * @return instance of the context holder.
