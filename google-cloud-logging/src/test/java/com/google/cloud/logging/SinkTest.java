@@ -77,8 +77,7 @@ public class SinkTest {
     initializeExpectedSink(2);
     replay(logging);
     Sink builtSink =
-        expectedSink
-            .toBuilder()
+        expectedSink.toBuilder()
             .setName(NEW_NAME)
             .setFilter(NEW_FILTER)
             .setDestination(DATASET_DESTINATION)

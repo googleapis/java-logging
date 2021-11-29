@@ -369,7 +369,8 @@ public class CmekSettingsName implements ResourceName {
     private Builder(CmekSettingsName cmekSettingsName) {
       Preconditions.checkArgument(
           Objects.equals(cmekSettingsName.pathTemplate, PROJECT),
-          "toBuilder is only supported when CmekSettingsName has the pattern of projects/{project}/cmekSettings");
+          "toBuilder is only supported when CmekSettingsName has the pattern of"
+              + " projects/{project}/cmekSettings");
       this.project = cmekSettingsName.project;
     }
 

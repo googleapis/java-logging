@@ -165,8 +165,7 @@ public class SinkInfoTest {
     compareSinkInfo(DATASET_SINK_INFO, DATASET_SINK_INFO.toBuilder().build());
     compareSinkInfo(TOPIC_SINK_INFO, TOPIC_SINK_INFO.toBuilder().build());
     SinkInfo updatedSinkInfo =
-        BUCKET_SINK_INFO
-            .toBuilder()
+        BUCKET_SINK_INFO.toBuilder()
             .setDestination(TOPIC_DESTINATION)
             .setName("newName")
             .setFilter("logName=projects/my-projectid/logs/syslog")
@@ -177,8 +176,7 @@ public class SinkInfoTest {
     assertEquals("logName=projects/my-projectid/logs/syslog", updatedSinkInfo.getFilter());
     assertEquals(VersionFormat.V2, updatedSinkInfo.getVersionFormat());
     updatedSinkInfo =
-        BUCKET_SINK_INFO
-            .toBuilder()
+        BUCKET_SINK_INFO.toBuilder()
             .setDestination(BUCKET_DESTINATION)
             .setName(NAME)
             .setFilter(FILTER)
