@@ -4,7 +4,7 @@
   <groupId>com.google.cloud</groupId>
   <artifactId>google-cloud-logging-parent</artifactId>
   <packaging>pom</packaging>
-  <version>2.4.0</version><!-- {x-version-update:google-cloud-logging:current} -->
+  <version>2.4.1-SNAPSHOT</version><!-- {x-version-update:google-cloud-logging:current} -->
   <name>Google Cloud Logging Parent</name>
   <url>https://github.com/googleapis/java-logging</url>
   <description>
@@ -70,17 +70,17 @@
       <dependency>
         <groupId>com.google.api.grpc</groupId>
         <artifactId>proto-google-cloud-logging-v2</artifactId>
-        <version>0.89.0</version><!-- {x-version-update:proto-google-cloud-logging-v2:current} -->
+        <version>0.89.1-SNAPSHOT</version><!-- {x-version-update:proto-google-cloud-logging-v2:current} -->
       </dependency>
       <dependency>
         <groupId>com.google.api.grpc</groupId>
         <artifactId>grpc-google-cloud-logging-v2</artifactId>
-        <version>0.89.0</version><!-- {x-version-update:grpc-google-cloud-logging-v2:current} -->
+        <version>0.89.1-SNAPSHOT</version><!-- {x-version-update:grpc-google-cloud-logging-v2:current} -->
       </dependency>
       <dependency>
         <groupId>com.google.cloud</groupId>
         <artifactId>google-cloud-logging</artifactId>
-        <version>2.4.0</version><!-- {x-version-update:google-cloud-logging:current} -->
+        <version>2.4.1-SNAPSHOT</version><!-- {x-version-update:google-cloud-logging:current} -->
       </dependency>
 
       <dependency>
@@ -133,8 +133,35 @@
             <ignoredUnusedDeclaredDependencies>org.objenesis:objenesis</ignoredUnusedDeclaredDependencies>
           </configuration>
         </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>clirr-maven-plugin</artifactId>
+          <version>2.8</version>
+          <configuration>
+            <!-- Compare the current code against version 2.3.0 -->
+            <comparisonVersion>2.3.0</comparisonVersion>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
+    <!-- <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>clirr-maven-plugin</artifactId>
+        <configuration>
+          <comparisonVersion>2.3.0</comparisonVersion>
+          <ignoredDifferencesFile>clirr-ignored-differences.xml</ignoredDifferencesFile>
+          <logResults>true</logResults>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins> -->
   </build>
 
   <modules>
