@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.4.1](https://www.github.com/googleapis/java-logging/compare/v2.4.0...v2.4.1) (2021-12-01)
+
+
+### Bug Fixes
+
+* remove distributionManagement from pom.xml ([#769](https://www.github.com/googleapis/java-logging/issues/769)) ([66c5c31](https://www.github.com/googleapis/java-logging/commit/66c5c31b234d72705e8c1062199d111e6e378501)), closes [#762](https://www.github.com/googleapis/java-logging/issues/762)
+
 ## [2.4.0](https://www.github.com/googleapis/java-logging/compare/v2.3.2...v2.4.0) (2021-11-22)
 
 
