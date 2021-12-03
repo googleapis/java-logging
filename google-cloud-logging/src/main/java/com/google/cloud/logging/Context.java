@@ -28,7 +28,7 @@ public class Context {
   // see https://www.w3.org/TR/trace-context/#traceparent-header-field-values for details.
   private static final Pattern W3C_TRACE_CONTEXT_FORMAT =
       Pattern.compile(
-          "^00-(?!00000000000000000000000000000000)[0-9abcdef]{32}-(?!0000000000000000)[0-9abcdef]{16}-[0-9abcdef]{2}$");
+          "^00-(?!00000000000000000000000000000000)[0-9a-f]{32}-(?!0000000000000000)[0-9a-f]{16}-[0-9a-f]{2}$");
   private final HttpRequest request;
   private final String traceId;
   private final String spanId;
