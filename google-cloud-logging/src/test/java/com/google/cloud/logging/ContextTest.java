@@ -133,7 +133,7 @@ public class ContextTest {
   @Test
   public void testParsingW3CTraceParent() {
     final String W3C_TEST_TRACE_ID = "12345678901234567890123456789012";
-    final String W3C_TEST_SPAN_ID = "123456789012";
+    final String W3C_TEST_SPAN_ID = "1234567890123456";
     final String W3C_TRACE_CONTEXT = "00-" + W3C_TEST_TRACE_ID + "-" + W3C_TEST_SPAN_ID + "-00";
 
     Context.Builder builder = Context.newBuilder();
