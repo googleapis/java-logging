@@ -70,7 +70,8 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
       LOG_NAME,
       RESOURCE,
       LABELS,
-      LOG_DESTINATION;
+      LOG_DESTINATION,
+      AUTO_POPULATE_METADATA;
 
       @SuppressWarnings("unchecked")
       <T> T get(Map<Option.OptionType, ?> options) {
@@ -113,6 +114,14 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
      */
     public static WriteOption destination(LogDestinationName destination) {
       return new WriteOption(OptionType.LOG_DESTINATION, destination);
+    }
+
+    /**
+     * Returns an option to opt-out automatic population of log entries metadata fields that are not
+     * set.
+     */
+    public static WriteOption autoPopulateMetadata(boolean autoPopulateMetadata) {
+      return new WriteOption(OptionType.AUTO_POPULATE_METADATA, autoPopulateMetadata);
     }
   }
 
