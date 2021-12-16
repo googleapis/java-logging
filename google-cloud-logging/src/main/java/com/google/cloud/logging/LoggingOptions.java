@@ -140,7 +140,7 @@ public class LoggingOptions extends ServiceOptions<Logging, LoggingOptions> {
     return (LoggingRpc) getRpc();
   }
 
-  public Boolean getAutoPopulate() {
+  public Boolean getAutoPopulateMetadata() {
     return this.autoPopulateMetadataOnWrite;
   }
 
