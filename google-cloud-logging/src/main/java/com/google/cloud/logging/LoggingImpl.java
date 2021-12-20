@@ -25,6 +25,7 @@ import static com.google.cloud.logging.Logging.WriteOption.OptionType.LOG_DESTIN
 import static com.google.cloud.logging.Logging.WriteOption.OptionType.LOG_NAME;
 import static com.google.cloud.logging.Logging.WriteOption.OptionType.RESOURCE;
 
+import com.google.api.client.util.Strings;
 import com.google.api.core.ApiFunction;
 import com.google.api.core.ApiFuture;
 import com.google.api.core.ApiFutureCallback;
@@ -93,6 +94,7 @@ import java.util.concurrent.TimeoutException;
 class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
 
   private static final int FLUSH_WAIT_TIMEOUT_SECONDS = 6;
+  private static final String RESOURCE_NAME_FORMAT = "projects/%s/traces/%s";
   private final LoggingRpc rpc;
   private final Map<Object, ApiFuture<Void>> pendingWrites = new ConcurrentHashMap<>();
 
@@ -797,6 +799,76 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     inWriteCall.set(true);
 
     try {
+      final Map<Option.OptionType, ?> writeOptions = optionMap(options);
+      final Boolean populateMetadata1 = getOptions().getAutoPopulateMetadata();
+      final Boolean populateMetadata2 =
+          WriteOption.OptionType.AUTO_POPULATE_METADATA.get(writeOptions);
+      if (populateMetadata2 == Boolean.TRUE
+          || (populateMetadata2 == null && populateMetadata1 == Boolean.TRUE)) {
+        final Boolean needDebugInfo =
+            Iterables.any(
+                logEntries,
+                log -> log.getSeverity() == Severity.DEBUG && log.getSourceLocation() == null);
+        final SourceLocation sourceLocation =
+            needDebugInfo ? SourceLocation.fromCurrentContext(1) : null;
+        final MonitoredResource sharedResourceMetadata = RESOURCE.get(writeOptions);
+        final MonitoredResource resourceMetadata =
+            sharedResourceMetadata == null ? MonitoredResourceUtil.getResource(null, null) : null;
+        final Context context = (new ContextHandler()).getCurrentContext();
+        final ArrayList<LogEntry> populatedLogEntries = Lists.newArrayList();
+        for (LogEntry entry : logEntries) {
+          LogEntry.Builder builder = entry.toBuilder();
+          if (resourceMetadata != null && entry.getResource() == null) {
+            builder.setResource(resourceMetadata);
+          }
+          if (entry.getHttpRequest() == null) {
+            builder.setHttpRequest(context.getHttpRequest());
+          }
+          if (Strings.isNullOrEmpty(entry.getTrace())) {
+            // if project id can be retrieved from resource (environment) metadata
+            // format trace id to support grouping and correlation
+            if (context.getTraceId() != null) {
+              String projectId = null;
+              if (entry.getResource() != null) {
+                projectId =
+                    entry
+                        .getResource()
+                        .getLabels()
+                        .getOrDefault(MonitoredResourceUtil.PORJECTID_LABEL, null);
+              }
+              if (projectId == null && resourceMetadata != null) {
+                projectId =
+                    resourceMetadata
+                        .getLabels()
+                        .getOrDefault(MonitoredResourceUtil.PORJECTID_LABEL, null);
+              }
+              if (projectId == null && sharedResourceMetadata != null) {
+                projectId =
+                    sharedResourceMetadata
+                        .getLabels()
+                        .getOrDefault(MonitoredResourceUtil.PORJECTID_LABEL, null);
+              }
+              if (projectId != null) {
+                builder.setTrace(
+                    String.format(RESOURCE_NAME_FORMAT, projectId, context.getTraceId()));
+              } else {
+                builder.setTrace(context.getTraceId());
+              }
+            }
+          }
+          if (Strings.isNullOrEmpty(entry.getSpanId())) {
+            builder.setSpanId(context.getSpanId());
+          }
+          if (entry.getSeverity() != null
+              && entry.getSeverity() == Severity.DEBUG
+              && entry.getSourceLocation() == null) {
+            builder.setSourceLocation(sourceLocation);
+          }
+          populatedLogEntries.add(builder.build());
+        }
+        logEntries = populatedLogEntries;
+      }
+
       writeLogEntries(logEntries, options);
       if (flushSeverity != null) {
         for (LogEntry logEntry : logEntries) {
