@@ -24,6 +24,7 @@ import org.junit.Test;
 
 public class LoggingOptionsTest {
   private static final Boolean DONT_AUTO_POPULATE_METADATA = false;
+  private static final String PROJECT_ID = "fake-project-id";
 
   @Test(expected = IllegalArgumentException.class)
   public void testNonGrpcTransportOptions() {
@@ -34,13 +35,16 @@ public class LoggingOptionsTest {
   @Test
   public void testAutoPopulateMetadataOption() {
     LoggingOptions actual =
-        LoggingOptions.newBuilder().setAutoPopulateMetadata(DONT_AUTO_POPULATE_METADATA).build();
+        LoggingOptions.newBuilder()
+            .setProjectId(PROJECT_ID)
+            .setAutoPopulateMetadata(DONT_AUTO_POPULATE_METADATA)
+            .build();
     assertEquals(DONT_AUTO_POPULATE_METADATA, actual.getAutoPopulateMetadata());
   }
 
   @Test
   public void testAutoPopulateMetadataDefaultOption() {
-    LoggingOptions actual = LoggingOptions.getDefaultInstance();
+    LoggingOptions actual = LoggingOptions.newBuilder().setProjectId(PROJECT_ID).build();
     assertEquals(Boolean.TRUE, actual.getAutoPopulateMetadata());
   }
 }
