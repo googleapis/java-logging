@@ -93,8 +93,8 @@ import java.util.concurrent.TimeoutException;
 
 class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
 
+  protected static final String RESOURCE_NAME_FORMAT = "projects/%s/traces/%s";
   private static final int FLUSH_WAIT_TIMEOUT_SECONDS = 6;
-  private static final String RESOURCE_NAME_FORMAT = "projects/%s/traces/%s";
   private final LoggingRpc rpc;
   private final Map<Object, ApiFuture<Void>> pendingWrites = new ConcurrentHashMap<>();
 
@@ -821,10 +821,10 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
           if (resourceMetadata != null && entry.getResource() == null) {
             builder.setResource(resourceMetadata);
           }
-          if (entry.getHttpRequest() == null) {
+          if (context != null && entry.getHttpRequest() == null) {
             builder.setHttpRequest(context.getHttpRequest());
           }
-          if (Strings.isNullOrEmpty(entry.getTrace())) {
+          if (context != null && Strings.isNullOrEmpty(entry.getTrace())) {
             // if project id can be retrieved from resource (environment) metadata
             // format trace id to support grouping and correlation
             if (context.getTraceId() != null) {
@@ -856,7 +856,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
               }
             }
           }
-          if (Strings.isNullOrEmpty(entry.getSpanId())) {
+          if (context != null && Strings.isNullOrEmpty(entry.getSpanId())) {
             builder.setSpanId(context.getSpanId());
           }
           if (entry.getSeverity() != null
