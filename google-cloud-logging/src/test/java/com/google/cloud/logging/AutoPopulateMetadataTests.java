@@ -89,14 +89,14 @@ public class AutoPopulateMetadataTests {
     expect(mockedRpc.write(capture(rpcWriteArgument)))
         .andReturn(ApiFutures.immediateFuture(EMPTY_WRITE_RESPONSE));
     MonitoredResourceUtil.setEnvironmentGetter(mockedEnvGetter);
+    // the following mocks generate MonitoredResource instance same as RESOURCE constant
     expect(mockedEnvGetter.getAttribute("project/project-id")).andStubReturn(RESOURCE_PROJECT_ID);
-    // following mock enforces to identify "Global" resource type
     expect(mockedEnvGetter.getAttribute("")).andStubReturn(null);
     replay(mockedRpcFactory, mockedRpc, mockedEnvGetter);
 
     LoggingOptions options =
         LoggingOptions.newBuilder()
-            .setProjectId(LOGGING_PROJECT_ID)
+            .setProjectId(RESOURCE_PROJECT_ID)
             .setServiceRpcFactory(mockedRpcFactory)
             .build();
     logging = options.getService();
@@ -128,12 +128,9 @@ public class AutoPopulateMetadataTests {
 
   @Test
   public void testAutoPopulationEnabledInWriteOptionsAndDisabledInLoggingOptions() {
+    // redefine logging option to opt out auto-populating
     LoggingOptions options =
-        LoggingOptions.newBuilder()
-            .setProjectId(LOGGING_PROJECT_ID)
-            .setServiceRpcFactory(mockedRpcFactory)
-            .setAutoPopulateMetadata(false)
-            .build();
+        logging.getOptions().toBuilder().setAutoPopulateMetadata(false).build();
     logging = options.getService();
     mockCurrentContext(HTTP_REQUEST, TRACE_ID, SPAN_ID);
 
@@ -169,5 +166,29 @@ public class AutoPopulateMetadataTests {
     assertEquals(expected.getClass(), actual.getSourceLocation().getClass());
     assertEquals(expected.getFunction(), actual.getSourceLocation().getFunction());
     assertEquals(new Long(expected.getLine() + 1), actual.getSourceLocation().getLine());
+  }
+
+  @Test
+  public void testNotFormattedTraceId() {
+    mockCurrentContext(HTTP_REQUEST, TRACE_ID, SPAN_ID);
+
+    final MonitoredResource expectedResource = MonitoredResource.newBuilder("custom").build();
+
+    logging.write(ImmutableList.of(SIMPLE_LOG_ENTRY), WriteOption.resource(expectedResource));
+
+    LogEntry actual = LogEntry.fromPb(rpcWriteArgument.getValue().getEntries(0));
+    assertEquals(TRACE_ID, actual.getTrace());
+  }
+
+  @Test
+  public void testMonitoredResourcePopulationInWriteOptions() {
+    mockCurrentContext(HTTP_REQUEST, TRACE_ID, SPAN_ID);
+
+    final MonitoredResource expectedResource = MonitoredResource.newBuilder("custom").build();
+
+    logging.write(ImmutableList.of(SIMPLE_LOG_ENTRY), WriteOption.resource(expectedResource));
+
+    LogEntry actual = LogEntry.fromPb(rpcWriteArgument.getValue().getEntries(0));
+    assertEquals(expectedResource, actual.getResource());
   }
 }

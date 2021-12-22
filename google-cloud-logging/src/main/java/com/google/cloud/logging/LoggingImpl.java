@@ -803,6 +803,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
       final Boolean populateMetadata1 = getOptions().getAutoPopulateMetadata();
       final Boolean populateMetadata2 =
           WriteOption.OptionType.AUTO_POPULATE_METADATA.get(writeOptions);
+
       if (populateMetadata2 == Boolean.TRUE
           || (populateMetadata2 == null && populateMetadata1 == Boolean.TRUE)) {
         final Boolean needDebugInfo =
@@ -812,10 +813,15 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
         final SourceLocation sourceLocation =
             needDebugInfo ? SourceLocation.fromCurrentContext(1) : null;
         final MonitoredResource sharedResourceMetadata = RESOURCE.get(writeOptions);
+        // populate monitored resource metadata by prioritizing the one set via WriteOption
         final MonitoredResource resourceMetadata =
-            sharedResourceMetadata == null ? MonitoredResourceUtil.getResource(null, null) : null;
+            sharedResourceMetadata == null
+                ? MonitoredResourceUtil.getResource(getOptions().getProjectId(), null)
+                : sharedResourceMetadata;
         final Context context = (new ContextHandler()).getCurrentContext();
         final ArrayList<LogEntry> populatedLogEntries = Lists.newArrayList();
+
+        // populate empty metadata fields of log entries before calling write API
         for (LogEntry entry : logEntries) {
           LogEntry.Builder builder = entry.toBuilder();
           if (resourceMetadata != null && entry.getResource() == null) {
@@ -825,36 +831,9 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
             builder.setHttpRequest(context.getHttpRequest());
           }
           if (context != null && Strings.isNullOrEmpty(entry.getTrace())) {
-            // if project id can be retrieved from resource (environment) metadata
-            // format trace id to support grouping and correlation
-            if (context.getTraceId() != null) {
-              String projectId = null;
-              if (entry.getResource() != null) {
-                projectId =
-                    entry
-                        .getResource()
-                        .getLabels()
-                        .getOrDefault(MonitoredResourceUtil.PORJECTID_LABEL, null);
-              }
-              if (projectId == null && resourceMetadata != null) {
-                projectId =
-                    resourceMetadata
-                        .getLabels()
-                        .getOrDefault(MonitoredResourceUtil.PORJECTID_LABEL, null);
-              }
-              if (projectId == null && sharedResourceMetadata != null) {
-                projectId =
-                    sharedResourceMetadata
-                        .getLabels()
-                        .getOrDefault(MonitoredResourceUtil.PORJECTID_LABEL, null);
-              }
-              if (projectId != null) {
-                builder.setTrace(
-                    String.format(RESOURCE_NAME_FORMAT, projectId, context.getTraceId()));
-              } else {
-                builder.setTrace(context.getTraceId());
-              }
-            }
+            MonitoredResource resource =
+                entry.getResource() != null ? entry.getResource() : resourceMetadata;
+            builder.setTrace(getFormattedTrace(context.getTraceId(), resource));
           }
           if (context != null && Strings.isNullOrEmpty(entry.getSpanId())) {
             builder.setSpanId(context.getSpanId());
@@ -894,6 +873,27 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     } catch (InterruptedException | ExecutionException | TimeoutException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  /**
+   * Formats trace following resource name template if the resource metadata has project id.
+   *
+   * @param traceId A trace id string or {@code null} if trace info is missing.
+   * @param resource A {@see MonitoredResource} describing environment metadata.
+   * @return A formatted trace id string.
+   */
+  private String getFormattedTrace(String traceId, MonitoredResource resource) {
+    if (traceId == null) {
+      return null;
+    }
+    String projectId = null;
+    if (resource != null) {
+      projectId = resource.getLabels().getOrDefault(MonitoredResourceUtil.PORJECTID_LABEL, null);
+    }
+    if (projectId != null) {
+      return String.format(RESOURCE_NAME_FORMAT, projectId, traceId);
+    }
+    return traceId;
   }
 
   /*
