@@ -19,6 +19,7 @@ package com.google.cloud.logging;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
 
 import com.google.cloud.MonitoredResource;
@@ -28,7 +29,6 @@ import com.google.cloud.logging.Payload.StringPayload;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import java.util.Collections;
-import java.util.Map;
 import java.util.logging.ErrorManager;
 import java.util.logging.Filter;
 import java.util.logging.Formatter;
@@ -41,6 +41,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+@SuppressWarnings("deprecation")
 public class LoggingHandlerTest {
 
   private static final String LOG_NAME = "java.log";
@@ -156,18 +157,6 @@ public class LoggingHandlerTest {
           .setTimestamp(123456789L)
           .build();
 
-  private static final String CONFIG_NAMESPACE = "com.google.cloud.logging.LoggingHandler";
-  private static final ImmutableMap<String, String> CONFIG_MAP =
-      ImmutableMap.<String, String>builder()
-          .put("log", "testLogName")
-          .put("level", "ALL")
-          .put("filter", "com.google.cloud.logging.LoggingHandlerTest$TestFilter")
-          .put("formatter", "com.google.cloud.logging.LoggingHandlerTest$TestFormatter")
-          .put("flushLevel", "CRITICAL")
-          .put("enhancers", "com.google.cloud.logging.LoggingHandlerTest$TestLoggingEnhancer")
-          .put("resourceType", "testResourceType")
-          .put("synchronicity", "SYNC")
-          .build();
   private static final ImmutableMap<String, String> BASE_SEVERITY_MAP =
       ImmutableMap.of(
           "levelName", Level.INFO.getName(), "levelValue", String.valueOf(Level.INFO.intValue()));
@@ -175,21 +164,9 @@ public class LoggingHandlerTest {
       new WriteOption[] {
         WriteOption.logName(LOG_NAME),
         WriteOption.resource(DEFAULT_RESOURCE),
-        WriteOption.labels(BASE_SEVERITY_MAP)
+        WriteOption.labels(BASE_SEVERITY_MAP),
+        WriteOption.autoPopulateMetadata(false),
       };
-
-  private static byte[] renderConfig(Map<String, String> config) {
-    StringBuilder str = new StringBuilder();
-    for (Map.Entry<String, String> entry : config.entrySet()) {
-      str.append(CONFIG_NAMESPACE)
-          .append('.')
-          .append(entry.getKey())
-          .append('=')
-          .append(entry.getValue())
-          .append(System.lineSeparator());
-    }
-    return str.toString().getBytes();
-  }
 
   private Logging logging;
   private LoggingOptions options;
@@ -219,7 +196,10 @@ public class LoggingHandlerTest {
   @Before
   public void setUp() {
     logging = EasyMock.createMock(Logging.class);
-    options = EasyMock.createStrictMock(LoggingOptions.class);
+    options = EasyMock.createMock(LoggingOptions.class);
+    expect(options.getProjectId()).andStubReturn(PROJECT);
+    expect(options.getService()).andStubReturn(logging);
+    expect(options.getAutoPopulateMetadata()).andStubReturn(Boolean.FALSE);
   }
 
   @After
@@ -235,8 +215,6 @@ public class LoggingHandlerTest {
 
   @Test
   public void testPublishLevels() {
-    expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
     logging.setWriteSynchronicity(Synchronicity.ASYNC);
@@ -290,8 +268,6 @@ public class LoggingHandlerTest {
 
   @Test
   public void testPublishCustomResource() {
-    expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
     logging.setWriteSynchronicity(Synchronicity.ASYNC);
@@ -301,7 +277,8 @@ public class LoggingHandlerTest {
         ImmutableList.of(FINEST_ENTRY),
         WriteOption.logName(LOG_NAME),
         WriteOption.resource(resource),
-        WriteOption.labels(BASE_SEVERITY_MAP));
+        WriteOption.labels(BASE_SEVERITY_MAP),
+        WriteOption.autoPopulateMetadata(false));
     expectLastCall().once();
     replay(options, logging);
     Handler handler = new LoggingHandler(LOG_NAME, options, resource);
@@ -334,8 +311,6 @@ public class LoggingHandlerTest {
 
   @Test
   public void testPublishKubernetesContainerResource() {
-    expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
     logging.setWriteSynchronicity(Synchronicity.ASYNC);
@@ -358,7 +333,8 @@ public class LoggingHandlerTest {
         ImmutableList.of(FINEST_ENTRY),
         WriteOption.logName(LOG_NAME),
         WriteOption.resource(resource),
-        WriteOption.labels(BASE_SEVERITY_MAP));
+        WriteOption.labels(BASE_SEVERITY_MAP),
+        WriteOption.autoPopulateMetadata(false));
     expectLastCall().once();
     replay(options, logging);
     Handler handler = new LoggingHandler(LOG_NAME, options, resource);
@@ -369,18 +345,11 @@ public class LoggingHandlerTest {
 
   @Test
   public void testEnhancedLogEntry() {
-    expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
-    MonitoredResource resource = MonitoredResource.of("custom", ImmutableMap.<String, String>of());
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
     logging.setWriteSynchronicity(Synchronicity.ASYNC);
     expectLastCall().once();
-    logging.write(
-        ImmutableList.of(FINEST_ENHANCED_ENTRY),
-        WriteOption.logName(LOG_NAME),
-        WriteOption.resource(resource),
-        WriteOption.labels(BASE_SEVERITY_MAP));
+    logging.write(ImmutableList.of(FINEST_ENHANCED_ENTRY), DEFAULT_OPTIONS);
     expectLastCall().once();
     replay(options, logging);
     LoggingEnhancer enhancer =
@@ -391,7 +360,8 @@ public class LoggingHandlerTest {
           }
         };
     Handler handler =
-        new LoggingHandler(LOG_NAME, options, resource, Collections.singletonList(enhancer));
+        new LoggingHandler(
+            LOG_NAME, options, DEFAULT_RESOURCE, Collections.singletonList(enhancer));
     handler.setLevel(Level.ALL);
     handler.setFormatter(new TestFormatter());
     handler.publish(newLogRecord(Level.FINEST, MESSAGE));
@@ -399,24 +369,18 @@ public class LoggingHandlerTest {
 
   @Test
   public void testTraceEnhancedLogEntry() {
-    expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
-    MonitoredResource resource = MonitoredResource.of("custom", ImmutableMap.<String, String>of());
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
     logging.setWriteSynchronicity(Synchronicity.ASYNC);
     expectLastCall().once();
-    logging.write(
-        ImmutableList.of(TRACE_ENTRY),
-        WriteOption.logName(LOG_NAME),
-        WriteOption.resource(resource),
-        WriteOption.labels(BASE_SEVERITY_MAP));
+    logging.write(ImmutableList.of(TRACE_ENTRY), DEFAULT_OPTIONS);
     expectLastCall().once();
     replay(options, logging);
     LoggingEnhancer enhancer = new TraceLoggingEnhancer();
     TraceLoggingEnhancer.setCurrentTraceId("projects/projectId/traces/traceId");
     Handler handler =
-        new LoggingHandler(LOG_NAME, options, resource, Collections.singletonList(enhancer));
+        new LoggingHandler(
+            LOG_NAME, options, DEFAULT_RESOURCE, Collections.singletonList(enhancer));
     handler.setLevel(Level.ALL);
     handler.setFormatter(new TestFormatter());
     handler.publish(newLogRecord(Level.FINEST, MESSAGE));
@@ -424,8 +388,6 @@ public class LoggingHandlerTest {
 
   @Test
   public void testReportWriteError() {
-    expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     RuntimeException ex = new RuntimeException();
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
@@ -448,8 +410,6 @@ public class LoggingHandlerTest {
 
   @Test
   public void testReportFlushError() {
-    expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     RuntimeException ex = new RuntimeException();
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
@@ -475,8 +435,6 @@ public class LoggingHandlerTest {
 
   @Test
   public void testReportFormatError() {
-    expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
     logging.setWriteSynchronicity(Synchronicity.ASYNC);
@@ -501,8 +459,6 @@ public class LoggingHandlerTest {
   // BUG(1795): rewrite this test when flush actually works.
   // @Test
   public void testFlushLevel() {
-    expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
     logging.setWriteSynchronicity(Synchronicity.ASYNC);
@@ -529,8 +485,6 @@ public class LoggingHandlerTest {
 
   @Test
   public void testSyncWrite() {
-    expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     LogEntry entry =
         LogEntry.newBuilder(Payload.StringPayload.of(MESSAGE))
             .setSeverity(Severity.DEBUG)
@@ -560,8 +514,6 @@ public class LoggingHandlerTest {
 
   @Test
   public void testAddHandler() {
-    expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
     logging.setWriteSynchronicity(Synchronicity.ASYNC);
@@ -586,8 +538,6 @@ public class LoggingHandlerTest {
 
   @Test
   public void testClose() throws Exception {
-    expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
     logging.setWriteSynchronicity(Synchronicity.ASYNC);
@@ -602,13 +552,35 @@ public class LoggingHandlerTest {
     handler.setFormatter(new TestFormatter());
     handler.publish(newLogRecord(Level.FINEST, MESSAGE));
     handler.close();
-    handler.close();
+  }
+
+  @Test
+  public void testAutoPopulationEnabled() {
+    reset(options);
+    options = EasyMock.createMock(LoggingOptions.class);
+    expect(options.getProjectId()).andStubReturn(PROJECT);
+    expect(options.getService()).andStubReturn(logging);
+    expect(options.getAutoPopulateMetadata()).andStubReturn(true);
+    logging.setFlushSeverity(Severity.ERROR);
+    expectLastCall().andVoid();
+    logging.setWriteSynchronicity(Synchronicity.ASYNC);
+    expectLastCall().andVoid();
+    logging.write(
+        ImmutableList.of(INFO_ENTRY),
+        WriteOption.logName(LOG_NAME),
+        WriteOption.resource(DEFAULT_RESOURCE),
+        WriteOption.labels(BASE_SEVERITY_MAP),
+        WriteOption.autoPopulateMetadata(true));
+    expectLastCall().once();
+    replay(options, logging);
+    Handler handler = new LoggingHandler(LOG_NAME, options, DEFAULT_RESOURCE);
+    handler.setLevel(Level.ALL);
+    handler.setFormatter(new TestFormatter());
+    handler.publish(newLogRecord(Level.INFO, MESSAGE));
   }
 
   private void testPublishCustomResourceWithDestination(
       LogEntry entry, LogDestinationName destination) {
-    expect(options.getProjectId()).andReturn(PROJECT).anyTimes();
-    expect(options.getService()).andReturn(logging);
     logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().once();
     logging.setWriteSynchronicity(Synchronicity.ASYNC);
@@ -619,7 +591,8 @@ public class LoggingHandlerTest {
         WriteOption.logName(LOG_NAME),
         WriteOption.resource(resource),
         WriteOption.labels(BASE_SEVERITY_MAP),
-        WriteOption.destination(destination));
+        WriteOption.destination(destination),
+        WriteOption.autoPopulateMetadata(false));
     expectLastCall().once();
     replay(options, logging);
     Handler handler = new LoggingHandler(LOG_NAME, options, resource, null, destination);
