@@ -41,6 +41,7 @@ class LoggingConfig {
   private static final String RESOURCE_TYPE_TAG = "resourceType";
   private static final String ENHANCERS_TAG = "enhancers";
   private static final String USE_INHERITED_CONTEXT = "useInheritedContext";
+  private static final String AUTO_POPULATE_METADATA = "autoPopulateMetadata";
 
   public LoggingConfig(String className) {
     this.className = className;
@@ -74,6 +75,14 @@ class LoggingConfig {
 
   Formatter getFormatter() {
     return getFormatterProperty(FORMATTER_TAG, new SimpleFormatter());
+  }
+
+  Boolean getAutoPopulateMetadata() {
+    String flag = getProperty(AUTO_POPULATE_METADATA);
+    if (flag != null) {
+      return Boolean.parseBoolean(flag);
+    }
+    return null;
   }
 
   MonitoredResource getMonitoredResource(String projectId) {

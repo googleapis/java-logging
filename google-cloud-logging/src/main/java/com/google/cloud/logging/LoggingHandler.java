@@ -17,6 +17,7 @@
 package com.google.cloud.logging;
 
 import static com.google.common.base.MoreObjects.firstNonNull;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.cloud.MonitoredResource;
 import com.google.cloud.logging.Logging.WriteOption;
@@ -25,6 +26,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -109,6 +111,9 @@ import java.util.logging.SimpleFormatter;
  *       else "global").
  *   <li>{@code com.google.cloud.logging.Synchronicity} the synchronicity of the write method to use
  *       to write logs to the Cloud Logging service (defaults to {@link Synchronicity#ASYNC}).
+ *   <li>{@code com.google.cloud.logging.LoggingHandler.autoPopulateMetadata} is a boolean flag that
+ *       opts-out the population of the log entries metadata before the logs are sent to Cloud
+ *       Logging (defaults to {@code true}).
  * </ul>
  *
  * <p>To add a {@code LoggingHandler} to an existing {@link Logger} and be sure to avoid infinite
@@ -138,6 +143,8 @@ public class LoggingHandler extends Handler {
   private final Level baseLevel;
 
   private volatile Level flushLevel;
+
+  private volatile Boolean autoPopulateMetadata;
 
   private WriteOption[] defaultWriteOptions;
 
@@ -196,7 +203,10 @@ public class LoggingHandler extends Handler {
   }
 
   /**
-   * Creates a handler that publishes messages to Cloud Logging.
+   * Creates a handler that publishes messages to Cloud Logging. Auto-population of the logs
+   * metadata can be opted-out in {@code options} argument or in the configuration file. At least
+   * one flag {@link LoggingOptions} or {@link LoggingConfig} has to be explicitly set to {@code
+   * false} in order to opt-out the metadata auto-population.
    *
    * @param log the name of the log to which log entries are written
    * @param options options for the Cloud Logging service
@@ -222,14 +232,18 @@ public class LoggingHandler extends Handler {
       setLevel(level);
       baseLevel = level.equals(Level.ALL) ? Level.FINEST : level;
       flushLevel = config.getFlushLevel();
+      Boolean f1 = options.getAutoPopulateMetadata();
+      Boolean f2 = config.getAutoPopulateMetadata();
+      autoPopulateMetadata = isTrueOrNull(f1) && isTrueOrNull(f2);
       String logName = log != null ? log : config.getLogName();
-
       MonitoredResource resource =
           firstNonNull(
               monitoredResource, config.getMonitoredResource(loggingOptions.getProjectId()));
       List<WriteOption> writeOptions = new ArrayList<WriteOption>();
       writeOptions.add(WriteOption.logName(logName));
-      writeOptions.add(WriteOption.resource(resource));
+      if (resource != null) {
+        writeOptions.add(WriteOption.resource(resource));
+      }
       writeOptions.add(
           WriteOption.labels(
               ImmutableMap.of(
@@ -240,6 +254,7 @@ public class LoggingHandler extends Handler {
       if (destination != null) {
         writeOptions.add(WriteOption.destination(destination));
       }
+      writeOptions.add(WriteOption.autoPopulateMetadata(autoPopulateMetadata));
       defaultWriteOptions = Iterables.toArray(writeOptions, WriteOption.class);
 
       getLogging().setFlushSeverity(severityFor(flushLevel));
@@ -366,6 +381,28 @@ public class LoggingHandler extends Handler {
   }
 
   /**
+   * Sets the metadata auto population flag.
+   */
+  public void setAutoPopulateMetadata(Boolean value) {
+    checkNotNull(value);
+    this.autoPopulateMetadata = value;
+    List<WriteOption> writeOptions = Arrays.asList(defaultWriteOptions);
+    for (int i = 0; i < writeOptions.size(); i++) {
+      if (writeOptions.get(i).getOptionType() == WriteOption.OptionType.AUTO_POPULATE_METADATA) {
+        writeOptions.remove(i);
+        break;
+      }
+    }
+    writeOptions.add(WriteOption.autoPopulateMetadata(value));
+    defaultWriteOptions = Iterables.toArray(writeOptions, WriteOption.class);
+  }
+
+  /** Gets the metadata auto population flag. */
+  public Boolean getAutoPopulateMetadata() {
+    return this.autoPopulateMetadata;
+  }
+
+  /**
    * Adds the provided {@code LoggingHandler} to {@code logger}. Use this method to register Cloud
    * Logging handlers instead of {@link Logger#addHandler(Handler)} to avoid infinite recursion when
    * logging.
@@ -416,5 +453,9 @@ public class LoggingHandler extends Handler {
       }
     }
     return logging;
+  }
+
+  private static boolean isTrueOrNull(Boolean b) {
+    return b == null || b == Boolean.TRUE;
   }
 }
