@@ -19,6 +19,7 @@ package com.google.cloud.logging;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
 
 import com.google.cloud.MonitoredResource;
@@ -551,7 +552,31 @@ public class LoggingHandlerTest {
     handler.setFormatter(new TestFormatter());
     handler.publish(newLogRecord(Level.FINEST, MESSAGE));
     handler.close();
-    handler.close();
+  }
+
+  @Test
+  public void testAutoPopulationEnabled() {
+    reset(options);
+    options = EasyMock.createMock(LoggingOptions.class);
+    expect(options.getProjectId()).andStubReturn(PROJECT);
+    expect(options.getService()).andStubReturn(logging);
+    expect(options.getAutoPopulateMetadata()).andStubReturn(true);
+    logging.setFlushSeverity(Severity.ERROR);
+    expectLastCall().andVoid();
+    logging.setWriteSynchronicity(Synchronicity.ASYNC);
+    expectLastCall().andVoid();
+    logging.write(
+        ImmutableList.of(INFO_ENTRY),
+        WriteOption.logName(LOG_NAME),
+        WriteOption.resource(DEFAULT_RESOURCE),
+        WriteOption.labels(BASE_SEVERITY_MAP),
+        WriteOption.autoPopulateMetadata(true));
+    expectLastCall().once();
+    replay(options, logging);
+    Handler handler = new LoggingHandler(LOG_NAME, options, DEFAULT_RESOURCE);
+    handler.setLevel(Level.ALL);
+    handler.setFormatter(new TestFormatter());
+    handler.publish(newLogRecord(Level.INFO, MESSAGE));
   }
 
   private void testPublishCustomResourceWithDestination(
