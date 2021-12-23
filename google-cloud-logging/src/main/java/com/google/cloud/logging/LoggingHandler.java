@@ -380,9 +380,7 @@ public class LoggingHandler extends Handler {
     return getLogging().getWriteSynchronicity();
   }
 
-  /**
-   * Sets the metadata auto population flag.
-   */
+  /** Sets the metadata auto population flag. */
   public void setAutoPopulateMetadata(Boolean value) {
     checkNotNull(value);
     this.autoPopulateMetadata = value;
