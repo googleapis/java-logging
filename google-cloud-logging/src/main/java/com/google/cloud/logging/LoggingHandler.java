@@ -382,8 +382,6 @@ public class LoggingHandler extends Handler {
 
   /**
    * Sets the metadata auto population flag.
-   *
-   * @param synchronicity {@link Synchronicity}
    */
   public void setAutoPopulateMetadata(Boolean value) {
     checkNotNull(value);
