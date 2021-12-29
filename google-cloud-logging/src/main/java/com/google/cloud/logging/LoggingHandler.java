@@ -17,7 +17,6 @@
 package com.google.cloud.logging;
 
 import static com.google.common.base.MoreObjects.firstNonNull;
-import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.cloud.MonitoredResource;
 import com.google.cloud.logging.Logging.WriteOption;
@@ -114,6 +113,10 @@ import java.util.logging.SimpleFormatter;
  *   <li>{@code com.google.cloud.logging.LoggingHandler.autoPopulateMetadata} is a boolean flag that
  *       opts-out the population of the log entries metadata before the logs are sent to Cloud
  *       Logging (defaults to {@code true}).
+ *   <li>{@code com.google.cloud.logging.LoggingHandler.useStructuredLogging} is a boolean flag that
+ *       opts-in redirecting the output of the handler to STDOUT (instead of ingesting it using
+ *       Logging API) by formatting the log following structured logging guidelines. Logging
+ *       (defaults to {@code true}).
  * </ul>
  *
  * <p>To add a {@code LoggingHandler} to an existing {@link Logger} and be sure to avoid infinite
@@ -123,6 +126,8 @@ import java.util.logging.SimpleFormatter;
  * <pre>
  * {@code com.example.mypackage.handlers=com.google.cloud.logging.LoggingHandler}
  * </pre>
+ *
+ * @see <a href="https://cloud.google.com/logging/docs/structured-logging">Structured logging</a>
  */
 public class LoggingHandler extends Handler {
 
@@ -145,6 +150,7 @@ public class LoggingHandler extends Handler {
   private volatile Level flushLevel;
 
   private volatile Boolean autoPopulateMetadata;
+  private volatile Boolean useStructuredLogging;
 
   private WriteOption[] defaultWriteOptions;
 
@@ -235,6 +241,7 @@ public class LoggingHandler extends Handler {
       Boolean f1 = options.getAutoPopulateMetadata();
       Boolean f2 = config.getAutoPopulateMetadata();
       autoPopulateMetadata = isTrueOrNull(f1) && isTrueOrNull(f2);
+      useStructuredLogging = firstNonNull(config.getUseStructuredLogging(), Boolean.FALSE);
       String logName = log != null ? log : config.getLogName();
       MonitoredResource resource =
           firstNonNull(
@@ -381,8 +388,7 @@ public class LoggingHandler extends Handler {
   }
 
   /** Sets the metadata auto population flag. */
-  public void setAutoPopulateMetadata(Boolean value) {
-    checkNotNull(value);
+  public void setAutoPopulateMetadata(boolean value) {
     this.autoPopulateMetadata = value;
     List<WriteOption> writeOptions = Arrays.asList(defaultWriteOptions);
     for (int i = 0; i < writeOptions.size(); i++) {
@@ -398,6 +404,18 @@ public class LoggingHandler extends Handler {
   /** Gets the metadata auto population flag. */
   public Boolean getAutoPopulateMetadata() {
     return this.autoPopulateMetadata;
+  }
+
+  /**
+   * Enable/disable use of structured logging. When enabled, logs will be printed to STDOUT in the
+   * structured logging format. Otherwise, logs will be ingested using Logging API.
+   */
+  public void setUseStructuredLogging(boolean value) {
+    this.useStructuredLogging = value;
+  }
+
+  public Boolean getUseStructuredLogging() {
+    return useStructuredLogging;
   }
 
   /**
