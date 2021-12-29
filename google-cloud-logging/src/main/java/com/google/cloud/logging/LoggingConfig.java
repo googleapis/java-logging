@@ -42,6 +42,7 @@ class LoggingConfig {
   private static final String ENHANCERS_TAG = "enhancers";
   private static final String USE_INHERITED_CONTEXT = "useInheritedContext";
   private static final String AUTO_POPULATE_METADATA = "autoPopulateMetadata";
+  private static final String USE_STRUCTURED_LOGGING = "useStructuredLogging";
 
   public LoggingConfig(String className) {
     this.className = className;
@@ -78,11 +79,11 @@ class LoggingConfig {
   }
 
   Boolean getAutoPopulateMetadata() {
-    String flag = getProperty(AUTO_POPULATE_METADATA);
-    if (flag != null) {
-      return Boolean.parseBoolean(flag);
-    }
-    return null;
+    return getBooleanProperty(AUTO_POPULATE_METADATA, null);
+  }
+
+  Boolean getUseStructuredLogging() {
+    return getBooleanProperty(USE_STRUCTURED_LOGGING, null);
   }
 
   MonitoredResource getMonitoredResource(String projectId) {
@@ -125,6 +126,14 @@ class LoggingConfig {
 
   private String getProperty(String name, String defaultValue) {
     return firstNonNull(getProperty(name), defaultValue);
+  }
+
+  private Boolean getBooleanProperty(String name, Boolean defaultValue) {
+    String flag = getProperty(name);
+    if (flag != null) {
+      return Boolean.parseBoolean(flag);
+    }
+    return defaultValue;
   }
 
   private Level getLevelProperty(String name, Level defaultValue) {
