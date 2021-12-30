@@ -171,15 +171,21 @@ public final class SourceLocation implements Serializable {
   static SourceLocation fromCurrentContext(String... exclusionClassPaths) {
     StackTraceElement[] stackTrace = (new Exception()).getStackTrace();
 
+    if (exclusionClassPaths != null) {
+      System.out.println("DEBUG: list of exclusions: " + String.join(", ", exclusionClassPaths));
+    }
     for (int level = 1; level < stackTrace.length; level++) {
       StackTraceElement ste = stackTrace[level];
       String className = ste.getClassName();
 
       if (exclusionClassPaths != null) {
-        if (Strings.isNullOrEmpty(className) || Arrays.stream(exclusionClassPaths).anyMatch(prefix -> prefix != null && className.startsWith(prefix))) {
+        if (Strings.isNullOrEmpty(className)
+            || Arrays.stream(exclusionClassPaths)
+                .anyMatch(prefix -> prefix != null && className.startsWith(prefix))) {
           continue;
         }
       }
+      System.out.println("DEBUG: selected element class nName: '" + className + "'");
       return newBuilder()
           .setFile(ste.getFileName())
           .setLine(Long.valueOf(ste.getLineNumber()))
