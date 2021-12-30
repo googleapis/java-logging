@@ -165,7 +165,6 @@ public class LoggingHandlerTest {
         WriteOption.logName(LOG_NAME),
         WriteOption.resource(DEFAULT_RESOURCE),
         WriteOption.labels(BASE_SEVERITY_MAP),
-        WriteOption.autoPopulateMetadata(false),
       };
 
   private Logging logging;
@@ -277,8 +276,7 @@ public class LoggingHandlerTest {
         ImmutableList.of(FINEST_ENTRY),
         WriteOption.logName(LOG_NAME),
         WriteOption.resource(resource),
-        WriteOption.labels(BASE_SEVERITY_MAP),
-        WriteOption.autoPopulateMetadata(false));
+        WriteOption.labels(BASE_SEVERITY_MAP));
     expectLastCall().once();
     replay(options, logging);
     Handler handler = new LoggingHandler(LOG_NAME, options, resource);
@@ -333,8 +331,7 @@ public class LoggingHandlerTest {
         ImmutableList.of(FINEST_ENTRY),
         WriteOption.logName(LOG_NAME),
         WriteOption.resource(resource),
-        WriteOption.labels(BASE_SEVERITY_MAP),
-        WriteOption.autoPopulateMetadata(false));
+        WriteOption.labels(BASE_SEVERITY_MAP));
     expectLastCall().once();
     replay(options, logging);
     Handler handler = new LoggingHandler(LOG_NAME, options, resource);
@@ -560,19 +557,27 @@ public class LoggingHandlerTest {
     options = EasyMock.createMock(LoggingOptions.class);
     expect(options.getProjectId()).andStubReturn(PROJECT);
     expect(options.getService()).andStubReturn(logging);
-    expect(options.getAutoPopulateMetadata()).andStubReturn(true);
-    logging.setFlushSeverity(Severity.ERROR);
-    expectLastCall().andVoid();
-    logging.setWriteSynchronicity(Synchronicity.ASYNC);
-    expectLastCall().andVoid();
-    logging.write(
-        ImmutableList.of(INFO_ENTRY),
-        WriteOption.logName(LOG_NAME),
-        WriteOption.resource(DEFAULT_RESOURCE),
-        WriteOption.labels(BASE_SEVERITY_MAP),
-        WriteOption.autoPopulateMetadata(true));
+    expect(options.getAutoPopulateMetadata()).andStubReturn(Boolean.TRUE);
+    logging.setFlushSeverity(EasyMock.anyObject(Severity.class));
+    expectLastCall().once();
+    logging.setWriteSynchronicity(EasyMock.anyObject(Synchronicity.class));
+    expectLastCall().once();
+    // due to the EasyMock bug https://github.com/easymock/easymock/issues/130
+    // it is impossible to define expectation for varargs using anyObject() matcher
+    // the following mock uses the known fact that the method pass two exclusion prefixes
+    // the following mocks should be replaced with anyObject() matchers when the bug is fixed
+    expect(
+            logging.populateMetadata(
+                EasyMock.eq(ImmutableList.of(INFO_ENTRY)),
+                EasyMock.eq(DEFAULT_RESOURCE),
+                EasyMock.anyString(),
+                EasyMock.anyString()))
+        .andReturn(ImmutableList.of(INFO_ENTRY))
+        .once();
+    logging.write(ImmutableList.of(INFO_ENTRY), DEFAULT_OPTIONS);
     expectLastCall().once();
     replay(options, logging);
+
     Handler handler = new LoggingHandler(LOG_NAME, options, DEFAULT_RESOURCE);
     handler.setLevel(Level.ALL);
     handler.setFormatter(new TestFormatter());
@@ -591,8 +596,7 @@ public class LoggingHandlerTest {
         WriteOption.logName(LOG_NAME),
         WriteOption.resource(resource),
         WriteOption.labels(BASE_SEVERITY_MAP),
-        WriteOption.destination(destination),
-        WriteOption.autoPopulateMetadata(false));
+        WriteOption.destination(destination));
     expectLastCall().once();
     replay(options, logging);
     Handler handler = new LoggingHandler(LOG_NAME, options, resource, null, destination);

@@ -29,6 +29,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.ErrorManager;
 import java.util.logging.Filter;
 import java.util.logging.Formatter;
@@ -261,11 +262,11 @@ public class LoggingHandler extends Handler {
       if (destination != null) {
         writeOptions.add(WriteOption.destination(destination));
       }
-      writeOptions.add(WriteOption.autoPopulateMetadata(autoPopulateMetadata));
       defaultWriteOptions = Iterables.toArray(writeOptions, WriteOption.class);
 
-      getLogging().setFlushSeverity(severityFor(flushLevel));
-      getLogging().setWriteSynchronicity(config.getSynchronicity());
+      logging = loggingOptions.getService();
+      logging.setFlushSeverity(severityFor(flushLevel));
+      logging.setWriteSynchronicity(config.getSynchronicity());
 
       this.enhancers = new LinkedList<>();
 
@@ -309,11 +310,32 @@ public class LoggingHandler extends Handler {
     }
     if (logEntry != null) {
       try {
-        getLogging().write(ImmutableList.of(logEntry), defaultWriteOptions);
+        Iterable<LogEntry> logEntries = ImmutableList.of(logEntry);
+        if (autoPopulateMetadata) {
+          logEntries =
+              logging.populateMetadata(
+                  logEntries, getMonitoredResource(), "com.google.cloud.logging", "java");
+        }
+        if (useStructuredLogging) {
+          logEntries.forEach(log -> System.out.println(log.toStructuredJsonString()));
+        } else {
+          logging.write(logEntries, defaultWriteOptions);
+        }
       } catch (Exception ex) {
         getErrorManager().error(null, ex, ErrorManager.WRITE_FAILURE);
       }
     }
+  }
+
+  private MonitoredResource getMonitoredResource() {
+    Optional<WriteOption> resourceOption =
+        Arrays.stream(defaultWriteOptions)
+            .filter(o -> o.getOptionType() == WriteOption.OptionType.RESOURCE)
+            .findFirst();
+    if (resourceOption.isPresent()) {
+      return (MonitoredResource) resourceOption.get().getValue();
+    }
+    return null;
   }
 
   private LogEntry logEntryFor(LogRecord record) throws Exception {
@@ -339,7 +361,7 @@ public class LoggingHandler extends Handler {
   @Override
   public void flush() {
     try {
-      getLogging().flush();
+      logging.flush();
     } catch (Exception ex) {
       getErrorManager().error(null, ex, ErrorManager.FLUSH_FAILURE);
     }
@@ -370,7 +392,7 @@ public class LoggingHandler extends Handler {
    */
   public void setFlushLevel(Level flushLevel) {
     this.flushLevel = flushLevel;
-    getLogging().setFlushSeverity(severityFor(flushLevel));
+    logging.setFlushSeverity(severityFor(flushLevel));
   }
 
   /**
@@ -379,26 +401,17 @@ public class LoggingHandler extends Handler {
    * @param synchronicity {@link Synchronicity}
    */
   public void setSynchronicity(Synchronicity synchronicity) {
-    getLogging().setWriteSynchronicity(synchronicity);
+    logging.setWriteSynchronicity(synchronicity);
   }
 
   /** Get the flush log level. */
   public Synchronicity getSynchronicity() {
-    return getLogging().getWriteSynchronicity();
+    return logging.getWriteSynchronicity();
   }
 
   /** Sets the metadata auto population flag. */
   public void setAutoPopulateMetadata(boolean value) {
     this.autoPopulateMetadata = value;
-    List<WriteOption> writeOptions = Arrays.asList(defaultWriteOptions);
-    for (int i = 0; i < writeOptions.size(); i++) {
-      if (writeOptions.get(i).getOptionType() == WriteOption.OptionType.AUTO_POPULATE_METADATA) {
-        writeOptions.remove(i);
-        break;
-      }
-    }
-    writeOptions.add(WriteOption.autoPopulateMetadata(value));
-    defaultWriteOptions = Iterables.toArray(writeOptions, WriteOption.class);
   }
 
   /** Gets the metadata auto population flag. */
@@ -457,18 +470,6 @@ public class LoggingHandler extends Handler {
       default:
         return Severity.DEFAULT;
     }
-  }
-
-  /** Returns an instance of the logging service. */
-  private Logging getLogging() {
-    if (logging == null) {
-      synchronized (this) {
-        if (logging == null) {
-          logging = loggingOptions.getService();
-        }
-      }
-    }
-    return logging;
   }
 
   private static boolean isTrueOrNull(Boolean b) {
