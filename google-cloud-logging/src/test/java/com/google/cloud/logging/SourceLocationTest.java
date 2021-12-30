@@ -92,7 +92,7 @@ public class SourceLocationTest {
 
   @Test
   public void testFromCurrentContextWithVeryLargeLevel() {
-    SourceLocation data = SourceLocation.fromCurrentContext("com.google", "sun", "java", "org");
+    SourceLocation data = SourceLocation.fromCurrentContext("com.google", "sun", "java", "jdk", "org");
     assertNull(data);
   }
 
