@@ -16,6 +16,7 @@
 
 package com.google.cloud.logging;
 
+import com.google.api.client.util.Strings;
 import com.google.common.base.MoreObjects;
 import com.google.logging.v2.LogEntrySourceLocation;
 import java.io.Serializable;
@@ -175,7 +176,7 @@ public final class SourceLocation implements Serializable {
       String className = ste.getClassName();
 
       if (exclusionClassPaths != null) {
-        if (Arrays.stream(exclusionClassPaths).anyMatch(prefix -> className.startsWith(prefix))) {
+        if (Strings.isNullOrEmpty(className) || Arrays.stream(exclusionClassPaths).anyMatch(prefix -> prefix != null && className.startsWith(prefix))) {
           continue;
         }
       }
