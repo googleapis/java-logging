@@ -42,7 +42,7 @@ class LoggingConfig {
   private static final String ENHANCERS_TAG = "enhancers";
   private static final String USE_INHERITED_CONTEXT = "useInheritedContext";
   private static final String AUTO_POPULATE_METADATA = "autoPopulateMetadata";
-  private static final String USE_STRUCTURED_LOGGING = "useStructuredLogging";
+  private static final String REDIRECT_TO_STDOUT = "redirectToStdout";
 
   public LoggingConfig(String className) {
     this.className = className;
@@ -82,8 +82,8 @@ class LoggingConfig {
     return getBooleanProperty(AUTO_POPULATE_METADATA, null);
   }
 
-  Boolean getUseStructuredLogging() {
-    return getBooleanProperty(USE_STRUCTURED_LOGGING, null);
+  Boolean getRedirectToStdout() {
+    return getBooleanProperty(REDIRECT_TO_STDOUT, null);
   }
 
   MonitoredResource getMonitoredResource(String projectId) {

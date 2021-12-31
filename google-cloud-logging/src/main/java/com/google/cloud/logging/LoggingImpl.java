@@ -24,6 +24,7 @@ import static com.google.cloud.logging.Logging.WriteOption.OptionType.LABELS;
 import static com.google.cloud.logging.Logging.WriteOption.OptionType.LOG_DESTINATION;
 import static com.google.cloud.logging.Logging.WriteOption.OptionType.LOG_NAME;
 import static com.google.cloud.logging.Logging.WriteOption.OptionType.RESOURCE;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.api.client.util.Strings;
 import com.google.api.core.ApiFunction;
@@ -41,7 +42,6 @@ import com.google.cloud.PageImpl;
 import com.google.cloud.logging.spi.v2.LoggingRpc;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Function;
-import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -459,10 +459,10 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
 
   @Override
   public ApiFuture<Boolean> deleteLogAsync(String log, LogDestinationName destination) {
-    Preconditions.checkNotNull(log, "log parameter cannot be null");
+    checkNotNull(log, "log parameter cannot be null");
     String projectId = getOptions().getProjectId();
     if (destination == null) {
-      Preconditions.checkNotNull(projectId, "projectId parameter cannot be null");
+      checkNotNull(projectId, "projectId parameter cannot be null");
     }
     LogName name = getLogName(projectId, log, destination);
     DeleteLogRequest request = DeleteLogRequest.newBuilder().setLogName(name.toString()).build();
@@ -796,6 +796,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
       Iterable<LogEntry> logEntries,
       MonitoredResource customResource,
       String... exclusionClassPaths) {
+    checkNotNull(logEntries);
     final Boolean needDebugInfo =
         Iterables.any(
             logEntries,
@@ -813,25 +814,28 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
 
     // populate empty metadata fields of log entries before calling write API
     for (LogEntry entry : logEntries) {
-      LogEntry.Builder builder = entry.toBuilder();
+      if (entry == null) {
+        continue;
+      }
+      LogEntry.Builder entityBuilder = entry.toBuilder();
       if (resourceMetadata != null && entry.getResource() == null) {
-        builder.setResource(resourceMetadata);
+        entityBuilder.setResource(resourceMetadata);
       }
       if (context != null && entry.getHttpRequest() == null) {
-        builder.setHttpRequest(context.getHttpRequest());
+        entityBuilder.setHttpRequest(context.getHttpRequest());
       }
       if (context != null && Strings.isNullOrEmpty(entry.getTrace())) {
         MonitoredResource resource =
             entry.getResource() != null ? entry.getResource() : resourceMetadata;
-        builder.setTrace(getFormattedTrace(context.getTraceId(), resource));
+        entityBuilder.setTrace(getFormattedTrace(context.getTraceId(), resource));
       }
       if (context != null && Strings.isNullOrEmpty(entry.getSpanId())) {
-        builder.setSpanId(context.getSpanId());
+        entityBuilder.setSpanId(context.getSpanId());
       }
       if (entry.getSeverity() == Severity.DEBUG && entry.getSourceLocation() == null) {
-        builder.setSourceLocation(sourceLocation);
+        entityBuilder.setSourceLocation(sourceLocation);
       }
-      populatedLogEntries.add(builder.build());
+      populatedLogEntries.add(entityBuilder.build());
     }
     return populatedLogEntries;
   }

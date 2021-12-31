@@ -563,7 +563,7 @@ public class LoggingHandlerTest {
     LoggingHandler handler = new LoggingHandler(LOG_NAME, options, DEFAULT_RESOURCE);
     handler.setLevel(Level.ALL);
     handler.setFormatter(new TestFormatter());
-    handler.setUseStructuredLogging(true);
+    handler.setRedirectToStdout(true);
     handler.publish(newLogRecord(Level.INFO, MESSAGE));
 
     assertTrue(null, !Strings.isNullOrEmpty(bout.toString()));

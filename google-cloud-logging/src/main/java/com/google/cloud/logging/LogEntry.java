@@ -665,14 +665,13 @@ public class LogEntry implements Serializable {
     }
 
     /**
-     * Adds a collection of Json fields that {@code value} parameter is serialized to to the current
-     * string representation. Nothing is added if {@code value} parameter is {@code null}.
+     * Serializes a dictionary of key, values as Json fields.
      *
-     * @param value an object to be serialized to Json using {@link Gson}.
+     * @param value a {@link Map} of key, value arguments to be serialized using {@link Gson}.
      * @param appendComma a flag to add a trailing comma.
      * @return a reference to this object.
      */
-    public StructuredLogFormatter appendJson(Object value, boolean appendComma) {
+    public StructuredLogFormatter appendDict(Map<String, Object> value, boolean appendComma) {
       if (value != null) {
         String json = gson.toJson(value);
         // append json object without brackets
@@ -685,10 +684,6 @@ public class LogEntry implements Serializable {
       }
       return this;
     }
-
-    public StructuredLogFormatter appendJson(Object value) {
-      return appendJson(value, false);
-    }
   }
 
   /**
@@ -696,6 +691,10 @@ public class LogEntry implements Serializable {
    * the logging agents that run on Google Cloud resources.
    */
   public String toStructuredJsonString() {
+    if (payload.getType() == Type.PROTO) {
+      throw new UnsupportedOperationException("LogEntry with protobuf payload cannot be converted");
+    }
+
     final StringBuilder builder = new StringBuilder("{");
     final StructuredLogFormatter formatter = new StructuredLogFormatter(builder);
 
@@ -714,9 +713,7 @@ public class LogEntry implements Serializable {
       formatter.appendField("message", payload.getData(), true);
     } else if (payload.getType() == Type.JSON) {
       Payload.JsonPayload jsonPayload = (Payload.JsonPayload) payload;
-      formatter.appendJson(jsonPayload.getDataAsMap(), true);
-    } else if (payload.getType() == Type.PROTO) {
-      throw new UnsupportedOperationException("LogEntry with protobuf payload cannot be converted");
+      formatter.appendDict(jsonPayload.getDataAsMap(), true);
     }
     builder.append("}");
     return builder.toString();

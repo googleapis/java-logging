@@ -114,10 +114,12 @@ import java.util.logging.SimpleFormatter;
  *   <li>{@code com.google.cloud.logging.LoggingHandler.autoPopulateMetadata} is a boolean flag that
  *       opts-out the population of the log entries metadata before the logs are sent to Cloud
  *       Logging (defaults to {@code true}).
- *   <li>{@code com.google.cloud.logging.LoggingHandler.useStructuredLogging} is a boolean flag that
- *       opts-in redirecting the output of the handler to STDOUT (instead of ingesting it using
- *       Logging API) by formatting the log following structured logging guidelines. Logging
- *       (defaults to {@code true}).
+ *   <li>{@code com.google.cloud.logging.LoggingHandler.redirectToStdout} is a boolean flag that
+ *       opts-in redirecting the output of the handler to STDOUT instead of ingesting logs to Cloud
+ *       Logging using Logging API (defaults to {@code true}). Redirecting logs can be used in
+ *       Google Cloud environments with installed logging agent to delegate log ingestions to the
+ *       agent. Redirected logs are formatted as one line Json string following the structured
+ *       logging guidelines.
  * </ul>
  *
  * <p>To add a {@code LoggingHandler} to an existing {@link Logger} and be sure to avoid infinite
@@ -151,7 +153,7 @@ public class LoggingHandler extends Handler {
   private volatile Level flushLevel;
 
   private volatile Boolean autoPopulateMetadata;
-  private volatile Boolean useStructuredLogging;
+  private volatile Boolean redirectToStdout;
 
   private WriteOption[] defaultWriteOptions;
 
@@ -242,7 +244,7 @@ public class LoggingHandler extends Handler {
       Boolean f1 = options.getAutoPopulateMetadata();
       Boolean f2 = config.getAutoPopulateMetadata();
       autoPopulateMetadata = isTrueOrNull(f1) && isTrueOrNull(f2);
-      useStructuredLogging = firstNonNull(config.getUseStructuredLogging(), Boolean.FALSE);
+      redirectToStdout = firstNonNull(config.getRedirectToStdout(), Boolean.FALSE);
       String logName = log != null ? log : config.getLogName();
       MonitoredResource resource =
           firstNonNull(
@@ -316,7 +318,7 @@ public class LoggingHandler extends Handler {
               logging.populateMetadata(
                   logEntries, getMonitoredResource(), "com.google.cloud.logging", "java");
         }
-        if (useStructuredLogging) {
+        if (redirectToStdout) {
           logEntries.forEach(log -> System.out.println(log.toStructuredJsonString()));
         } else {
           logging.write(logEntries, defaultWriteOptions);
@@ -420,15 +422,16 @@ public class LoggingHandler extends Handler {
   }
 
   /**
-   * Enable/disable use of structured logging. When enabled, logs will be printed to STDOUT in the
-   * structured logging format. Otherwise, logs will be ingested using Logging API.
+   * Enable/disable redirection to STDOUT. If set to {@code true}, logs will be printed to STDOUT in
+   * the Json format that can be parsed by the logging agent. If set to {@code false}, logs will be
+   * ingested to Cloud Logging by calling Logging API.
    */
-  public void setUseStructuredLogging(boolean value) {
-    this.useStructuredLogging = value;
+  public void setRedirectToStdout(boolean value) {
+    this.redirectToStdout = value;
   }
 
-  public Boolean getUseStructuredLogging() {
-    return useStructuredLogging;
+  public Boolean getRedirectToStdout() {
+    return redirectToStdout;
   }
 
   /**
