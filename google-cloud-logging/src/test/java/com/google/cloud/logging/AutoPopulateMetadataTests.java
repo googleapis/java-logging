@@ -89,7 +89,8 @@ public class AutoPopulateMetadataTests {
     expect(mockedRpc.write(capture(rpcWriteArgument)))
         .andReturn(ApiFutures.immediateFuture(EMPTY_WRITE_RESPONSE));
     MonitoredResourceUtil.setEnvironmentGetter(mockedEnvGetter);
-    // the following mocks generate MonitoredResource instance same as RESOURCE constant
+    // the following mocks generate MonitoredResource instance same as RESOURCE
+    // constant
     expect(mockedEnvGetter.getAttribute("project/project-id")).andStubReturn(RESOURCE_PROJECT_ID);
     expect(mockedEnvGetter.getAttribute("")).andStubReturn(null);
     replay(mockedRpcFactory, mockedRpc, mockedEnvGetter);
@@ -158,7 +159,7 @@ public class AutoPopulateMetadataTests {
 
   @Test
   public void testSourceLocationPopulation() {
-    SourceLocation expected = SourceLocation.fromCurrentContext(0);
+    SourceLocation expected = SourceLocation.fromCurrentContext();
     logging.write(ImmutableList.of(SIMPLE_LOG_ENTRY_WITH_DEBUG));
 
     LogEntry actual = LogEntry.fromPb(rpcWriteArgument.getValue().getEntries(0));
