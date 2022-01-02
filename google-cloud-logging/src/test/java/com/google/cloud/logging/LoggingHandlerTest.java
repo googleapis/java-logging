@@ -21,6 +21,7 @@ import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import com.google.api.client.util.Strings;
@@ -357,6 +358,34 @@ public class LoggingHandlerTest {
   }
 
   @Test
+  public void testEnhancedLogEntryPrintToStdout() {
+    final String ExpectedOutput =
+        "{\"severity\":\"INFO\",\"timestamp\":\"1970-01-02T10:17:36.789Z\",\"logging.googleapis.com/labels\":{\"enhanced\":\"true\"},\"logging.googleapis.com/trace_sampled\":false,\"message\":\"message\"}";
+    replay(options, logging);
+    ByteArrayOutputStream bout = new ByteArrayOutputStream();
+    PrintStream out = new PrintStream(bout);
+    System.setOut(out);
+
+    LoggingEnhancer enhancer =
+        new LoggingEnhancer() {
+          @Override
+          public void enhanceLogEntry(Builder builder) {
+            builder.addLabel("enhanced", "true");
+          }
+        };
+    LoggingHandler handler =
+        new LoggingHandler(
+            LOG_NAME, options, DEFAULT_RESOURCE, Collections.singletonList(enhancer));
+    handler.setLevel(Level.ALL);
+    handler.setFormatter(new TestFormatter());
+    handler.setRedirectToStdout(true);
+    handler.publish(newLogRecord(Level.INFO, MESSAGE));
+
+    assertEquals(ExpectedOutput, bout.toString().trim()); // ignore trailing newline!
+    System.setOut(null);
+  }
+
+  @Test
   public void testTraceEnhancedLogEntry() {
     logging.write(ImmutableList.of(TRACE_ENTRY), DEFAULT_OPTIONS);
     expectLastCall().once();
@@ -545,7 +574,7 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testStructuredLoggingEnabled() {
+  public void testRedirectToStdoutEnabled() {
     setupOptionsToEnableAutoPopulation();
     expect(
             logging.populateMetadata(
@@ -572,7 +601,7 @@ public class LoggingHandlerTest {
 
   @Test
   /** Validate that nothing is printed to STDOUT */
-  public void testStructuredLoggingDisabled() {
+  public void testRedirectToStdoutDisabled() {
     ByteArrayOutputStream bout = new ByteArrayOutputStream();
     PrintStream out = new PrintStream(bout);
     System.setOut(out);
