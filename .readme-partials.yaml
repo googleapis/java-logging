@@ -152,15 +152,33 @@ custom_content: |
   [source location](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#LogEntrySourceLocation)
   are automatically populated with information that the library retrieves from the execution context.
   The library populates only empty (set to `null`) LogEntry fields.
-  This behavior can be opted out by calling `LoggingOptions.Builder.setAutoPopulateMetadata(false)`.
-  Cloud Logging handler can be configured to opt-out automatic population of the metadata via the config file by
-  setting `com.google.cloud.logging.LoggingHandler.autoPopulateMetadata` configuration to `false`.
+  This behavior in the `Logging` instance can be opted out via `LoggingOptions`.
+  Call `LoggingOptions.Builder.setAutoPopulateMetadata(false)` to configure logging options to opt-out the metadata auto-population.
+  Cloud Logging handler can be configured to opt-out automatic population of the metadata using the logger configuration.
+  To disable the metadata auto-population add `com.google.cloud.logging.LoggingHandler.autoPopulateMetadata=false`
+  to the logger configuration file.
 
   The auto-population logic populates source location _only_ for log entries with `Severity.DEBUG` severity.
   The execution context of the Http request and tracing information is maintained by `ContextHandler` class.
   The context is managed in the scope of the thread.
+  If you do not use thread pools for multi-threading the `ContextHandler` can be configured to propagate the context
+  to the scope of the child threads.
+  To enable this add `com.google.cloud.logging.ContextHandler.useInheritedContext=true` to the logger configuration file.
   The library provides two methods to update the context:
-  1. Using [servlet initializer](https://github.com/googleapis/java-logging-servlet-initializer).
+
+  * Manually set the context. You can use the following methods of the `Context.Builder` to set the context information.
+  Use the method `setRequest()` to setup the `HttpRequest` instance or `setRequestUrl()`, `setRequestMethod()`,
+  `setReferer() `, `setRemoteIp()` and `setServerIp()` to setup the fields of the `HttpRequest`.
+  The trace and span Ids can be set directly using `setTraceId()` and `setSpanId()` respectively.
+  Alternatively it can be parsed from the W3C tracing context header using `loadW3CTraceParentContext()` or
+  from the Google Cloud tracing context header using `loadCloudTraceContext()`.
+
+      ```java
+      Context context = Context.newBuilder().setHttpRequest(request).setTrace(traceId).setSpanId(spanId).build();
+      (new ContextHandler()).setCurrentContext(context);
+      ```
+
+  * Using [servlet initializer](https://github.com/googleapis/java-logging-servlet-initializer).
   If your application uses a Web server based on Jakarta servlets (e.g. Jetty or Tomcat), you can add the servlet initializer
   package to your WAR. The package implements a service provider interface (SPI) for
   [javax.servlet.ServletContainerInitializer](https://docs.oracle.com/javaee/6/api/javax/servlet/ServletContainerInitializer.html)
@@ -175,9 +193,3 @@ custom_content: |
       </dependency>      
       ```
 
-  1. Manually set the context.
-
-      ```java
-      Context context = Context.newBuilder().setHttpRequest(request).setTrace(traceId).setSpanId(spanId).build();
-      (new ContextHandler()).setCurrentContext(context);
-      ```
