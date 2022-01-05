@@ -653,7 +653,7 @@ public class LogEntry implements Serializable {
       checkNotNull(name);
       if (value != null) {
         builder.append(gson.toJson(name)).append(":").append(gson.toJson(value));
-        if (!appendComma) {
+        if (appendComma) {
           builder.append(",");
         }
       }
@@ -661,7 +661,7 @@ public class LogEntry implements Serializable {
     }
 
     public StructuredLogFormatter appendField(String name, Object value) {
-      return appendField(name, value, false);
+      return appendField(name, value, true);
     }
 
     /**
@@ -677,7 +677,7 @@ public class LogEntry implements Serializable {
         // append json object without brackets
         if (json.length() > 1) {
           builder.append(json.substring(0, json.length() - 1).substring(1));
-          if (!appendComma) {
+          if (appendComma) {
             builder.append(",");
           }
         }
@@ -710,10 +710,10 @@ public class LogEntry implements Serializable {
         .appendField("logging.googleapis.com/trace", trace)
         .appendField("logging.googleapis.com/trace_sampled", traceSampled);
     if (payload.getType() == Type.STRING) {
-      formatter.appendField("message", payload.getData(), true);
+      formatter.appendField("message", payload.getData(), false);
     } else if (payload.getType() == Type.JSON) {
       Payload.JsonPayload jsonPayload = (Payload.JsonPayload) payload;
-      formatter.appendDict(jsonPayload.getDataAsMap(), true);
+      formatter.appendDict(jsonPayload.getDataAsMap(), false);
     }
     builder.append("}");
     return builder.toString();
