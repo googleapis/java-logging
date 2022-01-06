@@ -848,12 +848,12 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
 
     try {
       final Map<Option.OptionType, ?> writeOptions = optionMap(options);
-      final Boolean populateMetadata1 = getOptions().getAutoPopulateMetadata();
-      final Boolean populateMetadata2 =
+      final Boolean logingOptionsPopulateFlag = getOptions().getAutoPopulateMetadata();
+      final Boolean writeOptionPopulateFlga =
           WriteOption.OptionType.AUTO_POPULATE_METADATA.get(writeOptions);
 
-      if (populateMetadata2 == Boolean.TRUE
-          || (populateMetadata2 == null && populateMetadata1 == Boolean.TRUE)) {
+      if (writeOptionPopulateFlga == Boolean.TRUE
+          || (writeOptionPopulateFlga == null && logingOptionsPopulateFlag == Boolean.TRUE)) {
         final MonitoredResource sharedResourceMetadata = RESOURCE.get(writeOptions);
         logEntries =
             populateMetadata(logEntries, sharedResourceMetadata, this.getClass().getName());
