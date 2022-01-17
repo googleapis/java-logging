@@ -224,7 +224,14 @@ public class LoggingHandlerTest {
 
   @Test
   public void testDefaultHandlerCreation() {
-    replay(options, logging);
+    // mocks behavior of MonitoredResourceUtil which is used by LoggingOptions.getDefaultInstance()
+    // static method
+    ResourceTypeEnvironmentGetter getterMock =
+        EasyMock.createMock(ResourceTypeEnvironmentGetter.class);
+    expect(getterMock.getAttribute("project/project-id")).andReturn(PROJECT);
+    expect(getterMock.getAttribute("")).andStubReturn(null);
+    MonitoredResourceUtil.setEnvironmentGetter(getterMock);
+    replay(options, logging, getterMock);
     assertNotNull(new LoggingHandler());
   }
 
