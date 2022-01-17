@@ -53,6 +53,7 @@ public class LoggingHandlerTest {
   private static final String LOG_NAME = "java.log";
   private static final String MESSAGE = "message";
   private static final String PROJECT = "project";
+  private static final String PROJECT_ENV_NAME = "GOOGLE_CLOUD_PROJECT";
 
   private static final MonitoredResource DEFAULT_RESOURCE =
       MonitoredResource.of("global", ImmutableMap.of("project_id", PROJECT));
@@ -224,15 +225,15 @@ public class LoggingHandlerTest {
 
   @Test
   public void testDefaultHandlerCreation() {
-    // mocks behavior of MonitoredResourceUtil which is used by LoggingOptions.getDefaultInstance()
-    // static method
-    ResourceTypeEnvironmentGetter getterMock =
-        EasyMock.createMock(ResourceTypeEnvironmentGetter.class);
-    expect(getterMock.getAttribute("project/project-id")).andReturn(PROJECT);
-    expect(getterMock.getAttribute("")).andStubReturn(null);
-    MonitoredResourceUtil.setEnvironmentGetter(getterMock);
-    replay(options, logging, getterMock);
+    String oldProject = System.getProperty(PROJECT_ENV_NAME);
+    System.setProperty(PROJECT_ENV_NAME, PROJECT);
+    replay(options, logging);
     assertNotNull(new LoggingHandler());
+    if (oldProject != null) {
+      System.setProperty(PROJECT_ENV_NAME, oldProject);
+    } else {
+      System.clearProperty(PROJECT_ENV_NAME);
+    }
   }
 
   @Test
