@@ -916,12 +916,12 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
 
     switch (this.writeSynchronicity) {
       case SYNC:
-        get(writeAsync(logEntries, writeOptions));
+        get(writeAsyncWithLocalRpcContext(logEntries, writeOptions));
         break;
 
       case ASYNC:
       default:
-        final ApiFuture<Void> writeFuture = writeAsync(logEntries, writeOptions);
+        final ApiFuture<Void> writeFuture = writeAsyncWithLocalRpcContext(logEntries, writeOptions);
         final Object pendingKey = new Object();
         pendingWrites.put(pendingKey, writeFuture);
         ApiFutures.addCallback(
@@ -948,6 +948,21 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
             },
             MoreExecutors.directExecutor());
         break;
+    }
+  }
+
+  /**
+   * Substitutes local, not cancellable grpc context for subsequent write API grpc call allowing to
+   * complete the API call even if the original context is cancelled.
+   */
+  private ApiFuture<Void> writeAsyncWithLocalRpcContext(
+      Iterable<LogEntry> logEntries, WriteOption... options) {
+    io.grpc.Context localContext = io.grpc.Context.current().fork();
+    io.grpc.Context callerContext = localContext.attach();
+    try {
+      return writeAsync(logEntries, options);
+    } finally {
+      localContext.detach(callerContext);
     }
   }
 
