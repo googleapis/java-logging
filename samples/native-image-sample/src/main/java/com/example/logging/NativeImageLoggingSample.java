@@ -22,6 +22,8 @@ import com.google.cloud.logging.Logging;
 import com.google.cloud.logging.LoggingOptions;
 import com.google.cloud.logging.Payload.StringPayload;
 import com.google.cloud.logging.Severity;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Collections;
 
 /**
@@ -33,6 +35,7 @@ public class NativeImageLoggingSample {
    * Runs the Logging Sample Application.
    */
   public static void main(String[] args) {
+    Instant startTime = Instant.now();
     // Instantiates a client
     Logging client = LoggingOptions.getDefaultInstance().getService();
 
@@ -56,5 +59,8 @@ public class NativeImageLoggingSample {
     System.out.println(
         "See your logs in the Cloud Console: https://console.cloud.google.com/logs/viewer "
             + "(Might take a few seconds to load.)");
+    Instant endTime = Instant.now();
+    Duration duration = Duration.between(startTime, endTime);
+    System.out.println("Duration: " + duration.toString());
   }
 }

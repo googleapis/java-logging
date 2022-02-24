@@ -18,7 +18,6 @@ package com.example.logging;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import com.google.cloud.logging.Logging;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.Before;
@@ -28,7 +27,6 @@ public class ITNativeImageLoggingSample {
 
   private ByteArrayOutputStream bout;
   private PrintStream out;
-  private static Logging logging;
 
   @Before
   public void setUp() {
