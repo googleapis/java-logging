@@ -63,8 +63,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>com.example.logging.NativeImageLoggingSample
-              </mainClass>
+              <mainClass>com.example.logging.NativeImageLoggingSample</mainClass>
             </manifest>
           </archive>
         </configuration>
