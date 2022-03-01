@@ -38,7 +38,7 @@ public class ITNativeImageLoggingSample {
   @Test
   public void testLogging() {
     bout.reset();
-    NativeImageLoggingSample.main(new String[]{});
+    NativeImageLoggingSample.main(new String[] {});
     String output = bout.toString();
     assertThat(output).contains("Logged: This is a log produced by Native Image.");
   }

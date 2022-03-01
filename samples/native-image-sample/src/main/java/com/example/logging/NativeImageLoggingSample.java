@@ -26,14 +26,10 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Collections;
 
-/**
- * Basic sample application which writes a log message to Cloud Logging.
- */
+/** Basic sample application which writes a log message to Cloud Logging. */
 public class NativeImageLoggingSample {
 
-  /**
-   * Runs the Logging Sample Application.
-   */
+  /** Runs the Logging Sample Application. */
   public static void main(String[] args) {
     Instant startTime = Instant.now();
     // Instantiates a client
@@ -45,11 +41,12 @@ public class NativeImageLoggingSample {
     // The data to write to the log
     String text = "This is a log produced by Native Image.";
 
-    LogEntry entry = LogEntry.newBuilder(StringPayload.of(text))
-        .setSeverity(Severity.INFO)
-        .setLogName(logName)
-        .setResource(MonitoredResource.newBuilder("global").build())
-        .build();
+    LogEntry entry =
+        LogEntry.newBuilder(StringPayload.of(text))
+            .setSeverity(Severity.INFO)
+            .setLogName(logName)
+            .setResource(MonitoredResource.newBuilder("global").build())
+            .build();
 
     client.write(Collections.singleton(entry));
     client.flush();
