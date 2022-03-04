@@ -30,7 +30,7 @@ import java.util.Collections;
 public class NativeImageLoggingSample {
 
   /** Runs the Logging Sample Application. */
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
     Instant startTime = Instant.now();
     // Instantiates a client
     Logging client = LoggingOptions.getDefaultInstance().getService();
@@ -50,6 +50,7 @@ public class NativeImageLoggingSample {
 
     client.write(Collections.singleton(entry));
     client.flush();
+    client.close();
 
     System.out.println(String.format("Logged: %s", text));
     System.out.println("Log message written to Cloud Logging.");

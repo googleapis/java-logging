@@ -36,7 +36,7 @@ public class ITNativeImageLoggingSample {
   }
 
   @Test
-  public void testLogging() {
+  public void testLogging() throws Exception {
     bout.reset();
     NativeImageLoggingSample.main(new String[] {});
     String output = bout.toString();
