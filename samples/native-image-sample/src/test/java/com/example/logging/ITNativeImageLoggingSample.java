@@ -24,13 +24,12 @@ import org.junit.Test;
 
 public class ITNativeImageLoggingSample {
 
-  @Rule
-  public StdOutCaptureRule stdOut = new StdOutCaptureRule();
+  @Rule public StdOutCaptureRule stdOut = new StdOutCaptureRule();
 
   @Test
   public void testLogging() throws Exception {
-    NativeImageLoggingSample.main(new String[]{});
-    assertThat(stdOut.getCapturedOutputAsUtf8String()).contains(
-        "Logged: This is a log produced by Native Image.");
+    NativeImageLoggingSample.main(new String[] {});
+    assertThat(stdOut.getCapturedOutputAsUtf8String())
+        .contains("Logged: This is a log produced by Native Image.");
   }
 }
