@@ -34,7 +34,7 @@ public class WriteLogEntry {
     String logName = args.length > 0 ? args[0] : "test-log";
 
     // Instantiates a client
-    try (Logging logging = LoggingOptions.getDefaultInstance().getService()) {
+    try (Logging logging = LoggingOptions.getDefaultInstance().newBuilder().setProjectId("leoy-toolbox").build().getService()) {
       Map<String, String> payload =
           ImmutableMap.of(
               "name", "King Arthur", "quest", "Find the Holy Grail", "favorite_color", "Blue");
@@ -42,7 +42,7 @@ public class WriteLogEntry {
           LogEntry.newBuilder(JsonPayload.of(payload))
               .setSeverity(Severity.INFO)
               .setLogName(logName)
-              .setResource(MonitoredResource.newBuilder("global").build())
+              .setResource(MonitoredResource.newBuilder("global").addLabel("project_id", "different-project").build())
               .build();
 
       logging.write(Collections.singleton(entry));

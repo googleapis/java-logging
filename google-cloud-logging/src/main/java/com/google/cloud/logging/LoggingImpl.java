@@ -846,6 +846,12 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
     }
     inWriteCall.set(true);
 
+    System.out.println("DEBUG start -----");
+    for (LogEntry entry : logEntries) {
+      System.out.println(entry.getResource().getLabels().toString());
+    }
+    System.out.println("DEBUG end -----");
+
     try {
       final Map<Option.OptionType, ?> writeOptions = optionMap(options);
       final Boolean logingOptionsPopulateFlag = getOptions().getAutoPopulateMetadata();
@@ -858,6 +864,12 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
         logEntries =
             populateMetadata(logEntries, sharedResourceMetadata, this.getClass().getName());
       }
+
+      System.out.println("DEBUG start -----");
+      for (LogEntry entry : logEntries) {
+        System.out.println(entry.getResource().getLabels().toString());
+      }
+      System.out.println("DEBUG end -----");
 
       writeLogEntries(logEntries, options);
       if (flushSeverity != null) {
