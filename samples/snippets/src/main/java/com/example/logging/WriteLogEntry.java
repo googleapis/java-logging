@@ -48,6 +48,8 @@ public class WriteLogEntry {
       logging.write(Collections.singleton(entry));
     }
     System.out.printf("Wrote to %s\n", logName);
+
+    Thread.sleep(60000);
   }
 }
 // [END logging_write_log_entry]
