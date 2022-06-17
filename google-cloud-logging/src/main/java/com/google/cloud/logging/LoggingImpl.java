@@ -23,6 +23,7 @@ import static com.google.cloud.logging.Logging.ListOption.OptionType.PAGE_TOKEN;
 import static com.google.cloud.logging.Logging.WriteOption.OptionType.LABELS;
 import static com.google.cloud.logging.Logging.WriteOption.OptionType.LOG_DESTINATION;
 import static com.google.cloud.logging.Logging.WriteOption.OptionType.LOG_NAME;
+import static com.google.cloud.logging.Logging.WriteOption.OptionType.PARTIAL_SUCCESS;
 import static com.google.cloud.logging.Logging.WriteOption.OptionType.RESOURCE;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -92,7 +93,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
-
   protected static final String RESOURCE_NAME_FORMAT = "projects/%s/traces/%s";
   private static final int FLUSH_WAIT_TIMEOUT_SECONDS = 6;
   private final LoggingRpc rpc;
@@ -774,6 +774,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
       builder.putAllLabels(labels);
     }
 
+    builder.setPartialSuccess(Boolean.TRUE.equals(PARTIAL_SUCCESS.get(options)));
     builder.addAllEntries(Iterables.transform(logEntries, LogEntry.toPbFunction(projectId)));
     return builder.build();
   }

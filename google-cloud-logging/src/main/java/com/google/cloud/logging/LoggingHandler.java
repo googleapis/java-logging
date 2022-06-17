@@ -19,6 +19,7 @@ package com.google.cloud.logging;
 import static com.google.common.base.MoreObjects.firstNonNull;
 
 import com.google.cloud.MonitoredResource;
+import com.google.cloud.Tuple;
 import com.google.cloud.logging.Logging.WriteOption;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -312,7 +313,9 @@ public class LoggingHandler extends Handler {
     }
     if (logEntry != null) {
       try {
-        Iterable<LogEntry> logEntries = ImmutableList.of(logEntry);
+        Tuple<Boolean, Iterable<LogEntry>> pair =
+            Instrumentation.populateInstrumentationInfo(ImmutableList.of(logEntry));
+        Iterable<LogEntry> logEntries = pair.y();
         if (autoPopulateMetadata) {
           logEntries =
               logging.populateMetadata(
@@ -321,7 +324,15 @@ public class LoggingHandler extends Handler {
         if (redirectToStdout) {
           logEntries.forEach(log -> System.out.println(log.toStructuredJsonString()));
         } else {
-          logging.write(logEntries, defaultWriteOptions);
+          // Add partialSuccess option always for request containing instrumentation data
+          if (pair.x()) {
+            List<WriteOption> writeOptions = new ArrayList<WriteOption>();
+            writeOptions.addAll(Arrays.asList(defaultWriteOptions));
+            writeOptions.add(WriteOption.partialSuccess(true));
+            logging.write(logEntries, Iterables.toArray(writeOptions, WriteOption.class));
+          } else {
+            logging.write(logEntries, defaultWriteOptions);
+          }
         }
       } catch (Exception ex) {
         getErrorManager().error(null, ex, ErrorManager.WRITE_FAILURE);
