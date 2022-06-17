@@ -42,11 +42,13 @@ public class Instrumentation {
   public static Tuple<Boolean, Iterable<LogEntry>> populateInstrumentationInfo(
       Iterable<LogEntry> logEntries) {
     boolean isWritten = setInstrumentationStatus(true);
+    if (isWritten) return Tuple.of(false, logEntries);
     List<LogEntry> entries = new ArrayList<>();
-    boolean isInfoAdded = false;
+
     for (LogEntry logEntry : logEntries) {
       // Check if LogEntry has a proper payload and also contains a diagnostic entry
-      if (logEntry.getPayload().getType() == Type.JSON
+      if (!isWritten
+          && logEntry.getPayload().getType() == Type.JSON
           && logEntry
               .<Payload.JsonPayload>getPayload()
               .getData()
@@ -61,7 +63,7 @@ public class Instrumentation {
                   .getFieldsOrThrow(INSTRUMENTATION_SOURCE_KEY)
                   .getListValue();
           entries.add(createDiagnosticEntry(null, null, infoList));
-          isInfoAdded = isWritten = true;
+          isWritten = true;
         } catch (Exception ex) {
           System.err.println("ERROR: unexpected exception in populateInstrumentationInfo: " + ex);
         }
@@ -71,9 +73,8 @@ public class Instrumentation {
     }
     if (!isWritten) {
       entries.add(createDiagnosticEntry(null, null, null));
-      isInfoAdded = true;
     }
-    return Tuple.of(isInfoAdded, entries);
+    return Tuple.of(true, entries);
   }
 
   /**
