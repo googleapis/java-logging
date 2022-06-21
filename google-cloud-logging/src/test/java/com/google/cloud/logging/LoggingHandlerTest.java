@@ -201,6 +201,7 @@ public class LoggingHandlerTest {
 
   @Before
   public void setUp() {
+    Instrumentation.setInstrumentationStatus(true);
     logging = EasyMock.createMock(Logging.class);
     options = EasyMock.createMock(LoggingOptions.class);
     expect(options.getProjectId()).andStubReturn(PROJECT);
@@ -626,6 +627,29 @@ public class LoggingHandlerTest {
 
     assertTrue(null, Strings.isNullOrEmpty(bout.toString()));
     System.setOut(null);
+  }
+
+  @Test
+  public void testDiagnosticInfo() {
+    Instrumentation.setInstrumentationStatus(false);
+    LogEntry json_entry =
+        LogEntry.newBuilder(
+                InstrumentationTest.generateInstrumentationPayload(
+                    Instrumentation.JAVA_LIBRARY_NAME_PREFIX,
+                    Instrumentation.DEFAULT_INSTRUMENTATION_VERSION))
+            .build();
+    logging.write(
+        ImmutableList.of(FINEST_ENTRY, json_entry),
+        WriteOption.logName(LOG_NAME),
+        WriteOption.resource(DEFAULT_RESOURCE),
+        WriteOption.labels(BASE_SEVERITY_MAP),
+        WriteOption.partialSuccess(true));
+    expectLastCall().once();
+    replay(options, logging);
+    LoggingHandler handler = new LoggingHandler(LOG_NAME, options, DEFAULT_RESOURCE);
+    handler.setLevel(Level.ALL);
+    handler.setFormatter(new TestFormatter());
+    handler.publish(newLogRecord(Level.FINEST, MESSAGE));
   }
 
   private void testPublishCustomResourceWithDestination(
