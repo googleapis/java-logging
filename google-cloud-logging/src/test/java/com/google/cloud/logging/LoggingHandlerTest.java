@@ -636,7 +636,7 @@ public class LoggingHandlerTest {
         LogEntry.newBuilder(
                 InstrumentationTest.generateInstrumentationPayload(
                     Instrumentation.JAVA_LIBRARY_NAME_PREFIX,
-                    Instrumentation.DEFAULT_INSTRUMENTATION_VERSION))
+                    Instrumentation.getLibraryVersion(Instrumentation.class.getClass())))
             .build();
     logging.write(
         ImmutableList.of(FINEST_ENTRY, json_entry),

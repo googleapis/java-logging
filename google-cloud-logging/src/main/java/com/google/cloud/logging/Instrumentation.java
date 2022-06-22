@@ -119,8 +119,7 @@ public class Instrumentation {
     if (Strings.isNullOrEmpty(libraryName) || !libraryName.startsWith(JAVA_LIBRARY_NAME_PREFIX))
       libraryName = JAVA_LIBRARY_NAME_PREFIX;
     if (Strings.isNullOrEmpty(libraryVersion)) {
-      libraryVersion = GaxProperties.getLibraryVersion(Instrumentation.class.getClass());
-      if (Strings.isNullOrEmpty(libraryVersion)) libraryVersion = DEFAULT_INSTRUMENTATION_VERSION;
+      libraryVersion = getLibraryVersion(Instrumentation.class.getClass());
     }
     Struct libraryInfo = createInfoStruct(libraryName, libraryVersion);
     ListValue.Builder libraryList = ListValue.newBuilder();
@@ -169,6 +168,19 @@ public class Instrumentation {
   public static boolean setInstrumentationStatus(boolean value) {
     if (instrumentationAdded == value) return instrumentationAdded;
     return setAndGetInstrumentationStatus(value);
+  }
+
+  /**
+   * Returns a library version associated with given class
+   *
+   * @param libraryClass {Class<?>} The class to be used to determine a library version
+   * @return The version number string for given class or "UNKNOWN" if class library version cannot
+   *     be detected
+   */
+  public static String getLibraryVersion(Class<?> libraryClass) {
+    String libraryVersion = GaxProperties.getLibraryVersion(libraryClass);
+    if (Strings.isNullOrEmpty(libraryVersion)) libraryVersion = DEFAULT_INSTRUMENTATION_VERSION;
+    return libraryVersion;
   }
 
   private static synchronized boolean setAndGetInstrumentationStatus(boolean value) {

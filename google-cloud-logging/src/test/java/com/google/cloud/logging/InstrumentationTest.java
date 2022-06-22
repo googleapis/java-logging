@@ -48,7 +48,8 @@ public class InstrumentationTest {
         1,
         2,
         new HashSet<>(Arrays.asList(Instrumentation.JAVA_LIBRARY_NAME_PREFIX)),
-        new HashSet<>(Arrays.asList(Instrumentation.DEFAULT_INSTRUMENTATION_VERSION)));
+        new HashSet<>(
+            Arrays.asList(Instrumentation.getLibraryVersion(Instrumentation.class.getClass()))));
   }
 
   @Test
@@ -74,7 +75,9 @@ public class InstrumentationTest {
         1,
         new HashSet<>(Arrays.asList(Instrumentation.JAVA_LIBRARY_NAME_PREFIX, JAVA_OTHER_NAME)),
         new HashSet<>(
-            Arrays.asList(Instrumentation.DEFAULT_INSTRUMENTATION_VERSION, JAVA_OTHER_VERSION)));
+            Arrays.asList(
+                Instrumentation.getLibraryVersion(Instrumentation.class.getClass()),
+                JAVA_OTHER_VERSION)));
   }
 
   @Test
@@ -88,7 +91,8 @@ public class InstrumentationTest {
         0,
         1,
         new HashSet<>(Arrays.asList(Instrumentation.JAVA_LIBRARY_NAME_PREFIX)),
-        new HashSet<>(Arrays.asList(Instrumentation.DEFAULT_INSTRUMENTATION_VERSION)));
+        new HashSet<>(
+            Arrays.asList(Instrumentation.getLibraryVersion(Instrumentation.class.getClass()))));
   }
 
   public static JsonPayload generateInstrumentationPayload(
