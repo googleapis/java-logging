@@ -26,6 +26,7 @@ import static org.junit.Assert.assertTrue;
 
 import com.google.cloud.MonitoredResource;
 import com.google.cloud.logging.BaseSystemTest;
+import com.google.cloud.logging.Instrumentation;
 import com.google.cloud.logging.LogEntry;
 import com.google.cloud.logging.LoggingHandler;
 import com.google.cloud.logging.LoggingOptions;
@@ -34,6 +35,8 @@ import com.google.cloud.logging.Severity;
 import com.google.cloud.logging.Synchronicity;
 import com.google.common.collect.ImmutableMap;
 import com.google.logging.v2.LogName;
+import com.google.protobuf.ListValue;
+import com.google.protobuf.Value;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -82,7 +85,24 @@ public class ITJulLoggerTest extends BaseSystemTest {
     assertThat(entry.getOperation()).isNull();
     assertThat(entry.getInsertId()).isNotNull();
     assertThat(entry.getTimestamp()).isNotNull();
-    assertThat(iterator.hasNext()).isFalse();
+    assertThat(iterator.hasNext()).isTrue();
+    entry = iterator.next();
+    ListValue infoList =
+        entry
+            .<Payload.JsonPayload>getPayload()
+            .getData()
+            .getFieldsOrThrow(Instrumentation.DIAGNOSTIC_INFO_KEY)
+            .getStructValue()
+            .getFieldsOrThrow(Instrumentation.INSTRUMENTATION_SOURCE_KEY)
+            .getListValue();
+    for (Value val : infoList.getValuesList()) {
+      assertThat(
+              val.getStructValue()
+                  .getFieldsOrThrow(Instrumentation.INSTRUMENTATION_NAME_KEY)
+                  .getStringValue()
+                  .startsWith(Instrumentation.JAVA_LIBRARY_NAME_PREFIX))
+          .isTrue();
+    }
     logger.removeHandler(handler);
   }
 
