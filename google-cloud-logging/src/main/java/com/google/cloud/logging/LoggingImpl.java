@@ -40,6 +40,7 @@ import com.google.cloud.BaseService;
 import com.google.cloud.MonitoredResource;
 import com.google.cloud.MonitoredResourceDescriptor;
 import com.google.cloud.PageImpl;
+import com.google.cloud.Tuple;
 import com.google.cloud.logging.spi.v2.LoggingRpc;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Function;
@@ -852,6 +853,9 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
       final Boolean logingOptionsPopulateFlag = getOptions().getAutoPopulateMetadata();
       final Boolean writeOptionPopulateFlga =
           WriteOption.OptionType.AUTO_POPULATE_METADATA.get(writeOptions);
+      Tuple<Boolean, Iterable<LogEntry>> pair =
+          Instrumentation.populateInstrumentationInfo(logEntries);
+      logEntries = pair.y();
 
       if (writeOptionPopulateFlga == Boolean.TRUE
           || (writeOptionPopulateFlga == null && logingOptionsPopulateFlag == Boolean.TRUE)) {
@@ -859,8 +863,9 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
         logEntries =
             populateMetadata(logEntries, sharedResourceMetadata, this.getClass().getName());
       }
-
-      writeLogEntries(logEntries, options);
+      // Add partialSuccess option always for request containing instrumentation data
+      writeLogEntries(
+          logEntries, pair.x() ? Instrumentation.addPartialSuccessOption(options) : options);
       if (flushSeverity != null) {
         for (LogEntry logEntry : logEntries) {
           // flush pending writes if log severity at or above flush severity

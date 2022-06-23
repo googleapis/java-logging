@@ -19,13 +19,16 @@ package com.google.cloud.logging;
 import com.google.api.client.util.Strings;
 import com.google.api.gax.core.GaxProperties;
 import com.google.cloud.Tuple;
+import com.google.cloud.logging.Logging.WriteOption;
 import com.google.cloud.logging.Payload.JsonPayload;
 import com.google.cloud.logging.Payload.Type;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Iterables;
 import com.google.protobuf.ListValue;
 import com.google.protobuf.Struct;
 import com.google.protobuf.Value;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Instrumentation {
@@ -38,7 +41,15 @@ public class Instrumentation {
   public static final int MAX_DIAGNOSTIC_VALUE_LENGTH = 14;
   public static final int MAX_DIAGNOSTIC_ENTIES = 3;
   private static boolean instrumentationAdded = false;
+  private static Object instrumentationLock = new Object();
 
+  /**
+   * Populates entries with instrumentation info which is added in separate log entry
+   *
+   * @param logEntries {Iterable<LogEntry>} The list of entries to be populated
+   * @return {Tuple<Boolean, Iterable<LogEntry>>} containg a flag if instrumentation info was added
+   *     or not and a modified list of log entries
+   */
   public static Tuple<Boolean, Iterable<LogEntry>> populateInstrumentationInfo(
       Iterable<LogEntry> logEntries) {
     boolean isWritten = setInstrumentationStatus(true);
@@ -75,6 +86,23 @@ public class Instrumentation {
       entries.add(createDiagnosticEntry(null, null, null));
     }
     return Tuple.of(true, entries);
+  }
+
+  /**
+   * Adds a partialSuccess flag option to array of WriteOption
+   *
+   * @param options {WriteOption[]} The options array to be extended
+   * @return The new array of oprions containing WriteOption.OptionType.PARTIAL_SUCCESS flag set to
+   *     true
+   */
+  public static WriteOption[] addPartialSuccessOption(WriteOption[] options) {
+    List<WriteOption> writeOptions = new ArrayList<WriteOption>();
+    writeOptions.addAll(Arrays.asList(options));
+    // Make sure we remove all partial success flags if any exist
+    writeOptions.removeIf(
+        option -> option.getOptionType() == WriteOption.OptionType.PARTIAL_SUCCESS);
+    writeOptions.add(WriteOption.partialSuccess(true));
+    return Iterables.toArray(writeOptions, WriteOption.class);
   }
 
   /**
@@ -139,7 +167,6 @@ public class Instrumentation {
                 Value.newBuilder().setStructValue(createInfoStruct(name, version)).build());
             if (libraryList.getValuesCount() == MAX_DIAGNOSTIC_ENTIES) break;
           } catch (Exception ex) {
-            System.err.println("ERROR: unexpected exception in generateLibrariesList: " + ex);
           }
         }
       }
@@ -163,11 +190,15 @@ public class Instrumentation {
    * already written or not.
    *
    * @param value {boolean} The value to be set.
-   * @returns The value of the flag before it is set.
+   * @returns The value of the flag before it was set.
    */
   public static boolean setInstrumentationStatus(boolean value) {
     if (instrumentationAdded == value) return instrumentationAdded;
-    return setAndGetInstrumentationStatus(value);
+    synchronized (instrumentationLock) {
+      boolean current = instrumentationAdded;
+      instrumentationAdded = value;
+      return current;
+    }
   }
 
   /**
@@ -181,12 +212,6 @@ public class Instrumentation {
     String libraryVersion = GaxProperties.getLibraryVersion(libraryClass);
     if (Strings.isNullOrEmpty(libraryVersion)) libraryVersion = DEFAULT_INSTRUMENTATION_VERSION;
     return libraryVersion;
-  }
-
-  private static synchronized boolean setAndGetInstrumentationStatus(boolean value) {
-    boolean current = instrumentationAdded;
-    instrumentationAdded = value;
-    return current;
   }
 
   private static String truncateValue(String value) {

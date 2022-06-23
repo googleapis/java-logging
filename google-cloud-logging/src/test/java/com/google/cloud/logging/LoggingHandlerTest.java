@@ -629,29 +629,6 @@ public class LoggingHandlerTest {
     System.setOut(null);
   }
 
-  @Test
-  public void testDiagnosticInfo() {
-    Instrumentation.setInstrumentationStatus(false);
-    LogEntry json_entry =
-        LogEntry.newBuilder(
-                InstrumentationTest.generateInstrumentationPayload(
-                    Instrumentation.JAVA_LIBRARY_NAME_PREFIX,
-                    Instrumentation.getLibraryVersion(Instrumentation.class.getClass())))
-            .build();
-    logging.write(
-        ImmutableList.of(FINEST_ENTRY, json_entry),
-        WriteOption.logName(LOG_NAME),
-        WriteOption.resource(DEFAULT_RESOURCE),
-        WriteOption.labels(BASE_SEVERITY_MAP),
-        WriteOption.partialSuccess(true));
-    expectLastCall().once();
-    replay(options, logging);
-    LoggingHandler handler = new LoggingHandler(LOG_NAME, options, DEFAULT_RESOURCE);
-    handler.setLevel(Level.ALL);
-    handler.setFormatter(new TestFormatter());
-    handler.publish(newLogRecord(Level.FINEST, MESSAGE));
-  }
-
   private void testPublishCustomResourceWithDestination(
       LogEntry entry, LogDestinationName destination) {
     MonitoredResource resource = MonitoredResource.of("custom", ImmutableMap.<String, String>of());
