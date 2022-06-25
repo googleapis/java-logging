@@ -52,7 +52,7 @@ public class Instrumentation {
    */
   public static Tuple<Boolean, Iterable<LogEntry>> populateInstrumentationInfo(
       Iterable<LogEntry> logEntries) {
-    boolean isWritten = setInstrumentationStatus();
+    boolean isWritten = setInstrumentationStatus(true);
     if (isWritten) return Tuple.of(false, logEntries);
     List<LogEntry> entries = new ArrayList<>();
 
@@ -187,25 +187,18 @@ public class Instrumentation {
   }
 
   /**
-   * The helper method used to set to true the flag which indicates if instrumentation info already
-   * written or not.
+   * The package-private helper method used to set the flag which indicates if instrumentation info
+   * already written or not.
    *
    * @returns The value of the flag before it was set.
    */
-  public static boolean setInstrumentationStatus() {
-    if (instrumentationAdded) return instrumentationAdded;
+  static boolean setInstrumentationStatus(boolean value) {
+    if (instrumentationAdded == value) return instrumentationAdded;
     synchronized (instrumentationLock) {
-      instrumentationAdded = true;
-      return false;
+      boolean current = instrumentationAdded;
+      instrumentationAdded = value;
+      return current;
     }
-  }
-
-  /**
-   * The package-private method to reset an instrumentation status to false to be used for testing
-   * purposes
-   */
-  static void resetInstrumentationStatus() {
-    instrumentationAdded = false;
   }
 
   /**

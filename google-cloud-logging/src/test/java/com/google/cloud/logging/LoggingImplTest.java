@@ -252,7 +252,7 @@ public class LoggingImplTest {
 
   @Before
   public void setUp() {
-    Instrumentation.setInstrumentationStatus();
+    Instrumentation.setInstrumentationStatus(true);
     rpcFactoryMock = EasyMock.createStrictMock(LoggingRpcFactory.class);
     loggingRpcMock = EasyMock.createStrictMock(LoggingRpc.class);
     EasyMock.expect(rpcFactoryMock.create(EasyMock.anyObject(LoggingOptions.class)))
@@ -2300,7 +2300,7 @@ public class LoggingImplTest {
   }
 
   private void testDiagnosticInfoGeneration(boolean addPartialSuccessOption) {
-    Instrumentation.resetInstrumentationStatus();
+    Instrumentation.setInstrumentationStatus(false);
     LogEntry json_entry =
         LogEntry.newBuilder(
                 InstrumentationTest.generateInstrumentationPayload(
