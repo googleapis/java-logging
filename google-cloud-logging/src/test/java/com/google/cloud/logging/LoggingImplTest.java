@@ -2306,6 +2306,7 @@ public class LoggingImplTest {
                 InstrumentationTest.generateInstrumentationPayload(
                     Instrumentation.JAVA_LIBRARY_NAME_PREFIX,
                     Instrumentation.getLibraryVersion(Instrumentation.class.getClass())))
+            .setLogName(Instrumentation.INSTRUMENTATION_LOG_NAME)
             .build();
     WriteLogEntriesRequest request =
         WriteLogEntriesRequest.newBuilder()

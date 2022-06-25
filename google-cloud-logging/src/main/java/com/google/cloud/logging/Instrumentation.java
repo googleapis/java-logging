@@ -38,6 +38,7 @@ public class Instrumentation {
   public static final String INSTRUMENTATION_VERSION_KEY = "version";
   public static final String JAVA_LIBRARY_NAME_PREFIX = "java";
   public static final String DEFAULT_INSTRUMENTATION_VERSION = "UNKNOWN";
+  public static final String INSTRUMENTATION_LOG_NAME = "diagnostic-log";
   public static final int MAX_DIAGNOSTIC_VALUE_LENGTH = 14;
   public static final int MAX_DIAGNOSTIC_ENTIES = 3;
   private static boolean instrumentationAdded = false;
@@ -132,14 +133,16 @@ public class Instrumentation {
                         .build()))
             .build();
     LogEntry entry =
-        LogEntry.of(
-            JsonPayload.of(
-                Struct.newBuilder()
-                    .putAllFields(
-                        ImmutableMap.of(
-                            DIAGNOSTIC_INFO_KEY,
-                            Value.newBuilder().setStructValue(instrumentation).build()))
-                    .build()));
+        LogEntry.newBuilder(
+                JsonPayload.of(
+                    Struct.newBuilder()
+                        .putAllFields(
+                            ImmutableMap.of(
+                                DIAGNOSTIC_INFO_KEY,
+                                Value.newBuilder().setStructValue(instrumentation).build()))
+                        .build()))
+            .setLogName(INSTRUMENTATION_LOG_NAME)
+            .build();
     return entry;
   }
 
