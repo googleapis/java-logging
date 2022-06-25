@@ -42,7 +42,7 @@ public class InstrumentationTest {
 
   @Test
   public void testInstrumentationGenerated() {
-    Instrumentation.setInstrumentationStatus(false);
+    Instrumentation.resetInstrumentationStatus();
     verifyEntries(
         Instrumentation.populateInstrumentationInfo(ImmutableList.of(STRING_ENTRY)),
         1,
@@ -54,7 +54,7 @@ public class InstrumentationTest {
 
   @Test
   public void testNoInstrumentationGenerated() {
-    Instrumentation.setInstrumentationStatus(true);
+    Instrumentation.setInstrumentationStatus();
     Tuple<Boolean, Iterable<LogEntry>> pair =
         Instrumentation.populateInstrumentationInfo(ImmutableList.of(STRING_ENTRY));
     ArrayList<LogEntry> entries = Lists.newArrayList(pair.y());
@@ -65,7 +65,7 @@ public class InstrumentationTest {
 
   @Test
   public void testInstrumentationUpdated() {
-    Instrumentation.setInstrumentationStatus(false);
+    Instrumentation.resetInstrumentationStatus();
     LogEntry json_entry =
         LogEntry.newBuilder(generateInstrumentationPayload(JAVA_OTHER_NAME, JAVA_OTHER_VERSION))
             .build();
@@ -82,7 +82,7 @@ public class InstrumentationTest {
 
   @Test
   public void testInvalidInstrumentationRemoved() {
-    Instrumentation.setInstrumentationStatus(false);
+    Instrumentation.resetInstrumentationStatus();
     LogEntry json_entry =
         LogEntry.newBuilder(generateInstrumentationPayload(JAVA_INVALID_NAME, JAVA_OTHER_VERSION))
             .build();

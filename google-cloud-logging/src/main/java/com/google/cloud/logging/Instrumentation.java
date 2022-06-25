@@ -52,7 +52,7 @@ public class Instrumentation {
    */
   public static Tuple<Boolean, Iterable<LogEntry>> populateInstrumentationInfo(
       Iterable<LogEntry> logEntries) {
-    boolean isWritten = setInstrumentationStatus(true);
+    boolean isWritten = setInstrumentationStatus();
     if (isWritten) return Tuple.of(false, logEntries);
     List<LogEntry> entries = new ArrayList<>();
 
@@ -96,6 +96,7 @@ public class Instrumentation {
    *     true
    */
   public static WriteOption[] addPartialSuccessOption(WriteOption[] options) {
+    if (options == null) return options;
     List<WriteOption> writeOptions = new ArrayList<WriteOption>();
     writeOptions.addAll(Arrays.asList(options));
     // Make sure we remove all partial success flags if any exist
@@ -186,19 +187,25 @@ public class Instrumentation {
   }
 
   /**
-   * The helper method used to set a status of a flag which indicates if instrumentation info
-   * already written or not.
+   * The helper method used to set to true the flag which indicates if instrumentation info already
+   * written or not.
    *
-   * @param value {boolean} The value to be set.
    * @returns The value of the flag before it was set.
    */
-  public static boolean setInstrumentationStatus(boolean value) {
-    if (instrumentationAdded == value) return instrumentationAdded;
+  public static boolean setInstrumentationStatus() {
+    if (instrumentationAdded) return instrumentationAdded;
     synchronized (instrumentationLock) {
-      boolean current = instrumentationAdded;
-      instrumentationAdded = value;
-      return current;
+      instrumentationAdded = true;
+      return false;
     }
+  }
+
+  /**
+   * The package-private method to reset an instrumentation status to false to be used for testing
+   * purposes
+   */
+  static void resetInstrumentationStatus() {
+    instrumentationAdded = false;
   }
 
   /**
