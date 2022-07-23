@@ -26,7 +26,10 @@ import java.util.Date;
 import java.util.TimeZone;
 import javax.management.timer.Timer;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
+@RunWith(JUnit4.class)
 public class TimestampDefaultFilterTest {
 
   @Test
