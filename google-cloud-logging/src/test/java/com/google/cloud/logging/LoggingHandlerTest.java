@@ -45,6 +45,7 @@ import java.util.logging.Logger;
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("deprecation")
@@ -475,7 +476,8 @@ public class LoggingHandlerTest {
   }
 
   // BUG(1795): rewrite this test when flush actually works.
-  // @Test
+  @Ignore
+  @Test
   public void testFlushLevel() {
     logging.setFlushSeverity(Severity.WARNING);
     expectLastCall().once();

@@ -46,7 +46,7 @@ public class MonitoredResourceUtilTest {
   @Before
   public void setup() {
     getterMock = createMock(ResourceTypeEnvironmentGetter.class);
-    expect(getterMock.getAttribute("project/project-id")).andReturn(MOCKED_PROJECT_ID);
+    expect(getterMock.getAttribute("project/project-id")).andReturn(MOCKED_PROJECT_ID).once();
     expect(getterMock.getAttribute("")).andReturn(MOCKED_NON_EMPTY).once();
     MonitoredResourceUtil.setEnvironmentGetter(getterMock);
   }
@@ -68,10 +68,11 @@ public class MonitoredResourceUtilTest {
     // exercise
     MonitoredResource response = MonitoredResourceUtil.getResource("", "");
     // verify
-    assertEquals(response.getType(), "global");
+    assertEquals("global", response.getType());
     assertTrue(response.getLabels().equals(ExpectedLabels));
   }
 
+  @Test
   public void testGetResourceWithParameters() {
     final String MyProjectId = "my-project-id";
     final String MyResourceType = "my-resource-type";
@@ -81,8 +82,11 @@ public class MonitoredResourceUtilTest {
     replay(getterMock);
     // exercise
     MonitoredResource response = MonitoredResourceUtil.getResource(MyProjectId, MyResourceType);
+    // The above doesn't query metadata... So just to satisfy the verify stage, query it:
+    getterMock.getAttribute("project/project-id");
+    getterMock.getAttribute("");
     // verify
-    assertEquals(response.getType(), "global");
+    assertEquals("my-resource-type", response.getType());
     assertTrue(response.getLabels().equals(ExpectedLabels));
   }
 
@@ -109,7 +113,7 @@ public class MonitoredResourceUtilTest {
     // exercise
     MonitoredResource response = MonitoredResourceUtil.getResource("", "");
     // verify
-    assertEquals(response.getType(), "gce_instance");
+    assertEquals("gce_instance", response.getType());
     assertTrue(response.getLabels().equals(ExpectedLabels));
   }
 
@@ -148,7 +152,7 @@ public class MonitoredResourceUtilTest {
     // exercise
     MonitoredResource response = MonitoredResourceUtil.getResource("", "");
     // verify
-    assertEquals(response.getType(), "k8s_container");
+    assertEquals("k8s_container", response.getType());
     assertTrue(response.getLabels().equals(ExpectedLabels));
   }
 
@@ -184,7 +188,7 @@ public class MonitoredResourceUtilTest {
     // exercise
     MonitoredResource response = MonitoredResourceUtil.getResource("", "");
     // verify
-    assertEquals(response.getType(), "gae_app");
+    assertEquals("gae_app", response.getType());
     assertTrue(response.getLabels().equals(ExpectedLabels));
   }
 
@@ -214,7 +218,7 @@ public class MonitoredResourceUtilTest {
     // exercise
     MonitoredResource response = MonitoredResourceUtil.getResource("", "");
     // verify
-    assertEquals(response.getType(), "gae_app");
+    assertEquals("gae_app", response.getType());
     assertTrue(response.getLabels().equals(ExpectedLabels));
   }
 
@@ -241,7 +245,7 @@ public class MonitoredResourceUtilTest {
     // exercise
     MonitoredResource response = MonitoredResourceUtil.getResource("", "");
     // verify
-    assertEquals(response.getType(), "cloud_function");
+    assertEquals("cloud_function", response.getType());
     assertTrue(response.getLabels().equals(ExpectedLabels));
   }
 
@@ -274,7 +278,7 @@ public class MonitoredResourceUtilTest {
     // exercise
     MonitoredResource response = MonitoredResourceUtil.getResource("", "");
     // verify
-    assertEquals(response.getType(), "cloud_run_revision");
+    assertEquals("cloud_run_revision", response.getType());
     assertTrue(response.getLabels().equals(ExpectedLabels));
   }
 }
