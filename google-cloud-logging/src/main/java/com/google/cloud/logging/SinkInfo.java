@@ -127,6 +127,7 @@ public class SinkInfo implements Serializable {
         return new BucketDestination(bucket);
       }
 
+      @SuppressWarnings("unchecked")
       static BucketDestination fromPb(String destinationPb) {
         Matcher matcher = PATTERN.matcher(destinationPb);
         if (!matcher.matches()) {
@@ -219,6 +220,7 @@ public class SinkInfo implements Serializable {
         return PATTERN.matcher(destinationPb).matches();
       }
 
+      @SuppressWarnings("unchecked")
       static DatasetDestination fromPb(String destinationPb) {
         Matcher matcher = PATTERN.matcher(destinationPb);
         if (!matcher.matches()) {
@@ -319,6 +321,7 @@ public class SinkInfo implements Serializable {
         return PATTERN.matcher(destinationPb).matches();
       }
 
+      @SuppressWarnings("unchecked")
       static LoggingBucketDestination fromPb(String destinationPb) {
         Matcher matcher = PATTERN.matcher(destinationPb);
         if (!matcher.matches()) {
@@ -411,6 +414,7 @@ public class SinkInfo implements Serializable {
         return PATTERN.matcher(destinationPb).matches();
       }
 
+      @SuppressWarnings("unchecked")
       static TopicDestination fromPb(String destinationPb) {
         Matcher matcher = PATTERN.matcher(destinationPb);
         if (!matcher.matches()) {
