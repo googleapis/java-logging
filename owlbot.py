@@ -94,3 +94,13 @@ java.common_templates(
         "CONTRIBUTING.md",
     ]
 )
+
+# --------------------------------------------------------------------------
+# Modify test configs
+# --------------------------------------------------------------------------
+
+s.move(
+    ".kokoro/common_env_vars.cfg",
+    ".kokoro/common.cfg",
+    merge=lambda src, dst, _, : f"{dst}\n{src}",
+)
