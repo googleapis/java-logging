@@ -101,7 +101,12 @@ java.common_templates(
 # --------------------------------------------------------------------------
 
 # add shared environment variables to test configs
-tracked_subdirs = ["continuous", "presubmit", "release", "nightly", ""]
+s.move(
+    ".kokoro/common_env_vars.cfg",
+    ".kokoro/common.cfg",
+    merge=lambda src, dst, _, : f"{dst}\n{src}",
+)
+tracked_subdirs = ["continuous", "presubmit", "release", "nightly"]
 for subdir in tracked_subdirs:
     for path, subdirs, files in os.walk(f".kokoro/{subdir}"):
         for name in files:
