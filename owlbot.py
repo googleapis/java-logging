@@ -101,7 +101,7 @@ java.common_templates(
 # --------------------------------------------------------------------------
 
 # add shared environment variables to test configs
-tracked_subdirs = ["continuous", "presubmit", "release", "nightly", ""]
+tracked_subdirs = ["continuous", "presubmit", "release", "nightly"]
 for subdir in tracked_subdirs:
     for path, subdirs, files in os.walk(f".kokoro/{subdir}"):
         for name in files:
