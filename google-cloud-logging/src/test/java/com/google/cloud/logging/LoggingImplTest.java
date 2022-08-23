@@ -87,7 +87,10 @@ import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
+@RunWith(JUnit4.class)
 public class LoggingImplTest {
 
   private static final String PROJECT = "project";
@@ -2305,7 +2308,7 @@ public class LoggingImplTest {
         LogEntry.newBuilder(
                 InstrumentationTest.generateInstrumentationPayload(
                     Instrumentation.JAVA_LIBRARY_NAME_PREFIX,
-                    Instrumentation.getLibraryVersion(Instrumentation.class.getClass())))
+                    Instrumentation.getLibraryVersion(Instrumentation.class)))
             .setLogName(Instrumentation.INSTRUMENTATION_LOG_NAME)
             .build();
     WriteLogEntriesRequest request =

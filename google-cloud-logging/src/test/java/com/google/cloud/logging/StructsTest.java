@@ -32,7 +32,10 @@ import java.util.List;
 import java.util.Map;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
+@RunWith(JUnit4.class)
 public class StructsTest {
 
   private static final Double NUMBER = 42.0;
@@ -187,7 +190,8 @@ public class StructsTest {
             "int", intNumber, "long", longNumber, "float", floatNumber, "double", doubleNumber);
     Struct struct = Structs.newStruct(map);
     checkStructField(struct, "int", Value.newBuilder().setNumberValue(intNumber).build());
-    checkStructField(struct, "long", Value.newBuilder().setNumberValue(longNumber).build());
+    checkStructField(
+        struct, "long", Value.newBuilder().setNumberValue((double) longNumber).build());
     checkStructField(struct, "float", Value.newBuilder().setNumberValue(floatNumber).build());
     checkStructField(struct, "double", Value.newBuilder().setNumberValue(doubleNumber).build());
     Map<String, Object> convertedMap = Structs.asMap(struct);

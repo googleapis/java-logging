@@ -45,8 +45,12 @@ import java.util.logging.Logger;
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
+@RunWith(JUnit4.class)
 @SuppressWarnings("deprecation")
 public class LoggingHandlerTest {
 
@@ -376,7 +380,7 @@ public class LoggingHandlerTest {
   @Test
   public void testEnhancedLogEntryPrintToStdout() {
     final String ExpectedOutput =
-        "{\"severity\":\"INFO\",\"timestamp\":\"1970-01-02T10:17:36.789Z\",\"logging.googleapis.com/labels\":{\"enhanced\":\"true\"},\"logging.googleapis.com/trace_sampled\":false,\"message\":\"message\"}";
+        "{\"severity\":\"INFO\",\"time\":\"1970-01-02T10:17:36.789Z\",\"logging.googleapis.com/labels\":{\"enhanced\":\"true\"},\"logging.googleapis.com/trace_sampled\":false,\"message\":\"message\"}";
     replay(options, logging);
     ByteArrayOutputStream bout = new ByteArrayOutputStream();
     PrintStream out = new PrintStream(bout);
@@ -475,7 +479,8 @@ public class LoggingHandlerTest {
   }
 
   // BUG(1795): rewrite this test when flush actually works.
-  // @Test
+  @Ignore
+  @Test
   public void testFlushLevel() {
     logging.setFlushSeverity(Severity.WARNING);
     expectLastCall().once();

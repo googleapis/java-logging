@@ -30,6 +30,7 @@ import com.google.protobuf.Value;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.jspecify.nullness.Nullable;
 
 public class Instrumentation {
   public static final String DIAGNOSTIC_INFO_KEY = "logging.googleapis.com/diagnostic";
@@ -48,8 +49,8 @@ public class Instrumentation {
    * Populates entries with instrumentation info which is added in separate log entry
    *
    * @param logEntries {Iterable<LogEntry>} The list of entries to be populated
-   * @return {Tuple<Boolean, Iterable<LogEntry>>} containg a flag if instrumentation info was added
-   *     or not and a modified list of log entries
+   * @return {Tuple<Boolean, Iterable<LogEntry>>} containing a flag if instrumentation info was
+   *     added or not and a modified list of log entries
    */
   public static Tuple<Boolean, Iterable<LogEntry>> populateInstrumentationInfo(
       Iterable<LogEntry> logEntries) {
@@ -96,7 +97,7 @@ public class Instrumentation {
    * @return The new array of oprions containing WriteOption.OptionType.PARTIAL_SUCCESS flag set to
    *     true
    */
-  public static WriteOption[] addPartialSuccessOption(WriteOption[] options) {
+  public static WriteOption @Nullable [] addPartialSuccessOption(WriteOption[] options) {
     if (options == null) return options;
     List<WriteOption> writeOptions = new ArrayList<WriteOption>();
     writeOptions.addAll(Arrays.asList(options));
@@ -114,7 +115,7 @@ public class Instrumentation {
    *     with 'java'. Will be truncated if longer than 14 characters.
    * @param libraryVersion {string} The version of the logging library to be reported. Will be
    *     truncated if longer than 14 characters.
-   * @returns {LogEntry} The entry with diagnostic instrumentation data.
+   * @return {LogEntry} The entry with diagnostic instrumentation data.
    */
   public static LogEntry createDiagnosticEntry(String libraryName, String libraryVersion) {
     return createDiagnosticEntry(libraryName, libraryVersion, null);
@@ -151,7 +152,7 @@ public class Instrumentation {
     if (Strings.isNullOrEmpty(libraryName) || !libraryName.startsWith(JAVA_LIBRARY_NAME_PREFIX))
       libraryName = JAVA_LIBRARY_NAME_PREFIX;
     if (Strings.isNullOrEmpty(libraryVersion)) {
-      libraryVersion = getLibraryVersion(Instrumentation.class.getClass());
+      libraryVersion = getLibraryVersion(Instrumentation.class);
     }
     Struct libraryInfo = createInfoStruct(libraryName, libraryVersion);
     ListValue.Builder libraryList = ListValue.newBuilder();
@@ -193,7 +194,7 @@ public class Instrumentation {
    * The package-private helper method used to set the flag which indicates if instrumentation info
    * already written or not.
    *
-   * @returns The value of the flag before it was set.
+   * @return The value of the flag before it was set.
    */
   static boolean setInstrumentationStatus(boolean value) {
     if (instrumentationAdded == value) return instrumentationAdded;

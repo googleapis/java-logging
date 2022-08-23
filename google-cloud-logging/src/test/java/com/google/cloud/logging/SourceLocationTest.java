@@ -20,7 +20,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
+@RunWith(JUnit4.class)
 public class SourceLocationTest {
 
   private static final String FILE = "file";
@@ -83,11 +86,6 @@ public class SourceLocationTest {
     // info of the expectedData is one line above the source location of the tested
     // data.
     assertEquals(Long.valueOf(expectedData.getLineNumber() + 1), data.getLine());
-  }
-
-  public void testFromCurrentContextWithNegativeLevel() {
-    SourceLocation data = SourceLocation.fromCurrentContext((String[]) null);
-    assertNull(data);
   }
 
   @Test

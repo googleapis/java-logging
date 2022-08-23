@@ -29,7 +29,10 @@ import com.google.logging.v2.TailLogEntriesResponse;
 import com.google.protobuf.Duration;
 import org.easymock.EasyMock;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
+@RunWith(JUnit4.class)
 public class TailLogEntriesTest {
   private static final String WINDOW = "20s";
   private static final Duration WINDOW_DURATION = Duration.newBuilder().setSeconds(20).build();
@@ -77,7 +80,6 @@ public class TailLogEntriesTest {
     // setup
     LoggingRpcFactory rpcFactoryMock = EasyMock.createStrictMock(LoggingRpcFactory.class);
     LoggingRpc loggingRpcMock = EasyMock.createStrictMock(LoggingRpc.class);
-    @SuppressWarnings("unchecked")
     BidiStream<TailLogEntriesRequest, TailLogEntriesResponse> bidiStreamMock =
         EasyMock.createStrictMock(BidiStream.class);
     EasyMock.expect(rpcFactoryMock.create(EasyMock.anyObject(LoggingOptions.class)))

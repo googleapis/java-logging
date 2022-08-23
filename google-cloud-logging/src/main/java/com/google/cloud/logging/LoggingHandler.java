@@ -38,6 +38,7 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+import org.jspecify.nullness.Nullable;
 
 /**
  * A logging handler that outputs logs generated with {@link java.util.logging.Logger} to Cloud
@@ -305,7 +306,7 @@ public class LoggingHandler extends Handler {
     }
     LogEntry logEntry;
     try {
-      logEntry = logEntryFor(record);
+      logEntry = logEntryFor(record).build();
     } catch (Exception ex) {
       getErrorManager().error(null, ex, ErrorManager.FORMAT_FAILURE);
       return;
@@ -332,7 +333,7 @@ public class LoggingHandler extends Handler {
     }
   }
 
-  private MonitoredResource getMonitoredResource() {
+  private @Nullable MonitoredResource getMonitoredResource() {
     Optional<WriteOption> resourceOption =
         Arrays.stream(defaultWriteOptions)
             .filter(o -> o.getOptionType() == WriteOption.OptionType.RESOURCE)
@@ -343,7 +344,7 @@ public class LoggingHandler extends Handler {
     return null;
   }
 
-  private LogEntry logEntryFor(LogRecord record) throws Exception {
+  protected LogEntry.Builder logEntryFor(LogRecord record) throws Exception {
     String payload = getFormatter().format(record);
     Level level = record.getLevel();
     LogEntry.Builder builder =
@@ -360,7 +361,7 @@ public class LoggingHandler extends Handler {
     for (LoggingEnhancer enhancer : enhancers) {
       enhancer.enhanceLogEntry(builder);
     }
-    return builder.build();
+    return builder;
   }
 
   @Override

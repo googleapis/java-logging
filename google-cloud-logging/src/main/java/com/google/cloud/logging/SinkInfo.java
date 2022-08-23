@@ -19,11 +19,13 @@ package com.google.cloud.logging;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.base.MoreObjects;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.logging.v2.LogSink;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.jspecify.nullness.Nullable;
 
 /**
  * Cloud Logging sinks can be used to control the export of your logs. Each sink specifies the
@@ -127,6 +129,7 @@ public class SinkInfo implements Serializable {
         return new BucketDestination(bucket);
       }
 
+      @SuppressWarnings("unchecked")
       static BucketDestination fromPb(String destinationPb) {
         Matcher matcher = PATTERN.matcher(destinationPb);
         if (!matcher.matches()) {
@@ -219,6 +222,7 @@ public class SinkInfo implements Serializable {
         return PATTERN.matcher(destinationPb).matches();
       }
 
+      @SuppressWarnings("unchecked")
       static DatasetDestination fromPb(String destinationPb) {
         Matcher matcher = PATTERN.matcher(destinationPb);
         if (!matcher.matches()) {
@@ -319,6 +323,7 @@ public class SinkInfo implements Serializable {
         return PATTERN.matcher(destinationPb).matches();
       }
 
+      @SuppressWarnings("unchecked")
       static LoggingBucketDestination fromPb(String destinationPb) {
         Matcher matcher = PATTERN.matcher(destinationPb);
         if (!matcher.matches()) {
@@ -411,6 +416,7 @@ public class SinkInfo implements Serializable {
         return PATTERN.matcher(destinationPb).matches();
       }
 
+      @SuppressWarnings("unchecked")
       static TopicDestination fromPb(String destinationPb) {
         Matcher matcher = PATTERN.matcher(destinationPb);
         if (!matcher.matches()) {
@@ -472,7 +478,7 @@ public class SinkInfo implements Serializable {
       return versionPb;
     }
 
-    static VersionFormat fromPb(LogSink.VersionFormat versionPb) {
+    static @Nullable VersionFormat fromPb(LogSink.VersionFormat versionPb) {
       switch (versionPb) {
         case V1:
           return VersionFormat.V1;
@@ -551,24 +557,28 @@ public class SinkInfo implements Serializable {
     }
 
     @Override
+    @CanIgnoreReturnValue
     public Builder setName(String name) {
       this.name = name;
       return this;
     }
 
     @Override
+    @CanIgnoreReturnValue
     public Builder setDestination(Destination destination) {
       this.destination = destination;
       return this;
     }
 
     @Override
+    @CanIgnoreReturnValue
     public Builder setFilter(String filter) {
       this.filter = filter;
       return this;
     }
 
     @Override
+    @CanIgnoreReturnValue
     public Builder setVersionFormat(VersionFormat versionFormat) {
       this.versionFormat = versionFormat;
       return this;

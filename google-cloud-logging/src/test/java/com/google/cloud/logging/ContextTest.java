@@ -23,8 +23,11 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 import org.threeten.bp.Duration;
 
+@RunWith(JUnit4.class)
 public class ContextTest {
 
   private static final HttpRequest.RequestMethod REQUEST_METHOD = HttpRequest.RequestMethod.GET;
@@ -145,7 +148,7 @@ public class ContextTest {
   }
 
   private void assertTraceAndSpan(Context context, String expectedTraceId, String expectedSpanId) {
-    assertEquals(context.getTraceId(), expectedTraceId);
-    assertEquals(context.getSpanId(), expectedSpanId);
+    assertEquals(expectedTraceId, context.getTraceId());
+    assertEquals(expectedSpanId, context.getSpanId());
   }
 }
