@@ -26,6 +26,7 @@ fi
 
 # make sure submodule is up to date
 cd "$PROJECT_ROOT"
+git config --global --add safe.directory '*'
 git submodule update --init --recursive
 cd "${PROJECT_ROOT}/env-tests-logging"
 
