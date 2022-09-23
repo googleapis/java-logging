@@ -201,8 +201,6 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
       }
     } catch (com.google.protobuf.InvalidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
-    } catch (com.google.protobuf.UninitializedMessageException e) {
-      throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
       throw new com.google.protobuf.InvalidProtocolBufferException(e).setUnfinishedMessage(this);
     } finally {
@@ -785,8 +783,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    * <code>.google.logging.v2.LogSink.VersionFormat output_version_format = 6 [deprecated = true];
    * </code>
    *
-   * @deprecated google.logging.v2.LogSink.output_version_format is deprecated. See
-   *     google/logging/v2/logging_config.proto;l=880
+   * @deprecated
    * @return The enum numeric value on the wire for outputVersionFormat.
    */
   @java.lang.Override
@@ -804,8 +801,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
    * <code>.google.logging.v2.LogSink.VersionFormat output_version_format = 6 [deprecated = true];
    * </code>
    *
-   * @deprecated google.logging.v2.LogSink.output_version_format is deprecated. See
-   *     google/logging/v2/logging_config.proto;l=880
+   * @deprecated
    * @return The outputVersionFormat.
    */
   @java.lang.Override
@@ -2696,8 +2692,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * <code>.google.logging.v2.LogSink.VersionFormat output_version_format = 6 [deprecated = true];
      * </code>
      *
-     * @deprecated google.logging.v2.LogSink.output_version_format is deprecated. See
-     *     google/logging/v2/logging_config.proto;l=880
+     * @deprecated
      * @return The enum numeric value on the wire for outputVersionFormat.
      */
     @java.lang.Override
@@ -2715,8 +2710,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * <code>.google.logging.v2.LogSink.VersionFormat output_version_format = 6 [deprecated = true];
      * </code>
      *
-     * @deprecated google.logging.v2.LogSink.output_version_format is deprecated. See
-     *     google/logging/v2/logging_config.proto;l=880
+     * @deprecated
      * @param value The enum numeric value on the wire for outputVersionFormat to set.
      * @return This builder for chaining.
      */
@@ -2737,8 +2731,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * <code>.google.logging.v2.LogSink.VersionFormat output_version_format = 6 [deprecated = true];
      * </code>
      *
-     * @deprecated google.logging.v2.LogSink.output_version_format is deprecated. See
-     *     google/logging/v2/logging_config.proto;l=880
+     * @deprecated
      * @return The outputVersionFormat.
      */
     @java.lang.Override
@@ -2759,8 +2752,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * <code>.google.logging.v2.LogSink.VersionFormat output_version_format = 6 [deprecated = true];
      * </code>
      *
-     * @deprecated google.logging.v2.LogSink.output_version_format is deprecated. See
-     *     google/logging/v2/logging_config.proto;l=880
+     * @deprecated
      * @param value The outputVersionFormat to set.
      * @return This builder for chaining.
      */
@@ -2784,8 +2776,7 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
      * <code>.google.logging.v2.LogSink.VersionFormat output_version_format = 6 [deprecated = true];
      * </code>
      *
-     * @deprecated google.logging.v2.LogSink.output_version_format is deprecated. See
-     *     google/logging/v2/logging_config.proto;l=880
+     * @deprecated
      * @return This builder for chaining.
      */
     @java.lang.Deprecated
@@ -3185,9 +3176,8 @@ public final class LogSink extends com.google.protobuf.GeneratedMessageV3
       } else {
         if (optionsCase_ == 12) {
           bigqueryOptionsBuilder_.mergeFrom(value);
-        } else {
-          bigqueryOptionsBuilder_.setMessage(value);
         }
+        bigqueryOptionsBuilder_.setMessage(value);
       }
       optionsCase_ = 12;
       return this;

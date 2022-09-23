@@ -209,8 +209,6 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
       }
     } catch (com.google.protobuf.InvalidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
-    } catch (com.google.protobuf.UninitializedMessageException e) {
-      throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
       throw new com.google.protobuf.InvalidProtocolBufferException(e).setUnfinishedMessage(this);
     } finally {
@@ -1083,8 +1081,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    * <code>.google.logging.v2.LogMetric.ApiVersion version = 4 [deprecated = true];</code>
    *
-   * @deprecated google.logging.v2.LogMetric.version is deprecated. See
-   *     google/logging/v2/logging_metrics.proto;l=220
+   * @deprecated
    * @return The enum numeric value on the wire for version.
    */
   @java.lang.Override
@@ -1102,8 +1099,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
    *
    * <code>.google.logging.v2.LogMetric.ApiVersion version = 4 [deprecated = true];</code>
    *
-   * @deprecated google.logging.v2.LogMetric.version is deprecated. See
-   *     google/logging/v2/logging_metrics.proto;l=220
+   * @deprecated
    * @return The version.
    */
   @java.lang.Override
@@ -3553,8 +3549,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
      *
      * <code>.google.logging.v2.LogMetric.ApiVersion version = 4 [deprecated = true];</code>
      *
-     * @deprecated google.logging.v2.LogMetric.version is deprecated. See
-     *     google/logging/v2/logging_metrics.proto;l=220
+     * @deprecated
      * @return The enum numeric value on the wire for version.
      */
     @java.lang.Override
@@ -3572,8 +3567,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
      *
      * <code>.google.logging.v2.LogMetric.ApiVersion version = 4 [deprecated = true];</code>
      *
-     * @deprecated google.logging.v2.LogMetric.version is deprecated. See
-     *     google/logging/v2/logging_metrics.proto;l=220
+     * @deprecated
      * @param value The enum numeric value on the wire for version to set.
      * @return This builder for chaining.
      */
@@ -3594,8 +3588,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
      *
      * <code>.google.logging.v2.LogMetric.ApiVersion version = 4 [deprecated = true];</code>
      *
-     * @deprecated google.logging.v2.LogMetric.version is deprecated. See
-     *     google/logging/v2/logging_metrics.proto;l=220
+     * @deprecated
      * @return The version.
      */
     @java.lang.Override
@@ -3616,8 +3609,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
      *
      * <code>.google.logging.v2.LogMetric.ApiVersion version = 4 [deprecated = true];</code>
      *
-     * @deprecated google.logging.v2.LogMetric.version is deprecated. See
-     *     google/logging/v2/logging_metrics.proto;l=220
+     * @deprecated
      * @param value The version to set.
      * @return This builder for chaining.
      */
@@ -3641,8 +3633,7 @@ public final class LogMetric extends com.google.protobuf.GeneratedMessageV3
      *
      * <code>.google.logging.v2.LogMetric.ApiVersion version = 4 [deprecated = true];</code>
      *
-     * @deprecated google.logging.v2.LogMetric.version is deprecated. See
-     *     google/logging/v2/logging_metrics.proto;l=220
+     * @deprecated
      * @return This builder for chaining.
      */
     @java.lang.Deprecated
