@@ -54,7 +54,7 @@ public class QuickstartSample {
       // Writes the log entry asynchronously
       logging.write(Collections.singleton(entry));
 
-      // Flush any pending log entries just before Logging is closed
+      // Optional - flush any pending log entries just before Logging is closed
       logging.flush();
     }
     System.out.printf("Logged: %s%n", textPayload);
