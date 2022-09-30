@@ -47,9 +47,9 @@ public class WriteLogEntry {
 
       // Writes the log entry asynchronously
       logging.write(Collections.singleton(entry));
-      
+
       // Optional - flush any pending log entries just before Logging is closed
-      logging.flush();      
+      logging.flush();
     }
     System.out.printf("Wrote to %s\n", logName);
   }
