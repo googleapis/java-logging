@@ -378,12 +378,7 @@ public interface LogMetricOrBuilder
    * <code>map&lt;string, string&gt; label_extractors = 7 [(.google.api.field_behavior) = OPTIONAL];
    * </code>
    */
-
-  /* nullable */
-  java.lang.String getLabelExtractorsOrDefault(
-      java.lang.String key,
-      /* nullable */
-      java.lang.String defaultValue);
+  java.lang.String getLabelExtractorsOrDefault(java.lang.String key, java.lang.String defaultValue);
   /**
    *
    *
@@ -546,8 +541,7 @@ public interface LogMetricOrBuilder
    *
    * <code>.google.logging.v2.LogMetric.ApiVersion version = 4 [deprecated = true];</code>
    *
-   * @deprecated google.logging.v2.LogMetric.version is deprecated. See
-   *     google/logging/v2/logging_metrics.proto;l=220
+   * @deprecated
    * @return The enum numeric value on the wire for version.
    */
   @java.lang.Deprecated
@@ -562,8 +556,7 @@ public interface LogMetricOrBuilder
    *
    * <code>.google.logging.v2.LogMetric.ApiVersion version = 4 [deprecated = true];</code>
    *
-   * @deprecated google.logging.v2.LogMetric.version is deprecated. See
-   *     google/logging/v2/logging_metrics.proto;l=220
+   * @deprecated
    * @return The version.
    */
   @java.lang.Deprecated
