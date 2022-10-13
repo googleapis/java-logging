@@ -259,8 +259,7 @@ public interface LogSinkOrBuilder
    * <code>.google.logging.v2.LogSink.VersionFormat output_version_format = 6 [deprecated = true];
    * </code>
    *
-   * @deprecated google.logging.v2.LogSink.output_version_format is deprecated. See
-   *     google/logging/v2/logging_config.proto;l=880
+   * @deprecated
    * @return The enum numeric value on the wire for outputVersionFormat.
    */
   @java.lang.Deprecated
@@ -275,8 +274,7 @@ public interface LogSinkOrBuilder
    * <code>.google.logging.v2.LogSink.VersionFormat output_version_format = 6 [deprecated = true];
    * </code>
    *
-   * @deprecated google.logging.v2.LogSink.output_version_format is deprecated. See
-   *     google/logging/v2/logging_config.proto;l=880
+   * @deprecated
    * @return The outputVersionFormat.
    */
   @java.lang.Deprecated
