@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.7.7](https://github.com/googleapis/java-logging/compare/v3.7.6...v3.7.7) (2022-10-13)
+
+
+### Dependencies
+
+* Regenerating with new Protobuf (3.7.x) ([#1130](https://github.com/googleapis/java-logging/issues/1130)) ([feaf255](https://github.com/googleapis/java-logging/commit/feaf25552b67af707f5c8509dc554aff5799095f))
+
 ### [3.7.6](https://github.com/googleapis/java-logging/compare/v3.7.5...v3.7.6) (2022-05-03)
 
 
