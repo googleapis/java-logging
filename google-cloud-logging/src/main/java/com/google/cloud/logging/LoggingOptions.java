@@ -103,8 +103,7 @@ public class LoggingOptions extends ServiceOptions<Logging, LoggingOptions> {
 
     @CanIgnoreReturnValue
     public Builder setBatchingSettings(BatchingSettings batchingSettings) {
-      this.batchingSettings =
-          batchingSettings == null ? null : batchingSettings.toBuilder().build();
+      this.batchingSettings = batchingSettings;
       return this;
     }
 
