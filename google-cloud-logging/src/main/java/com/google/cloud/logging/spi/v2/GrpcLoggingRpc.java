@@ -169,18 +169,25 @@ public class GrpcLoggingRpc implements LoggingRpc {
       // released.
       BatchingSettings oldBatchSettings =
           logBuilder.writeLogEntriesSettings().getBatchingSettings();
+
+      // The BatchingSettings from LoggingOptions should override
+      // ones provided in oldBatchSettings
+      BatchingSettings batchingSettings = options.getBatchingSettings();
+
       logBuilder
           .writeLogEntriesSettings()
           .setBatchingSettings(
-              oldBatchSettings
-                  .toBuilder()
-                  .setFlowControlSettings(
-                      oldBatchSettings
-                          .getFlowControlSettings()
-                          .toBuilder()
-                          .setLimitExceededBehavior(LimitExceededBehavior.Block)
-                          .build())
-                  .build());
+              batchingSettings != null
+                  ? batchingSettings
+                  : oldBatchSettings
+                      .toBuilder()
+                      .setFlowControlSettings(
+                          oldBatchSettings
+                              .getFlowControlSettings()
+                              .toBuilder()
+                              .setLimitExceededBehavior(LimitExceededBehavior.Block)
+                              .build())
+                      .build());
 
       configClient = ConfigClient.create(confBuilder.build());
       loggingClient = LoggingClient.create(logBuilder.build());
