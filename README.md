@@ -58,13 +58,13 @@ implementation 'com.google.cloud:google-cloud-logging'
 If you are using Gradle without BOM, add this to your dependencies:
 
 ```Groovy
-implementation 'com.google.cloud:google-cloud-logging:3.11.9'
+implementation 'com.google.cloud:google-cloud-logging:3.11.10'
 ```
 
 If you are using SBT, add this to your dependencies:
 
 ```Scala
-libraryDependencies += "com.google.cloud" % "google-cloud-logging" % "3.11.9"
+libraryDependencies += "com.google.cloud" % "google-cloud-logging" % "3.11.10"
 ```
 
 ## Authentication
@@ -190,6 +190,38 @@ NOTE:
 > Writing log entries asynchronously in some Google Cloud managed environments (e.g. Cloud Functions)
 > may lead to unexpected results such as absense of expected log entries or abnormal program execution.
 > To avoid these unexpected results, it is recommended to use synchronous mode.
+
+#### Controlling the batching settings
+As mentioned before, in the asynchronous mode the call(s) to Logging API takes place asynchronously and few calls to `write()` 
+method may be batched together to compose a single call to Logging API. In order to control the batching settings, the `LoggingOptions`
+is enhanced with `BatchingSettings` which can be set as shown in example below:
+
+```java
+import com.google.api.gax.batching.BatchingSettings;
+import com.google.api.gax.batching.FlowControlSettings;
+import com.google.api.gax.batching.FlowController;
+
+LoggingOptions actual =
+    LoggingOptions.newBuilder()
+        .setBatchingSettings(
+            BatchingSettings.newBuilder()
+                .setIsEnabled(true)
+                .setElementCountThreshold(1000L)
+                .setRequestByteThreshold(1048576L)
+                .setDelayThreshold(Duration.ofMillis(50L))
+                .setFlowControlSettings(
+                    FlowControlSettings.newBuilder()
+                        .setMaxOutstandingElementCount(100000L)
+                        .setMaxOutstandingRequestBytes(10485760L)
+                        .setLimitExceededBehavior(
+                            FlowController.LimitExceededBehavior.ThrowException)
+                        .build())
+                .build())
+        .setProjectId('Your project ID')
+        .build();  
+```
+
+You can find more information about batching parameters see [BatchingSettings](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.batching.BatchingSettings).
 
 #### Listing log entries
 
