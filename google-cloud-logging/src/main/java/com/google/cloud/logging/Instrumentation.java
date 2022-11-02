@@ -19,17 +19,13 @@ package com.google.cloud.logging;
 import com.google.api.client.util.Strings;
 import com.google.api.gax.core.GaxProperties;
 import com.google.cloud.Tuple;
-import com.google.cloud.logging.Logging.WriteOption;
 import com.google.cloud.logging.Payload.JsonPayload;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Iterables;
 import com.google.protobuf.ListValue;
 import com.google.protobuf.Struct;
 import com.google.protobuf.Value;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import org.jspecify.nullness.Nullable;
 
 public final class Instrumentation {
   public static final String DIAGNOSTIC_INFO_KEY = "logging.googleapis.com/diagnostic";
@@ -89,26 +85,6 @@ public final class Instrumentation {
       entries.add(createDiagnosticEntry(null, null, null));
     }
     return Tuple.of(true, entries);
-  }
-
-  /**
-   * Adds a partialSuccess flag option to array of WriteOption
-   *
-   * @param options {WriteOption[]} The options array to be extended
-   * @return The new array of oprions containing WriteOption.OptionType.PARTIAL_SUCCESS flag set to
-   *     true
-   */
-  public static WriteOption @Nullable [] addPartialSuccessOption(WriteOption[] options) {
-    if (options == null) {
-      return options;
-    }
-    List<WriteOption> writeOptions = new ArrayList<>();
-    Collections.addAll(writeOptions, options);
-    // Make sure we remove all partial success flags if any exist
-    writeOptions.removeIf(
-        option -> option.getOptionType() == WriteOption.OptionType.PARTIAL_SUCCESS);
-    writeOptions.add(WriteOption.partialSuccess(true));
-    return Iterables.toArray(writeOptions, WriteOption.class);
   }
 
   /**
