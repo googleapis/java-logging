@@ -91,7 +91,6 @@ import com.google.protobuf.Empty;
 import com.google.protobuf.util.Durations;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -880,7 +879,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
       // For request containing instrumentation data (e.g. when pair.x() == true),
       // always set or override partialSuccess with true.
       if (pair.x() || writeOptionPartialSuccessFlag == null) {
-        options = addPartialSuccessOption(options);
+        options = Instrumentation.addPartialSuccessOption(options);
       }
       writeLogEntries(logEntries, options);
       if (flushSeverity != null) {
@@ -1136,25 +1135,5 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   @VisibleForTesting
   int getNumPendingWrites() {
     return pendingWrites.size();
-  }
-
-  /**
-   * Adds a partialSuccess flag option to array of WriteOption
-   *
-   * @param options {WriteOption[]} The options array to be extended
-   * @return The new array of oprions containing WriteOption.OptionType.PARTIAL_SUCCESS flag set to
-   *     true
-   */
-  static WriteOption @Nullable [] addPartialSuccessOption(WriteOption[] options) {
-    if (options == null) {
-      return options;
-    }
-    List<WriteOption> writeOptions = new ArrayList<>();
-    Collections.addAll(writeOptions, options);
-    // Make sure we remove all partial success flags if any exist
-    writeOptions.removeIf(
-        option -> option.getOptionType() == WriteOption.OptionType.PARTIAL_SUCCESS);
-    writeOptions.add(WriteOption.partialSuccess(true));
-    return Iterables.toArray(writeOptions, WriteOption.class);
   }
 }
