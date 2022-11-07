@@ -234,7 +234,7 @@ public final class Instrumentation {
   }
 
   /**
-   * Trancates given string to MAX_DIAGNOSTIC_VALUE_LENGTH and adds "*" of reduced suffix
+   * Trancates given string to MAX_DIAGNOSTIC_VALUE_LENGTH and adds "*" instead of reduced suffix
    *
    * @param value {String} Value to be truncated
    * @return The truncated string
