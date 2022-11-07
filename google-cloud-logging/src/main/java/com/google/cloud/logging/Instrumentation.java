@@ -233,7 +233,13 @@ public final class Instrumentation {
     return libraryVersion;
   }
 
-  private static String truncateValue(String value) {
+  /**
+   * Trancates given string to MAX_DIAGNOSTIC_VALUE_LENGTH and adds "*" of reduced suffix
+   *
+   * @param value {String} Value to be truncated
+   * @return The truncated string
+   */
+  public static String truncateValue(String value) {
     if (Strings.isNullOrEmpty(value) || value.length() < MAX_DIAGNOSTIC_VALUE_LENGTH) {
       return value;
     }
