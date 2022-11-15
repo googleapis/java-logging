@@ -45,7 +45,12 @@ public class ITSinkTest extends BaseSystemTest {
     Page<Sink> sinkPage = logging.listSinks(options);
     Iterator<Sink> iterator = sinkPage.iterateAll().iterator();
     while (iterator.hasNext()) {
-      iterator.next().delete();
+      Sink sink = iterator.next();
+      try {
+        sink.delete();
+      } catch (Exception ex) {
+        System.err.println("ERROR: Failed to delete a " + sink.getName() + " sink, error: " + ex);
+      }
     }
   }
 
