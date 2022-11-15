@@ -31,10 +31,23 @@ import com.google.cloud.logging.LoggingException;
 import com.google.cloud.logging.Sink;
 import com.google.cloud.logging.SinkInfo;
 import com.google.common.collect.Sets;
+import java.util.Iterator;
 import java.util.Set;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ITSinkTest extends BaseSystemTest {
+
+  @BeforeClass
+  public static void setUp() {
+    // Cleanup all stucked sinks if any
+    Logging.ListOption[] options = {Logging.ListOption.pageSize(50)};
+    Page<Sink> sinkPage = logging.listSinks(options);
+    Iterator<Sink> iterator = sinkPage.iterateAll().iterator();
+    while (iterator.hasNext()) {
+      iterator.next().delete();
+    }
+  }
 
   @Test
   public void testCreateGetUpdateAndDeleteSink() {
