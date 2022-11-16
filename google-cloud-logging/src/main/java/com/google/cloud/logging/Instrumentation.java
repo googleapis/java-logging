@@ -37,8 +37,11 @@ public final class Instrumentation {
   public static final String INSTRUMENTATION_NAME_KEY = "name";
   public static final String INSTRUMENTATION_VERSION_KEY = "version";
   public static final String JAVA_LIBRARY_NAME_PREFIX = "java";
+  // Using release-please annotations to update DEFAULT_INSTRUMENTATION_VERSION with latest version.
+  // See
+  // https://github.com/googleapis/release-please/blob/main/docs/customizing.md#updating-arbitrary-files
   // {x-version-update-start:google-cloud-logging:current}
-  public static final String DEFAULT_INSTRUMENTATION_VERSION = "3.13.0";
+  public static final String DEFAULT_INSTRUMENTATION_VERSION = "3.13.1-SNAPSHOT";
   // {x-version-update-end}
   public static final String INSTRUMENTATION_LOG_NAME = "diagnostic-log";
   public static final int MAX_DIAGNOSTIC_VALUE_LENGTH = 14;
@@ -160,8 +163,7 @@ public final class Instrumentation {
     }
     Struct libraryInfo = createInfoStruct(libraryName, libraryVersion);
     ListValue.Builder libraryList = ListValue.newBuilder();
-    // Append first the library info for this library
-    libraryList.addValues(Value.newBuilder().setStructValue(libraryInfo).build());
+    // First add instrumentation data of other libraries to a list if any
     if (existingLibraryList != null) {
       for (Value val : existingLibraryList.getValuesList()) {
         if (val.hasStructValue()) {
@@ -187,6 +189,8 @@ public final class Instrumentation {
         }
       }
     }
+    // At last, append this library info to a list
+    libraryList.addValues(Value.newBuilder().setStructValue(libraryInfo).build());
     return libraryList.build();
   }
 
@@ -233,7 +237,13 @@ public final class Instrumentation {
     return libraryVersion;
   }
 
-  private static String truncateValue(String value) {
+  /**
+   * Trancates given string to MAX_DIAGNOSTIC_VALUE_LENGTH and adds "*" instead of reduced suffix
+   *
+   * @param value {String} Value to be truncated
+   * @return The truncated string
+   */
+  public static String truncateValue(String value) {
     if (Strings.isNullOrEmpty(value) || value.length() < MAX_DIAGNOSTIC_VALUE_LENGTH) {
       return value;
     }
