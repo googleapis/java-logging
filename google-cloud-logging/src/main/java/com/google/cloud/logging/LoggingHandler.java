@@ -518,6 +518,8 @@ public class LoggingHandler extends Handler {
         // SEVERE
       case 1000:
         return Severity.ERROR;
+      case Integer.MAX_VALUE:
+        return Severity.UNRECOGNIZED;
       default:
         return Severity.DEFAULT;
     }
