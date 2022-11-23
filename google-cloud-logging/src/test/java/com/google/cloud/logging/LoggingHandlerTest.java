@@ -548,6 +548,16 @@ public class LoggingHandlerTest {
   }
 
   @Test
+  public void testFlushLevelOn() {
+    logging.setFlushSeverity(Severity.WARNING);
+    expectLastCall().anyTimes();
+    replay(options, logging);
+    LoggingHandler handler = new LoggingHandler(LOG_NAME, options, DEFAULT_RESOURCE);
+    handler.setFlushLevel(Level.WARNING);
+    assertEquals(Level.WARNING, handler.getFlushLevel());
+  }
+
+  @Test
   public void testSyncWrite() {
     reset(logging);
     LogEntry entry =
