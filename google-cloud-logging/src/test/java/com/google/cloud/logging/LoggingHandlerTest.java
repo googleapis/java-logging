@@ -538,7 +538,7 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testFlushLevelOnOrOff() {
+  public void testFlushLevelOff() {
     logging.setFlushSeverity(Severity.UNRECOGNIZED);
     expectLastCall().anyTimes();
     replay(options, logging);
