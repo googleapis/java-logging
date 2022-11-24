@@ -882,6 +882,8 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
         options = Instrumentation.addPartialSuccessOption(options);
       }
       writeLogEntries(logEntries, options);
+      // We treat Severity.UNRECOGNIZED as an option to disable flushing completely,
+      // since LogSeverity does not exposed OFF as a severity level
       if (flushSeverity != null && flushSeverity != Severity.UNRECOGNIZED) {
         for (LogEntry logEntry : logEntries) {
           // flush pending writes if log severity at or above flush severity
