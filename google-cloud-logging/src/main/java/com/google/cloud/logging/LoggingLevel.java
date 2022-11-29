@@ -44,13 +44,6 @@ public final class LoggingLevel extends Level {
   private static final long serialVersionUID = -6455416241709366337L;
 
   /**
-   * A level to be used to disable logging. This level is initialized to {@code Integer.MAX_VALUE}.
-   * For now this level can be used only to disable flushing.
-   */
-  public static final LoggingLevel OFF =
-      new LoggingLevel("OFF", Integer.MAX_VALUE, Severity.UNRECOGNIZED);
-
-  /**
    * A level to be used for debug or trace information. This level is initialized to {@code 250}.
    */
   public static final LoggingLevel DEBUG = new LoggingLevel("DEBUG", 250, Severity.DEBUG);
