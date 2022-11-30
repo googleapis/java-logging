@@ -247,7 +247,7 @@ public class LoggingHandlerTest {
     expect(options.getProjectId()).andStubReturn(PROJECT);
     expect(options.getService()).andStubReturn(logging);
     expect(options.getAutoPopulateMetadata()).andStubReturn(Boolean.FALSE);
-    logging.setFlushSeverity(EasyMock.anyObject(Severity.class));
+    logging.setFlushSeverity(Severity.ERROR);
     expectLastCall().anyTimes();
     logging.setWriteSynchronicity(EasyMock.anyObject(Synchronicity.class));
     expectLastCall().anyTimes();
@@ -546,7 +546,7 @@ public class LoggingHandlerTest {
   @Test
   public void testFlushLevelOff() {
     logging.setFlushSeverity(Severity.NONE);
-    expectLastCall().anyTimes();
+    expectLastCall().once();
     replay(options, logging);
     LoggingHandler handler = new LoggingHandler(LOG_NAME, options, DEFAULT_RESOURCE);
     handler.setFlushLevel(Level.OFF);
@@ -556,7 +556,7 @@ public class LoggingHandlerTest {
   @Test
   public void testFlushLevelOn() {
     logging.setFlushSeverity(Severity.WARNING);
-    expectLastCall().anyTimes();
+    expectLastCall().once();
     replay(options, logging);
     LoggingHandler handler = new LoggingHandler(LOG_NAME, options, DEFAULT_RESOURCE);
     handler.setFlushLevel(Level.WARNING);
@@ -567,7 +567,7 @@ public class LoggingHandlerTest {
   public void testCustomFlushLevelOn() {
     CustomLevel level = new CustomLevel();
     logging.setFlushSeverity(Severity.INFO);
-    expectLastCall().anyTimes();
+    expectLastCall().once();
     replay(options, logging);
     LoggingHandler handler = new LoggingHandler(LOG_NAME, options, DEFAULT_RESOURCE);
     handler.setFlushLevel(level);

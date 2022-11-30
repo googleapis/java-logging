@@ -882,7 +882,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
         options = Instrumentation.addPartialSuccessOption(options);
       }
       writeLogEntries(logEntries, options);
-      if (flushSeverity != Severity.NONE) {
+      if (flushSeverity != null && flushSeverity != Severity.NONE) {
         for (LogEntry logEntry : logEntries) {
           // flush pending writes if log severity at or above flush severity
           if (logEntry.getSeverity().compareTo(flushSeverity) >= 0) {
