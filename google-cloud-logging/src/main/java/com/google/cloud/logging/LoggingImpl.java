@@ -138,7 +138,12 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
 
   @Override
   public void setFlushSeverity(Severity flushSeverity) {
-    this.flushSeverity = flushSeverity;
+    // For backward compatibility we treat null as Severity.NONE
+    if (flushSeverity == null) {
+      this.flushSeverity = Severity.NONE;
+    } else {
+      this.flushSeverity = flushSeverity;
+    }
   }
 
   @Override
@@ -882,7 +887,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
         options = Instrumentation.addPartialSuccessOption(options);
       }
       writeLogEntries(logEntries, options);
-      if (flushSeverity != null && flushSeverity != Severity.NONE) {
+      if (flushSeverity != Severity.NONE) {
         for (LogEntry logEntry : logEntries) {
           // flush pending writes if log severity at or above flush severity
           if (logEntry.getSeverity().compareTo(flushSeverity) >= 0) {

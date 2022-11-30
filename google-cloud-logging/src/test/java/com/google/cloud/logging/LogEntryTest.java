@@ -400,5 +400,8 @@ public class LogEntryTest {
     assertThrows(
         IllegalArgumentException.class,
         () -> PROTO_ENTRY.toBuilder().setSeverity(Severity.NONE).build().toPb(PROJECT));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> STRING_ENTRY.toBuilder().setSeverity(Severity.NONE).build().toStructuredJsonString());
   }
 }
