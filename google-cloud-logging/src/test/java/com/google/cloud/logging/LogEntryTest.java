@@ -394,4 +394,11 @@ public class LogEntryTest {
   public void testStructureLogPresentationWithProtobufPayload() {
     assertThrows(UnsupportedOperationException.class, () -> PROTO_ENTRY.toStructuredJsonString());
   }
+
+  @Test
+  public void testStructureLogInvalidSeverity() {
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> PROTO_ENTRY.toBuilder().setSeverity(Severity.NONE).build().toPb(PROJECT));
+  }
 }
