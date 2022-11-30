@@ -26,8 +26,8 @@ import com.google.logging.type.LogSeverity;
  */
 public enum Severity {
 
-  /** The unrecognized severity level. Should not be used with log entries. */
-  UNRECOGNIZED(LogSeverity.UNRECOGNIZED),
+  /** The None severity level. Should not be used with log entries. */
+  NONE(LogSeverity.UNRECOGNIZED),
 
   /** The log entry has no assigned severity level. */
   DEFAULT(LogSeverity.DEFAULT),

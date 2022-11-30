@@ -231,6 +231,12 @@ public class LoggingHandlerTest {
     }
   }
 
+  static class CustomLevel extends Level {
+    CustomLevel() {
+      super("CUSTOM", 510);
+    }
+  }
+
   @Rule public final OutputStreamPatcher outputStreamPatcher = new OutputStreamPatcher();
 
   @Before
@@ -539,7 +545,7 @@ public class LoggingHandlerTest {
 
   @Test
   public void testFlushLevelOff() {
-    logging.setFlushSeverity(Severity.UNRECOGNIZED);
+    logging.setFlushSeverity(Severity.NONE);
     expectLastCall().anyTimes();
     replay(options, logging);
     LoggingHandler handler = new LoggingHandler(LOG_NAME, options, DEFAULT_RESOURCE);
@@ -555,6 +561,17 @@ public class LoggingHandlerTest {
     LoggingHandler handler = new LoggingHandler(LOG_NAME, options, DEFAULT_RESOURCE);
     handler.setFlushLevel(Level.WARNING);
     assertEquals(Level.WARNING, handler.getFlushLevel());
+  }
+
+  @Test
+  public void testCustomFlushLevelOn() {
+    CustomLevel level = new CustomLevel();
+    logging.setFlushSeverity(Severity.INFO);
+    expectLastCall().anyTimes();
+    replay(options, logging);
+    LoggingHandler handler = new LoggingHandler(LOG_NAME, options, DEFAULT_RESOURCE);
+    handler.setFlushLevel(level);
+    assertEquals(level, handler.getFlushLevel());
   }
 
   @Test
