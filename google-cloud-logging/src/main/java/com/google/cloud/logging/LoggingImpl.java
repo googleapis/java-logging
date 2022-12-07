@@ -1126,17 +1126,17 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   }
 
   static Map<Option.OptionType, ?> updateFilter(final Map<Option.OptionType, ?> options) {
+    // We should see if filter provided in otiopns have a timestamp parameter
+    // and if not, it should be added with further update of options map.
     String existingFilter = EntryListOption.OptionType.FILTER.get(options);
     String newFilter = generateFilter(existingFilter);
     if (newFilter.equals(existingFilter)) {
       return options;
     }
-    Map<Option.OptionType, Object> optionMap = Maps.newHashMap();
-    for (Map.Entry<Option.OptionType, ?> entry : options.entrySet()) {
-      optionMap.put(entry.getKey(), entry.getValue());
-    }
-    optionMap.put(EntryListOption.OptionType.FILTER, newFilter);
-    return optionMap;
+    // Update
+    Map<Option.OptionType, Object> optionsCopy = Maps.newHashMap(options);
+    optionsCopy.put(EntryListOption.OptionType.FILTER, newFilter);
+    return optionsCopy;
   }
 
   static String generateFilter(String filter) {
