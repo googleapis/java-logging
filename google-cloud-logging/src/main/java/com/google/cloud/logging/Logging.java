@@ -1169,8 +1169,7 @@ public interface Logging extends AutoCloseable, Service<LoggingOptions> {
    *
    * <p>Example of streaming log entries for a specific project.
    *
-   * <pre>
-   * {@code
+   * <pre>{@code
    * LogEntryServerStream stream = logging.tailLogEntries(TailOption.project("my_project_id"));
    * Iterator<LogEntry> it = stream.iterator();
    * while (it.hasNext()) {
