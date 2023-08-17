@@ -445,7 +445,7 @@ public class LoggingServiceV2StubSettings extends StubSettings<LoggingServiceV2S
 
   /** Returns the default service endpoint. */
   public static String getDefaultEndpoint() {
-    return "logging.apis-s3nscloud.io:443";
+    return "logging.test-endpoint:443";
   }
 
   /** Returns the default mTLS service endpoint. */
