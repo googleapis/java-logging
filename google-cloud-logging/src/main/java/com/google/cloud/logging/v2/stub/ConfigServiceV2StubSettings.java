@@ -686,7 +686,7 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
 
   /** Returns the default service endpoint. */
   public static String getDefaultEndpoint() {
-    return "logging.googleapis.com:443";
+    return "logging.apis-s3nscloud.io:443";
   }
 
   /** Returns the default mTLS service endpoint. */
