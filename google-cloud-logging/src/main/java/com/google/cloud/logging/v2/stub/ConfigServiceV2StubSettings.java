@@ -686,7 +686,7 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
 
   /** Returns the default service endpoint. */
   public static String getDefaultEndpoint() {
-    return "logging.test-endpoint:443";
+    return "logging.googleapis.com:443";
   }
 
   /** Returns the default mTLS service endpoint. */
@@ -1060,7 +1060,7 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
       builder.setTransportChannelProvider(defaultTransportChannelProvider());
       builder.setCredentialsProvider(defaultCredentialsProviderBuilder().build());
       builder.setInternalHeaderProvider(defaultApiClientHeaderProviderBuilder().build());
-      builder.setEndpoint(getDefaultEndpoint());
+      builder.setEndpoint("test-endpoint.com:443");
       builder.setMtlsEndpoint(getDefaultMtlsEndpoint());
       builder.setSwitchToMtlsEndpointAllowed(true);
 
