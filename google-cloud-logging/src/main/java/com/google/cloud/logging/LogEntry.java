@@ -766,7 +766,9 @@ public class LogEntry implements Serializable {
     builder.setSeverity(Severity.fromPb(entryPb.getSeverity()));
     if (!entryPb.getLogName().isEmpty()) {
       LogName name = LogName.parse(entryPb.getLogName());
-      builder.setLogName(name.getLog());
+      if (name != null) {
+        builder.setLogName(name.getLog());
+      }  
       LogDestinationName resource = LogDestinationName.fromLogName(name);
       if (resource != null) {
         builder.setDestination(resource);
