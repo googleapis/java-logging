@@ -21,6 +21,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.base.MoreObjects;
 import com.google.protobuf.Any;
 import com.google.protobuf.Struct;
+import com.google.cloud.Structs;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
