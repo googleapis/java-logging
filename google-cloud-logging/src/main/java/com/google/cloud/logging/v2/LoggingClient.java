@@ -77,10 +77,12 @@ import javax.annotation.Generated;
  * threads. In the example above, try-with-resources is used, which automatically calls close().
  *
  * <table>
+ *   <caption>Methods</caption>
  *    <tr>
  *      <th>Method</th>
  *      <th>Description</th>
  *      <th>Method Variants</th>
+ *    </tr>
  *    <tr>
  *      <td>DeleteLog</td>
  *      <td><p> Deletes all the log entries in a log for the _Default Log Bucket. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted. Entries received after the delete operation with a timestamp before the operation will be deleted.</td>
@@ -110,8 +112,8 @@ import javax.annotation.Generated;
  *      </ul>
  *      <p>"Flattened" method variants have converted the fields of the request object into function parameters to enable multiple ways to call the same method.</p>
  *      <ul>
- *           <li>writeLogEntries(LogName logName, MonitoredResource resource, Map<String, String> labels, List<LogEntry> entries)
- *           <li>writeLogEntries(String logName, MonitoredResource resource, Map<String, String> labels, List<LogEntry> entries)
+ *           <li>writeLogEntries(LogName logName, MonitoredResource resource, Map&lt;String, String&gt; labels, List&lt;LogEntry&gt; entries)
+ *           <li>writeLogEntries(String logName, MonitoredResource resource, Map&lt;String, String&gt; labels, List&lt;LogEntry&gt; entries)
  *      </ul>
  *      <p>Callable method variants take no parameters and return an immutable API callable object, which can be used to initiate calls to the service.</p>
  *      <ul>
@@ -129,7 +131,7 @@ import javax.annotation.Generated;
  *      </ul>
  *      <p>"Flattened" method variants have converted the fields of the request object into function parameters to enable multiple ways to call the same method.</p>
  *      <ul>
- *           <li>listLogEntries(List<String> resourceNames, String filter, String orderBy)
+ *           <li>listLogEntries(List&lt;String&gt; resourceNames, String filter, String orderBy)
  *      </ul>
  *      <p>Callable method variants take no parameters and return an immutable API callable object, which can be used to initiate calls to the service.</p>
  *      <ul>
@@ -185,7 +187,6 @@ import javax.annotation.Generated;
  *           <li>tailLogEntriesCallable()
  *      </ul>
  *       </td>
- *    </tr>
  *    </tr>
  *  </table>
  *

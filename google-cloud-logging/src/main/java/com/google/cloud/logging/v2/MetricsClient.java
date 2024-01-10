@@ -65,10 +65,12 @@ import javax.annotation.Generated;
  * threads. In the example above, try-with-resources is used, which automatically calls close().
  *
  * <table>
+ *   <caption>Methods</caption>
  *    <tr>
  *      <th>Method</th>
  *      <th>Description</th>
  *      <th>Method Variants</th>
+ *    </tr>
  *    <tr>
  *      <td>ListLogMetrics</td>
  *      <td><p> Lists logs-based metrics.</td>
@@ -164,7 +166,6 @@ import javax.annotation.Generated;
  *           <li>deleteLogMetricCallable()
  *      </ul>
  *       </td>
- *    </tr>
  *    </tr>
  *  </table>
  *

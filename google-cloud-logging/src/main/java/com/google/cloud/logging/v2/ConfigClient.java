@@ -125,10 +125,12 @@ import javax.annotation.Generated;
  * threads. In the example above, try-with-resources is used, which automatically calls close().
  *
  * <table>
+ *   <caption>Methods</caption>
  *    <tr>
  *      <th>Method</th>
  *      <th>Description</th>
  *      <th>Method Variants</th>
+ *    </tr>
  *    <tr>
  *      <td>ListBuckets</td>
  *      <td><p> Lists log buckets.</td>
@@ -708,7 +710,6 @@ import javax.annotation.Generated;
  *           <li>copyLogEntriesCallable()
  *      </ul>
  *       </td>
- *    </tr>
  *    </tr>
  *  </table>
  *
