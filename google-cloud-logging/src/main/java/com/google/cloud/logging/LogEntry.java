@@ -805,7 +805,8 @@ public class LogEntry implements Serializable {
     return builder.build();
   }
 
-  public static Function<LogEntry, com.google.logging.v2.LogEntry> toPbFunction(final String projectId) {
+  public static Function<LogEntry, com.google.logging.v2.LogEntry> toPbFunction(
+      final String projectId) {
     return (LogEntry entry) -> {
       return entry.toPb(projectId);
     };
