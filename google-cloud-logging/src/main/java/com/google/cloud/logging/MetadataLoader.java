@@ -87,7 +87,7 @@ public final class MetadataLoader {
   /**
    * Distinguish between Standard and Flexible GAE environments. There is no indicator of the
    * environment. The path to the startup-script in the metadata attribute was selected as one of
-   * the new values that explitly mentioning "flex" and cannot be altered by user (e.g. environment
+   * the new values that explicitly mentioning "flex" and cannot be altered by user (e.g. environment
    * variable). The method assumes that the resource type is already identified as {@link
    * Resource.AppEngine}.
    *
