@@ -93,6 +93,10 @@ java.common_templates(
         ".github/CODEOWNERS",
         ".github/blunderbuss.yml",
         "CONTRIBUTING.md",
+        ".kokoro/requirements.in",
+        ".kokoro/requirements.txt",
+        ".kokoro/presubmit/graalvm-native.cfg",
+        ".kokoro/presubmit/graalvm-native-17.cfg"
     ]
 )
 
