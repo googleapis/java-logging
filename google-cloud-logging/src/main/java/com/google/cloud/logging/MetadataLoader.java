@@ -40,6 +40,9 @@ public final class MetadataLoader {
           .put(Label.FunctionName, this::getFunctionName)
           .put(Label.InstanceId, this::getInstanceId)
           .put(Label.InstanceName, this::getInstanceName)
+          .put(Label.CloudRunJobName, this::getCloudRunJobName)
+          .put(Label.CloudRunJobExecutionName, this::getCloudRunJobExecutionName)
+          .put(Label.CloudRunJobTaskIndex, this::getCloudRunJobTaskIndex)
           .put(Label.CloudRunLocation, this::getCloudRunLocation)
           .put(Label.GKELocation, this::getGKELocation)
           .put(Label.ModuleId, this::getModuleId)
@@ -119,6 +122,18 @@ public final class MetadataLoader {
 
   private String getInstanceName() {
     return getter.getAttribute("instance/name");
+  }
+
+  private String getCloudRunJobName() {
+    return getter.getEnv("CLOUD_RUN_JOB");
+  }
+
+  private String getCloudRunJobExecutionName() {
+    return getter.getEnv("CLOUD_RUN_EXECUTION");
+  }
+
+  private String getCloudRunJobTaskIndex() {
+    return getter.getEnv("CLOUD_RUN_TASK_INDEX");
   }
 
   private String getCloudRunLocation() {
