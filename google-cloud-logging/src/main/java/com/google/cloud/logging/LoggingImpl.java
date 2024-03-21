@@ -98,6 +98,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import io.opentelemetry.api.trace.Span;
+import com.google.cloud.logging.ContextHandler.ContextPriority;
 
 class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   protected static final String RESOURCE_NAME_FORMAT = "projects/%s/traces/%s";
@@ -822,7 +824,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
         customResource == null
             ? MonitoredResourceUtil.getResource(getOptions().getProjectId(), null)
             : customResource;
-    final Context context = new ContextHandler().getCurrentContext();
+
     final ArrayList<LogEntry> populatedLogEntries = Lists.newArrayList();
 
     // populate empty metadata fields of log entries before calling write API
@@ -834,6 +836,18 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
       if (resourceMetadata != null && entry.getResource() == null) {
         entityBuilder.setResource(resourceMetadata);
       }
+
+      ContextHandler contextHandler = new ContextHandler();
+      // Populate trace/span ID from OpenTelemetry span context to logging context.
+      System.out.println("Starting reading Otel context");
+      if (Span.current().getSpanContext().isValid())
+      {
+        System.out.println("Span context detected.");
+        Context.Builder contextBuilder = Context.newBuilder().loadOpenTelemetryContext();
+        contextHandler.setCurrentContextWithPriority(contextBuilder.build(), ContextPriority.OTEL_EXTRACTED);
+      }
+
+      Context context = contextHandler.getCurrentContext();
       if (context != null && entry.getHttpRequest() == null) {
         entityBuilder.setHttpRequest(context.getHttpRequest());
       }
@@ -841,6 +855,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
         MonitoredResource resource =
             entry.getResource() != null ? entry.getResource() : resourceMetadata;
         entityBuilder.setTrace(getFormattedTrace(context.getTraceId(), resource));
+        entityBuilder.setTraceSampled(context.getTraceSampled());
       }
       if (context != null && Strings.isNullOrEmpty(entry.getSpanId())) {
         entityBuilder.setSpanId(context.getSpanId());

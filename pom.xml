@@ -56,8 +56,15 @@
     <site.installationModule>google-cloud-logging-parent</site.installationModule>
   </properties>
 
+  <!-- OpenTelemetry -->
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-api</artifactId>
+        <version>1.36.0</version>
+      </dependency>
+      <!-- END OpenTelemetry -->
       <dependency>
         <groupId>com.google.api.grpc</groupId>
         <artifactId>proto-google-cloud-logging-v2</artifactId>

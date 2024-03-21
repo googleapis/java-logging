@@ -26,6 +26,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import io.opentelemetry.api.OpenTelemetry;
+import io.opentelemetry.api.common.Attributes;
+import io.opentelemetry.api.trace.Span;
 
 /** Class to hold context attributes including information about {@see HttpRequest} and tracing. */
 public class Context {
@@ -38,11 +41,15 @@ public class Context {
   private final String traceId;
   private final String spanId;
 
+  private final boolean traceSampled;
+
+
   /** A builder for {@see Context} objects. */
   public static final class Builder {
     private HttpRequest.Builder requestBuilder = HttpRequest.newBuilder();
     private String traceId;
     private String spanId;
+    private boolean traceSampled;
 
     Builder() {}
 
@@ -50,6 +57,7 @@ public class Context {
       this.requestBuilder = context.request.toBuilder();
       this.traceId = context.traceId;
       this.spanId = context.spanId;
+      this.traceSampled = context.traceSampled;
     }
 
     /** Sets the HTTP request. */
@@ -118,6 +126,13 @@ public class Context {
       return this;
     }
 
+    /** Sets the boolean as trace sampled flag. */
+    @CanIgnoreReturnValue
+    public Builder setTraceSampled(boolean traceSampled) {
+      this.traceSampled = traceSampled;
+      return this;
+    }
+
     /**
      * Sets the trace id and span id values by parsing the string which represents xCloud Trace
      * Context. The Cloud Trace Context is passed as {@code x-cloud-trace-context} header (can be in
@@ -176,6 +191,20 @@ public class Context {
       return this;
     }
 
+    @CanIgnoreReturnValue
+    public Builder loadOpenTelemetryContext() {
+      if (Span.current().getSpanContext() != null && Span.current().getSpanContext().isValid())
+      {
+        setTraceId(Span.current().getSpanContext().getTraceId());
+        setSpanId(Span.current().getSpanContext().getSpanId());
+        setTraceSampled(Span.current().getSpanContext().isSampled());
+
+        System.out.println("TraceID: " + Span.current().getSpanContext().getTraceId() + "; Span Id: " + Span.current().getSpanContext().getSpanId() + ", isSampled: " + Span.current().getSpanContext().isSampled());
+      }
+
+      return this;
+    }
+
     /** Creates a {@see Context} object for this builder. */
     public Context build() {
       return new Context(this);
@@ -191,6 +220,7 @@ public class Context {
     }
     this.traceId = builder.traceId;
     this.spanId = builder.spanId;
+    this.traceSampled = builder.traceSampled;
   }
 
   public HttpRequest getHttpRequest() {
@@ -205,6 +235,10 @@ public class Context {
     return this.spanId;
   }
 
+  public boolean getTraceSampled() {
+    return this.traceSampled;
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(request, traceId, spanId);
@@ -216,6 +250,7 @@ public class Context {
         .add("request", request)
         .add("traceId", traceId)
         .add("spanId", spanId)
+        .add("traceSampled", traceSampled)
         .toString();
   }
 
@@ -230,7 +265,8 @@ public class Context {
     Context other = (Context) obj;
     return Objects.equals(request, other.request)
         && Objects.equals(traceId, other.traceId)
-        && Objects.equals(spanId, other.spanId);
+        && Objects.equals(spanId, other.spanId)
+        && Objects.equals(traceSampled, other.traceSampled);
   }
 
   /** Returns a builder for this object. */

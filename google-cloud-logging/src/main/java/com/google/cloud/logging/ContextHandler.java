@@ -18,7 +18,13 @@ package com.google.cloud.logging;
 
 /** Class provides a per-thread storage of the {@see Context} instances. */
 public class ContextHandler {
+
+  public enum ContextPriority {
+    NO_INPUT, XCLOUD_HEADER, W3_HEADER, OTEL_EXTRACTED
+  }
+
   private static final ThreadLocal<Context> contextHolder = initContextHolder();
+  private static final ThreadLocal<ContextPriority> currentPriority = new ThreadLocal<ContextPriority>();
 
   /**
    * Initializes the context holder to {@link InheritableThreadLocal} if {@link LogManager}
@@ -43,6 +49,15 @@ public class ContextHandler {
   public void setCurrentContext(Context context) {
     contextHolder.set(context);
   }
+
+  public void setCurrentContextWithPriority(Context context, ContextPriority priority) {
+    if (currentPriority.get() == null || priority.compareTo(currentPriority.get()) >= 0)
+    {
+        contextHolder.set(context);
+        currentPriority.set(priority);
+    }
+  }
+
 
   public void removeCurrentContext() {
     contextHolder.remove();

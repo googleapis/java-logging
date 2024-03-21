@@ -24,6 +24,7 @@ public class TraceLoggingEnhancer implements LoggingEnhancer {
   public TraceLoggingEnhancer(String prefix) {}
 
   private static final ThreadLocal<String> traceId = new ThreadLocal<>();
+  private static final ThreadLocal<String> spanId = new ThreadLocal<>();
 
   /**
    * Set the Trace ID associated with any logging done by the current thread.
@@ -39,12 +40,34 @@ public class TraceLoggingEnhancer implements LoggingEnhancer {
   }
 
   /**
+   * Set the Span ID associated with any logging done by the current thread.
+   *
+   * @param id The spanID
+   */
+  public static void setCurrentSpanId(String id) {
+    if (id == null) {
+      spanId.remove();
+    } else {
+      spanId.set(id);
+    }
+  }
+
+  /**
    * Get the Trace ID associated with any logging done by the current thread.
    *
-   * @return id The traceID
+   * @return id The trace ID
    */
   public static String getCurrentTraceId() {
     return traceId.get();
+  }
+
+  /**
+   * Get the Span ID associated with any logging done by the current thread.
+   *
+   * @return id The span ID
+   */
+  public static String getCurrentSpanId() {
+    return spanId.get();
   }
 
   @Override
@@ -52,6 +75,10 @@ public class TraceLoggingEnhancer implements LoggingEnhancer {
     String traceId = getCurrentTraceId();
     if (traceId != null) {
       builder.setTrace(traceId);
+    }
+    String spanId = getCurrentSpanId();
+    if (spanId != null) {
+      builder.setSpanId(spanId);
     }
   }
 }
