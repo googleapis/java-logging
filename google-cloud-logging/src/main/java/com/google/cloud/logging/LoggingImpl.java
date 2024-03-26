@@ -844,7 +844,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
       {
         System.out.println("Span context detected.");
         Context.Builder contextBuilder = Context.newBuilder().loadOpenTelemetryContext();
-        contextHandler.setCurrentContextWithPriority(contextBuilder.build(), ContextPriority.OTEL_EXTRACTED);
+        contextHandler.setCurrentContext(contextBuilder.build(), ContextPriority.OTEL_EXTRACTED);
       }
 
       Context context = contextHandler.getCurrentContext();
