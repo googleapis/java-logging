@@ -229,7 +229,10 @@ public class MonitoredResourceUtil {
       enhancers.add(
           new LabelLoggingEnhancer(
               CLOUD_RUN_JOB_LABEL_PREFIX,
-              ImmutableList.of(Label.CloudRunJobExecutionName, Label.CloudRunJobTaskIndex, Label.CloudRunJobTaskAttempt)));
+              ImmutableList.of(
+                  Label.CloudRunJobExecutionName,
+                  Label.CloudRunJobTaskIndex,
+                  Label.CloudRunJobTaskAttempt)));
     }
     return enhancers;
   }

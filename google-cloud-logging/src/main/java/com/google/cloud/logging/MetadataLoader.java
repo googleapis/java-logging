@@ -137,6 +137,7 @@ public final class MetadataLoader {
   private String getCloudRunJobTaskIndex() {
     return getter.getEnv("CLOUD_RUN_TASK_INDEX");
   }
+
   private String getCloudRunJobTaskAttempt() {
     return getter.getEnv("CLOUD_RUN_TASK_ATTEMPT");
   }
