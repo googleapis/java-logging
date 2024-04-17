@@ -305,6 +305,7 @@ public class MonitoredResourceUtilTest {
     expect(getterMock.getEnv("CLOUD_RUN_JOB")).andReturn(mockedJobName).times(2);
     expect(getterMock.getEnv("CLOUD_RUN_EXECUTION")).andReturn(mockedJobName + "_1").times(1);
     expect(getterMock.getEnv("CLOUD_RUN_TASK_INDEX")).andReturn("0").times(1);
+    expect(getterMock.getEnv("CLOUD_RUN_TASK_ATTEMPT")).andReturn("0").times(1);
     expect(getterMock.getEnv(anyString())).andReturn(null).anyTimes();
     replay(getterMock);
     // exercise

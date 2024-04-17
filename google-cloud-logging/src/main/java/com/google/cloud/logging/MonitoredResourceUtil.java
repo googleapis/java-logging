@@ -46,6 +46,7 @@ public class MonitoredResourceUtil {
     CloudRunJobName("job_name"),
     CloudRunJobExecutionName("execution_name"),
     CloudRunJobTaskIndex("task_index"),
+    CloudRunJobTaskAttempt("task_attempt"),
     CloudRunLocation("location"),
     GKELocation("location"),
     ModuleId("module_id"),
@@ -185,7 +186,8 @@ public class MonitoredResourceUtil {
     }
     if (getter.getEnv("CLOUD_RUN_JOB") != null
         && getter.getEnv("CLOUD_RUN_EXECUTION") != null
-        && getter.getEnv("CLOUD_RUN_TASK_INDEX") != null) {
+        && getter.getEnv("CLOUD_RUN_TASK_INDEX") != null
+        && getter.getEnv("CLOUD_RUN_TASK_ATTEMPT") != null) {
       return Resource.CLOUD_RUN_JOB;
     }
     if (getter.getEnv("GAE_INSTANCE") != null
@@ -227,7 +229,7 @@ public class MonitoredResourceUtil {
       enhancers.add(
           new LabelLoggingEnhancer(
               CLOUD_RUN_JOB_LABEL_PREFIX,
-              ImmutableList.of(Label.CloudRunJobExecutionName, Label.CloudRunJobTaskIndex)));
+              ImmutableList.of(Label.CloudRunJobExecutionName, Label.CloudRunJobTaskIndex, Label.CloudRunJobTaskAttempt)));
     }
     return enhancers;
   }
