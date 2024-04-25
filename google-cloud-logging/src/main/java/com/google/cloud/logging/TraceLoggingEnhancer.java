@@ -25,6 +25,7 @@ public class TraceLoggingEnhancer implements LoggingEnhancer {
 
   private static final ThreadLocal<String> traceId = new ThreadLocal<>();
   private static final ThreadLocal<String> spanId = new ThreadLocal<>();
+  private static final ThreadLocal<Boolean> traceSampled = new ThreadLocal<Boolean>();
 
   /**
    * Set the Trace ID associated with any logging done by the current thread.
@@ -53,6 +54,19 @@ public class TraceLoggingEnhancer implements LoggingEnhancer {
   }
 
   /**
+   * Set the trace sampled flag associated with any logging done by the current thread.
+   *
+   * @param isTraceSampled The traceSampled flag
+   */
+  public static void setCurrentTraceSampled(Boolean isTraceSampled) {
+    if (isTraceSampled == null) {
+      traceSampled.remove();
+    } else {
+      traceSampled.set(isTraceSampled);
+    }
+  }
+
+  /**
    * Get the Trace ID associated with any logging done by the current thread.
    *
    * @return id The trace ID
@@ -70,6 +84,15 @@ public class TraceLoggingEnhancer implements LoggingEnhancer {
     return spanId.get();
   }
 
+  /**
+   * Get the trace sampled flag associated with any logging done by the current thread.
+   *
+   * @return traceSampled The traceSampled flag
+   */
+  public static Boolean getCurrentTraceSampled() {
+    return traceSampled.get();
+  }
+
   @Override
   public void enhanceLogEntry(LogEntry.Builder builder) {
     String traceId = getCurrentTraceId();
@@ -79,6 +102,10 @@ public class TraceLoggingEnhancer implements LoggingEnhancer {
     String spanId = getCurrentSpanId();
     if (spanId != null) {
       builder.setSpanId(spanId);
+    }
+    Boolean isTraceSampled = getCurrentTraceSampled();
+    if (isTraceSampled != null) {
+      builder.setTraceSampled(isTraceSampled);
     }
   }
 }
