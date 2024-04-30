@@ -37,6 +37,9 @@ public class Context {
   private static final Pattern W3C_TRACE_CONTEXT_FORMAT =
       Pattern.compile(
           "^00-(?!00000000000000000000000000000000)[0-9a-f]{32}-(?!0000000000000000)[0-9a-f]{16}-[0-9a-f]{2}$");
+  // Trace sampled flag for bit masking
+  // see https://www.w3.org/TR/trace-context/#trace-flags for details
+  private static final byte FLAG_SAMPLED = 1; // 00000001
   private final HttpRequest request;
   private final String traceId;
   private final String spanId;
@@ -144,7 +147,9 @@ public class Context {
     @CanIgnoreReturnValue
     public Builder loadCloudTraceContext(String cloudTrace) {
       if (cloudTrace != null) {
+        String traceSampledString = Iterables.get(Splitter.on(";o=").split(cloudTrace), 1);
         cloudTrace = Iterables.get(Splitter.on(';').split(cloudTrace), 0);
+
         int split = cloudTrace.indexOf('/');
         if (split >= 0) {
           String traceId = cloudTrace.substring(0, split);
@@ -154,6 +159,10 @@ public class Context {
             // do not set span Id without trace Id
             if (!spanId.isEmpty()) {
               setSpanId(spanId);
+            }
+            // do not set trace sampled flag without trace Id
+            if (!traceSampledString.isEmpty()) {
+              setTraceSampled(traceSampledString.equals("1"));
             }
           }
         } else if (!cloudTrace.isEmpty()) {
@@ -186,7 +195,9 @@ public class Context {
         List<String> fields = Splitter.on('-').splitToList(traceParent);
         setTraceId(fields.get(1));
         setSpanId(fields.get(2));
-        // fields[3] contains flag(s)
+        boolean sampled = (Integer.parseInt(fields.get(3), 16) & FLAG_SAMPLED) == FLAG_SAMPLED;
+        System.out.println("trace: " + fields.get(1) + ", span: " + fields.get(2) + ", sampled string " + fields.get(3) + ", sampled boolean: " + sampled);
+        setTraceSampled(sampled);
       }
       return this;
     }
