@@ -54,7 +54,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <github.global.server>github</github.global.server>
     <site.installationModule>google-cloud-logging-parent</site.installationModule>
-    <opentelemetry.version>1.36.0</opentelemetry.version>
+    <opentelemetry.version>1.37.0</opentelemetry.version>
   </properties>
 
   <!-- OpenTelemetry -->

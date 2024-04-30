@@ -21,18 +21,18 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 
-import io.opentelemetry.context.Scope;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-import org.threeten.bp.Duration;
-import io.opentelemetry.api.trace.Span;
 import io.opentelemetry.api.trace.*;
+import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.context.Scope;
 import io.opentelemetry.sdk.OpenTelemetrySdk;
 import io.opentelemetry.sdk.testing.exporter.InMemorySpanExporter;
 import io.opentelemetry.sdk.trace.SdkTracerProvider;
 import io.opentelemetry.sdk.trace.SpanProcessor;
 import io.opentelemetry.sdk.trace.export.SimpleSpanProcessor;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+import org.threeten.bp.Duration;
 
 @RunWith(JUnit4.class)
 public class ContextTest {
@@ -127,7 +127,7 @@ public class ContextTest {
     final String X_CLOUD_TRACE_NO_TRACE = "/SPAN_ID;o=TRACE_TRUE";
     final String X_CLOUD_TRACE_ONLY = TEST_TRACE_ID;
     final String X_CLOUD_TRACE_WITH_SPAN = TEST_TRACE_ID + "/" + TEST_SPAN_ID;
-    final String X_CLOUD_TRACE_FULL = TEST_TRACE_ID + "/" + TEST_SPAN_ID + ";o=" + TEST_TRACE_SAMPLED;
+    final String X_CLOUD_TRACE_FULL = TEST_TRACE_ID + "/" + TEST_SPAN_ID + ";o=1";
 
     Context.Builder builder = Context.newBuilder();
 
@@ -150,7 +150,8 @@ public class ContextTest {
     final String W3C_TEST_TRACE_ID = "12345678901234567890123456789012";
     final String W3C_TEST_SPAN_ID = "1234567890123456";
     final String W3C_TEST_TRACE_SAMPLED = "0f";
-    final String W3C_TRACE_CONTEXT = "00-" + W3C_TEST_TRACE_ID + "-" + W3C_TEST_SPAN_ID + "-" + W3C_TEST_TRACE_SAMPLED;
+    final String W3C_TRACE_CONTEXT =
+        "00-" + W3C_TEST_TRACE_ID + "-" + W3C_TEST_SPAN_ID + "-" + W3C_TEST_TRACE_SAMPLED;
 
     Context.Builder builder = Context.newBuilder();
 
@@ -165,12 +166,10 @@ public class ContextTest {
     InMemorySpanExporter testExporter = InMemorySpanExporter.create();
     SpanProcessor inMemorySpanProcessor = SimpleSpanProcessor.create(testExporter);
     OpenTelemetrySdk openTelemetrySdk =
-            OpenTelemetrySdk.builder()
-                    .setTracerProvider(
-                            SdkTracerProvider.builder()
-                                    .addSpanProcessor(inMemorySpanProcessor)
-                                    .build())
-                    .build();
+        OpenTelemetrySdk.builder()
+            .setTracerProvider(
+                SdkTracerProvider.builder().addSpanProcessor(inMemorySpanProcessor).build())
+            .build();
 
     Tracer tracer = openTelemetrySdk.getTracer("ContextTest");
     Span otelSpan = tracer.spanBuilder("Example Span Attributes").startSpan();
@@ -180,8 +179,12 @@ public class ContextTest {
       otelSpan.setAttribute("Attribute 1", "first attribute value");
       currentOtelContext = otelSpan.getSpanContext();
       builder.loadOpenTelemetryContext();
-      assertTraceSpanAndSampled(builder.build(), currentOtelContext.getTraceId(), currentOtelContext.getSpanId(), currentOtelContext.isSampled());
-    } catch(Throwable t) {
+      assertTraceSpanAndSampled(
+          builder.build(),
+          currentOtelContext.getTraceId(),
+          currentOtelContext.getSpanId(),
+          currentOtelContext.isSampled());
+    } catch (Throwable t) {
       otelSpan.recordException(t);
       throw t;
     } finally {
@@ -189,7 +192,11 @@ public class ContextTest {
     }
   }
 
-  private void assertTraceSpanAndSampled(Context context, String expectedTraceId, String expectedSpanId, boolean expectedTraceSampled) {
+  private void assertTraceSpanAndSampled(
+      Context context,
+      String expectedTraceId,
+      String expectedSpanId,
+      boolean expectedTraceSampled) {
     assertEquals(expectedTraceId, context.getTraceId());
     assertEquals(expectedSpanId, context.getSpanId());
     assertEquals(expectedTraceSampled, context.getTraceSampled());

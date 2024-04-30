@@ -16,69 +16,73 @@
 
 package com.google.cloud.logging;
 
-/**
- * Class provides a per-thread storage of the {@see Context} instances.
- */
+/** Class provides a per-thread storage of the {@see Context} instances. */
 public class ContextHandler {
 
-    public enum ContextPriority {
-        NO_INPUT, XCLOUD_HEADER, W3_HEADER, OTEL_EXTRACTED
+  public enum ContextPriority {
+    NO_INPUT,
+    XCLOUD_HEADER,
+    W3_HEADER,
+    OTEL_EXTRACTED
+  }
+
+  private static final ThreadLocal<Context> contextHolder = initContextHolder();
+  private static final ThreadLocal<ContextPriority> currentPriority =
+      new ThreadLocal<ContextPriority>();
+
+  /**
+   * Initializes the context holder to {@link InheritableThreadLocal} if {@link LogManager}
+   * configuration property {@code com.google.cloud.logging.ContextHandler.useInheritedContext} is
+   * set to {@code true} or to {@link ThreadLocal} otherwise.
+   *
+   * @return instance of the context holder.
+   */
+  private static ThreadLocal<Context> initContextHolder() {
+    LoggingConfig config = new LoggingConfig(ContextHandler.class.getName());
+    if (config.getUseInheritedContext()) {
+      return new InheritableThreadLocal<>();
+    } else {
+      return new ThreadLocal<>();
     }
+  }
 
-    private static final ThreadLocal<Context> contextHolder = initContextHolder();
-    private static final ThreadLocal<ContextPriority> currentPriority = new ThreadLocal<ContextPriority>();
+  public Context getCurrentContext() {
+    return contextHolder.get();
+  }
 
-    /**
-     * Initializes the context holder to {@link InheritableThreadLocal} if {@link LogManager}
-     * configuration property {@code com.google.cloud.logging.ContextHandler.useInheritedContext} is
-     * set to {@code true} or to {@link ThreadLocal} otherwise.
-     *
-     * @return instance of the context holder.
-     */
-    private static ThreadLocal<Context> initContextHolder() {
-        LoggingConfig config = new LoggingConfig(ContextHandler.class.getName());
-        if (config.getUseInheritedContext()) {
-            return new InheritableThreadLocal<>();
-        } else {
-            return new ThreadLocal<>();
-        }
+  public void setCurrentContext(Context context) {
+    contextHolder.set(context);
+  }
+
+  /**
+   * Sets the context based on the priority. Overrides traceId, spanId and TraceSampled if the
+   * passed priority is higher. HttpRequest values will be retrieved and combined from existing
+   * context if HttpRequest in the new context is empty .
+   */
+  public void setCurrentContext(Context context, ContextPriority priority) {
+    if ((currentPriority.get() == null || priority.compareTo(currentPriority.get()) >= 0)
+        && context != null) {
+      Context.Builder combinedContextBuilder =
+          Context.newBuilder()
+              .setTraceId(context.getTraceId())
+              .setSpanId(context.getSpanId())
+              .setTraceSampled(context.getTraceSampled());
+      Context currentContext = getCurrentContext();
+
+      if (context.getHttpRequest() != null) {
+        combinedContextBuilder.setRequest(context.getHttpRequest());
+      }
+      // Combines HttpRequest from the existing context if HttpRequest in new context is empty.
+      else if (currentContext != null && currentContext.getHttpRequest() != null) {
+        combinedContextBuilder.setRequest(currentContext.getHttpRequest());
+      }
+
+      contextHolder.set(combinedContextBuilder.build());
+      currentPriority.set(priority);
     }
+  }
 
-    public Context getCurrentContext() {
-        return contextHolder.get();
-    }
-
-
-    public void setCurrentContext(Context context) {
-        contextHolder.set(context);
-    }
-
-    /**
-     * Sets the context based on the priority. Overrides traceId, spanId and TraceSampled if the passed priority is higher.
-     * HttpRequest values will be retrieved and combined from existing context if HttpRequest in the new context is empty .
-     */
-
-    public void setCurrentContext(Context context, ContextPriority priority) {
-        if ((currentPriority.get() == null || priority.compareTo(currentPriority.get()) >= 0) && context != null) {
-            Context.Builder combinedContextBuilder = Context.newBuilder().setTraceId(context.getTraceId()).setSpanId(context.getSpanId()).setTraceSampled(context.getTraceSampled());
-            Context currentContext = getCurrentContext();
-
-            if (context.getHttpRequest() != null)
-            {
-                combinedContextBuilder.setRequest(context.getHttpRequest());
-            }
-            // Combines HttpRequest from the existing context if HttpRequest in new context is empty.
-            else if (currentContext != null && currentContext.getHttpRequest() != null ){
-                combinedContextBuilder.setRequest(currentContext.getHttpRequest());
-            }
-
-            contextHolder.set(combinedContextBuilder.build());
-            currentPriority.set(priority);
-        }
-    }
-
-
-    public void removeCurrentContext() {
-        contextHolder.remove();
-    }
+  public void removeCurrentContext() {
+    contextHolder.remove();
+  }
 }

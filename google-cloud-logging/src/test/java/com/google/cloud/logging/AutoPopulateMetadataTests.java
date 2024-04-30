@@ -111,9 +111,15 @@ public class AutoPopulateMetadataTests {
     new ContextHandler().removeCurrentContext();
   }
 
-  private void mockCurrentContext(HttpRequest request, String traceId, String spanId, boolean traceSampled) {
+  private void mockCurrentContext(
+      HttpRequest request, String traceId, String spanId, boolean traceSampled) {
     Context mockedContext =
-        Context.newBuilder().setRequest(request).setTraceId(traceId).setSpanId(spanId).setTraceSampled(traceSampled).build();
+        Context.newBuilder()
+            .setRequest(request)
+            .setTraceId(traceId)
+            .setSpanId(spanId)
+            .setTraceSampled(traceSampled)
+            .build();
     new ContextHandler().setCurrentContext(mockedContext);
   }
 

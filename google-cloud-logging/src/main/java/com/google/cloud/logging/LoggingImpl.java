@@ -41,6 +41,7 @@ import com.google.cloud.MonitoredResource;
 import com.google.cloud.MonitoredResourceDescriptor;
 import com.google.cloud.PageImpl;
 import com.google.cloud.Tuple;
+import com.google.cloud.logging.ContextHandler.ContextPriority;
 import com.google.cloud.logging.spi.v2.LoggingRpc;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Ascii;
@@ -89,6 +90,7 @@ import com.google.logging.v2.WriteLogEntriesRequest;
 import com.google.logging.v2.WriteLogEntriesResponse;
 import com.google.protobuf.Empty;
 import com.google.protobuf.util.Durations;
+import io.opentelemetry.api.trace.Span;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -98,8 +100,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import io.opentelemetry.api.trace.Span;
-import com.google.cloud.logging.ContextHandler.ContextPriority;
 
 class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
   protected static final String RESOURCE_NAME_FORMAT = "projects/%s/traces/%s";
@@ -839,8 +839,7 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
 
       ContextHandler contextHandler = new ContextHandler();
       // Populate trace/span ID from OpenTelemetry span context to logging context.
-      if (Span.current().getSpanContext().isValid())
-      {
+      if (Span.current().getSpanContext().isValid()) {
         Context.Builder contextBuilder = Context.newBuilder().loadOpenTelemetryContext();
         contextHandler.setCurrentContext(contextBuilder.build(), ContextPriority.OTEL_EXTRACTED);
       }
