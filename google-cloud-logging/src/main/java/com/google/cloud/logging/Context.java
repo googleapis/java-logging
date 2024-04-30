@@ -26,8 +26,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import io.opentelemetry.api.OpenTelemetry;
-import io.opentelemetry.api.common.Attributes;
 import io.opentelemetry.api.trace.Span;
 
 /** Class to hold context attributes including information about {@see HttpRequest} and tracing. */
@@ -43,10 +41,7 @@ public class Context {
   private final HttpRequest request;
   private final String traceId;
   private final String spanId;
-
   private final boolean traceSampled;
-
-
   /** A builder for {@see Context} objects. */
   public static final class Builder {
     private HttpRequest.Builder requestBuilder = HttpRequest.newBuilder();
@@ -137,7 +132,7 @@ public class Context {
     }
 
     /**
-     * Sets the trace id and span id values by parsing the string which represents xCloud Trace
+     * Sets the trace id, span id and trace sampled flag values by parsing the string which represents xCloud Trace
      * Context. The Cloud Trace Context is passed as {@code x-cloud-trace-context} header (can be in
      * Pascal case format). The string format is <code>TRACE_ID/SPAN_ID;o=TRACE_TRUE</code>.
      *
@@ -147,9 +142,10 @@ public class Context {
     @CanIgnoreReturnValue
     public Builder loadCloudTraceContext(String cloudTrace) {
       if (cloudTrace != null) {
-        String traceSampledString = Iterables.get(Splitter.on(";o=").split(cloudTrace), 1);
+        if (cloudTrace.indexOf("o=") >= 0) {
+          setTraceSampled(Iterables.get(Splitter.on("o=").split(cloudTrace), 1).equals("1"));
+        }
         cloudTrace = Iterables.get(Splitter.on(';').split(cloudTrace), 0);
-
         int split = cloudTrace.indexOf('/');
         if (split >= 0) {
           String traceId = cloudTrace.substring(0, split);
@@ -160,10 +156,6 @@ public class Context {
             if (!spanId.isEmpty()) {
               setSpanId(spanId);
             }
-            // do not set trace sampled flag without trace Id
-            if (!traceSampledString.isEmpty()) {
-              setTraceSampled(traceSampledString.equals("1"));
-            }
           }
         } else if (!cloudTrace.isEmpty()) {
           setTraceId(cloudTrace);
@@ -173,7 +165,7 @@ public class Context {
     }
 
     /**
-     * Sets the trace id and span id values by parsing the string which represents the standard W3C
+     * Sets the trace id, span id and trace sampled flag values by parsing the string which represents the standard W3C
      * trace context propagation header. The context propagation header is passed as {@code
      * traceparent} header. The method currently supports ONLY version {@code "00"}. The string
      * format is <code>00-TRACE_ID-SPAN_ID-FLAGS</code>. field of the {@code version-format} value.
@@ -201,6 +193,13 @@ public class Context {
       return this;
     }
 
+    /**
+     * Sets the trace id, span id and trace sampled flag values by parsing detected OpenTelemetry
+     * span context.
+     *
+     * @see <a href="https://opentelemetry.io/docs/specs/otel/trace/api/#spancontext">OpenTelemetry
+     *     SpanContext.</a>
+     */
     @CanIgnoreReturnValue
     public Builder loadOpenTelemetryContext() {
       if (Span.current().getSpanContext() != null && Span.current().getSpanContext().isValid())
@@ -209,7 +208,6 @@ public class Context {
         setSpanId(Span.current().getSpanContext().getSpanId());
         setTraceSampled(Span.current().getSpanContext().isSampled());
       }
-
       return this;
     }
 

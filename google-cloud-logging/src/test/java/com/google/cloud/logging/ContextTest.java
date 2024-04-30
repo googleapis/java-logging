@@ -16,7 +16,6 @@
 
 package com.google.cloud.logging;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
@@ -34,7 +33,6 @@ import io.opentelemetry.sdk.testing.exporter.InMemorySpanExporter;
 import io.opentelemetry.sdk.trace.SdkTracerProvider;
 import io.opentelemetry.sdk.trace.SpanProcessor;
 import io.opentelemetry.sdk.trace.export.SimpleSpanProcessor;
-
 
 @RunWith(JUnit4.class)
 public class ContextTest {
@@ -162,7 +160,6 @@ public class ContextTest {
     assertTraceSpanAndSampled(builder.build(), W3C_TEST_TRACE_ID, W3C_TEST_SPAN_ID, true);
   }
 
-
   @Test
   public void testParsingOpenTelemetryContext() {
     InMemorySpanExporter testExporter = InMemorySpanExporter.create();
@@ -190,11 +187,6 @@ public class ContextTest {
     } finally {
       otelSpan.end();
     }
-  }
-
-  private void assertTraceAndSpan1(Context context, String expectedTraceId, String expectedSpanId) {
-    assertEquals(expectedTraceId, context.getTraceId());
-    assertEquals(expectedSpanId, context.getSpanId());
   }
 
   private void assertTraceSpanAndSampled(Context context, String expectedTraceId, String expectedSpanId, boolean expectedTraceSampled) {
