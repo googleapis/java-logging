@@ -17,32 +17,23 @@
 package com.google.cloud.logging;
 
 
-import static com.google.logging.v2.LoggingServiceV2Grpc.SERVICE_NAME;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 
-import io.opentelemetry.api.OpenTelemetry;
+import io.opentelemetry.context.Scope;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.threeten.bp.Duration;
 import io.opentelemetry.api.trace.Span;
 import io.opentelemetry.api.trace.*;
-import io.opentelemetry.api.GlobalOpenTelemetry;
-import io.opentelemetry.api.common.AttributeKey;
-import io.opentelemetry.api.common.Attributes;
-import io.opentelemetry.api.trace.StatusCode;
 import io.opentelemetry.sdk.OpenTelemetrySdk;
-import io.opentelemetry.sdk.resources.Resource;
 import io.opentelemetry.sdk.testing.exporter.InMemorySpanExporter;
 import io.opentelemetry.sdk.trace.SdkTracerProvider;
 import io.opentelemetry.sdk.trace.SpanProcessor;
-import io.opentelemetry.sdk.trace.data.EventData;
-import io.opentelemetry.sdk.trace.data.SpanData;
 import io.opentelemetry.sdk.trace.export.SimpleSpanProcessor;
-import io.opentelemetry.sdk.trace.samplers.Sampler;
 
 
 @RunWith(JUnit4.class)
@@ -173,37 +164,8 @@ public class ContextTest {
 
 
   @Test
-  public void testParsingOtelContext() {
-     InMemorySpanExporter testExporter = InMemorySpanExporter.create();
-    //    OpenTelemetrySdk myOpenTelemetrySdk = OpenTelemetrySdk.builder().build();
-
-/*        OpenTelemetrySdk.builder()
-                .setTracerProvider(
-                        SdkTracerProvider.builder()
-                                .addSpanProcessor(BatchSpanProcessor.builder(traceExporter).build())
-                                .build())
-                .buildAndRegisterGlobal();*/
-
-
-    // Create  with an in-memory span exporter.
-    //  GlobalOpenTelemetry.resetForTest();
-     /*   Resource resource =
-                Resource.getDefault().merge(Resource.builder().put(SERVICE_NAME, "Sparky").build());
-
-
-        OpenTelemetry sdk = OpenTelemetrySdk.builder()
-                .setTracerProvider(
-                        SdkTracerProvider.builder()
-                                .setResource(resource)
-                                .addSpanProcessor(inMemorySpanProcessor)
-                                .setSampler(Sampler.alwaysOn())
-                                .build())
-                .buildAndRegisterGlobal();
-*/
-
-
-    ///////////////
-
+  public void testParsingOpenTelemetryContext() {
+    InMemorySpanExporter testExporter = InMemorySpanExporter.create();
     SpanProcessor inMemorySpanProcessor = SimpleSpanProcessor.create(testExporter);
     OpenTelemetrySdk openTelemetrySdk =
             OpenTelemetrySdk.builder()
@@ -213,16 +175,21 @@ public class ContextTest {
                                     .build())
                     .build();
 
-    // OpenTelemetry has a maximum of 128 Attributes by default for Spans, Links, and Events.
     Tracer tracer = openTelemetrySdk.getTracer("ContextTest");
-    Span multiAttrSpan = tracer.spanBuilder("Example Span Attributes").startSpan();
-    multiAttrSpan.setAttribute("Attribute 1", "first attribute value");
-    multiAttrSpan.setAttribute("Attribute 2", "second attribute value");
-    multiAttrSpan.end();
+    Span otelSpan = tracer.spanBuilder("Example Span Attributes").startSpan();
+    SpanContext currentOtelContext;
     Context.Builder builder = Context.newBuilder();
-    SpanContext currentOtelContext = multiAttrSpan.getSpanContext();
-    builder.loadOpenTelemetryContext();
-    assertTraceSpanAndSampled(builder.build(), currentOtelContext.getTraceId(), currentOtelContext.getSpanId(), currentOtelContext.isSampled());
+    try (Scope scope = otelSpan.makeCurrent()) {
+      otelSpan.setAttribute("Attribute 1", "first attribute value");
+      currentOtelContext = otelSpan.getSpanContext();
+      builder.loadOpenTelemetryContext();
+      assertTraceSpanAndSampled(builder.build(), currentOtelContext.getTraceId(), currentOtelContext.getSpanId(), currentOtelContext.isSampled());
+    } catch(Throwable t) {
+      otelSpan.recordException(t);
+      throw t;
+    } finally {
+      otelSpan.end();
+    }
   }
 
   private void assertTraceAndSpan1(Context context, String expectedTraceId, String expectedSpanId) {

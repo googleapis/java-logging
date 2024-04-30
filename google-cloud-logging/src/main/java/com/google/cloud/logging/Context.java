@@ -196,7 +196,6 @@ public class Context {
         setTraceId(fields.get(1));
         setSpanId(fields.get(2));
         boolean sampled = (Integer.parseInt(fields.get(3), 16) & FLAG_SAMPLED) == FLAG_SAMPLED;
-        System.out.println("trace: " + fields.get(1) + ", span: " + fields.get(2) + ", sampled string " + fields.get(3) + ", sampled boolean: " + sampled);
         setTraceSampled(sampled);
       }
       return this;
@@ -209,8 +208,6 @@ public class Context {
         setTraceId(Span.current().getSpanContext().getTraceId());
         setSpanId(Span.current().getSpanContext().getSpanId());
         setTraceSampled(Span.current().getSpanContext().isSampled());
-
-        System.out.println("TraceID: " + Span.current().getSpanContext().getTraceId() + "; Span Id: " + Span.current().getSpanContext().getSpanId() + ", isSampled: " + Span.current().getSpanContext().isSampled());
       }
 
       return this;

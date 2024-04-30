@@ -839,10 +839,8 @@ class LoggingImpl extends BaseService<LoggingOptions> implements Logging {
 
       ContextHandler contextHandler = new ContextHandler();
       // Populate trace/span ID from OpenTelemetry span context to logging context.
-      System.out.println("Starting reading Otel context");
       if (Span.current().getSpanContext().isValid())
       {
-        System.out.println("Span context detected.");
         Context.Builder contextBuilder = Context.newBuilder().loadOpenTelemetryContext();
         contextHandler.setCurrentContext(contextBuilder.build(), ContextPriority.OTEL_EXTRACTED);
       }
