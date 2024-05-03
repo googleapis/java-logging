@@ -65,6 +65,11 @@
         <artifactId>opentelemetry-api</artifactId>
         <version>${opentelemetry.version}</version>
       </dependency>
+      <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-context</artifactId>
+        <version>${opentelemetry.version}</version>
+      </dependency>
       <!-- END OpenTelemetry -->
       <dependency>
         <groupId>com.google.api.grpc</groupId>
@@ -142,12 +147,6 @@
         <groupId>io.opentelemetry</groupId>
         <artifactId>opentelemetry-semconv</artifactId>
         <version>${opentelemetry.version}-alpha</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>io.opentelemetry</groupId>
-        <artifactId>opentelemetry-context</artifactId>
-        <version>${opentelemetry.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
