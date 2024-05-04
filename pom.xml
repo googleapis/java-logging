@@ -65,11 +65,12 @@
         <artifactId>opentelemetry-api</artifactId>
         <version>${opentelemetry.version}</version>
       </dependency>
-<!--      <dependency>-->
-<!--        <groupId>io.opentelemetry</groupId>-->
-<!--        <artifactId>opentelemetry-context</artifactId>-->
-<!--        <version>${opentelemetry.version}</version>-->
-<!--      </dependency>-->
+      <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-context</artifactId>
+        <version>${opentelemetry.version}</version>
+        <optional>false</optional>
+      </dependency>
       <!-- END OpenTelemetry -->
       <dependency>
         <groupId>com.google.api.grpc</groupId>
@@ -179,6 +180,10 @@
           <artifactId>maven-dependency-plugin</artifactId>
           <configuration>
             <ignoredUnusedDeclaredDependencies>org.objenesis:objenesis</ignoredUnusedDeclaredDependencies>
+            <!-- ignore annotations for "non-test scoped" warnings -->
+            <ignoredNonTestScopedDependencies>
+              <ignoredNonTestScopedDependency>io.opentelemetry:opentelemetry-context</ignoredNonTestScopedDependency>
+            </ignoredNonTestScopedDependencies>
           </configuration>
         </plugin>
       </plugins>
