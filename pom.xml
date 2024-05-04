@@ -65,11 +65,11 @@
         <artifactId>opentelemetry-api</artifactId>
         <version>${opentelemetry.version}</version>
       </dependency>
-      <dependency>
-        <groupId>io.opentelemetry</groupId>
-        <artifactId>opentelemetry-context</artifactId>
-        <version>${opentelemetry.version}</version>
-      </dependency>
+<!--      <dependency>-->
+<!--        <groupId>io.opentelemetry</groupId>-->
+<!--        <artifactId>opentelemetry-context</artifactId>-->
+<!--        <version>${opentelemetry.version}</version>-->
+<!--      </dependency>-->
       <!-- END OpenTelemetry -->
       <dependency>
         <groupId>com.google.api.grpc</groupId>
