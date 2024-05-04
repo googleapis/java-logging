@@ -91,6 +91,7 @@ import com.google.logging.v2.WriteLogEntriesResponse;
 import com.google.protobuf.Empty;
 import com.google.protobuf.util.Durations;
 import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.context.ImplicitContextKeyed;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
