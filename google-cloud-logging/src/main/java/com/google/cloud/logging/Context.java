@@ -205,7 +205,7 @@ public class Context {
      */
     @CanIgnoreReturnValue
     public Builder loadOpenTelemetryContext() {
-      io.opentelemetry.context.Context currentContext =  io.opentelemetry.context.Context.current();
+      io.opentelemetry.context.Context currentContext = io.opentelemetry.context.Context.current();
       SpanContext spanContext = Span.fromContext(currentContext).getSpanContext();
       if (spanContext != null && spanContext.isValid()) {
         setTraceId(spanContext.getTraceId());
