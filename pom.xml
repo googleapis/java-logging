@@ -65,12 +65,12 @@
         <artifactId>opentelemetry-api</artifactId>
         <version>${opentelemetry.version}</version>
       </dependency>
-      <dependency>
-        <groupId>io.opentelemetry</groupId>
-        <artifactId>opentelemetry-context</artifactId>
-        <version>${opentelemetry.version}</version>
-        <optional>false</optional>
-      </dependency>
+<!--      <dependency>-->
+<!--        <groupId>io.opentelemetry</groupId>-->
+<!--        <artifactId>opentelemetry-context</artifactId>-->
+<!--        <version>${opentelemetry.version}</version>-->
+<!--        <optional>false</optional>-->
+<!--      </dependency>-->
       <!-- END OpenTelemetry -->
       <dependency>
         <groupId>com.google.api.grpc</groupId>
@@ -179,11 +179,15 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-dependency-plugin</artifactId>
           <configuration>
-            <ignoredUnusedDeclaredDependencies>org.objenesis:objenesis</ignoredUnusedDeclaredDependencies>
+            <ignoredUnusedDeclaredDependencies>
+              <ignoredUnusedDeclaredDependency>org.objenesis:objenesis</ignoredUnusedDeclaredDependency>
+<!--              <ignoredUnusedDeclaredDependency>io.opentelemetry:opentelemetry-context</ignoredUnusedDeclaredDependency>-->
+            </ignoredUnusedDeclaredDependencies>
+<!--            <ignoredUnusedDeclaredDependencies>io.opentelemetry:opentelemetry-context</ignoredUnusedDeclaredDependencies>-->
             <!-- ignore annotations for "non-test scoped" warnings -->
-            <ignoredNonTestScopedDependencies>
-              <ignoredNonTestScopedDependency>io.opentelemetry:opentelemetry-context</ignoredNonTestScopedDependency>
-            </ignoredNonTestScopedDependencies>
+<!--            <ignoredNonTestScopedDependencies>-->
+<!--              <ignoredNonTestScopedDependency>io.opentelemetry:opentelemetry-context</ignoredNonTestScopedDependency>-->
+<!--            </ignoredNonTestScopedDependencies>-->
           </configuration>
         </plugin>
       </plugins>
