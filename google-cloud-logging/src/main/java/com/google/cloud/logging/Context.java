@@ -23,6 +23,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.SpanContext;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -204,10 +205,12 @@ public class Context {
      */
     @CanIgnoreReturnValue
     public Builder loadOpenTelemetryContext() {
-      if (Span.current().getSpanContext() != null && Span.current().getSpanContext().isValid()) {
-        setTraceId(Span.current().getSpanContext().getTraceId());
-        setSpanId(Span.current().getSpanContext().getSpanId());
-        setTraceSampled(Span.current().getSpanContext().isSampled());
+      io.opentelemetry.context.Context currentContext =  io.opentelemetry.context.Context.current();
+      SpanContext spanContext = Span.fromContext(currentContext).getSpanContext();
+      if (spanContext != null && spanContext.isValid()) {
+        setTraceId(spanContext.getTraceId());
+        setSpanId(spanContext.getSpanId());
+        setTraceSampled(spanContext.isSampled());
       }
       return this;
     }
