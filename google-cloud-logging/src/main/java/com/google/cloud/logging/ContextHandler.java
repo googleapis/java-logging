@@ -27,7 +27,8 @@ public class ContextHandler {
   }
 
   private static final ThreadLocal<Context> contextHolder = initContextHolder();
-  private static final ThreadLocal<ContextPriority> currentPriority = ThreadLocal.withInitial(()->ContextPriority.NO_INPUT);
+  private static final ThreadLocal<ContextPriority> currentPriority =
+      ThreadLocal.withInitial(() -> ContextPriority.NO_INPUT);
 
   /**
    * Initializes the context holder to {@link InheritableThreadLocal} if {@link LogManager}

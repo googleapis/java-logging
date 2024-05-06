@@ -16,6 +16,10 @@
 
 package com.google.cloud.logging.it;
 
+import static com.google.cloud.logging.testing.RemoteLoggingHelper.formatForTest;
+import static com.google.common.truth.Truth.assertThat;
+import static org.junit.Assert.*;
+
 import com.google.cloud.MonitoredResource;
 import com.google.cloud.logging.*;
 import com.google.common.collect.ImmutableList;
@@ -30,15 +34,10 @@ import io.opentelemetry.sdk.testing.exporter.InMemorySpanExporter;
 import io.opentelemetry.sdk.trace.SdkTracerProvider;
 import io.opentelemetry.sdk.trace.SpanProcessor;
 import io.opentelemetry.sdk.trace.export.SimpleSpanProcessor;
+import java.util.Iterator;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.Iterator;
-
-import static com.google.cloud.logging.testing.RemoteLoggingHelper.formatForTest;
-import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.*;
 
 public class ITTracingLogsTest extends BaseSystemTest {
 
@@ -59,11 +58,12 @@ public class ITTracingLogsTest extends BaseSystemTest {
   private static final String W3C_TEST_SPAN_ID = "1234567890123456";
   private static final String W3C_TEST_TRACE_SAMPLED = "0f";
   private static final String W3C_TRACE_CONTEXT =
-          "00-" + W3C_TEST_TRACE_ID + "-" + W3C_TEST_SPAN_ID + "-" + W3C_TEST_TRACE_SAMPLED;
+      "00-" + W3C_TEST_TRACE_ID + "-" + W3C_TEST_SPAN_ID + "-" + W3C_TEST_TRACE_SAMPLED;
 
   private static final String XCTC_TEST_TRACE_ID = "98765432101234569876543210123456";
   private static final String XCTC_TEST_SPAN_ID = "9876543210123456";
-  private static final String X_CLOUD_TRACE_CONTEXT = XCTC_TEST_TRACE_ID + "/" + XCTC_TEST_SPAN_ID + ";o=1";
+  private static final String X_CLOUD_TRACE_CONTEXT =
+      XCTC_TEST_TRACE_ID + "/" + XCTC_TEST_SPAN_ID + ";o=1";
 
   private static String otelTraceId;
   private static String otelSpanId;
@@ -80,19 +80,19 @@ public class ITTracingLogsTest extends BaseSystemTest {
     logName = LogName.ofProjectLogName(loggingOptions.getProjectId(), LOG_ID);
     logging.setWriteSynchronicity(Synchronicity.SYNC);
     w3cEntry =
-            LogEntry.newBuilder(STRING_PAYLOAD)
-                    .setLogName(LOG_ID)
-                    .addLabel("tracing_source", "w3c")
-                    .setHttpRequest(HttpRequest.newBuilder().setStatus(500).build())
-                    .setResource(GLOBAL_RESOURCE)
-                    .build();
+        LogEntry.newBuilder(STRING_PAYLOAD)
+            .setLogName(LOG_ID)
+            .addLabel("tracing_source", "w3c")
+            .setHttpRequest(HttpRequest.newBuilder().setStatus(500).build())
+            .setResource(GLOBAL_RESOURCE)
+            .build();
     xctcEntry =
-            LogEntry.newBuilder(STRING_PAYLOAD)
-                    .setLogName(LOG_ID)
-                    .addLabel("tracing_source", "xctc")
-                    .setHttpRequest(HttpRequest.newBuilder().setRequestUrl("www.google.com").build())
-                    .setResource(GLOBAL_RESOURCE)
-                    .build();
+        LogEntry.newBuilder(STRING_PAYLOAD)
+            .setLogName(LOG_ID)
+            .addLabel("tracing_source", "xctc")
+            .setHttpRequest(HttpRequest.newBuilder().setRequestUrl("www.google.com").build())
+            .setResource(GLOBAL_RESOURCE)
+            .build();
     otelEntry =
         LogEntry.newBuilder(OTEL_PAYLOAD)
             .addLabel("tracing_source", "otel")
@@ -104,10 +104,10 @@ public class ITTracingLogsTest extends BaseSystemTest {
     InMemorySpanExporter testExporter = InMemorySpanExporter.create();
     SpanProcessor inMemorySpanProcessor = SimpleSpanProcessor.create(testExporter);
     OpenTelemetrySdk openTelemetrySdk =
-            OpenTelemetrySdk.builder()
-                    .setTracerProvider(
-                            SdkTracerProvider.builder().addSpanProcessor(inMemorySpanProcessor).build())
-                    .build();
+        OpenTelemetrySdk.builder()
+            .setTracerProvider(
+                SdkTracerProvider.builder().addSpanProcessor(inMemorySpanProcessor).build())
+            .build();
     tracer = openTelemetrySdk.getTracer("ContextTest");
   }
 
@@ -154,11 +154,13 @@ public class ITTracingLogsTest extends BaseSystemTest {
     LogEntry entry = iterator.next();
     assertEquals(LOG_ID, entry.getLogName());
     assertEquals(ImmutableMap.of("tracing_source", "xctc"), entry.getLabels());
-    assertEquals(HttpRequest.newBuilder().setRequestUrl("www.google.com").build(), entry.getHttpRequest());
+    assertEquals(
+        HttpRequest.newBuilder().setRequestUrl("www.google.com").build(), entry.getHttpRequest());
     assertEquals(XCTC_TEST_TRACE_ID, entry.getTrace());
     assertEquals(XCTC_TEST_SPAN_ID, entry.getSpanId());
     assertEquals(true, entry.getTraceSampled());
   }
+
   @Test(timeout = 600_000)
   public void testDetectOtelTraceId() throws InterruptedException {
     // Writes a log entry in open telemetry context
@@ -193,7 +195,8 @@ public class ITTracingLogsTest extends BaseSystemTest {
     LogEntry entry = iterator.next();
     assertEquals(LOG_ID, entry.getLogName());
     assertEquals(HttpRequest.newBuilder().setStatus(500).build(), entry.getHttpRequest());
-    // Expect to get trace Id, span Id and isSampled flag from Open Telemetry context when it exists.
+    // Expect to get trace Id, span Id and isSampled flag from Open Telemetry context when it
+    // exists.
     assertEquals(otelTraceId, entry.getTrace());
     assertEquals(otelSpanId, entry.getSpanId());
     assertEquals(isSampled, entry.getTraceSampled());
@@ -213,7 +216,8 @@ public class ITTracingLogsTest extends BaseSystemTest {
 
     LogEntry entry = iterator.next();
     assertEquals(LOG_ID, entry.getLogName());
-    // Expect to get trace Id, span Id and isSampled flag from Open telemetry context when it exists.
+    // Expect to get trace Id, span Id and isSampled flag from Open telemetry context when it
+    // exists.
     assertEquals(otelTraceId, entry.getTrace());
     assertEquals(otelSpanId, entry.getSpanId());
     assertEquals(isSampled, entry.getTraceSampled());
