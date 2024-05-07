@@ -22,7 +22,7 @@ public class ContextHandler {
   public enum ContextPriority {
     NO_INPUT,
     XCLOUD_HEADER,
-    W3_HEADER,
+    W3C_HEADER,
     OTEL_EXTRACTED
   }
 
@@ -51,7 +51,11 @@ public class ContextHandler {
   }
 
   public void setCurrentContext(Context context) {
-    contextHolder.set(context);
+    setCurrentContext(context, ContextPriority.NO_INPUT);
+  }
+
+  public ContextPriority getCurrentContextPriority() {
+    return currentPriority.get();
   }
 
   /**
@@ -83,5 +87,9 @@ public class ContextHandler {
 
   public void removeCurrentContext() {
     contextHolder.remove();
+  }
+
+  public void removeCurrentContextPriority() {
+    currentPriority.remove();
   }
 }
