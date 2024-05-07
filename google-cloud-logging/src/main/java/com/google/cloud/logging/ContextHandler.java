@@ -60,8 +60,7 @@ public class ContextHandler {
    * context if HttpRequest in the new context is empty .
    */
   public void setCurrentContext(Context context, ContextPriority priority) {
-    if ((currentPriority.get() == null || priority.compareTo(currentPriority.get()) >= 0)
-        && context != null) {
+    if (priority != null && priority.compareTo(currentPriority.get()) >= 0 && context != null) {
       Context.Builder combinedContextBuilder =
           Context.newBuilder()
               .setTraceId(context.getTraceId())
