@@ -1,5 +1,22 @@
 # Changelog
 
+## [3.17.2](https://github.com/googleapis/java-logging/compare/v3.17.1...v3.17.2) (2024-05-16)
+
+
+### Dependencies
+
+* Update dependency com.google.cloud:sdk-platform-java-config to v3.30.1 ([#1611](https://github.com/googleapis/java-logging/issues/1611)) ([e7a0904](https://github.com/googleapis/java-logging/commit/e7a0904a1faf04b0de400c1778f976494246e39e))
+
+## [3.17.1](https://github.com/googleapis/java-logging/compare/v3.17.0...v3.17.1) (2024-05-06)
+
+
+### Dependencies
+
+* Update actions/checkout action to v4 ([#1570](https://github.com/googleapis/java-logging/issues/1570)) ([ea0db35](https://github.com/googleapis/java-logging/commit/ea0db3579da6e965e778233b3cba4862b3fff65c))
+* Update actions/github-script action to v7 ([#1571](https://github.com/googleapis/java-logging/issues/1571)) ([16d6192](https://github.com/googleapis/java-logging/commit/16d61928b6d4887faebbdd48a694a2edff8cb752))
+* Update actions/setup-java action to v4 ([#1572](https://github.com/googleapis/java-logging/issues/1572)) ([9eb8834](https://github.com/googleapis/java-logging/commit/9eb88346fac9688c0e56bec83f7407c5690a5b7f))
+* Update dependency com.google.cloud:sdk-platform-java-config to v3.30.0 ([#1603](https://github.com/googleapis/java-logging/issues/1603)) ([16967e5](https://github.com/googleapis/java-logging/commit/16967e5ba704a75419904ba2aaabce0cbc116352))
+
 ## [3.17.0](https://github.com/googleapis/java-logging/compare/v3.16.3...v3.17.0) (2024-04-25)
 
 
