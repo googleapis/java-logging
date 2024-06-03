@@ -157,13 +157,6 @@
       <artifactId>opentelemetry-sdk-trace</artifactId>
       <scope>test</scope>
     </dependency>
-<!--    <dependency>-->
-<!--      <groupId>io.opentelemetry</groupId>-->
-<!--      <artifactId>opentelemetry-sdk-metrics</artifactId>-->
-<!--      <scope>test</scope>-->
-<!--    </dependency>-->
-    <!-- END OpenTelemetry -->
-    <!-- OpenTelemetry -->
     <!-- END OpenTelemetry -->
     <!-- Need testing utility classes for generated gRPC clients tests -->
     <dependency>
