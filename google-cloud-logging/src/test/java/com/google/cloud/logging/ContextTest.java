@@ -169,7 +169,7 @@ public class ContextTest {
         OpenTelemetrySdk.builder()
             .setTracerProvider(
                 SdkTracerProvider.builder().addSpanProcessor(inMemorySpanProcessor).build())
-            .build();
+            .buildAndRegisterGlobal();
 
     Tracer tracer = openTelemetrySdk.getTracer("ContextTest");
     Span otelSpan = tracer.spanBuilder("Example Span Attributes").startSpan();

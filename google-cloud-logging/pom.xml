@@ -157,6 +157,28 @@
       <artifactId>opentelemetry-sdk-trace</artifactId>
       <scope>test</scope>
     </dependency>
+<!--    <dependency>-->
+<!--      <groupId>io.opentelemetry</groupId>-->
+<!--      <artifactId>opentelemetry-sdk-metrics</artifactId>-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
+    <!-- END OpenTelemetry -->
+    <!-- OpenTelemetry -->
+    <dependency>
+      <groupId>io.opentelemetry</groupId>
+      <artifactId>opentelemetry-semconv</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.opentelemetry</groupId>
+      <artifactId>opentelemetry-sdk-common</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.cloud.opentelemetry</groupId>
+      <artifactId>exporter-trace</artifactId>
+      <scope>test</scope>
+    </dependency>
     <!-- END OpenTelemetry -->
     <!-- Need testing utility classes for generated gRPC clients tests -->
     <dependency>
