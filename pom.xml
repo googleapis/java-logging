@@ -4,7 +4,7 @@
   <groupId>com.google.cloud</groupId>
   <artifactId>google-cloud-logging-parent</artifactId>
   <packaging>pom</packaging>
-  <version>3.15.17-SNAPSHOT</version><!-- {x-version-update:google-cloud-logging:current} -->
+  <version>3.19.0</version><!-- {x-version-update:google-cloud-logging:current} -->
   <name>Google Cloud Logging Parent</name>
   <url>https://github.com/googleapis/java-logging</url>
   <description>
@@ -14,7 +14,7 @@
   <parent>
     <groupId>com.google.cloud</groupId>
     <artifactId>sdk-platform-java-config</artifactId>
-    <version>3.23.0</version>
+    <version>3.32.0</version>
   </parent>
 
   <developers>
@@ -56,22 +56,41 @@
     <site.installationModule>google-cloud-logging-parent</site.installationModule>
   </properties>
 
+  <!-- OpenTelemetry -->
   <dependencyManagement>
     <dependencies>
       <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-bom</artifactId>
+        <version>1.38.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+<!--      <dependency>-->
+<!--        <groupId>io.opentelemetry</groupId>-->
+<!--        <artifactId>opentelemetry-api</artifactId>-->
+<!--        <version>${opentelemetry.version}</version>-->
+<!--      </dependency>-->
+<!--      <dependency>-->
+<!--        <groupId>io.opentelemetry</groupId>-->
+<!--        <artifactId>opentelemetry-context</artifactId>-->
+<!--        <version>${opentelemetry.version}</version>-->
+<!--      </dependency>-->
+      <!-- END OpenTelemetry -->
+      <dependency>
         <groupId>com.google.api.grpc</groupId>
         <artifactId>proto-google-cloud-logging-v2</artifactId>
-        <version>0.104.17-SNAPSHOT</version><!-- {x-version-update:proto-google-cloud-logging-v2:current} -->
+        <version>0.108.0</version><!-- {x-version-update:proto-google-cloud-logging-v2:current} -->
       </dependency>
       <dependency>
         <groupId>com.google.api.grpc</groupId>
         <artifactId>grpc-google-cloud-logging-v2</artifactId>
-        <version>0.104.17-SNAPSHOT</version><!-- {x-version-update:grpc-google-cloud-logging-v2:current} -->
+        <version>0.108.0</version><!-- {x-version-update:grpc-google-cloud-logging-v2:current} -->
       </dependency>
       <dependency>
         <groupId>com.google.cloud</groupId>
         <artifactId>google-cloud-logging</artifactId>
-        <version>3.15.17-SNAPSHOT</version><!-- {x-version-update:google-cloud-logging:current} -->
+        <version>3.19.0</version><!-- {x-version-update:google-cloud-logging:current} -->
       </dependency>
 
       <dependency>
@@ -102,13 +121,13 @@
       <dependency>
           <groupId>org.objenesis</groupId>
           <artifactId>objenesis</artifactId>
-          <version>3.3</version>
+          <version>3.4</version>
           <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>com.google.truth</groupId>
         <artifactId>truth</artifactId>
-        <version>1.3.0</version>
+        <version>1.4.2</version>
         <scope>test</scope>
         <exclusions>
           <exclusion>
@@ -117,6 +136,54 @@
           </exclusion>
         </exclusions>
       </dependency>
+<!--      &lt;!&ndash; OpenTelemetry &ndash;&gt;-->
+<!--      <dependency>-->
+<!--        <groupId>io.opentelemetry</groupId>-->
+<!--        <artifactId>opentelemetry-api</artifactId>-->
+<!--&lt;!&ndash;        <version>${opentelemetry.version}</version>&ndash;&gt;-->
+<!--      </dependency>-->
+<!--      <dependency>-->
+<!--        <groupId>io.opentelemetry</groupId>-->
+<!--        <artifactId>opentelemetry-context</artifactId>-->
+<!--&lt;!&ndash;        <version>${opentelemetry.version}</version>&ndash;&gt;-->
+<!--      </dependency>-->
+<!--      <dependency>-->
+<!--        <groupId>io.opentelemetry</groupId>-->
+<!--        <artifactId>opentelemetry-sdk</artifactId>-->
+<!--&lt;!&ndash;        <version>${opentelemetry.version}</version>&ndash;&gt;-->
+<!--        <scope>test</scope>-->
+<!--      </dependency>-->
+<!--      <dependency>-->
+<!--        <groupId>io.opentelemetry</groupId>-->
+<!--        <artifactId>opentelemetry-sdk-testing</artifactId>-->
+<!--&lt;!&ndash;        <version>${opentelemetry.version}</version>&ndash;&gt;-->
+<!--        <scope>test</scope>-->
+<!--      </dependency>-->
+      <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-semconv</artifactId>
+        <version>1.1.0-alpha</version>
+        <scope>test</scope>
+      </dependency>
+<!--      <dependency>-->
+<!--        <groupId>io.opentelemetry</groupId>-->
+<!--        <artifactId>opentelemetry-sdk-trace</artifactId>-->
+<!--        <version>${opentelemetry.version}</version>-->
+<!--        <scope>test</scope>-->
+<!--      </dependency>-->
+<!--      <dependency>-->
+<!--        <groupId>io.opentelemetry</groupId>-->
+<!--        <artifactId>opentelemetry-sdk-common</artifactId>-->
+<!--        <version>${opentelemetry.version}</version>-->
+<!--        <scope>test</scope>-->
+<!--      </dependency>-->
+      <dependency>
+        <groupId>com.google.cloud.opentelemetry</groupId>
+        <artifactId>exporter-trace</artifactId>
+        <version>0.15.0</version>
+        <scope>test</scope>
+      </dependency>
+      <!-- END OpenTelemetry -->
     </dependencies>
   </dependencyManagement>
 

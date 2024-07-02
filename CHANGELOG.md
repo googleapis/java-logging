@@ -1,5 +1,118 @@
 # Changelog
 
+## [3.19.0](https://github.com/googleapis/java-logging/compare/v3.18.0...v3.19.0) (2024-06-26)
+
+
+### Features
+
+* **logging:** OpenTelemetry trace/span ID integration for Java logging library ([#1596](https://github.com/googleapis/java-logging/issues/1596)) ([67db829](https://github.com/googleapis/java-logging/commit/67db829621fd1c4a876d158fe1afb4927821fa54))
+
+
+### Dependencies
+
+* Update dependency com.google.cloud:sdk-platform-java-config to v3.32.0 ([#1649](https://github.com/googleapis/java-logging/issues/1649)) ([cb428d1](https://github.com/googleapis/java-logging/commit/cb428d19a1ea750520d336c9d1042d50f3801f15))
+
+## [3.18.0](https://github.com/googleapis/java-logging/compare/v3.17.2...v3.18.0) (2024-06-04)
+
+
+### Features
+
+* [java] allow passing libraries_bom_version from env ([#1967](https://github.com/googleapis/java-logging/issues/1967)) ([#1615](https://github.com/googleapis/java-logging/issues/1615)) ([dc00cd0](https://github.com/googleapis/java-logging/commit/dc00cd0da891b59f3c22cd7ce281868f5ce8b433))
+
+
+### Dependencies
+
+* Update dependency com.google.cloud:sdk-platform-java-config to v3.31.0 ([#1625](https://github.com/googleapis/java-logging/issues/1625)) ([9db8f3b](https://github.com/googleapis/java-logging/commit/9db8f3b948e20fa406f315b670341da2b00f0856))
+
+## [3.17.2](https://github.com/googleapis/java-logging/compare/v3.17.1...v3.17.2) (2024-05-16)
+
+
+### Dependencies
+
+* Update dependency com.google.cloud:sdk-platform-java-config to v3.30.1 ([#1611](https://github.com/googleapis/java-logging/issues/1611)) ([e7a0904](https://github.com/googleapis/java-logging/commit/e7a0904a1faf04b0de400c1778f976494246e39e))
+
+## [3.17.1](https://github.com/googleapis/java-logging/compare/v3.17.0...v3.17.1) (2024-05-06)
+
+
+### Dependencies
+
+* Update actions/checkout action to v4 ([#1570](https://github.com/googleapis/java-logging/issues/1570)) ([ea0db35](https://github.com/googleapis/java-logging/commit/ea0db3579da6e965e778233b3cba4862b3fff65c))
+* Update actions/github-script action to v7 ([#1571](https://github.com/googleapis/java-logging/issues/1571)) ([16d6192](https://github.com/googleapis/java-logging/commit/16d61928b6d4887faebbdd48a694a2edff8cb752))
+* Update actions/setup-java action to v4 ([#1572](https://github.com/googleapis/java-logging/issues/1572)) ([9eb8834](https://github.com/googleapis/java-logging/commit/9eb88346fac9688c0e56bec83f7407c5690a5b7f))
+* Update dependency com.google.cloud:sdk-platform-java-config to v3.30.0 ([#1603](https://github.com/googleapis/java-logging/issues/1603)) ([16967e5](https://github.com/googleapis/java-logging/commit/16967e5ba704a75419904ba2aaabce0cbc116352))
+
+## [3.17.0](https://github.com/googleapis/java-logging/compare/v3.16.3...v3.17.0) (2024-04-25)
+
+
+### Features
+
+* Add Cloud Run Jobs support ([#1574](https://github.com/googleapis/java-logging/issues/1574)) ([1dd64d0](https://github.com/googleapis/java-logging/commit/1dd64d078e0d4cbb1e16cb1d050ba192492d6a60))
+
+
+### Bug Fixes
+
+* **deps:** Update the Java code generator (gapic-generator-java) to 2.39.0 ([#1587](https://github.com/googleapis/java-logging/issues/1587)) ([848418b](https://github.com/googleapis/java-logging/commit/848418b426c2e93e636dbd9de71985c386ccb9d2))
+
+
+### Dependencies
+
+* Update dependency com.google.cloud:sdk-platform-java-config to v3.29.0 ([#1586](https://github.com/googleapis/java-logging/issues/1586)) ([edcaf8d](https://github.com/googleapis/java-logging/commit/edcaf8de643a7f7f419ee6059c706d0ef0ef4873))
+
+## [3.16.3](https://github.com/googleapis/java-logging/compare/v3.16.2...v3.16.3) (2024-04-17)
+
+
+### Dependencies
+
+* Update dependency com.google.cloud:sdk-platform-java-config to v3.28.1 ([#1569](https://github.com/googleapis/java-logging/issues/1569)) ([8eb0781](https://github.com/googleapis/java-logging/commit/8eb0781b1e1e6e369a6ff0a03d1db4cd0462a6a7))
+
+## [3.16.2](https://github.com/googleapis/java-logging/compare/v3.16.1...v3.16.2) (2024-03-20)
+
+
+### Dependencies
+
+* Update dependency com.google.cloud:sdk-platform-java-config to v3.28.0 ([#1560](https://github.com/googleapis/java-logging/issues/1560)) ([d52e623](https://github.com/googleapis/java-logging/commit/d52e62343aa814183baa4fa8ea39d41a5e7c423f))
+* Update dependency com.google.cloud:sdk-platform-java-config to v3.28.1 ([#1563](https://github.com/googleapis/java-logging/issues/1563)) ([81aa3e6](https://github.com/googleapis/java-logging/commit/81aa3e6b6662d62844b289a22e8aba50dff36a51))
+
+## [3.16.1](https://github.com/googleapis/java-logging/compare/v3.16.0...v3.16.1) (2024-03-07)
+
+
+### Bug Fixes
+
+* **deps:** Update the Java code generator (gapic-generator-java) to 2.37.0 ([#1553](https://github.com/googleapis/java-logging/issues/1553)) ([15b05fc](https://github.com/googleapis/java-logging/commit/15b05fc4a8e6c4069414110b749525082821e509))
+
+
+### Dependencies
+
+* Update dependency com.google.cloud:sdk-platform-java-config to v3.27.0 ([#1552](https://github.com/googleapis/java-logging/issues/1552)) ([6c5464d](https://github.com/googleapis/java-logging/commit/6c5464d1c5a74962fcd459a1e03282747e148a44))
+
+## [3.16.0](https://github.com/googleapis/java-logging/compare/v3.15.17...v3.16.0) (2024-02-20)
+
+
+### Features
+
+* Add an API method for reordering firewall policies ([#1538](https://github.com/googleapis/java-logging/issues/1538)) ([9cd6b96](https://github.com/googleapis/java-logging/commit/9cd6b96d9946828c02ccff2ff846a06cc6fff329))
+
+
+### Dependencies
+
+* Update dependency com.google.cloud:sdk-platform-java-config to v3.25.0 ([#1535](https://github.com/googleapis/java-logging/issues/1535)) ([7fde779](https://github.com/googleapis/java-logging/commit/7fde7795f03ac96353912829b42adc0035a41d26))
+* Update dependency org.graalvm.buildtools:junit-platform-native to v0.10.0 ([#1528](https://github.com/googleapis/java-logging/issues/1528)) ([b3e4f9b](https://github.com/googleapis/java-logging/commit/b3e4f9b77bffc49a4f9569d4b7a9318a0d5ea5c0))
+* Update dependency org.graalvm.buildtools:native-maven-plugin to v0.10.0 ([#1456](https://github.com/googleapis/java-logging/issues/1456)) ([f27713e](https://github.com/googleapis/java-logging/commit/f27713ed55159754715cca5ff205364e315a7c05))
+* Update dependency org.graalvm.buildtools:native-maven-plugin to v0.10.1 ([#1542](https://github.com/googleapis/java-logging/issues/1542)) ([af784bc](https://github.com/googleapis/java-logging/commit/af784bce7c5272a346ce5016464c87af7d69b442))
+* Update dependency org.junit.vintage:junit-vintage-engine to v5.10.2 ([#1530](https://github.com/googleapis/java-logging/issues/1530)) ([20981dc](https://github.com/googleapis/java-logging/commit/20981dc90ca1b73b74d9f5a0c7f0dfa4d9960ab9))
+
+## [3.15.17](https://github.com/googleapis/java-logging/compare/v3.15.16...v3.15.17) (2024-02-07)
+
+
+### Dependencies
+
+* Update dependency com.google.cloud:sdk-platform-java-config to v3.24.0 ([#1526](https://github.com/googleapis/java-logging/issues/1526)) ([235f1aa](https://github.com/googleapis/java-logging/commit/235f1aa380d4f34f65d4cc957b3d26fa6a35e226))
+
+
+### Documentation
+
+* Fix typo in code comments ([#1520](https://github.com/googleapis/java-logging/issues/1520)) ([0440fc6](https://github.com/googleapis/java-logging/commit/0440fc6dfa3c5cd19f0d7d941af242872da1bbd3))
+
 ## [3.15.16](https://github.com/googleapis/java-logging/compare/v3.15.15...v3.15.16) (2024-01-25)
 
 

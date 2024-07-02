@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Google LLC
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ import static com.google.cloud.logging.v2.ConfigClient.ListViewsPagedResponse;
 
 import com.google.api.core.ApiFunction;
 import com.google.api.core.ApiFuture;
-import com.google.api.core.BetaApi;
 import com.google.api.gax.core.GaxProperties;
 import com.google.api.gax.core.GoogleCredentialsProvider;
 import com.google.api.gax.core.InstantiatingExecutorProvider;
@@ -679,15 +678,6 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
             "Transport not supported: %s", getTransportChannelProvider().getTransportName()));
   }
 
-  /** Returns the endpoint set by the user or the the service's default endpoint. */
-  @Override
-  public String getEndpoint() {
-    if (super.getEndpoint() != null) {
-      return super.getEndpoint();
-    }
-    return getDefaultEndpoint();
-  }
-
   /** Returns the default service name. */
   @Override
   public String getServiceName() {
@@ -731,7 +721,6 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
     return defaultGrpcTransportProviderBuilder().build();
   }
 
-  @BetaApi("The surface for customizing headers is not stable yet and may change in the future.")
   public static ApiClientHeaderProvider.Builder defaultApiClientHeaderProviderBuilder() {
     return ApiClientHeaderProvider.newBuilder()
         .setGeneratedLibToken(
@@ -1395,8 +1384,6 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
     }
 
     /** Returns the builder for the settings used for calls to createBucketAsync. */
-    @BetaApi(
-        "The surface for use by generated code is not stable yet and may change in the future.")
     public OperationCallSettings.Builder<CreateBucketRequest, LogBucket, BucketMetadata>
         createBucketAsyncOperationSettings() {
       return createBucketAsyncOperationSettings;
@@ -1408,8 +1395,6 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
     }
 
     /** Returns the builder for the settings used for calls to updateBucketAsync. */
-    @BetaApi(
-        "The surface for use by generated code is not stable yet and may change in the future.")
     public OperationCallSettings.Builder<UpdateBucketRequest, LogBucket, BucketMetadata>
         updateBucketAsyncOperationSettings() {
       return updateBucketAsyncOperationSettings;
@@ -1493,8 +1478,6 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
     }
 
     /** Returns the builder for the settings used for calls to createLink. */
-    @BetaApi(
-        "The surface for use by generated code is not stable yet and may change in the future.")
     public OperationCallSettings.Builder<CreateLinkRequest, Link, LinkMetadata>
         createLinkOperationSettings() {
       return createLinkOperationSettings;
@@ -1506,8 +1489,6 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
     }
 
     /** Returns the builder for the settings used for calls to deleteLink. */
-    @BetaApi(
-        "The surface for use by generated code is not stable yet and may change in the future.")
     public OperationCallSettings.Builder<DeleteLinkRequest, Empty, LinkMetadata>
         deleteLinkOperationSettings() {
       return deleteLinkOperationSettings;
@@ -1581,21 +1562,10 @@ public class ConfigServiceV2StubSettings extends StubSettings<ConfigServiceV2Stu
     }
 
     /** Returns the builder for the settings used for calls to copyLogEntries. */
-    @BetaApi(
-        "The surface for use by generated code is not stable yet and may change in the future.")
     public OperationCallSettings.Builder<
             CopyLogEntriesRequest, CopyLogEntriesResponse, CopyLogEntriesMetadata>
         copyLogEntriesOperationSettings() {
       return copyLogEntriesOperationSettings;
-    }
-
-    /** Returns the endpoint set by the user or the the service's default endpoint. */
-    @Override
-    public String getEndpoint() {
-      if (super.getEndpoint() != null) {
-        return super.getEndpoint();
-      }
-      return getDefaultEndpoint();
     }
 
     @Override
