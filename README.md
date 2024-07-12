@@ -282,7 +282,7 @@ Cloud Function or GKE. The logger agent installed on these environments can capt
 The agent can parse structured logs printed to STDOUT and capture additional log metadata beside the log payload.
 The parsed information includes severity, source location, user labels, http request and tracing information.
 
-#### Auto-population of log entrys' metadata
+#### Auto-population of Metadata in a LogEntry
 
 LogEntry object metadata information such as [monitored resource](https://cloud.google.com/logging/docs/reference/v2/rest/v2/MonitoredResource), 
 [Http request](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#HttpRequest) or 
@@ -329,7 +329,7 @@ If you use Maven, to use the servlet initializer add the following dependency to
       <artifactId>google-cloud-logging-servlet-initializer</artifactId>
     </dependency>      
     ```
-#### Population of Log Entrys' Trace/Span ID
+#### Population of Trace/Span ID fields in a LogEntry
 Cloud Logging libraries use [trace fields within LogEntry](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#FIELDS.trace) to capture trace contexts, which enables the [correlation of logs and traces](https://cloud.google.com/logging/docs/view/correlate-logs), and distributed tracing troubleshooting. 
 These tracing fields, including [trace](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#FIELDS.trace), [spanId](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#FIELDS.span_id), and [traceSampled](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#FIELDS.trace_sampled), define the trace context for a `LogEntry`.
 
