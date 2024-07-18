@@ -1,5 +1,7 @@
 custom_content: |
   #### Creating an authorized service object
+
+  (test change)
   
   To make requests to Cloud Logging, you must create a service object with valid credentials.
   You can then make API calls by calling methods on the Logging service object. 
