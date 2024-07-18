@@ -1,4 +1,3 @@
-(this new text line should trigger the generation)
 # Google Cloud Logging Client for Java
 
 Java idiomatic client for [Cloud Logging][product-docs].
