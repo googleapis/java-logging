@@ -52,7 +52,7 @@ If you are using Maven without the BOM, add this to your dependencies:
 If you are using Gradle 5.x or later, add this to your dependencies:
 
 ```Groovy
-implementation platform('com.google.cloud:libraries-bom:26.43.0')
+implementation platform('com.google.cloud:libraries-bom:26.38.0')
 
 implementation 'com.google.cloud:google-cloud-logging'
 ```
@@ -282,7 +282,7 @@ Cloud Function or GKE. The logger agent installed on these environments can capt
 The agent can parse structured logs printed to STDOUT and capture additional log metadata beside the log payload.
 The parsed information includes severity, source location, user labels, http request and tracing information.
 
-#### Auto-population of Metadata in a LogEntry
+#### Auto-population of log entrys' metadata
 
 LogEntry object metadata information such as [monitored resource](https://cloud.google.com/logging/docs/reference/v2/rest/v2/MonitoredResource), 
 [Http request](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#HttpRequest) or 
