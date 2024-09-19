@@ -1,5 +1,36 @@
 # Changelog
 
+## [3.20.2](https://github.com/googleapis/java-logging/compare/v3.20.1...v3.20.2) (2024-09-12)
+
+
+### Dependencies
+
+* Update dependency com.google.cloud:sdk-platform-java-config to v3.35.0 ([#1683](https://github.com/googleapis/java-logging/issues/1683)) ([31ec2b9](https://github.com/googleapis/java-logging/commit/31ec2b972d5e11e12fe0432f42e3e5b8f23312c6))
+
+## [3.20.1](https://github.com/googleapis/java-logging/compare/v3.20.0...v3.20.1) (2024-08-22)
+
+
+### Dependencies
+
+* Update dependency com.google.cloud:sdk-platform-java-config to v3.34.0 ([#1677](https://github.com/googleapis/java-logging/issues/1677)) ([dbd050c](https://github.com/googleapis/java-logging/commit/dbd050c354cee5272c37dd323358b222cea5e87e))
+
+## [3.20.0](https://github.com/googleapis/java-logging/compare/v3.19.0...v3.20.0) (2024-08-02)
+
+
+### Features
+
+* Enable hermetic library generation ([#1620](https://github.com/googleapis/java-logging/issues/1620)) ([034b9c4](https://github.com/googleapis/java-logging/commit/034b9c42ac8ba12f20dbde9e90ae8e59ea4c5748))
+
+
+### Dependencies
+
+* Update dependency com.google.cloud:sdk-platform-java-config to v3.33.0 ([#1664](https://github.com/googleapis/java-logging/issues/1664)) ([cb6de76](https://github.com/googleapis/java-logging/commit/cb6de767ba726a1178b4ebd0b481a4fc2454b910))
+
+
+### Documentation
+
+* Documentation update for OpenTelemetry and tracing ([#1657](https://github.com/googleapis/java-logging/issues/1657)) ([e3c6670](https://github.com/googleapis/java-logging/commit/e3c667094170ac7d404addc797facbe997ca51d3))
+
 ## [3.19.0](https://github.com/googleapis/java-logging/compare/v3.18.0...v3.19.0) (2024-06-26)
 
 
