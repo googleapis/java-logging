@@ -38,7 +38,6 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class ITJulLoggerTest extends BaseSystemTest {
@@ -50,7 +49,6 @@ public class ITJulLoggerTest extends BaseSystemTest {
     assertTrue(cleanupLog(LOG_ID));
   }
 
-  @Ignore
   @Test
   public void testLoggingHandler() throws InterruptedException {
     LoggingOptions options = logging.getOptions();
@@ -87,7 +85,6 @@ public class ITJulLoggerTest extends BaseSystemTest {
     logger.removeHandler(handler);
   }
 
-  @Ignore
   @Test
   public void testSyncLoggingHandler() throws InterruptedException {
     LoggingOptions options = logging.getOptions();
