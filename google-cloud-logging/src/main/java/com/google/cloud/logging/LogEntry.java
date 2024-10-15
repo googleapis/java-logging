@@ -38,6 +38,7 @@ import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A Cloud Logging log entry. All log entries are represented via objects of this class. Log entries
@@ -368,7 +369,7 @@ public class LogEntry implements Serializable {
    * @return timestamp in milliseconds
    */
   @Deprecated
-  public Long getTimestamp() {
+  public @Nullable Long getTimestamp() {
     return timestamp != null ? timestamp.toEpochMilli() : null;
   }
 
@@ -389,7 +390,7 @@ public class LogEntry implements Serializable {
    * @return timestamp in milliseconds
    */
   @Deprecated
-  public Long getReceiveTimestamp() {
+  public @Nullable Long getReceiveTimestamp() {
     return receiveTimestamp != null ? receiveTimestamp.toEpochMilli() : null;
   }
 
@@ -437,13 +438,13 @@ public class LogEntry implements Serializable {
    * Returns the resource name of the trace associated with the log entry, if any. If it contains a
    * relative resource name, the name is assumed to be relative to `//tracing.googleapis.com`.
    */
-  public String getTrace() {
+  public @Nullable String getTrace() {
     // For backwards compatibility return null when trace not set instead of "null".
     return trace == null ? null : trace;
   }
 
   /** Returns the ID of the trace span associated with the log entry, if any. */
-  public String getSpanId() {
+  public @Nullable String getSpanId() {
     // For backwards compatibility return null when spanId not set instead of "null".
     return spanId == null ? null : spanId;
   }
