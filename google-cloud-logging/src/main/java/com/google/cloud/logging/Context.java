@@ -138,7 +138,7 @@ public class Context {
      * x-cloud-trace-context} header (can be in Pascal case format). The string format is <code>
      * TRACE_ID/SPAN_ID;o=TRACE_TRUE</code>.
      *
-     * @see <a href="https://cloud.google.com/trace/docs/setup#force-trace">Cloud Trace header
+     * @see <a href="https://cloud.google.com/trace/docs/trace-context#legacy-http-header">Cloud Trace header
      *     format.</a>
      */
     @CanIgnoreReturnValue
