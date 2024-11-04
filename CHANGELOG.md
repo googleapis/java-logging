@@ -1,5 +1,39 @@
 # Changelog
 
+## [3.20.6](https://github.com/googleapis/java-logging/compare/v3.20.5...v3.20.6) (2024-10-26)
+
+
+### Dependencies
+
+* Update sdk platform java dependencies ([#1717](https://github.com/googleapis/java-logging/issues/1717)) ([ee9ef91](https://github.com/googleapis/java-logging/commit/ee9ef91a9ebaed9faa5870a29be40b0c1531a226))
+
+## [3.20.5](https://github.com/googleapis/java-logging/compare/v3.20.4...v3.20.5) (2024-10-23)
+
+
+### Dependencies
+
+* Update sdk platform java dependencies ([#1707](https://github.com/googleapis/java-logging/issues/1707)) ([2359040](https://github.com/googleapis/java-logging/commit/23590409f5c4aaff5c741e860fc0916f7ec4c963))
+
+## [3.20.4](https://github.com/googleapis/java-logging/compare/v3.20.3...v3.20.4) (2024-10-07)
+
+
+### Bug Fixes
+
+* **deps:** Update the Java code generator (gapic-generator-java) to 2.47.0 ([90b88ee](https://github.com/googleapis/java-logging/commit/90b88ee70ee84bdcb0af4aced50b5ee61e0a706c))
+
+
+### Dependencies
+
+* Update dependency com.google.cloud:sdk-platform-java-config to v3.37.0 ([#1702](https://github.com/googleapis/java-logging/issues/1702)) ([1f7da17](https://github.com/googleapis/java-logging/commit/1f7da17810fa22b8437edc88e4f95b3ed5cb8349))
+
+## [3.20.3](https://github.com/googleapis/java-logging/compare/v3.20.2...v3.20.3) (2024-10-01)
+
+
+### Dependencies
+
+* Update dependency com.google.cloud:sdk-platform-java-config to v3.36.1 ([#1698](https://github.com/googleapis/java-logging/issues/1698)) ([9491512](https://github.com/googleapis/java-logging/commit/94915125fd2425ffba5ef86da0c54af3c1d2c138))
+* Update dependency org.apache.maven.plugins:maven-deploy-plugin to v3.1.3 ([2b6ea70](https://github.com/googleapis/java-logging/commit/2b6ea703aad05e714f5634fbd74e0b9bca0c51f9))
+
 ## [3.20.2](https://github.com/googleapis/java-logging/compare/v3.20.1...v3.20.2) (2024-09-12)
 
 
