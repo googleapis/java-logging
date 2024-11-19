@@ -16,6 +16,8 @@
 
 package com.google.cloud.logging;
 
+import static com.google.api.gax.util.TimeConversionUtils.toJavaTimeDuration;
+
 import com.google.api.core.ApiFunction;
 import com.google.cloud.StringEnumType;
 import com.google.cloud.StringEnumValue;
@@ -23,7 +25,6 @@ import com.google.common.base.MoreObjects;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.io.Serializable;
 import java.util.Objects;
-import org.threeten.bp.Duration;
 
 /**
  * Objects of this class represent information about the (optional) HTTP request associated with a
@@ -51,7 +52,7 @@ public final class HttpRequest implements Serializable {
   private final boolean cacheHit;
   private final boolean cacheValidatedWithOriginServer;
   private final Long cacheFillBytes;
-  private final Duration latency;
+  private final java.time.Duration latency;
 
   /** The HTTP request method. */
   public static final class RequestMethod extends StringEnumValue {
@@ -112,7 +113,7 @@ public final class HttpRequest implements Serializable {
     private boolean cacheHit;
     private boolean cacheValidatedWithOriginServer;
     private Long cacheFillBytes;
-    private Duration latency;
+    private java.time.Duration latency;
 
     Builder() {}
 
@@ -259,11 +260,18 @@ public final class HttpRequest implements Serializable {
     }
 
     /**
+     * This method
+     */
+    public Builder setLatency(org.threeten.bp.Duration latency) {
+      return setLatencyDuration(toJavaTimeDuration(latency));
+    }
+
+    /**
      * Sets the latency on the server, from the time the request was received until the response was
      * sent.
      */
     @CanIgnoreReturnValue
-    public Builder setLatency(Duration latency) {
+    public Builder setLatencyDuration(java.time.Duration latency) {
       this.latency = latency;
       return this;
     }
