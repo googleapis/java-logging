@@ -197,6 +197,38 @@
             <ignoredUnusedDeclaredDependencies>org.objenesis:objenesis</ignoredUnusedDeclaredDependencies>
           </configuration>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <executions>
+            <execution>
+              <id>default-jar</id>
+              <phase>package</phase>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+              <configuration>
+                <archive>
+                  <manifestEntries>
+                    <!-- This manifest entry is ignored by java 8.
+                    It allows inter-module access when Gson serializes
+                    the private variables of java.time.Duration -->
+                    <Add-Opens>java.base/java.time=ALL-UNNAMED</Add-Opens>
+                  </manifestEntries>
+                </archive>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <configuration>
+            <!-- This arg line allows inter-module access when Gson serializes
+            the private variables of java.time.Duration -->
+            <argLine>--add-opens java.base/java.time=ALL-UNNAMED</argLine>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>
