@@ -32,7 +32,6 @@ import com.google.logging.v2.LogName;
 import java.util.Iterator;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class ITLoggingTest extends BaseSystemTest {
@@ -83,7 +82,6 @@ public class ITLoggingTest extends BaseSystemTest {
     assertTrue(cleanupLog(LOG_ID));
   }
 
-  @Ignore
   @Test(timeout = 600_000) // Note: it can take ~10 minutes for logs to propagate!
   public void testListEntries() throws InterruptedException {
     LoggingOptions loggingOptions = logging.getOptions();
@@ -117,7 +115,6 @@ public class ITLoggingTest extends BaseSystemTest {
     assertNotNull(entry.getTimestamp());
   }
 
-  @Ignore
   @Test(timeout = 600_000) // Note: it can take ~10 minutes for logs to propagate!
   public void testSortedOrder() throws InterruptedException {
     LoggingOptions loggingOptions = logging.getOptions();
@@ -141,7 +138,6 @@ public class ITLoggingTest extends BaseSystemTest {
     }
   }
 
-  @Ignore
   @Test
   public void testDeleteNonExistingLog() {
     String logId = formatForTest("test-delete-non-existing-log");
