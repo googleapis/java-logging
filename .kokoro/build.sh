@@ -42,6 +42,7 @@ if [[ ! -z "${GOOGLE_APPLICATION_CREDENTIALS}" && "${GOOGLE_APPLICATION_CREDENTI
     export GOOGLE_APPLICATION_CREDENTIALS=$(realpath ${KOKORO_GFILE_DIR}/${GOOGLE_APPLICATION_CREDENTIALS})
 fi
 
+
 RETURN_CODE=0
 set +e
 
@@ -71,11 +72,6 @@ integration)
     RETURN_CODE=$?
     ;;
 graalvm)
-    # Run Unit and Integration Tests with Native Image
-    mvn -B ${INTEGRATION_TEST_ARGS} -ntp -Pnative test
-    RETURN_CODE=$?
-    ;;
-graalvm17)
     # Run Unit and Integration Tests with Native Image
     mvn -B ${INTEGRATION_TEST_ARGS} -ntp -Pnative test
     RETURN_CODE=$?
