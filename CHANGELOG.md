@@ -1,5 +1,37 @@
 # Changelog
 
+## [3.22.2](https://github.com/googleapis/java-logging/compare/v3.22.1...v3.22.2) (2025-04-25)
+
+
+### Dependencies
+
+* Update dependency com.google.cloud:sdk-platform-java-config to v3.46.2 ([#1796](https://github.com/googleapis/java-logging/issues/1796)) ([1f88271](https://github.com/googleapis/java-logging/commit/1f882712aeb7e48a2339ffbad783813e11e74401))
+
+## [3.22.1](https://github.com/googleapis/java-logging/compare/v3.22.0...v3.22.1) (2025-04-25)
+
+
+### Bug Fixes
+
+* **deps:** Update the Java code generator (gapic-generator-java) to 2.56.2 ([7cce5b5](https://github.com/googleapis/java-logging/commit/7cce5b509c904209f0a92e239e836afac4169ec4))
+
+## [3.22.0](https://github.com/googleapis/java-logging/compare/v3.21.4...v3.22.0) (2025-03-18)
+
+
+### Features
+
+* Next release from main branch is 3.22.0 ([#1776](https://github.com/googleapis/java-logging/issues/1776)) ([7736073](https://github.com/googleapis/java-logging/commit/773607312a1dc6f5f569f2518587ffba4743bb43))
+
+
+### Bug Fixes
+
+* **deps:** Update the Java code generator (gapic-generator-java) to 2.55.1 ([dd25992](https://github.com/googleapis/java-logging/commit/dd259929b01a2dd50ca2d09005fedf1631b97877))
+
+
+### Dependencies
+
+* Update dependency com.google.cloud:sdk-platform-java-config to v3.45.1 ([#1779](https://github.com/googleapis/java-logging/issues/1779)) ([a643ab0](https://github.com/googleapis/java-logging/commit/a643ab03600fa25cee41df23b2daf65c0fc4e70a))
+* Update googleapis/sdk-platform-java action to v2.55.1 ([#1780](https://github.com/googleapis/java-logging/issues/1780)) ([505557e](https://github.com/googleapis/java-logging/commit/505557e1b9b14c910aec402335bf9fc9ca96975c))
+
 ## [3.21.4](https://github.com/googleapis/java-logging/compare/v3.21.3...v3.21.4) (2025-02-26)
 
 
