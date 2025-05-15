@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.22.4](https://github.com/googleapis/java-logging/compare/v3.22.3...v3.22.4) (2025-05-15)
+
+
+### Dependencies
+
+* Update googleapis/sdk-platform-java action to v2.58.0 ([#1806](https://github.com/googleapis/java-logging/issues/1806)) ([b94da77](https://github.com/googleapis/java-logging/commit/b94da779d8263ce6c1845bb8baa6a9e9aedc2ccf))
+
 ## [3.22.3](https://github.com/googleapis/java-logging/compare/v3.22.2...v3.22.3) (2025-05-06)
 
 
