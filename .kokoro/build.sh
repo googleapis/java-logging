@@ -70,6 +70,7 @@ integration)
       -Dcheckstyle.skip=true \
       -DskipUnitTests=true \
       -Dfmt.skip=true \
+      -Dprotobuf.version=4.31.0-RC1 \
       -fae \
       verify
     RETURN_CODE=$?
