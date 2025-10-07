@@ -14,7 +14,7 @@
   <parent>
     <groupId>com.google.cloud</groupId>
     <artifactId>sdk-platform-java-config</artifactId>
-    <version>3.52.2</version>
+    <version>3.52.3</version>
   </parent>
 
   <developers>
@@ -110,7 +110,7 @@
       <dependency>
         <groupId>org.easymock</groupId>
         <artifactId>easymock</artifactId>
-        <version>5.5.0</version>
+        <version>5.6.0</version>
         <exclusions>
           <exclusion>
             <groupId>org.objenesis</groupId>
