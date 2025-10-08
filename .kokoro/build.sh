@@ -65,7 +65,6 @@ integration)
       -ntp \
       -Penable-integration-tests \
       -DtrimStackTrace=false \
-      -Dfailsafe.excludes=**/ITTailLogsTest#testTailLogEntries \
       -Dclirr.skip=true \
       -Denforcer.skip=true \
       -Dcheckstyle.skip=true \
@@ -77,7 +76,7 @@ integration)
     ;;
 graalvm)
     # Run Unit and Integration Tests with Native Image
-    mvn -B ${INTEGRATION_TEST_ARGS} -ntp -Pnative test -Dfailsafe.excludes=**/ITTailLogsTest#testTailLogEntries -Dfmt.skip=true
+    mvn -B ${INTEGRATION_TEST_ARGS} -ntp -Pnative test -Dfmt.skip=true
     RETURN_CODE=$?
     ;;
 samples)
