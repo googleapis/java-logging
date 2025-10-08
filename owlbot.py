@@ -96,7 +96,8 @@ java.common_templates(
         ".kokoro/requirements.in",
         ".kokoro/requirements.txt",
         ".kokoro/presubmit/graalvm-native.cfg",
-        ".kokoro/presubmit/graalvm-native-17.cfg"
+        ".kokoro/presubmit/graalvm-native-17.cfg",
+        ".kokoro/build.sh"
     ]
 )
 
