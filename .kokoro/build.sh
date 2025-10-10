@@ -65,7 +65,6 @@ integration)
       -ntp \
       -Penable-integration-tests \
       -DtrimStackTrace=false \
-      -Dit.test='!com.google.cloud.logging.it.ITTailLogsTest#testTailLogEntries' \
       -Dclirr.skip=true \
       -Denforcer.skip=true \
       -Dcheckstyle.skip=true \
@@ -78,7 +77,7 @@ integration)
     ;;
 graalvm)
     # Run Unit and Integration Tests with Native Image
-    mvn -B ${INTEGRATION_TEST_ARGS} -ntp -Pnative test -Dit.test='!com.google.cloud.logging.it.ITTailLogsTest#testTailLogEntries' -Dfmt.skip=true -Dfailsafe.failIfNoSpecifiedTests=false
+    mvn -B ${INTEGRATION_TEST_ARGS} -ntp -Pnative test -Dfmt.skip=true -Dfailsafe.failIfNoSpecifiedTests=false
     RETURN_CODE=$?
     ;;
 samples)
