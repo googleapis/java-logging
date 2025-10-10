@@ -70,14 +70,13 @@ integration)
       -Dcheckstyle.skip=true \
       -DskipUnitTests=true \
       -Dfmt.skip=true \
-      -Dfailsafe.failIfNoSpecifiedTests=false \
       -fae \
       verify
     RETURN_CODE=$?
     ;;
 graalvm)
     # Run Unit and Integration Tests with Native Image
-    mvn -B ${INTEGRATION_TEST_ARGS} -ntp -Pnative test -Dfmt.skip=true -Dfailsafe.failIfNoSpecifiedTests=false
+    mvn -B ${INTEGRATION_TEST_ARGS} -ntp -Pnative test -Dfmt.skip=true
     RETURN_CODE=$?
     ;;
 samples)
