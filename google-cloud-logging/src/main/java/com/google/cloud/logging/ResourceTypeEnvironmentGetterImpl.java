@@ -17,11 +17,12 @@
 package com.google.cloud.logging;
 
 import com.google.cloud.MetadataConfig;
+import org.jspecify.annotations.Nullable;
 
 final class ResourceTypeEnvironmentGetterImpl implements ResourceTypeEnvironmentGetter {
 
   @Override
-  public String getEnv(String name) {
+  public @Nullable String getEnv(String name) {
     // handle exception thrown if a security manager exists and blocks access to the
     // process environment
     try {
