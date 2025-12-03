@@ -40,7 +40,7 @@ branches:
     branch: 3.22.x
   - bumpMinorPreMajor: true
     handleGHRelease: true
-    releaseType: java-backport
+    releaseType: java-yoshi
     extraFiles:
       - >-
         google-cloud-logging/src/main/java/com/google/cloud/logging/Instrumentation.java
