@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.23.9-rc1](https://github.com/googleapis/java-logging/compare/v3.23.8...v3.23.9-rc1) (2025-12-04)
+
+
+### Bug Fixes
+
+* next release candidate ([31ee5a3](https://github.com/googleapis/java-logging/commit/31ee5a3b89701fbd9468a6ed903a9fc1951d65d5))
+
 ## [3.23.8](https://github.com/googleapis/java-logging/compare/v3.23.7...v3.23.8) (2025-11-13)
 
 
