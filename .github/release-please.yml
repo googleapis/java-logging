@@ -3,16 +3,16 @@ handleGHRelease: true
 releaseType: java-yoshi
 branches:
     - branch: java7
-    - releaseType: java-backport
-      branch: 3.7.x
-    - releaseType: java-backport
-      branch: 3.13.x
-    - releaseType: java-backport
-      branch: 3.17.x
-    - releaseType: java-backport
-      branch: 3.21.x
-    - releaseType: java-backport
-      branch: 3.22.x
+    - branch: 3.7.x
+      releaseType: java-backport
+    - branch: 3.13.x
+      releaseType: java-backport
+    - branch: 3.17.x
+      releaseType: java-backport
+    - branch: 3.21.x
+      releaseType: java-backport
+    - branch: 3.22.x
+      releaseType: java-backport
     - branch: protobuf-4.x-rc
       manifest: true
 extraFiles:
