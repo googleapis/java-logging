@@ -1,0 +1,715 @@
+command stderr:
++ source /usr/local/lib/python3.13/site-packages/library_generation/utils/utilities.sh
+++ set -eo pipefail
+++++ realpath /usr/local/lib/python3.13/site-packages/library_generation/utils/utilities.sh
++++ dirname /usr/local/lib/python3.13/site-packages/library_generation/utils/utilities.sh
+++ utilities_script_dir=/usr/local/lib/python3.13/site-packages/library_generation/utils
++ get_output_folder
++++ pwd
+++ basename /workspace/java-logging
++ [[ java-logging != \o\u\t\p\u\t ]]
+++ pwd
++ echo /workspace/java-logging/output
+command stdout:
+/workspace/java-logging/output
+output_folder: /workspace/java-logging/output
+generating library logging
+command stderr:
++ source /usr/local/lib/python3.13/site-packages/library_generation/utils/utilities.sh
+++ set -eo pipefail
+++++ realpath /usr/local/lib/python3.13/site-packages/library_generation/utils/utilities.sh
++++ dirname /usr/local/lib/python3.13/site-packages/library_generation/utils/utilities.sh
+++ utilities_script_dir=/usr/local/lib/python3.13/site-packages/library_generation/utils
++ mktemp -d
+command stdout:
+/tmp/tmp.en4QLxb3wV
+build_file_folder: /workspace/java-logging/output/google/logging/v2
+arguments: 
+['--proto_path', 'google/logging/v2', '--proto_only', 'false', '--gapic_additional_protos', '  google/cloud/common_resources.proto', '--transport', 'grpc', '--rest_numeric_enums', 'true', '--gapic_yaml', 'google/logging/v2/logging_gapic.yaml', '--service_config', 'google/logging/v2/logging_grpc_service_config.json', '--service_yaml', 'google/logging/v2/logging_v2.yaml', '--include_samples', 'true', '--destination_path', 'java-google-logging-v2']
+Generating library from google/logging/v2 to /workspace/java-logging
+/workspace/java-logging/output /workspace/java-logging
+/workspace/java-logging
+/workspace/java-logging/output/temp_preprocessed-24496 /workspace/java-logging
+/workspace/java-logging
+Library generation finished successfully
+command stderr:
++ source /usr/local/lib/python3.13/site-packages/library_generation/utils/utilities.sh
+++ set -eo pipefail
+++++ realpath /usr/local/lib/python3.13/site-packages/library_generation/utils/utilities.sh
++++ dirname /usr/local/lib/python3.13/site-packages/library_generation/utils/utilities.sh
+++ utilities_script_dir=/usr/local/lib/python3.13/site-packages/library_generation/utils
++ build_owlbot_cli_source_folder /workspace/java-logging /tmp/tmp.en4QLxb3wV /workspace/java-logging/output/java-google-logging-v2 google/logging/v2
++ local postprocessing_target=/workspace/java-logging
++ local target_folder=/tmp/tmp.en4QLxb3wV
++ local preprocessed_sources_path=/workspace/java-logging/output/java-google-logging-v2
++ local proto_path=google/logging/v2
++ [[ -z google/logging/v2 ]]
++ owlbot_staging_folder=/workspace/java-logging/owl-bot-staging
++ mkdir -p /workspace/java-logging/owl-bot-staging
++ mkdir -p /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java
++ copy_directory_if_exists /workspace/java-logging/output/java-google-logging-v2 proto /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library
++ local base_folder=/workspace/java-logging/output/java-google-logging-v2
++ local folder_prefix=proto
++ local destination_folder=/tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library
++ '[' '!' -d /workspace/java-logging/output/java-google-logging-v2 ']'
++ pushd /workspace/java-logging/output/java-google-logging-v2
+++ find . -maxdepth 1 -type d -name 'proto*'
+++ wc -l
++ [[ 1 -gt 0 ]]
++ cp -r /workspace/java-logging/output/java-google-logging-v2/proto-java-google-logging-v2 /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library
++ popd
++ copy_directory_if_exists /workspace/java-logging/output/java-google-logging-v2 grpc /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/grpc-google-cloud-library
++ local base_folder=/workspace/java-logging/output/java-google-logging-v2
++ local folder_prefix=grpc
++ local destination_folder=/tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/grpc-google-cloud-library
++ '[' '!' -d /workspace/java-logging/output/java-google-logging-v2 ']'
++ pushd /workspace/java-logging/output/java-google-logging-v2
+++ find . -maxdepth 1 -type d -name 'grpc*'
+++ wc -l
++ [[ 1 -gt 0 ]]
++ cp -r /workspace/java-logging/output/java-google-logging-v2/grpc-java-google-logging-v2 /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/grpc-google-cloud-library
++ popd
++ copy_directory_if_exists /workspace/java-logging/output/java-google-logging-v2 gapic /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library
++ local base_folder=/workspace/java-logging/output/java-google-logging-v2
++ local folder_prefix=gapic
++ local destination_folder=/tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library
++ '[' '!' -d /workspace/java-logging/output/java-google-logging-v2 ']'
++ pushd /workspace/java-logging/output/java-google-logging-v2
+++ find . -maxdepth 1 -type d -name 'gapic*'
+++ wc -l
++ [[ 1 -gt 0 ]]
++ cp -r /workspace/java-logging/output/java-google-logging-v2/gapic-java-google-logging-v2 /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library
++ popd
++ copy_directory_if_exists /workspace/java-logging/output/java-google-logging-v2 samples /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/samples
++ local base_folder=/workspace/java-logging/output/java-google-logging-v2
++ local folder_prefix=samples
++ local destination_folder=/tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/samples
++ '[' '!' -d /workspace/java-logging/output/java-google-logging-v2 ']'
++ pushd /workspace/java-logging/output/java-google-logging-v2
+++ find . -maxdepth 1 -type d -name 'samples*'
+++ wc -l
++ [[ 1 -gt 0 ]]
++ cp -r /workspace/java-logging/output/java-google-logging-v2/samples /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/samples
++ popd
++ pushd /tmp/tmp.en4QLxb3wV
++ git init
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint: 
+hint: 	git config --global init.defaultBranch <name>
+hint: 
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint: 
+hint: 	git branch -m <name>
++ git commit --allow-empty -m 'empty commit'
++ popd
+command stdout:
+/workspace/java-logging/output/java-google-logging-v2 /workspace/java-logging/output
+/workspace/java-logging/output
+/workspace/java-logging/output/java-google-logging-v2 /workspace/java-logging/output
+/workspace/java-logging/output
+/workspace/java-logging/output/java-google-logging-v2 /workspace/java-logging/output
+/workspace/java-logging/output
+/workspace/java-logging/output/java-google-logging-v2 /workspace/java-logging/output
+/workspace/java-logging/output
+/tmp/tmp.en4QLxb3wV /workspace/java-logging/output
+Initialized empty Git repository in /tmp/tmp.en4QLxb3wV/.git/
+[master (root-commit) 23a0faf] empty commit
+/workspace/java-logging/output
++++ readlink -f /usr/local/lib/python3.13/site-packages/library_generation/postprocess_library.sh
+++ dirname /usr/local/lib/python3.13/site-packages/library_generation/postprocess_library.sh
++ scripts_root=/usr/local/lib/python3.13/site-packages/library_generation
++ postprocessing_target=/workspace/java-logging
++ preprocessed_sources_path=
++ versions_file=/workspace/java-logging/versions.txt
++ owlbot_cli_source_folder=/tmp/tmp.en4QLxb3wV
++ is_monorepo=false
++ libraries_bom_version=26.71.0
++ library_version=3.23.8
++ owlbot_yaml_file_name=.OwlBot-hermetic.yaml
++ source /usr/local/lib/python3.13/site-packages/library_generation/utils/utilities.sh
+++ set -eo pipefail
+++++ realpath /usr/local/lib/python3.13/site-packages/library_generation/utils/utilities.sh
++++ dirname /usr/local/lib/python3.13/site-packages/library_generation/utils/utilities.sh
+++ utilities_script_dir=/usr/local/lib/python3.13/site-packages/library_generation/utils
++ required_inputs=('postprocessing_target' 'versions_file' 'is_monorepo')
++ declare -a required_inputs
++ for required_input in "${required_inputs[@]}"
++ [[ -z /workspace/java-logging ]]
++ for required_input in "${required_inputs[@]}"
++ [[ -z /workspace/java-logging/versions.txt ]]
++ for required_input in "${required_inputs[@]}"
++ [[ -z false ]]
++ for owlbot_file in ".repo-metadata.json" "owlbot.py" "${owlbot_yaml_file_name}"
+++ find /workspace/java-logging -name .repo-metadata.json
+++ wc -l
++ [[ 1 -eq 0 ]]
++ for owlbot_file in ".repo-metadata.json" "owlbot.py" "${owlbot_yaml_file_name}"
+++ find /workspace/java-logging -name owlbot.py
+++ wc -l
++ [[ 1 -eq 0 ]]
++ for owlbot_file in ".repo-metadata.json" "owlbot.py" "${owlbot_yaml_file_name}"
+++ find /workspace/java-logging -name .OwlBot-hermetic.yaml
+++ wc -l
++ [[ 1 -eq 0 ]]
++ [[ -z /tmp/tmp.en4QLxb3wV ]]
++ [[ false == \t\r\u\e ]]
++ owlbot_yaml_relative_path=.github/.OwlBot-hermetic.yaml
++ repo_workspace=/workspace
++ preprocessed_libraries_binding=/tmp/tmp.en4QLxb3wV
++ pushd /workspace/java-logging
+/workspace/java-logging /workspace/java-logging
++ owl-bot copy-code --source-repo-commit-hash=none --source-repo=/tmp/tmp.en4QLxb3wV --config-file=.github/.OwlBot-hermetic.yaml
+Using local source repo directory /tmp/tmp.en4QLxb3wV
+git config --global --add safe.directory /tmp/tmp.en4QLxb3wV
+rm  /workspace/java-logging/grpc-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ConfigServiceV2Grpc.java
+rm  /workspace/java-logging/grpc-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LoggingServiceV2Grpc.java
+rm  /workspace/java-logging/grpc-google-cloud-logging-v2/src/main/java/com/google/logging/v2/MetricsServiceV2Grpc.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/BigQueryDataset.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/BigQueryDatasetOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/BigQueryOptions.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/BigQueryOptionsOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/BillingAccountLocationName.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/BillingAccountName.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/BucketMetadata.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/BucketMetadataOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CmekSettings.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CmekSettingsName.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CmekSettingsOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CopyLogEntriesMetadata.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CopyLogEntriesMetadataOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CopyLogEntriesRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CopyLogEntriesRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CopyLogEntriesResponse.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CopyLogEntriesResponseOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateBucketRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateBucketRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateExclusionRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateExclusionRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateLinkRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateLinkRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateLogMetricRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateLogMetricRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateSinkRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateSinkRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateViewRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateViewRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteBucketRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteBucketRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteExclusionRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteExclusionRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteLinkRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteLinkRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteLogMetricRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteLogMetricRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteLogRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteLogRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteSinkRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteSinkRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteViewRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteViewRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/FolderLocationName.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/FolderName.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetBucketRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetBucketRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetCmekSettingsRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetCmekSettingsRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetExclusionRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetExclusionRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetLinkRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetLinkRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetLogMetricRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetLogMetricRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetSettingsRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetSettingsRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetSinkRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetSinkRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetViewRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetViewRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/IndexConfig.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/IndexConfigOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/IndexType.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LifecycleState.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/Link.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LinkMetadata.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LinkMetadataOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LinkName.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LinkOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListBucketsRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListBucketsRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListBucketsResponse.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListBucketsResponseOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListExclusionsRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListExclusionsRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListExclusionsResponse.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListExclusionsResponseOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLinksRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLinksRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLinksResponse.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLinksResponseOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogEntriesRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogEntriesRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogEntriesResponse.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogEntriesResponseOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogMetricsRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogMetricsRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogMetricsResponse.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogMetricsResponseOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogsRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogsRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogsResponse.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogsResponseOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListMonitoredResourceDescriptorsRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListMonitoredResourceDescriptorsRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListMonitoredResourceDescriptorsResponse.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListMonitoredResourceDescriptorsResponseOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListSinksRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListSinksRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListSinksResponse.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListSinksResponseOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListViewsRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListViewsRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListViewsResponse.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListViewsResponseOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LocationMetadata.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LocationMetadataOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LocationName.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogBucket.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogBucketName.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogBucketOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogEntry.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogEntryOperation.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogEntryOperationOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogEntryOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogEntryProto.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogEntrySourceLocation.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogEntrySourceLocationOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogExclusion.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogExclusionName.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogExclusionOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LoggingConfigProto.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LoggingMetricsProto.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LoggingProto.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogMetric.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogMetricName.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogMetricOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogName.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogSink.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogSinkName.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogSinkOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogSplit.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogSplitOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogView.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogViewName.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogViewOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/OperationState.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/OrganizationLocationName.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/OrganizationName.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ProjectName.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/Settings.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/SettingsName.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/SettingsOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/TailLogEntriesRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/TailLogEntriesRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/TailLogEntriesResponse.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/TailLogEntriesResponseOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UndeleteBucketRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UndeleteBucketRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateBucketRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateBucketRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateCmekSettingsRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateCmekSettingsRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateExclusionRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateExclusionRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateLogMetricRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateLogMetricRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateSettingsRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateSettingsRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateSinkRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateSinkRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateViewRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateViewRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/WriteLogEntriesPartialErrors.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/WriteLogEntriesPartialErrorsOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/WriteLogEntriesRequest.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/WriteLogEntriesRequestOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/WriteLogEntriesResponse.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/WriteLogEntriesResponseOrBuilder.java
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/proto/google/logging/v2/log_entry.proto
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/proto/google/logging/v2/logging_config.proto
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/proto/google/logging/v2/logging_metrics.proto
+rm  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/proto/google/logging/v2/logging.proto
+rmdir  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2
+rmdir  /workspace/java-logging/grpc-google-cloud-logging-v2/src/main/java/com/google/logging/v2
+rmdir  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google/logging
+rmdir  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/proto/google/logging/v2
+rmdir  /workspace/java-logging/grpc-google-cloud-logging-v2/src/main/java/com/google/logging
+rmdir  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/proto/google/logging
+rmdir  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com/google
+rmdir  /workspace/java-logging/grpc-google-cloud-logging-v2/src/main/java/com/google
+rmdir  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/proto/google
+rmdir  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java/com
+rmdir  /workspace/java-logging/grpc-google-cloud-logging-v2/src/main/java/com
+rmdir  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/proto
+rmdir  /workspace/java-logging/proto-google-cloud-logging-v2/src/main/java
+rmdir  /workspace/java-logging/grpc-google-cloud-logging-v2/src/main/java
+rmdir  /workspace/java-logging/proto-google-cloud-logging-v2/src/main
+rmdir  /workspace/java-logging/grpc-google-cloud-logging-v2/src/main
+rmdir  /workspace/java-logging/proto-google-cloud-logging-v2/src
+rmdir  /workspace/java-logging/grpc-google-cloud-logging-v2/src
+mkdir /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src
+mkdir /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main
+mkdir /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java
+mkdir /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com
+mkdir /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google
+mkdir /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging
+mkdir /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/BigQueryDataset.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/BigQueryDataset.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/BigQueryDatasetOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/BigQueryDatasetOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/BigQueryOptions.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/BigQueryOptions.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/BigQueryOptionsOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/BigQueryOptionsOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/BillingAccountLocationName.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/BillingAccountLocationName.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/BillingAccountName.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/BillingAccountName.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/BucketMetadata.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/BucketMetadata.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/BucketMetadataOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/BucketMetadataOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/CmekSettings.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CmekSettings.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/CmekSettingsName.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CmekSettingsName.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/CmekSettingsOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CmekSettingsOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/CopyLogEntriesMetadata.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CopyLogEntriesMetadata.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/CopyLogEntriesMetadataOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CopyLogEntriesMetadataOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/CopyLogEntriesRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CopyLogEntriesRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/CopyLogEntriesRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CopyLogEntriesRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/CopyLogEntriesResponse.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CopyLogEntriesResponse.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/CopyLogEntriesResponseOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CopyLogEntriesResponseOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/CreateBucketRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateBucketRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/CreateBucketRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateBucketRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/CreateExclusionRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateExclusionRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/CreateExclusionRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateExclusionRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/CreateLinkRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateLinkRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/CreateLinkRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateLinkRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/CreateLogMetricRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateLogMetricRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/CreateLogMetricRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateLogMetricRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/CreateSinkRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateSinkRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/CreateSinkRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateSinkRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/CreateViewRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateViewRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/CreateViewRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/CreateViewRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/DeleteBucketRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteBucketRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/DeleteBucketRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteBucketRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/DeleteExclusionRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteExclusionRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/DeleteExclusionRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteExclusionRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/DeleteLinkRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteLinkRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/DeleteLinkRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteLinkRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/DeleteLogMetricRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteLogMetricRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/DeleteLogMetricRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteLogMetricRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/DeleteLogRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteLogRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/DeleteLogRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteLogRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/DeleteSinkRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteSinkRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/DeleteSinkRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteSinkRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/DeleteViewRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteViewRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/DeleteViewRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/DeleteViewRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/FolderLocationName.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/FolderLocationName.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/FolderName.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/FolderName.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/GetBucketRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetBucketRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/GetBucketRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetBucketRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/GetCmekSettingsRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetCmekSettingsRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/GetCmekSettingsRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetCmekSettingsRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/GetExclusionRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetExclusionRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/GetExclusionRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetExclusionRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/GetLinkRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetLinkRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/GetLinkRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetLinkRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/GetLogMetricRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetLogMetricRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/GetLogMetricRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetLogMetricRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/GetSettingsRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetSettingsRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/GetSettingsRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetSettingsRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/GetSinkRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetSinkRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/GetSinkRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetSinkRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/GetViewRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetViewRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/GetViewRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/GetViewRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/IndexConfig.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/IndexConfig.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/IndexConfigOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/IndexConfigOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/IndexType.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/IndexType.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LifecycleState.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LifecycleState.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/Link.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/Link.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LinkMetadata.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LinkMetadata.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LinkMetadataOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LinkMetadataOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LinkName.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LinkName.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LinkOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LinkOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListBucketsRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListBucketsRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListBucketsRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListBucketsRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListBucketsResponse.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListBucketsResponse.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListBucketsResponseOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListBucketsResponseOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListExclusionsRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListExclusionsRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListExclusionsRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListExclusionsRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListExclusionsResponse.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListExclusionsResponse.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListExclusionsResponseOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListExclusionsResponseOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListLinksRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLinksRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListLinksRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLinksRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListLinksResponse.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLinksResponse.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListLinksResponseOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLinksResponseOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListLogEntriesRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogEntriesRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListLogEntriesRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogEntriesRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListLogEntriesResponse.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogEntriesResponse.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListLogEntriesResponseOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogEntriesResponseOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListLogMetricsRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogMetricsRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListLogMetricsRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogMetricsRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListLogMetricsResponse.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogMetricsResponse.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListLogMetricsResponseOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogMetricsResponseOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListLogsRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogsRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListLogsRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogsRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListLogsResponse.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogsResponse.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListLogsResponseOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListLogsResponseOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListMonitoredResourceDescriptorsRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListMonitoredResourceDescriptorsRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListMonitoredResourceDescriptorsRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListMonitoredResourceDescriptorsRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListMonitoredResourceDescriptorsResponse.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListMonitoredResourceDescriptorsResponse.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListMonitoredResourceDescriptorsResponseOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListMonitoredResourceDescriptorsResponseOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListSinksRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListSinksRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListSinksRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListSinksRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListSinksResponse.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListSinksResponse.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListSinksResponseOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListSinksResponseOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListViewsRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListViewsRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListViewsRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListViewsRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListViewsResponse.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListViewsResponse.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ListViewsResponseOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ListViewsResponseOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LocationMetadata.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LocationMetadata.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LocationMetadataOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LocationMetadataOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LocationName.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LocationName.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogBucket.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogBucket.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogBucketName.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogBucketName.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogBucketOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogBucketOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogEntry.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogEntry.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogEntryOperation.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogEntryOperation.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogEntryOperationOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogEntryOperationOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogEntryOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogEntryOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogEntryProto.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogEntryProto.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogEntrySourceLocation.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogEntrySourceLocation.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogEntrySourceLocationOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogEntrySourceLocationOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogExclusion.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogExclusion.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogExclusionName.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogExclusionName.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogExclusionOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogExclusionOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LoggingConfigProto.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LoggingConfigProto.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LoggingMetricsProto.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LoggingMetricsProto.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LoggingProto.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LoggingProto.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogMetric.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogMetric.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogMetricName.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogMetricName.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogMetricOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogMetricOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogName.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogName.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogSink.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogSink.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogSinkName.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogSinkName.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogSinkOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogSinkOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogSplit.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogSplit.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogSplitOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogSplitOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogView.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogView.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogViewName.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogViewName.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/LogViewOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LogViewOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/OperationState.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/OperationState.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/OrganizationLocationName.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/OrganizationLocationName.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/OrganizationName.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/OrganizationName.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/ProjectName.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ProjectName.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/Settings.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/Settings.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/SettingsName.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/SettingsName.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/SettingsOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/SettingsOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/TailLogEntriesRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/TailLogEntriesRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/TailLogEntriesRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/TailLogEntriesRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/TailLogEntriesResponse.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/TailLogEntriesResponse.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/TailLogEntriesResponseOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/TailLogEntriesResponseOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/UndeleteBucketRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UndeleteBucketRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/UndeleteBucketRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UndeleteBucketRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/UpdateBucketRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateBucketRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/UpdateBucketRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateBucketRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/UpdateCmekSettingsRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateCmekSettingsRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/UpdateCmekSettingsRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateCmekSettingsRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/UpdateExclusionRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateExclusionRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/UpdateExclusionRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateExclusionRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/UpdateLogMetricRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateLogMetricRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/UpdateLogMetricRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateLogMetricRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/UpdateSettingsRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateSettingsRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/UpdateSettingsRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateSettingsRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/UpdateSinkRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateSinkRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/UpdateSinkRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateSinkRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/UpdateViewRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateViewRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/UpdateViewRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/UpdateViewRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/WriteLogEntriesPartialErrors.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/WriteLogEntriesPartialErrors.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/WriteLogEntriesPartialErrorsOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/WriteLogEntriesPartialErrorsOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/WriteLogEntriesRequest.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/WriteLogEntriesRequest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/WriteLogEntriesRequestOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/WriteLogEntriesRequestOrBuilder.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/WriteLogEntriesResponse.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/WriteLogEntriesResponse.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/java/com/google/logging/v2/WriteLogEntriesResponseOrBuilder.java /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/java/com/google/logging/v2/WriteLogEntriesResponseOrBuilder.java
+mkdir /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/proto
+mkdir /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/proto/google
+mkdir /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/proto/google/logging
+mkdir /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/proto/google/logging/v2
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/proto/google/logging/v2/log_entry.proto /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/proto/google/logging/v2/log_entry.proto
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/proto/google/logging/v2/logging_config.proto /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/proto/google/logging/v2/logging_config.proto
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/proto/google/logging/v2/logging_metrics.proto /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/proto/google/logging/v2/logging_metrics.proto
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/proto-google-cloud-library/src/main/proto/google/logging/v2/logging.proto /workspace/java-logging/owl-bot-staging/v2/proto-google-cloud-logging-v2/src/main/proto/google/logging/v2/logging.proto
+mkdir /workspace/java-logging/owl-bot-staging/v2/grpc-google-cloud-logging-v2/src
+mkdir /workspace/java-logging/owl-bot-staging/v2/grpc-google-cloud-logging-v2/src/main
+mkdir /workspace/java-logging/owl-bot-staging/v2/grpc-google-cloud-logging-v2/src/main/java
+mkdir /workspace/java-logging/owl-bot-staging/v2/grpc-google-cloud-logging-v2/src/main/java/com
+mkdir /workspace/java-logging/owl-bot-staging/v2/grpc-google-cloud-logging-v2/src/main/java/com/google
+mkdir /workspace/java-logging/owl-bot-staging/v2/grpc-google-cloud-logging-v2/src/main/java/com/google/logging
+mkdir /workspace/java-logging/owl-bot-staging/v2/grpc-google-cloud-logging-v2/src/main/java/com/google/logging/v2
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/grpc-google-cloud-library/src/main/java/com/google/logging/v2/ConfigServiceV2Grpc.java /workspace/java-logging/owl-bot-staging/v2/grpc-google-cloud-logging-v2/src/main/java/com/google/logging/v2/ConfigServiceV2Grpc.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/grpc-google-cloud-library/src/main/java/com/google/logging/v2/LoggingServiceV2Grpc.java /workspace/java-logging/owl-bot-staging/v2/grpc-google-cloud-logging-v2/src/main/java/com/google/logging/v2/LoggingServiceV2Grpc.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/grpc-google-cloud-library/src/main/java/com/google/logging/v2/MetricsServiceV2Grpc.java /workspace/java-logging/owl-bot-staging/v2/grpc-google-cloud-logging-v2/src/main/java/com/google/logging/v2/MetricsServiceV2Grpc.java
+mkdir /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src
+mkdir /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main
+mkdir /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java
+mkdir /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com
+mkdir /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google
+mkdir /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud
+mkdir /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging
+mkdir /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/main/java/com/google/cloud/logging/v2/ConfigClient.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2/ConfigClient.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/main/java/com/google/cloud/logging/v2/ConfigSettings.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2/ConfigSettings.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/main/java/com/google/cloud/logging/v2/gapic_metadata.json /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2/gapic_metadata.json
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/main/java/com/google/cloud/logging/v2/LoggingClient.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2/LoggingClient.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/main/java/com/google/cloud/logging/v2/LoggingSettings.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2/LoggingSettings.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/main/java/com/google/cloud/logging/v2/MetricsClient.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2/MetricsClient.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/main/java/com/google/cloud/logging/v2/MetricsSettings.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2/MetricsSettings.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/main/java/com/google/cloud/logging/v2/package-info.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2/package-info.java
+mkdir /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2/stub
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/main/java/com/google/cloud/logging/v2/stub/ConfigServiceV2Stub.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2/stub/ConfigServiceV2Stub.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/main/java/com/google/cloud/logging/v2/stub/ConfigServiceV2StubSettings.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2/stub/ConfigServiceV2StubSettings.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/main/java/com/google/cloud/logging/v2/stub/GrpcConfigServiceV2CallableFactory.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2/stub/GrpcConfigServiceV2CallableFactory.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/main/java/com/google/cloud/logging/v2/stub/GrpcConfigServiceV2Stub.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2/stub/GrpcConfigServiceV2Stub.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/main/java/com/google/cloud/logging/v2/stub/GrpcLoggingServiceV2CallableFactory.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2/stub/GrpcLoggingServiceV2CallableFactory.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/main/java/com/google/cloud/logging/v2/stub/GrpcLoggingServiceV2Stub.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2/stub/GrpcLoggingServiceV2Stub.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/main/java/com/google/cloud/logging/v2/stub/GrpcMetricsServiceV2CallableFactory.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2/stub/GrpcMetricsServiceV2CallableFactory.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/main/java/com/google/cloud/logging/v2/stub/GrpcMetricsServiceV2Stub.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2/stub/GrpcMetricsServiceV2Stub.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/main/java/com/google/cloud/logging/v2/stub/LoggingServiceV2Stub.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2/stub/LoggingServiceV2Stub.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/main/java/com/google/cloud/logging/v2/stub/LoggingServiceV2StubSettings.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2/stub/LoggingServiceV2StubSettings.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/main/java/com/google/cloud/logging/v2/stub/MetricsServiceV2Stub.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2/stub/MetricsServiceV2Stub.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/main/java/com/google/cloud/logging/v2/stub/MetricsServiceV2StubSettings.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/java/com/google/cloud/logging/v2/stub/MetricsServiceV2StubSettings.java
+mkdir /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/resources
+mkdir /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/resources/META-INF
+mkdir /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/resources/META-INF/native-image
+mkdir /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/resources/META-INF/native-image/com.google.cloud.logging.v2
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/main/resources/META-INF/native-image/com.google.cloud.logging.v2/reflect-config.json /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/main/resources/META-INF/native-image/com.google.cloud.logging.v2/reflect-config.json
+mkdir /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/test
+mkdir /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/test/java
+mkdir /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/test/java/com
+mkdir /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/test/java/com/google
+mkdir /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/test/java/com/google/cloud
+mkdir /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/test/java/com/google/cloud/logging
+mkdir /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/test/java/com/google/cloud/logging/v2
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/test/java/com/google/cloud/logging/v2/ConfigClientTest.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/test/java/com/google/cloud/logging/v2/ConfigClientTest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/test/java/com/google/cloud/logging/v2/LoggingClientTest.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/test/java/com/google/cloud/logging/v2/LoggingClientTest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/test/java/com/google/cloud/logging/v2/MetricsClientTest.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/test/java/com/google/cloud/logging/v2/MetricsClientTest.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/test/java/com/google/cloud/logging/v2/MockConfigServiceV2.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/test/java/com/google/cloud/logging/v2/MockConfigServiceV2.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/test/java/com/google/cloud/logging/v2/MockConfigServiceV2Impl.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/test/java/com/google/cloud/logging/v2/MockConfigServiceV2Impl.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/test/java/com/google/cloud/logging/v2/MockLoggingServiceV2.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/test/java/com/google/cloud/logging/v2/MockLoggingServiceV2.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/test/java/com/google/cloud/logging/v2/MockLoggingServiceV2Impl.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/test/java/com/google/cloud/logging/v2/MockLoggingServiceV2Impl.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/test/java/com/google/cloud/logging/v2/MockMetricsServiceV2.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/test/java/com/google/cloud/logging/v2/MockMetricsServiceV2.java
+cp /tmp/tmp.en4QLxb3wV/google/logging/v2/generated-java/gapic-google-cloud-library/src/test/java/com/google/cloud/logging/v2/MockMetricsServiceV2Impl.java /workspace/java-logging/owl-bot-staging/v2/google-cloud-logging/src/test/java/com/google/cloud/logging/v2/MockMetricsServiceV2Impl.java
+git log -1 --format=%B
+Wrote commit message to /tmp/tmp-199-WqjA1q1fChGi/commit-msg--199-iDo7pu39YoH2-.txt
++ [[ false == \t\r\u\e ]]
++ echo 'running owl-bot post-processor'
+running owl-bot post-processor
++ pushd /workspace/java-logging
+/workspace/java-logging /workspace/java-logging /workspace/java-logging
++ bash /usr/local/lib/python3.13/site-packages/library_generation/owlbot/bin/entrypoint.sh /usr/local/lib/python3.13/site-packages/library_generation /workspace/java-logging/versions.txt false 26.71.0 3.23.8
++ scripts_root=/usr/local/lib/python3.13/site-packages/library_generation
++ versions_file=/workspace/java-logging/versions.txt
++ is_monorepo=false
++ libraries_bom_version=26.71.0
++ library_version=3.23.8
++ [[ false == \t\r\u\e ]]
++ echo 'Retrieving files from owl-bot-staging directory...'
+Retrieving files from owl-bot-staging directory...
++ '[' -f owlbot.py ']'
++ export SYNTHTOOL_TEMPLATES=/usr/local/lib/python3.13/site-packages/library_generation/owlbot/templates
++ SYNTHTOOL_TEMPLATES=/usr/local/lib/python3.13/site-packages/library_generation/owlbot/templates
++ export SYNTHTOOL_LIBRARIES_BOM_VERSION=26.71.0
++ SYNTHTOOL_LIBRARIES_BOM_VERSION=26.71.0
++ export SYNTHTOOL_LIBRARY_VERSION=3.23.8
++ SYNTHTOOL_LIBRARY_VERSION=3.23.8
++ python3 owlbot.py
+No replacements made in **/CmekSettingsName for pattern return newBillingAccountBuilder, maybe replacement is no longer needed?
+.github/ISSUE_TEMPLATE/bug_report.md
+.github/ISSUE_TEMPLATE/feature_request.md
+.github/ISSUE_TEMPLATE/support_request.md
+.github/PULL_REQUEST_TEMPLATE.md
+.github/auto-label.yaml
+.github/blunderbuss.yml
+.github/dependabot.yml
+.github/generated-files-bot.yml
+.github/release-please.yml
+.github/release-trigger.yml
+.github/scripts/update_generation_config.sh
+.github/snippet-bot.yml
+.github/sync-repo-settings.yaml
+.github/trusted-contribution.yml
+.github/workflows/approve-readme.yaml
+.github/workflows/ci.yaml
+.github/workflows/renovate_config_check.yaml
+.github/workflows/samples.yaml
+.github/workflows/update_generation_config.yaml
+.kokoro/build.sh
+.kokoro/presubmit/graalvm-native-a.cfg
+.kokoro/presubmit/graalvm-native-b.cfg
+.kokoro/presubmit/graalvm-native-c.cfg
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+LICENSE
+README.md
+SECURITY.md
+java.header
+license-checks.xml
+renovate.json
+samples/install-without-bom/pom.xml
+samples/pom.xml
+samples/snapshot/pom.xml
+samples/snippets/pom.xml
++ unset SYNTHTOOL_TEMPLATES
++ unset SYNTHTOOL_LIBRARIES_BOM_VERSION
++ unset SYNTHTOOL_LIBRARY_VERSION
++ echo ...done
+...done
++ echo 'Generating missing pom.xml...'
+Generating missing pom.xml...
++ python3 /usr/local/lib/python3.13/site-packages/library_generation/owlbot/src/fix_poms.py /workspace/java-logging/versions.txt false
+/usr/local/lib/python3.13/site-packages/library_generation/owlbot
+working directory: /workspace/java-logging
+monorepo? False
+updating modules in cloud pom.xml
+updating modules in bom pom.xml
+updating modules in parent pom.xml
+updating modules in /workspace/java-logging/versions.txt
++ echo ...done
+...done
++ echo 'Generating clirr-ignored-differences.xml...'
+Generating clirr-ignored-differences.xml...
++ /usr/local/lib/python3.13/site-packages/library_generation/owlbot/bin/write_clirr_ignore.sh /usr/local/lib/python3.13/site-packages/library_generation
++ echo ...done
+...done
++ echo 'Fixing missing license headers...'
+Fixing missing license headers...
++ python3 /usr/local/lib/python3.13/site-packages/library_generation/owlbot/src/fix-license-headers.py
+No replacements made in [PosixPath('/workspace/java-logging/proto-google-cloud-logging-v2/src/**/*Name.java'), PosixPath('/workspace/java-logging/proto-google-cloud-logging-v2/src/**/*Names.java')] for pattern /\*
+ \* Copyright \d{4} Google LLC
+ \*
+ \* Licensed under the Apache License, Version 2.0 \(the "License"\); you may not use this file except
+ \* in compliance with the License. You may obtain a copy of the License at
+ \*
+ \* http://www.apache.org/licenses/LICENSE-2.0
+ \*
+ \* Unless required by applicable law or agreed to in writing, software distributed under the License
+ \* is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ \* or implied. See the License for the specific language governing permissions and limitations under
+ \* the License.
+ \*/
+, maybe replacement is no longer needed?
++ echo ...done
+...done
++ echo 'Reformatting source...'
+Reformatting source...
++ /usr/local/lib/python3.13/site-packages/library_generation/owlbot/bin/format_source.sh /usr/local/lib/python3.13/site-packages/library_generation
++ echo ...done
+...done
++ popd
+/workspace/java-logging /workspace/java-logging
+Library postprocessing finished successfully
