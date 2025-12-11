@@ -34,8 +34,8 @@ import com.google.common.collect.Sets;
 import java.util.Iterator;
 import java.util.Set;
 import org.junit.BeforeClass;
-import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.Test;
 
 public class ITSinkTest extends BaseSystemTest {
 
