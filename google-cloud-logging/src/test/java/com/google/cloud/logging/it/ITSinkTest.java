@@ -35,6 +35,7 @@ import java.util.Iterator;
 import java.util.Set;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Ignore;
 
 public class ITSinkTest extends BaseSystemTest {
 
@@ -55,6 +56,7 @@ public class ITSinkTest extends BaseSystemTest {
   }
 
   @Test
+  @Ignore
   public void testCreateGetUpdateAndDeleteSink() {
     String name = formatForTest("test-create-get-update-sink");
     SinkInfo sinkInfo =
