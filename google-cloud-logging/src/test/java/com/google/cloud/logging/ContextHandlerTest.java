@@ -16,7 +16,7 @@
 
 package com.google.cloud.logging;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.google.cloud.logging.ContextHandler.ContextPriority;
 import com.google.cloud.logging.HttpRequest.RequestMethod;

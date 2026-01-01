@@ -238,11 +238,6 @@ class LoggingHandlerTest {
 
   public final OutputStreamPatcher outputStreamPatcher = new OutputStreamPatcher();
 
-  @org.junit.jupiter.api.AfterEach
-  void tearDownPatcher() {
-    outputStreamPatcher.after();
-  }
-
   @BeforeEach
   void setUp() {
     Instrumentation.setInstrumentationStatus(true);
@@ -260,6 +255,7 @@ class LoggingHandlerTest {
   @AfterEach
   void after() {
     verify(logging, options);
+    outputStreamPatcher.after();
   }
 
   private static LogRecord newLogRecord(Level level, String message) {
