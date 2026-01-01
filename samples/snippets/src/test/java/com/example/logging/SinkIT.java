@@ -16,8 +16,8 @@
 
 package com.example.logging;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.cloud.logging.Logging;
 import com.google.cloud.logging.LoggingOptions;
@@ -26,21 +26,20 @@ import com.google.cloud.logging.SinkInfo;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.UUID;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 /** Tests for sink sample. */
-@RunWith(JUnit4.class)
-public class SinkIT {
+
+class SinkIT {
 
   private Logging logging = LoggingOptions.getDefaultInstance().getService();
   private static final String SINK_NAME = "test-sink" + UUID.randomUUID().toString();
 
-  @Before
-  public void setUp() {
+  @BeforeEach void setUp() {
     // Create sink
     logging.create(
         SinkInfo.newBuilder(SINK_NAME, SinkInfo.Destination.DatasetDestination.of("dataset"))
@@ -49,15 +48,13 @@ public class SinkIT {
             .build());
   }
 
-  @After
-  public void tearDown() throws Exception {
+  @AfterEach void tearDown() throws Exception {
     // Delete sink
     logging.deleteSink(SINK_NAME);
     logging.close();
   }
 
-  @Test
-  public void testGetSinkMetadata() throws Exception {
+  @Test void testGetSinkMetadata() throws Exception {
     Sink sink = logging.getSink(SINK_NAME);
     assertNotNull(sink);
     PrintStream standardOut = System.out;

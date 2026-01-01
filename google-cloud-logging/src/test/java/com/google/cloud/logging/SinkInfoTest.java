@@ -17,9 +17,9 @@
 package com.google.cloud.logging;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import com.google.cloud.logging.SinkInfo.Destination;
 import com.google.cloud.logging.SinkInfo.Destination.BucketDestination;
@@ -27,12 +27,9 @@ import com.google.cloud.logging.SinkInfo.Destination.DatasetDestination;
 import com.google.cloud.logging.SinkInfo.Destination.LoggingBucketDestination;
 import com.google.cloud.logging.SinkInfo.Destination.TopicDestination;
 import com.google.cloud.logging.SinkInfo.VersionFormat;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-@RunWith(JUnit4.class)
-public class SinkInfoTest {
+class SinkInfoTest {
 
   private static final String NAME = "name";
   private static final String FILTER =
@@ -61,13 +58,13 @@ public class SinkInfoTest {
           .build();
 
   @Test
-  public void testOfBucketDestination() {
+  void testOfBucketDestination() {
     assertEquals(Destination.Type.BUCKET, BUCKET_DESTINATION.getType());
     assertEquals("bucket", BUCKET_DESTINATION.getBucket());
   }
 
   @Test
-  public void testOfDatasetDestination() {
+  void testOfDatasetDestination() {
     assertEquals(Destination.Type.DATASET, DATASET_DESTINATION.getType());
     assertEquals("project", DATASET_DESTINATION.getProject());
     assertEquals("dataset", DATASET_DESTINATION.getDataset());
@@ -77,7 +74,7 @@ public class SinkInfoTest {
   }
 
   @Test
-  public void testOfTopicDestination() {
+  void testOfTopicDestination() {
     assertEquals(Destination.Type.TOPIC, TOPIC_DESTINATION.getType());
     assertEquals("project", TOPIC_DESTINATION.getProject());
     assertEquals("topic", TOPIC_DESTINATION.getTopic());
@@ -87,7 +84,7 @@ public class SinkInfoTest {
   }
 
   @Test
-  public void testOfLoggingBucketDestination() {
+  void testOfLoggingBucketDestination() {
     assertEquals(Destination.Type.LOGGING_BUCKET, LOGGING_BUCKET_DESTINATION.getType());
     assertEquals("project", LOGGING_BUCKET_DESTINATION.getProject());
     assertEquals("location", LOGGING_BUCKET_DESTINATION.getLocation());
@@ -100,7 +97,7 @@ public class SinkInfoTest {
   }
 
   @Test
-  public void testToAndFromPbDestination() {
+  void testToAndFromPbDestination() {
     BucketDestination bucketDestination = Destination.fromPb(BUCKET_DESTINATION.toPb("other"));
     assertEquals(Destination.Type.BUCKET, bucketDestination.getType());
     assertEquals("bucket", bucketDestination.getBucket());
@@ -133,7 +130,7 @@ public class SinkInfoTest {
   }
 
   @Test
-  public void testToAndFromPbDestination_noProjectId() {
+  void testToAndFromPbDestination_noProjectId() {
     DatasetDestination datasetDestination =
         DatasetDestination.fromPb(DatasetDestination.of("dataset").toPb("project"));
     compareDatasetDestination(DATASET_DESTINATION, datasetDestination);
@@ -150,7 +147,7 @@ public class SinkInfoTest {
   }
 
   @Test
-  public void testBuilder() {
+  void testBuilder() {
     assertEquals(NAME, BUCKET_SINK_INFO.getName());
     assertEquals(BUCKET_DESTINATION, BUCKET_SINK_INFO.getDestination());
     assertEquals(FILTER, BUCKET_SINK_INFO.getFilter());
@@ -166,7 +163,7 @@ public class SinkInfoTest {
   }
 
   @Test
-  public void testToBuilder() {
+  void testToBuilder() {
     compareSinkInfo(BUCKET_SINK_INFO, BUCKET_SINK_INFO.toBuilder().build());
     compareSinkInfo(DATASET_SINK_INFO, DATASET_SINK_INFO.toBuilder().build());
     compareSinkInfo(TOPIC_SINK_INFO, TOPIC_SINK_INFO.toBuilder().build());
@@ -192,7 +189,7 @@ public class SinkInfoTest {
   }
 
   @Test
-  public void testToAndFromPb() {
+  void testToAndFromPb() {
     compareSinkInfo(BUCKET_SINK_INFO, SinkInfo.fromPb(BUCKET_SINK_INFO.toPb("project")));
     compareSinkInfo(DATASET_SINK_INFO, SinkInfo.fromPb(DATASET_SINK_INFO.toPb("project")));
     compareSinkInfo(TOPIC_SINK_INFO, SinkInfo.fromPb(TOPIC_SINK_INFO.toPb("project")));
@@ -206,7 +203,7 @@ public class SinkInfoTest {
   }
 
   @Test
-  public void testToAndFromPb_noProjectId() {
+  void testToAndFromPb_noProjectId() {
     DatasetDestination datasetDestination = DatasetDestination.of("dataset");
     SinkInfo sinkInfo =
         SinkInfo.newBuilder(NAME, DATASET_DESTINATION).setVersionFormat(VERSION).build();

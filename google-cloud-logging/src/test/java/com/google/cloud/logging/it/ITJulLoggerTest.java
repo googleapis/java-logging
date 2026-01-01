@@ -18,11 +18,11 @@ package com.google.cloud.logging.it;
 
 import static com.google.cloud.logging.testing.RemoteLoggingHelper.formatForTest;
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.cloud.MonitoredResource;
 import com.google.cloud.logging.BaseSystemTest;
@@ -37,22 +37,22 @@ import com.google.logging.v2.LogName;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.junit.After;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-public class ITJulLoggerTest extends BaseSystemTest {
+class ITJulLoggerTest extends BaseSystemTest {
 
   private static final String LOG_ID = formatForTest("test-jul-log-handler-log");
 
-  @After
-  public void tearDown() throws InterruptedException {
+  @AfterEach
+  void tearDown() throws InterruptedException {
     assertTrue(cleanupLog(LOG_ID));
   }
 
-  @Ignore
+  @Disabled
   @Test
-  public void testLoggingHandler() throws InterruptedException {
+  void testLoggingHandler() throws InterruptedException {
     LoggingOptions options = logging.getOptions();
     LogName logName = LogName.ofProjectLogName(options.getProjectId(), LOG_ID);
 
@@ -87,9 +87,9 @@ public class ITJulLoggerTest extends BaseSystemTest {
     logger.removeHandler(handler);
   }
 
-  @Ignore
+  @Disabled
   @Test
-  public void testSyncLoggingHandler() throws InterruptedException {
+  void testSyncLoggingHandler() throws InterruptedException {
     LoggingOptions options = logging.getOptions();
     LogName logName = LogName.ofProjectLogName(options.getProjectId(), LOG_ID);
     MonitoredResource resource =

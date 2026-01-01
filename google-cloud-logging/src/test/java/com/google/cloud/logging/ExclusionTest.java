@@ -16,17 +16,14 @@
 package com.google.cloud.logging;
 
 import static com.google.protobuf.util.Timestamps.fromMillis;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.google.protobuf.Timestamp;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-@RunWith(JUnit4.class)
-public class ExclusionTest {
+class ExclusionTest {
 
   private static final String EXCLUSION_NAME = "load-balancer-exclusion";
   private static final String DESCRIPTION = "description";
@@ -49,7 +46,7 @@ public class ExclusionTest {
       fromMillis(System.currentTimeMillis());
 
   @Test
-  public void testBuilder() {
+  void testBuilder() {
     assertEquals(EXCLUSION_NAME, EXCLUSION.getName());
     assertEquals(DESCRIPTION, EXCLUSION.getDescription());
     assertEquals(EXCLUSION_FILTER, EXCLUSION.getFilter());
@@ -58,7 +55,7 @@ public class ExclusionTest {
   }
 
   @Test
-  public void testToBuilder() {
+  void testToBuilder() {
     compareExclusion(EXCLUSION, EXCLUSION.toBuilder().build());
     Exclusion exclusion =
         EXCLUSION.toBuilder()
@@ -87,14 +84,14 @@ public class ExclusionTest {
   }
 
   @Test
-  public void testToAndFromProtobuf() {
+  void testToAndFromProtobuf() {
     compareExclusion(EXCLUSION, Exclusion.fromProtobuf(EXCLUSION.toProtobuf()));
     Exclusion exclusion = Exclusion.of(EXCLUSION_NAME, EXCLUSION_FILTER);
     compareExclusion(exclusion, Exclusion.fromProtobuf(exclusion.toProtobuf()));
   }
 
   @Test
-  public void testOf() {
+  void testOf() {
     Exclusion exclusion = Exclusion.of(EXCLUSION_NAME, EXCLUSION_FILTER);
     assertEquals(EXCLUSION_NAME, exclusion.getName());
     assertEquals(EXCLUSION_FILTER, exclusion.getFilter());

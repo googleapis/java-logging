@@ -22,7 +22,7 @@ import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.google.api.core.ApiFutures;
 import com.google.cloud.MonitoredResource;
@@ -34,14 +34,11 @@ import com.google.common.collect.ImmutableList;
 import com.google.logging.v2.WriteLogEntriesRequest;
 import com.google.logging.v2.WriteLogEntriesResponse;
 import org.easymock.Capture;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-@RunWith(JUnit4.class)
-public class AutoPopulateMetadataTests {
+class AutoPopulateMetadataTests {
 
   private static final String LOG_NAME = "test-log";
   private static final String RESOURCE_PROJECT_ID = "env-project-id";
@@ -81,8 +78,8 @@ public class AutoPopulateMetadataTests {
   private final Capture<WriteLogEntriesRequest> rpcWriteArgument = newCapture();
   private ResourceTypeEnvironmentGetter mockedEnvGetter;
 
-  @Before
-  public void setup() {
+  @BeforeEach
+  void setup() {
     mockedEnvGetter = createMock(ResourceTypeEnvironmentGetter.class);
     mockedRpcFactory = createMock(LoggingRpcFactory.class);
     mockedRpc = createMock(LoggingRpc.class);
@@ -106,8 +103,8 @@ public class AutoPopulateMetadataTests {
     logging = options.getService();
   }
 
-  @After
-  public void teardown() {
+  @AfterEach
+  void teardown() {
     new ContextHandler().removeCurrentContext();
   }
 
@@ -124,7 +121,7 @@ public class AutoPopulateMetadataTests {
   }
 
   @Test
-  public void testAutoPopulationEnabledInLoggingOptions() {
+  void testAutoPopulationEnabledInLoggingOptions() {
     mockCurrentContext(HTTP_REQUEST, TRACE_ID, SPAN_ID, TRACE_SAMPLED);
 
     logging.write(ImmutableList.of(SIMPLE_LOG_ENTRY));
@@ -138,7 +135,7 @@ public class AutoPopulateMetadataTests {
   }
 
   @Test
-  public void testAutoPopulationEnabledInWriteOptionsAndDisabledInLoggingOptions() {
+  void testAutoPopulationEnabledInWriteOptionsAndDisabledInLoggingOptions() {
     // redefine logging option to opt out auto-populating
     LoggingOptions options =
         logging.getOptions().toBuilder().setAutoPopulateMetadata(false).build();
@@ -156,7 +153,7 @@ public class AutoPopulateMetadataTests {
   }
 
   @Test
-  public void testAutoPopulationDisabledInWriteOptions() {
+  void testAutoPopulationDisabledInWriteOptions() {
     mockCurrentContext(HTTP_REQUEST, TRACE_ID, SPAN_ID, TRACE_SAMPLED);
 
     logging.write(ImmutableList.of(SIMPLE_LOG_ENTRY), WriteOption.autoPopulateMetadata(false));
@@ -170,7 +167,7 @@ public class AutoPopulateMetadataTests {
   }
 
   @Test
-  public void testSourceLocationPopulation() {
+  void testSourceLocationPopulation() {
     SourceLocation expected = SourceLocation.fromCurrentContext();
     logging.write(ImmutableList.of(SIMPLE_LOG_ENTRY_WITH_DEBUG));
 
@@ -182,7 +179,7 @@ public class AutoPopulateMetadataTests {
   }
 
   @Test
-  public void testNotFormattedTraceId() {
+  void testNotFormattedTraceId() {
     mockCurrentContext(HTTP_REQUEST, TRACE_ID, SPAN_ID, TRACE_SAMPLED);
 
     final MonitoredResource expectedResource = MonitoredResource.newBuilder("custom").build();
@@ -194,7 +191,7 @@ public class AutoPopulateMetadataTests {
   }
 
   @Test
-  public void testMonitoredResourcePopulationInWriteOptions() {
+  void testMonitoredResourcePopulationInWriteOptions() {
     mockCurrentContext(HTTP_REQUEST, TRACE_ID, SPAN_ID, TRACE_SAMPLED);
 
     final MonitoredResource expectedResource = MonitoredResource.newBuilder("custom").build();

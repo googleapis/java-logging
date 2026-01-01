@@ -17,7 +17,7 @@
 package com.google.cloud.logging;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.google.cloud.logging.Payload.JsonPayload;
 import com.google.cloud.logging.Payload.ProtoPayload;
@@ -31,12 +31,9 @@ import com.google.protobuf.Struct;
 import com.google.protobuf.Value;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-@RunWith(JUnit4.class)
-public class PayloadTest {
+class PayloadTest {
 
   private static final String STRING_DATA = "string";
   private static final Value NULL_VALUE =
@@ -103,7 +100,7 @@ public class PayloadTest {
   private static final ProtoPayload PROTO_PAYLOAD = ProtoPayload.of(PROTO_DATA);
 
   @Test
-  public void testOf() {
+  void testOf() {
     assertEquals(Payload.Type.STRING, STRING_PAYLOAD.getType());
     assertEquals(STRING_DATA, STRING_PAYLOAD.getData());
     assertEquals(Payload.Type.JSON, JSON_PAYLOAD.getType());
@@ -118,7 +115,7 @@ public class PayloadTest {
   }
 
   @Test
-  public void testToAndFromPb() {
+  void testToAndFromPb() {
     Payload<?> payload = Payload.fromPb(STRING_PAYLOAD.toPb().build());
     assertThat(payload).isInstanceOf(StringPayload.class);
     comparePayload(STRING_PAYLOAD, payload);

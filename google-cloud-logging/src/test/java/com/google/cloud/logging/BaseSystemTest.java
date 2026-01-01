@@ -26,31 +26,30 @@ import com.google.logging.v2.LogName;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Iterator;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Rule;
-import org.junit.rules.Timeout;
+import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Timeout;
 
 /**
  * A base class for system tests. This class can be extended to run system tests in different
  * environments (e.g. local emulator or remote Logging service).
  */
+@Timeout(value = 600, unit = TimeUnit.SECONDS)
 public class BaseSystemTest {
-
-  @Rule public Timeout globalTimeout = Timeout.seconds(600);
 
   private static final DateTimeFormatter RFC_3339 =
       DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
   protected static Logging logging;
 
-  @BeforeClass
+  @BeforeAll
   public static void beforeClass() {
     RemoteLoggingHelper helper = RemoteLoggingHelper.create();
     logging = helper.getOptions().getService();
   }
 
-  @AfterClass
+  @AfterAll
   public static void afterClass() throws Exception {
     logging.close();
   }

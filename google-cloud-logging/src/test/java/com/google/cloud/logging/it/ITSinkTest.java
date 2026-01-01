@@ -17,12 +17,12 @@
 package com.google.cloud.logging.it;
 
 import static com.google.cloud.logging.testing.RemoteLoggingHelper.formatForTest;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import com.google.api.gax.paging.Page;
 import com.google.cloud.logging.BaseSystemTest;
@@ -33,13 +33,13 @@ import com.google.cloud.logging.SinkInfo;
 import com.google.common.collect.Sets;
 import java.util.Iterator;
 import java.util.Set;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-public class ITSinkTest extends BaseSystemTest {
+class ITSinkTest extends BaseSystemTest {
 
-  @BeforeClass
+  @BeforeAll
   public static void setUp() {
     // Cleanup all stucked sinks if any
     Logging.ListOption[] options = {Logging.ListOption.pageSize(50)};
@@ -56,8 +56,8 @@ public class ITSinkTest extends BaseSystemTest {
   }
 
   @Test
-  @Ignore
-  public void testCreateGetUpdateAndDeleteSink() {
+  @Disabled
+  void testCreateGetUpdateAndDeleteSink() {
     String name = formatForTest("test-create-get-update-sink");
     SinkInfo sinkInfo =
         SinkInfo.newBuilder(name, SinkInfo.Destination.DatasetDestination.of("dataset"))
@@ -81,7 +81,7 @@ public class ITSinkTest extends BaseSystemTest {
   }
 
   @Test
-  public void testUpdateNonExistingSink() {
+  void testUpdateNonExistingSink() {
     String name = formatForTest("test-update-non-existing-sink");
     SinkInfo sinkInfo =
         SinkInfo.newBuilder(name, SinkInfo.Destination.DatasetDestination.of("dataset"))
@@ -98,7 +98,7 @@ public class ITSinkTest extends BaseSystemTest {
   }
 
   @Test
-  public void testListSinks() throws InterruptedException {
+  void testListSinks() throws InterruptedException {
     String firstName = formatForTest("test-list-sinks-1");
     String secondName = formatForTest("test-list-sinks-2");
     Sink firstSink =

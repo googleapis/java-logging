@@ -16,17 +16,14 @@
 
 package com.google.cloud.logging;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.google.cloud.logging.ContextHandler.ContextPriority;
 import com.google.cloud.logging.HttpRequest.RequestMethod;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
-@RunWith(JUnit4.class)
-public class ContextHandlerTest {
+class ContextHandlerTest {
   private static final HttpRequest OLD_HTTP_REQUEST =
       HttpRequest.newBuilder()
           .setRequestMethod(RequestMethod.POST)
@@ -46,14 +43,14 @@ public class ContextHandlerTest {
   private static final String SPAN_ID = "1";
   private static final boolean TRACE_SAMPLED = true;
 
-  @After
-  public void teardown() {
+  @AfterEach
+  void teardown() {
     new ContextHandler().removeCurrentContext();
     new ContextHandler().removeCurrentContextPriority();
   }
 
   @Test
-  public void testDefaultSetContext() {
+  void testDefaultSetContext() {
     Context newContext =
         Context.newBuilder()
             .setRequest(HTTP_REQUEST)
@@ -71,7 +68,7 @@ public class ContextHandlerTest {
   }
 
   @Test
-  public void testSetContextWithPriorityFromNoInput() {
+  void testSetContextWithPriorityFromNoInput() {
     Context newContext =
         Context.newBuilder()
             .setRequest(HTTP_REQUEST)
@@ -89,7 +86,7 @@ public class ContextHandlerTest {
   }
 
   @Test
-  public void testSetContextWithPriorityFromW3CHeader() {
+  void testSetContextWithPriorityFromW3CHeader() {
     Context newContext =
         Context.newBuilder()
             .setRequest(HTTP_REQUEST)
@@ -107,7 +104,7 @@ public class ContextHandlerTest {
   }
 
   @Test
-  public void testSetContextFromXCloudHeader() {
+  void testSetContextFromXCloudHeader() {
     Context newContext =
         Context.newBuilder()
             .setRequest(HTTP_REQUEST)
@@ -125,7 +122,7 @@ public class ContextHandlerTest {
   }
 
   @Test
-  public void testSetContextFromOpenTelemetry() {
+  void testSetContextFromOpenTelemetry() {
     Context newContext =
         Context.newBuilder()
             .setRequest(HTTP_REQUEST)
@@ -143,7 +140,7 @@ public class ContextHandlerTest {
   }
 
   @Test
-  public void testOverrideW3CContextFromOpenTelemetry() {
+  void testOverrideW3CContextFromOpenTelemetry() {
     Context oldContext =
         Context.newBuilder()
             .setRequest(OLD_HTTP_REQUEST)
@@ -170,7 +167,7 @@ public class ContextHandlerTest {
   }
 
   @Test
-  public void testOverrideXCTCContextFromOpenTelemetry() {
+  void testOverrideXCTCContextFromOpenTelemetry() {
     Context oldContext =
         Context.newBuilder()
             .setRequest(OLD_HTTP_REQUEST)
@@ -198,7 +195,7 @@ public class ContextHandlerTest {
   }
 
   @Test
-  public void testOverrideOtelContextFromDefaultSetContext() {
+  void testOverrideOtelContextFromDefaultSetContext() {
     Context oldContext =
         Context.newBuilder()
             .setRequest(OLD_HTTP_REQUEST)
@@ -225,7 +222,7 @@ public class ContextHandlerTest {
   }
 
   @Test
-  public void testOverrideOtelContextFromW3C() {
+  void testOverrideOtelContextFromW3C() {
     Context oldContext =
         Context.newBuilder()
             .setRequest(OLD_HTTP_REQUEST)
@@ -252,7 +249,7 @@ public class ContextHandlerTest {
   }
 
   @Test
-  public void testOverrideOtelContextFromXCTC() {
+  void testOverrideOtelContextFromXCTC() {
     Context oldContext =
         Context.newBuilder()
             .setRequest(OLD_HTTP_REQUEST)

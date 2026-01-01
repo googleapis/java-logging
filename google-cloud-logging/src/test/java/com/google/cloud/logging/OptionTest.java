@@ -16,19 +16,16 @@
 
 package com.google.cloud.logging;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.google.cloud.logging.Logging.ListOption;
 import com.google.cloud.logging.Option.OptionType;
 import com.google.common.testing.EqualsTester;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-@RunWith(JUnit4.class)
-public class OptionTest {
+class OptionTest {
 
   private static final OptionType OPTION_TYPE = ListOption.OptionType.PAGE_SIZE;
   private static final OptionType ANOTHER_OPTION_TYPE = ListOption.OptionType.PAGE_TOKEN;
@@ -40,7 +37,7 @@ public class OptionTest {
   private static final Option OPTION_NOT_EQUALS2 = new Option(ANOTHER_OPTION_TYPE, VALUE) {};
 
   @Test
-  public void testEquals() {
+  void testEquals() {
     new EqualsTester()
         .addEqualityGroup(OPTION, OPTION_EQUALS)
         .addEqualityGroup(OPTION_NOT_EQUALS1)
@@ -49,7 +46,7 @@ public class OptionTest {
   }
 
   @Test
-  public void testConstructor() {
+  void testConstructor() {
     assertEquals(OPTION_TYPE, OPTION.getOptionType());
     assertEquals(VALUE, OPTION.getValue());
     Option option = new Option(OPTION_TYPE, null) {};
@@ -57,14 +54,14 @@ public class OptionTest {
     assertNull(option.getValue());
     try {
       new Option(null, VALUE) {};
-      Assert.fail();
+      Assertions.fail();
     } catch (NullPointerException expected) {
 
     }
   }
 
   @Test
-  public void testListOption() {
+  void testListOption() {
     Option option = ListOption.pageSize(42);
     assertEquals(ListOption.OptionType.PAGE_SIZE, option.getOptionType());
     assertEquals(42, option.getValue());

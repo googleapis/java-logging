@@ -22,7 +22,7 @@ import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.google.cloud.MonitoredResource;
 import com.google.cloud.logging.Logging.WriteOption;
@@ -41,18 +41,15 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 import org.easymock.EasyMock;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.ExternalResource;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
-@RunWith(JUnit4.class) // We're testing our own deprecated Builder methods.
+// We're testing our own deprecated Builder methods.
 @SuppressWarnings("deprecation")
-public class LoggingHandlerTest {
+class LoggingHandlerTest {
 
   private static final String LOG_NAME = "java.log";
   private static final String MESSAGE = "message";
@@ -227,7 +224,7 @@ public class LoggingHandlerTest {
     }
 
     @Override
-    protected void after() {
+    public void after() {
       System.setOut(oldOut);
       System.setErr(oldErr);
     }
@@ -239,10 +236,15 @@ public class LoggingHandlerTest {
     }
   }
 
-  @Rule public final OutputStreamPatcher outputStreamPatcher = new OutputStreamPatcher();
+  public final OutputStreamPatcher outputStreamPatcher = new OutputStreamPatcher();
 
-  @Before
-  public void setUp() {
+  @org.junit.jupiter.api.AfterEach
+  void tearDownPatcher() {
+    outputStreamPatcher.after();
+  }
+
+  @BeforeEach
+  void setUp() {
     Instrumentation.setInstrumentationStatus(true);
     logging = EasyMock.createMock(Logging.class);
     options = EasyMock.createMock(LoggingOptions.class);
@@ -255,8 +257,8 @@ public class LoggingHandlerTest {
     expectLastCall().anyTimes();
   }
 
-  @After
-  public void after() {
+  @AfterEach
+  void after() {
     verify(logging, options);
   }
 
@@ -267,7 +269,7 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testDefaultHandlerCreation() {
+  void testDefaultHandlerCreation() {
     String oldProject = System.getProperty(PROJECT_ENV_NAME);
     System.setProperty(PROJECT_ENV_NAME, PROJECT);
     replay(options, logging);
@@ -280,7 +282,7 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testPublishLevels() {
+  void testPublishLevels() {
     logging.write(ImmutableList.of(FINEST_ENTRY), DEFAULT_OPTIONS);
     expectLastCall().once();
     logging.write(ImmutableList.of(FINER_ENTRY), DEFAULT_OPTIONS);
@@ -329,7 +331,7 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testPublishCustomResource() {
+  void testPublishCustomResource() {
     MonitoredResource resource = MonitoredResource.of("custom", ImmutableMap.<String, String>of());
     logging.write(
         ImmutableList.of(FINEST_ENTRY),
@@ -345,29 +347,29 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testPublishCustomResourceWithFolder() {
+  void testPublishCustomResourceWithFolder() {
     testPublishCustomResourceWithDestination(FINEST_ENTRY, LogDestinationName.folder("folder"));
   }
 
   @Test
-  public void testPublishCustomResourceWithBilling() {
+  void testPublishCustomResourceWithBilling() {
     testPublishCustomResourceWithDestination(
         FINEST_ENTRY, LogDestinationName.billingAccount("billing"));
   }
 
   @Test
-  public void testPublishCustomResourceWithOrganization() {
+  void testPublishCustomResourceWithOrganization() {
     testPublishCustomResourceWithDestination(
         FINEST_ENTRY, LogDestinationName.organization("organization"));
   }
 
   @Test
-  public void testPublishCustomResourceWithProject() {
+  void testPublishCustomResourceWithProject() {
     testPublishCustomResourceWithDestination(FINEST_ENTRY, LogDestinationName.project(PROJECT));
   }
 
   @Test
-  public void testPublishKubernetesContainerResource() {
+  void testPublishKubernetesContainerResource() {
     MonitoredResource resource =
         MonitoredResource.of(
             "k8s_container",
@@ -396,7 +398,7 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testEnhancedLogEntry() {
+  void testEnhancedLogEntry() {
     logging.write(ImmutableList.of(FINEST_ENHANCED_ENTRY), DEFAULT_OPTIONS);
     expectLastCall().once();
     replay(options, logging);
@@ -416,7 +418,7 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testEnhancedLogEntryPrintToStdout() throws UnsupportedEncodingException {
+  void testEnhancedLogEntryPrintToStdout() throws UnsupportedEncodingException {
     outputStreamPatcher.patch();
 
     replay(options, logging);
@@ -433,7 +435,7 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testEnhancedLogEntryPrintToStderr() throws UnsupportedEncodingException {
+  void testEnhancedLogEntryPrintToStderr() throws UnsupportedEncodingException {
     outputStreamPatcher.patch();
 
     replay(options, logging);
@@ -450,7 +452,7 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testTraceEnhancedLogEntry() {
+  void testTraceEnhancedLogEntry() {
     logging.write(ImmutableList.of(TRACE_ENTRY), DEFAULT_OPTIONS);
     expectLastCall().once();
     replay(options, logging);
@@ -466,7 +468,7 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testReportWriteError() {
+  void testReportWriteError() {
     RuntimeException ex = new RuntimeException();
     logging.write(ImmutableList.of(FINEST_ENTRY), DEFAULT_OPTIONS);
     expectLastCall().andStubThrow(ex);
@@ -484,7 +486,7 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testReportFlushError() {
+  void testReportFlushError() {
     RuntimeException ex = new RuntimeException();
     logging.write(ImmutableList.of(FINEST_ENTRY), DEFAULT_OPTIONS);
     expectLastCall().once();
@@ -505,7 +507,7 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testReportFormatError() {
+  void testReportFormatError() {
     replay(options, logging);
     Formatter formatter = EasyMock.createStrictMock(Formatter.class);
     RuntimeException ex = new RuntimeException();
@@ -524,9 +526,9 @@ public class LoggingHandlerTest {
   }
 
   // BUG(1795): rewrite this test when flush actually works.
-  @Ignore
+  @Disabled
   @Test
-  public void testFlushLevel() {
+  void testFlushLevel() {
     logging.setFlushSeverity(Severity.WARNING);
     expectLastCall().once();
     logging.write(
@@ -548,7 +550,7 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testFlushLevelOff() {
+  void testFlushLevelOff() {
     logging.setFlushSeverity(Severity.NONE);
     expectLastCall().once();
     replay(options, logging);
@@ -558,7 +560,7 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testFlushLevelOn() {
+  void testFlushLevelOn() {
     logging.setFlushSeverity(Severity.WARNING);
     expectLastCall().once();
     replay(options, logging);
@@ -568,7 +570,7 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testCustomFlushLevelOn() {
+  void testCustomFlushLevelOn() {
     CustomLevel level = new CustomLevel();
     logging.setFlushSeverity(Severity.INFO);
     expectLastCall().once();
@@ -579,7 +581,7 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testSyncWrite() {
+  void testSyncWrite() {
     reset(logging);
     LogEntry entry =
         LogEntry.newBuilder(Payload.StringPayload.of(MESSAGE))
@@ -605,7 +607,7 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testAddHandler() {
+  void testAddHandler() {
     logging.write(ImmutableList.of(FINEST_ENTRY), DEFAULT_OPTIONS);
     expectLastCall().once();
     replay(options, logging);
@@ -625,7 +627,7 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testClose() throws Exception {
+  void testClose() throws Exception {
     logging.write(ImmutableList.of(FINEST_ENTRY), DEFAULT_OPTIONS);
     expectLastCall().once();
     logging.close();
@@ -666,7 +668,7 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testAutoPopulationEnabled() {
+  void testAutoPopulationEnabled() {
     setupOptionsToEnableAutoPopulation(/* expectDiagnostic= */ false);
     logging.write(ImmutableList.of(INFO_ENTRY), DEFAULT_OPTIONS);
     expectLastCall().once();
@@ -686,7 +688,7 @@ public class LoggingHandlerTest {
   // Test the deprecated get/setRedirectToStdout methods.
   @SuppressWarnings("deprecation")
   @Test
-  public void testSetRedirectToStdoutImpliesLogTarget() {
+  void testSetRedirectToStdoutImpliesLogTarget() {
     replay(options, logging);
     LoggingHandler handler = new LoggingHandler(LOG_NAME, options, DEFAULT_RESOURCE);
 
@@ -699,7 +701,7 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testRedirectToStdout() {
+  void testRedirectToStdout() {
     setupOptionsToEnableAutoPopulation(/* expectDiagnostic= */ true);
     replay(options, logging);
     outputStreamPatcher.patch();
@@ -716,7 +718,7 @@ public class LoggingHandlerTest {
   }
 
   @Test
-  public void testRedirectToStderr() {
+  void testRedirectToStderr() {
     setupOptionsToEnableAutoPopulation(/* expectDiagnostic= */ true);
     replay(options, logging);
     outputStreamPatcher.patch();

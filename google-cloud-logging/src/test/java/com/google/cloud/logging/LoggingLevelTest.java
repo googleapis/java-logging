@@ -17,18 +17,15 @@
 package com.google.cloud.logging;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.logging.Level;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-@RunWith(JUnit4.class)
-public class LoggingLevelTest {
+class LoggingLevelTest {
 
   @Test
-  public void testDebug() {
+  void testDebug() {
     LoggingLevel debug = LoggingLevel.DEBUG;
     assertEquals(Severity.DEBUG, debug.getSeverity());
     assertEquals("DEBUG", debug.getName());
@@ -37,7 +34,7 @@ public class LoggingLevelTest {
   }
 
   @Test
-  public void testNotice() {
+  void testNotice() {
     LoggingLevel notice = LoggingLevel.NOTICE;
     assertEquals(Severity.NOTICE, notice.getSeverity());
     assertEquals("NOTICE", notice.getName());
@@ -46,7 +43,7 @@ public class LoggingLevelTest {
   }
 
   @Test
-  public void testError() {
+  void testError() {
     LoggingLevel error = LoggingLevel.ERROR;
     assertEquals(Severity.ERROR, error.getSeverity());
     assertEquals("ERROR", error.getName());
@@ -55,7 +52,7 @@ public class LoggingLevelTest {
   }
 
   @Test
-  public void testCritical() {
+  void testCritical() {
     LoggingLevel critical = LoggingLevel.CRITICAL;
     assertEquals(Severity.CRITICAL, critical.getSeverity());
     assertEquals("CRITICAL", critical.getName());
@@ -64,7 +61,7 @@ public class LoggingLevelTest {
   }
 
   @Test
-  public void testAlert() {
+  void testAlert() {
     LoggingLevel alert = LoggingLevel.ALERT;
     assertEquals(Severity.ALERT, alert.getSeverity());
     assertEquals("ALERT", alert.getName());
@@ -73,7 +70,7 @@ public class LoggingLevelTest {
   }
 
   @Test
-  public void testEmergency() {
+  void testEmergency() {
     LoggingLevel emergency = LoggingLevel.EMERGENCY;
     assertEquals(Severity.EMERGENCY, emergency.getSeverity());
     assertEquals("EMERGENCY", emergency.getName());

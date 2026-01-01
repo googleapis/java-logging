@@ -18,11 +18,11 @@ package com.google.cloud.logging.it;
 
 import static com.google.cloud.logging.testing.RemoteLoggingHelper.formatForTest;
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.cloud.MonitoredResource;
 import com.google.cloud.logging.*;
@@ -30,12 +30,14 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.logging.v2.LogName;
 import java.util.Iterator;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
-public class ITLoggingTest extends BaseSystemTest {
+class ITLoggingTest extends BaseSystemTest {
 
   private static final String LOG_ID = formatForTest("test-write-log-entries-log");
   private static final Payload.StringPayload FIRST_PAYLOAD =
@@ -50,7 +52,7 @@ public class ITLoggingTest extends BaseSystemTest {
   private static final MonitoredResource[] MONITORED_RESOURCES_IN_TEST =
       new MonitoredResource[] {GLOBAL_RESOURCE, CLOUDSQL_RESOURCE};
 
-  @BeforeClass
+  @BeforeAll
   public static void insertLogs() {
     // This ensures predictability of the test:
     // with batching enabled by default, it's possible that for two log entries,
@@ -78,13 +80,16 @@ public class ITLoggingTest extends BaseSystemTest {
     logging.flush();
   }
 
-  @AfterClass
+  @AfterAll
   public static void cleanUpLogs() throws InterruptedException {
     assertTrue(cleanupLog(LOG_ID));
   }
 
-  @Ignore
-  @Test(timeout = 600_000) // Note: it can take ~10 minutes for logs to propagate!
+  @Disabled
+  @Test
+  @Timeout(
+      value = 600_000,
+      unit = TimeUnit.MILLISECONDS) // Note: it can take ~10 minutes for logs to propagate!
   public void testListEntries() throws InterruptedException {
     LoggingOptions loggingOptions = logging.getOptions();
     LogName logName = LogName.ofProjectLogName(loggingOptions.getProjectId(), LOG_ID);
@@ -117,8 +122,11 @@ public class ITLoggingTest extends BaseSystemTest {
     assertNotNull(entry.getTimestamp());
   }
 
-  @Ignore
-  @Test(timeout = 600_000) // Note: it can take ~10 minutes for logs to propagate!
+  @Disabled
+  @Test
+  @Timeout(
+      value = 600_000,
+      unit = TimeUnit.MILLISECONDS) // Note: it can take ~10 minutes for logs to propagate!
   public void testSortedOrder() throws InterruptedException {
     LoggingOptions loggingOptions = logging.getOptions();
     LogName logName = LogName.ofProjectLogName(loggingOptions.getProjectId(), LOG_ID);
@@ -141,9 +149,9 @@ public class ITLoggingTest extends BaseSystemTest {
     }
   }
 
-  @Ignore
+  @Disabled
   @Test
-  public void testDeleteNonExistingLog() {
+  void testDeleteNonExistingLog() {
     String logId = formatForTest("test-delete-non-existing-log");
     assertFalse(logging.deleteLog(logId));
   }

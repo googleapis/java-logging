@@ -17,7 +17,7 @@
 package com.google.cloud.logging;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.google.api.gax.rpc.BidiStream;
 import com.google.cloud.ServiceOptions;
@@ -29,12 +29,9 @@ import com.google.logging.v2.TailLogEntriesResponse;
 import com.google.protobuf.Duration;
 import com.google.protobuf.util.Durations;
 import org.easymock.EasyMock;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-@RunWith(JUnit4.class)
-public class TailLogEntriesTest {
+class TailLogEntriesTest {
   private static final String WINDOW = "20s";
   private static final Duration WINDOW_DURATION = Durations.fromSeconds(20);
   private static final String FILTER = "severity<INFO";
@@ -45,7 +42,7 @@ public class TailLogEntriesTest {
   private static final String ORG_ID = "test-org-id";
 
   @Test
-  public void testTailOptions() {
+  void testTailOptions() {
     TailLogEntriesRequest request =
         LoggingImpl.buildTailLogEntriesRequest(
             LoggingImpl.optionMap(
@@ -68,7 +65,7 @@ public class TailLogEntriesTest {
   }
 
   @Test
-  public void testEmptyTailOptions() {
+  void testEmptyTailOptions() {
     TailLogEntriesRequest request =
         LoggingImpl.buildTailLogEntriesRequest(LoggingImpl.optionMap(), DEFAULT_PROJECT_ID);
     assertThat(request.getFilter()).isEmpty();
@@ -77,7 +74,7 @@ public class TailLogEntriesTest {
   }
 
   @Test
-  public void testBidiStreamSendIsCalled() {
+  void testBidiStreamSendIsCalled() {
     // setup
     LoggingRpcFactory rpcFactoryMock = EasyMock.createStrictMock(LoggingRpcFactory.class);
     LoggingRpc loggingRpcMock = EasyMock.createStrictMock(LoggingRpc.class);

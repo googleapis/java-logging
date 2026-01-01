@@ -21,21 +21,18 @@ import static org.easymock.EasyMock.createStrictMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.api.core.ApiFutures;
 import java.util.concurrent.ExecutionException;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
-@RunWith(JUnit4.class)
-public class MetricTest {
+class MetricTest {
 
   private static final String NAME = "name";
   private static final String FILTER = "logName=projects/my-projectid/logs/syslog";
@@ -62,13 +59,13 @@ public class MetricTest {
     metric = new Metric(logging, new MetricInfo.BuilderImpl(METRIC_INFO));
   }
 
-  @After
-  public void tearDown() throws Exception {
+  @AfterEach
+  void tearDown() throws Exception {
     verify(logging, serviceMockReturnsOptions);
   }
 
   @Test
-  public void testBuilder() {
+  void testBuilder() {
     initializeExpectedMetric(2);
     replay(logging);
     Metric builtMetric =
@@ -84,14 +81,14 @@ public class MetricTest {
   }
 
   @Test
-  public void testToBuilder() {
+  void testToBuilder() {
     initializeExpectedMetric(2);
     replay(logging);
     compareMetric(expectedMetric, expectedMetric.toBuilder().build());
   }
 
   @Test
-  public void testReload() {
+  void testReload() {
     initializeExpectedMetric(2);
     MetricInfo updatedInfo = METRIC_INFO.toBuilder().setFilter(NEW_FILTER).build();
     Metric expectedMetric =
@@ -105,7 +102,7 @@ public class MetricTest {
   }
 
   @Test
-  public void testReloadNull() {
+  void testReloadNull() {
     initializeExpectedMetric(1);
     expect(logging.getOptions()).andReturn(mockOptions);
     expect(logging.getMetric(NAME)).andReturn(null);
@@ -115,7 +112,7 @@ public class MetricTest {
   }
 
   @Test
-  public void testReloadAsync() throws ExecutionException, InterruptedException {
+  void testReloadAsync() throws ExecutionException, InterruptedException {
     initializeExpectedMetric(2);
     MetricInfo updatedInfo = METRIC_INFO.toBuilder().setFilter(NEW_FILTER).build();
     Metric expectedMetric =
@@ -129,7 +126,7 @@ public class MetricTest {
   }
 
   @Test
-  public void testReloadAsyncNull() throws ExecutionException, InterruptedException {
+  void testReloadAsyncNull() throws ExecutionException, InterruptedException {
     initializeExpectedMetric(1);
     expect(logging.getOptions()).andReturn(mockOptions);
     expect(logging.getMetricAsync(NAME)).andReturn(ApiFutures.<Metric>immediateFuture(null));
@@ -139,7 +136,7 @@ public class MetricTest {
   }
 
   @Test
-  public void testUpdate() {
+  void testUpdate() {
     initializeExpectedMetric(2);
     MetricInfo updatedInfo = METRIC_INFO.toBuilder().setFilter(NEW_FILTER).build();
     Metric expectedMetric =
@@ -153,7 +150,7 @@ public class MetricTest {
   }
 
   @Test
-  public void testUpdateAsync() throws ExecutionException, InterruptedException {
+  void testUpdateAsync() throws ExecutionException, InterruptedException {
     initializeExpectedMetric(2);
     MetricInfo updatedInfo = METRIC_INFO.toBuilder().setFilter(NEW_FILTER).build();
     Metric expectedMetric =
@@ -168,7 +165,7 @@ public class MetricTest {
   }
 
   @Test
-  public void testDeleteTrue() {
+  void testDeleteTrue() {
     initializeExpectedMetric(1);
     expect(logging.getOptions()).andReturn(mockOptions);
     expect(logging.deleteMetric(NAME)).andReturn(true);
@@ -178,7 +175,7 @@ public class MetricTest {
   }
 
   @Test
-  public void testDeleteFalse() {
+  void testDeleteFalse() {
     initializeExpectedMetric(1);
     expect(logging.getOptions()).andReturn(mockOptions);
     expect(logging.deleteMetric(NAME)).andReturn(false);
@@ -188,7 +185,7 @@ public class MetricTest {
   }
 
   @Test
-  public void testDeleteAsyncTrue() throws ExecutionException, InterruptedException {
+  void testDeleteAsyncTrue() throws ExecutionException, InterruptedException {
     initializeExpectedMetric(1);
     expect(logging.getOptions()).andReturn(mockOptions);
     expect(logging.deleteMetricAsync(NAME)).andReturn(ApiFutures.immediateFuture(true));
@@ -198,7 +195,7 @@ public class MetricTest {
   }
 
   @Test
-  public void testDeleteAsyncFalse() throws ExecutionException, InterruptedException {
+  void testDeleteAsyncFalse() throws ExecutionException, InterruptedException {
     initializeExpectedMetric(1);
     expect(logging.getOptions()).andReturn(mockOptions);
     expect(logging.deleteMetricAsync(NAME)).andReturn(ApiFutures.immediateFuture(false));

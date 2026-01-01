@@ -18,7 +18,7 @@ package com.google.cloud.logging.it;
 
 import static com.google.cloud.logging.testing.RemoteLoggingHelper.formatForTest;
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.google.cloud.MonitoredResource;
 import com.google.cloud.logging.*;
@@ -35,13 +35,15 @@ import io.opentelemetry.sdk.trace.SdkTracerProvider;
 import io.opentelemetry.sdk.trace.SpanProcessor;
 import io.opentelemetry.sdk.trace.export.SimpleSpanProcessor;
 import java.util.Iterator;
-import org.junit.After;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
-@Ignore
-public class ITTracingLogsTest extends BaseSystemTest {
+@Disabled
+class ITTracingLogsTest extends BaseSystemTest {
 
   private static final String LOG_ID = formatForTest("test-write-log-entries-log");
   private static final Payload.StringPayload STRING_PAYLOAD =
@@ -76,7 +78,7 @@ public class ITTracingLogsTest extends BaseSystemTest {
   private static LogEntry otelEntry;
   private static LogName logName;
 
-  @BeforeClass
+  @BeforeAll
   public static void prepareLogs() throws InterruptedException {
     LoggingOptions loggingOptions = logging.getOptions();
     logName = LogName.ofProjectLogName(loggingOptions.getProjectId(), LOG_ID);
@@ -113,12 +115,13 @@ public class ITTracingLogsTest extends BaseSystemTest {
     tracer = openTelemetrySdk.getTracer("ContextTest");
   }
 
-  @After
-  public void cleanUpLogs() throws InterruptedException {
+  @AfterEach
+  void cleanUpLogs() throws InterruptedException {
     assertTrue(cleanupLog(LOG_ID));
   }
 
-  @Test(timeout = 600_000)
+  @Test
+  @Timeout(value = 600_000, unit = TimeUnit.MILLISECONDS)
   public void testDetectW3CTraceId() throws InterruptedException {
     // Loads w3c tracing context and writes a log entry
     Context.Builder builder = Context.newBuilder();
@@ -140,7 +143,8 @@ public class ITTracingLogsTest extends BaseSystemTest {
     assertEquals(true, entry.getTraceSampled());
   }
 
-  @Test(timeout = 600_000)
+  @Test
+  @Timeout(value = 600_000, unit = TimeUnit.MILLISECONDS)
   public void testDetectXCTCTraceId() throws InterruptedException {
     // Loads cloud trace context and writes a log entry
     Context.Builder builder = Context.newBuilder();
@@ -163,7 +167,8 @@ public class ITTracingLogsTest extends BaseSystemTest {
     assertEquals(true, entry.getTraceSampled());
   }
 
-  @Test(timeout = 600_000)
+  @Test
+  @Timeout(value = 600_000, unit = TimeUnit.MILLISECONDS)
   public void testDetectOtelTraceId() throws InterruptedException {
     // Writes a log entry in open telemetry context
     writeLogEntryWithOtelContext(otelEntry);
@@ -182,7 +187,8 @@ public class ITTracingLogsTest extends BaseSystemTest {
     assertEquals(isSampled, entry.getTraceSampled());
   }
 
-  @Test(timeout = 600_000)
+  @Test
+  @Timeout(value = 600_000, unit = TimeUnit.MILLISECONDS)
   public void testW3CTraceIdWithOtelContext() throws InterruptedException {
     // Writes a log entry with W3C context and Open Telemetry context
     Context.Builder builder = Context.newBuilder();
@@ -204,7 +210,8 @@ public class ITTracingLogsTest extends BaseSystemTest {
     assertEquals(isSampled, entry.getTraceSampled());
   }
 
-  @Test(timeout = 600_000)
+  @Test
+  @Timeout(value = 600_000, unit = TimeUnit.MILLISECONDS)
   public void testXCTCTraceIdWithOtelContext() throws InterruptedException {
     // Writes a log entry with cloud trace context and Open Telemetry context
     Context.Builder builder = Context.newBuilder();

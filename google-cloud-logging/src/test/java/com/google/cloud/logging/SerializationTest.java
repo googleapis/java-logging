@@ -36,11 +36,8 @@ import com.google.common.collect.ImmutableMap;
 import com.google.protobuf.Any;
 import com.google.protobuf.Empty;
 import java.io.Serializable;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
-@RunWith(JUnit4.class)
-public class SerializationTest extends BaseSerializationTest {
+class SerializationTest extends BaseSerializationTest {
 
   private static final Logging LOGGING =
       LoggingOptions.newBuilder()

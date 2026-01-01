@@ -20,29 +20,30 @@ import static com.google.common.truth.Truth.assertThat;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
+import java.util.concurrent.TimeUnit;
 
-public class LogsIT {
+class LogsIT {
   private static final String GOOGLEAPIS_AUDIT_LOGNAME = "cloudaudit.googleapis.com%2Factivity";
 
   private ByteArrayOutputStream bout;
   private PrintStream out;
 
-  @Before
-  public void setUp() {
+  @BeforeEach void setUp() {
     bout = new ByteArrayOutputStream();
     out = new PrintStream(bout);
     System.setOut(out);
   }
 
-  @After
-  public void tearDown() {
+  @AfterEach void tearDown() {
     System.setOut(null);
   }
 
-  @Test(timeout = 60000)
+  @Test
+  @Timeout(value = 60000, unit = TimeUnit.MILLISECONDS)
   public void testListLogNamesSample() throws Exception {
     ListLogs.main();
     // Check for mocked STDOUT having data
