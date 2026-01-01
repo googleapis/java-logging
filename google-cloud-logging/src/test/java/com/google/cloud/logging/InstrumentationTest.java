@@ -16,7 +16,10 @@
 
 package com.google.cloud.logging;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.api.client.util.Lists;
 import com.google.cloud.Tuple;
@@ -30,7 +33,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class InstrumentationTest {
@@ -60,8 +62,8 @@ class InstrumentationTest {
     Tuple<Boolean, Iterable<LogEntry>> pair =
         Instrumentation.populateInstrumentationInfo(ImmutableList.of(STRING_ENTRY));
     ArrayList<LogEntry> entries = Lists.newArrayList(pair.y());
-    Assertions.assertFalse(pair.x());
-    Assertions.assertEquals(1, entries.size());
+    assertFalse(pair.x());
+    assertEquals(1, entries.size());
     assertSame(Payload.Type.STRING, entries.get(0).getPayload().getType());
   }
 
@@ -120,8 +122,8 @@ class InstrumentationTest {
       HashSet<String> names,
       HashSet<String> versions) {
     ArrayList<LogEntry> entries = Lists.newArrayList(pair.y());
-    Assertions.assertTrue(pair.x());
-    Assertions.assertEquals(expected, entries.size());
+    assertTrue(pair.x());
+    assertEquals(expected, entries.size());
     assertSame(Payload.Type.JSON, entries.get(index).getPayload().getType());
     ListValue infoList =
         entries
@@ -133,18 +135,18 @@ class InstrumentationTest {
             .getFieldsOrThrow(Instrumentation.INSTRUMENTATION_SOURCE_KEY)
             .getListValue();
     for (Value val : infoList.getValuesList()) {
-      Assertions.assertTrue(
+      assertTrue(
           names.remove(
               val.getStructValue()
                   .getFieldsOrThrow(Instrumentation.INSTRUMENTATION_NAME_KEY)
                   .getStringValue()));
-      Assertions.assertTrue(
+      assertTrue(
           versions.remove(
               val.getStructValue()
                   .getFieldsOrThrow(Instrumentation.INSTRUMENTATION_VERSION_KEY)
                   .getStringValue()));
     }
-    Assertions.assertEquals(0, names.size());
-    Assertions.assertEquals(0, versions.size());
+    assertEquals(0, names.size());
+    assertEquals(0, versions.size());
   }
 }

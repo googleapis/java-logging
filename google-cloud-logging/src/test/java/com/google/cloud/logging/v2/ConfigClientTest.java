@@ -106,21 +106,21 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import javax.annotation.Generated;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Before;
+import org.junit.Test;
 
 @Generated("by gapic-generator-java")
-class ConfigClientTest {
+public class ConfigClientTest {
   private static MockConfigServiceV2 mockConfigServiceV2;
   private static MockServiceHelper mockServiceHelper;
   private LocalChannelProvider channelProvider;
   private ConfigClient client;
 
-  @BeforeAll
+  @BeforeClass
   public static void startStaticServer() {
     mockConfigServiceV2 = new MockConfigServiceV2();
     mockServiceHelper =
@@ -129,13 +129,13 @@ class ConfigClientTest {
     mockServiceHelper.start();
   }
 
-  @AfterAll
+  @AfterClass
   public static void stopServer() {
     mockServiceHelper.stop();
   }
 
-  @BeforeEach
-  void setUp() throws IOException {
+  @Before
+  public void setUp() throws IOException {
     mockServiceHelper.reset();
     channelProvider = mockServiceHelper.createChannelProvider();
     ConfigSettings settings =
@@ -146,13 +146,13 @@ class ConfigClientTest {
     client = ConfigClient.create(settings);
   }
 
-  @AfterEach
-  void tearDown() throws Exception {
+  @After
+  public void tearDown() throws Exception {
     client.close();
   }
 
   @Test
-  void listBucketsTest() throws Exception {
+  public void listBucketsTest() throws Exception {
     LogBucket responsesElement = LogBucket.newBuilder().build();
     ListBucketsResponse expectedResponse =
         ListBucketsResponse.newBuilder()
@@ -168,22 +168,22 @@ class ConfigClientTest {
 
     List<LogBucket> resources = Lists.newArrayList(pagedListResponse.iterateAll());
 
-    Assertions.assertEquals(1, resources.size());
-    Assertions.assertEquals(expectedResponse.getBucketsList().get(0), resources.get(0));
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getBucketsList().get(0), resources.get(0));
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     ListBucketsRequest actualRequest = ((ListBucketsRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void listBucketsExceptionTest() throws Exception {
+  public void listBucketsExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -191,14 +191,14 @@ class ConfigClientTest {
       BillingAccountLocationName parent =
           BillingAccountLocationName.of("[BILLING_ACCOUNT]", "[LOCATION]");
       client.listBuckets(parent);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void listBucketsTest2() throws Exception {
+  public void listBucketsTest2() throws Exception {
     LogBucket responsesElement = LogBucket.newBuilder().build();
     ListBucketsResponse expectedResponse =
         ListBucketsResponse.newBuilder()
@@ -213,36 +213,36 @@ class ConfigClientTest {
 
     List<LogBucket> resources = Lists.newArrayList(pagedListResponse.iterateAll());
 
-    Assertions.assertEquals(1, resources.size());
-    Assertions.assertEquals(expectedResponse.getBucketsList().get(0), resources.get(0));
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getBucketsList().get(0), resources.get(0));
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     ListBucketsRequest actualRequest = ((ListBucketsRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void listBucketsExceptionTest2() throws Exception {
+  public void listBucketsExceptionTest2() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       FolderLocationName parent = FolderLocationName.of("[FOLDER]", "[LOCATION]");
       client.listBuckets(parent);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void listBucketsTest3() throws Exception {
+  public void listBucketsTest3() throws Exception {
     LogBucket responsesElement = LogBucket.newBuilder().build();
     ListBucketsResponse expectedResponse =
         ListBucketsResponse.newBuilder()
@@ -257,36 +257,36 @@ class ConfigClientTest {
 
     List<LogBucket> resources = Lists.newArrayList(pagedListResponse.iterateAll());
 
-    Assertions.assertEquals(1, resources.size());
-    Assertions.assertEquals(expectedResponse.getBucketsList().get(0), resources.get(0));
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getBucketsList().get(0), resources.get(0));
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     ListBucketsRequest actualRequest = ((ListBucketsRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void listBucketsExceptionTest3() throws Exception {
+  public void listBucketsExceptionTest3() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
       client.listBuckets(parent);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void listBucketsTest4() throws Exception {
+  public void listBucketsTest4() throws Exception {
     LogBucket responsesElement = LogBucket.newBuilder().build();
     ListBucketsResponse expectedResponse =
         ListBucketsResponse.newBuilder()
@@ -301,36 +301,36 @@ class ConfigClientTest {
 
     List<LogBucket> resources = Lists.newArrayList(pagedListResponse.iterateAll());
 
-    Assertions.assertEquals(1, resources.size());
-    Assertions.assertEquals(expectedResponse.getBucketsList().get(0), resources.get(0));
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getBucketsList().get(0), resources.get(0));
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     ListBucketsRequest actualRequest = ((ListBucketsRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void listBucketsExceptionTest4() throws Exception {
+  public void listBucketsExceptionTest4() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       OrganizationLocationName parent = OrganizationLocationName.of("[ORGANIZATION]", "[LOCATION]");
       client.listBuckets(parent);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void listBucketsTest5() throws Exception {
+  public void listBucketsTest5() throws Exception {
     LogBucket responsesElement = LogBucket.newBuilder().build();
     ListBucketsResponse expectedResponse =
         ListBucketsResponse.newBuilder()
@@ -345,36 +345,36 @@ class ConfigClientTest {
 
     List<LogBucket> resources = Lists.newArrayList(pagedListResponse.iterateAll());
 
-    Assertions.assertEquals(1, resources.size());
-    Assertions.assertEquals(expectedResponse.getBucketsList().get(0), resources.get(0));
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getBucketsList().get(0), resources.get(0));
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     ListBucketsRequest actualRequest = ((ListBucketsRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent, actualRequest.getParent());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent, actualRequest.getParent());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void listBucketsExceptionTest5() throws Exception {
+  public void listBucketsExceptionTest5() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       String parent = "parent-995424086";
       client.listBuckets(parent);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void getBucketTest() throws Exception {
+  public void getBucketTest() throws Exception {
     LogBucket expectedResponse =
         LogBucket.newBuilder()
             .setName(
@@ -401,21 +401,21 @@ class ConfigClientTest {
             .build();
 
     LogBucket actualResponse = client.getBucket(request);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     GetBucketRequest actualRequest = ((GetBucketRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(request.getName(), actualRequest.getName());
-    Assertions.assertTrue(
+    Assert.assertEquals(request.getName(), actualRequest.getName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void getBucketExceptionTest() throws Exception {
+  public void getBucketExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -427,14 +427,14 @@ class ConfigClientTest {
                       .toString())
               .build();
       client.getBucket(request);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void createBucketAsyncTest() throws Exception {
+  public void createBucketAsyncTest() throws Exception {
     LogBucket expectedResponse =
         LogBucket.newBuilder()
             .setName(
@@ -467,23 +467,23 @@ class ConfigClientTest {
             .build();
 
     LogBucket actualResponse = client.createBucketAsyncAsync(request).get();
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     CreateBucketRequest actualRequest = ((CreateBucketRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(request.getParent(), actualRequest.getParent());
-    Assertions.assertEquals(request.getBucketId(), actualRequest.getBucketId());
-    Assertions.assertEquals(request.getBucket(), actualRequest.getBucket());
-    Assertions.assertTrue(
+    Assert.assertEquals(request.getParent(), actualRequest.getParent());
+    Assert.assertEquals(request.getBucketId(), actualRequest.getBucketId());
+    Assert.assertEquals(request.getBucket(), actualRequest.getBucket());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void createBucketAsyncExceptionTest() throws Exception {
+  public void createBucketAsyncExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -495,17 +495,17 @@ class ConfigClientTest {
               .setBucket(LogBucket.newBuilder().build())
               .build();
       client.createBucketAsyncAsync(request).get();
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (ExecutionException e) {
-      Assertions.assertEquals(InvalidArgumentException.class, e.getCause().getClass());
+      Assert.assertEquals(InvalidArgumentException.class, e.getCause().getClass());
       InvalidArgumentException apiException = ((InvalidArgumentException) e.getCause());
-      Assertions.assertEquals(
+      Assert.assertEquals(
           StatusCode.Code.INVALID_ARGUMENT, apiException.getStatusCode().getCode());
     }
   }
 
   @Test
-  void updateBucketAsyncTest() throws Exception {
+  public void updateBucketAsyncTest() throws Exception {
     LogBucket expectedResponse =
         LogBucket.newBuilder()
             .setName(
@@ -540,23 +540,23 @@ class ConfigClientTest {
             .build();
 
     LogBucket actualResponse = client.updateBucketAsyncAsync(request).get();
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     UpdateBucketRequest actualRequest = ((UpdateBucketRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(request.getName(), actualRequest.getName());
-    Assertions.assertEquals(request.getBucket(), actualRequest.getBucket());
-    Assertions.assertEquals(request.getUpdateMask(), actualRequest.getUpdateMask());
-    Assertions.assertTrue(
+    Assert.assertEquals(request.getName(), actualRequest.getName());
+    Assert.assertEquals(request.getBucket(), actualRequest.getBucket());
+    Assert.assertEquals(request.getUpdateMask(), actualRequest.getUpdateMask());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void updateBucketAsyncExceptionTest() throws Exception {
+  public void updateBucketAsyncExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -570,17 +570,17 @@ class ConfigClientTest {
               .setUpdateMask(FieldMask.newBuilder().build())
               .build();
       client.updateBucketAsyncAsync(request).get();
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (ExecutionException e) {
-      Assertions.assertEquals(InvalidArgumentException.class, e.getCause().getClass());
+      Assert.assertEquals(InvalidArgumentException.class, e.getCause().getClass());
       InvalidArgumentException apiException = ((InvalidArgumentException) e.getCause());
-      Assertions.assertEquals(
+      Assert.assertEquals(
           StatusCode.Code.INVALID_ARGUMENT, apiException.getStatusCode().getCode());
     }
   }
 
   @Test
-  void createBucketTest() throws Exception {
+  public void createBucketTest() throws Exception {
     LogBucket expectedResponse =
         LogBucket.newBuilder()
             .setName(
@@ -607,23 +607,23 @@ class ConfigClientTest {
             .build();
 
     LogBucket actualResponse = client.createBucket(request);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     CreateBucketRequest actualRequest = ((CreateBucketRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(request.getParent(), actualRequest.getParent());
-    Assertions.assertEquals(request.getBucketId(), actualRequest.getBucketId());
-    Assertions.assertEquals(request.getBucket(), actualRequest.getBucket());
-    Assertions.assertTrue(
+    Assert.assertEquals(request.getParent(), actualRequest.getParent());
+    Assert.assertEquals(request.getBucketId(), actualRequest.getBucketId());
+    Assert.assertEquals(request.getBucket(), actualRequest.getBucket());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void createBucketExceptionTest() throws Exception {
+  public void createBucketExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -635,14 +635,14 @@ class ConfigClientTest {
               .setBucket(LogBucket.newBuilder().build())
               .build();
       client.createBucket(request);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void updateBucketTest() throws Exception {
+  public void updateBucketTest() throws Exception {
     LogBucket expectedResponse =
         LogBucket.newBuilder()
             .setName(
@@ -671,23 +671,23 @@ class ConfigClientTest {
             .build();
 
     LogBucket actualResponse = client.updateBucket(request);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     UpdateBucketRequest actualRequest = ((UpdateBucketRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(request.getName(), actualRequest.getName());
-    Assertions.assertEquals(request.getBucket(), actualRequest.getBucket());
-    Assertions.assertEquals(request.getUpdateMask(), actualRequest.getUpdateMask());
-    Assertions.assertTrue(
+    Assert.assertEquals(request.getName(), actualRequest.getName());
+    Assert.assertEquals(request.getBucket(), actualRequest.getBucket());
+    Assert.assertEquals(request.getUpdateMask(), actualRequest.getUpdateMask());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void updateBucketExceptionTest() throws Exception {
+  public void updateBucketExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -701,14 +701,14 @@ class ConfigClientTest {
               .setUpdateMask(FieldMask.newBuilder().build())
               .build();
       client.updateBucket(request);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void deleteBucketTest() throws Exception {
+  public void deleteBucketTest() throws Exception {
     Empty expectedResponse = Empty.newBuilder().build();
     mockConfigServiceV2.addResponse(expectedResponse);
 
@@ -722,18 +722,18 @@ class ConfigClientTest {
     client.deleteBucket(request);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     DeleteBucketRequest actualRequest = ((DeleteBucketRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(request.getName(), actualRequest.getName());
-    Assertions.assertTrue(
+    Assert.assertEquals(request.getName(), actualRequest.getName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void deleteBucketExceptionTest() throws Exception {
+  public void deleteBucketExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -745,14 +745,14 @@ class ConfigClientTest {
                       .toString())
               .build();
       client.deleteBucket(request);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void undeleteBucketTest() throws Exception {
+  public void undeleteBucketTest() throws Exception {
     Empty expectedResponse = Empty.newBuilder().build();
     mockConfigServiceV2.addResponse(expectedResponse);
 
@@ -766,18 +766,18 @@ class ConfigClientTest {
     client.undeleteBucket(request);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     UndeleteBucketRequest actualRequest = ((UndeleteBucketRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(request.getName(), actualRequest.getName());
-    Assertions.assertTrue(
+    Assert.assertEquals(request.getName(), actualRequest.getName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void undeleteBucketExceptionTest() throws Exception {
+  public void undeleteBucketExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -789,14 +789,14 @@ class ConfigClientTest {
                       .toString())
               .build();
       client.undeleteBucket(request);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void listViewsTest() throws Exception {
+  public void listViewsTest() throws Exception {
     LogView responsesElement = LogView.newBuilder().build();
     ListViewsResponse expectedResponse =
         ListViewsResponse.newBuilder()
@@ -811,36 +811,36 @@ class ConfigClientTest {
 
     List<LogView> resources = Lists.newArrayList(pagedListResponse.iterateAll());
 
-    Assertions.assertEquals(1, resources.size());
-    Assertions.assertEquals(expectedResponse.getViewsList().get(0), resources.get(0));
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getViewsList().get(0), resources.get(0));
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     ListViewsRequest actualRequest = ((ListViewsRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent, actualRequest.getParent());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent, actualRequest.getParent());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void listViewsExceptionTest() throws Exception {
+  public void listViewsExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       String parent = "parent-995424086";
       client.listViews(parent);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void getViewTest() throws Exception {
+  public void getViewTest() throws Exception {
     LogView expectedResponse =
         LogView.newBuilder()
             .setName(
@@ -863,21 +863,21 @@ class ConfigClientTest {
             .build();
 
     LogView actualResponse = client.getView(request);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     GetViewRequest actualRequest = ((GetViewRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(request.getName(), actualRequest.getName());
-    Assertions.assertTrue(
+    Assert.assertEquals(request.getName(), actualRequest.getName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void getViewExceptionTest() throws Exception {
+  public void getViewExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -890,14 +890,14 @@ class ConfigClientTest {
                       .toString())
               .build();
       client.getView(request);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void createViewTest() throws Exception {
+  public void createViewTest() throws Exception {
     LogView expectedResponse =
         LogView.newBuilder()
             .setName(
@@ -919,23 +919,23 @@ class ConfigClientTest {
             .build();
 
     LogView actualResponse = client.createView(request);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     CreateViewRequest actualRequest = ((CreateViewRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(request.getParent(), actualRequest.getParent());
-    Assertions.assertEquals(request.getViewId(), actualRequest.getViewId());
-    Assertions.assertEquals(request.getView(), actualRequest.getView());
-    Assertions.assertTrue(
+    Assert.assertEquals(request.getParent(), actualRequest.getParent());
+    Assert.assertEquals(request.getViewId(), actualRequest.getViewId());
+    Assert.assertEquals(request.getView(), actualRequest.getView());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void createViewExceptionTest() throws Exception {
+  public void createViewExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -947,14 +947,14 @@ class ConfigClientTest {
               .setView(LogView.newBuilder().build())
               .build();
       client.createView(request);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void updateViewTest() throws Exception {
+  public void updateViewTest() throws Exception {
     LogView expectedResponse =
         LogView.newBuilder()
             .setName(
@@ -976,23 +976,23 @@ class ConfigClientTest {
             .build();
 
     LogView actualResponse = client.updateView(request);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     UpdateViewRequest actualRequest = ((UpdateViewRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(request.getName(), actualRequest.getName());
-    Assertions.assertEquals(request.getView(), actualRequest.getView());
-    Assertions.assertEquals(request.getUpdateMask(), actualRequest.getUpdateMask());
-    Assertions.assertTrue(
+    Assert.assertEquals(request.getName(), actualRequest.getName());
+    Assert.assertEquals(request.getView(), actualRequest.getView());
+    Assert.assertEquals(request.getUpdateMask(), actualRequest.getUpdateMask());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void updateViewExceptionTest() throws Exception {
+  public void updateViewExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -1004,14 +1004,14 @@ class ConfigClientTest {
               .setUpdateMask(FieldMask.newBuilder().build())
               .build();
       client.updateView(request);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void deleteViewTest() throws Exception {
+  public void deleteViewTest() throws Exception {
     Empty expectedResponse = Empty.newBuilder().build();
     mockConfigServiceV2.addResponse(expectedResponse);
 
@@ -1026,18 +1026,18 @@ class ConfigClientTest {
     client.deleteView(request);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     DeleteViewRequest actualRequest = ((DeleteViewRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(request.getName(), actualRequest.getName());
-    Assertions.assertTrue(
+    Assert.assertEquals(request.getName(), actualRequest.getName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void deleteViewExceptionTest() throws Exception {
+  public void deleteViewExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -1050,14 +1050,14 @@ class ConfigClientTest {
                       .toString())
               .build();
       client.deleteView(request);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void listSinksTest() throws Exception {
+  public void listSinksTest() throws Exception {
     LogSink responsesElement = LogSink.newBuilder().build();
     ListSinksResponse expectedResponse =
         ListSinksResponse.newBuilder()
@@ -1072,36 +1072,36 @@ class ConfigClientTest {
 
     List<LogSink> resources = Lists.newArrayList(pagedListResponse.iterateAll());
 
-    Assertions.assertEquals(1, resources.size());
-    Assertions.assertEquals(expectedResponse.getSinksList().get(0), resources.get(0));
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getSinksList().get(0), resources.get(0));
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     ListSinksRequest actualRequest = ((ListSinksRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void listSinksExceptionTest() throws Exception {
+  public void listSinksExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       BillingAccountName parent = BillingAccountName.of("[BILLING_ACCOUNT]");
       client.listSinks(parent);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void listSinksTest2() throws Exception {
+  public void listSinksTest2() throws Exception {
     LogSink responsesElement = LogSink.newBuilder().build();
     ListSinksResponse expectedResponse =
         ListSinksResponse.newBuilder()
@@ -1116,36 +1116,36 @@ class ConfigClientTest {
 
     List<LogSink> resources = Lists.newArrayList(pagedListResponse.iterateAll());
 
-    Assertions.assertEquals(1, resources.size());
-    Assertions.assertEquals(expectedResponse.getSinksList().get(0), resources.get(0));
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getSinksList().get(0), resources.get(0));
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     ListSinksRequest actualRequest = ((ListSinksRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void listSinksExceptionTest2() throws Exception {
+  public void listSinksExceptionTest2() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       FolderName parent = FolderName.of("[FOLDER]");
       client.listSinks(parent);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void listSinksTest3() throws Exception {
+  public void listSinksTest3() throws Exception {
     LogSink responsesElement = LogSink.newBuilder().build();
     ListSinksResponse expectedResponse =
         ListSinksResponse.newBuilder()
@@ -1160,36 +1160,36 @@ class ConfigClientTest {
 
     List<LogSink> resources = Lists.newArrayList(pagedListResponse.iterateAll());
 
-    Assertions.assertEquals(1, resources.size());
-    Assertions.assertEquals(expectedResponse.getSinksList().get(0), resources.get(0));
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getSinksList().get(0), resources.get(0));
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     ListSinksRequest actualRequest = ((ListSinksRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void listSinksExceptionTest3() throws Exception {
+  public void listSinksExceptionTest3() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       OrganizationName parent = OrganizationName.of("[ORGANIZATION]");
       client.listSinks(parent);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void listSinksTest4() throws Exception {
+  public void listSinksTest4() throws Exception {
     LogSink responsesElement = LogSink.newBuilder().build();
     ListSinksResponse expectedResponse =
         ListSinksResponse.newBuilder()
@@ -1204,36 +1204,36 @@ class ConfigClientTest {
 
     List<LogSink> resources = Lists.newArrayList(pagedListResponse.iterateAll());
 
-    Assertions.assertEquals(1, resources.size());
-    Assertions.assertEquals(expectedResponse.getSinksList().get(0), resources.get(0));
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getSinksList().get(0), resources.get(0));
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     ListSinksRequest actualRequest = ((ListSinksRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void listSinksExceptionTest4() throws Exception {
+  public void listSinksExceptionTest4() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       ProjectName parent = ProjectName.of("[PROJECT]");
       client.listSinks(parent);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void listSinksTest5() throws Exception {
+  public void listSinksTest5() throws Exception {
     LogSink responsesElement = LogSink.newBuilder().build();
     ListSinksResponse expectedResponse =
         ListSinksResponse.newBuilder()
@@ -1248,36 +1248,36 @@ class ConfigClientTest {
 
     List<LogSink> resources = Lists.newArrayList(pagedListResponse.iterateAll());
 
-    Assertions.assertEquals(1, resources.size());
-    Assertions.assertEquals(expectedResponse.getSinksList().get(0), resources.get(0));
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getSinksList().get(0), resources.get(0));
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     ListSinksRequest actualRequest = ((ListSinksRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent, actualRequest.getParent());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent, actualRequest.getParent());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void listSinksExceptionTest5() throws Exception {
+  public void listSinksExceptionTest5() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       String parent = "parent-995424086";
       client.listSinks(parent);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void getSinkTest() throws Exception {
+  public void getSinkTest() throws Exception {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
@@ -1296,35 +1296,35 @@ class ConfigClientTest {
     LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
 
     LogSink actualResponse = client.getSink(sinkName);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     GetSinkRequest actualRequest = ((GetSinkRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(sinkName.toString(), actualRequest.getSinkName());
-    Assertions.assertTrue(
+    Assert.assertEquals(sinkName.toString(), actualRequest.getSinkName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void getSinkExceptionTest() throws Exception {
+  public void getSinkExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
       client.getSink(sinkName);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void getSinkTest2() throws Exception {
+  public void getSinkTest2() throws Exception {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
@@ -1343,35 +1343,35 @@ class ConfigClientTest {
     String sinkName = "sinkName508775358";
 
     LogSink actualResponse = client.getSink(sinkName);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     GetSinkRequest actualRequest = ((GetSinkRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(sinkName, actualRequest.getSinkName());
-    Assertions.assertTrue(
+    Assert.assertEquals(sinkName, actualRequest.getSinkName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void getSinkExceptionTest2() throws Exception {
+  public void getSinkExceptionTest2() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       String sinkName = "sinkName508775358";
       client.getSink(sinkName);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void createSinkTest() throws Exception {
+  public void createSinkTest() throws Exception {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
@@ -1391,22 +1391,22 @@ class ConfigClientTest {
     LogSink sink = LogSink.newBuilder().build();
 
     LogSink actualResponse = client.createSink(parent, sink);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     CreateSinkRequest actualRequest = ((CreateSinkRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertEquals(sink, actualRequest.getSink());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertEquals(sink, actualRequest.getSink());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void createSinkExceptionTest() throws Exception {
+  public void createSinkExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -1414,14 +1414,14 @@ class ConfigClientTest {
       BillingAccountName parent = BillingAccountName.of("[BILLING_ACCOUNT]");
       LogSink sink = LogSink.newBuilder().build();
       client.createSink(parent, sink);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void createSinkTest2() throws Exception {
+  public void createSinkTest2() throws Exception {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
@@ -1441,22 +1441,22 @@ class ConfigClientTest {
     LogSink sink = LogSink.newBuilder().build();
 
     LogSink actualResponse = client.createSink(parent, sink);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     CreateSinkRequest actualRequest = ((CreateSinkRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertEquals(sink, actualRequest.getSink());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertEquals(sink, actualRequest.getSink());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void createSinkExceptionTest2() throws Exception {
+  public void createSinkExceptionTest2() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -1464,14 +1464,14 @@ class ConfigClientTest {
       FolderName parent = FolderName.of("[FOLDER]");
       LogSink sink = LogSink.newBuilder().build();
       client.createSink(parent, sink);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void createSinkTest3() throws Exception {
+  public void createSinkTest3() throws Exception {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
@@ -1491,22 +1491,22 @@ class ConfigClientTest {
     LogSink sink = LogSink.newBuilder().build();
 
     LogSink actualResponse = client.createSink(parent, sink);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     CreateSinkRequest actualRequest = ((CreateSinkRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertEquals(sink, actualRequest.getSink());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertEquals(sink, actualRequest.getSink());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void createSinkExceptionTest3() throws Exception {
+  public void createSinkExceptionTest3() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -1514,14 +1514,14 @@ class ConfigClientTest {
       OrganizationName parent = OrganizationName.of("[ORGANIZATION]");
       LogSink sink = LogSink.newBuilder().build();
       client.createSink(parent, sink);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void createSinkTest4() throws Exception {
+  public void createSinkTest4() throws Exception {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
@@ -1541,22 +1541,22 @@ class ConfigClientTest {
     LogSink sink = LogSink.newBuilder().build();
 
     LogSink actualResponse = client.createSink(parent, sink);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     CreateSinkRequest actualRequest = ((CreateSinkRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertEquals(sink, actualRequest.getSink());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertEquals(sink, actualRequest.getSink());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void createSinkExceptionTest4() throws Exception {
+  public void createSinkExceptionTest4() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -1564,14 +1564,14 @@ class ConfigClientTest {
       ProjectName parent = ProjectName.of("[PROJECT]");
       LogSink sink = LogSink.newBuilder().build();
       client.createSink(parent, sink);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void createSinkTest5() throws Exception {
+  public void createSinkTest5() throws Exception {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
@@ -1591,22 +1591,22 @@ class ConfigClientTest {
     LogSink sink = LogSink.newBuilder().build();
 
     LogSink actualResponse = client.createSink(parent, sink);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     CreateSinkRequest actualRequest = ((CreateSinkRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent, actualRequest.getParent());
-    Assertions.assertEquals(sink, actualRequest.getSink());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent, actualRequest.getParent());
+    Assert.assertEquals(sink, actualRequest.getSink());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void createSinkExceptionTest5() throws Exception {
+  public void createSinkExceptionTest5() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -1614,14 +1614,14 @@ class ConfigClientTest {
       String parent = "parent-995424086";
       LogSink sink = LogSink.newBuilder().build();
       client.createSink(parent, sink);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void updateSinkTest() throws Exception {
+  public void updateSinkTest() throws Exception {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
@@ -1641,22 +1641,22 @@ class ConfigClientTest {
     LogSink sink = LogSink.newBuilder().build();
 
     LogSink actualResponse = client.updateSink(sinkName, sink);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     UpdateSinkRequest actualRequest = ((UpdateSinkRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(sinkName.toString(), actualRequest.getSinkName());
-    Assertions.assertEquals(sink, actualRequest.getSink());
-    Assertions.assertTrue(
+    Assert.assertEquals(sinkName.toString(), actualRequest.getSinkName());
+    Assert.assertEquals(sink, actualRequest.getSink());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void updateSinkExceptionTest() throws Exception {
+  public void updateSinkExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -1664,14 +1664,14 @@ class ConfigClientTest {
       LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
       LogSink sink = LogSink.newBuilder().build();
       client.updateSink(sinkName, sink);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void updateSinkTest2() throws Exception {
+  public void updateSinkTest2() throws Exception {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
@@ -1691,22 +1691,22 @@ class ConfigClientTest {
     LogSink sink = LogSink.newBuilder().build();
 
     LogSink actualResponse = client.updateSink(sinkName, sink);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     UpdateSinkRequest actualRequest = ((UpdateSinkRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(sinkName, actualRequest.getSinkName());
-    Assertions.assertEquals(sink, actualRequest.getSink());
-    Assertions.assertTrue(
+    Assert.assertEquals(sinkName, actualRequest.getSinkName());
+    Assert.assertEquals(sink, actualRequest.getSink());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void updateSinkExceptionTest2() throws Exception {
+  public void updateSinkExceptionTest2() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -1714,14 +1714,14 @@ class ConfigClientTest {
       String sinkName = "sinkName508775358";
       LogSink sink = LogSink.newBuilder().build();
       client.updateSink(sinkName, sink);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void updateSinkTest3() throws Exception {
+  public void updateSinkTest3() throws Exception {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
@@ -1742,23 +1742,23 @@ class ConfigClientTest {
     FieldMask updateMask = FieldMask.newBuilder().build();
 
     LogSink actualResponse = client.updateSink(sinkName, sink, updateMask);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     UpdateSinkRequest actualRequest = ((UpdateSinkRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(sinkName.toString(), actualRequest.getSinkName());
-    Assertions.assertEquals(sink, actualRequest.getSink());
-    Assertions.assertEquals(updateMask, actualRequest.getUpdateMask());
-    Assertions.assertTrue(
+    Assert.assertEquals(sinkName.toString(), actualRequest.getSinkName());
+    Assert.assertEquals(sink, actualRequest.getSink());
+    Assert.assertEquals(updateMask, actualRequest.getUpdateMask());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void updateSinkExceptionTest3() throws Exception {
+  public void updateSinkExceptionTest3() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -1767,14 +1767,14 @@ class ConfigClientTest {
       LogSink sink = LogSink.newBuilder().build();
       FieldMask updateMask = FieldMask.newBuilder().build();
       client.updateSink(sinkName, sink, updateMask);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void updateSinkTest4() throws Exception {
+  public void updateSinkTest4() throws Exception {
     LogSink expectedResponse =
         LogSink.newBuilder()
             .setName(LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]").toString())
@@ -1795,23 +1795,23 @@ class ConfigClientTest {
     FieldMask updateMask = FieldMask.newBuilder().build();
 
     LogSink actualResponse = client.updateSink(sinkName, sink, updateMask);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     UpdateSinkRequest actualRequest = ((UpdateSinkRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(sinkName, actualRequest.getSinkName());
-    Assertions.assertEquals(sink, actualRequest.getSink());
-    Assertions.assertEquals(updateMask, actualRequest.getUpdateMask());
-    Assertions.assertTrue(
+    Assert.assertEquals(sinkName, actualRequest.getSinkName());
+    Assert.assertEquals(sink, actualRequest.getSink());
+    Assert.assertEquals(updateMask, actualRequest.getUpdateMask());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void updateSinkExceptionTest4() throws Exception {
+  public void updateSinkExceptionTest4() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -1820,14 +1820,14 @@ class ConfigClientTest {
       LogSink sink = LogSink.newBuilder().build();
       FieldMask updateMask = FieldMask.newBuilder().build();
       client.updateSink(sinkName, sink, updateMask);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void deleteSinkTest() throws Exception {
+  public void deleteSinkTest() throws Exception {
     Empty expectedResponse = Empty.newBuilder().build();
     mockConfigServiceV2.addResponse(expectedResponse);
 
@@ -1836,32 +1836,32 @@ class ConfigClientTest {
     client.deleteSink(sinkName);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     DeleteSinkRequest actualRequest = ((DeleteSinkRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(sinkName.toString(), actualRequest.getSinkName());
-    Assertions.assertTrue(
+    Assert.assertEquals(sinkName.toString(), actualRequest.getSinkName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void deleteSinkExceptionTest() throws Exception {
+  public void deleteSinkExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       LogSinkName sinkName = LogSinkName.ofProjectSinkName("[PROJECT]", "[SINK]");
       client.deleteSink(sinkName);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void deleteSinkTest2() throws Exception {
+  public void deleteSinkTest2() throws Exception {
     Empty expectedResponse = Empty.newBuilder().build();
     mockConfigServiceV2.addResponse(expectedResponse);
 
@@ -1870,32 +1870,32 @@ class ConfigClientTest {
     client.deleteSink(sinkName);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     DeleteSinkRequest actualRequest = ((DeleteSinkRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(sinkName, actualRequest.getSinkName());
-    Assertions.assertTrue(
+    Assert.assertEquals(sinkName, actualRequest.getSinkName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void deleteSinkExceptionTest2() throws Exception {
+  public void deleteSinkExceptionTest2() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       String sinkName = "sinkName508775358";
       client.deleteSink(sinkName);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void createLinkTest() throws Exception {
+  public void createLinkTest() throws Exception {
     Link expectedResponse =
         Link.newBuilder()
             .setName(
@@ -1921,23 +1921,23 @@ class ConfigClientTest {
     String linkId = "linkId-1102667083";
 
     Link actualResponse = client.createLinkAsync(parent, link, linkId).get();
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     CreateLinkRequest actualRequest = ((CreateLinkRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertEquals(link, actualRequest.getLink());
-    Assertions.assertEquals(linkId, actualRequest.getLinkId());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertEquals(link, actualRequest.getLink());
+    Assert.assertEquals(linkId, actualRequest.getLinkId());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void createLinkExceptionTest() throws Exception {
+  public void createLinkExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -1947,17 +1947,17 @@ class ConfigClientTest {
       Link link = Link.newBuilder().build();
       String linkId = "linkId-1102667083";
       client.createLinkAsync(parent, link, linkId).get();
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (ExecutionException e) {
-      Assertions.assertEquals(InvalidArgumentException.class, e.getCause().getClass());
+      Assert.assertEquals(InvalidArgumentException.class, e.getCause().getClass());
       InvalidArgumentException apiException = ((InvalidArgumentException) e.getCause());
-      Assertions.assertEquals(
+      Assert.assertEquals(
           StatusCode.Code.INVALID_ARGUMENT, apiException.getStatusCode().getCode());
     }
   }
 
   @Test
-  void createLinkTest2() throws Exception {
+  public void createLinkTest2() throws Exception {
     Link expectedResponse =
         Link.newBuilder()
             .setName(
@@ -1982,23 +1982,23 @@ class ConfigClientTest {
     String linkId = "linkId-1102667083";
 
     Link actualResponse = client.createLinkAsync(parent, link, linkId).get();
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     CreateLinkRequest actualRequest = ((CreateLinkRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent, actualRequest.getParent());
-    Assertions.assertEquals(link, actualRequest.getLink());
-    Assertions.assertEquals(linkId, actualRequest.getLinkId());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent, actualRequest.getParent());
+    Assert.assertEquals(link, actualRequest.getLink());
+    Assert.assertEquals(linkId, actualRequest.getLinkId());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void createLinkExceptionTest2() throws Exception {
+  public void createLinkExceptionTest2() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -2007,17 +2007,17 @@ class ConfigClientTest {
       Link link = Link.newBuilder().build();
       String linkId = "linkId-1102667083";
       client.createLinkAsync(parent, link, linkId).get();
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (ExecutionException e) {
-      Assertions.assertEquals(InvalidArgumentException.class, e.getCause().getClass());
+      Assert.assertEquals(InvalidArgumentException.class, e.getCause().getClass());
       InvalidArgumentException apiException = ((InvalidArgumentException) e.getCause());
-      Assertions.assertEquals(
+      Assert.assertEquals(
           StatusCode.Code.INVALID_ARGUMENT, apiException.getStatusCode().getCode());
     }
   }
 
   @Test
-  void deleteLinkTest() throws Exception {
+  public void deleteLinkTest() throws Exception {
     Empty expectedResponse = Empty.newBuilder().build();
     Operation resultOperation =
         Operation.newBuilder()
@@ -2033,18 +2033,18 @@ class ConfigClientTest {
     client.deleteLinkAsync(name).get();
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     DeleteLinkRequest actualRequest = ((DeleteLinkRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(name.toString(), actualRequest.getName());
-    Assertions.assertTrue(
+    Assert.assertEquals(name.toString(), actualRequest.getName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void deleteLinkExceptionTest() throws Exception {
+  public void deleteLinkExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -2052,17 +2052,17 @@ class ConfigClientTest {
       LinkName name =
           LinkName.ofProjectLocationBucketLinkName("[PROJECT]", "[LOCATION]", "[BUCKET]", "[LINK]");
       client.deleteLinkAsync(name).get();
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (ExecutionException e) {
-      Assertions.assertEquals(InvalidArgumentException.class, e.getCause().getClass());
+      Assert.assertEquals(InvalidArgumentException.class, e.getCause().getClass());
       InvalidArgumentException apiException = ((InvalidArgumentException) e.getCause());
-      Assertions.assertEquals(
+      Assert.assertEquals(
           StatusCode.Code.INVALID_ARGUMENT, apiException.getStatusCode().getCode());
     }
   }
 
   @Test
-  void deleteLinkTest2() throws Exception {
+  public void deleteLinkTest2() throws Exception {
     Empty expectedResponse = Empty.newBuilder().build();
     Operation resultOperation =
         Operation.newBuilder()
@@ -2077,35 +2077,35 @@ class ConfigClientTest {
     client.deleteLinkAsync(name).get();
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     DeleteLinkRequest actualRequest = ((DeleteLinkRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(name, actualRequest.getName());
-    Assertions.assertTrue(
+    Assert.assertEquals(name, actualRequest.getName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void deleteLinkExceptionTest2() throws Exception {
+  public void deleteLinkExceptionTest2() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       String name = "name3373707";
       client.deleteLinkAsync(name).get();
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (ExecutionException e) {
-      Assertions.assertEquals(InvalidArgumentException.class, e.getCause().getClass());
+      Assert.assertEquals(InvalidArgumentException.class, e.getCause().getClass());
       InvalidArgumentException apiException = ((InvalidArgumentException) e.getCause());
-      Assertions.assertEquals(
+      Assert.assertEquals(
           StatusCode.Code.INVALID_ARGUMENT, apiException.getStatusCode().getCode());
     }
   }
 
   @Test
-  void listLinksTest() throws Exception {
+  public void listLinksTest() throws Exception {
     Link responsesElement = Link.newBuilder().build();
     ListLinksResponse expectedResponse =
         ListLinksResponse.newBuilder()
@@ -2121,22 +2121,22 @@ class ConfigClientTest {
 
     List<Link> resources = Lists.newArrayList(pagedListResponse.iterateAll());
 
-    Assertions.assertEquals(1, resources.size());
-    Assertions.assertEquals(expectedResponse.getLinksList().get(0), resources.get(0));
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getLinksList().get(0), resources.get(0));
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     ListLinksRequest actualRequest = ((ListLinksRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void listLinksExceptionTest() throws Exception {
+  public void listLinksExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -2144,14 +2144,14 @@ class ConfigClientTest {
       LogBucketName parent =
           LogBucketName.ofProjectLocationBucketName("[PROJECT]", "[LOCATION]", "[BUCKET]");
       client.listLinks(parent);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void listLinksTest2() throws Exception {
+  public void listLinksTest2() throws Exception {
     Link responsesElement = Link.newBuilder().build();
     ListLinksResponse expectedResponse =
         ListLinksResponse.newBuilder()
@@ -2166,36 +2166,36 @@ class ConfigClientTest {
 
     List<Link> resources = Lists.newArrayList(pagedListResponse.iterateAll());
 
-    Assertions.assertEquals(1, resources.size());
-    Assertions.assertEquals(expectedResponse.getLinksList().get(0), resources.get(0));
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getLinksList().get(0), resources.get(0));
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     ListLinksRequest actualRequest = ((ListLinksRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent, actualRequest.getParent());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent, actualRequest.getParent());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void listLinksExceptionTest2() throws Exception {
+  public void listLinksExceptionTest2() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       String parent = "parent-995424086";
       client.listLinks(parent);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void getLinkTest() throws Exception {
+  public void getLinkTest() throws Exception {
     Link expectedResponse =
         Link.newBuilder()
             .setName(
@@ -2213,21 +2213,21 @@ class ConfigClientTest {
         LinkName.ofProjectLocationBucketLinkName("[PROJECT]", "[LOCATION]", "[BUCKET]", "[LINK]");
 
     Link actualResponse = client.getLink(name);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     GetLinkRequest actualRequest = ((GetLinkRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(name.toString(), actualRequest.getName());
-    Assertions.assertTrue(
+    Assert.assertEquals(name.toString(), actualRequest.getName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void getLinkExceptionTest() throws Exception {
+  public void getLinkExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -2235,14 +2235,14 @@ class ConfigClientTest {
       LinkName name =
           LinkName.ofProjectLocationBucketLinkName("[PROJECT]", "[LOCATION]", "[BUCKET]", "[LINK]");
       client.getLink(name);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void getLinkTest2() throws Exception {
+  public void getLinkTest2() throws Exception {
     Link expectedResponse =
         Link.newBuilder()
             .setName(
@@ -2259,35 +2259,35 @@ class ConfigClientTest {
     String name = "name3373707";
 
     Link actualResponse = client.getLink(name);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     GetLinkRequest actualRequest = ((GetLinkRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(name, actualRequest.getName());
-    Assertions.assertTrue(
+    Assert.assertEquals(name, actualRequest.getName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void getLinkExceptionTest2() throws Exception {
+  public void getLinkExceptionTest2() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       String name = "name3373707";
       client.getLink(name);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void listExclusionsTest() throws Exception {
+  public void listExclusionsTest() throws Exception {
     LogExclusion responsesElement = LogExclusion.newBuilder().build();
     ListExclusionsResponse expectedResponse =
         ListExclusionsResponse.newBuilder()
@@ -2302,36 +2302,36 @@ class ConfigClientTest {
 
     List<LogExclusion> resources = Lists.newArrayList(pagedListResponse.iterateAll());
 
-    Assertions.assertEquals(1, resources.size());
-    Assertions.assertEquals(expectedResponse.getExclusionsList().get(0), resources.get(0));
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getExclusionsList().get(0), resources.get(0));
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     ListExclusionsRequest actualRequest = ((ListExclusionsRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void listExclusionsExceptionTest() throws Exception {
+  public void listExclusionsExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       BillingAccountName parent = BillingAccountName.of("[BILLING_ACCOUNT]");
       client.listExclusions(parent);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void listExclusionsTest2() throws Exception {
+  public void listExclusionsTest2() throws Exception {
     LogExclusion responsesElement = LogExclusion.newBuilder().build();
     ListExclusionsResponse expectedResponse =
         ListExclusionsResponse.newBuilder()
@@ -2346,36 +2346,36 @@ class ConfigClientTest {
 
     List<LogExclusion> resources = Lists.newArrayList(pagedListResponse.iterateAll());
 
-    Assertions.assertEquals(1, resources.size());
-    Assertions.assertEquals(expectedResponse.getExclusionsList().get(0), resources.get(0));
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getExclusionsList().get(0), resources.get(0));
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     ListExclusionsRequest actualRequest = ((ListExclusionsRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void listExclusionsExceptionTest2() throws Exception {
+  public void listExclusionsExceptionTest2() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       FolderName parent = FolderName.of("[FOLDER]");
       client.listExclusions(parent);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void listExclusionsTest3() throws Exception {
+  public void listExclusionsTest3() throws Exception {
     LogExclusion responsesElement = LogExclusion.newBuilder().build();
     ListExclusionsResponse expectedResponse =
         ListExclusionsResponse.newBuilder()
@@ -2390,36 +2390,36 @@ class ConfigClientTest {
 
     List<LogExclusion> resources = Lists.newArrayList(pagedListResponse.iterateAll());
 
-    Assertions.assertEquals(1, resources.size());
-    Assertions.assertEquals(expectedResponse.getExclusionsList().get(0), resources.get(0));
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getExclusionsList().get(0), resources.get(0));
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     ListExclusionsRequest actualRequest = ((ListExclusionsRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void listExclusionsExceptionTest3() throws Exception {
+  public void listExclusionsExceptionTest3() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       OrganizationName parent = OrganizationName.of("[ORGANIZATION]");
       client.listExclusions(parent);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void listExclusionsTest4() throws Exception {
+  public void listExclusionsTest4() throws Exception {
     LogExclusion responsesElement = LogExclusion.newBuilder().build();
     ListExclusionsResponse expectedResponse =
         ListExclusionsResponse.newBuilder()
@@ -2434,36 +2434,36 @@ class ConfigClientTest {
 
     List<LogExclusion> resources = Lists.newArrayList(pagedListResponse.iterateAll());
 
-    Assertions.assertEquals(1, resources.size());
-    Assertions.assertEquals(expectedResponse.getExclusionsList().get(0), resources.get(0));
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getExclusionsList().get(0), resources.get(0));
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     ListExclusionsRequest actualRequest = ((ListExclusionsRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void listExclusionsExceptionTest4() throws Exception {
+  public void listExclusionsExceptionTest4() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       ProjectName parent = ProjectName.of("[PROJECT]");
       client.listExclusions(parent);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void listExclusionsTest5() throws Exception {
+  public void listExclusionsTest5() throws Exception {
     LogExclusion responsesElement = LogExclusion.newBuilder().build();
     ListExclusionsResponse expectedResponse =
         ListExclusionsResponse.newBuilder()
@@ -2478,36 +2478,36 @@ class ConfigClientTest {
 
     List<LogExclusion> resources = Lists.newArrayList(pagedListResponse.iterateAll());
 
-    Assertions.assertEquals(1, resources.size());
-    Assertions.assertEquals(expectedResponse.getExclusionsList().get(0), resources.get(0));
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getExclusionsList().get(0), resources.get(0));
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     ListExclusionsRequest actualRequest = ((ListExclusionsRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent, actualRequest.getParent());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent, actualRequest.getParent());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void listExclusionsExceptionTest5() throws Exception {
+  public void listExclusionsExceptionTest5() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       String parent = "parent-995424086";
       client.listExclusions(parent);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void getExclusionTest() throws Exception {
+  public void getExclusionTest() throws Exception {
     LogExclusion expectedResponse =
         LogExclusion.newBuilder()
             .setName(LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]").toString())
@@ -2522,35 +2522,35 @@ class ConfigClientTest {
     LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
 
     LogExclusion actualResponse = client.getExclusion(name);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     GetExclusionRequest actualRequest = ((GetExclusionRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(name.toString(), actualRequest.getName());
-    Assertions.assertTrue(
+    Assert.assertEquals(name.toString(), actualRequest.getName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void getExclusionExceptionTest() throws Exception {
+  public void getExclusionExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
       client.getExclusion(name);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void getExclusionTest2() throws Exception {
+  public void getExclusionTest2() throws Exception {
     LogExclusion expectedResponse =
         LogExclusion.newBuilder()
             .setName(LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]").toString())
@@ -2565,35 +2565,35 @@ class ConfigClientTest {
     String name = "name3373707";
 
     LogExclusion actualResponse = client.getExclusion(name);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     GetExclusionRequest actualRequest = ((GetExclusionRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(name, actualRequest.getName());
-    Assertions.assertTrue(
+    Assert.assertEquals(name, actualRequest.getName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void getExclusionExceptionTest2() throws Exception {
+  public void getExclusionExceptionTest2() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       String name = "name3373707";
       client.getExclusion(name);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void createExclusionTest() throws Exception {
+  public void createExclusionTest() throws Exception {
     LogExclusion expectedResponse =
         LogExclusion.newBuilder()
             .setName(LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]").toString())
@@ -2609,22 +2609,22 @@ class ConfigClientTest {
     LogExclusion exclusion = LogExclusion.newBuilder().build();
 
     LogExclusion actualResponse = client.createExclusion(parent, exclusion);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     CreateExclusionRequest actualRequest = ((CreateExclusionRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertEquals(exclusion, actualRequest.getExclusion());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertEquals(exclusion, actualRequest.getExclusion());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void createExclusionExceptionTest() throws Exception {
+  public void createExclusionExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -2632,14 +2632,14 @@ class ConfigClientTest {
       BillingAccountName parent = BillingAccountName.of("[BILLING_ACCOUNT]");
       LogExclusion exclusion = LogExclusion.newBuilder().build();
       client.createExclusion(parent, exclusion);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void createExclusionTest2() throws Exception {
+  public void createExclusionTest2() throws Exception {
     LogExclusion expectedResponse =
         LogExclusion.newBuilder()
             .setName(LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]").toString())
@@ -2655,22 +2655,22 @@ class ConfigClientTest {
     LogExclusion exclusion = LogExclusion.newBuilder().build();
 
     LogExclusion actualResponse = client.createExclusion(parent, exclusion);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     CreateExclusionRequest actualRequest = ((CreateExclusionRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertEquals(exclusion, actualRequest.getExclusion());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertEquals(exclusion, actualRequest.getExclusion());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void createExclusionExceptionTest2() throws Exception {
+  public void createExclusionExceptionTest2() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -2678,14 +2678,14 @@ class ConfigClientTest {
       FolderName parent = FolderName.of("[FOLDER]");
       LogExclusion exclusion = LogExclusion.newBuilder().build();
       client.createExclusion(parent, exclusion);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void createExclusionTest3() throws Exception {
+  public void createExclusionTest3() throws Exception {
     LogExclusion expectedResponse =
         LogExclusion.newBuilder()
             .setName(LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]").toString())
@@ -2701,22 +2701,22 @@ class ConfigClientTest {
     LogExclusion exclusion = LogExclusion.newBuilder().build();
 
     LogExclusion actualResponse = client.createExclusion(parent, exclusion);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     CreateExclusionRequest actualRequest = ((CreateExclusionRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertEquals(exclusion, actualRequest.getExclusion());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertEquals(exclusion, actualRequest.getExclusion());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void createExclusionExceptionTest3() throws Exception {
+  public void createExclusionExceptionTest3() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -2724,14 +2724,14 @@ class ConfigClientTest {
       OrganizationName parent = OrganizationName.of("[ORGANIZATION]");
       LogExclusion exclusion = LogExclusion.newBuilder().build();
       client.createExclusion(parent, exclusion);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void createExclusionTest4() throws Exception {
+  public void createExclusionTest4() throws Exception {
     LogExclusion expectedResponse =
         LogExclusion.newBuilder()
             .setName(LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]").toString())
@@ -2747,22 +2747,22 @@ class ConfigClientTest {
     LogExclusion exclusion = LogExclusion.newBuilder().build();
 
     LogExclusion actualResponse = client.createExclusion(parent, exclusion);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     CreateExclusionRequest actualRequest = ((CreateExclusionRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertEquals(exclusion, actualRequest.getExclusion());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertEquals(exclusion, actualRequest.getExclusion());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void createExclusionExceptionTest4() throws Exception {
+  public void createExclusionExceptionTest4() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -2770,14 +2770,14 @@ class ConfigClientTest {
       ProjectName parent = ProjectName.of("[PROJECT]");
       LogExclusion exclusion = LogExclusion.newBuilder().build();
       client.createExclusion(parent, exclusion);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void createExclusionTest5() throws Exception {
+  public void createExclusionTest5() throws Exception {
     LogExclusion expectedResponse =
         LogExclusion.newBuilder()
             .setName(LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]").toString())
@@ -2793,22 +2793,22 @@ class ConfigClientTest {
     LogExclusion exclusion = LogExclusion.newBuilder().build();
 
     LogExclusion actualResponse = client.createExclusion(parent, exclusion);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     CreateExclusionRequest actualRequest = ((CreateExclusionRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent, actualRequest.getParent());
-    Assertions.assertEquals(exclusion, actualRequest.getExclusion());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent, actualRequest.getParent());
+    Assert.assertEquals(exclusion, actualRequest.getExclusion());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void createExclusionExceptionTest5() throws Exception {
+  public void createExclusionExceptionTest5() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -2816,14 +2816,14 @@ class ConfigClientTest {
       String parent = "parent-995424086";
       LogExclusion exclusion = LogExclusion.newBuilder().build();
       client.createExclusion(parent, exclusion);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void updateExclusionTest() throws Exception {
+  public void updateExclusionTest() throws Exception {
     LogExclusion expectedResponse =
         LogExclusion.newBuilder()
             .setName(LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]").toString())
@@ -2840,23 +2840,23 @@ class ConfigClientTest {
     FieldMask updateMask = FieldMask.newBuilder().build();
 
     LogExclusion actualResponse = client.updateExclusion(name, exclusion, updateMask);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     UpdateExclusionRequest actualRequest = ((UpdateExclusionRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(name.toString(), actualRequest.getName());
-    Assertions.assertEquals(exclusion, actualRequest.getExclusion());
-    Assertions.assertEquals(updateMask, actualRequest.getUpdateMask());
-    Assertions.assertTrue(
+    Assert.assertEquals(name.toString(), actualRequest.getName());
+    Assert.assertEquals(exclusion, actualRequest.getExclusion());
+    Assert.assertEquals(updateMask, actualRequest.getUpdateMask());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void updateExclusionExceptionTest() throws Exception {
+  public void updateExclusionExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -2865,14 +2865,14 @@ class ConfigClientTest {
       LogExclusion exclusion = LogExclusion.newBuilder().build();
       FieldMask updateMask = FieldMask.newBuilder().build();
       client.updateExclusion(name, exclusion, updateMask);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void updateExclusionTest2() throws Exception {
+  public void updateExclusionTest2() throws Exception {
     LogExclusion expectedResponse =
         LogExclusion.newBuilder()
             .setName(LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]").toString())
@@ -2889,23 +2889,23 @@ class ConfigClientTest {
     FieldMask updateMask = FieldMask.newBuilder().build();
 
     LogExclusion actualResponse = client.updateExclusion(name, exclusion, updateMask);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     UpdateExclusionRequest actualRequest = ((UpdateExclusionRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(name, actualRequest.getName());
-    Assertions.assertEquals(exclusion, actualRequest.getExclusion());
-    Assertions.assertEquals(updateMask, actualRequest.getUpdateMask());
-    Assertions.assertTrue(
+    Assert.assertEquals(name, actualRequest.getName());
+    Assert.assertEquals(exclusion, actualRequest.getExclusion());
+    Assert.assertEquals(updateMask, actualRequest.getUpdateMask());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void updateExclusionExceptionTest2() throws Exception {
+  public void updateExclusionExceptionTest2() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -2914,14 +2914,14 @@ class ConfigClientTest {
       LogExclusion exclusion = LogExclusion.newBuilder().build();
       FieldMask updateMask = FieldMask.newBuilder().build();
       client.updateExclusion(name, exclusion, updateMask);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void deleteExclusionTest() throws Exception {
+  public void deleteExclusionTest() throws Exception {
     Empty expectedResponse = Empty.newBuilder().build();
     mockConfigServiceV2.addResponse(expectedResponse);
 
@@ -2930,32 +2930,32 @@ class ConfigClientTest {
     client.deleteExclusion(name);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     DeleteExclusionRequest actualRequest = ((DeleteExclusionRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(name.toString(), actualRequest.getName());
-    Assertions.assertTrue(
+    Assert.assertEquals(name.toString(), actualRequest.getName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void deleteExclusionExceptionTest() throws Exception {
+  public void deleteExclusionExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       LogExclusionName name = LogExclusionName.ofProjectExclusionName("[PROJECT]", "[EXCLUSION]");
       client.deleteExclusion(name);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void deleteExclusionTest2() throws Exception {
+  public void deleteExclusionTest2() throws Exception {
     Empty expectedResponse = Empty.newBuilder().build();
     mockConfigServiceV2.addResponse(expectedResponse);
 
@@ -2964,32 +2964,32 @@ class ConfigClientTest {
     client.deleteExclusion(name);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     DeleteExclusionRequest actualRequest = ((DeleteExclusionRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(name, actualRequest.getName());
-    Assertions.assertTrue(
+    Assert.assertEquals(name, actualRequest.getName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void deleteExclusionExceptionTest2() throws Exception {
+  public void deleteExclusionExceptionTest2() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       String name = "name3373707";
       client.deleteExclusion(name);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void getCmekSettingsTest() throws Exception {
+  public void getCmekSettingsTest() throws Exception {
     CmekSettings expectedResponse =
         CmekSettings.newBuilder()
             .setName(CmekSettingsName.ofProjectCmekSettingsName("[PROJECT]").toString())
@@ -3005,21 +3005,21 @@ class ConfigClientTest {
             .build();
 
     CmekSettings actualResponse = client.getCmekSettings(request);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     GetCmekSettingsRequest actualRequest = ((GetCmekSettingsRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(request.getName(), actualRequest.getName());
-    Assertions.assertTrue(
+    Assert.assertEquals(request.getName(), actualRequest.getName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void getCmekSettingsExceptionTest() throws Exception {
+  public void getCmekSettingsExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -3029,14 +3029,14 @@ class ConfigClientTest {
               .setName(CmekSettingsName.ofProjectCmekSettingsName("[PROJECT]").toString())
               .build();
       client.getCmekSettings(request);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void updateCmekSettingsTest() throws Exception {
+  public void updateCmekSettingsTest() throws Exception {
     CmekSettings expectedResponse =
         CmekSettings.newBuilder()
             .setName(CmekSettingsName.ofProjectCmekSettingsName("[PROJECT]").toString())
@@ -3054,23 +3054,23 @@ class ConfigClientTest {
             .build();
 
     CmekSettings actualResponse = client.updateCmekSettings(request);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     UpdateCmekSettingsRequest actualRequest = ((UpdateCmekSettingsRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(request.getName(), actualRequest.getName());
-    Assertions.assertEquals(request.getCmekSettings(), actualRequest.getCmekSettings());
-    Assertions.assertEquals(request.getUpdateMask(), actualRequest.getUpdateMask());
-    Assertions.assertTrue(
+    Assert.assertEquals(request.getName(), actualRequest.getName());
+    Assert.assertEquals(request.getCmekSettings(), actualRequest.getCmekSettings());
+    Assert.assertEquals(request.getUpdateMask(), actualRequest.getUpdateMask());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void updateCmekSettingsExceptionTest() throws Exception {
+  public void updateCmekSettingsExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -3082,14 +3082,14 @@ class ConfigClientTest {
               .setUpdateMask(FieldMask.newBuilder().build())
               .build();
       client.updateCmekSettings(request);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void getSettingsTest() throws Exception {
+  public void getSettingsTest() throws Exception {
     Settings expectedResponse =
         Settings.newBuilder()
             .setName(SettingsName.ofProjectName("[PROJECT]").toString())
@@ -3103,35 +3103,35 @@ class ConfigClientTest {
     SettingsName name = SettingsName.ofProjectName("[PROJECT]");
 
     Settings actualResponse = client.getSettings(name);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     GetSettingsRequest actualRequest = ((GetSettingsRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(name.toString(), actualRequest.getName());
-    Assertions.assertTrue(
+    Assert.assertEquals(name.toString(), actualRequest.getName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void getSettingsExceptionTest() throws Exception {
+  public void getSettingsExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       SettingsName name = SettingsName.ofProjectName("[PROJECT]");
       client.getSettings(name);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void getSettingsTest2() throws Exception {
+  public void getSettingsTest2() throws Exception {
     Settings expectedResponse =
         Settings.newBuilder()
             .setName(SettingsName.ofProjectName("[PROJECT]").toString())
@@ -3145,35 +3145,35 @@ class ConfigClientTest {
     String name = "name3373707";
 
     Settings actualResponse = client.getSettings(name);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     GetSettingsRequest actualRequest = ((GetSettingsRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(name, actualRequest.getName());
-    Assertions.assertTrue(
+    Assert.assertEquals(name, actualRequest.getName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void getSettingsExceptionTest2() throws Exception {
+  public void getSettingsExceptionTest2() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
     try {
       String name = "name3373707";
       client.getSettings(name);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void updateSettingsTest() throws Exception {
+  public void updateSettingsTest() throws Exception {
     Settings expectedResponse =
         Settings.newBuilder()
             .setName(SettingsName.ofProjectName("[PROJECT]").toString())
@@ -3188,22 +3188,22 @@ class ConfigClientTest {
     FieldMask updateMask = FieldMask.newBuilder().build();
 
     Settings actualResponse = client.updateSettings(settings, updateMask);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     UpdateSettingsRequest actualRequest = ((UpdateSettingsRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(settings, actualRequest.getSettings());
-    Assertions.assertEquals(updateMask, actualRequest.getUpdateMask());
-    Assertions.assertTrue(
+    Assert.assertEquals(settings, actualRequest.getSettings());
+    Assert.assertEquals(updateMask, actualRequest.getUpdateMask());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void updateSettingsExceptionTest() throws Exception {
+  public void updateSettingsExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -3211,14 +3211,14 @@ class ConfigClientTest {
       Settings settings = Settings.newBuilder().build();
       FieldMask updateMask = FieldMask.newBuilder().build();
       client.updateSettings(settings, updateMask);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void copyLogEntriesTest() throws Exception {
+  public void copyLogEntriesTest() throws Exception {
     CopyLogEntriesResponse expectedResponse =
         CopyLogEntriesResponse.newBuilder().setLogEntriesCopiedCount(-2134326978).build();
     Operation resultOperation =
@@ -3237,23 +3237,23 @@ class ConfigClientTest {
             .build();
 
     CopyLogEntriesResponse actualResponse = client.copyLogEntriesAsync(request).get();
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockConfigServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     CopyLogEntriesRequest actualRequest = ((CopyLogEntriesRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(request.getName(), actualRequest.getName());
-    Assertions.assertEquals(request.getFilter(), actualRequest.getFilter());
-    Assertions.assertEquals(request.getDestination(), actualRequest.getDestination());
-    Assertions.assertTrue(
+    Assert.assertEquals(request.getName(), actualRequest.getName());
+    Assert.assertEquals(request.getFilter(), actualRequest.getFilter());
+    Assert.assertEquals(request.getDestination(), actualRequest.getDestination());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void copyLogEntriesExceptionTest() throws Exception {
+  public void copyLogEntriesExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockConfigServiceV2.addException(exception);
 
@@ -3265,11 +3265,11 @@ class ConfigClientTest {
               .setDestination("destination-1429847026")
               .build();
       client.copyLogEntriesAsync(request).get();
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (ExecutionException e) {
-      Assertions.assertEquals(InvalidArgumentException.class, e.getCause().getClass());
+      Assert.assertEquals(InvalidArgumentException.class, e.getCause().getClass());
       InvalidArgumentException apiException = ((InvalidArgumentException) e.getCause());
-      Assertions.assertEquals(
+      Assert.assertEquals(
           StatusCode.Code.INVALID_ARGUMENT, apiException.getStatusCode().getCode());
     }
   }

@@ -18,11 +18,11 @@ package com.google.cloud.logging;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import com.google.cloud.logging.Logging.ListOption;
 import com.google.cloud.logging.Option.OptionType;
 import com.google.common.testing.EqualsTester;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class OptionTest {
@@ -54,7 +54,7 @@ class OptionTest {
     assertNull(option.getValue());
     try {
       new Option(null, VALUE) {};
-      Assertions.fail();
+      fail();
     } catch (NullPointerException expected) {
 
     }

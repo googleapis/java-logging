@@ -47,21 +47,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 import javax.annotation.Generated;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Before;
+import org.junit.Test;
 
 @Generated("by gapic-generator-java")
-class MetricsClientTest {
+public class MetricsClientTest {
   private static MockMetricsServiceV2 mockMetricsServiceV2;
   private static MockServiceHelper mockServiceHelper;
   private LocalChannelProvider channelProvider;
   private MetricsClient client;
 
-  @BeforeAll
+  @BeforeClass
   public static void startStaticServer() {
     mockMetricsServiceV2 = new MockMetricsServiceV2();
     mockServiceHelper =
@@ -70,13 +70,13 @@ class MetricsClientTest {
     mockServiceHelper.start();
   }
 
-  @AfterAll
+  @AfterClass
   public static void stopServer() {
     mockServiceHelper.stop();
   }
 
-  @BeforeEach
-  void setUp() throws IOException {
+  @Before
+  public void setUp() throws IOException {
     mockServiceHelper.reset();
     channelProvider = mockServiceHelper.createChannelProvider();
     MetricsSettings settings =
@@ -87,13 +87,13 @@ class MetricsClientTest {
     client = MetricsClient.create(settings);
   }
 
-  @AfterEach
-  void tearDown() throws Exception {
+  @After
+  public void tearDown() throws Exception {
     client.close();
   }
 
   @Test
-  void listLogMetricsTest() throws Exception {
+  public void listLogMetricsTest() throws Exception {
     LogMetric responsesElement = LogMetric.newBuilder().build();
     ListLogMetricsResponse expectedResponse =
         ListLogMetricsResponse.newBuilder()
@@ -108,36 +108,36 @@ class MetricsClientTest {
 
     List<LogMetric> resources = Lists.newArrayList(pagedListResponse.iterateAll());
 
-    Assertions.assertEquals(1, resources.size());
-    Assertions.assertEquals(expectedResponse.getMetricsList().get(0), resources.get(0));
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getMetricsList().get(0), resources.get(0));
 
     List<AbstractMessage> actualRequests = mockMetricsServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     ListLogMetricsRequest actualRequest = ((ListLogMetricsRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void listLogMetricsExceptionTest() throws Exception {
+  public void listLogMetricsExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockMetricsServiceV2.addException(exception);
 
     try {
       ProjectName parent = ProjectName.of("[PROJECT]");
       client.listLogMetrics(parent);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void listLogMetricsTest2() throws Exception {
+  public void listLogMetricsTest2() throws Exception {
     LogMetric responsesElement = LogMetric.newBuilder().build();
     ListLogMetricsResponse expectedResponse =
         ListLogMetricsResponse.newBuilder()
@@ -152,36 +152,36 @@ class MetricsClientTest {
 
     List<LogMetric> resources = Lists.newArrayList(pagedListResponse.iterateAll());
 
-    Assertions.assertEquals(1, resources.size());
-    Assertions.assertEquals(expectedResponse.getMetricsList().get(0), resources.get(0));
+    Assert.assertEquals(1, resources.size());
+    Assert.assertEquals(expectedResponse.getMetricsList().get(0), resources.get(0));
 
     List<AbstractMessage> actualRequests = mockMetricsServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     ListLogMetricsRequest actualRequest = ((ListLogMetricsRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent, actualRequest.getParent());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent, actualRequest.getParent());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void listLogMetricsExceptionTest2() throws Exception {
+  public void listLogMetricsExceptionTest2() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockMetricsServiceV2.addException(exception);
 
     try {
       String parent = "parent-995424086";
       client.listLogMetrics(parent);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void getLogMetricTest() throws Exception {
+  public void getLogMetricTest() throws Exception {
     LogMetric expectedResponse =
         LogMetric.newBuilder()
             .setName(LogMetricName.of("[PROJECT]", "[METRIC]").toString())
@@ -201,35 +201,35 @@ class MetricsClientTest {
     LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
 
     LogMetric actualResponse = client.getLogMetric(metricName);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockMetricsServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     GetLogMetricRequest actualRequest = ((GetLogMetricRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(metricName.toString(), actualRequest.getMetricName());
-    Assertions.assertTrue(
+    Assert.assertEquals(metricName.toString(), actualRequest.getMetricName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void getLogMetricExceptionTest() throws Exception {
+  public void getLogMetricExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockMetricsServiceV2.addException(exception);
 
     try {
       LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
       client.getLogMetric(metricName);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void getLogMetricTest2() throws Exception {
+  public void getLogMetricTest2() throws Exception {
     LogMetric expectedResponse =
         LogMetric.newBuilder()
             .setName(LogMetricName.of("[PROJECT]", "[METRIC]").toString())
@@ -249,35 +249,35 @@ class MetricsClientTest {
     String metricName = "metricName-610759589";
 
     LogMetric actualResponse = client.getLogMetric(metricName);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockMetricsServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     GetLogMetricRequest actualRequest = ((GetLogMetricRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(metricName, actualRequest.getMetricName());
-    Assertions.assertTrue(
+    Assert.assertEquals(metricName, actualRequest.getMetricName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void getLogMetricExceptionTest2() throws Exception {
+  public void getLogMetricExceptionTest2() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockMetricsServiceV2.addException(exception);
 
     try {
       String metricName = "metricName-610759589";
       client.getLogMetric(metricName);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void createLogMetricTest() throws Exception {
+  public void createLogMetricTest() throws Exception {
     LogMetric expectedResponse =
         LogMetric.newBuilder()
             .setName(LogMetricName.of("[PROJECT]", "[METRIC]").toString())
@@ -298,22 +298,22 @@ class MetricsClientTest {
     LogMetric metric = LogMetric.newBuilder().build();
 
     LogMetric actualResponse = client.createLogMetric(parent, metric);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockMetricsServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     CreateLogMetricRequest actualRequest = ((CreateLogMetricRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent.toString(), actualRequest.getParent());
-    Assertions.assertEquals(metric, actualRequest.getMetric());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent.toString(), actualRequest.getParent());
+    Assert.assertEquals(metric, actualRequest.getMetric());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void createLogMetricExceptionTest() throws Exception {
+  public void createLogMetricExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockMetricsServiceV2.addException(exception);
 
@@ -321,14 +321,14 @@ class MetricsClientTest {
       ProjectName parent = ProjectName.of("[PROJECT]");
       LogMetric metric = LogMetric.newBuilder().build();
       client.createLogMetric(parent, metric);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void createLogMetricTest2() throws Exception {
+  public void createLogMetricTest2() throws Exception {
     LogMetric expectedResponse =
         LogMetric.newBuilder()
             .setName(LogMetricName.of("[PROJECT]", "[METRIC]").toString())
@@ -349,22 +349,22 @@ class MetricsClientTest {
     LogMetric metric = LogMetric.newBuilder().build();
 
     LogMetric actualResponse = client.createLogMetric(parent, metric);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockMetricsServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     CreateLogMetricRequest actualRequest = ((CreateLogMetricRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(parent, actualRequest.getParent());
-    Assertions.assertEquals(metric, actualRequest.getMetric());
-    Assertions.assertTrue(
+    Assert.assertEquals(parent, actualRequest.getParent());
+    Assert.assertEquals(metric, actualRequest.getMetric());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void createLogMetricExceptionTest2() throws Exception {
+  public void createLogMetricExceptionTest2() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockMetricsServiceV2.addException(exception);
 
@@ -372,14 +372,14 @@ class MetricsClientTest {
       String parent = "parent-995424086";
       LogMetric metric = LogMetric.newBuilder().build();
       client.createLogMetric(parent, metric);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void updateLogMetricTest() throws Exception {
+  public void updateLogMetricTest() throws Exception {
     LogMetric expectedResponse =
         LogMetric.newBuilder()
             .setName(LogMetricName.of("[PROJECT]", "[METRIC]").toString())
@@ -400,22 +400,22 @@ class MetricsClientTest {
     LogMetric metric = LogMetric.newBuilder().build();
 
     LogMetric actualResponse = client.updateLogMetric(metricName, metric);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockMetricsServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     UpdateLogMetricRequest actualRequest = ((UpdateLogMetricRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(metricName.toString(), actualRequest.getMetricName());
-    Assertions.assertEquals(metric, actualRequest.getMetric());
-    Assertions.assertTrue(
+    Assert.assertEquals(metricName.toString(), actualRequest.getMetricName());
+    Assert.assertEquals(metric, actualRequest.getMetric());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void updateLogMetricExceptionTest() throws Exception {
+  public void updateLogMetricExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockMetricsServiceV2.addException(exception);
 
@@ -423,14 +423,14 @@ class MetricsClientTest {
       LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
       LogMetric metric = LogMetric.newBuilder().build();
       client.updateLogMetric(metricName, metric);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void updateLogMetricTest2() throws Exception {
+  public void updateLogMetricTest2() throws Exception {
     LogMetric expectedResponse =
         LogMetric.newBuilder()
             .setName(LogMetricName.of("[PROJECT]", "[METRIC]").toString())
@@ -451,22 +451,22 @@ class MetricsClientTest {
     LogMetric metric = LogMetric.newBuilder().build();
 
     LogMetric actualResponse = client.updateLogMetric(metricName, metric);
-    Assertions.assertEquals(expectedResponse, actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockMetricsServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     UpdateLogMetricRequest actualRequest = ((UpdateLogMetricRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(metricName, actualRequest.getMetricName());
-    Assertions.assertEquals(metric, actualRequest.getMetric());
-    Assertions.assertTrue(
+    Assert.assertEquals(metricName, actualRequest.getMetricName());
+    Assert.assertEquals(metric, actualRequest.getMetric());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void updateLogMetricExceptionTest2() throws Exception {
+  public void updateLogMetricExceptionTest2() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockMetricsServiceV2.addException(exception);
 
@@ -474,14 +474,14 @@ class MetricsClientTest {
       String metricName = "metricName-610759589";
       LogMetric metric = LogMetric.newBuilder().build();
       client.updateLogMetric(metricName, metric);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void deleteLogMetricTest() throws Exception {
+  public void deleteLogMetricTest() throws Exception {
     Empty expectedResponse = Empty.newBuilder().build();
     mockMetricsServiceV2.addResponse(expectedResponse);
 
@@ -490,32 +490,32 @@ class MetricsClientTest {
     client.deleteLogMetric(metricName);
 
     List<AbstractMessage> actualRequests = mockMetricsServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     DeleteLogMetricRequest actualRequest = ((DeleteLogMetricRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(metricName.toString(), actualRequest.getMetricName());
-    Assertions.assertTrue(
+    Assert.assertEquals(metricName.toString(), actualRequest.getMetricName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void deleteLogMetricExceptionTest() throws Exception {
+  public void deleteLogMetricExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockMetricsServiceV2.addException(exception);
 
     try {
       LogMetricName metricName = LogMetricName.of("[PROJECT]", "[METRIC]");
       client.deleteLogMetric(metricName);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
   }
 
   @Test
-  void deleteLogMetricTest2() throws Exception {
+  public void deleteLogMetricTest2() throws Exception {
     Empty expectedResponse = Empty.newBuilder().build();
     mockMetricsServiceV2.addResponse(expectedResponse);
 
@@ -524,25 +524,25 @@ class MetricsClientTest {
     client.deleteLogMetric(metricName);
 
     List<AbstractMessage> actualRequests = mockMetricsServiceV2.getRequests();
-    Assertions.assertEquals(1, actualRequests.size());
+    Assert.assertEquals(1, actualRequests.size());
     DeleteLogMetricRequest actualRequest = ((DeleteLogMetricRequest) actualRequests.get(0));
 
-    Assertions.assertEquals(metricName, actualRequest.getMetricName());
-    Assertions.assertTrue(
+    Assert.assertEquals(metricName, actualRequest.getMetricName());
+    Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
             GaxGrpcProperties.getDefaultApiClientHeaderPattern()));
   }
 
   @Test
-  void deleteLogMetricExceptionTest2() throws Exception {
+  public void deleteLogMetricExceptionTest2() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(io.grpc.Status.INVALID_ARGUMENT);
     mockMetricsServiceV2.addException(exception);
 
     try {
       String metricName = "metricName-610759589";
       client.deleteLogMetric(metricName);
-      Assertions.fail("No exception raised");
+      Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception.
     }
