@@ -108,6 +108,13 @@
     </dependency>
 
     <!-- Test dependencies -->
+    <!-- JUnit 4.x is still needed as the gapic-generator still generates tests with it -->
+    <!-- Remove once the gapic-generator is able to generate JUnit 5.x tests -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
@@ -123,6 +130,8 @@
       <artifactId>junit-jupiter-params</artifactId>
       <scope>test</scope>
     </dependency>
+    <!-- The generated tests from gapic-generator are still generated with JUnit4. -->
+    <!-- Remove once they are migrated to JUnit 5.x+ -->
     <dependency>
       <groupId>org.junit.vintage</groupId>
       <artifactId>junit-vintage-engine</artifactId>
