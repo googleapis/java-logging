@@ -79,13 +79,15 @@ class LoggingIT {
     logging.close();
   }
 
-  @BeforeEach void setUp() {
+  @BeforeEach
+  void setUp() {
     bout = new ByteArrayOutputStream();
     out = new PrintStream(bout);
     System.setOut(out);
   }
 
-  @AfterEach void tearDown() throws Exception {
+  @AfterEach
+  void tearDown() throws Exception {
     // Clean up created logs
     deleteLog(TEST_LOG);
     System.setOut(null);

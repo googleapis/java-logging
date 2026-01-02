@@ -32,13 +32,15 @@ class LogsIT {
   private ByteArrayOutputStream bout;
   private PrintStream out;
 
-  @BeforeEach void setUp() {
+  @BeforeEach
+  void setUp() {
     bout = new ByteArrayOutputStream();
     out = new PrintStream(bout);
     System.setOut(out);
   }
 
-  @AfterEach void tearDown() {
+  @AfterEach
+  void tearDown() {
     System.setOut(null);
   }
 

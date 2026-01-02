@@ -39,7 +39,8 @@ class SinkIT {
   private Logging logging = LoggingOptions.getDefaultInstance().getService();
   private static final String SINK_NAME = "test-sink" + UUID.randomUUID().toString();
 
-  @BeforeEach void setUp() {
+  @BeforeEach
+  void setUp() {
     // Create sink
     logging.create(
         SinkInfo.newBuilder(SINK_NAME, SinkInfo.Destination.DatasetDestination.of("dataset"))
@@ -48,13 +49,15 @@ class SinkIT {
             .build());
   }
 
-  @AfterEach void tearDown() throws Exception {
+  @AfterEach
+  void tearDown() throws Exception {
     // Delete sink
     logging.deleteSink(SINK_NAME);
     logging.close();
   }
 
-  @Test void testGetSinkMetadata() throws Exception {
+  @Test
+  void testGetSinkMetadata() throws Exception {
     Sink sink = logging.getSink(SINK_NAME);
     assertNotNull(sink);
     PrintStream standardOut = System.out;

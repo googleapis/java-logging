@@ -39,7 +39,8 @@ class ITNativeImageLoggingSample {
     System.setOut(originalStdOut);
   }
 
-  @Test void testLogging() throws Exception {
+  @Test
+  void testLogging() throws Exception {
     NativeImageLoggingSample.main(new String[] {});
     assertThat(stdOutCaptor.toString("UTF-8"))
         .contains("Logged: This is a log produced by Native Image.");
