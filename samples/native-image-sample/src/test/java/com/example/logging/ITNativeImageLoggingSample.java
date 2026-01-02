@@ -18,31 +18,18 @@ package com.example.logging;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.google.cloud.testing.junit4.StdOutCaptureRule;
+import org.junit.Rule;
+import org.junit.Test;
 
-class ITNativeImageLoggingSample {
+public class ITNativeImageLoggingSample {
 
-  private final ByteArrayOutputStream stdOutCaptor = new ByteArrayOutputStream();
-  private final PrintStream originalStdOut = System.out;
-
-  @BeforeEach
-  void setUp() {
-    System.setOut(new PrintStream(stdOutCaptor));
-  }
-
-  @AfterEach
-  void tearDown() {
-    System.setOut(originalStdOut);
-  }
+  @Rule public StdOutCaptureRule stdOut = new StdOutCaptureRule();
 
   @Test
-  void testLogging() throws Exception {
+  public void testLogging() throws Exception {
     NativeImageLoggingSample.main(new String[] {});
-    assertThat(stdOutCaptor.toString("UTF-8"))
+    assertThat(stdOut.getCapturedOutputAsUtf8String())
         .contains("Logged: This is a log produced by Native Image.");
   }
 }

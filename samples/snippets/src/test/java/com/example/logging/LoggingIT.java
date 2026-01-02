@@ -29,20 +29,18 @@ import com.google.cloud.logging.Synchronicity;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Collections;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Timeout;
-import java.util.concurrent.TimeUnit;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 /** Tests for quickstart sample. */
-
+@RunWith(JUnit4.class)
 @SuppressWarnings("checkstyle:abbreviationaswordinname")
-class LoggingIT {
+public class LoggingIT {
 
   private static final String TEST_LOG = formatForTest("test-log");
   private static final String STRING_PAYLOAD = "Hello, world!";
@@ -69,40 +67,38 @@ class LoggingIT {
     }
   }
 
-  @BeforeAll
+  @BeforeClass
   public static void startup() {
     logging = LoggingOptions.getDefaultInstance().getService();
   }
 
-  @AfterAll
+  @AfterClass
   public static void shutDown() throws Exception {
     logging.close();
   }
 
-  @BeforeEach
-  void setUp() {
+  @Before
+  public void setUp() {
     bout = new ByteArrayOutputStream();
     out = new PrintStream(bout);
     System.setOut(out);
   }
 
-  @AfterEach
-  void tearDown() throws Exception {
+  @After
+  public void tearDown() throws Exception {
     // Clean up created logs
     deleteLog(TEST_LOG);
     System.setOut(null);
   }
 
-  @Test
-  @Timeout(value = 60000, unit = TimeUnit.MILLISECONDS)
+  @Test(timeout = 60000)
   public void testQuickstartSample() throws Exception {
     QuickstartSample.main(TEST_LOG);
     String got = bout.toString();
     assertThat(got).contains(String.format("Logged: %s", STRING_PAYLOAD));
   }
 
-  @Test
-  @Timeout(value = 60000, unit = TimeUnit.MILLISECONDS)
+  @Test(timeout = 60000)
   public void testListLogEntriesSample() throws Exception {
     // write a log entry
     LogEntry entry =
@@ -127,8 +123,7 @@ class LoggingIT {
     assertThat(bout.toString().contains(STRING_PAYLOAD2)).isTrue();
   }
 
-  @Test
-  @Timeout(value = 60000, unit = TimeUnit.MILLISECONDS)
+  @Test(timeout = 60000)
   public void testWriteLogHttpRequestSample() throws Exception {
     HttpRequest request =
         HttpRequest.newBuilder()
@@ -155,16 +150,14 @@ class LoggingIT {
     assertThat(bout.toString().contains(request.toString())).isTrue();
   }
 
-  @Test
-  @Timeout(value = 60000, unit = TimeUnit.MILLISECONDS)
+  @Test(timeout = 60000)
   public void testWriteLogEntrySample() throws Exception {
     WriteLogEntry.main(new String[] {TEST_LOG});
     String got = bout.toString();
     assertThat(got).contains(String.format("Wrote to %s", TEST_LOG));
   }
 
-  @Test
-  @Timeout(value = 60000, unit = TimeUnit.MILLISECONDS)
+  @Test(timeout = 60000)
   public void testTailLogEntriesSample() throws Exception {
     Runnable task =
         () -> {
