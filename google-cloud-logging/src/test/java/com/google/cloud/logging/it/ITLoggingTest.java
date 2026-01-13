@@ -81,8 +81,9 @@ class ITLoggingTest extends BaseSystemTest {
   }
 
   @AfterAll
-  static void cleanUpLogs() throws InterruptedException {
-    assertTrue(cleanupLog(LOG_ID));
+  static void cleanUpLogs() {
+    // best-effort to try and delete the log
+    logging.deleteLog(LOG_ID);
   }
 
   @Disabled

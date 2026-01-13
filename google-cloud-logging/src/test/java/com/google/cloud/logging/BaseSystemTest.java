@@ -21,7 +21,6 @@ import com.google.cloud.MonitoredResource;
 import com.google.cloud.logging.testing.RemoteLoggingHelper;
 import com.google.common.collect.Iterables;
 import com.google.logging.v2.LogName;
-
 import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -51,6 +50,19 @@ public class BaseSystemTest {
 
   @AfterAll
   static void afterClass() throws Exception {
+    // Use a cutoff of ~6 hours based on the log name. Any logs that were created before the cutoff
+    // is from a previous invocation of the test and was unable to be properly deleted.
+    Page<String> logPage = logging.listLogs();
+    for (String logName : logPage.iterateAll()) {
+      Instant cutoff = Instant.now().minus(6, ChronoUnit.HOURS);
+      String logCreateTimeString = logName.split("_")[0];
+      Instant logCreateTimeInstant =
+          (Instant) DateTimeFormatter.ISO_INSTANT.parse(logCreateTimeString);
+      if (logCreateTimeInstant.isBefore(cutoff)) {
+        logging.deleteLog(logName);
+      }
+    }
+
     logging.close();
   }
 
@@ -62,18 +74,6 @@ public class BaseSystemTest {
    */
   protected static <V> String createEqualityFilter(String name, V value) {
     return name + "=" + "\"" + value + "\"";
-  }
-
-  protected static boolean cleanupLog(String logName) throws InterruptedException {
-    int deleteAttempts = 0;
-    int allowedDeleteAttempts = 5;
-    boolean deleted = false;
-    while (!deleted && deleteAttempts < allowedDeleteAttempts) {
-      Thread.sleep(5000);
-      deleted = logging.deleteLog(logName);
-      deleteAttempts++;
-    }
-    return deleted;
   }
 
   /**

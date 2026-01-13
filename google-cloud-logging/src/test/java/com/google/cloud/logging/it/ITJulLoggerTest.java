@@ -46,8 +46,9 @@ class ITJulLoggerTest extends BaseSystemTest {
   private static final String LOG_ID = formatForTest("test-jul-log-handler-log");
 
   @AfterEach
-  void tearDown() throws InterruptedException {
-    assertTrue(cleanupLog(LOG_ID));
+  void tearDown() {
+    // best-effort to try and delete the log
+    logging.deleteLog(LOG_ID);
   }
 
   @Disabled

@@ -38,8 +38,9 @@ class ITTailLogsTest extends BaseSystemTest {
       MonitoredResource.newBuilder("global").build();
 
   @AfterAll
-  static void cleanUpLogs() throws InterruptedException {
-    assertTrue(cleanupLog(LOG_ID));
+  static void cleanUpLogs() {
+    // best-effort to try and delete the log
+    logging.deleteLog(LOG_ID);
   }
 
   @Disabled
