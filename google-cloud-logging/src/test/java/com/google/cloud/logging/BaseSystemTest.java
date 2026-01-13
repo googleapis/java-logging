@@ -44,13 +44,13 @@ public class BaseSystemTest {
   protected static Logging logging;
 
   @BeforeAll
-  public static void beforeClass() {
+  static void beforeClass() {
     RemoteLoggingHelper helper = RemoteLoggingHelper.create();
     logging = helper.getOptions().getService();
   }
 
   @AfterAll
-  public static void afterClass() throws Exception {
+  static void afterClass() throws Exception {
     logging.close();
   }
 
