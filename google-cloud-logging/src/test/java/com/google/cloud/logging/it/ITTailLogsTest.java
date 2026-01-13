@@ -38,7 +38,7 @@ class ITTailLogsTest extends BaseSystemTest {
       MonitoredResource.newBuilder("global").build();
 
   @AfterAll
-  public static void cleanUpLogs() throws InterruptedException {
+  static void cleanUpLogs() throws InterruptedException {
     assertTrue(cleanupLog(LOG_ID));
   }
 
@@ -47,7 +47,7 @@ class ITTailLogsTest extends BaseSystemTest {
   @Timeout(
       value = 120_000,
       unit = TimeUnit.MILLISECONDS) // Note: the test should not take longer than 2 min
-  public void testTailLogEntries() throws InterruptedException {
+  void testTailLogEntries() throws InterruptedException {
     LogEntry testLogEntry =
         LogEntry.newBuilder(Payload.StringPayload.of("stringPayload1"))
             .addLabel("key1", "value1")

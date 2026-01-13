@@ -236,7 +236,7 @@ class LoggingHandlerTest {
     }
   }
 
-  public final OutputStreamPatcher outputStreamPatcher = new OutputStreamPatcher();
+  final OutputStreamPatcher outputStreamPatcher = new OutputStreamPatcher();
 
   @BeforeEach
   void setUp() {

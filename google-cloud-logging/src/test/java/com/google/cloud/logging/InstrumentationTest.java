@@ -102,7 +102,7 @@ class InstrumentationTest {
                     Instrumentation.getLibraryVersion(Instrumentation.class)))));
   }
 
-  public static JsonPayload generateInstrumentationPayload(
+  static JsonPayload generateInstrumentationPayload(
       String libraryName, String libraryVersion) {
     Map<String, Object> jsonData = new HashMap<>();
     Map<String, Object> instrumentationData = new HashMap<>();

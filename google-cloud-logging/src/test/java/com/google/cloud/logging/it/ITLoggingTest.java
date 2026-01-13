@@ -53,7 +53,7 @@ class ITLoggingTest extends BaseSystemTest {
       new MonitoredResource[] {GLOBAL_RESOURCE, CLOUDSQL_RESOURCE};
 
   @BeforeAll
-  public static void insertLogs() {
+  static void insertLogs() {
     // This ensures predictability of the test:
     // with batching enabled by default, it's possible that for two log entries,
     // batching
@@ -81,7 +81,7 @@ class ITLoggingTest extends BaseSystemTest {
   }
 
   @AfterAll
-  public static void cleanUpLogs() throws InterruptedException {
+  static void cleanUpLogs() throws InterruptedException {
     assertTrue(cleanupLog(LOG_ID));
   }
 
@@ -90,7 +90,7 @@ class ITLoggingTest extends BaseSystemTest {
   @Timeout(
       value = 600_000,
       unit = TimeUnit.MILLISECONDS) // Note: it can take ~10 minutes for logs to propagate!
-  public void testListEntries() throws InterruptedException {
+  void testListEntries() throws InterruptedException {
     LoggingOptions loggingOptions = logging.getOptions();
     LogName logName = LogName.ofProjectLogName(loggingOptions.getProjectId(), LOG_ID);
 
@@ -127,7 +127,7 @@ class ITLoggingTest extends BaseSystemTest {
   @Timeout(
       value = 600_000,
       unit = TimeUnit.MILLISECONDS) // Note: it can take ~10 minutes for logs to propagate!
-  public void testSortedOrder() throws InterruptedException {
+  void testSortedOrder() throws InterruptedException {
     LoggingOptions loggingOptions = logging.getOptions();
     LogName logName = LogName.ofProjectLogName(loggingOptions.getProjectId(), LOG_ID);
 

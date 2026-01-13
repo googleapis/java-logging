@@ -100,7 +100,7 @@ class ExclusionTest {
     assertFalse(exclusion.isDisabled());
   }
 
-  public void compareExclusion(Exclusion expected, Exclusion actual) {
+  void compareExclusion(Exclusion expected, Exclusion actual) {
     assertEquals(expected, actual);
     assertEquals(expected.toString(), actual.toString());
     assertEquals(expected.getName(), actual.getName());

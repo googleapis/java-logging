@@ -24,7 +24,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class InvalidContextTest {
-  public static List<String> data() {
+  static List<String> data() {
     final String[] INVALID_W3C_TRACE_CONTEXTS = {
       "",
       "abc/efg",

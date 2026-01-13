@@ -40,7 +40,7 @@ import org.junit.jupiter.api.Test;
 class ITSinkTest extends BaseSystemTest {
 
   @BeforeAll
-  public static void setUp() {
+  static void setUp() {
     // Cleanup all stucked sinks if any
     Logging.ListOption[] options = {Logging.ListOption.pageSize(50)};
     Page<Sink> sinkPage = logging.listSinks(options);

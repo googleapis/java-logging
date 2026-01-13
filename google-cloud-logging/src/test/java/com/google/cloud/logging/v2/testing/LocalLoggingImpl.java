@@ -33,7 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LocalLoggingImpl extends LoggingServiceV2Grpc.LoggingServiceV2ImplBase {
+class LocalLoggingImpl extends LoggingServiceV2Grpc.LoggingServiceV2ImplBase {
 
   private final Map<String, List<LogEntry>> logs = new HashMap<>();
 

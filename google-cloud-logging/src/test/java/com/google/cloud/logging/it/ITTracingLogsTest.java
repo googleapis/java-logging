@@ -81,7 +81,7 @@ class ITTracingLogsTest extends BaseSystemTest {
   private static LogName logName;
 
   @BeforeAll
-  public static void prepareLogs() throws InterruptedException {
+  static void prepareLogs() throws InterruptedException {
     LoggingOptions loggingOptions = logging.getOptions();
     logName = LogName.ofProjectLogName(loggingOptions.getProjectId(), LOG_ID);
     logging.setWriteSynchronicity(Synchronicity.SYNC);
@@ -124,7 +124,7 @@ class ITTracingLogsTest extends BaseSystemTest {
 
   @Test
   @Timeout(value = 600_000, unit = TimeUnit.MILLISECONDS)
-  public void testDetectW3CTraceId() throws InterruptedException {
+  void testDetectW3CTraceId() throws InterruptedException {
     // Loads w3c tracing context and writes a log entry
     Context.Builder builder = Context.newBuilder();
     builder.loadW3CTraceParentContext(W3C_TRACE_CONTEXT);
@@ -147,7 +147,7 @@ class ITTracingLogsTest extends BaseSystemTest {
 
   @Test
   @Timeout(value = 600_000, unit = TimeUnit.MILLISECONDS)
-  public void testDetectXCTCTraceId() throws InterruptedException {
+  void testDetectXCTCTraceId() throws InterruptedException {
     // Loads cloud trace context and writes a log entry
     Context.Builder builder = Context.newBuilder();
     builder.loadCloudTraceContext(X_CLOUD_TRACE_CONTEXT);
@@ -171,7 +171,7 @@ class ITTracingLogsTest extends BaseSystemTest {
 
   @Test
   @Timeout(value = 600_000, unit = TimeUnit.MILLISECONDS)
-  public void testDetectOtelTraceId() throws InterruptedException {
+  void testDetectOtelTraceId() throws InterruptedException {
     // Writes a log entry in open telemetry context
     writeLogEntryWithOtelContext(otelEntry);
 
@@ -191,7 +191,7 @@ class ITTracingLogsTest extends BaseSystemTest {
 
   @Test
   @Timeout(value = 600_000, unit = TimeUnit.MILLISECONDS)
-  public void testW3CTraceIdWithOtelContext() throws InterruptedException {
+  void testW3CTraceIdWithOtelContext() throws InterruptedException {
     // Writes a log entry with W3C context and Open Telemetry context
     Context.Builder builder = Context.newBuilder();
     builder.loadW3CTraceParentContext(W3C_TRACE_CONTEXT);
@@ -214,7 +214,7 @@ class ITTracingLogsTest extends BaseSystemTest {
 
   @Test
   @Timeout(value = 600_000, unit = TimeUnit.MILLISECONDS)
-  public void testXCTCTraceIdWithOtelContext() throws InterruptedException {
+  void testXCTCTraceIdWithOtelContext() throws InterruptedException {
     // Writes a log entry with cloud trace context and Open Telemetry context
     Context.Builder builder = Context.newBuilder();
     builder.loadCloudTraceContext(X_CLOUD_TRACE_CONTEXT);
