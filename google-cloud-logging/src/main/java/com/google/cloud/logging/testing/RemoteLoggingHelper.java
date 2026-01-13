@@ -101,7 +101,7 @@ public class RemoteLoggingHelper {
    * <p>Format: {Instant}_{name}_{UUID}
    */
   public static String formatForTest(String name) {
-    String now = DateTimeFormatter.ISO_INSTANT.format(Instant.now());
+    String now = DateTimeFormatter.ISO_LOCAL_DATE.format(Instant.now());
     return now + "_" + name + "_" + UUID.randomUUID().toString().substring(0, 8);
   }
 
