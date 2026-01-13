@@ -16,15 +16,15 @@
 
 package com.google.cloud.logging;
 
-import static java.time.ZoneOffset.UTC;
-
 import com.google.api.gax.paging.Page;
 import com.google.cloud.MonitoredResource;
 import com.google.cloud.logging.testing.RemoteLoggingHelper;
 import com.google.common.collect.Iterables;
 import com.google.logging.v2.LogName;
+
+import java.time.Instant;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
+import java.time.temporal.ChronoUnit;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.AfterAll;
@@ -83,11 +83,8 @@ public class BaseSystemTest {
    *     Filters Documentation</a>
    */
   protected static String createTimestampFilter(int hoursAgo) {
-    Calendar calendar = Calendar.getInstance();
-    calendar.add(Calendar.HOUR, -1 * hoursAgo);
-    return "timestamp>=\""
-        + calendar.getTime().toInstant().atZone(UTC).toLocalDateTime().format(RFC_3339)
-        + "\"";
+    Instant now = Instant.now().minus(hoursAgo, ChronoUnit.HOURS);
+    return "timestamp>=\"" + RFC_3339.format(now) + "\"";
   }
 
   protected static String appendResourceTypeFilter(
