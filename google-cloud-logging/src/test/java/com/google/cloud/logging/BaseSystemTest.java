@@ -51,13 +51,14 @@ public class BaseSystemTest {
   @AfterAll
   static void afterClass() throws Exception {
     // Use a cutoff of a day based on the log name. Any logs that were created before the cutoff
-    // is from a previous invocation of the test and was unable to be properly deleted.
+    // is from a previous invocation of the test and was previously unable to be properly deleted.
     Page<String> logPage = logging.listLogs();
     for (String logName : logPage.iterateAll()) {
-      Instant cutoff = Instant.now().minus(1, ChronoUnit.DAYS);
-      String logCreateTimeString = logName.split("_")[0];
-      Instant logCreateTimeInstant =
-          (Instant) DateTimeFormatter.ISO_LOCAL_DATE.parse(logCreateTimeString);
+      if (!logName.startsWith("java-logging")) {
+        continue;
+      }
+      Instant cutoff = Instant.now().minus(6, ChronoUnit.HOURS);
+      Instant logCreateTimeInstant = Instant.ofEpochMilli(Long.parseLong(logName.split("_")[0]));
       if (logCreateTimeInstant.isBefore(cutoff)) {
         logging.deleteLog(logName);
       }
