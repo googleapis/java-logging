@@ -36,6 +36,7 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A logging handler that outputs logs generated with {@link java.util.logging.Logger} to Cloud
@@ -356,7 +357,7 @@ public class LoggingHandler extends Handler {
     }
   }
 
-  private MonitoredResource getMonitoredResource() {
+  private @Nullable MonitoredResource getMonitoredResource() {
     Optional<WriteOption> resourceOption =
         stream(defaultWriteOptions)
             .filter(o -> o.getOptionType() == WriteOption.OptionType.RESOURCE)
