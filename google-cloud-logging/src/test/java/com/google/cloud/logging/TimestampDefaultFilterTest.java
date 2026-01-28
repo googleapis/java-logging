@@ -23,15 +23,12 @@ import static java.util.Locale.US;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-@RunWith(JUnit4.class)
-public class TimestampDefaultFilterTest {
+class TimestampDefaultFilterTest {
 
   @Test
-  public void DefaultTimestampFilterTest() {
+  void DefaultTimestampFilterTest() {
     ITimestampDefaultFilter filter = new TimestampDefaultFilter();
 
     // Timestamp filter exists

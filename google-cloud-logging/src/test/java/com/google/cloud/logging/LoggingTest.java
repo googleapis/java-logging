@@ -17,10 +17,10 @@
 package com.google.cloud.logging;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.cloud.MonitoredResource;
 import com.google.cloud.logging.Logging.EntryListOption;
@@ -31,12 +31,9 @@ import com.google.cloud.logging.Logging.WriteOption;
 import com.google.common.collect.ImmutableMap;
 import com.google.logging.v2.ListLogEntriesRequest;
 import java.util.Map;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-@RunWith(JUnit4.class)
-public class LoggingTest {
+class LoggingTest {
 
   private static final int PAGE_SIZE = 42;
   private static final String PAGE_TOKEN = "page token";
@@ -53,7 +50,7 @@ public class LoggingTest {
   private static final Boolean DO_PARTIAL_SUCCESS = false;
 
   @Test
-  public void testListOption() {
+  void testListOption() {
     // page token
     ListOption listOption = ListOption.pageToken(PAGE_TOKEN);
     assertEquals(PAGE_TOKEN, listOption.getValue());
@@ -65,7 +62,7 @@ public class LoggingTest {
   }
 
   @Test
-  public void testEntryListOption() {
+  void testEntryListOption() {
     EntryListOption listOption = EntryListOption.pageToken(PAGE_TOKEN);
     assertEquals(PAGE_TOKEN, listOption.getValue());
     assertEquals(ListOption.OptionType.PAGE_TOKEN, listOption.getOptionType());
@@ -105,7 +102,7 @@ public class LoggingTest {
   }
 
   @Test
-  public void testFilterUpdate() {
+  void testFilterUpdate() {
     Map<Option.OptionType, ?> options = LoggingImpl.optionMap(EntryListOption.filter(FILTER));
     assertThat((String) EntryListOption.OptionType.FILTER.get(options)).isEqualTo(FILTER);
     Map<Option.OptionType, ?> updated = LoggingImpl.updateFilter(options);
@@ -117,7 +114,7 @@ public class LoggingTest {
   }
 
   @Test
-  public void testWriteOption() {
+  void testWriteOption() {
     WriteOption writeOption = WriteOption.labels(LABELS);
     assertEquals(LABELS, writeOption.getValue());
     assertEquals(WriteOption.OptionType.LABELS, writeOption.getOptionType());
@@ -140,7 +137,7 @@ public class LoggingTest {
   }
 
   @Test
-  public void testWriteOptionWithDestination() {
+  void testWriteOptionWithDestination() {
     WriteOption writeOption = WriteOption.destination(LogDestinationName.project(PROJECT_NAME));
     LogDestinationName resource = (LogDestinationName) writeOption.getValue();
     assertEquals(WriteOption.OptionType.LOG_DESTINATION, writeOption.getOptionType());

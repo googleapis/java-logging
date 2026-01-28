@@ -17,32 +17,38 @@
 package com.google.cloud.logging.it;
 
 import static com.google.cloud.logging.testing.RemoteLoggingHelper.formatForTest;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.cloud.MonitoredResource;
 import com.google.cloud.logging.*;
 import com.google.cloud.logging.Logging.TailOption;
 import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
-import org.junit.AfterClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
-public class ITTailLogsTest extends BaseSystemTest {
+class ITTailLogsTest extends BaseSystemTest {
 
   private static final String LOG_ID = formatForTest("test-tail-log-entries-log");
   private static final MonitoredResource GLOBAL_RESOURCE =
       MonitoredResource.newBuilder("global").build();
 
-  @AfterClass
-  public static void cleanUpLogs() throws InterruptedException {
-    assertTrue(cleanupLog(LOG_ID));
+  @AfterAll
+  static void cleanUpLogs() {
+    // best-effort to try and delete the log
+    logging.deleteLog(LOG_ID);
   }
 
-  @Ignore
-  @Test(timeout = 120_000) // Note: the test should not take longer than 2 min
-  public void testTailLogEntries() throws InterruptedException {
+  @Disabled
+  @Test
+  @Timeout(
+      value = 120_000,
+      unit = TimeUnit.MILLISECONDS) // Note: the test should not take longer than 2 min
+  void testTailLogEntries() throws InterruptedException {
     LogEntry testLogEntry =
         LogEntry.newBuilder(Payload.StringPayload.of("stringPayload1"))
             .addLabel("key1", "value1")

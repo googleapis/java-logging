@@ -23,6 +23,7 @@ import com.google.cloud.logging.LoggingOptions;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Duration;
+import java.time.Instant;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -93,10 +94,15 @@ public class RemoteLoggingHelper {
 
   /**
    * Formats a resource name for testing purpose. This method appends a random UUID to the provided
-   * name.
+   * name. Prepends the Log name with the `java-logging` and the current instant time to allow for
+   * stale logs to be easily found and removed.
+   *
+   * <p>Format: java-logging_{INSTANT_IN_MILLIS}_{name}_{UUID}
    */
   public static String formatForTest(String name) {
-    return name + "-" + UUID.randomUUID();
+    long nowInMillis = Instant.now().toEpochMilli();
+    return String.format(
+        "java-logging_%d_%s_%s", nowInMillis, name, UUID.randomUUID().toString().substring(0, 8));
   }
 
   private static RetrySettings retrySettings() {

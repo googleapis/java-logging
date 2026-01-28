@@ -17,11 +17,11 @@
 package com.google.cloud.logging.it;
 
 import static com.google.cloud.logging.testing.RemoteLoggingHelper.formatForTest;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.api.gax.paging.Page;
 import com.google.cloud.MonitoredResourceDescriptor;
@@ -32,14 +32,14 @@ import com.google.cloud.logging.MetricInfo;
 import com.google.common.collect.Sets;
 import java.util.Iterator;
 import java.util.Set;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-@Ignore("Preventing temporary RESOURCE_EXHAUSTED problems")
-public class ITMetricsTest extends BaseSystemTest {
+@Disabled("Preventing temporary RESOURCE_EXHAUSTED problems")
+class ITMetricsTest extends BaseSystemTest {
 
   @Test
-  public void testListMonitoredResourceDescriptors() {
+  void testListMonitoredResourceDescriptors() {
     Iterator<MonitoredResourceDescriptor> iterator =
         logging
             .listMonitoredResourceDescriptors(Logging.ListOption.pageSize(100))
@@ -54,7 +54,7 @@ public class ITMetricsTest extends BaseSystemTest {
   }
 
   @Test
-  public void testCreateGetUpdateAndDeleteMetric() {
+  void testCreateGetUpdateAndDeleteMetric() {
     String name = formatForTest("test-create-get-update-metric");
     MetricInfo metricInfo =
         MetricInfo.newBuilder(name, "severity>=ERROR").setDescription("description").build();
@@ -77,7 +77,7 @@ public class ITMetricsTest extends BaseSystemTest {
   }
 
   @Test
-  public void testUpdateNonExistingMetric() {
+  void testUpdateNonExistingMetric() {
     String name = formatForTest("test-update-non-existing-metric");
     MetricInfo metricInfo =
         MetricInfo.newBuilder(name, "severity>=ERROR").setDescription("description").build();
@@ -90,7 +90,7 @@ public class ITMetricsTest extends BaseSystemTest {
   }
 
   @Test
-  public void testListMetrics() throws InterruptedException {
+  void testListMetrics() throws InterruptedException {
     String firstName = formatForTest("test-list-metrics-1");
     String secondName = formatForTest("test-list-metrics-2");
     Metric firstMetric = logging.create(MetricInfo.of(firstName, "severity>=ERROR"));

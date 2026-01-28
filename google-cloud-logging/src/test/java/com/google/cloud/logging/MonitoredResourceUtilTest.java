@@ -21,18 +21,15 @@ import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.google.cloud.MonitoredResource;
 import com.google.common.collect.ImmutableMap;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-@RunWith(JUnit4.class)
-public class MonitoredResourceUtilTest {
+class MonitoredResourceUtilTest {
   private static final String MOCKED_PROJECT_ID = "mocked-project-id";
   private static final String MOCKED_ZONE = "mocked-zone-id";
   private static final String MOCKED_QUALIFIED_ZONE =
@@ -44,21 +41,21 @@ public class MonitoredResourceUtilTest {
 
   private ResourceTypeEnvironmentGetter getterMock;
 
-  @Before
-  public void setup() {
+  @BeforeEach
+  void setup() {
     getterMock = createMock(ResourceTypeEnvironmentGetter.class);
     expect(getterMock.getAttribute("project/project-id")).andReturn(MOCKED_PROJECT_ID).once();
     expect(getterMock.getAttribute("")).andReturn(MOCKED_NON_EMPTY).once();
     MonitoredResourceUtil.setEnvironmentGetter(getterMock);
   }
 
-  @After
-  public void teardown() {
+  @AfterEach
+  void teardown() {
     verify(getterMock);
   }
 
   @Test
-  public void testResourceTypeGlobal() {
+  void testResourceTypeGlobal() {
     final ImmutableMap<String, String> expectedLabels =
         ImmutableMap.of("project_id", MonitoredResourceUtilTest.MOCKED_PROJECT_ID);
 
@@ -74,7 +71,7 @@ public class MonitoredResourceUtilTest {
   }
 
   @Test
-  public void testGetResourceWithParameters() {
+  void testGetResourceWithParameters() {
     final String myProjectId = "my-project-id";
     final String myResourceType = "my-resource-type";
     final ImmutableMap<String, String> expectedLabels = ImmutableMap.of("project_id", myProjectId);
@@ -92,7 +89,7 @@ public class MonitoredResourceUtilTest {
   }
 
   @Test
-  public void testResourceTypeGCEInstance() {
+  void testResourceTypeGCEInstance() {
     final String mockedInstanceId = "1234567890abcdefg";
     final ImmutableMap<String, String> expectedLabels =
         ImmutableMap.of(
@@ -124,7 +121,7 @@ public class MonitoredResourceUtilTest {
    * contains a value other than the mocked constant
    */
   @Test
-  public void testResourceTypeK8sContainer() {
+  void testResourceTypeK8sContainer() {
     final String mockedClusterName = "mocked-cluster-1";
     final String mockedNamespaceName = "default";
     final String mockedPodName = "mocked-pod";
@@ -166,7 +163,7 @@ public class MonitoredResourceUtilTest {
   }
 
   @Test
-  public void testResourceTypeGAEStandardEnvironment() {
+  void testResourceTypeGAEStandardEnvironment() {
     final String mockedModuleId = "mocked-module-id";
     final String mockedVersionId = "mocked-version-id";
     final ImmutableMap<String, String> expectedLabels =
@@ -194,7 +191,7 @@ public class MonitoredResourceUtilTest {
   }
 
   @Test
-  public void testResourceTypeGAEFlexibleEnvironment() {
+  void testResourceTypeGAEFlexibleEnvironment() {
     final String mockedModuleId = "mocked-module-id";
     final String mockedVersionId = "mocked-version-id";
     final ImmutableMap<String, String> expectedLabels =
@@ -224,7 +221,7 @@ public class MonitoredResourceUtilTest {
   }
 
   @Test
-  public void testResourceTypeCloudFunction() {
+  void testResourceTypeCloudFunction() {
     final String mockedFunctionName = "mocked-function-name";
     final ImmutableMap<String, String> expectedLabels =
         ImmutableMap.of(
@@ -255,7 +252,7 @@ public class MonitoredResourceUtilTest {
   }
 
   @Test
-  public void testResourceTypeCloudRun() {
+  void testResourceTypeCloudRun() {
     final String mockedRevisionName = "mocked-revision-name";
     final String mockedServiceName = "mocked-service-name";
     final String mockedConfigurationName = "mocked-config-name";
@@ -288,7 +285,7 @@ public class MonitoredResourceUtilTest {
   }
 
   @Test
-  public void testResourceTypeCloudRunJob() {
+  void testResourceTypeCloudRunJob() {
     final String mockedJobName = "mocked-job-name";
     final ImmutableMap<String, String> expectedLabels =
         ImmutableMap.of(

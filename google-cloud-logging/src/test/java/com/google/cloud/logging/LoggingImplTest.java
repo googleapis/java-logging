@@ -18,12 +18,12 @@ package com.google.cloud.logging;
 
 import static com.google.protobuf.util.Timestamps.fromMillis;
 import static org.easymock.EasyMock.replay;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.api.core.ApiFuture;
 import com.google.api.core.ApiFutures;
@@ -82,14 +82,11 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.easymock.EasyMock;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-@RunWith(JUnit4.class)
-public class LoggingImplTest {
+class LoggingImplTest {
 
   private static final String PROJECT = "project";
   private static final String ANOTHER_PROJECT = "projectoverride";
@@ -240,8 +237,8 @@ public class LoggingImplTest {
     EasyMock.replay(loggingRpcMock);
   }
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     Instrumentation.setInstrumentationStatus(true);
     rpcFactoryMock = EasyMock.createStrictMock(LoggingRpcFactory.class);
     loggingRpcMock = EasyMock.createStrictMock(LoggingRpc.class);
@@ -272,19 +269,19 @@ public class LoggingImplTest {
         };
   }
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     EasyMock.verify(rpcFactoryMock, loggingRpcMock);
   }
 
   @Test
-  public void testGetOptions() {
+  void testGetOptions() {
     EasyMock.replay(rpcFactoryMock, loggingRpcMock);
     assertSame(options, options.getService().getOptions());
   }
 
   @Test
-  public void testCreateSink() {
+  void testCreateSink() {
     LogSink sinkPb = SINK_INFO.toPb(PROJECT);
     ApiFuture<LogSink> response = ApiFutures.immediateFuture(sinkPb);
     CreateSinkRequest request =
@@ -297,7 +294,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testCreateSinkAsync() throws ExecutionException, InterruptedException {
+  void testCreateSinkAsync() throws ExecutionException, InterruptedException {
     LogSink sinkPb = SINK_INFO.toPb(PROJECT);
     ApiFuture<LogSink> response = ApiFutures.immediateFuture(sinkPb);
     CreateSinkRequest request =
@@ -310,7 +307,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testUpdateSink() {
+  void testUpdateSink() {
     LogSink sinkPb = SINK_INFO.toPb(PROJECT);
     ApiFuture<LogSink> response = ApiFutures.immediateFuture(sinkPb);
     UpdateSinkRequest request =
@@ -323,7 +320,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testUpdateSinkAsync() throws ExecutionException, InterruptedException {
+  void testUpdateSinkAsync() throws ExecutionException, InterruptedException {
     LogSink sinkPb = SINK_INFO.toPb(PROJECT);
     ApiFuture<LogSink> response = ApiFutures.immediateFuture(sinkPb);
     UpdateSinkRequest request =
@@ -336,7 +333,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testGetSink() {
+  void testGetSink() {
     LogSink sinkPb = SINK_INFO.toPb(PROJECT);
     ApiFuture<LogSink> response = ApiFutures.immediateFuture(sinkPb);
     GetSinkRequest request = GetSinkRequest.newBuilder().setSinkName(SINK_NAME_PB).build();
@@ -348,7 +345,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testGetSink_null() {
+  void testGetSink_null() {
     ApiFuture<LogSink> response = ApiFutures.immediateFuture(null);
     GetSinkRequest request = GetSinkRequest.newBuilder().setSinkName(SINK_NAME_PB).build();
     EasyMock.expect(loggingRpcMock.get(request)).andReturn(response);
@@ -358,7 +355,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testGetSinkAsync() throws ExecutionException, InterruptedException {
+  void testGetSinkAsync() throws ExecutionException, InterruptedException {
     LogSink sinkPb = SINK_INFO.toPb(PROJECT);
     ApiFuture<LogSink> response = ApiFutures.immediateFuture(sinkPb);
     GetSinkRequest request = GetSinkRequest.newBuilder().setSinkName(SINK_NAME_PB).build();
@@ -370,7 +367,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testGetSinkAsync_null() throws ExecutionException, InterruptedException {
+  void testGetSinkAsync_null() throws ExecutionException, InterruptedException {
     ApiFuture<LogSink> response = ApiFutures.immediateFuture(null);
     GetSinkRequest request = GetSinkRequest.newBuilder().setSinkName(SINK_NAME_PB).build();
     EasyMock.expect(loggingRpcMock.get(request)).andReturn(response);
@@ -380,7 +377,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testDeleteSink() {
+  void testDeleteSink() {
     DeleteSinkRequest request = DeleteSinkRequest.newBuilder().setSinkName(SINK_NAME_PB).build();
     ApiFuture<Empty> response = ApiFutures.immediateFuture(Empty.getDefaultInstance());
     EasyMock.expect(loggingRpcMock.delete(request)).andReturn(response);
@@ -390,7 +387,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testDeleteSink_null() {
+  void testDeleteSink_null() {
     DeleteSinkRequest request = DeleteSinkRequest.newBuilder().setSinkName(SINK_NAME_PB).build();
     ApiFuture<Empty> response = ApiFutures.immediateFuture(null);
     EasyMock.expect(loggingRpcMock.delete(request)).andReturn(response);
@@ -400,7 +397,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testDeleteSinkAsync() throws ExecutionException, InterruptedException {
+  void testDeleteSinkAsync() throws ExecutionException, InterruptedException {
     DeleteSinkRequest request = DeleteSinkRequest.newBuilder().setSinkName(SINK_NAME_PB).build();
     ApiFuture<Empty> response = ApiFutures.immediateFuture(Empty.getDefaultInstance());
     EasyMock.expect(loggingRpcMock.delete(request)).andReturn(response);
@@ -410,7 +407,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testDeleteSinkAsync_null() throws ExecutionException, InterruptedException {
+  void testDeleteSinkAsync_null() throws ExecutionException, InterruptedException {
     DeleteSinkRequest request = DeleteSinkRequest.newBuilder().setSinkName(SINK_NAME_PB).build();
     ApiFuture<Empty> response = ApiFutures.immediateFuture(null);
     EasyMock.expect(loggingRpcMock.delete(request)).andReturn(response);
@@ -420,7 +417,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListSinks() {
+  void testListSinks() {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -443,7 +440,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListSinksNextPage() {
+  void testListSinksNextPage() {
     String cursor1 = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -481,7 +478,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListSinksEmpty() {
+  void testListSinksEmpty() {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ListSinksRequest request = ListSinksRequest.newBuilder().setParent(PROJECT_PARENT).build();
@@ -501,7 +498,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListSinksWithOptions() {
+  void testListSinksWithOptions() {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -529,7 +526,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListSinksAsync() throws ExecutionException, InterruptedException {
+  void testListSinksAsync() throws ExecutionException, InterruptedException {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -552,7 +549,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListSinksAsyncNextPage() throws ExecutionException, InterruptedException {
+  void testListSinksAsyncNextPage() throws ExecutionException, InterruptedException {
     String cursor1 = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -590,7 +587,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListSinksAsyncEmpty() throws ExecutionException, InterruptedException {
+  void testListSinksAsyncEmpty() throws ExecutionException, InterruptedException {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ListSinksRequest request = ListSinksRequest.newBuilder().setParent(PROJECT_PARENT).build();
@@ -610,7 +607,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListSinksWithOptionsAsync() throws ExecutionException, InterruptedException {
+  void testListSinksWithOptionsAsync() throws ExecutionException, InterruptedException {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -639,7 +636,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testCreateMetric() {
+  void testCreateMetric() {
     LogMetric metricPb = METRIC_INFO.toPb();
     ApiFuture<LogMetric> response = ApiFutures.immediateFuture(metricPb);
     CreateLogMetricRequest request =
@@ -652,7 +649,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testCreateMetricAsync() throws ExecutionException, InterruptedException {
+  void testCreateMetricAsync() throws ExecutionException, InterruptedException {
     LogMetric metricPb = METRIC_INFO.toPb();
     ApiFuture<LogMetric> response = ApiFutures.immediateFuture(metricPb);
     CreateLogMetricRequest request =
@@ -665,7 +662,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testUpdateMetric() {
+  void testUpdateMetric() {
     LogMetric sinkPb = METRIC_INFO.toPb();
     ApiFuture<LogMetric> response = ApiFutures.immediateFuture(sinkPb);
     UpdateLogMetricRequest request =
@@ -678,7 +675,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testUpdateMetricAsync() throws ExecutionException, InterruptedException {
+  void testUpdateMetricAsync() throws ExecutionException, InterruptedException {
     LogMetric sinkPb = METRIC_INFO.toPb();
     ApiFuture<LogMetric> response = ApiFutures.immediateFuture(sinkPb);
     UpdateLogMetricRequest request =
@@ -691,7 +688,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testGetMetric() {
+  void testGetMetric() {
     LogMetric sinkPb = METRIC_INFO.toPb();
     ApiFuture<LogMetric> response = ApiFutures.immediateFuture(sinkPb);
     GetLogMetricRequest request =
@@ -704,7 +701,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testGetMetric_null() {
+  void testGetMetric_null() {
     ApiFuture<LogMetric> response = ApiFutures.immediateFuture(null);
     GetLogMetricRequest request =
         GetLogMetricRequest.newBuilder().setMetricName(METRIC_NAME_PB).build();
@@ -715,7 +712,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testGetMetricAsync() throws ExecutionException, InterruptedException {
+  void testGetMetricAsync() throws ExecutionException, InterruptedException {
     LogMetric sinkPb = METRIC_INFO.toPb();
     ApiFuture<LogMetric> response = ApiFutures.immediateFuture(sinkPb);
     GetLogMetricRequest request =
@@ -728,7 +725,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testGetMetricAsync_null() throws ExecutionException, InterruptedException {
+  void testGetMetricAsync_null() throws ExecutionException, InterruptedException {
     ApiFuture<LogMetric> response = ApiFutures.immediateFuture(null);
     GetLogMetricRequest request =
         GetLogMetricRequest.newBuilder().setMetricName(METRIC_NAME_PB).build();
@@ -739,7 +736,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testDeleteMetric() {
+  void testDeleteMetric() {
     DeleteLogMetricRequest request =
         DeleteLogMetricRequest.newBuilder().setMetricName(METRIC_NAME_PB).build();
     ApiFuture<Empty> response = ApiFutures.immediateFuture(Empty.getDefaultInstance());
@@ -750,7 +747,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testDeleteMetric_null() {
+  void testDeleteMetric_null() {
     DeleteLogMetricRequest request =
         DeleteLogMetricRequest.newBuilder().setMetricName(METRIC_NAME_PB).build();
     ApiFuture<Empty> response = ApiFutures.immediateFuture(null);
@@ -761,7 +758,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testDeleteMetricAsync() throws ExecutionException, InterruptedException {
+  void testDeleteMetricAsync() throws ExecutionException, InterruptedException {
     DeleteLogMetricRequest request =
         DeleteLogMetricRequest.newBuilder().setMetricName(METRIC_NAME_PB).build();
     ApiFuture<Empty> response = ApiFutures.immediateFuture(Empty.getDefaultInstance());
@@ -772,7 +769,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testDeleteMetricAsync_null() throws ExecutionException, InterruptedException {
+  void testDeleteMetricAsync_null() throws ExecutionException, InterruptedException {
     DeleteLogMetricRequest request =
         DeleteLogMetricRequest.newBuilder().setMetricName(METRIC_NAME_PB).build();
     ApiFuture<Empty> response = ApiFutures.immediateFuture(null);
@@ -783,7 +780,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListMetrics() {
+  void testListMetrics() {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -807,7 +804,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListMetricsNextPage() {
+  void testListMetricsNextPage() {
     String cursor1 = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -846,7 +843,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListMetricsEmpty() {
+  void testListMetricsEmpty() {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ListLogMetricsRequest request =
@@ -867,7 +864,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListMetricsWithOptions() {
+  void testListMetricsWithOptions() {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -895,7 +892,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListMetricsAsync() throws ExecutionException, InterruptedException {
+  void testListMetricsAsync() throws ExecutionException, InterruptedException {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -919,7 +916,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListMetricsAsyncNextPage() throws ExecutionException, InterruptedException {
+  void testListMetricsAsyncNextPage() throws ExecutionException, InterruptedException {
     String cursor1 = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -958,7 +955,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListMetricsAsyncEmpty() throws ExecutionException, InterruptedException {
+  void testListMetricsAsyncEmpty() throws ExecutionException, InterruptedException {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ListLogMetricsRequest request =
@@ -979,7 +976,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListMetricsWithOptionsAsync() throws ExecutionException, InterruptedException {
+  void testListMetricsWithOptionsAsync() throws ExecutionException, InterruptedException {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -1008,7 +1005,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testCreateExclusion() {
+  void testCreateExclusion() {
     LogExclusion exclusionPb = EXCLUSION.toProtobuf();
     ApiFuture<LogExclusion> response = ApiFutures.immediateFuture(exclusionPb);
     CreateExclusionRequest request =
@@ -1028,7 +1025,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testCreateExclusionAsync() throws ExecutionException, InterruptedException {
+  void testCreateExclusionAsync() throws ExecutionException, InterruptedException {
     LogExclusion exclusionPb = EXCLUSION.toProtobuf();
     ApiFuture<LogExclusion> response = ApiFutures.immediateFuture(exclusionPb);
     CreateExclusionRequest request =
@@ -1048,7 +1045,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testGetExclusion() {
+  void testGetExclusion() {
     LogExclusion exclusionPb = EXCLUSION.toProtobuf();
     ApiFuture<LogExclusion> response = ApiFutures.immediateFuture(exclusionPb);
     GetExclusionRequest request =
@@ -1065,7 +1062,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testGetExclusion_null() {
+  void testGetExclusion_null() {
     ApiFuture<LogExclusion> response = ApiFutures.immediateFuture(null);
     GetExclusionRequest request =
         GetExclusionRequest.newBuilder().setName(EXCLUSION_NAME_PB).build();
@@ -1077,7 +1074,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testGetExclusionAsync() throws ExecutionException, InterruptedException {
+  void testGetExclusionAsync() throws ExecutionException, InterruptedException {
     LogExclusion exclusionPb = EXCLUSION.toProtobuf();
     ApiFuture<LogExclusion> response = ApiFutures.immediateFuture(exclusionPb);
     GetExclusionRequest request =
@@ -1094,7 +1091,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testGetExclusionAsync_null() throws ExecutionException, InterruptedException {
+  void testGetExclusionAsync_null() throws ExecutionException, InterruptedException {
     ApiFuture<LogExclusion> response = ApiFutures.immediateFuture(null);
     GetExclusionRequest request =
         GetExclusionRequest.newBuilder().setName(EXCLUSION_NAME_PB).build();
@@ -1106,7 +1103,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testUpdateExclusion() {
+  void testUpdateExclusion() {
     LogExclusion exclusionPb = EXCLUSION1.toProtobuf();
     ApiFuture<LogExclusion> response = ApiFutures.immediateFuture(exclusionPb);
     UpdateExclusionRequest request =
@@ -1126,7 +1123,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testUpdateExclusionAsync() throws ExecutionException, InterruptedException {
+  void testUpdateExclusionAsync() throws ExecutionException, InterruptedException {
     LogExclusion exclusionPb = EXCLUSION1.toProtobuf();
     ApiFuture<LogExclusion> response = ApiFutures.immediateFuture(exclusionPb);
     UpdateExclusionRequest request =
@@ -1146,7 +1143,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testDeleteExclusion() {
+  void testDeleteExclusion() {
     DeleteExclusionRequest request =
         DeleteExclusionRequest.newBuilder().setName(EXCLUSION_NAME_PB).build();
     ApiFuture<Empty> response = ApiFutures.immediateFuture(Empty.getDefaultInstance());
@@ -1157,7 +1154,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testDeleteExclusion_null() {
+  void testDeleteExclusion_null() {
     DeleteExclusionRequest request =
         DeleteExclusionRequest.newBuilder().setName(EXCLUSION_NAME_PB).build();
     ApiFuture<Empty> response = ApiFutures.immediateFuture(null);
@@ -1168,7 +1165,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testDeleteExclusionAsync() throws ExecutionException, InterruptedException {
+  void testDeleteExclusionAsync() throws ExecutionException, InterruptedException {
     DeleteExclusionRequest request =
         DeleteExclusionRequest.newBuilder().setName(EXCLUSION_NAME_PB).build();
     ApiFuture<Empty> response = ApiFutures.immediateFuture(Empty.getDefaultInstance());
@@ -1179,7 +1176,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testDeleteExclusionAsync_null() throws ExecutionException, InterruptedException {
+  void testDeleteExclusionAsync_null() throws ExecutionException, InterruptedException {
     DeleteExclusionRequest request =
         DeleteExclusionRequest.newBuilder().setName(EXCLUSION_NAME_PB).build();
     ApiFuture<Empty> response = ApiFutures.immediateFuture(null);
@@ -1190,7 +1187,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListExclusions() {
+  void testListExclusions() {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ListExclusionsRequest request =
@@ -1214,7 +1211,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListExclusionEmpty() {
+  void testListExclusionEmpty() {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ListExclusionsRequest request =
@@ -1236,7 +1233,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListExclusionNextPage() {
+  void testListExclusionNextPage() {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ListExclusionsRequest request1 =
@@ -1273,7 +1270,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListExclusionWithOptions() {
+  void testListExclusionWithOptions() {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ListExclusionsRequest request =
@@ -1302,7 +1299,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListExclusionsAsync() throws ExecutionException, InterruptedException {
+  void testListExclusionsAsync() throws ExecutionException, InterruptedException {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ListExclusionsRequest request =
@@ -1326,7 +1323,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListExclusionAsyncEmpty() throws ExecutionException, InterruptedException {
+  void testListExclusionAsyncEmpty() throws ExecutionException, InterruptedException {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ListExclusionsRequest request =
@@ -1348,7 +1345,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListExclusionAsyncNextPage() throws ExecutionException, InterruptedException {
+  void testListExclusionAsyncNextPage() throws ExecutionException, InterruptedException {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ListExclusionsRequest request1 =
@@ -1385,7 +1382,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListExclusionAsyncWithOptions() throws ExecutionException, InterruptedException {
+  void testListExclusionAsyncWithOptions() throws ExecutionException, InterruptedException {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ListExclusionsRequest request =
@@ -1414,7 +1411,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListResourceDescriptor() {
+  void testListResourceDescriptor() {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -1440,7 +1437,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListResourceDescriptorNextPage() {
+  void testListResourceDescriptorNextPage() {
     String cursor1 = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -1484,7 +1481,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListResourceDescriptorEmpty() {
+  void testListResourceDescriptorEmpty() {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ListMonitoredResourceDescriptorsRequest request =
@@ -1509,7 +1506,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListResourceDescriptorWithOptions() {
+  void testListResourceDescriptorWithOptions() {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -1540,7 +1537,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListResourceDescriptorAsync() throws ExecutionException, InterruptedException {
+  void testListResourceDescriptorAsync() throws ExecutionException, InterruptedException {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -1567,8 +1564,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListResourceDescriptorAsyncNextPage()
-      throws ExecutionException, InterruptedException {
+  void testListResourceDescriptorAsyncNextPage() throws ExecutionException, InterruptedException {
     String cursor1 = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -1613,8 +1609,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListResourceDescriptorAsyncEmpty()
-      throws ExecutionException, InterruptedException {
+  void testListResourceDescriptorAsyncEmpty() throws ExecutionException, InterruptedException {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ListMonitoredResourceDescriptorsRequest request =
@@ -1640,7 +1635,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListResourceDescriptorAsyncWithOptions()
+  void testListResourceDescriptorAsyncWithOptions()
       throws ExecutionException, InterruptedException {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
@@ -1674,7 +1669,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogsWithLogNames() {
+  void testListLogsWithLogNames() {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ImmutableList<String> logNames = ImmutableList.of(LOG_NAME1, LOG_NAME2);
@@ -1686,7 +1681,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogsWithEmptySet() {
+  void testListLogsWithEmptySet() {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ImmutableList<String> emptyList = ImmutableList.of();
@@ -1698,7 +1693,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogsNextPageWithLogNames() throws ExecutionException, InterruptedException {
+  void testListLogsNextPageWithLogNames() throws ExecutionException, InterruptedException {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ImmutableList<String> logNames1 = ImmutableList.of(LOG_NAME1, LOG_NAME2);
@@ -1715,7 +1710,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogsAsyncWithLogNames() throws ExecutionException, InterruptedException {
+  void testListLogsAsyncWithLogNames() throws ExecutionException, InterruptedException {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ImmutableList<String> logNames = ImmutableList.of(LOG_NAME1, LOG_NAME2);
@@ -1727,7 +1722,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogsAsyncWithEmptySet() throws ExecutionException, InterruptedException {
+  void testListLogsAsyncWithEmptySet() throws ExecutionException, InterruptedException {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ImmutableList<String> emptyList = ImmutableList.of();
@@ -1739,8 +1734,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogsAsyncNextPageWithLogNames()
-      throws ExecutionException, InterruptedException {
+  void testListLogsAsyncNextPageWithLogNames() throws ExecutionException, InterruptedException {
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
     ImmutableList<String> logNames1 = ImmutableList.of(LOG_NAME1, LOG_NAME2);
@@ -1757,7 +1751,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testDeleteLog() {
+  void testDeleteLog() {
     DeleteLogRequest request =
         DeleteLogRequest.newBuilder().setLogName(LOG_NAME_PROJECT_PATH).build();
     ApiFuture<Empty> response = ApiFutures.immediateFuture(Empty.getDefaultInstance());
@@ -1768,7 +1762,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testDeleteLog_null() {
+  void testDeleteLog_null() {
     DeleteLogRequest request =
         DeleteLogRequest.newBuilder().setLogName(LOG_NAME_PROJECT_PATH).build();
     EasyMock.expect(loggingRpcMock.delete(request))
@@ -1779,7 +1773,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testDeleteLogAsync() throws ExecutionException, InterruptedException {
+  void testDeleteLogAsync() throws ExecutionException, InterruptedException {
     DeleteLogRequest request =
         DeleteLogRequest.newBuilder().setLogName(LOG_NAME_PROJECT_PATH).build();
     ApiFuture<Empty> response = ApiFutures.immediateFuture(Empty.getDefaultInstance());
@@ -1790,51 +1784,49 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testDeleteLogBillingDestination() throws ExecutionException, InterruptedException {
+  void testDeleteLogBillingDestination() throws ExecutionException, InterruptedException {
     testDeleteByDestination(
         LOG_NAME, LOG_NAME_BILLING_PATH, LogDestinationName.billingAccount(BILLING), false);
   }
 
   @Test
-  public void testDeleteLogBillingDestinationAsync()
-      throws ExecutionException, InterruptedException {
+  void testDeleteLogBillingDestinationAsync() throws ExecutionException, InterruptedException {
     testDeleteByDestination(
         LOG_NAME, LOG_NAME_BILLING_PATH, LogDestinationName.billingAccount(BILLING), true);
   }
 
   @Test
-  public void testDeleteLogFolderDestination() throws ExecutionException, InterruptedException {
+  void testDeleteLogFolderDestination() throws ExecutionException, InterruptedException {
     testDeleteByDestination(
         LOG_NAME, LOG_NAME_FOLDER_PATH, LogDestinationName.folder(FOLDER), false);
   }
 
   @Test
-  public void testDeleteLogFolderDestinationAsync()
-      throws ExecutionException, InterruptedException {
+  void testDeleteLogFolderDestinationAsync() throws ExecutionException, InterruptedException {
     testDeleteByDestination(
         LOG_NAME, LOG_NAME_FOLDER_PATH, LogDestinationName.folder(FOLDER), true);
   }
 
   @Test
-  public void testDeleteLogOrgDestination() throws ExecutionException, InterruptedException {
+  void testDeleteLogOrgDestination() throws ExecutionException, InterruptedException {
     testDeleteByDestination(
         LOG_NAME, LOG_NAME_ORGANIZATION_PATH, LogDestinationName.organization(ORGANIZATION), false);
   }
 
   @Test
-  public void testDeleteLogOrgDestinationAsync() throws ExecutionException, InterruptedException {
+  void testDeleteLogOrgDestinationAsync() throws ExecutionException, InterruptedException {
     testDeleteByDestination(
         LOG_NAME, LOG_NAME_ORGANIZATION_PATH, LogDestinationName.organization(ORGANIZATION), true);
   }
 
   @Test
-  public void testDeleteLogProjectDestination() throws ExecutionException, InterruptedException {
+  void testDeleteLogProjectDestination() throws ExecutionException, InterruptedException {
     testDeleteByDestination(
         LOG_NAME, LOG_NAME_PROJECT_PATH, LogDestinationName.project(PROJECT), false);
   }
 
   @Test
-  public void testDeleteLogAsync_null() throws ExecutionException, InterruptedException {
+  void testDeleteLogAsync_null() throws ExecutionException, InterruptedException {
     DeleteLogRequest request =
         DeleteLogRequest.newBuilder().setLogName(LOG_NAME_PROJECT_PATH).build();
     EasyMock.expect(loggingRpcMock.delete(request))
@@ -1845,7 +1837,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testWriteLogEntries() {
+  void testWriteLogEntries() {
     WriteLogEntriesRequest request =
         WriteLogEntriesRequest.newBuilder()
             .addAllEntries(
@@ -1862,7 +1854,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testWriteLogEntriesDoesNotEnableFlushByDefault() {
+  void testWriteLogEntriesDoesNotEnableFlushByDefault() {
     WriteLogEntriesRequest request =
         WriteLogEntriesRequest.newBuilder()
             .addAllEntries(
@@ -1882,7 +1874,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testWriteLogEntriesWithSeverityFlushEnabled() {
+  void testWriteLogEntriesWithSeverityFlushEnabled() {
     WriteLogEntriesRequest request =
         WriteLogEntriesRequest.newBuilder()
             .addAllEntries(
@@ -1899,37 +1891,37 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testWriteLogEntriesWithOptions() {
+  void testWriteLogEntriesWithOptions() {
     testWriteLogEntriesWithDestination(
         PROJECT, LOG_NAME_PROJECT_PATH, LogDestinationName.project(PROJECT));
   }
 
   @Test
-  public void testWriteLogEntriesWithDifferentProjectOptions() {
+  void testWriteLogEntriesWithDifferentProjectOptions() {
     testWriteLogEntriesWithDestination(
         PROJECT, LOG_NAME_ANOTHER_PROJECT_PATH, LogDestinationName.project(ANOTHER_PROJECT));
   }
 
   @Test
-  public void testWriteLogEntriesWithFolderOptions() {
+  void testWriteLogEntriesWithFolderOptions() {
     testWriteLogEntriesWithDestination(
         PROJECT, LOG_NAME_FOLDER_PATH, LogDestinationName.folder(FOLDER));
   }
 
   @Test
-  public void testWriteLogEntriesWithBillingOptions() {
+  void testWriteLogEntriesWithBillingOptions() {
     testWriteLogEntriesWithDestination(
         PROJECT, LOG_NAME_BILLING_PATH, LogDestinationName.billingAccount(BILLING));
   }
 
   @Test
-  public void testWriteLogEntriesWithOrganizationOptions() {
+  void testWriteLogEntriesWithOrganizationOptions() {
     testWriteLogEntriesWithDestination(
         PROJECT, LOG_NAME_ORGANIZATION_PATH, LogDestinationName.organization(ORGANIZATION));
   }
 
   @Test
-  public void testWriteLogEntriesAsync() {
+  void testWriteLogEntriesAsync() {
     WriteLogEntriesRequest request =
         WriteLogEntriesRequest.newBuilder()
             .addAllEntries(
@@ -1949,7 +1941,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testWriteLogEntriesAsyncWithOptions() {
+  void testWriteLogEntriesAsyncWithOptions() {
     ImmutableMap<String, String> labels = ImmutableMap.of("key", "value");
     WriteLogEntriesRequest request =
         WriteLogEntriesRequest.newBuilder()
@@ -1975,7 +1967,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogEntries() {
+  void testListLogEntries() {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -1996,7 +1988,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogEntriesNextPage() throws ExecutionException, InterruptedException {
+  void testListLogEntriesNextPage() throws ExecutionException, InterruptedException {
     String cursor1 = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -2043,7 +2035,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogEntriesEmpty() {
+  void testListLogEntriesEmpty() {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -2068,7 +2060,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogEntriesWithOptions() {
+  void testListLogEntriesWithOptions() {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -2099,7 +2091,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogEntriesAsync() throws ExecutionException, InterruptedException {
+  void testListLogEntriesAsync() throws ExecutionException, InterruptedException {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -2123,7 +2115,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogEntriesAsyncNextPage() {
+  void testListLogEntriesAsyncNextPage() {
     String cursor1 = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -2167,7 +2159,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogEntriesAsyncEmpty() throws ExecutionException, InterruptedException {
+  void testListLogEntriesAsyncEmpty() throws ExecutionException, InterruptedException {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -2191,7 +2183,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testListLogEntriesAsyncWithOptions() throws ExecutionException, InterruptedException {
+  void testListLogEntriesAsyncWithOptions() throws ExecutionException, InterruptedException {
     String cursor = "cursor";
     EasyMock.replay(rpcFactoryMock);
     logging = options.getService();
@@ -2225,7 +2217,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testFlush() throws InterruptedException {
+  void testFlush() throws InterruptedException {
     SettableApiFuture<WriteLogEntriesResponse> mockRpcResponse = SettableApiFuture.create();
     replay(rpcFactoryMock);
     logging = options.getService();
@@ -2261,7 +2253,7 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testFlushStress() throws InterruptedException {
+  void testFlushStress() throws InterruptedException {
     SettableApiFuture<WriteLogEntriesResponse> mockRpcResponse = SettableApiFuture.create();
     mockRpcResponse.set(null);
     replay(rpcFactoryMock);
@@ -2302,17 +2294,17 @@ public class LoggingImplTest {
   }
 
   @Test
-  public void testDiagnosticInfoWithNoPartialSuccess() {
+  void testDiagnosticInfoWithNoPartialSuccess() {
     testDiagnosticInfoGeneration(false);
   }
 
   @Test
-  public void testDiagnosticInfoWithPartialSuccess() {
+  void testDiagnosticInfoWithPartialSuccess() {
     testDiagnosticInfoGeneration(true);
   }
 
   @Test
-  public void testPartialSuccessNotOverridenIfPresent() {
+  void testPartialSuccessNotOverridenIfPresent() {
     WriteLogEntriesRequest request =
         WriteLogEntriesRequest.newBuilder()
             .addAllEntries(

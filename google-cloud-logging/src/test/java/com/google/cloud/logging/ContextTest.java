@@ -16,10 +16,10 @@
 
 package com.google.cloud.logging;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import io.opentelemetry.api.trace.*;
 import io.opentelemetry.api.trace.Span;
@@ -30,12 +30,9 @@ import io.opentelemetry.sdk.trace.SdkTracerProvider;
 import io.opentelemetry.sdk.trace.SpanProcessor;
 import io.opentelemetry.sdk.trace.export.SimpleSpanProcessor;
 import java.time.Duration;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-@RunWith(JUnit4.class)
-public class ContextTest {
+class ContextTest {
 
   private static final HttpRequest.RequestMethod REQUEST_METHOD = HttpRequest.RequestMethod.GET;
   private static final String REQUEST_URL = "https://test.domain?arg=val";
@@ -81,7 +78,7 @@ public class ContextTest {
           .build();
 
   @Test
-  public void testCompareContexts() {
+  void testCompareContexts() {
     Context context1 =
         Context.newBuilder()
             .setRequest(REQUEST)
@@ -107,7 +104,7 @@ public class ContextTest {
   }
 
   @Test
-  public void testContextBuilder() {
+  void testContextBuilder() {
     Context emptyContext = Context.newBuilder().build();
     Context anotherContext = TEST_CONTEXT.toBuilder().build();
 
@@ -123,7 +120,7 @@ public class ContextTest {
   }
 
   @Test
-  public void testParsingCloudTraceContext() {
+  void testParsingCloudTraceContext() {
     final String X_CLOUD_TRACE_NO_TRACE = "/SPAN_ID;o=TRACE_TRUE";
     final String X_CLOUD_TRACE_ONLY = TEST_TRACE_ID;
     final String X_CLOUD_TRACE_WITH_SPAN = TEST_TRACE_ID + "/" + TEST_SPAN_ID;
@@ -146,7 +143,7 @@ public class ContextTest {
   }
 
   @Test
-  public void testParsingW3CTraceParent() {
+  void testParsingW3CTraceParent() {
     final String W3C_TEST_TRACE_ID = "12345678901234567890123456789012";
     final String W3C_TEST_SPAN_ID = "1234567890123456";
     final String W3C_TEST_TRACE_SAMPLED = "0f";
@@ -162,7 +159,7 @@ public class ContextTest {
   }
 
   @Test
-  public void testParsingOpenTelemetryContext() {
+  void testParsingOpenTelemetryContext() {
     InMemorySpanExporter testExporter = InMemorySpanExporter.create();
     SpanProcessor inMemorySpanProcessor = SimpleSpanProcessor.create(testExporter);
     OpenTelemetrySdk openTelemetrySdk =

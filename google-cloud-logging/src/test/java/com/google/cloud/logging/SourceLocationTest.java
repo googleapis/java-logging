@@ -16,15 +16,12 @@
 
 package com.google.cloud.logging;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-@RunWith(JUnit4.class)
-public class SourceLocationTest {
+class SourceLocationTest {
 
   private static final String FILE = "file";
   private static final Long LINE = 42L;
@@ -33,14 +30,14 @@ public class SourceLocationTest {
       SourceLocation.newBuilder().setFile(FILE).setLine(LINE).setFunction(FUNCTION).build();
 
   @Test
-  public void testBuilder() {
+  void testBuilder() {
     assertEquals(FILE, SOURCE_LOCATION.getFile());
     assertEquals(LINE, SOURCE_LOCATION.getLine());
     assertEquals(FUNCTION, SOURCE_LOCATION.getFunction());
   }
 
   @Test
-  public void testToBuilder() {
+  void testToBuilder() {
     compareSourceLocation(SOURCE_LOCATION, SOURCE_LOCATION.toBuilder().build());
     SourceLocation sourceLocation =
         SOURCE_LOCATION.toBuilder()
@@ -57,12 +54,12 @@ public class SourceLocationTest {
   }
 
   @Test
-  public void testToAndFromPb() {
+  void testToAndFromPb() {
     compareSourceLocation(SOURCE_LOCATION, SourceLocation.fromPb(SOURCE_LOCATION.toPb()));
   }
 
   @Test
-  public void testFromCurrentContext() {
+  void testFromCurrentContext() {
     StackTraceElement expectedData = new Exception().getStackTrace()[0];
     SourceLocation data = SourceLocation.fromCurrentContext();
     assertEquals(expectedData.getFileName(), data.getFile());
@@ -75,7 +72,7 @@ public class SourceLocationTest {
   }
 
   @Test
-  public void testFromCurrentContextWithExclusionList() {
+  void testFromCurrentContextWithExclusionList() {
     StackTraceElement expectedData = new Exception().getStackTrace()[0];
     SourceLocation data = SourceLocation.fromCurrentContext(LoggingImpl.class.getName());
     assertEquals(expectedData.getFileName(), data.getFile());
@@ -88,7 +85,7 @@ public class SourceLocationTest {
   }
 
   @Test
-  public void testFromCurrentContextWithVeryLargeLevel() {
+  void testFromCurrentContextWithVeryLargeLevel() {
     SourceLocation data =
         SourceLocation.fromCurrentContext("com.google", "sun", "java", "jdk", "org");
     assertNull(data);
