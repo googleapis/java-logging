@@ -24,6 +24,7 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.logging.v2.LogEntrySourceLocation;
 import java.io.Serializable;
 import java.util.Objects;
+import org.jspecify.annotations.Nullable;
 
 /** Additional information about the source code location that produced the log entry. */
 public final class SourceLocation implements Serializable {
@@ -173,7 +174,7 @@ public final class SourceLocation implements Serializable {
    * @return a new instance of {@link SourceLocation} populated with file name, method and line
    *     number information.
    */
-  static SourceLocation fromCurrentContext(String... exclusionClassPaths) {
+  static @Nullable SourceLocation fromCurrentContext(String... exclusionClassPaths) {
     StackTraceElement[] stackTrace = new Exception().getStackTrace();
 
     for (int level = 1; level < stackTrace.length; level++) {

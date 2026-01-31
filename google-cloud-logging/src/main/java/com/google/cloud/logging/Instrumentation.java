@@ -29,6 +29,7 @@ import com.google.protobuf.Value;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.jspecify.annotations.Nullable;
 
 public final class Instrumentation {
   public static final String DIAGNOSTIC_INFO_KEY = "logging.googleapis.com/diagnostic";
@@ -102,7 +103,7 @@ public final class Instrumentation {
    * @return The new array of oprions containing WriteOption.OptionType.PARTIAL_SUCCESS flag set to
    *     true
    */
-  public static WriteOption[] addPartialSuccessOption(WriteOption[] options) {
+  public static WriteOption @Nullable [] addPartialSuccessOption(WriteOption[] options) {
     if (options == null) {
       return options;
     }
