@@ -21,23 +21,20 @@ import static org.easymock.EasyMock.createStrictMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.api.core.ApiFutures;
 import com.google.cloud.logging.SinkInfo.Destination.BucketDestination;
 import com.google.cloud.logging.SinkInfo.Destination.DatasetDestination;
 import com.google.cloud.logging.SinkInfo.VersionFormat;
 import java.util.concurrent.ExecutionException;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
-@RunWith(JUnit4.class)
-public class SinkTest {
+class SinkTest {
 
   private static final String NAME = "sink";
   private static final String FILTER =
@@ -70,13 +67,13 @@ public class SinkTest {
     sink = new Sink(logging, new SinkInfo.BuilderImpl(SINK_INFO));
   }
 
-  @After
-  public void tearDown() throws Exception {
+  @AfterEach
+  void tearDown() throws Exception {
     verify(logging, serviceMockReturnsOptions);
   }
 
   @Test
-  public void testBuilder() {
+  void testBuilder() {
     initializeExpectedSink(2);
     replay(logging);
     Sink builtSink =
@@ -93,14 +90,14 @@ public class SinkTest {
   }
 
   @Test
-  public void testToBuilder() {
+  void testToBuilder() {
     initializeExpectedSink(2);
     replay(logging);
     compareSink(expectedSink, expectedSink.toBuilder().build());
   }
 
   @Test
-  public void testReload() {
+  void testReload() {
     initializeExpectedSink(2);
     SinkInfo updatedInfo = SINK_INFO.toBuilder().setFilter(NEW_FILTER).build();
     Sink expectedSink = new Sink(serviceMockReturnsOptions, new SinkInfo.BuilderImpl(updatedInfo));
@@ -113,7 +110,7 @@ public class SinkTest {
   }
 
   @Test
-  public void testReloadNull() {
+  void testReloadNull() {
     initializeExpectedSink(1);
     expect(logging.getOptions()).andReturn(mockOptions);
     expect(logging.getSink(NAME)).andReturn(null);
@@ -123,7 +120,7 @@ public class SinkTest {
   }
 
   @Test
-  public void testReloadAsync() throws ExecutionException, InterruptedException {
+  void testReloadAsync() throws ExecutionException, InterruptedException {
     initializeExpectedSink(2);
     SinkInfo updatedInfo = SINK_INFO.toBuilder().setFilter(NEW_FILTER).build();
     Sink expectedSink = new Sink(serviceMockReturnsOptions, new SinkInfo.BuilderImpl(updatedInfo));
@@ -136,7 +133,7 @@ public class SinkTest {
   }
 
   @Test
-  public void testReloadAsyncNull() throws ExecutionException, InterruptedException {
+  void testReloadAsyncNull() throws ExecutionException, InterruptedException {
     initializeExpectedSink(1);
     expect(logging.getOptions()).andReturn(mockOptions);
     expect(logging.getSinkAsync(NAME)).andReturn(ApiFutures.<Sink>immediateFuture(null));
@@ -146,7 +143,7 @@ public class SinkTest {
   }
 
   @Test
-  public void testUpdate() {
+  void testUpdate() {
     initializeExpectedSink(2);
     SinkInfo updatedInfo = SINK_INFO.toBuilder().setFilter(NEW_FILTER).build();
     Sink expectedSink = new Sink(serviceMockReturnsOptions, new SinkInfo.BuilderImpl(updatedInfo));
@@ -159,7 +156,7 @@ public class SinkTest {
   }
 
   @Test
-  public void testUpdateAsync() throws ExecutionException, InterruptedException {
+  void testUpdateAsync() throws ExecutionException, InterruptedException {
     initializeExpectedSink(2);
     SinkInfo updatedInfo = SINK_INFO.toBuilder().setFilter(NEW_FILTER).build();
     Sink expectedSink = new Sink(serviceMockReturnsOptions, new SinkInfo.BuilderImpl(updatedInfo));
@@ -172,7 +169,7 @@ public class SinkTest {
   }
 
   @Test
-  public void testDeleteTrue() {
+  void testDeleteTrue() {
     initializeExpectedSink(1);
     expect(logging.getOptions()).andReturn(mockOptions);
     expect(logging.deleteSink(NAME)).andReturn(true);
@@ -182,7 +179,7 @@ public class SinkTest {
   }
 
   @Test
-  public void testDeleteFalse() {
+  void testDeleteFalse() {
     initializeExpectedSink(1);
     expect(logging.getOptions()).andReturn(mockOptions);
     expect(logging.deleteSink(NAME)).andReturn(false);
@@ -192,7 +189,7 @@ public class SinkTest {
   }
 
   @Test
-  public void testDeleteAsyncTrue() throws ExecutionException, InterruptedException {
+  void testDeleteAsyncTrue() throws ExecutionException, InterruptedException {
     initializeExpectedSink(1);
     expect(logging.getOptions()).andReturn(mockOptions);
     expect(logging.deleteSinkAsync(NAME)).andReturn(ApiFutures.immediateFuture(true));
@@ -202,7 +199,7 @@ public class SinkTest {
   }
 
   @Test
-  public void testDeleteAsyncFalse() throws ExecutionException, InterruptedException {
+  void testDeleteAsyncFalse() throws ExecutionException, InterruptedException {
     initializeExpectedSink(1);
     expect(logging.getOptions()).andReturn(mockOptions);
     expect(logging.deleteSinkAsync(NAME)).andReturn(ApiFutures.immediateFuture(false));

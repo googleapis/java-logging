@@ -17,10 +17,10 @@
 package com.google.cloud.logging;
 
 import static org.easymock.EasyMock.createMock;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.google.api.gax.batching.BatchingSettings;
 import com.google.api.gax.batching.FlowControlSettings;
@@ -28,12 +28,9 @@ import com.google.api.gax.batching.FlowController;
 import com.google.cloud.NoCredentials;
 import com.google.cloud.TransportOptions;
 import java.time.Duration;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-@RunWith(JUnit4.class)
-public class LoggingOptionsTest {
+class LoggingOptionsTest {
   private static final Boolean DONT_AUTO_POPULATE_METADATA = false;
   private static final String PROJECT_ID = "fake-project-id";
   private static final Long ELEMENTS_TRESHOLD_COUNT = 100L;
@@ -43,7 +40,7 @@ public class LoggingOptionsTest {
   private static final Long MAX_OUTSTANDING_REQUEST_BYTES_COUNT = 104857601L;
 
   @Test
-  public void testNonGrpcTransportOptions() {
+  void testNonGrpcTransportOptions() {
     TransportOptions invalidTransport = createMock(TransportOptions.class);
     assertThrows(
         IllegalArgumentException.class,
@@ -51,7 +48,7 @@ public class LoggingOptionsTest {
   }
 
   @Test
-  public void testAutoPopulateMetadataOption() {
+  void testAutoPopulateMetadataOption() {
     LoggingOptions actual =
         LoggingOptions.newBuilder()
             .setProjectId(PROJECT_ID)
@@ -61,24 +58,24 @@ public class LoggingOptionsTest {
   }
 
   @Test
-  public void testAutoPopulateMetadataDefaultOption() {
+  void testAutoPopulateMetadataDefaultOption() {
     LoggingOptions actual = LoggingOptions.newBuilder().setProjectId(PROJECT_ID).build();
     assertEquals(Boolean.TRUE, actual.getAutoPopulateMetadata());
   }
 
   @Test
-  public void testBatchingSettingsDefaultOption() {
+  void testBatchingSettingsDefaultOption() {
     LoggingOptions actual = LoggingOptions.newBuilder().setProjectId(PROJECT_ID).build();
-    assertNull("Batching settings should be null by default!", actual.getBatchingSettings());
+    assertNull(actual.getBatchingSettings(), "Batching settings should be null by default!");
   }
 
   @Test
-  public void testBatchingSettingsOption() {
+  void testBatchingSettingsOption() {
     verifyBatchingSettings(generateLoggingOptions().getBatchingSettings());
   }
 
   @Test
-  public void testBatchingSettingsOptionWithGrpc() {
+  void testBatchingSettingsOptionWithGrpc() {
     verifyBatchingSettings(
         generateLoggingOptions().getService().getOptions().getBatchingSettings());
   }

@@ -16,16 +16,13 @@
 
 package com.google.cloud.logging;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-@RunWith(JUnit4.class)
-public class OperationTest {
+class OperationTest {
 
   private static final String ID = "id";
   private static final String PRODUCER = "producer";
@@ -35,7 +32,7 @@ public class OperationTest {
       Operation.newBuilder(ID, PRODUCER).setFirst(FIRST).setLast(LAST).build();
 
   @Test
-  public void testBuilder() {
+  void testBuilder() {
     assertEquals(ID, OPERATION.getId());
     assertEquals(PRODUCER, OPERATION.getProducer());
     assertTrue(OPERATION.first());
@@ -43,7 +40,7 @@ public class OperationTest {
   }
 
   @Test
-  public void testToBuilder() {
+  void testToBuilder() {
     compareLogOperation(OPERATION, OPERATION.toBuilder().build());
     Operation operation =
         OPERATION.toBuilder()
@@ -62,7 +59,7 @@ public class OperationTest {
   }
 
   @Test
-  public void testOf() {
+  void testOf() {
     Operation operation = Operation.of(ID, PRODUCER);
     assertEquals(ID, operation.getId());
     assertEquals(PRODUCER, operation.getProducer());
@@ -71,7 +68,7 @@ public class OperationTest {
   }
 
   @Test
-  public void testToAndFromPb() {
+  void testToAndFromPb() {
     compareLogOperation(OPERATION, Operation.fromPb(OPERATION.toPb()));
     Operation operation = Operation.of(ID, PRODUCER);
     compareLogOperation(operation, Operation.fromPb(operation.toPb()));

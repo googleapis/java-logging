@@ -16,10 +16,10 @@
 
 package com.google.cloud.logging;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.google.cloud.MonitoredResource;
 import com.google.cloud.logging.Payload.JsonPayload;
@@ -31,13 +31,10 @@ import com.google.gson.JsonParser;
 import com.google.protobuf.Any;
 import com.google.protobuf.Empty;
 import java.time.Instant;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-@RunWith(JUnit4.class)
 @SuppressWarnings("deprecation") // We're testing our own deprecated Builder methods
-public class LogEntryTest {
+class LogEntryTest {
 
   private static final String LOG_NAME = "syslog";
   private static final String PROJECT = "project";
@@ -130,7 +127,7 @@ public class LogEntryTest {
       STRING_ENTRY.toBuilder().setDestination(ORG_NAME).build();
 
   @Test
-  public void testOf() {
+  void testOf() {
     LogEntry logEntry = LogEntry.of(STRING_PAYLOAD);
     assertEquals(STRING_PAYLOAD, logEntry.getPayload());
     assertEquals(Severity.DEFAULT, logEntry.getSeverity());
@@ -169,7 +166,7 @@ public class LogEntryTest {
   }
 
   @Test
-  public void testBuilder() {
+  void testBuilder() {
     assertEquals(LOG_NAME, STRING_ENTRY.getLogName());
     assertEquals(RESOURCE, STRING_ENTRY.getResource());
     assertEquals(TIMESTAMP.toEpochMilli(), (long) STRING_ENTRY.getTimestamp());
@@ -256,7 +253,7 @@ public class LogEntryTest {
   }
 
   @Test
-  public void testToBuilder() {
+  void testToBuilder() {
     compareLogEntry(STRING_ENTRY, STRING_ENTRY.toBuilder().build(), true);
     HttpRequest request =
         HttpRequest.newBuilder()
@@ -317,7 +314,7 @@ public class LogEntryTest {
   }
 
   @Test
-  public void testToAndFromPb() {
+  void testToAndFromPb() {
     compareLogEntry(STRING_ENTRY, LogEntry.fromPb(STRING_ENTRY.toPb(PROJECT)), false);
     compareLogEntry(JSON_ENTRY, LogEntry.fromPb(JSON_ENTRY.toPb(PROJECT)), false);
     compareLogEntry(PROTO_ENTRY, LogEntry.fromPb(PROTO_ENTRY.toPb(PROJECT)), false);
@@ -341,7 +338,7 @@ public class LogEntryTest {
   }
 
   @Test
-  public void testToAndFromPbWithExpectedFailure() {
+  void testToAndFromPbWithExpectedFailure() {
     LogEntry logEntry =
         LogEntry.newBuilder(STRING_PAYLOAD).setLogName(LOG_NAME).setResource(RESOURCE).build();
     assertThrows(
@@ -378,7 +375,7 @@ public class LogEntryTest {
   private static final LogEntry[] TEST_LOG_ENTRIES = {STRING_ENTRY, JSON_ENTRY};
 
   @Test
-  public void testStructureLogPresentations() {
+  void testStructureLogPresentations() {
     for (int i = 0; i < TEST_LOG_ENTRIES.length; i++) {
       String structuredLog = TEST_LOG_ENTRIES[i].toStructuredJsonString();
 
@@ -389,12 +386,12 @@ public class LogEntryTest {
   }
 
   @Test
-  public void testStructureLogPresentationWithProtobufPayload() {
+  void testStructureLogPresentationWithProtobufPayload() {
     assertThrows(UnsupportedOperationException.class, () -> PROTO_ENTRY.toStructuredJsonString());
   }
 
   @Test
-  public void testStructureLogInvalidSeverity() {
+  void testStructureLogInvalidSeverity() {
     assertThrows(
         IllegalArgumentException.class,
         () -> PROTO_ENTRY.toBuilder().setSeverity(Severity.NONE).build().toPb(PROJECT));

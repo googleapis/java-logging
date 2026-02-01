@@ -16,19 +16,16 @@
 
 package com.google.cloud.logging;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.cloud.logging.HttpRequest.RequestMethod;
 import java.time.Duration;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-@RunWith(JUnit4.class)
-public class HttpRequestTest {
+class HttpRequestTest {
 
   private static final RequestMethod REQUEST_METHOD = RequestMethod.GET;
   private static final String REQUEST_URL = "http://www.example.com";
@@ -63,7 +60,7 @@ public class HttpRequestTest {
           .build();
 
   @Test
-  public void testBuilder() {
+  void testBuilder() {
     assertEquals(REQUEST_METHOD, HTTP_REQUEST.getRequestMethod());
     assertEquals(REQUEST_URL, HTTP_REQUEST.getRequestUrl());
     assertEquals(REQUEST_SIZE, HTTP_REQUEST.getRequestSize());
@@ -80,7 +77,7 @@ public class HttpRequestTest {
   }
 
   @Test
-  public void testBuilderDefaultValues() {
+  void testBuilderDefaultValues() {
     HttpRequest httpRequest = HttpRequest.newBuilder().build();
     assertNull(httpRequest.getRequestMethod());
     assertNull(httpRequest.getRequestUrl());
@@ -99,7 +96,7 @@ public class HttpRequestTest {
   }
 
   @Test
-  public void testToBuilder() {
+  void testToBuilder() {
     compareHttpRequest(HTTP_REQUEST, HTTP_REQUEST.toBuilder().build());
     HttpRequest httpRequest =
         HTTP_REQUEST.toBuilder()
@@ -133,7 +130,7 @@ public class HttpRequestTest {
   }
 
   @Test
-  public void testToAndFromPb() {
+  void testToAndFromPb() {
     HttpRequest httpRequest = HttpRequest.fromPb(HTTP_REQUEST.toPb());
     compareHttpRequest(HTTP_REQUEST, httpRequest);
     assertEquals(REQUEST_METHOD, httpRequest.getRequestMethod());

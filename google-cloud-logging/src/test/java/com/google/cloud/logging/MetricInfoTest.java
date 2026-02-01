@@ -16,15 +16,12 @@
 
 package com.google.cloud.logging;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-@RunWith(JUnit4.class)
-public class MetricInfoTest {
+class MetricInfoTest {
 
   private static final String NAME = "name";
   private static final String FILTER = "logName=projects/my-projectid/logs/syslog";
@@ -36,7 +33,7 @@ public class MetricInfoTest {
       MetricInfo.newBuilder(NAME, FILTER).setDescription(DESCRIPTION).build();
 
   @Test
-  public void testOf() {
+  void testOf() {
     MetricInfo metricInfo = MetricInfo.of(NAME, FILTER);
     assertEquals(NAME, metricInfo.getName());
     assertEquals(FILTER, metricInfo.getFilter());
@@ -44,14 +41,14 @@ public class MetricInfoTest {
   }
 
   @Test
-  public void testBuilder() {
+  void testBuilder() {
     assertEquals(NAME, METRIC_INFO.getName());
     assertEquals(FILTER, METRIC_INFO.getFilter());
     assertEquals(DESCRIPTION, METRIC_INFO.getDescription());
   }
 
   @Test
-  public void testToBuilder() {
+  void testToBuilder() {
     compareMetricInfo(METRIC_INFO, METRIC_INFO.toBuilder().build());
     MetricInfo metricInfo =
         METRIC_INFO.toBuilder()
@@ -68,7 +65,7 @@ public class MetricInfoTest {
   }
 
   @Test
-  public void testToAndFromPb() {
+  void testToAndFromPb() {
     compareMetricInfo(METRIC_INFO, MetricInfo.fromPb(METRIC_INFO.toPb()));
     MetricInfo metricInfo = MetricInfo.of(NAME, FILTER);
     compareMetricInfo(metricInfo, MetricInfo.fromPb(metricInfo.toPb()));
