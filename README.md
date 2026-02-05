@@ -1,3 +1,5 @@
+**_THIS REPOSITORY IS DEPRECATED. ALL OF ITS CONTENT AND HISTORY HAS BEEN MOVED TO [GOOGLE-CLOUD-JAVA](https://github.com/googleapis/google-cloud-java/tree/main/java-logging)_**
+
 # Google Cloud Logging Client for Java
 
 Java idiomatic client for [Cloud Logging][product-docs].
