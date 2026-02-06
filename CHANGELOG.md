@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.24.1](https://github.com/googleapis/java-logging/compare/v3.24.0...v3.24.1) (2026-02-06)
+
+
+### Documentation
+
+* Redirect users to google-cloud-java ([#1931](https://github.com/googleapis/java-logging/issues/1931)) ([c47fa68](https://github.com/googleapis/java-logging/commit/c47fa68b85828abad32ce8a91b0d48fe0fffe619))
+
 ## [3.24.0](https://github.com/googleapis/java-logging/compare/v3.23.11...v3.24.0) (2026-01-26)
 
 
